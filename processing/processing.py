@@ -3,6 +3,7 @@ import numpy as np
 import glob
 import os
 
+
 def get_raw_data(rank):
     path = '../data/fpl_official/20-21/season/raw/'
     f = os.path.join(path, f"managers_{rank}.json")
@@ -61,21 +62,20 @@ def get_raw_data(rank):
 
     return chips, teams, caps, vice, bench_pts, transfers
 
+
 def get_season_points():
-    for rank in np.arange(5000, 300000, 5000):
+    for rank in np.arange(5000, 105000, 5000):
         print(rank)
         chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
 
         points = pd.DataFrame().reindex_like(bench_pts)
 
-        free_transfer = np.zeros(300000)
+        free_transfer = np.zeros(105000)
 
         all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'position', 'element', 'total_points', 'minutes', 'value']]
 
         for gw in np.arange(1, 39):
-            print(gw)
             gw_data = all_gw_data[all_gw_data['GW'] == gw]
-            next_gw_data = all_gw_data[all_gw_data['GW'] == gw+1]
 
             for player in points.index:
                 # Not registered team
@@ -85,13 +85,9 @@ def get_season_points():
 
                 # FPL Team
                 fpl_team = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)])]
-                fpl_bench = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)][-3:])]
 
                 # All player pts
                 points.loc[player, str(gw)] = sum(fpl_team['total_points'])
-
-                fpl_team = fpl_team.drop_duplicates(subset='element', keep="first")
-                fpl_bench = fpl_bench.drop_duplicates(subset='element', keep="first")
 
                 # Captain/Vice points
                 try:
@@ -124,7 +120,7 @@ def get_season_points():
                             free_transfer[int(player)] = 1
                         else:
                             # Hits
-                            points.loc[int(player/rank), str(gw)] += 4 * hit
+                            points.loc[player, str(gw)] += 4 * hit
                             free_transfer[int(player)] = 1
 
                     else:
@@ -146,12 +142,11 @@ def get_season_value():
         in_the_bank = pd.DataFrame().reindex_like(bench_pts)
         bench_value = pd.DataFrame().reindex_like(bench_pts)
 
-        free_transfer = np.zeros(300000)
+        free_transfer = np.zeros(105000)
 
         all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'position', 'element', 'total_points', 'minutes', 'value']]
 
         for gw in np.arange(1, 39):
-            print(gw)
             gw_data = all_gw_data[all_gw_data['GW'] == gw]
             next_gw_data = all_gw_data[all_gw_data['GW'] == gw+1]
 
@@ -162,33 +157,10 @@ def get_season_value():
                     continue
 
                 # FPL Team
-                fpl_team = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)])]
-                fpl_bench = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)][-3:])]
+                fpl_team = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)])].drop_duplicates(subset='element', keep="first")
+                fpl_bench = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)][-3:])].drop_duplicates(subset='element', keep="first")
                 next_fpl_team = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
                 next_fpl_bench = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)][-3:] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
-                fpl_team = fpl_team.drop_duplicates(subset='element', keep="first")
-                fpl_bench = fpl_bench.drop_duplicates(subset='element', keep="first")
-
-                # Hits
-                try:
-                    if not (chips.loc[int(player), 'freehit'] == gw or chips.loc[int(player), 'wildcard_1'] == gw or chips.loc[int(player), 'wildcard_2'] == gw) :
-                        transfer = len(transfers.loc[player, str(gw)]['in'])
-                        hit = free_transfer[int(player)] - transfer
-                        if hit > 0:
-                            # No transfer
-                            free_transfer[int(player)] = 2
-                        elif hit == 0 :
-                            # Used all FT
-                            free_transfer[int(player)] = 1
-                        else:
-                            # Hits
-                            points.loc[int(player/rank), str(gw)] += 4 * hit
-                            free_transfer[int(player)] = 1
-
-                    else:
-                        free_transfer[player] = 1
-                except:
-                    free_transfer[int(player)] = min(2, free_transfer[int(player)] + 1)
 
                 # Team value
                 # Handle missing players from DF due to BGW
