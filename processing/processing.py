@@ -72,7 +72,7 @@ def get_season_points():
 
         free_transfer = np.zeros(105000)
 
-        all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'position', 'element', 'total_points', 'minutes', 'value']]
+        all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'element', 'total_points', 'minutes']]
 
         for gw in np.arange(1, 39):
             gw_data = all_gw_data[all_gw_data['GW'] == gw]
@@ -144,7 +144,7 @@ def get_season_value():
 
         free_transfer = np.zeros(105000)
 
-        all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'position', 'element', 'total_points', 'minutes', 'value']]
+        all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'element', 'value']]
 
         for gw in np.arange(1, 39):
             gw_data = all_gw_data[all_gw_data['GW'] == gw]
@@ -179,12 +179,21 @@ def get_season_value():
                     if chips.loc[int(player), 'freehit'] != gw:
                         # Huge approximative because of mid-week price changes.
                         # Get the next player value in case of BGW
-                        in_the_bank.loc[player, str(gw)] +=  max(0,
-                            sum(gw_data[gw_data['element'].isin(list(transfers.loc[player, str(gw)]['out'].values()))].drop_duplicates(subset='element', keep="first")['value']) +
-                            sum(next_gw_data[next_gw_data['element'].isin([player_id for player_id in transfers.loc[player, str(gw)]['out'] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")['value']) -
-                            sum(gw_data[gw_data['element'].isin(list(transfers.loc[player, str(gw)]['in'].values()))].drop_duplicates(subset='element', keep="first")['value']) -
-                            sum(next_gw_data[next_gw_data['element'].isin([player_id for player_id in transfers.loc[player, str(gw)]['in'] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")['value'])
-                            )
+                        gw_value = (
+                            in_the_bank.loc[player, str(gw-1)] + 
+                            sum(gw_data[gw_data['element'].isin(list(transfers.loc[player, str(gw)]['out'].values()))].drop_duplicates(subset='element', keep="first")['value']) -
+                            sum(gw_data[gw_data['element'].isin(list(transfers.loc[player, str(gw)]['in'].values()))].drop_duplicates(subset='element', keep="first")['value'])
+                        )
+
+                        in_missing = [player_id for player_id in transfers.loc[player, str(gw)]['in'].values() if player_id not in gw_data['element'].values]
+                        out_missing = [player_id for player_id in transfers.loc[player, str(gw)]['out'].values() if player_id not in gw_data['element'].values]
+
+                        if len(out_missing):
+                            gw_value += sum(next_gw_data[next_gw_data['element'].isin(out_missing)].drop_duplicates(subset='element', keep="first")['value'])
+                        if len(in_missing) :
+                            gw_value -= sum(next_gw_data[next_gw_data['element'].isin(in_missing)].drop_duplicates(subset='element', keep="first")['value'])
+
+                        in_the_bank.loc[player, str(gw)] =  max(0, gw_value)
                 else:
                     in_the_bank.loc[player, str(gw)] = in_the_bank.loc[player, str(gw-1)]
 
@@ -200,4 +209,4 @@ def get_season_value():
         bench_value.to_csv(f'../data/fpl_official/20-21/season/processed/bench_value_{rank}.csv')
 
 # get_season_points()
-get_season_value()
+# get_season_value()
