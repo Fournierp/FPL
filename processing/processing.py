@@ -134,7 +134,8 @@ def get_season_points():
 
 
 def get_season_value():
-    for rank in np.arange(5000, 105000, 5000):
+    # for rank in np.arange(5000, 105000, 5000):
+    for rank in [50000]:
         print(rank)
         chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
 
@@ -208,5 +209,50 @@ def get_season_value():
         in_the_bank.to_csv(f'../data/fpl_official/20-21/season/processed/in_the_bank_{rank}.csv')
         bench_value.to_csv(f'../data/fpl_official/20-21/season/processed/bench_value_{rank}.csv')
 
+
+def get_season_formation():
+    for rank in np.arange(40000, 105000, 5000):
+        print(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
+
+        team_formation = pd.DataFrame().reindex_like(bench_pts)
+        bench_order = pd.DataFrame().reindex_like(bench_pts)
+
+        all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))
+        all_gw_data = all_gw_data[['position', 'element']].drop_duplicates(subset='element', keep="first")
+
+        for gw in np.arange(1, 39):
+            for player in team_formation.index:
+                # Formation
+                lineup = all_gw_data['element'].isin(teams.loc[player, str(gw)][:-4])
+                team_formation.loc[player, str(gw)] = (
+                    all_gw_data[(lineup) & (all_gw_data['position'] == 'FWD')].shape[0] + 
+                    all_gw_data[(lineup) & (all_gw_data['position'] == 'MID')].shape[0] * 10 +
+                    all_gw_data[(lineup) & (all_gw_data['position'] == 'DEF')].shape[0] * 100
+                )
+                mapping = {
+                    'DEF': 1,
+                    'MID': 2,
+                    'FWD': 3,
+                }
+                try:
+                    bench_order.loc[player, str(gw)] = (
+                        100 * mapping[all_gw_data[all_gw_data['element'].isin([teams.loc[player, str(gw)][-3]])]['position'].values[0]] + \
+                        10 * mapping[all_gw_data[all_gw_data['element'].isin([teams.loc[player, str(gw)][-2]])]['position'].values[0]] + \
+                        mapping[all_gw_data[all_gw_data['element'].isin([teams.loc[player, str(gw)][-1]])]['position'].values[0]]
+                    )
+                except:
+                    bench_order.loc[player, str(gw)] = 0
+
+        team_formation = team_formation.fillna(0)
+        team_formation = team_formation.astype(int)
+        bench_order = bench_order.fillna(0)
+        bench_order = bench_order.astype(int)
+
+        team_formation.to_csv(f'../data/fpl_official/20-21/season/processed/team_formation_{rank}.csv')
+        bench_order.to_csv(f'../data/fpl_official/20-21/season/processed/bench_order_{rank}.csv')
+
+
 # get_season_points()
 # get_season_value()
+# get_season_formation()
