@@ -134,8 +134,7 @@ def get_season_points():
 
 
 def get_season_value():
-    # for rank in np.arange(5000, 105000, 5000):
-    for rank in [50000]:
+    for rank in np.arange(5000, 105000, 5000):
         print(rank)
         chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
 
@@ -253,6 +252,64 @@ def get_season_formation():
         bench_order.to_csv(f'../data/fpl_official/20-21/season/processed/bench_order_{rank}.csv')
 
 
+def get_season_pos_values():
+    for rank in np.arange(35000, 105000, 5000):
+        print(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
+
+        gk_value = pd.DataFrame().reindex_like(bench_pts)
+        def_value = pd.DataFrame().reindex_like(bench_pts)
+        mid_value = pd.DataFrame().reindex_like(bench_pts)
+        fwd_value = pd.DataFrame().reindex_like(bench_pts)
+
+        all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'position', 'element', 'minutes', 'value']]
+
+        for gw in np.arange(1, 39):
+            gw_data = all_gw_data[all_gw_data['GW'] == gw]
+            next_gw_data = all_gw_data[all_gw_data['GW'] == gw+1]
+
+            for player in gk_value.index:
+                # FPL Team
+                fpl_team = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)])].drop_duplicates(subset='element', keep="first")
+                fpl_bench = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)][-3:])].drop_duplicates(subset='element', keep="first")
+                next_fpl_team = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
+                next_fpl_bench = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)][-3:] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
+
+                # Team value
+                # Handle missing players from DF due to BGW
+                gk_value.loc[player, str(gw)] = (
+                    sum(fpl_team[fpl_team['position'] == 'GK']['value']) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'GK']['value'])
+                )
+                def_value.loc[player, str(gw)] = (
+                    sum(fpl_team[fpl_team['position'] == 'DEF']['value']) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'DEF']['value'])
+                )
+                mid_value.loc[player, str(gw)] = (
+                    sum(fpl_team[fpl_team['position'] == 'MID']['value']) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'MID']['value'])
+                )
+                fwd_value.loc[player, str(gw)] = (
+                    sum(fpl_team[fpl_team['position'] == 'FWD']['value']) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'FWD']['value'])
+                )
+
+        gk_value = gk_value.fillna(0)
+        gk_value = gk_value.astype(int)
+        def_value = def_value.fillna(0)
+        def_value = def_value.astype(int)
+        mid_value = mid_value.fillna(0)
+        mid_value = mid_value.astype(int)
+        fwd_value = fwd_value.fillna(0)
+        fwd_value = fwd_value.astype(int)
+
+        gk_value.to_csv(f'../data/fpl_official/20-21/season/processed/gk_value_{rank}.csv')
+        def_value.to_csv(f'../data/fpl_official/20-21/season/processed/def_value_{rank}.csv')
+        mid_value.to_csv(f'../data/fpl_official/20-21/season/processed/mid_value_{rank}.csv')
+        fwd_value.to_csv(f'../data/fpl_official/20-21/season/processed/fwd_value_{rank}.csv')
+
+
 # get_season_points()
 # get_season_value()
 # get_season_formation()
+get_season_pos_values()
