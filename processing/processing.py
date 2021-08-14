@@ -156,12 +156,12 @@ def get_season_value():
 
                 # FPL Team
                 fpl_team = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)])].drop_duplicates(subset='element', keep="first")
-                fpl_bench = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)][-3:])].drop_duplicates(subset='element', keep="first")
+                fpl_bench = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)][-4:])].drop_duplicates(subset='element', keep="first")
                 next_fpl_team = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
-                next_fpl_bench = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)][-3:] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
+                next_fpl_bench = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)][-4:] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
 
                 # Team value
-                # Handle missing players from DF due to BGW
+                Handle missing players from DF due to BGW
                 team_value.loc[player, str(gw)] = (
                     sum(fpl_team['value']) +
                     sum(next_fpl_team['value'])
@@ -208,7 +208,7 @@ def get_season_value():
 
 
 def get_season_formation():
-    for rank in np.arange(40000, 105000, 5000):
+    for rank in np.arange(5000, 105000, 5000):
         print(rank)
         chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
 
@@ -363,6 +363,7 @@ def get_season_misc():
         'DEF': 1,
         'MID': 2,
         'FWD': 3,
+        'GK': 4
     }
 
     for rank in np.arange(5000, 105000, 5000):
@@ -421,7 +422,7 @@ def get_season_misc():
 
 
 # get_season_points()
-# get_season_value()
+get_season_value()
 # get_season_formation()
 # get_season_pos_values()
 # get_season_transfers()
