@@ -75,6 +75,17 @@ class Schedule:
                 output_file.write(cron_job_template.format(time=cron_time))
             output_file.write(YML_FILE_FOOT.format(script=f'{script}.py'))
 
+        # Scrape FPL Ownership a few hours after the deadline.
+        script='fpl_gameweek'
+        with open(f'.github/workflows/{script}.yml', 'w') as output_file:
+            output_file.write(YML_FILE_HEAD)
+            for gw, deadline in enumerate(self.deadlines):
+                # Cronify deadlines
+                delay = (deadline + datetime.timedelta(hours=3))
+                cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
+                output_file.write(cron_job_template.format(time=cron_time))
+            output_file.write(YML_FILE_FOOT.format(script=f'{script}.py'))
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
