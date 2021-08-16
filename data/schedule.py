@@ -86,6 +86,17 @@ class Schedule:
                 output_file.write(cron_job_template.format(time=cron_time))
             output_file.write(YML_FILE_FOOT.format(script=f'{script}.py'))
 
+        # website='fpl_review'
+        # with open(f'.github/workflows/{website}.yml', 'w') as output_file:
+        #     output_file.write(YML_FILE_HEAD)
+        #     for gw, deadline in enumerate(self.deadlines):
+        #         # Cronify deadlines
+        #         eight_hour_prior = (deadline - datetime.timedelta(hours=8))
+        #         cron_time = f'{eight_hour_prior.minute} {eight_hour_prior.hour} {eight_hour_prior.day} {eight_hour_prior.month} *'
+        #         output_file.write(cron_job_template.format(time=cron_time))
+        #     output_file.write(YML_FILE_FOOT.format(script=f'{website}.py'))
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
