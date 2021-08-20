@@ -32,8 +32,8 @@ class FPL_Gameweek:
         
         # Get current gameweek
         current_gw = self.get_current_gw(res['events'])
-        if not os.path.exists(self.root + '{current_gw}/'):
-            os.mkdir(self.root + '{current_gw}/')
+        if not os.path.exists(self.root + f'{current_gw}/'):
+            os.mkdir(self.root + f'{current_gw}/')
         
         # Get player ids
         cols = ["id", "first_name", "second_name", "team"]
@@ -89,11 +89,12 @@ class FPL_Gameweek:
                 if chip is not None:
                     chip_strategy.loc[chip, col] += 1
                 # Transfer strategy
-                transfer_in, transfer_out = transfer
-                for p_in, p_out in zip(transfer_in, transfer_out):
-                    transfer_strategy.loc[p_in, col+'_in'] += 1
-                    transfer_strategy.loc[p_out, col+'_out'] += 1
-                hit_strategy.loc['transfers', col] += len(transfer_in)
+                if transfer is not None:
+                    transfer_in, transfer_out = transfer
+                    for p_in, p_out in zip(transfer_in, transfer_out):
+                        transfer_strategy.loc[p_in, col+'_in'] += 1
+                        transfer_strategy.loc[p_out, col+'_out'] += 1
+                    hit_strategy.loc['transfers', col] += len(transfer_in)
 
             self.players.loc[:, col] = self.players.loc[:, col] / n_samples * 100
             captain.loc[:, col] = captain.loc[:, col] / n_samples * 100
