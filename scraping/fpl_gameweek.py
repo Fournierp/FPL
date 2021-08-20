@@ -84,7 +84,8 @@ class FPL_Gameweek:
                 # Ownership
                 for p in team:
                     self.players.loc[p, col] += 1
-                captain.loc[cap[0], col] += 1
+                if cap is not None:
+                    captain.loc[cap[0], col] += 1
                 # Chip strategy
                 if chip is not None:
                     chip_strategy.loc[chip, col] += 1
@@ -179,4 +180,4 @@ if __name__ == "__main__":
     fplg.sample_ranks()
 
     logger.info("Saving DataFrame.")
-    # Git()
+    Git()
