@@ -90,7 +90,7 @@ class FPL_Gameweek:
                 if chip is not None:
                     chip_strategy.loc[chip, col] += 1
                 # Transfer strategy
-                if transfer is not None:
+                if transfer is not None and len(transfer):
                     transfer_in, transfer_out = transfer
                     for p_in, p_out in zip(transfer_in, transfer_out):
                         transfer_strategy.loc[p_in, col+'_in'] += 1
