@@ -30,11 +30,7 @@ class FiveThirtyEight:
         res = requests.get(url).json()
         
         # Get current gameweek
-        next_gw = self.get_next_gw(res['events'])
-        if not os.path.exists(self.root + str(next_gw) + '/'):
-            os.mkdir(self.root + str(next_gw) + '/')
-        
-        return next_gw
+        return self.get_next_gw(res['events'])
 
 
     def get_next_gw(self, events):
@@ -61,7 +57,7 @@ class FiveThirtyEight:
         self.logger.info("Loading spi_global_rankings ...")
         df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv')
 
-        if not os.path.exists(self.root + f'{self.next_gw}'):
+        if not os.path.exists(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}'):
             os.makedirs(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}')
 
         df.to_csv(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}/spi_global_rankings.csv')
