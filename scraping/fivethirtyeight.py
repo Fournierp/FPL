@@ -14,22 +14,32 @@ from git import Git
 class FiveThirtyEight:
 
     def __init__(self, logger, season_data):
-        self.root = 'data/fivethirtyeight'
+        self.season = season_data['season']
+
+        self.root = f'data/fivethirtyeight/'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
+        
+        self.next_gw = self.get_fpl_metadata()
 
         self.logger = logger
 
-        self.season = season_data['season']
 
-
-    def get_current_gw(self):
+    def get_fpl_metadata(self):
         url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
         res = requests.get(url).json()
-    
-        # Get current FPL gameweek
-        for idx, gw in enumerate(res['events']):
-            if gw['is_current']:
+        
+        # Get current gameweek
+        next_gw = self.get_next_gw(res['events'])
+        if not os.path.exists(self.root + str(next_gw) + '/'):
+            os.mkdir(self.root + str(next_gw) + '/')
+        
+        return next_gw
+
+
+    def get_next_gw(self, events):
+        for idx, gw in enumerate(events):
+            if gw['is_next']:
                 return idx + 1
 
 
@@ -51,16 +61,14 @@ class FiveThirtyEight:
         self.logger.info("Loading spi_global_rankings ...")
         df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv')
 
-        current_gw = self.get_current_gw()
+        if not os.path.exists(self.root + f'{self.next_gw}'):
+            os.makedirs(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}')
 
-        if not os.path.exists(self.root + f'/{self.season}-{self.season % 2000 + 1}/{current_gw}'):
-            os.makedirs(self.root + f'/{self.season}-{self.season % 2000 + 1}/{current_gw}')
-
-        df.to_csv(self.root + f'/{self.season}-{self.season % 2000 + 1}/{current_gw}/spi_global_rankings.csv')
+        df.to_csv(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}/spi_global_rankings.csv')
 
         self.logger.info("Loading spi_matches_latest ...")
         df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_matches_latest.csv')
-        df.to_csv(self.root + f'/spi_matches_latest.csv')
+        df.to_csv(self.root + f'spi_matches_latest.csv')
 
 
 if __name__ == "__main__":
@@ -75,4 +83,4 @@ if __name__ == "__main__":
     fivethirtyeight.update_ranking_data()
 
     logger.info("Saving data ...")
-    Git()
+    # Git()
