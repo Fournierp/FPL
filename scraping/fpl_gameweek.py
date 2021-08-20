@@ -84,7 +84,7 @@ class FPL_Gameweek:
                 # Ownership
                 for p in team:
                     self.players.loc[p, col] += 1
-                if cap is not None:
+                if cap is not None and len(cap):
                     captain.loc[cap[0], col] += 1
                 # Chip strategy
                 if chip is not None:
