@@ -31,6 +31,8 @@ id,first_name,second_name,team
 530,Folarin,Balogun,1
 531,Reiss,Nelson,1
 532,Karl,Hein,1
+558,Martin,Ødegaard,1
+559,Aaron,Ramsdale,1
 28,Jed,Steer,2
 29,Conor,Hourihane,2
 30,Emiliano,Martínez,2
@@ -502,6 +504,7 @@ id,first_name,second_name,team
 469,Adedapo,Awokoya-Mebude,18
 472,Juan Camilo,Hernández Suárez,18
 495,Juraj,Kucka,18
+557,Ozan,Tufan,18
 406,Mark,Noble,19
 407,Darren,Randolph,19
 408,Lukasz,Fabianski,19
