@@ -1,4 +1,5 @@
 import os
+import sys
 import requests
 import logging
 import time 
@@ -179,5 +180,8 @@ if __name__ == "__main__":
     fplg = FPL_Gameweek(logger, season_data)
     fplg.sample_ranks()
 
-    logger.info("Saving DataFrame.")
-    Git()
+    if len(sys.argv) > 1:
+        logger.info("Saving data ...")
+        Git()
+    else:
+        print("Local")

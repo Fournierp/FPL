@@ -1,4 +1,5 @@
 import os
+import sys
 import requests
 import logging
 import time 
@@ -110,6 +111,8 @@ if __name__ == "__main__":
     logger.info("Scraping Free Planner Data.")
     fplrs.get_free_planner_data()
 
-    logger.info("Saving data ...")
-    Git()
-    
+    if len(sys.argv) > 1:
+        logger.info("Saving data ...")
+        Git()
+    else:
+        print("Local")
