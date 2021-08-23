@@ -56,4 +56,4 @@ jobs:
       - name: Run script
         env:
           BOT_GITHUB_ACCESS_TOKEN: ${ secrets.BOT_GITHUB_ACCESS_TOKEN }
-        run: python scraping/fpl_gameweek.py 
+        run: python scraping/fpl_gameweek.py foo bar
