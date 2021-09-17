@@ -66,6 +66,7 @@ id,first_name,second_name,team
 497,Jaden,Philogene-Bidace,2
 526,Carney,Chukwuemeka,2
 568,Cameron,Archer,2
+596,Viljami,Sinisalo,2
 76,Pontus,Jansson,3
 77,Christian,Nørgaard,3
 78,Ivan,Toney,3
@@ -128,6 +129,7 @@ id,first_name,second_name,team
 538,Moisés,Caicedo,4
 560,Haydon,Roberts,4
 584,Marc,Cucurella,4
+595,Jürgen,Locadia,4
 98,James,Tarkowski,5
 99,Phil,Bardsley,5
 100,Erik,Pieters,5
@@ -412,6 +414,7 @@ id,first_name,second_name,team
 465,Federico,Fernández,14
 513,Freddie,Woodman,14
 514,Mark,Gillespie,14
+599,Joe,White,14
 145,Billy,Gilmour,15
 290,Brandon,Williams,15
 313,Michael,McGovern,15
@@ -497,6 +500,8 @@ id,first_name,second_name,team
 494,Cristian,Romero,17
 520,Dane,Scarlett,17
 588,Emerson Aparecido,Leite de Souza Junior,17
+597,Dilan,Markanday,17
+598,Tobi,Omole,17
 354,Moussa,Sissoko,18
 376,Ben,Foster,18
 377,Danny,Rose,18
