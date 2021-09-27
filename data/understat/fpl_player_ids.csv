@@ -1,0 +1,607 @@
+id,first_name,second_name,team,name
+1,Bernd,Leno,1,Bernd Leno
+2,Rúnar Alex,Rúnarsson,1,Rúnar Alex Rúnarsson
+3,Willian,Borges Da Silva,1,Willian Borges Da Silva
+4,Pierre-Emerick,Aubameyang,1,Pierre-Emerick Aubameyang
+5,Cédric,Soares,1,Cédric Soares
+6,Alexandre,Lacazette,1,Alexandre Lacazette
+7,Granit,Xhaka,1,Granit Xhaka
+8,Pablo,Marí,1,Pablo Marí
+9,Héctor,Bellerín,1,Héctor Bellerín
+10,Calum,Chambers,1,Calum Chambers
+11,Sead,Kolasinac,1,Sead Kolasinac
+12,Mohamed Naser,El Sayed Elneny,1,Mohamed Naser El Sayed Elneny
+13,Ainsley,Maitland-Niles,1,Ainsley Maitland-Niles
+14,Rob,Holding,1,Rob Holding
+15,Thomas,Partey,1,Thomas Partey
+16,Kieran,Tierney,1,Kieran Tierney
+17,Nicolas,Pépé,1,Nicolas Pépé
+18,Lucas,Torreira,1,Lucas Torreira
+20,Edward,Nketiah,1,Edward Nketiah
+21,Emile,Smith Rowe,1,Emile Smith Rowe
+22,Bukayo,Saka,1,Bukayo Saka
+23,Gabriel,Magalhães,1,Gabriel Magalhães
+24,Konstantinos,Mavropanos,1,Konstantinos Mavropanos
+25,Mattéo,Guendouzi,1,Mattéo Guendouzi
+26,Gabriel Teodoro,Martinelli Silva,1,Gabriel Teodoro Martinelli Silva
+27,William,Saliba,1,William Saliba
+67,Ben,White,1,Ben White
+466,Nuno,Varela Tavares,1,Nuno Varela Tavares
+478,Albert,Sambi Lokonga,1,Albert Sambi Lokonga
+530,Folarin,Balogun,1,Folarin Balogun
+531,Reiss,Nelson,1,Reiss Nelson
+532,Karl,Hein,1,Karl Hein
+558,Martin,Ødegaard,1,Martin Ødegaard
+559,Aaron,Ramsdale,1,Aaron Ramsdale
+572,Arthur,Okonkwo,1,Arthur Okonkwo
+590,Takehiro,Tomiyasu,1,Takehiro Tomiyasu
+28,Jed,Steer,2,Jed Steer
+29,Conor,Hourihane,2,Conor Hourihane
+30,Emiliano,Martínez,2,Emiliano Martínez
+31,Björn,Engels,2,Björn Engels
+32,Bertrand,Traoré,2,Bertrand Traoré
+34,Morgan,Sanson,2,Morgan Sanson
+35,John,McGinn,2,John McGinn
+36,Kortney,Hause,2,Kortney Hause
+37,Mahmoud Ahmed,Ibrahim Hassan,2,Mahmoud Ahmed Ibrahim Hassan
+38,Tyrone,Mings,2,Tyrone Mings
+39,Matt,Targett,2,Matt Targett
+40,Ollie,Watkins,2,Ollie Watkins
+41,Marvelous,Nakamba,2,Marvelous Nakamba
+42,Anwar,El Ghazi,2,Anwar El Ghazi
+43,Emiliano,Buendía Stati,2,Emiliano Buendía Stati
+44,Matthew,Cash,2,Matthew Cash
+45,Ezri,Konsa Ngoyo,2,Ezri Konsa Ngoyo
+46,Frédéric,Guilbert,2,Frédéric Guilbert
+47,Wesley,Moraes,2,Wesley Moraes
+48,Mbwana Ally,Samatta,2,Mbwana Ally Samatta
+49,Keinan,Davis,2,Keinan Davis
+50,Douglas Luiz,Soares de Paulo,2,Douglas Luiz Soares de Paulo
+51,Jacob,Ramsey,2,Jacob Ramsey
+52,Ashley,Young,2,Ashley Young
+283,Axel,Tuanzebe,2,Axel Tuanzebe
+337,Danny,Ings,2,Danny Ings
+492,Leon,Bailey,2,Leon Bailey
+496,Aaron,Ramsey,2,Aaron Ramsey
+497,Jaden,Philogene-Bidace,2,Jaden Philogene-Bidace
+526,Carney,Chukwuemeka,2,Carney Chukwuemeka
+568,Cameron,Archer,2,Cameron Archer
+596,Viljami,Sinisalo,2,Viljami Sinisalo
+76,Pontus,Jansson,3,Pontus Jansson
+77,Christian,Nørgaard,3,Christian Nørgaard
+78,Ivan,Toney,3,Ivan Toney
+79,Tariqe,Fosu-Henry,3,Tariqe Fosu-Henry
+80,David,Raya Martin,3,David Raya Martin
+81,Sergi,Canós,3,Sergi Canós
+82,Pelenda Joshua,Dasilva,3,Pelenda Joshua Dasilva
+83,Rico,Henry,3,Rico Henry
+84,Vitaly,Janelt,3,Vitaly Janelt
+85,Saman,Ghoddos,3,Saman Ghoddos
+86,Mathias,Jensen,3,Mathias Jensen
+87,Charlie,Goode,3,Charlie Goode
+88,Marcus,Forss,3,Marcus Forss
+89,Mads,Roerslev Rasmussen,3,Mads Roerslev Rasmussen
+90,Mads,Bech Sørensen,3,Mads Bech Sørensen
+91,Ethan,Pinnock,3,Ethan Pinnock
+92,Ellery,Balcombe,3,Ellery Balcombe
+93,Jan,Zamburek,3,Jan Zamburek
+94,Patrik,Gunnarsson,3,Patrik Gunnarsson
+95,Halil,Dervişoğlu,3,Halil Dervişoğlu
+96,Bryan,Mbeumo,3,Bryan Mbeumo
+97,Mads,Bidstrup,3,Mads Bidstrup
+479,Frank,Onyeka,3,Frank Onyeka
+483,Kristoffer,Ajer,3,Kristoffer Ajer
+498,Dominic,Thompson,3,Dominic Thompson
+499,Shandon,Baptiste,3,Shandon Baptiste
+524,Yoane,Wissa,3,Yoane Wissa
+556,Álvaro,Fernández,3,Álvaro Fernández
+569,Finley,Stevens,3,Finley Stevens
+594,Mathias,Jorgensen,3,Mathias Jorgensen
+53,Adam,Lallana,4,Adam Lallana
+54,Jason,Steele,4,Jason Steele
+55,Pascal,Groß,4,Pascal Groß
+56,Shane,Duffy,4,Shane Duffy
+57,Davy,Pröpper,4,Davy Pröpper
+58,Dan,Burn,4,Dan Burn
+59,Lewis,Dunk,4,Lewis Dunk
+60,Solomon,March,4,Solomon March
+61,Adam,Webster,4,Adam Webster
+62,Joël,Veltman,4,Joël Veltman
+63,Neal,Maupay,4,Neal Maupay
+64,Leandro,Trossard,4,Leandro Trossard
+65,Mathew,Ryan,4,Mathew Ryan
+66,Alireza,Jahanbakhsh,4,Alireza Jahanbakhsh
+68,Bernardo,Fernandes Da Silva Junior,4,Bernardo Fernandes Da Silva Junior
+69,Robert,Sánchez,4,Robert Sánchez
+70,Yves,Bissouma,4,Yves Bissouma
+71,Tariq,Lamptey,4,Tariq Lamptey
+72,Aaron,Connolly,4,Aaron Connolly
+73,Steven,Alzate,4,Steven Alzate
+74,Alexis,Mac Allister,4,Alexis Mac Allister
+75,Jakub,Moder,4,Jakub Moder
+447,Danny,Welbeck,4,Danny Welbeck
+462,Enock,Mwepu,4,Enock Mwepu
+476,Kjell,Scherpen,4,Kjell Scherpen
+500,Florin,Andone,4,Florin Andone
+535,Andi,Zeqiri,4,Andi Zeqiri
+536,Michal,Karbownik,4,Michal Karbownik
+537,Taylor,Richards,4,Taylor Richards
+538,Moisés,Caicedo,4,Moisés Caicedo
+560,Haydon,Roberts,4,Haydon Roberts
+584,Marc,Cucurella,4,Marc Cucurella
+595,Jürgen,Locadia,4,Jürgen Locadia
+98,James,Tarkowski,5,James Tarkowski
+99,Phil,Bardsley,5,Phil Bardsley
+100,Erik,Pieters,5,Erik Pieters
+101,Jack,Cork,5,Jack Cork
+102,Dale,Stephens,5,Dale Stephens
+103,Kevin,Long,5,Kevin Long
+104,Jay,Rodriguez,5,Jay Rodriguez
+105,Ashley,Barnes,5,Ashley Barnes
+106,Ben,Mee,5,Ben Mee
+107,Ashley,Westwood,5,Ashley Westwood
+108,Johann Berg,Gudmundsson,5,Johann Berg Gudmundsson
+109,Chris,Wood,5,Chris Wood
+110,Matthew,Lowton,5,Matthew Lowton
+111,Matej,Vydra,5,Matej Vydra
+112,Nick,Pope,5,Nick Pope
+113,Charlie,Taylor,5,Charlie Taylor
+114,Will,Norris,5,Will Norris
+115,Josh,Brownhill,5,Josh Brownhill
+116,Josh,Benson,5,Josh Benson
+117,Bailey,Peacock-Farrell,5,Bailey Peacock-Farrell
+118,Dwight,McNeil,5,Dwight McNeil
+451,Nathan,Collins,5,Nathan Collins
+480,Wayne,Hennessey,5,Wayne Hennessey
+533,Lewis,Richardson,5,Lewis Richardson
+534,Bobby,Thomas,5,Bobby Thomas
+565,Owen,Dodgson,5,Owen Dodgson
+575,Aaron,Lennon,5,Aaron Lennon
+578,Maxwel,Cornet,5,Maxwel Cornet
+585,Connor,Roberts,5,Connor Roberts
+119,César,Azpilicueta,6,César Azpilicueta
+120,Olivier,Giroud,6,Olivier Giroud
+121,Thiago,Emiliano da Silva,6,Thiago Emiliano da Silva
+122,Marcos,Alonso,6,Marcos Alonso
+123,Jorge Luiz,Frello Filho,6,Jorge Luiz Frello Filho
+124,Ross,Barkley,6,Ross Barkley
+125,Mateo,Kovacic,6,Mateo Kovacic
+126,Michy,Batshuayi,6,Michy Batshuayi
+127,Antonio,Rüdiger,6,Antonio Rüdiger
+129,Kepa,Arrizabalaga,6,Kepa Arrizabalaga
+130,N'Golo,Kanté,6,N'Golo Kanté
+131,Hakim,Ziyech,6,Hakim Ziyech
+132,Ruben,Loftus-Cheek,6,Ruben Loftus-Cheek
+133,Andreas,Christensen,6,Andreas Christensen
+134,Timo,Werner,6,Timo Werner
+135,Benjamin,Chilwell,6,Benjamin Chilwell
+136,Tammy,Abraham,6,Tammy Abraham
+137,Christian,Pulisic,6,Christian Pulisic
+138,Mason,Mount,6,Mason Mount
+139,Ethan,Ampadu,6,Ethan Ampadu
+140,Callum,Hudson-Odoi,6,Callum Hudson-Odoi
+141,Kai,Havertz,6,Kai Havertz
+142,Reece,James,6,Reece James
+143,Edouard,Mendy,6,Edouard Mendy
+501,Malang,Sarr,6,Malang Sarr
+527,Trevoh,Chalobah,6,Trevoh Chalobah
+529,Romelu,Lukaku,6,Romelu Lukaku
+539,Emerson,Palmieri dos Santos,6,Emerson Palmieri dos Santos
+592,Saúl,Ñíguez,6,Saúl Ñíguez
+606,Marcus,Bettinelli,6,Marcus Bettinelli
+144,Conor,Gallagher,7,Conor Gallagher
+146,Vicente,Guaita,7,Vicente Guaita
+147,James,Tomkins,7,James Tomkins
+148,James,McArthur,7,James McArthur
+149,Christian,Benteke,7,Christian Benteke
+150,Cheikhou,Kouyaté,7,Cheikhou Kouyaté
+151,Martin,Kelly,7,Martin Kelly
+152,Luka,Milivojevic,7,Luka Milivojevic
+153,Jordan,Ayew,7,Jordan Ayew
+154,Wilfried,Zaha,7,Wilfried Zaha
+155,Jeffrey,Schlupp,7,Jeffrey Schlupp
+156,Jack,Butland,7,Jack Butland
+157,Jairo,Riedewald,7,Jairo Riedewald
+158,Jarosław,Jach,7,Jarosław Jach
+159,Jean-Philippe,Mateta,7,Jean-Philippe Mateta
+160,Eberechi,Eze,7,Eberechi Eze
+161,Nathan,Ferguson,7,Nathan Ferguson
+162,Tyrick,Mitchell,7,Tyrick Mitchell
+386,Will,Hughes,7,Will Hughes
+464,Michael,Olise,7,Michael Olise
+474,Joel,Ward,7,Joel Ward
+477,Marc,Guéhi,7,Marc Guéhi
+488,Joachim,Andersen,7,Joachim Andersen
+493,Nathaniel,Clyne,7,Nathaniel Clyne
+540,Reece,Hannam,7,Reece Hannam
+541,Jesurun,Rak-Sakyi,7,Jesurun Rak-Sakyi
+542,Robert,Street,7,Robert Street
+543,Scott,Banks,7,Scott Banks
+561,Remi,Matthews,7,Remi Matthews
+586,Odsonne,Edouard,7,Odsonne Edouard
+163,Fabian,Delph,8,Fabian Delph
+164,Gylfi,Sigurdsson,8,Gylfi Sigurdsson
+165,Seamus,Coleman,8,Seamus Coleman
+166,James,Rodríguez,8,James Rodríguez
+167,Bernard,Anício Caldeira Duarte,8,Bernard Anício Caldeira Duarte
+168,Lucas,Digne,8,Lucas Digne
+169,Michael,Keane,8,Michael Keane
+170,Jordan,Pickford,8,Jordan Pickford
+171,Allan,Marques Loureiro,8,Allan Marques Loureiro
+172,André Filipe,Tavares Gomes,8,André Filipe Tavares Gomes
+173,Abdoulaye,Doucouré,8,Abdoulaye Doucouré
+174,Alex,Iwobi,8,Alex Iwobi
+175,Yerry,Mina,8,Yerry Mina
+176,Tom,Davies,8,Tom Davies
+177,Dominic,Calvert-Lewin,8,Dominic Calvert-Lewin
+178,Mason,Holgate,8,Mason Holgate
+179,Ben,Godfrey,8,Ben Godfrey
+180,Richarlison,de Andrade,8,Richarlison de Andrade
+181,João,Virgínia,8,João Virgínia
+481,Asmir,Begović,8,Asmir Begović
+482,Andros,Townsend,8,Andros Townsend
+484,Demarai,Gray,8,Demarai Gray
+502,Jonjoe,Kenny,8,Jonjoe Kenny
+503,Anthony,Gordon,8,Anthony Gordon
+504,Jean-Philippe,Gbamin,8,Jean-Philippe Gbamin
+544,Jarrad,Branthwaite,8,Jarrad Branthwaite
+545,Nathan,Broadhead,8,Nathan Broadhead
+564,Moise,Kean,8,Moise Kean
+570,Niels,Nkounkou,8,Niels Nkounkou
+571,Andy,Lonergan,8,Andy Lonergan
+591,Salomón,Rondón,8,Salomón Rondón
+602,Ellis,Simms,8,Ellis Simms
+200,Kasper,Schmeichel,9,Kasper Schmeichel
+201,Jonny,Evans,9,Jonny Evans
+202,Marc,Albrighton,9,Marc Albrighton
+203,Nampalys,Mendy,9,Nampalys Mendy
+204,Danny,Ward,9,Danny Ward
+205,Jamie,Vardy,9,Jamie Vardy
+206,Dennis,Praet,9,Dennis Praet
+207,Ricardo Domingos,Barbosa Pereira,9,Ricardo Domingos Barbosa Pereira
+208,Daniel,Amartey,9,Daniel Amartey
+209,Timothy,Castagne,9,Timothy Castagne
+210,Youri,Tielemans,9,Youri Tielemans
+211,Ayoze,Pérez,9,Ayoze Pérez
+212,James,Maddison,9,James Maddison
+213,Kelechi,Iheanacho,9,Kelechi Iheanacho
+214,Hamza,Choudhury,9,Hamza Choudhury
+215,Harvey,Barnes,9,Harvey Barnes
+216,Wilfred,Ndidi,9,Wilfred Ndidi
+217,Çaglar,Söyüncü,9,Çaglar Söyüncü
+218,James,Justin,9,James Justin
+219,Luke,Thomas,9,Luke Thomas
+220,Wesley,Fofana,9,Wesley Fofana
+340,Jannik,Vestergaard,9,Jannik Vestergaard
+455,Patson,Daka,9,Patson Daka
+458,Boubakary,Soumaré,9,Boubakary Soumaré
+473,Ryan,Bertrand,9,Ryan Bertrand
+505,Kiernan,Dewsbury-Hall,9,Kiernan Dewsbury-Hall
+573,Eldin,Jakupovic,9,Eldin Jakupovic
+587,Ademola,Lookman,9,Ademola Lookman
+182,Pablo,Hernández Domínguez,10,Pablo Hernández Domínguez
+183,Francisco,Casilla Cortés,10,Francisco Casilla Cortés
+184,Liam,Cooper,10,Liam Cooper
+185,Luke,Ayling,10,Luke Ayling
+186,Mateusz,Klich,10,Mateusz Klich
+187,Rodrigo,Moreno,10,Rodrigo Moreno
+188,Stuart,Dallas,10,Stuart Dallas
+189,Patrick,Bamford,10,Patrick Bamford
+190,Diego,Llorente,10,Diego Llorente
+191,Kalvin,Phillips,10,Kalvin Phillips
+192,Hélder Wander,Sousa de Azevedo e Costa,10,Hélder Wander Sousa de Azevedo e Costa
+193,Tyler,Roberts,10,Tyler Roberts
+194,Robin,Koch,10,Robin Koch
+195,Ian Carlo,Poveda-Ocampo,10,Ian Carlo Poveda-Ocampo
+196,Raphael,Dias Belloli,10,Raphael Dias Belloli
+197,Jamie,Shackleton,10,Jamie Shackleton
+198,Pascal,Struijk,10,Pascal Struijk
+199,Illan,Meslier,10,Illan Meslier
+267,Jack,Harrison,10,Jack Harrison
+287,Daniel,James,10,Daniel James
+463,Héctor Junior,Firpo Adames,10,Héctor Junior Firpo Adames
+490,Kristoffer,Klaesson,10,Kristoffer Klaesson
+550,Sam,Greenwood,10,Sam Greenwood
+551,Crysencio,Summerville,10,Crysencio Summerville
+552,Adam,Forshaw,10,Adam Forshaw
+562,Cody,Drameh,10,Cody Drameh
+563,Charlie,Cresswell,10,Charlie Cresswell
+576,Liam,McCarron,10,Liam McCarron
+577,Joe,Gelhardt,10,Joe Gelhardt
+600,Nohan,Kenneh,10,Nohan Kenneh
+601,Stuart,McKinstry,10,Stuart McKinstry
+221,James,Milner,11,James Milner
+222,Jordan,Henderson,11,Jordan Henderson
+223,Adrián,San Miguel del Castillo,11,Adrián San Miguel del Castillo
+224,Joel,Matip,11,Joel Matip
+225,Thiago,Alcántara do Nascimento,11,Thiago Alcántara do Nascimento
+226,Xherdan,Shaqiri,11,Xherdan Shaqiri
+227,Alex,Oxlade-Chamberlain,11,Alex Oxlade-Chamberlain
+228,Roberto,Firmino,11,Roberto Firmino
+229,Virgil,van Dijk,11,Virgil van Dijk
+230,Sadio,Mané,11,Sadio Mané
+231,Alisson,Ramses Becker,11,Alisson Ramses Becker
+232,Fabio Henrique,Tavares,11,Fabio Henrique Tavares
+233,Mohamed,Salah,11,Mohamed Salah
+234,Andrew,Robertson,11,Andrew Robertson
+235,Divock,Origi,11,Divock Origi
+236,Takumi,Minamino,11,Takumi Minamino
+237,Trent,Alexander-Arnold,11,Trent Alexander-Arnold
+238,Joseph,Gomez,11,Joseph Gomez
+239,Naby,Keita,11,Naby Keita
+240,Diogo,Jota,11,Diogo Jota
+241,Nathaniel,Phillips,11,Nathaniel Phillips
+242,Caoimhin,Kelleher,11,Caoimhin Kelleher
+243,Ibrahima,Konaté,11,Ibrahima Konaté
+244,Curtis,Jones,11,Curtis Jones
+245,Konstantinos,Tsimikas,11,Konstantinos Tsimikas
+246,Neco,Williams,11,Neco Williams
+247,Rhys,Williams,11,Rhys Williams
+248,Ben,Davies,11,Ben Davies
+506,Harvey,Elliott,11,Harvey Elliott
+553,Ben,Woodburn,11,Ben Woodburn
+33,Jack,Grealish,12,Jack Grealish
+249,Kyle,Walker,12,Kyle Walker
+250,Ilkay,Gündogan,12,Ilkay Gündogan
+251,Kevin,De Bruyne,12,Kevin De Bruyne
+252,John,Stones,12,John Stones
+253,Benjamin,Mendy,12,Benjamin Mendy
+254,Riyad,Mahrez,12,Riyad Mahrez
+255,Raheem,Sterling,12,Raheem Sterling
+256,João Pedro Cavaco,Cancelo,12,João Pedro Cavaco Cancelo
+257,Ederson,Santana de Moraes,12,Ederson Santana de Moraes
+258,Nathan,Aké,12,Nathan Aké
+259,Aymeric,Laporte,12,Aymeric Laporte
+260,Zack,Steffen,12,Zack Steffen
+261,Bernardo Mota,Veiga de Carvalho e Silva,12,Bernardo Mota Veiga de Carvalho e Silva
+262,Rúben Santos,Gato Alves Dias,12,Rúben Santos Gato Alves Dias
+263,Gabriel Fernando,de Jesus,12,Gabriel Fernando de Jesus
+264,Oleksandr,Zinchenko,12,Oleksandr Zinchenko
+265,Phil,Foden,12,Phil Foden
+266,Rodrigo,Hernandez,12,Rodrigo Hernandez
+268,Ferran,Torres,12,Ferran Torres
+453,Fernando,Luiz Rosa,12,Fernando Luiz Rosa
+507,Cole,Palmer,12,Cole Palmer
+508,Samuel,Edozie,12,Samuel Edozie
+566,Tommy,Doyle,12,Tommy Doyle
+593,Scott,Carson,12,Scott Carson
+603,Luke,Mbete,12,Luke Mbete
+604,Joshua,Wilson-Esbrand,12,Joshua Wilson-Esbrand
+605,Romeo,Lavia,12,Romeo Lavia
+269,Edinson,Cavani,13,Edinson Cavani
+270,David,de Gea,13,David de Gea
+271,Nemanja,Matic,13,Nemanja Matic
+272,Paul,Pogba,13,Paul Pogba
+273,Harry,Maguire,13,Harry Maguire
+274,Frederico,Rodrigues de Paula Santos,13,Frederico Rodrigues de Paula Santos
+275,Luke,Shaw,13,Luke Shaw
+276,Jesse,Lingard,13,Jesse Lingard
+277,Bruno Miguel,Borges Fernandes,13,Bruno Miguel Borges Fernandes
+278,Anthony,Martial,13,Anthony Martial
+279,Alex Nicolao,Telles,13,Alex Nicolao Telles
+280,Dean,Henderson,13,Dean Henderson
+281,Marcus,Rashford,13,Marcus Rashford
+282,Donny,van de Beek,13,Donny van de Beek
+284,Victor,Lindelöf,13,Victor Lindelöf
+285,Scott,McTominay,13,Scott McTominay
+286,Eric,Bailly,13,Eric Bailly
+288,Aaron,Wan-Bissaka,13,Aaron Wan-Bissaka
+289,Mason,Greenwood,13,Mason Greenwood
+459,Juan,Mata,13,Juan Mata
+485,Jadon,Sancho,13,Jadon Sancho
+509,Tom,Heaton,13,Tom Heaton
+510,José Diogo,Dalot Teixeira,13,José Diogo Dalot Teixeira
+511,Andreas,Pereira,13,Andreas Pereira
+512,Anthony,Elanga,13,Anthony Elanga
+555,Raphaël,Varane,13,Raphaël Varane
+579,Cristiano Ronaldo,dos Santos Aveiro,13,Cristiano Ronaldo dos Santos Aveiro
+19,Joseph,Willock,14,Joseph Willock
+291,Jonjo,Shelvey,14,Jonjo Shelvey
+292,Matt,Ritchie,14,Matt Ritchie
+293,Ciaran,Clark,14,Ciaran Clark
+294,Karl,Darlow,14,Karl Darlow
+295,Martin,Dubravka,14,Martin Dubravka
+296,Callum,Wilson,14,Callum Wilson
+297,Jeff,Hendrick,14,Jeff Hendrick
+298,Ryan,Fraser,14,Ryan Fraser
+299,Jamaal,Lascelles,14,Jamaal Lascelles
+300,Dwight,Gayle,14,Dwight Gayle
+301,Paul,Dummett,14,Paul Dummett
+302,Javier,Manquillo,14,Javier Manquillo
+303,Emil,Krafth,14,Emil Krafth
+304,Jacob,Murphy,14,Jacob Murphy
+305,Fabian,Schär,14,Fabian Schär
+306,Isaac,Hayden,14,Isaac Hayden
+307,Allan,Saint-Maximin,14,Allan Saint-Maximin
+308,Miguel,Almirón,14,Miguel Almirón
+309,Sean,Longstaff,14,Sean Longstaff
+310,Joelinton Cássio,Apolinário de Lira,14,Joelinton Cássio Apolinário de Lira
+311,Jamal,Lewis,14,Jamal Lewis
+312,Matthew,Longstaff,14,Matthew Longstaff
+465,Federico,Fernández,14,Federico Fernández
+513,Freddie,Woodman,14,Freddie Woodman
+514,Mark,Gillespie,14,Mark Gillespie
+599,Joe,White,14,Joe White
+145,Billy,Gilmour,15,Billy Gilmour
+290,Brandon,Williams,15,Brandon Williams
+313,Michael,McGovern,15,Michael McGovern
+314,Tim,Krul,15,Tim Krul
+315,Teemu,Pukki,15,Teemu Pukki
+316,Marco,Stiepermann,15,Marco Stiepermann
+317,Lukas,Rupp,15,Lukas Rupp
+318,Kenny,McLean,15,Kenny McLean
+319,Grant,Hanley,15,Grant Hanley
+320,Onel,Hernández,15,Onel Hernández
+321,Sam,Byram,15,Sam Byram
+322,Jordan,Hugill,15,Jordan Hugill
+323,Kieran,Dowell,15,Kieran Dowell
+324,Christoph,Zimmermann,15,Christoph Zimmermann
+325,Todd,Cantwell,15,Todd Cantwell
+326,Max,Aarons,15,Max Aarons
+327,Jacob,Sørensen,15,Jacob Sørensen
+328,Przemyslaw,Placheta,15,Przemyslaw Placheta
+329,Adam,Idah,15,Adam Idah
+330,Josh,Martin,15,Josh Martin
+331,Andrew,Omobamidele,15,Andrew Omobamidele
+448,Angus,Gunn,15,Angus Gunn
+449,Milot,Rashica,15,Milot Rashica
+456,Ben,Gibson,15,Ben Gibson
+457,Dimitris,Giannoulis,15,Dimitris Giannoulis
+471,Pierre,Lees-Melou,15,Pierre Lees-Melou
+515,Bali,Mumba,15,Bali Mumba
+516,Joshua,Sargent,15,Joshua Sargent
+528,Christos,Tzolis,15,Christos Tzolis
+580,Ozan,Kabak,15,Ozan Kabak
+581,Mathias,Normann,15,Mathias Normann
+332,Theo,Walcott,16,Theo Walcott
+333,Fraser,Forster,16,Fraser Forster
+334,Alex,McCarthy,16,Alex McCarthy
+335,Oriol,Romeu Vidal,16,Oriol Romeu Vidal
+336,Nathan,Redmond,16,Nathan Redmond
+338,Jack,Stephens,16,Jack Stephens
+339,Stuart,Armstrong,16,Stuart Armstrong
+341,James,Ward-Prowse,16,James Ward-Prowse
+342,Kyle,Walker-Peters,16,Kyle Walker-Peters
+343,Jan,Bednarek,16,Jan Bednarek
+344,Daniel,N'Lundulu,16,Daniel N'Lundulu
+345,Che,Adams,16,Che Adams
+346,Nathan,Tella,16,Nathan Tella
+347,William,Smallbone,16,William Smallbone
+348,Michael,Obafemi,16,Michael Obafemi
+349,Ibrahima,Diallo,16,Ibrahima Diallo
+350,Moussa,Djenepo,16,Moussa Djenepo
+351,Mohammed,Salisu,16,Mohammed Salisu
+460,Romain,Perraud,16,Romain Perraud
+491,Tino,Livramento,16,Tino Livramento
+517,Mohamed,Elyounoussi,16,Mohamed Elyounoussi
+518,Armando,Broja,16,Armando Broja
+519,Shane,Long,16,Shane Long
+525,Adam,Armstrong,16,Adam Armstrong
+546,Yan,Valery,16,Yan Valery
+567,Lyanco Evangelista,Silveira Neves Vojnovic,16,Lyanco Evangelista Silveira Neves Vojnovic
+352,Joe,Hart,17,Joe Hart
+353,Hugo,Lloris,17,Hugo Lloris
+355,Toby,Alderweireld,17,Toby Alderweireld
+356,Erik,Lamela,17,Erik Lamela
+357,Harry,Kane,17,Harry Kane
+358,Serge,Aurier,17,Serge Aurier
+359,Heung-Min,Son,17,Heung-Min Son
+360,Matt,Doherty,17,Matt Doherty
+361,Eric,Dier,17,Eric Dier
+362,Lucas,Rodrigues Moura da Silva,17,Lucas Rodrigues Moura da Silva
+363,Bamidele,Alli,17,Bamidele Alli
+364,Ben,Davies,17,Ben Davies
+365,Pierre-Emile,Højbjerg,17,Pierre-Emile Højbjerg
+366,Harry,Winks,17,Harry Winks
+367,Davinson,Sánchez,17,Davinson Sánchez
+368,Ryan,Sessegnon,17,Ryan Sessegnon
+369,Steven,Bergwijn,17,Steven Bergwijn
+370,Sergio,Reguilón,17,Sergio Reguilón
+371,Japhet,Tanganga,17,Japhet Tanganga
+372,Giovani,Lo Celso,17,Giovani Lo Celso
+373,Oliver,Skipp,17,Oliver Skipp
+374,Joe,Rodon,17,Joe Rodon
+375,Tanguy,Ndombele,17,Tanguy Ndombele
+486,Pierluigi,Gollini,17,Pierluigi Gollini
+487,Bryan,Gil Salvatierra,17,Bryan Gil Salvatierra
+494,Cristian,Romero,17,Cristian Romero
+520,Dane,Scarlett,17,Dane Scarlett
+588,Emerson Aparecido,Leite de Souza Junior,17,Emerson Aparecido Leite de Souza Junior
+597,Dilan,Markanday,17,Dilan Markanday
+598,Tobi,Omole,17,Tobi Omole
+354,Moussa,Sissoko,18,Moussa Sissoko
+376,Ben,Foster,18,Ben Foster
+377,Danny,Rose,18,Danny Rose
+378,Dan,Gosling,18,Dan Gosling
+379,Craig,Cathcart,18,Craig Cathcart
+380,Troy,Deeney,18,Troy Deeney
+381,Tom,Cleverley,18,Tom Cleverley
+382,Francisco,Femenía Far,18,Francisco Femenía Far
+383,Andre,Gray,18,Andre Gray
+384,Christian,Kabasele,18,Christian Kabasele
+385,Nathaniel,Chalobah,18,Nathaniel Chalobah
+387,William,Troost-Ekong,18,William Troost-Ekong
+388,Stipe,Perica,18,Stipe Perica
+389,Daniel,Bachmann,18,Daniel Bachmann
+390,Adam,Masina,18,Adam Masina
+391,Ken,Sema,18,Ken Sema
+392,Philip,Zinckernagel,18,Philip Zinckernagel
+393,Isaac,Success Ajayi,18,Isaac Success Ajayi
+394,Ayotomiwa,Dele-Bashiru,18,Ayotomiwa Dele-Bashiru
+395,Ashley,Fletcher,18,Ashley Fletcher
+396,Francisco,Sierralta,18,Francisco Sierralta
+397,Domingos,Quina,18,Domingos Quina
+398,Marc,Navarro,18,Marc Navarro
+399,Ismaila,Sarr,18,Ismaila Sarr
+400,Jeremy,Ngakia,18,Jeremy Ngakia
+401,Ben,Wilmot,18,Ben Wilmot
+402,Joseph,Hungbo,18,Joseph Hungbo
+403,Imrân,Louza,18,Imrân Louza
+404,João Pedro,Junqueira de Jesus,18,João Pedro Junqueira de Jesus
+405,Kwadwo,Baah,18,Kwadwo Baah
+450,Emmanuel,Dennis,18,Emmanuel Dennis
+454,Matthew,Pollock,18,Matthew Pollock
+467,Oghenekaro Peter,Etebo,18,Oghenekaro Peter Etebo
+468,Joshua,King,18,Joshua King
+469,Adedapo,Awokoya-Mebude,18,Adedapo Awokoya-Mebude
+472,Juan Camilo,Hernández Suárez,18,Juan Camilo Hernández Suárez
+495,Juraj,Kucka,18,Juraj Kucka
+557,Ozan,Tufan,18,Ozan Tufan
+574,Robert,Elliot,18,Robert Elliot
+128,Kurt,Zouma,19,Kurt Zouma
+406,Mark,Noble,19,Mark Noble
+407,Darren,Randolph,19,Darren Randolph
+408,Lukasz,Fabianski,19,Lukasz Fabianski
+409,Angelo,Ogbonna,19,Angelo Ogbonna
+410,Winston,Reid,19,Winston Reid
+411,Aaron,Cresswell,19,Aaron Cresswell
+412,Andriy,Yarmolenko,19,Andriy Yarmolenko
+413,Michail,Antonio,19,Michail Antonio
+414,Craig,Dawson,19,Craig Dawson
+415,Ryan,Fredericks,19,Ryan Fredericks
+416,Manuel,Lanzini,19,Manuel Lanzini
+417,Arthur,Masuaku,19,Arthur Masuaku
+418,Vladimir,Coufal,19,Vladimir Coufal
+419,Saïd,Benrahma,19,Saïd Benrahma
+420,Jarrod,Bowen,19,Jarrod Bowen
+421,Declan,Rice,19,Declan Rice
+422,Tomas,Soucek,19,Tomas Soucek
+423,Pablo,Fornals,19,Pablo Fornals
+424,Issa,Diop,19,Issa Diop
+425,Ben,Johnson,19,Ben Johnson
+489,Alphonse,Areola,19,Alphonse Areola
+521,Frederik,Alves,19,Frederik Alves
+522,Conor,Coventry,19,Conor Coventry
+554,Jamal,Baptiste,19,Jamal Baptiste
+582,Nikola,Vlasic,19,Nikola Vlasic
+589,Alex,Kral,19,Alex Kral
+426,João Filipe Iria,Santos Moutinho,20,João Filipe Iria Santos Moutinho
+427,Rui Pedro,dos Santos Patrício,20,Rui Pedro dos Santos Patrício
+428,Willy,Boly,20,Willy Boly
+429,Conor,Coady,20,Conor Coady
+430,Raúl,Jiménez,20,Raúl Jiménez
+431,Romain,Saïss,20,Romain Saïss
+432,Fernando,Marçal,20,Fernando Marçal
+433,Jonathan,Castro Otto,20,Jonathan Castro Otto
+434,Leander,Dendoncker,20,Leander Dendoncker
+435,Adama,Traoré,20,Adama Traoré
+436,Rúben Diogo,da Silva Neves,20,Rúben Diogo da Silva Neves
+437,Nélson,Cabral Semedo,20,Nélson Cabral Semedo
+438,Daniel,Castelo Podence,20,Daniel Castelo Podence
+439,Max,Kilman,20,Max Kilman
+440,Morgan,Gibbs-White,20,Morgan Gibbs-White
+441,Pedro,Lomba Neto,20,Pedro Lomba Neto
+442,Owen,Otasowie,20,Owen Otasowie
+443,Ki-Jana,Hoever,20,Ki-Jana Hoever
+444,Andreas,Söndergaard,20,Andreas Söndergaard
+445,Fabio,Silva,20,Fabio Silva
+446,Yerson,Mosquera Valdelamar,20,Yerson Mosquera Valdelamar
+452,John,Ruddy,20,John Ruddy
+461,Francisco,Machado Mota de Castro Trincão,20,Francisco Machado Mota de Castro Trincão
+470,Rayan,Ait Nouri,20,Rayan Ait Nouri
+475,José,Malheiro de Sá,20,José Malheiro de Sá
+523,Patrick,Cutrone,20,Patrick Cutrone
+547,Luke,Cundle,20,Luke Cundle
+548,Chem,Campbell,20,Chem Campbell
+549,Christian,Marques,20,Christian Marques
+583,Hee-Chan,Hwang,20,Hee-Chan Hwang
