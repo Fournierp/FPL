@@ -10,8 +10,7 @@ from utils import odds, clean_sheet
 class Poisson:
 
     def __init__(self, games):
-        self.games = games
-        self.games = df.loc[:, ["score1", "score2", "team1", "team2"]]
+        self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
         self.games["score1"] = self.games["score1"].astype(int)
         self.games["score2"] = self.games["score2"].astype(int)
 
