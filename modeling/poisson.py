@@ -9,6 +9,9 @@ class Poisson:
 
     def __init__(self, games):
         self.games = games
+        self.games = df.loc[:, ["score1", "score2", "team1", "team2"]]
+        self.games["score1"] = self.games["score1"].astype(int)
+        self.games["score2"] = self.games["score2"].astype(int)
 
         self.teams = np.sort(np.unique(self.games["team1"]))
         self.league_size = len(self.teams)
@@ -22,7 +25,7 @@ class Poisson:
         )
 
 
-    def score_inference(self, parameters, games):
+    def fit(self, parameters, games):
         parameter_df = (
             pd.DataFrame()
             .assign(attack=parameters[:self.league_size])
@@ -59,23 +62,19 @@ class Poisson:
         bounds += [(0, 1)]
 
         self.solution = minimize(
-            self.score_inference,
+            self.fit,
             self.parameters,
             args=self.games,
             constraints=constraints,
-            bounds=bounds,
-            options = {
-                "maxiter": 10,
-                "disp": False,
-            })
+            bounds=bounds)
 
         self.parameters = self.solution["x"]
 
 
-    def score_mtx(self, home_team, away_team, max_goals=8):
+    def score_mtx(self, team1, team2, max_goals=8):
         # Get the corresponding model parameters
-        home_idx = np.where(self.teams == home_team)[0][0]
-        away_idx = np.where(self.teams == away_team)[0][0]
+        home_idx = np.where(self.teams == team1)[0][0]
+        away_idx = np.where(self.teams == team2)[0][0]
 
         home = self.parameters[[home_idx, home_idx + self.league_size]]
         away = self.parameters[[away_idx, away_idx + self.league_size]]
@@ -91,21 +90,20 @@ class Poisson:
         away_goals_pmf = poisson(away_goals).pmf(np.arange(0, max_goals))
 
         # Aggregate probabilities
-        m = np.outer(home_goals_pmf, away_goals_pmf)
-        return m
+        return np.outer(home_goals_pmf, away_goals_pmf)
 
 
     def odds(self, m):
         home = np.sum(np.tril(m, -1))
         draw = np.sum(np.diag(m))
         away = np.sum(np.triu(m, 1))
-        return f"Home: {home:.2f}, Draw {draw:.2f}, Away {away:.2f}"
+        return (home, draw, away)
 
 
     def clean_sheet(self, m):
         home = np.sum(m[:, 0])
         away = np.sum(m[0, :])
-        return f"Home: {home:.2f}, Away {away:.2f}"
+        return (home, away)
 
 
 if __name__ == "__main__":
@@ -116,10 +114,6 @@ if __name__ == "__main__":
         .dropna()
         )
     df = df[df['season'] != 2021]
-
-    games = df.loc[:, ["score1", "score2", "team1", "team2"]]
-    games["score1"] = games["score1"].astype(int)
-    games["score2"] = games["score2"].astype(int)
 
     poisson_model = Poisson(games)
     poisson_model.optimize()
