@@ -4,6 +4,8 @@ import numpy as np
 from scipy.stats import poisson
 from scipy.optimize import minimize
 
+from utils import odds, clean_sheet
+
 
 class Poisson:
 
@@ -93,19 +95,6 @@ class Poisson:
         return np.outer(home_goals_pmf, away_goals_pmf)
 
 
-    def odds(self, m):
-        home = np.sum(np.tril(m, -1))
-        draw = np.sum(np.diag(m))
-        away = np.sum(np.triu(m, 1))
-        return (home, draw, away)
-
-
-    def clean_sheet(self, m):
-        home = np.sum(m[:, 0])
-        away = np.sum(m[0, :])
-        return (home, away)
-
-
 if __name__ == "__main__":
 
     df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
@@ -119,5 +108,5 @@ if __name__ == "__main__":
     poisson_model.optimize()
     mtx = poisson_model.score_mtx("Arsenal", "Burnley", 6)
     print(mtx)
-    print(poisson_model.odds(mtx))
-    print(poisson_model.clean_sheet(mtx))
+    print(odds(mtx))
+    print(clean_sheet(mtx))
