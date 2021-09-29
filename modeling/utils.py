@@ -12,3 +12,7 @@ def clean_sheet(m):
     home = np.sum(m[:, 0])
     away = np.sum(m[0, :])
     return (home, away)
+
+
+def time_decay(xi, t):
+    return np.exp(-xi * t)
