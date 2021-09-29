@@ -67,6 +67,10 @@ class FiveThirtyEight:
         df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_matches_latest.csv')
         df.to_csv(self.root + f'spi_matches_latest.csv')
 
+        self.logger.info("Loading spi_matches ...")
+        df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_matches.csv')
+        df.to_csv(self.root + f'spi_matches.csv')
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
