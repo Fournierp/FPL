@@ -27,9 +27,9 @@ class Dixon_Coles:
         self.parameters = np.concatenate(
             (
                 np.repeat(1, len(self.teams)), # Attack strength
-                np.repeat(-1, len(self.teams)), # Defense strength
+                np.repeat(1, len(self.teams)), # Defense strength
                 [.3], # Home advantage
-                [0], # Rho
+                [.1], # Rho
             )
         )
 
@@ -144,7 +144,8 @@ class Dixon_Coles:
             .assign(attack=self.parameters[:self.league_size])
             .assign(defence=self.parameters[self.league_size : self.league_size * 2])
             .assign(team=self.teams)
-            .assign(home_adv=self.parameters[-1])
+            .assign(home_adv=self.parameters[-2])
+            .assign(rho=self.parameters[-1])
         )
         parameter_df.to_csv("dixon_coles_parameters.csv")
 
@@ -154,7 +155,24 @@ class Dixon_Coles:
         
         self.league_size = (parameter_df.shape[0] - 1) / 2
         self.teams = parameter_df.loc[:, 'team']
-        self.parameters = parameter_df.loc[:, 'attack'].append(parameter_df.loc[:, 'defence']).append(parameter_df.loc[:, 'home_adv'])
+        self.parameters = (
+            parameter_df.loc[:, 'attack'].
+            append(parameter_df.loc[:, 'defence']).
+            append(parameter_df.loc[0, 'home_adv']).
+            append(parameter_df.loc[0, 'rho'])
+            )
+
+
+    def print_parameters(self):
+        parameter_df = (
+            pd.DataFrame()
+            .assign(attack=self.parameters[:self.league_size])
+            .assign(defence=self.parameters[self.league_size : self.league_size * 2])
+            .assign(team=self.teams)
+            .assign(home_adv=self.parameters[-2])
+            .assign(rho=self.parameters[-1])
+        )
+        return parameter_df
 
 
     def predict(self, games):
