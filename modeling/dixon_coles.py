@@ -7,7 +7,7 @@ from scipy.optimize import minimize
 from datetime import datetime
 
 from utils import odds, clean_sheet, time_decay
-from ranked_probability_score import ranked_probability_score, get_winner
+from ranked_probability_score import ranked_probability_score, match_outcome
 
 
 class Dixon_Coles:
@@ -155,6 +155,55 @@ class Dixon_Coles:
         self.league_size = (parameter_df.shape[0] - 1) / 2
         self.teams = parameter_df.loc[:, 'team']
         self.parameters = parameter_df.loc[:, 'attack'].append(parameter_df.loc[:, 'defence']).append(parameter_df.loc[:, 'home_adv'])
+
+
+    def predict(self, games):
+        """ Predict score for several fixtures. """
+        parameter_df = (
+            pd.DataFrame()
+            .assign(attack=self.parameters[:self.league_size])
+            .assign(defence=self.parameters[self.league_size : self.league_size * 2])
+            .assign(team=self.teams)
+        )
+
+        aggregate_df = (
+            games.merge(parameter_df, left_on='team1', right_on='team')
+            .rename(columns={"attack": "attack1", "defence": "defence1"})
+            .merge(parameter_df, left_on='team2', right_on='team')
+            .rename(columns={"attack": "attack2", "defence": "defence2"})
+            .drop("team_y", axis=1)
+            .drop("team_x", axis=1)
+            .assign(home_adv=self.parameters[-2])
+            .assign(rho=self.parameters[-1])
+        )
+        aggregate_df["rho"] = self.parameters[-1]
+
+        aggregate_df["score1_infered"] = np.exp(aggregate_df["home_adv"] + aggregate_df["attack1"] - aggregate_df["defence2"])
+        aggregate_df["score2_infered"] = np.exp(aggregate_df["attack2"] - aggregate_df["defence1"])
+
+        aggregate_df["winner"] = match_outcome(aggregate_df)
+
+        def lambda_synthesize(row):
+            home_goals_pmf = poisson(row["score1_infered"]).pmf(np.arange(0, 8))
+            away_goals_pmf = poisson(row["score2_infered"]).pmf(np.arange(0, 8))
+
+            m = np.outer(home_goals_pmf, away_goals_pmf)
+
+            m[0, 0] *= 1 - row["score1"] * row["score2"] * row["rho"]
+            m[0, 1] *= 1 + row["score1"] * row["rho"]
+            m[1, 0] *= 1 + row["score2"] * row["rho"]
+            m[1, 1] *= 1 - row["rho"]
+
+            row["home_win_p"], row["home_draw_p"], row["home_away_p"] = odds(m)
+            row["home_cs_p"], row["home_cs_p"] = clean_sheet(m)
+
+            row["rps"] = ranked_probability_score([row["home_win_p"], row["home_draw_p"], row["home_away_p"]], row["winner"])
+
+            return row
+
+        aggregate_df = aggregate_df.apply(lambda_synthesize, axis=1)
+
+        return aggregate_df
 
 
 if __name__ == "__main__":
