@@ -166,10 +166,10 @@ class Poisson_Time_Decay:
 
             m = np.outer(home_goals_pmf, away_goals_pmf)
 
-            row["home_win_p"], row["home_draw_p"], row["home_away_p"] = odds(m)
+            row["home_win_p"], row["draw_p"], row["away_win_p"] = odds(m)
             row["home_cs_p"], row["home_cs_p"] = clean_sheet(m)
 
-            row["rps"] = ranked_probability_score([row["home_win_p"], row["home_draw_p"], row["home_away_p"]], row["winner"])
+            row["rps"] = ranked_probability_score([row["home_win_p"], row["draw_p"], row["away_win_p"]], row["winner"])
 
             return row
 
