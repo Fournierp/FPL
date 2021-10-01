@@ -2,13 +2,24 @@ import pandas as pd
 import numpy as np
 import os
 import sasoptpy as so
-from utils import get_team, get_predictions, get_rolling, pretty_print
+from utils import get_team, get_predictions, get_rolling, pretty_print, get_chips, get_next_gw
 
 # User {Hyper}parameters
-start = 7
 decay_bench = 0.1
 decay_gameweek = 0.8
 team_id = 35868
+horizon = 5
+# Chip strategy: set to (-1) if you don't want to use
+# Choose a value in range [0-5] as the number of gameweeks after the current one
+freehit_gw = -1
+wildcard_gw = 0
+bboost_gw = -1
+threexc_gw = -1
+
+assert (freehit_gw < 5), "Select a gameweek within the horizon."
+assert (wildcard_gw < 5), "Select a gameweek within the horizon."
+assert (bboost_gw < 5), "Select a gameweek within the horizon."
+assert (threexc_gw < 5), "Select a gameweek within the horizon."
 
 # Data collection
 # Predicted points from https://fplreview.com/
@@ -18,17 +29,26 @@ data.set_index('id', inplace=True)
 players = data.index.tolist()
 
 # FPL data
+start = get_next_gw()
 initial_team, bank = get_team(team_id, start - 1)
+freehit_used, wildcard_used, bboost_used, threexc_used = get_chips(team_id, start - 1)
 
 # GW
-period = min(5, len([col for col in df.columns if '_Pts' in col]))
+period = min(horizon, len([col for col in df.columns if '_Pts' in col]))
 rolling_transfer, transfer = get_rolling(team_id, start - 1) 
 budget = np.sum([data.loc[p, 'SV'] for p in initial_team]) + bank
 all_gameweeks = np.arange(start-1, start+period)
 gameweeks = np.arange(start, start+period)
 
+assert not (freehit_used and freehit_gw >= 0), "Freehit chip was already used."
+assert not (wildcard_used and wildcard_gw >= 0), "Wildcard chip was already used."
+assert not (bboost_used and bboost_gw >= 0), "Bench boost chip was already used."
+assert not (threexc_used and threexc_gw >= 0), "Tripple captain chip was already used."
+
+
 # Model
-model = so.Model(name='season_model')
+model_name = 'chips'
+model = so.Model(name=model_name + '_model')
 
 # Variables
 team = model.add_variables(players, all_gameweeks, name='team', vartype=so.binary)
@@ -43,17 +63,36 @@ free_transfers = model.add_variables(all_gameweeks, name='ft', vartype=so.intege
 hits = model.add_variables(gameweeks, name='hits', vartype=so.integer, lb=0, ub=15)
 rolling_transfers = model.add_variables(gameweeks, name='rolling', vartype=so.binary)
 
+freehit = model.add_variables(gameweeks, name='fh', vartype=so.integer, lb=0, ub=15)
+wildcard = model.add_variables(gameweeks, name='wc', vartype=so.integer, lb=0, ub=15)
+bboost = model.add_variables(gameweeks, name='bb', vartype=so.binary)
+threexc = model.add_variables(players, gameweeks, name='3xc', vartype=so.binary)
+
 
 # Objective: maximize total expected points
 # Assume a 10% (decay_bench) chance of a player not playing
 # Assume a 80% (decay_gameweek) reliability of next week's xPts
 xp = so.expr_sum(
-    np.power(decay_gameweek, w - start) *
-    so.expr_sum((starter[p, w] + captain[p, w] + decay_bench * (vicecaptain[p, w] + team[p, w] - starter[p, w])) *
-                data.loc[p, str(w) + '_Pts'] for p in players) -
-    4 * hits[w] for w in gameweeks)
+    np.power(decay_gameweek, w - start) * (
+            so.expr_sum(
+                (starter[p, w] + captain[p, w] + threexc[p, w] +
+                 decay_bench * (vicecaptain[p, w] + team[p, w] - starter[p, w])) *
+                data.loc[p, str(w) + '_Pts'] for p in players
+            ) -
+            4 * (hits[w] - wildcard[w] - freehit[w])
+    ) for w in gameweeks)
 
-model.set_objective(- xp, name='total_xp_obj', sense='N')
+if bboost_gw + 1:
+    xp_bb = np.power(decay_gameweek, bboost_gw) * (
+                so.expr_sum(
+                    ((1 - decay_bench) * (team[p, start + bboost_gw] - starter[p, start + bboost_gw])) *
+                    data.loc[p, str(start + bboost_gw) + '_Pts'] for p in players
+                )
+        )
+else:
+    xp_bb = 0
+
+model.set_objective(- xp - xp_bb, name='total_xp_obj', sense='N')
 
 # Initial conditions: set team and FT depending on the team
 model.add_constraints((team[p, start - 1] == 1 for p in initial_team), name='initial_team')
@@ -104,6 +143,10 @@ model.add_constraints((team[p, w] == team[p, w - 1] + buy[p, w] - sell[p, w] for
 # The rolling transfer must be equal to the number of free transfers not used (+ 1)
 model.add_constraints((free_transfers[w] == rolling_transfers[w] + 1 for w in gameweeks), name='rolling_ft_rel')
 
+# The player must not be sold and bought simultaneously (on wildcard/freehit)
+model.add_constraints((sell[p, w] + buy[p, w] <= 1 for p in players for w in gameweeks), name='single_buy_or_sell')
+
+
 # Rolling transfers
 number_of_transfers = {w: so.expr_sum(sell[p, w] for p in players) for w in gameweeks}
 number_of_transfers[start - 1] = transfer
@@ -118,12 +161,55 @@ model.add_constraints(
 model.add_constraints((hits[w] >= number_of_transfers[w] - free_transfers[w] for w in gameweeks), name='hits')
 
 
+if freehit_gw + 1:
+    # The chip must be used on the defined gameweek
+    model.add_constraint(freehit[start + freehit_gw] == hits[start + freehit_gw], name='initial_freehit')
+    model.add_constraint(freehit[start + freehit_gw + 1] == hits[start + freehit_gw], name='initial_freehit2')
+    # The chip must only be used once
+    model.add_constraint(so.expr_sum(freehit[w] for w in gameweeks) == hits[start + freehit_gw] + hits[start + freehit_gw + 1], name='freehit_once')
+    # The freehit team must be kept only one gameweek
+    model.add_constraints((buy[p, start + freehit_gw] == sell[p, start + freehit_gw + 1] for p in players), name='freehit1')
+    model.add_constraints((sell[p, start + freehit_gw] == buy[p, start + freehit_gw + 1] for p in players), name='freehit2')
+else:
+    # The unused chip must not contribute
+    model.add_constraint(so.expr_sum(freehit[w] for w in gameweeks) == 0, name='freehit_unused')
+
+if wildcard_gw + 1:
+    # The chip must be used on the defined gameweek
+    model.add_constraint(wildcard[start + wildcard_gw] == hits[start + wildcard_gw], name='initial_wildcard')
+    # The chip must only be used once
+    model.add_constraint(so.expr_sum(wildcard[w] for w in gameweeks) == hits[start + wildcard_gw], name='wc_once')
+else:
+    # The unused chip must not contribute
+    model.add_constraint(so.expr_sum(wildcard[w] for w in gameweeks) == 0, name='wildcard_unused')
+
+if bboost_gw + 1:
+    # The chip must be used on the defined gameweek
+    model.add_constraint(bboost[start + bboost_gw] == 1, name='initial_bboost')
+    # The chip must only be used once
+    model.add_constraint(so.expr_sum(bboost[w] for w in gameweeks) == 1, name='bboost_once')
+else:
+    # The unused chip must not contribute
+    model.add_constraint(so.expr_sum(bboost[w] for w in gameweeks) == 0, name='bboost_unused')
+    
+if threexc_gw + 1:
+    # The chip must be used on the defined gameweek
+    model.add_constraint(so.expr_sum(threexc[p, start + threexc_gw] for p in players) == 1, name='initial_3xc')
+    # The chips must only be used once
+    model.add_constraint(so.expr_sum(threexc[p, w] for p in players for w in gameweeks) == 1, name='tc_once')
+    # The TC player must be the captain
+    model.add_constraints((threexc[p, w] <= captain[p, w] for p in players for w in gameweeks), name='3xc_is_cap')
+else:
+    # The unused chip must not contribute
+    model.add_constraint(so.expr_sum(threexc[p, w] for p in players for w in gameweeks) == 0, name='tc_unused')
+
+
 # Solve Step
-model.export_mps(filename='season.mps')
-command = 'cbc season.mps solve solu season_solution.txt'
+model.export_mps(filename=model_name+".mps")
+command = f'cbc {model_name}.mps solve solu {model_name}_solution.txt'
 # !{command}
 os.system(command)
-with open('season_solution.txt', 'r') as f:
+with open(f'{model_name}_solution.txt', 'r') as f:
     for v in model.get_variables():
         v.set_value(0)
     for line in f:
@@ -134,4 +220,5 @@ with open('season_solution.txt', 'r') as f:
         var.set_value(float(words[2]))
 
 # GW
-pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits)
+pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers,
+             hits, freehit_gw, wildcard_gw, bboost_gw, threexc_gw)

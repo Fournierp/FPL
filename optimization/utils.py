@@ -33,7 +33,7 @@ def get_transfer_history(team_id, last_gw):
         chip = res['active_chip']
 
         transfers.append(transfer)
-        if transfer > 1 or (chip is not None and chip is not '3xc' and chip is not 'bboost'):
+        if transfer > 1 or (chip is not None and chip != '3xc' and chip != 'bboost'):
             break
 
     return transfers
@@ -52,7 +52,35 @@ def get_rolling(team_id, last_gw):
     return rolling, transfers[0]
 
 
-def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits):
+def get_chips(team_id, last_gw):
+    freehit, wildcard, bboost, threexc = 0, 0, 0, 0
+    # Reversing GW history until a chip is played or 2+ transfers were made
+    for gw in range(last_gw, 0, -1):
+        res = requests.get(f'https://fantasy.premierleague.com/api/entry/{team_id}/event/{gw}/picks/').json()
+        chip = res['active_chip']
+
+        if chip == '3xc':
+            threexc = gw
+        if chip == 'bboost':
+            bboost = gw
+        if chip == 'wildcard' and wildcard == 0:
+            wildcard = gw
+        if chip == 'freehit':
+            freehit = gw
+
+    return freehit, wildcard, bboost, threexc
+
+
+def get_next_gw():
+    url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
+    res = requests.get(url).json()
+        
+    for idx, gw in enumerate(res['events']):
+        if not gw['finished']:
+            return idx + 1
+
+
+def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits, freehit=-1, wildcard=-1, bboost=-1, threexc=-1):
     df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'Start', 'Cap', 'Vice', 'Buy', 'Sell'])
 
     for w in np.arange(start, start+period):
@@ -70,7 +98,20 @@ def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, 
             if sell[p, w].get_value():
                 print(f"Sell: {data.loc[p, 'Name']}")
         
-        print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])-hits[w].get_value()*4:.2f} - Hits: {int(hits[w].get_value())}")
+        chip = ""
+        av = ""
+        if freehit + 1:
+            chip = " - Chip: Freehit"
+        if wildcard + 1:
+            chip = " - Chip: Wildcard"
+        if bboost + 1:
+            chip = "- Chip: Bench Boost"
+            av = f" - Added value: {np.sum(df.loc[(df['Team'] == 1) & (df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
+        if threexc == w-start:
+            chip = " - Chip: Triple Captain"
+            av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
+
+        print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])-hits[w].get_value()*4:.2f} - Hits: {int(hits[w].get_value())}" + chip + av)
         print(" ____ ")
 
     custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
