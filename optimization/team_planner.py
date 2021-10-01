@@ -1,133 +1,129 @@
 import pandas as pd
+import numpy as np
 import os
 import sasoptpy as so
+from utils import get_team, get_predictions, get_rolling, pretty_print
 
-
-# Using the predicted points from https://fplreview.com/
-filepath = "../data/fpl_review/2021-22/gameweek/7/fplreview_fp.csv"
 # User {Hyper}parameters
-base = 7
-gw_t1 = str(base) + "_Pts"
-gw_t2 = str(base + 1) + "_Pts"
-budget = 1000
-free_transfers = 1
+start = 7
 decay_bench = 0.1
 decay_gameweek = 0.8
-# Get the goalkeeper data
-df = pd.read_csv(filepath)
-df["Pos"] = df["Pos"].map(
-    {
-        1: 'G',
-        2: 'D',
-        3: 'M',
-        4: 'F'
-        })
-df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
-df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
-data = df.copy().reset_index()
-data.set_index('index', inplace=True)
+team_id = 35868
+
+# Data collection
+# Predicted points from https://fplreview.com/
+df = get_predictions()
+data = df.copy()
+data.set_index('id', inplace=True)
 players = data.index.tolist()
 
-# Create a model
-model = so.Model(name='gameweek_model')
+# FPL data
+initial_team, bank = get_team(team_id, start - 1)
 
-# Define variables
-team_t = model.add_variables(players, name='players_in_common', vartype=so.binary)
+# GW
+period = min(5, len([col for col in df.columns if '_Pts' in col]))
+rolling_transfer, transfer = get_rolling(team_id, start - 1) 
+budget = np.sum([data.loc[p, 'SV'] for p in initial_team]) + bank
+all_gameweeks = np.arange(start-1, start+period)
+gameweeks = np.arange(start, start+period)
 
-team_t1 = model.add_variables(players, name='team_t1', vartype=so.binary)
-starter_t1 = model.add_variables(players, name='starter_t1', vartype=so.binary)
-captain_t1 = model.add_variables(players, name='captain_t1', vartype=so.binary)
-vicecaptain_t1 = model.add_variables(players, name='vicecaptain_t1', vartype=so.binary)
+# Model
+model = so.Model(name='season_model')
 
-team_t2 = model.add_variables(players, name='team_t2', vartype=so.binary)
-starter_t2 = model.add_variables(players, name='starter_t2', vartype=so.binary)
-captain_t2 = model.add_variables(players, name='captain_t2', vartype=so.binary)
-vicecaptain_t2 = model.add_variables(players, name='vicecaptain_t2', vartype=so.binary)
+# Variables
+team = model.add_variables(players, all_gameweeks, name='team', vartype=so.binary)
+starter = model.add_variables(players, gameweeks, name='starter', vartype=so.binary)
+captain = model.add_variables(players, gameweeks, name='captain', vartype=so.binary)
+vicecaptain = model.add_variables(players, gameweeks, name='vicecaptain', vartype=so.binary)
 
-# Define Objective: maximize total expected points
+buy = model.add_variables(players, gameweeks, name='buy', vartype=so.binary)
+sell = model.add_variables(players, gameweeks, name='sell', vartype=so.binary)
+
+free_transfers = model.add_variables(all_gameweeks, name='ft', vartype=so.integer, lb=1, ub=2)
+hits = model.add_variables(gameweeks, name='hits', vartype=so.integer, lb=0, ub=15)
+rolling_transfers = model.add_variables(gameweeks, name='rolling', vartype=so.binary)
+
+
+# Objective: maximize total expected points
 # Assume a 10% (decay_bench) chance of a player not playing
 # Assume a 80% (decay_gameweek) reliability of next week's xPts
-xp_t1 = so.expr_sum((starter_t1[p] + captain_t1[p] + decay_bench * (vicecaptain_t1[p] + team_t1[p] - starter_t1[p])) *
-                    data.loc[p, gw_t1] for p in players)
-xp_t2 = so.expr_sum((starter_t2[p] + captain_t2[p] + decay_bench * (vicecaptain_t2[p] + team_t2[p] - starter_t2[p])) *
-                    data.loc[p, gw_t2] for p in players)
+xp = so.expr_sum(
+    np.power(decay_gameweek, w - start) *
+    so.expr_sum((starter[p, w] + captain[p, w] + decay_bench * (vicecaptain[p, w] + team[p, w] - starter[p, w])) *
+                data.loc[p, str(w) + '_Pts'] for p in players) -
+    4 * hits[w] for w in gameweeks)
 
-model.set_objective(- xp_t1 - decay_gameweek * xp_t2, name='total_xp_obj', sense='N')
+model.set_objective(- xp, name='total_xp_obj', sense='N')
 
-# Define Constraints
+# Initial conditions: set team and FT depending on the team
+model.add_constraints((team[p, start - 1] == 1 for p in initial_team), name='initial_team')
+model.add_constraint(free_transfers[start - 1] == rolling_transfer + 1, name='initial_ft')
+
+
+# Constraints
 # The cost of the squad must exceed the budget
-model.add_constraint(so.expr_sum(team_t1[p] * data.loc[p, 'BV'] for p in players) <= budget, name='budget_t1')
-model.add_constraint(so.expr_sum(team_t2[p] * data.loc[p, 'BV'] for p in players) <= budget, name='budget_t2')
+model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, 'BV'] for p in players) <= budget for w in all_gameweeks), name='budget')
 
-# The number of keeper must be 11 on field and 4 on bench
-model.add_constraint(so.expr_sum(team_t1[p] for p in players) == 15, name='15_starters_t1')
-model.add_constraint(so.expr_sum(starter_t1[p] for p in players) == 11, name='11_starters_t1')
-model.add_constraint(so.expr_sum(captain_t1[p] for p in players) == 1, name='1_captain_t1')
-model.add_constraint(so.expr_sum(vicecaptain_t1[p] for p in players) == 1, name='1_vicecaptain_t1')
-
-model.add_constraint(so.expr_sum(team_t2[p] for p in players) == 15, name='15_starters_t2')
-model.add_constraint(so.expr_sum(starter_t2[p] for p in players) == 11, name='11_starters_t2')
-model.add_constraint(so.expr_sum(captain_t2[p] for p in players) == 1, name='1_captain_t2')
-model.add_constraint(so.expr_sum(vicecaptain_t2[p] for p in players) == 1, name='1_vicecaptain_t2')
+# The number of players must be 11 on field, 4 on bench, 1 captain & 1 vicecaptain
+model.add_constraints((so.expr_sum(team[p, w] for p in players) == 15 for w in all_gameweeks), name='15_players')
+model.add_constraints((so.expr_sum(starter[p, w] for p in players) == 11 for w in gameweeks), name='11_starters')
+model.add_constraints((so.expr_sum(captain[p, w] for p in players) == 1 for w in gameweeks), name='1_captain')
+model.add_constraints((so.expr_sum(vicecaptain[p, w] for p in players) == 1 for w in gameweeks), name='1_vicecaptain')
 
 # A captain must not be picked more than once
-model.add_constraints((captain_t1[p] + vicecaptain_t1[p] <= 1 for p in players), name='cap_or_vice_t1')
-model.add_constraints((captain_t2[p] + vicecaptain_t2[p] <= 1 for p in players), name='cap_or_vice_t2')
+model.add_constraints((captain[p, w] + vicecaptain[p, w] <= 1 for p in players for w in gameweeks), name='cap_or_vice')
 
 # The number of players from a team must not be more than three
-team_name = df.columns[-20:].values
-model.add_constraints((so.expr_sum(team_t1[p] * data.loc[p, team] for p in players) <= 3
-                       for team in team_name), name='team_limit_t1')
-
-model.add_constraints((so.expr_sum(team_t2[p] * data.loc[p, team] for p in players) <= 3
-                       for team in team_name), name='team_limit_t2')
+team_names = df.columns[-20:].values
+model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, team_name] for p in players) <= 3
+                       for team_name in team_names for w in gameweeks), name='team_limit')
 
 # The number of players fit the requirements 2 Gk, 5 Def, 5 Mid, 3 For
-model.add_constraint(so.expr_sum(team_t1[p] * data.loc[p, 'G'] for p in players) == 2, name='gk_limit_t1')
-model.add_constraint(so.expr_sum(team_t1[p] * data.loc[p, 'D'] for p in players) == 5, name='def_limit_t1')
-model.add_constraint(so.expr_sum(team_t1[p] * data.loc[p, 'M'] for p in players) == 5, name='mid_limit_t1')
-model.add_constraint(so.expr_sum(team_t1[p] * data.loc[p, 'F'] for p in players) == 3, name='for_limit_t1')
-
-model.add_constraint(so.expr_sum(team_t2[p] * data.loc[p, 'G'] for p in players) == 2, name='gk_limit_t2')
-model.add_constraint(so.expr_sum(team_t2[p] * data.loc[p, 'D'] for p in players) == 5, name='def_limit_t2')
-model.add_constraint(so.expr_sum(team_t2[p] * data.loc[p, 'M'] for p in players) == 5, name='mid_limit_t2')
-model.add_constraint(so.expr_sum(team_t2[p] * data.loc[p, 'F'] for p in players) == 3, name='for_limit_t2')
+model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, 'G'] for p in players) == 2 for w in gameweeks), name='gk_limit')
+model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, 'D'] for p in players) == 5 for w in gameweeks), name='def_limit')
+model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, 'M'] for p in players) == 5 for w in gameweeks), name='mid_limit')
+model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, 'F'] for p in players) == 3 for w in gameweeks), name='for_limit')
 
 # The formation is valid i.e. Minimum one goalkeeper, 3 defenders, 2 midfielders and 1 striker on the lineup
-model.add_constraint(so.expr_sum(starter_t1[p] * data.loc[p, 'G'] for p in players) == 1, name='gk_min_t1')
-model.add_constraint(so.expr_sum(starter_t1[p] * data.loc[p, 'D'] for p in players) >= 3, name='def_min_t1')
-model.add_constraint(so.expr_sum(starter_t1[p] * data.loc[p, 'M'] for p in players) >= 2, name='mid_min_t1')
-model.add_constraint(so.expr_sum(starter_t1[p] * data.loc[p, 'F'] for p in players) >= 1, name='for_min_t1')
-
-model.add_constraint(so.expr_sum(starter_t2[p] * data.loc[p, 'G'] for p in players) == 1, name='gk_min_t2')
-model.add_constraint(so.expr_sum(starter_t2[p] * data.loc[p, 'D'] for p in players) >= 3, name='def_min_t2')
-model.add_constraint(so.expr_sum(starter_t2[p] * data.loc[p, 'M'] for p in players) >= 2, name='mid_min_t2')
-model.add_constraint(so.expr_sum(starter_t2[p] * data.loc[p, 'F'] for p in players) >= 1, name='for_min_t2')
+model.add_constraints((so.expr_sum(starter[p, w] * data.loc[p, 'G'] for p in players) == 1 for w in gameweeks), name='gk_min')
+model.add_constraints((so.expr_sum(starter[p, w] * data.loc[p, 'D'] for p in players) >= 3 for w in gameweeks), name='def_min')
+model.add_constraints((so.expr_sum(starter[p, w] * data.loc[p, 'M'] for p in players) >= 2 for w in gameweeks), name='mid_min')
+model.add_constraints((so.expr_sum(starter[p, w] * data.loc[p, 'F'] for p in players) >= 1 for w in gameweeks), name='for_min')
 
 # The captain & vicecap must be a player on the field
-model.add_constraints((captain_t1[p] <= starter_t1[p] for p in players), name='captain_in_starters_t1')
-model.add_constraints((vicecaptain_t1[p] <= starter_t1[p] for p in players), name='vicecaptain_in_starters_t1')
-
-model.add_constraints((captain_t2[p] <= starter_t2[p] for p in players), name='captain_in_starters_t2')
-model.add_constraints((vicecaptain_t2[p] <= starter_t2[p] for p in players), name='vicecaptain_in_starters_t2')
+model.add_constraints((captain[p, w] <= starter[p, w] for p in players for w in gameweeks), name='captain_in_starters')
+model.add_constraints((vicecaptain[p, w] <= starter[p, w] for p in players for w in gameweeks), name='vicecaptain_in_starters')
 
 # The starters must be in the team
-model.add_constraints((starter_t1[p] <= team_t1[p] for p in players), name='starters_in_team_t1')
+model.add_constraints((starter[p, w] <= team[p, w] for p in players for w in gameweeks), name='starters_in_team')
 
-model.add_constraints((starter_t2[p] <= team_t2[p] for p in players), name='starters_in_team_t2')
+# The team must be equal to the next week excluding transfers
+model.add_constraints((team[p, w] == team[p, w - 1] + buy[p, w] - sell[p, w] for p in players for w in gameweeks),
+                      name='team_transfer')
 
-# The teams must have players in common (15 - the number of FT)
-model.add_constraint((so.expr_sum(team_t[p] for p in players) == 15 - free_transfers), name='players_in_common')
-model.add_constraints((team_t[p] >= team_t1[p] + team_t2[p] - 1 for p in players), name='auxiliary_var')
-model.add_constraints((team_t[p] <= team_t1[p] for p in players), name='t1_in_t')
-model.add_constraints((team_t[p] <= team_t2[p] for p in players), name='t2_in_t')
+# The rolling transfer must be equal to the number of free transfers not used (+ 1)
+model.add_constraints((free_transfers[w] == rolling_transfers[w] + 1 for w in gameweeks), name='rolling_ft_rel')
+
+# Rolling transfers
+number_of_transfers = {w: so.expr_sum(sell[p, w] for p in players) for w in gameweeks}
+number_of_transfers[start - 1] = transfer
+model.add_constraints((free_transfers[w - 1] - number_of_transfers[w - 1] <= 2 * rolling_transfers[w] for w in gameweeks),
+                      name='rolling_condition_1')
+model.add_constraints(
+    (free_transfers[w - 1] - number_of_transfers[w - 1] >= rolling_transfers[w] + (-14) * (1 - rolling_transfers[w])
+     for w in gameweeks),
+    name='rolling_condition_2')
+
+# The number of hits must be the number of transfer except the free ones.
+model.add_constraints((hits[w] >= number_of_transfers[w] - free_transfers[w] for w in gameweeks), name='hits')
+
 
 # Solve Step
-model.export_mps(filename='gameweek.mps')
-command = 'cbc gameweek.mps solve solu gameweek_solution.txt'
+model.export_mps(filename='season.mps')
+command = 'cbc season.mps solve solu season_solution.txt'
 # !{command}
 os.system(command)
-with open('gameweek_solution.txt', 'r') as f:
+with open('season_solution.txt', 'r') as f:
     for v in model.get_variables():
         v.set_value(0)
     for line in f:
@@ -137,140 +133,5 @@ with open('gameweek_solution.txt', 'r') as f:
         var = model.get_variable(words[1])
         var.set_value(float(words[2]))
 
-squad_value = bench_value = squad_xp = 0
-team = pd.DataFrame([], columns=['Name', 'Pos', 'Team', 'BV', 'xP', 'Start', 'Captain', 'Vicecaptain'])
-
-# GK
-for p in players:
-    if starter_t1[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'G':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t1], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw_t1]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t1]
-
-# DEF
-for p in players:
-    if starter_t1[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'D':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t1], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t1]
-
-# MID
-for p in players:
-    if starter_t1[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'M':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t1], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t1]
-
-# FOR
-for p in players:
-    if starter_t1[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'F':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t1], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t1]
-
-# CAP
-for p in players:
-    if captain_t1[p].get_value() > 0.5:
-        team.loc[team['Name'] == data.loc[p]['Name'], ['Captain']] = 1
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_xp += data.loc[p][gw_t1]
-
-# VICECAP
-for p in players:
-    if vicecaptain_t1[p].get_value() > 0.5:
-        team.loc[team['Name'] == data.loc[p]['Name'], ['Vicecaptain']] = 1
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_xp += data.loc[p][gw_t1] * 0.1
-
-# BENCH
-for p in players:
-    if team_t1[p].get_value() > 0.5 and starter_t1[p].get_value() == 0:
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t1], 'Start': 0, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        bench_value += data.loc[p].BV
-        squad_xp += 0.1 * data.loc[p][gw_t1]
-
-print('Squad value: {} | Bench value: {} | XP: {}'.format(squad_value, bench_value, squad_xp))
-print(team)
-
-squad_value = bench_value = squad_xp = 0
-team = pd.DataFrame([], columns=['Name', 'Pos', 'Team', 'BV', 'xP', 'Start', 'Captain', 'Vicecaptain'])
-
-# GK
-for p in players:
-    if starter_t2[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'G':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t2], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw_t1]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t2]
-
-# DEF
-for p in players:
-    if starter_t2[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'D':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t2], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t2]
-
-# MID
-for p in players:
-    if starter_t2[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'M':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t2], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t2]
-
-# FOR
-for p in players:
-    if starter_t2[p].get_value() > 0.5 and data.loc[p]['Pos'] == 'F':
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t2], 'Start': 1, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_value += data.loc[p].BV
-        squad_xp += data.loc[p][gw_t2]
-
-# CAP
-for p in players:
-    if captain_t2[p].get_value() > 0.5:
-        team.loc[team['Name'] == data.loc[p]['Name'], ['Captain']] = 1
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_xp += data.loc[p][gw_t2]
-
-# VICECAP
-for p in players:
-    if vicecaptain_t2[p].get_value() > 0.5:
-        team.loc[team['Name'] == data.loc[p]['Name'], ['Vicecaptain']] = 1
-        # print(p, data.loc[p][['Name', 'BV', 'Team', gw]])
-        squad_xp += data.loc[p][gw_t2] * 0.1
-
-# BENCH
-for p in players:
-    if team_t2[p].get_value() > 0.5 and starter_t2[p].get_value() == 0:
-        team = team.append({'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                            'BV': data.loc[p]['BV'], 'xP': data.loc[p][gw_t2], 'Start': 0, 'Captain': 0, 'Vicecaptain': 0},
-                           ignore_index=True)
-        bench_value += data.loc[p].BV
-        squad_xp += 0.1 * data.loc[p][gw_t2]
-
-print('Squad value: {} | Bench value: {} | XP: {}'.format(squad_value, bench_value, squad_xp))
-print(team)
+# GW
+pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits)
