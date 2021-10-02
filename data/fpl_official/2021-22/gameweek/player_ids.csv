@@ -67,6 +67,7 @@ id,first_name,second_name,team
 526,Carney,Chukwuemeka,2
 568,Cameron,Archer,2
 596,Viljami,Sinisalo,2
+610,Lamare,Bogarde,2
 76,Pontus,Jansson,3
 77,Christian,Nørgaard,3
 78,Ivan,Toney,3
@@ -251,6 +252,7 @@ id,first_name,second_name,team
 571,Andy,Lonergan,8
 591,Salomón,Rondón,8
 602,Ellis,Simms,8
+607,Lewis,Dobbin,8
 200,Kasper,Schmeichel,9
 201,Jonny,Evans,9
 202,Marc,Albrighton,9
@@ -310,6 +312,7 @@ id,first_name,second_name,team
 577,Joe,Gelhardt,10
 600,Nohan,Kenneh,10
 601,Stuart,McKinstry,10
+608,Leo Fuhr,Hjelde,10
 221,James,Milner,11
 222,Jordan,Henderson,11
 223,Adrián,San Miguel del Castillo,11
@@ -422,6 +425,7 @@ id,first_name,second_name,team
 513,Freddie,Woodman,14
 514,Mark,Gillespie,14
 599,Joe,White,14
+609,Elliot,Anderson,14
 145,Billy,Gilmour,15
 290,Brandon,Williams,15
 313,Michael,McGovern,15
@@ -605,3 +609,4 @@ id,first_name,second_name,team
 548,Chem,Campbell,20
 549,Christian,Marques,20
 583,Hee-Chan,Hwang,20
+611,Louie,Moulden,20
