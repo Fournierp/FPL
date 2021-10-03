@@ -181,7 +181,7 @@ if __name__ == "__main__":
         )
     df = df[df['season'] != 2021]
 
-    poisson_model = Poisson(games)
+    poisson_model = Poisson(df)
     poisson_model.optimize()
     mtx = poisson_model.score_mtx("Arsenal", "Burnley", 6)
     print(mtx)

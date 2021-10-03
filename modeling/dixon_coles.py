@@ -233,7 +233,7 @@ if __name__ == "__main__":
         )
     df = df[df['season'] != 2021]
 
-    dc_model = Dixon_Coles(games)
+    dc_model = Dixon_Coles(df)
     dc_model.optimize()
     mtx = dc_model.score_mtx("Arsenal", "Burnley", 6)
     print(mtx)
