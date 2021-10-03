@@ -2,7 +2,14 @@ import pandas as pd
 import numpy as np
 import os
 import sasoptpy as so
-from utils import get_team, get_predictions, get_rolling, pretty_print, get_chips, get_next_gw
+from utils import (
+    get_team,
+    get_predictions,
+    get_rolling,
+    pretty_print,
+    get_chips,
+    get_next_gw,
+    get_ownership_data)
 
 # User {Hyper}parameters
 decay_bench = 0.05
@@ -12,7 +19,7 @@ horizon = 5
 # Chip strategy: set to (-1) if you don't want to use
 # Choose a value in range [0-5] as the number of gameweeks after the current one
 freehit_gw = -1
-wildcard_gw = 0
+wildcard_gw = -1
 bboost_gw = -1
 threexc_gw = -1
 
@@ -42,6 +49,9 @@ hit_limit = {
     'eq': {},
     'min': {}
 }
+# Differential strategy
+nb_differentials = 3
+differential_threshold = 10
 
 
 # Data collection
@@ -49,6 +59,9 @@ hit_limit = {
 df = get_predictions()
 data = df.copy()
 data.set_index('id', inplace=True)
+# Ownership data
+ownership = get_ownership_data()
+data = pd.concat([data, ownership], axis=1, join="inner")
 players = data.index.tolist()
 
 # FPL data
@@ -70,7 +83,7 @@ assert not (threexc_used and threexc_gw >= 0), "Tripple captain chip was already
 
 
 # Model
-model_name = 'chips'
+model_name = 'differential'
 model = so.Model(name=model_name + '_model')
 
 # Variables
@@ -282,6 +295,16 @@ for bias in hit_limit:
         assert all([w in gameweeks for (w, _) in hit_limit['min']]), 'Gameweek selected does not exist.'
         # The number of hits above the minumum
         model.add_constraints((hits[w] > min_hit for (w, min_hit) in hit_limit[bias]), name='hits_min')
+
+
+target = 'Top_250K'
+if nb_differentials:
+    print("*****")
+    data['Differential'] = np.where(data[target] < differential_threshold, 1, 0)
+    model.add_constraints(
+        (
+            so.expr_sum(starter[p, w] * data.loc[p, 'Differential'] for p in players) >= nb_differentials for w in gameweeks
+        ), name='differentials')
 
 
 # Solve Step

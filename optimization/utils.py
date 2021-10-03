@@ -80,6 +80,13 @@ def get_next_gw():
             return idx + 1
 
 
+def get_ownership_data():
+    gw = get_next_gw() - 1
+    df = pd.read_csv(f"../data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv")[['id', 'Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K']]
+    df['id'] = df['id']
+    return df.set_index('id')
+
+
 def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits, freehit=-1, wildcard=-1, bboost=-1, threexc=-1):
     df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'Start', 'Cap', 'Vice', 'Buy', 'Sell'])
 
@@ -90,7 +97,7 @@ def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, 
                 df = df.append({'GW': w, 'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
                                 'SV': data.loc[p]['SV'], 'xP': data.loc[p][str(w) + '_Pts'], 'Start': int(starter[p, w].get_value()),
                                 'Cap': int(captain[p, w].get_value()), 'Vice': int(vicecaptain[p, w].get_value()),
-                                'Sell': int(sell[p, w].get_value()), 'Buy': int(buy[p, w].get_value())},
+                                'Sell': int(sell[p, w].get_value()), 'Buy': int(buy[p, w].get_value()), 'Ownership': data.loc[p]["Top_100"]},
                                ignore_index=True)
 
             if buy[p, w].get_value():
@@ -100,18 +107,18 @@ def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, 
         
         chip = ""
         av = ""
-        if freehit + 1:
+        if freehit == w-start:
             chip = " - Chip: Freehit"
-        if wildcard + 1:
+        if wildcard == w-start:
             chip = " - Chip: Wildcard"
-        if bboost + 1:
+        if bboost == w-start:
             chip = "- Chip: Bench Boost"
             av = f" - Added value: {np.sum(df.loc[(df['Team'] == 1) & (df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
         if threexc == w-start:
             chip = " - Chip: Triple Captain"
             av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
 
-        print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])-hits[w].get_value()*4:.2f} - Hits: {int(hits[w].get_value())}" + chip + av)
+        print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) - hits[w].get_value()*4*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1):.2f} - Hits: {int(hits[w].get_value())*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1)}" + chip + av)
         print(" ____ ")
 
     custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
