@@ -115,8 +115,10 @@ class FPL_Season:
 
         with open(self.root + f'manager_id_{team_id}.json', 'w') as outfile:
             json.dump(managers, outfile)
-
-        Git()
+        
+        if self.git_cli:
+            self.logger.info(f"Saving csv.")
+            Git()
 
 
     def get_fpl_teamid(self, rank):
@@ -246,4 +248,4 @@ if __name__ == "__main__":
 
     fpls = FPL_Season(logger, season_data, sys.argv[1:])
     # fpls.sample_ranks()
-    # fpls.sample_one_manager(team_id=5144098)
+    fpls.sample_one_manager(team_id=35868)
