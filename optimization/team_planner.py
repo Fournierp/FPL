@@ -15,9 +15,10 @@ from utils import (
 decay_bench = 0.05
 decay_gameweek = 0.8
 team_id = 35868
-horizon = 3
-nb_suboptimal = 3
-cutoff_search = 'first_buy'
+horizon = 5
+nb_suboptimal = 1
+cutoff_search = 'horizon_transfer'
+objective_type = 'decay'
 # Chip strategy: set to (-1) if you don't want to use
 # Choose a value in range [0-5] as the number of gameweeks after the current one
 freehit_gw = -1
@@ -114,7 +115,8 @@ force_out = model.add_variables(players, gameweeks, name='fo', vartype=so.binary
 # Assume a 10% (decay_bench) chance of a player not playing
 # Assume a 80% (decay_gameweek) reliability of next week's xPts
 xp = so.expr_sum(
-    np.power(decay_gameweek, w - start) * (
+    (np.power(decay_gameweek, w - start) if objective_type == 'linear' else 1) *
+    (
             so.expr_sum(
                 (starter[p, w] + captain[p, w] + threexc[p, w] +
                  decay_bench * (vicecaptain[p, w] + team[p, w] - starter[p, w])) *
@@ -124,7 +126,7 @@ xp = so.expr_sum(
     ) for w in gameweeks)
 
 if bboost_gw + 1:
-    xp_bb = np.power(decay_gameweek, bboost_gw) * (
+    xp_bb = (np.power(decay_gameweek, bboost_gw) if objective_type == 'linear' else 1) * (
                 so.expr_sum(
                     ((1 - decay_bench) * (team[p, start + bboost_gw] - starter[p, start + bboost_gw])) *
                     data.loc[p, str(start + bboost_gw) + '_Pts'] for p in players
