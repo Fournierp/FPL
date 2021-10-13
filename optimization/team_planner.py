@@ -15,7 +15,9 @@ from utils import (
 decay_bench = 0.05
 decay_gameweek = 0.8
 team_id = 35868
-horizon = 5
+horizon = 3
+nb_suboptimal = 3
+cutoff_search = 'first_buy'
 # Chip strategy: set to (-1) if you don't want to use
 # Choose a value in range [0-5] as the number of gameweeks after the current one
 freehit_gw = -1
@@ -83,7 +85,7 @@ assert not (threexc_used and threexc_gw >= 0), "Tripple captain chip was already
 
 
 # Model
-model_name = 'differential'
+model_name = 'suboptimal'
 model = so.Model(name=model_name + '_model')
 
 # Variables
@@ -298,7 +300,7 @@ for bias in hit_limit:
 
 
 target = 'Top_250K'
-if nb_differentials:
+if not nb_differentials:
     print("*****")
     data['Differential'] = np.where(data[target] < differential_threshold, 1, 0)
     model.add_constraints(
@@ -307,21 +309,56 @@ if nb_differentials:
         ), name='differentials')
 
 
-# Solve Step
-model.export_mps(filename=model_name+".mps")
-command = f'cbc {model_name}.mps solve solu {model_name}_solution.txt'
-# !{command}
-os.system(command)
-with open(f'{model_name}_solution.txt', 'r') as f:
+for i in range(nb_suboptimal):
+    # Solve
+    model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
+    command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
+    # !{command}
+    os.system(command)
+
+    # Reset variables for next passes
     for v in model.get_variables():
         v.set_value(0)
-    for line in f:
-        if 'objective value' in line:
-            continue
-        words = line.split()
-        var = model.get_variable(words[1])
-        var.set_value(float(words[2]))
 
-# GW
-pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers,
-             hits, freehit_gw, wildcard_gw, bboost_gw, threexc_gw)
+    with open(f'optimization/tmp/{model_name}_solution.txt', 'r') as f:
+        for line in f:
+            if 'objective value' in line:
+                continue
+            words = line.split()
+            var = model.get_variable(words[1])
+            var.set_value(float(words[2]))
+
+    # GW
+    print(f"\n----- {i} -----")
+    pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers,
+                hits, freehit_gw, wildcard_gw, bboost_gw, threexc_gw)
+
+    if i != nb_suboptimal - 1:
+        # Select the players that have been transfered in/out
+        if cutoff_search == 'first_buy':
+            actions = so.expr_sum(buy[p, start] for p in players if buy[p, start].get_value() > 0.5)
+            gw_range = [start]
+        elif cutoff_search == 'horizon_buy':
+            actions = so.expr_sum(so.expr_sum(buy[p, w] for p in players if buy[p, w].get_value() > 0.5) for w in gameweeks)
+            gw_range = gameweeks
+        elif cutoff_search == 'first_transfer':
+            actions = (
+                so.expr_sum(buy[p, start] for p in players if buy[p, start].get_value() > 0.5) +
+                so.expr_sum(sell[p, start] for p in players if sell[p, start].get_value() > 0.5)
+                )
+            gw_range = [start]
+        elif cutoff_search == 'horizon_transfer':
+            actions = (
+                so.expr_sum(so.expr_sum(buy[p, w] for p in players if buy[p, w].get_value() > 0.5) for w in gameweeks) +
+                so.expr_sum(so.expr_sum(sell[p, w] for p in players if sell[p, w].get_value() > 0.5) for w in gameweeks)
+                )
+            gw_range = gameweeks
+
+        if actions.get_value() != 0:
+            # This step forces one transfer to be unfeasible
+            # Note: the constraint is only applied to the activated transfers
+            # so the ones not activated are thus allowed.
+            model.add_constraint(actions <= actions.get_value() - 1, name=f'cutoff_{i}')
+        else:
+            # Force one transfer in case of sub-optimal solution choosing to roll transfer
+            model.add_constraint(so.expr_sum(number_of_transfers[w] for w in gw_range) >= 1, name=f'cutoff_{i}')

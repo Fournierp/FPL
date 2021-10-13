@@ -10,7 +10,8 @@ def get_team(team_id, gw):
 
 
 def get_predictions():
-    df = pd.read_csv("../data/fpl_review/2021-22/gameweek/7/fplreview_fp.csv")
+    start = get_next_gw()
+    df = pd.read_csv(f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
     df["Pos"] = df["Pos"].map(
         {
             1: 'G',
@@ -32,8 +33,10 @@ def get_transfer_history(team_id, last_gw):
         transfer = res['entry_history']['event_transfers']
         chip = res['active_chip']
 
+        if chip is not None and chip != '3xc' and chip != 'bboost':
+            transfer = 2
         transfers.append(transfer)
-        if transfer > 1 or (chip is not None and chip != '3xc' and chip != 'bboost'):
+        if transfer > 1:
             break
 
     return transfers
@@ -82,7 +85,7 @@ def get_next_gw():
 
 def get_ownership_data():
     gw = get_next_gw() - 1
-    df = pd.read_csv(f"../data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv")[['id', 'Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K']]
+    df = pd.read_csv(f"data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv")[['id', 'Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K']]
     df['id'] = df['id']
     return df.set_index('id')
 
