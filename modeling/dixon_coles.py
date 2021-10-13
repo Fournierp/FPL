@@ -6,8 +6,10 @@ from scipy.optimize import minimize
 
 from datetime import datetime
 
-from utils import odds, clean_sheet, time_decay
+from utils import odds, clean_sheet, time_decay, score_mtx
 from ranked_probability_score import ranked_probability_score, match_outcome
+import warnings
+warnings.filterwarnings('ignore')
 
 
 class Dixon_Coles:
@@ -199,27 +201,37 @@ class Dixon_Coles:
         aggregate_df["score1_infered"] = np.exp(aggregate_df["home_adv"] + aggregate_df["attack1"] - aggregate_df["defence2"])
         aggregate_df["score2_infered"] = np.exp(aggregate_df["attack2"] - aggregate_df["defence1"])
 
-        aggregate_df["winner"] = match_outcome(aggregate_df)
-
-        def lambda_synthesize(row):
-            home_goals_pmf = poisson(row["score1_infered"]).pmf(np.arange(0, 8))
-            away_goals_pmf = poisson(row["score2_infered"]).pmf(np.arange(0, 8))
-
-            m = np.outer(home_goals_pmf, away_goals_pmf)
+        def synthesize_odds(row):
+            m = score_mtx(row["score1_infered"], row["score2_infered"])
 
             m[0, 0] *= 1 - row["score1"] * row["score2"] * row["rho"]
             m[0, 1] *= 1 + row["score1"] * row["rho"]
             m[1, 0] *= 1 + row["score2"] * row["rho"]
             m[1, 1] *= 1 - row["rho"]
 
-            row["home_win_p"], row["draw_p"], row["away_win_p"] = odds(m)
-            row["home_cs_p"], row["home_cs_p"] = clean_sheet(m)
+            home_win_p, draw_p, away_win_p = odds(m)
+            home_cs_p, away_cs_p = clean_sheet(m)
 
-            row["rps"] = ranked_probability_score([row["home_win_p"], row["draw_p"], row["away_win_p"]], row["winner"])
+            return home_win_p, draw_p, away_win_p, home_cs_p, away_cs_p
 
-            return row
+        (
+            aggregate_df["home_win_p"],
+            aggregate_df["draw_p"],
+            aggregate_df["away_win_p"],
+            aggregate_df["home_cs_p"],
+            aggregate_df["away_cs_p"]
+            ) = zip(*aggregate_df.apply(lambda row : synthesize_odds(row), axis=1))
 
-        aggregate_df = aggregate_df.apply(lambda_synthesize, axis=1)
+        return aggregate_df
+
+
+    def evaluate(self, games):
+        """ Eval model """
+        aggregate_df = self.predict(games)
+
+        aggregate_df["winner"] = match_outcome(aggregate_df)
+
+        aggregate_df["rps"] = aggregate_df.apply(lambda row: ranked_probability_score([row["home_win_p"], row["draw_p"], row["away_win_p"]], row["winner"]), axis=1)
 
         return aggregate_df
 
@@ -231,11 +243,7 @@ if __name__ == "__main__":
         .loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
         .dropna()
         )
-    df = df[df['season'] != 2021]
 
-    dc_model = Dixon_Coles(df)
+    dc_model = Dixon_Coles(df[df['season'] != 2021])
     dc_model.optimize()
-    mtx = dc_model.score_mtx("Arsenal", "Burnley", 6)
-    print(mtx)
-    print(odds(mtx))
-    print(clean_sheet(mtx))
+    print(poisson_model.predict(df[df['season'] == 2021]))

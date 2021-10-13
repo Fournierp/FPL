@@ -4,7 +4,7 @@ import numpy as np
 from scipy.stats import poisson
 from scipy.optimize import minimize
 
-from utils import odds, clean_sheet
+from utils import odds, clean_sheet, score_mtx
 from ranked_probability_score import ranked_probability_score, match_outcome
 
 
@@ -73,28 +73,6 @@ class Poisson:
         self.parameters = self.solution["x"]
 
 
-    def score_mtx(self, team1, team2, max_goals=8):
-        # Get the corresponding model parameters
-        home_idx = np.where(self.teams == team1)[0][0]
-        away_idx = np.where(self.teams == team2)[0][0]
-
-        home = self.parameters[[home_idx, home_idx + self.league_size]]
-        away = self.parameters[[away_idx, away_idx + self.league_size]]
-        home_attack, home_defence = home[0], home[1]
-        away_attack, away_defence = away[0], away[1]
-
-        home_advantage = self.parameters[-1]
-
-        # PMF
-        home_goals = np.exp(home_advantage + home_attack - away_defence)
-        away_goals = np.exp(away_attack - home_defence)
-        home_goals_pmf = poisson(home_goals).pmf(np.arange(0, max_goals))
-        away_goals_pmf = poisson(away_goals).pmf(np.arange(0, max_goals))
-
-        # Aggregate probabilities
-        return np.outer(home_goals_pmf, away_goals_pmf)
-
-
     def print_parameters(self):
         parameter_df = (
             pd.DataFrame()
@@ -129,6 +107,17 @@ class Poisson:
             )
 
 
+    def get_team_parameters(self, team):
+        idx = np.where(self.teams == team)[0][0]
+
+        parameters = self.parameters[[idx, idx + self.league_size]]
+        attack, defence = parameters[0], parameters[1]
+
+        home_advantage = self.parameters[-1]
+
+        return attack, defence, home_advantage
+
+
     def predict(self, games):
         """ Predict score for several fixtures. """
         parameter_df = (
@@ -152,22 +141,32 @@ class Poisson:
         aggregate_df["score1_infered"] = np.exp(aggregate_df["home_adv"] + aggregate_df["attack1"] - aggregate_df["defence2"])
         aggregate_df["score2_infered"] = np.exp(aggregate_df["attack2"] - aggregate_df["defence1"])
 
+        def synthesize_odds(row):
+            m = score_mtx(row["score1_infered"], row["score2_infered"])
+
+            home_win_p, draw_p, away_win_p = odds(m)
+            home_cs_p, away_cs_p = clean_sheet(m)
+
+            return home_win_p, draw_p, away_win_p, home_cs_p, away_cs_p
+
+        (
+            aggregate_df["home_win_p"],
+            aggregate_df["draw_p"],
+            aggregate_df["away_win_p"],
+            aggregate_df["home_cs_p"],
+            aggregate_df["away_cs_p"]
+            ) = zip(*aggregate_df.apply(lambda row : synthesize_odds(row), axis=1))
+
+        return aggregate_df
+
+
+    def evaluate(self, games):
+        """ Eval model """
+        aggregate_df = self.predict(games)
+
         aggregate_df["winner"] = match_outcome(aggregate_df)
 
-        def lambda_synthesize(row):
-            home_goals_pmf = poisson(row["score1_infered"]).pmf(np.arange(0, 8))
-            away_goals_pmf = poisson(row["score2_infered"]).pmf(np.arange(0, 8))
-
-            m = np.outer(home_goals_pmf, away_goals_pmf)
-
-            row["home_win_p"], row["draw_p"], row["away_win_p"] = odds(m)
-            row["home_cs_p"], row["home_cs_p"] = clean_sheet(m)
-
-            row["rps"] = ranked_probability_score([row["home_win_p"], row["draw_p"], row["away_win_p"]], row["winner"])
-
-            return row
-
-        aggregate_df = aggregate_df.apply(lambda_synthesize, axis=1)
+        aggregate_df["rps"] = aggregate_df.apply(lambda row: ranked_probability_score([row["home_win_p"], row["draw_p"], row["away_win_p"]], row["winner"]), axis=1)
 
         return aggregate_df
 
@@ -179,11 +178,7 @@ if __name__ == "__main__":
         .loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
         .dropna()
         )
-    df = df[df['season'] != 2021]
 
-    poisson_model = Poisson(df)
+    poisson_model = Poisson(df[df['season'] != 2021])
     poisson_model.optimize()
-    mtx = poisson_model.score_mtx("Arsenal", "Burnley", 6)
-    print(mtx)
-    print(odds(mtx))
-    print(clean_sheet(mtx))
+    print(poisson_model.predict(df[df['season'] == 2021]))
