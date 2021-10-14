@@ -8,6 +8,8 @@ from datetime import datetime
 
 from utils import odds, clean_sheet, time_decay, score_mtx
 from ranked_probability_score import ranked_probability_score, match_outcome
+import warnings
+warnings.filterwarnings('ignore')
 
 
 class Poisson_Time_Decay:

@@ -1,5 +1,15 @@
 import numpy as np
 
+from scipy.stats import poisson
+
+
+def score_mtx(home_goals, away_goals, max_goals=8):
+    home_goals_pmf = poisson(home_goals).pmf(np.arange(0, max_goals))
+    away_goals_pmf = poisson(away_goals).pmf(np.arange(0, max_goals))
+
+    # Aggregate probabilities
+    return np.outer(home_goals_pmf, away_goals_pmf)
+
 
 def odds(m):
     home = np.sum(np.tril(m, -1))
