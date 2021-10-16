@@ -46,12 +46,14 @@ hate = {
     'bench': {}
 }
 # Biased decisions for transfter limits (gw, limit)
-# Example usage: (index, gw)
+# Example usage: (gw, amount)
 hit_limit = {
     'max': {},
     'eq': {},
     'min': {}
 }
+# Gameweeks where 2FT are desired. In other words the (GW-1) where a FT is rolled.
+two_ft_gw = []
 # Differential strategy
 nb_differentials = 3
 differential_threshold = 10
@@ -300,6 +302,10 @@ for bias in hit_limit:
         # The number of hits above the minumum
         model.add_constraints((hits[w] > min_hit for (w, min_hit) in hit_limit[bias]), name='hits_min')
 
+for gw in two_ft_gw:
+    assert gw > start and gw <= start + horizon, 'Gameweek selected cannot be constrained.'
+    # Force rolling free transfer
+    model.add_constraint(free_transfers[gw] == 2, name=f'force_roll_{gw}')
 
 target = 'Top_250K'
 if not nb_differentials:
