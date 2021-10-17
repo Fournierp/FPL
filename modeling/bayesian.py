@@ -35,6 +35,7 @@ class Bayesian:
             games.merge(self.teams, left_on="team1", right_on="team")
             .rename(columns={"team_index": "hg"})
             .drop(["team"], axis=1)
+            .drop_duplicates()
             .merge(self.teams, left_on="team2", right_on="team")
             .rename(columns={"team_index": "ag"})
             .drop(["team"], axis=1)

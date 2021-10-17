@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 
 from scipy.stats import poisson
-from scipy.optimize import minimize
 
 from utils import odds, clean_sheet, score_mtx
 from ranked_probability_score import ranked_probability_score, match_outcome
