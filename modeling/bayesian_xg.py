@@ -153,6 +153,65 @@ class Bayesian_XG:
         return aggregate_df
 
 
+    def backtest(self, train_games, test_season):
+
+        # Get training data
+        self.train_games = train_games
+
+        # Initialize model
+        self.__init__(self.train_games[self.train_games['season'] != test_season])
+
+        # Initial train
+        self.fit()
+
+        # Get test data
+        # Separate testing based on per GW intervals
+        fixtures = pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv").loc[:, ['event', 'kickoff_time']]
+        fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
+        # Get only EPL games from the test season
+        self.test_games = (self.train_games
+            .loc[self.train_games['league_id'] == 2411]
+            .loc[self.train_games['season'] == test_season]
+            .dropna()
+            )
+        self.test_games["kickoff_time"] = pd.to_datetime(self.test_games["date"]).dt.date
+        # Merge on date
+        self.test_games = self.test_games.merge(fixtures, left_on='kickoff_time', right_on='kickoff_time')
+        # Add the home team and away team index for running inference
+        self.test_games = (
+            self.test_games.merge(self.teams, left_on="team1", right_on="team")
+            .rename(columns={"team_index": "hg"})
+            .drop(["team"], axis=1)
+            .drop_duplicates()
+            .merge(self.teams, left_on="team2", right_on="team")
+            .rename(columns={"team_index": "ag"})
+            .drop(["team"], axis=1)
+            .sort_values("date")
+        )
+
+        rps_list = []
+
+        for gw in range(1, 39):
+            # For each GW of the season
+            if gw in self.test_games['event'].values:
+                
+                # Run inference on the specific GW and save data.
+                rps_list.append(self.evaluate(self.test_games[self.test_games['event'] == gw])['rps'].values)
+
+                # Retrain model with the new GW added to the train set.
+                self.__init__(
+                    pd.concat(
+                        [
+                            self.train_games[self.train_games['season'] != 2021],
+                            self.test_games[self.test_games['event'] <= gw]
+                            ])
+                    .drop(columns=['ag', 'hg'])
+                    )
+                self.fit()
+
+        return np.mean(rps_list)
+
+
 if __name__ == "__main__":
     df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
     df = (df
@@ -163,7 +222,7 @@ if __name__ == "__main__":
     model = Bayesian_XG(df[df['season'] != 2021])
     model.fit()
 
-    df = (df
+    games = (df
         .loc[df['league_id'] == 2411]
         .dropna()
         .loc[df['season'] == 2021]
@@ -175,6 +234,8 @@ if __name__ == "__main__":
         .drop(["team"], axis=1)
         .sort_values("date")
     )
-    games = df.loc[:, ["score1", "score2", "team1", "team2", "hg", "ag"]]
+    games = games.loc[:, ["score1", "score2", "team1", "team2", "hg", "ag"]]
     print(model.predict(games))
     print(np.mean(model.evaluate(games)['rps']))
+
+    print(model.backtest(df, 2021))
