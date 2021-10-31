@@ -29,7 +29,7 @@ jobs:
       - name: Run script
         env:
           BOT_GITHUB_ACCESS_TOKEN: ${{ secrets.BOT_GITHUB_ACCESS_TOKEN }}
-        run: python scraping/{script} foo bar"""
+        run: python {dir}/{script} foo bar"""
 
 
 class Schedule:
@@ -73,7 +73,28 @@ class Schedule:
                 delay = (deadline - datetime.timedelta(hours=12))
                 cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
                 output_file.write(cron_job_template.format(time=cron_time))
-            output_file.write(YML_FILE_FOOT.format(script=f'{script}.py'))
+            output_file.write(YML_FILE_FOOT.format(dir='scraping', script=f'{script}.py'))
+   
+        # Run score prediction model a few hours before the deadline.
+        script='dixon_coles'
+        with open(f'.github/workflows/{script}.yml', 'w') as output_file:
+            output_file.write(YML_FILE_HEAD)
+            for gw, deadline in enumerate(self.deadlines):
+                # Cronify deadlines
+                delay = (deadline - datetime.timedelta(hours=6))
+                cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
+                output_file.write(cron_job_template.format(time=cron_time))
+            output_file.write(YML_FILE_FOOT.format(dir='modeling', script=f'{script}.py'))
+
+        script='bayesian_xg'
+        with open(f'.github/workflows/{script}.yml', 'w') as output_file:
+            output_file.write(YML_FILE_HEAD)
+            for gw, deadline in enumerate(self.deadlines):
+                # Cronify deadlines
+                delay = (deadline - datetime.timedelta(hours=6))
+                cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
+                output_file.write(cron_job_template.format(time=cron_time))
+            output_file.write(YML_FILE_FOOT.format(dir='modeling', script=f'{script}.py'))
 
         # Scrape FPL Ownership a few hours after the deadline.
         script='fpl_gameweek'
@@ -84,7 +105,7 @@ class Schedule:
                 delay = (deadline + datetime.timedelta(hours=3))
                 cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
                 output_file.write(cron_job_template.format(time=cron_time))
-            output_file.write(YML_FILE_FOOT.format(script=f'{script}.py'))
+            output_file.write(YML_FILE_FOOT.format(dir='scraping', script=f'{script}.py'))
 
         website='fpl_review'
         with open(f'.github/workflows/{website}.yml', 'w') as output_file:
@@ -94,7 +115,7 @@ class Schedule:
                 eight_hour_prior = (deadline - datetime.timedelta(hours=8))
                 cron_time = f'{eight_hour_prior.minute} {eight_hour_prior.hour} {eight_hour_prior.day} {eight_hour_prior.month} *'
                 output_file.write(cron_job_template.format(time=cron_time))
-            output_file.write(YML_FILE_FOOT.format(script=f'{website}.py'))
+            output_file.write(YML_FILE_FOOT.format(dir='scraping', script=f'{website}.py'))
 
 
 if __name__ == "__main__":
