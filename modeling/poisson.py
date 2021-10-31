@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
+import json
+import os
 
 from scipy.stats import poisson
 from scipy.optimize import minimize
 
-from utils import odds, clean_sheet, score_mtx
+from utils import odds, clean_sheet, score_mtx, get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
 
 
@@ -234,15 +236,81 @@ class Poisson:
 
 
 if __name__ == "__main__":
+    with open('info.json') as f:
+        season = json.load(f)['season']
+
+    next_gw = get_next_gw()
 
     df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
     df = (df
         .loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
-        .dropna()
         )
 
-    poisson_model = Poisson(df[df['season'] != 2021])
-    poisson_model.optimize()
-    print(poisson_model.predict(df[df['season'] == 2021]))
+    # Get GW dates
+    fixtures = pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv").loc[:, ['event', 'kickoff_time']]
+    fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
 
-    print(dc_model.backtest(df, 2021))
+    # Get only EPL games from the current season
+    season_games = (df
+        .loc[df['league_id'] == 2411]
+        .loc[df['season'] == season]
+        )
+    season_games["kickoff_time"] = pd.to_datetime(season_games["date"]).dt.date
+
+    # Merge on date
+    season_games = (
+        season_games
+        .merge(fixtures, left_on='kickoff_time', right_on='kickoff_time')
+        .drop_duplicates()
+        )
+
+    # Train model on all games up to the previous GW
+    model = Poisson(
+        pd.concat([
+            df.loc[df['season'] != season],
+            season_games[season_games['event'] < next_gw]
+            ]))
+    model.optimize()
+
+    # Add the home team and away team index for running inference
+    idx = (
+        pd.DataFrame()
+        .assign(team=model.teams)
+        .assign(team_index=np.arange(model.league_size)))
+    season_games = (
+        season_games.merge(idx, left_on="team1", right_on="team")
+        .rename(columns={"team_index": "hg"})
+        .drop(["team"], axis=1)
+        .drop_duplicates()
+        .merge(idx, left_on="team2", right_on="team")
+        .rename(columns={"team_index": "ag"})
+        .drop(["team"], axis=1)
+        .sort_values("date")
+    )
+
+    # Run inference on the specific GW
+    predictions = model.predict(season_games[season_games['event'] == next_gw])
+    if os.path.isfile("data/predictions/scores/poisson.csv"):
+        past_predictions = pd.read_csv("data/predictions/scores/poisson.csv")
+        (
+            pd.concat(
+                [
+                    past_predictions,
+                    predictions
+                    .loc[:, [
+                        'date', 'team1', 'team2', 'event', 'hg', 'ag', 'attack1', 'defence1',
+                        'attack2', 'defence2', 'home_adv', 'rho', 'score1_infered',
+                        'score2_infered', 'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p', 'away_cs_p']]
+                ],
+                ignore_index=True
+            ).to_csv("data/predictions/scores/poisson.csv", index=False)
+        )
+    else:
+        (
+            predictions
+            .loc[:, [
+                'date', 'team1', 'team2', 'event', 'hg', 'ag', 'attack1', 'defence1',
+                'attack2', 'defence2', 'home_adv', 'rho', 'score1_infered',
+                'score2_infered', 'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p', 'away_cs_p']]
+            .to_csv("data/predictions/scores/poisson.csv", index=False)
+        )

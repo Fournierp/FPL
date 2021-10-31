@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime
+import json
+import os
 
 from scipy.stats import poisson
 
-from utils import odds, clean_sheet, time_decay, score_mtx
+from utils import odds, clean_sheet, time_decay, score_mtx, get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
 
 import pymc3 as pm
@@ -49,9 +51,9 @@ class Bayesian_XG:
         self.games = df.loc[:, ["xg1", "xg2", "team1", "team2", "hg", "ag", "weight"]]
         self.games = (
             self.games
+            .dropna()
             .rename(columns={"xg1": "score1", "xg2": "score2"})
         )
-        self.games["winner"] = match_outcome(self.games)
 
         self.goals_home_obs = self.games["score1"].values
         self.goals_away_obs = self.games["score2"].values
@@ -213,29 +215,77 @@ class Bayesian_XG:
 
 
 if __name__ == "__main__":
+    with open('info.json') as f:
+        season = json.load(f)['season']
+
+    next_gw = get_next_gw()
+
     df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
     df = (df
         .loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
-        .dropna()
         )
 
-    model = Bayesian_XG(df[df['season'] != 2021])
+    # Get GW dates
+    fixtures = pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv").loc[:, ['event', 'kickoff_time']]
+    fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
+
+    # Get only EPL games from the current season
+    season_games = (df
+        .loc[df['league_id'] == 2411]
+        .loc[df['season'] == season]
+        )
+    season_games["kickoff_time"] = pd.to_datetime(season_games["date"]).dt.date
+
+    # Merge on date
+    season_games = (
+        season_games
+        .merge(fixtures, left_on='kickoff_time', right_on='kickoff_time')
+        .drop_duplicates()
+        )
+
+    # Train model on all games up to the previous GW
+    model = Bayesian_XG(
+        pd.concat([
+            df.loc[df['season'] != season],
+            season_games[season_games['event'] < next_gw]
+            ]))
     model.fit()
 
-    games = (df
-        .loc[df['league_id'] == 2411]
-        .dropna()
-        .loc[df['season'] == 2021]
-        .merge(model.teams, left_on="team1", right_on="team")
+    # Add the home team and away team index for running inference
+    season_games = (
+        season_games.merge(model.teams, left_on="team1", right_on="team")
         .rename(columns={"team_index": "hg"})
         .drop(["team"], axis=1)
+        .drop_duplicates()
         .merge(model.teams, left_on="team2", right_on="team")
         .rename(columns={"team_index": "ag"})
         .drop(["team"], axis=1)
         .sort_values("date")
     )
-    games = games.loc[:, ["score1", "score2", "team1", "team2", "hg", "ag"]]
-    print(model.predict(games))
-    print(np.mean(model.evaluate(games)['rps']))
 
-    print(model.backtest(df, 2021))
+    # Run inference on the specific GW
+    predictions = model.predict(season_games[season_games['event'] == next_gw])
+    if os.path.isfile("data/predictions/scores/bayesian_xg.csv"):
+        past_predictions = pd.read_csv("data/predictions/scores/bayesian_xg.csv")
+        (
+            pd.concat(
+                [
+                    past_predictions,
+                    predictions
+                    .loc[:, [
+                        'date', 'team1', 'team2', 'event', 'hg', 'ag', 'attack1', 'defence1',
+                        'attack2', 'defence2', 'home_adv', 'intercept', 'score1_infered',
+                        'score2_infered', 'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p', 'away_cs_p']]
+                ],
+                ignore_index=True
+            ).to_csv("data/predictions/scores/bayesian_xg.csv", index=False)
+        )
+    else:
+        (
+            predictions
+            .loc[:, [
+                'date', 'team1', 'team2', 'event', 'hg', 'ag', 'attack1', 'defence1',
+                'attack2', 'defence2', 'home_adv', 'intercept', 'score1_infered',
+                'score2_infered', 'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p', 'away_cs_p']]
+            .to_csv("data/predictions/scores/bayesian_xg.csv", index=False)
+        )

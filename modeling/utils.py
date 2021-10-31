@@ -1,4 +1,5 @@
 import numpy as np
+import requests
 
 from scipy.stats import poisson
 
@@ -26,3 +27,13 @@ def clean_sheet(m):
 
 def time_decay(xi, t):
     return np.exp(-xi * t)
+
+
+def get_next_gw():
+    url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
+    res = requests.get(url).json()
+
+    # Get current gameweek
+    for idx, gw in enumerate(res['events']):
+        if gw['is_next']:
+            return idx + 1
