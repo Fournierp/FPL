@@ -9,6 +9,7 @@ from scipy.optimize import minimize
 from utils import odds, clean_sheet, score_mtx, get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
 
+from git import Git
 
 class Poisson:
 
@@ -314,3 +315,9 @@ if __name__ == "__main__":
                 'score2_infered', 'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p', 'away_cs_p']]
             .to_csv("data/predictions/scores/poisson.csv", index=False)
         )
+
+    if len(sys.argv) > 1:
+        logger.info("Saving data ...")
+        Git()
+    else:
+        print("Local")

@@ -16,10 +16,11 @@ import arviz as az
 import warnings
 warnings.filterwarnings('ignore')
 
+from git import Git
 
 class Bayesian_XG:
 
-    def __init__(self, games):
+    def __init__(self, games, weight_value):
         teams = np.sort(np.unique(games["team1"]))
         league_size = len(teams)
 
@@ -46,7 +47,7 @@ class Bayesian_XG:
 
         df["date"] = pd.to_datetime(df["date"])
         df["days_since"] = (df["date"].max() - df["date"]).dt.days
-        df["weight"] = time_decay(0.001, df["days_since"])
+        df["weight"] = time_decay(weight_value, df["days_since"])
 
         self.games = df.loc[:, ["xg1", "xg2", "team1", "team2", "hg", "ag", "weight"]]
         self.games = (
@@ -218,6 +219,7 @@ if __name__ == "__main__":
     with open('info.json') as f:
         season = json.load(f)['season']
 
+    weight = 0.0001
     next_gw = get_next_gw()
 
     df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
@@ -248,7 +250,7 @@ if __name__ == "__main__":
         pd.concat([
             df.loc[df['season'] != season],
             season_games[season_games['event'] < next_gw]
-            ]))
+            ]), weight)
     model.fit()
 
     # Add the home team and away team index for running inference
@@ -289,3 +291,10 @@ if __name__ == "__main__":
                 'score2_infered', 'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p', 'away_cs_p']]
             .to_csv("data/predictions/scores/bayesian_xg.csv", index=False)
         )
+
+
+    if len(sys.argv) > 1:
+        logger.info("Saving data ...")
+        Git()
+    else:
+        print("Local")
