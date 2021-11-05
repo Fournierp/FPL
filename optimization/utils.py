@@ -90,7 +90,7 @@ def get_ownership_data():
     return df.set_index('id')
 
 
-def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits, freehit=-1, wildcard=-1, bboost=-1, threexc=-1):
+def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=1):
     df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'Start', 'Cap', 'Vice', 'Buy', 'Sell'])
 
     for w in np.arange(start, start+period):
@@ -125,4 +125,5 @@ def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, 
         print(" ____ ")
 
     custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
+    df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start'], ascending=[True, False]).to_csv(f'optimization/tmp/{nb_suboptimal}.csv')
     print(df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start'], ascending=[True, False]))

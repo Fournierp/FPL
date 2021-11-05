@@ -16,8 +16,8 @@ decay_bench = 0.05
 decay_gameweek = 0.8
 team_id = 35868
 horizon = 5
-nb_suboptimal = 1
-cutoff_search = 'horizon_transfer'
+nb_suboptimal = 3
+cutoff_search = 'first_transfer'
 objective_type = 'decay'
 # Chip strategy: set to (-1) if you don't want to use
 # Choose a value in range [0-5] as the number of gameweeks after the current one
@@ -64,6 +64,7 @@ differential_threshold = 10
 df = get_predictions()
 data = df.copy()
 data.set_index('id', inplace=True)
+
 # Ownership data
 ownership = get_ownership_data()
 data = pd.concat([data, ownership], axis=1, join="inner")
@@ -146,7 +147,7 @@ model.add_constraint(free_transfers[start - 1] == rolling_transfer + 1, name='in
 
 # Constraints
 # The cost of the squad must exceed the budget
-model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, 'BV'] for p in players) <= budget for w in all_gameweeks), name='budget')
+model.add_constraints((so.expr_sum(team[p, w] * data.loc[p, 'SV'] for p in players) <= budget for w in all_gameweeks), name='budget')
 
 # The number of players must be 11 on field, 4 on bench, 1 captain & 1 vicecaptain
 model.add_constraints((so.expr_sum(team[p, w] for p in players) == 15 for w in all_gameweeks), name='15_players')
@@ -339,7 +340,7 @@ for i in range(nb_suboptimal):
     # GW
     print(f"\n----- {i} -----")
     pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers,
-                hits, freehit_gw, wildcard_gw, bboost_gw, threexc_gw)
+                hits, freehit_gw, wildcard_gw, bboost_gw, threexc_gw, i)
 
     if i != nb_suboptimal - 1:
         # Select the players that have been transfered in/out
