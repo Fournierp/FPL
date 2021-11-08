@@ -40,8 +40,8 @@ class Elo:
         self.historical_rating = self.games.loc[:, ["team1", "team2", "hg", "ag", "date"]]
 
 
-    def odds(self, home_rating, away_rating, w=400):
-        return 1 / (1 + pow(10, (away_rating - home_rating) / w))
+    def odds(self, rating_a, rating_b, w=400):
+        return 1 / (1 + pow(10, (rating_b - rating_a) / w))
 
 
     def rating_update(self, rating, actual_score, expected_score, k=20):
@@ -111,12 +111,15 @@ class Elo:
 
     def predict(self, games, hfa=50):
 
+        def hubbert(rating_a, rating_b):
+            return np.exp( - (rating_a - rating_b) / 10) / np.power(1 + np.exp( - (rating_a - rating_b) / 10), 2)
+
         def synthesize_odds(row):
             # Get match data
             try:
                 home_rating = self.teams.loc[self.teams.team == row['team1']]['rating'].values[0]
             except:
-                home_rating = 1300
+                home_rating = 1375
                 self.teams = self.teams.append(
                     {'team': row['team1'], 'rating': home_rating, 'team_index': self.league_size},
                     ignore_index=True)
@@ -125,7 +128,7 @@ class Elo:
             try:
                 away_rating = self.teams.loc[self.teams.team == row['team2']]['rating'].values[0]
             except:
-                away_rating = 1300
+                away_rating = 1375
                 self.teams = self.teams.append(
                     {'team': row['team1'], 'rating': away_rating, 'team_index': self.league_size},
                     ignore_index=True)
@@ -134,8 +137,12 @@ class Elo:
             # Infer result
             exp_h = self.odds(home_rating + hfa, away_rating)
             exp_a = self.odds(away_rating, home_rating + hfa)
+            exp_d = hubbert(home_rating, away_rating)
 
-            return home_rating, away_rating, exp_h, 0, exp_a
+            exp_h = exp_h - exp_h * exp_d
+            exp_a = exp_a - exp_a * exp_d
+
+            return home_rating, away_rating, exp_h, exp_d, exp_a
 
         (
             games["home_rating"],
@@ -215,7 +222,7 @@ class Elo:
             model.fine_tune(predictions)
 
         return np.mean(rps_list)
-        
+
 
 if __name__ == "__main__":
     df = (
