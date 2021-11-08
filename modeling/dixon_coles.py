@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+import sys
 import os
 
 from scipy.stats import poisson
@@ -306,7 +307,7 @@ if __name__ == "__main__":
     with open('info.json') as f:
         season = json.load(f)['season']
 
-    next_gw = get_next_gw()-1
+    next_gw = get_next_gw()
 
     df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
     df = (df
