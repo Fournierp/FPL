@@ -49,59 +49,65 @@ class Elo:
 
 
     def fit(self, hfa=50):
-        for index, match in self.games.iterrows():
-            # Get match data
-            home_team = match['team1']
-            away_team = match['team2']
+        if os.path.isfile("data/predictions/scores/teams.csv"):
+            self.teams = pd.read_csv("data/predictions/scores/teams.csv")
+        
+        else:
+            for index, match in self.games.iterrows():
+                # Get match data
+                home_team = match['team1']
+                away_team = match['team2']
 
-            home_rating = self.teams.loc[self.teams.team == home_team]['rating'].values[0]
-            away_rating = self.teams.loc[self.teams.team == away_team]['rating'].values[0]
+                home_rating = self.teams.loc[self.teams.team == home_team]['rating'].values[0]
+                away_rating = self.teams.loc[self.teams.team == away_team]['rating'].values[0]
 
-            # Save the rating prior to the game
-            self.historical_rating.loc[
-                (
-                    (self.historical_rating.team1 == home_team) &
-                    (self.historical_rating.team2 == away_team) &
-                    (self.historical_rating.date == match['date'])),
-                'rating1'] = home_rating
-            self.historical_rating.loc[
-                (
-                    (self.historical_rating.team1 == home_team) &
-                    (self.historical_rating.team2 == away_team) &
-                    (self.historical_rating.date == match['date'])),
-                'rating2'] = away_rating
+                # Save the rating prior to the game
+                self.historical_rating.loc[
+                    (
+                        (self.historical_rating.team1 == home_team) &
+                        (self.historical_rating.team2 == away_team) &
+                        (self.historical_rating.date == match['date'])),
+                    'rating1'] = home_rating
+                self.historical_rating.loc[
+                    (
+                        (self.historical_rating.team1 == home_team) &
+                        (self.historical_rating.team2 == away_team) &
+                        (self.historical_rating.date == match['date'])),
+                    'rating2'] = away_rating
 
-            # Infer result
-            exp_h = self.odds(home_rating + hfa, away_rating)
-            exp_a = self.odds(away_rating, home_rating + hfa)
+                # Infer result
+                exp_h = self.odds(home_rating + hfa, away_rating)
+                exp_a = self.odds(away_rating, home_rating + hfa)
 
-            # Save the probabilities
-            self.historical_rating.loc[
-                (
-                    (self.historical_rating.team1 == home_team) &
-                    (self.historical_rating.team2 == away_team) &
-                    (self.historical_rating.date == match['date'])),
-                'home_win_p'] = exp_h
-            self.historical_rating.loc[
-                (
-                    (self.historical_rating.team1 == home_team) &
-                    (self.historical_rating.team2 == away_team) &
-                    (self.historical_rating.date == match['date'])),
-                'away_win_p'] = exp_a
-            self.historical_rating.loc[
-                (
-                    (self.historical_rating.team1 == home_team) &
-                    (self.historical_rating.team2 == away_team) &
-                    (self.historical_rating.date == match['date'])),
-                'draw_p'] = 0
+                # Save the probabilities
+                self.historical_rating.loc[
+                    (
+                        (self.historical_rating.team1 == home_team) &
+                        (self.historical_rating.team2 == away_team) &
+                        (self.historical_rating.date == match['date'])),
+                    'home_win_p'] = exp_h
+                self.historical_rating.loc[
+                    (
+                        (self.historical_rating.team1 == home_team) &
+                        (self.historical_rating.team2 == away_team) &
+                        (self.historical_rating.date == match['date'])),
+                    'away_win_p'] = exp_a
+                self.historical_rating.loc[
+                    (
+                        (self.historical_rating.team1 == home_team) &
+                        (self.historical_rating.team2 == away_team) &
+                        (self.historical_rating.date == match['date'])),
+                    'draw_p'] = 0
 
-            # Update ratings
-            res_h = 1 if match['winner'] == 0 else 0.5 if match['winner'] == 1 else 0
-            res_a = 1 if match['winner'] == 2 else 0.5 if match['winner'] == 1 else 0
+                # Update ratings
+                res_h = 1 if match['winner'] == 0 else 0.5 if match['winner'] == 1 else 0
+                res_a = 1 if match['winner'] == 2 else 0.5 if match['winner'] == 1 else 0
 
-            self.teams.loc[self.teams.team == home_team, 'rating'] = self.rating_update(home_rating, res_h, exp_h)
-            self.teams.loc[self.teams.team == away_team, 'rating'] = self.rating_update(away_rating, res_a, exp_a)
+                self.teams.loc[self.teams.team == home_team, 'rating'] = self.rating_update(home_rating, res_h, exp_h)
+                self.teams.loc[self.teams.team == away_team, 'rating'] = self.rating_update(away_rating, res_a, exp_a)
 
+            self.teams.to_csv("data/predictions/scores/teams.csv", index=False)
+            
 
     def predict(self, games, hfa=50):
 
@@ -288,5 +294,3 @@ if __name__ == "__main__":
                 'date', 'team1', 'team2', 'event', 'home_rating', 'away_rating', 'home_win_p', 'draw_p', 'away_win_p']]
             .to_csv("data/predictions/scores/elo.csv", index=False)
         )
-    
-    # model.teams.to_csv("data/predictions/scores/elo.csv", index=False)
