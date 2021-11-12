@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import json
 import os
 
 from utils import get_next_gw
@@ -8,8 +7,13 @@ from ranked_probability_score import ranked_probability_score, match_outcome
 
 
 class Elo:
+    """ Elo rating system based on the outcomes of the games """
 
     def __init__(self, games):
+        """
+        Args:
+            games (pd.DataFrame): Finished games to used for training.
+        """
         teams = np.sort(np.unique(games["team1"]))
         league_size = len(teams)
 
@@ -32,34 +36,62 @@ class Elo:
             .merge(self.teams, left_on="team2", right_on="team")
             .rename(columns={"team_index": "ag"})
             .drop(["team"], axis=1)
-            .loc[:, ["score1", "score2", "team1", "team2", "hg", "ag", "date"]])
+            .loc[:, [
+                "score1", "score2", "team1", "team2", "hg", "ag", "date"]])
         self.games["winner"] = match_outcome(self.games)
         self.games["date"] = pd.to_datetime(self.games["date"], dayfirst=True)
         self.games = self.games.sort_values("date")
 
-        self.historical_rating = self.games.loc[:, ["team1", "team2", "hg", "ag", "date"]]
-
+        self.historical_rating = self.games.loc[:, [
+            "team1", "team2", "hg", "ag", "date"]]
 
     def odds(self, rating_a, rating_b, w=400):
+        """ Compute the expected winning odd of team A in a fixture
+
+        Args:
+            rating_a (int): Rating of the team
+            rating_b (int): Rating of the team
+            w (int, optional): width of the distribution. Defaults to 400.
+
+        Returns:
+            float: expected winning odd of team A in a fixture
+        """
         return 1 / (1 + pow(10, (rating_b - rating_a) / w))
 
-
     def rating_update(self, rating, actual_score, expected_score, k=20):
+        """ Amount by which the rating of a team will be changed based on the outcome
+        and expectation of a game
+
+        Args:
+            rating (int): Rating of the team
+            actual_score (float): Result
+            expected_score (float): Expected result
+            k (int, optional): factor by which a victory changes rating
+
+        Returns:
+            (float): elo points delta
+        """
         return rating + k * (actual_score - expected_score)
 
-
     def fit(self, hfa=50):
+        """ Compute the current team ratings based on past results
+
+        Args:
+            hfa (int, optional): Home field advantage. Defaults to 50.
+        """
         if os.path.isfile("data/predictions/scores/teams.csv"):
             self.teams = pd.read_csv("data/predictions/scores/teams.csv")
-        
+
         else:
             for index, match in self.games.iterrows():
                 # Get match data
                 home_team = match['team1']
                 away_team = match['team2']
 
-                home_rating = self.teams.loc[self.teams.team == home_team]['rating'].values[0]
-                away_rating = self.teams.loc[self.teams.team == away_team]['rating'].values[0]
+                home_rating = self.teams.loc[
+                    self.teams.team == home_team]['rating'].values[0]
+                away_rating = self.teams.loc[
+                    self.teams.team == away_team]['rating'].values[0]
 
                 # Save the rating prior to the game
                 self.historical_rating.loc[
@@ -100,37 +132,79 @@ class Elo:
                     'draw_p'] = 0
 
                 # Update ratings
-                res_h = 1 if match['winner'] == 0 else 0.5 if match['winner'] == 1 else 0
-                res_a = 1 if match['winner'] == 2 else 0.5 if match['winner'] == 1 else 0
+                res_h = (
+                    1 if match['winner'] == 0
+                    else 0.5 if match['winner'] == 1
+                    else 0)
+                res_a = (
+                    1 if match['winner'] == 2
+                    else 0.5 if match['winner'] == 1
+                    else 0)
 
-                self.teams.loc[self.teams.team == home_team, 'rating'] = self.rating_update(home_rating, res_h, exp_h)
-                self.teams.loc[self.teams.team == away_team, 'rating'] = self.rating_update(away_rating, res_a, exp_a)
+                self.teams.loc[
+                    self.teams.team == home_team, 'rating'] = \
+                    self.rating_update(home_rating, res_h, exp_h)
+                self.teams.loc[
+                    self.teams.team == away_team, 'rating'] = \
+                    self.rating_update(away_rating, res_a, exp_a)
 
             self.teams.to_csv("data/predictions/scores/teams.csv", index=False)
-            
 
     def predict(self, games, hfa=50):
+        """ Predict the result of games
+
+        Args:
+            games (pf.DataFrame): Fixtures
+            hfa (int, optional): Home field advantage. Defaults to 50.
+        """
 
         def hubbert(rating_a, rating_b):
-            return np.exp( - (rating_a - rating_b) / 10) / np.power(1 + np.exp( - (rating_a - rating_b) / 10), 2)
+            """ Adjustment to the odds to add draws
+
+            Args:
+                rating_a (int): Team rating
+                rating_b (int): Team rating
+
+            Returns:
+                float: Odds of a draw
+            """
+            return (
+                np.exp(- (rating_a - rating_b) / 10) /
+                np.power(1 + np.exp(- (rating_a - rating_b) / 10), 2))
 
         def synthesize_odds(row):
+            """ Lambda function that parses row by row to compute score matrix
+
+            Args:
+                row (array): Fixture
+
+            Returns:
+                (tuple): Home and Away ratings and winning odds
+            """
             # Get match data
             try:
-                home_rating = self.teams.loc[self.teams.team == row['team1']]['rating'].values[0]
+                home_rating = self.teams.loc[
+                    self.teams.team == row['team1']]['rating'].values[0]
             except:
                 home_rating = 1375
                 self.teams = self.teams.append(
-                    {'team': row['team1'], 'rating': home_rating, 'team_index': self.league_size},
+                    {
+                        'team': row['team1'],
+                        'rating': home_rating,
+                        'team_index': self.league_size},
                     ignore_index=True)
                 self.league_size += 1
 
             try:
-                away_rating = self.teams.loc[self.teams.team == row['team2']]['rating'].values[0]
+                away_rating = self.teams.loc[
+                    self.teams.team == row['team2']]['rating'].values[0]
             except:
                 away_rating = 1375
                 self.teams = self.teams.append(
-                    {'team': row['team1'], 'rating': away_rating, 'team_index': self.league_size},
+                    {
+                        'team': row['team1'],
+                        'rating': away_rating,
+                        'team_index': self.league_size},
                     ignore_index=True)
                 self.league_size += 1
 
@@ -150,23 +224,36 @@ class Elo:
             games["home_win_p"],
             games["draw_p"],
             games["away_win_p"]
-            ) = zip(*games.apply(lambda row : synthesize_odds(row), axis=1))
+            ) = zip(*games.apply(lambda row: synthesize_odds(row), axis=1))
 
         return games
 
-    
     def evaluate(self, games):
-        """ Eval model """
+        """ Evaluate the model's prediction accuracy
+
+        Args:
+            games (pd.DataFrame): Fixtured to evaluate on
+
+        Returns:
+            pd.DataFrame: df with appended metrics
+        """
         aggregate_df = self.predict(games)
 
         aggregate_df["winner"] = match_outcome(aggregate_df)
 
-        aggregate_df["rps"] = aggregate_df.apply(lambda row: ranked_probability_score([row["home_win_p"], row["draw_p"], row["away_win_p"]], row["winner"]), axis=1)
+        aggregate_df["rps"] = aggregate_df.apply(
+            lambda row: ranked_probability_score([
+                row["home_win_p"], row["draw_p"],
+                row["away_win_p"]], row["winner"]), axis=1)
 
         return aggregate_df
 
-
     def fine_tune(self, gw_data):
+        """ Given pretrained model, fine-tune on given GW data
+
+        Args:
+            gw_data (row)
+        """
         for index, match in gw_data.iterrows():
             # Get match data
             home_team = match['team1']
@@ -179,18 +266,38 @@ class Elo:
             exp_a = match['away_win_p']
 
             # Update ratings
-            res_h = 1 if match['winner'] == 0 else 0.5 if match['winner'] == 1 else 0
-            res_a = 1 if match['winner'] == 2 else 0.5 if match['winner'] == 1 else 0
+            res_h = (
+                1 if match['winner'] == 0
+                else 0.5 if match['winner'] == 1
+                else 0)
+            res_a = (
+                1 if match['winner'] == 2
+                else 0.5 if match['winner'] == 1
+                else 0)
 
-            self.teams.loc[self.teams.team == home_team, 'rating'] = self.rating_update(home_rating, res_h, exp_h)
-            self.teams.loc[self.teams.team == away_team, 'rating'] = self.rating_update(away_rating, res_a, exp_a)
-
+            self.teams.loc[
+                self.teams.team == home_team, 'rating'] = self.rating_update(
+                    home_rating, res_h, exp_h)
+            self.teams.loc[
+                self.teams.team == away_team, 'rating'] = self.rating_update(
+                    away_rating, res_a, exp_a)
 
     def backtest(self, season):
+        """ Test the model's accuracy on past/finished games by iteratively
+        training and testing on parts of the data.
 
+        Args:
+            season (int): Season for the test
+
+        Returns:
+            (float): Evaluation metric
+        """
         # Get GW dates
-        fixtures = pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv").loc[:, ['event', 'kickoff_time']]
-        fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
+        fixtures = (
+            pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            .loc[:, ['event', 'kickoff_time']])
+        fixtures["kickoff_time"] = (
+            pd.to_datetime(fixtures["kickoff_time"]).dt.date)
 
         # Merge on date
         season_games = (
@@ -205,17 +312,23 @@ class Elo:
                 "Date": "date",
                 })
             .dropna())
-        season_games["date"] = pd.to_datetime(season_games["date"], dayfirst=True).dt.date
+        season_games["date"] = pd.to_datetime(
+            season_games["date"], dayfirst=True).dt.date
         season_games = (
-            pd.merge(season_games, fixtures, left_on='date', right_on='kickoff_time')
+            pd.merge(
+                season_games,
+                fixtures,
+                left_on='date',
+                right_on='kickoff_time')
             .drop_duplicates()
             )
-        
+
         rps_list = []
 
         for next_gw in range(1, get_next_gw()):
             # Run inference on the specific GW
-            predictions = model.evaluate(season_games[season_games['event'] == next_gw])
+            predictions = model.evaluate(
+                season_games[season_games['event'] == next_gw])
             rps_list.append(predictions['rps'].values)
 
             # Update the model with the current GW
@@ -229,14 +342,13 @@ if __name__ == "__main__":
         pd.read_csv(
             f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
             usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'])
-            
-            for season in [
-                '9394', '9495', '9596', '9697', '9798',
-                '9899', '9900', '0001', '0102', '0203',
-                '0304', '0405', '0506', '0607', '0708',
-                '0809', '0910', '1011', '1112', '1213',
-                '1314', '1415', '1516', '1617', '1718',
-                '1819', '1920', '2021'])
+        for season in [
+            '9394', '9495', '9596', '9697', '9798',
+            '9899', '9900', '0001', '0102', '0203',
+            '0304', '0405', '0506', '0607', '0708',
+            '0809', '0910', '1011', '1112', '1213',
+            '1314', '1415', '1516', '1617', '1718',
+            '1819', '1920', '2021'])
 
     df = (
         pd.concat(df)
@@ -257,7 +369,9 @@ if __name__ == "__main__":
     next_gw = get_next_gw()-1
 
     # Get GW dates
-    fixtures = pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv").loc[:, ['event', 'kickoff_time']]
+    fixtures = (
+        pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+        .loc[:, ['event', 'kickoff_time']])
     fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
 
     # Merge on date
@@ -273,9 +387,14 @@ if __name__ == "__main__":
             "Date": "date",
             })
         .dropna())
-    season_games["date"] = pd.to_datetime(season_games["date"], dayfirst=True).dt.date
+    season_games["date"] = (
+        pd.to_datetime(season_games["date"], dayfirst=True).dt.date)
     season_games = (
-        pd.merge(season_games, fixtures, left_on='date', right_on='kickoff_time')
+        pd.merge(
+            season_games,
+            fixtures,
+            left_on='date',
+            right_on='kickoff_time')
         .drop_duplicates()
         )
 
@@ -289,7 +408,8 @@ if __name__ == "__main__":
                     past_predictions,
                     predictions
                     .loc[:, [
-                        'date', 'team1', 'team2', 'event', 'home_rating', 'away_rating', 'home_win_p', 'draw_p', 'away_win_p']]
+                        'date', 'team1', 'team2', 'event', 'home_rating',
+                        'away_rating', 'home_win_p', 'draw_p', 'away_win_p']]
                 ],
                 ignore_index=True
             ).to_csv("data/predictions/scores/elo.csv", index=False)
@@ -298,6 +418,7 @@ if __name__ == "__main__":
         (
             predictions
             .loc[:, [
-                'date', 'team1', 'team2', 'event', 'home_rating', 'away_rating', 'home_win_p', 'draw_p', 'away_win_p']]
+                'date', 'team1', 'team2', 'event', 'home_rating',
+                'away_rating', 'home_win_p', 'draw_p', 'away_win_p']]
             .to_csv("data/predictions/scores/elo.csv", index=False)
         )
