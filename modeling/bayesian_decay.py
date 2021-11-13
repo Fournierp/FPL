@@ -1,12 +1,10 @@
 import pandas as pd
 import numpy as np
 import json
-import sys
 import os
 
 from utils import odds, clean_sheet, time_decay, score_mtx, get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
-from git import Git
 
 import pymc3 as pm
 import theano.tensor as tt
@@ -381,9 +379,3 @@ if __name__ == "__main__":
                 'home_cs_p', 'away_cs_p']]
             .to_csv("data/predictions/scores/bayesian_decay.csv", index=False)
         )
-
-    if len(sys.argv) > 1:
-        logger.info("Saving data ...")
-        Git()
-    else:
-        print("Local")

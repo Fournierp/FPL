@@ -2,7 +2,7 @@ import os
 import sys
 import requests
 import logging
-import time 
+import time
 
 import json
 import pandas as pd
@@ -10,14 +10,22 @@ import numpy as np
 
 from concurrent.futures import ProcessPoolExecutor
 
-from git import Git 
+from git import Git
+
 
 class FPL_Gameweek:
-    # Get the Gameweek state
+    """ Get the Gameweek state """
+
     def __init__(self, logger, season_data):
+        """
+        Args:
+            logger (logging.Logger): Logging pacakge
+            season_data (int): Season year
+        """
         self.season = season_data['season']
 
-        self.root = f'data/fpl_official/{self.season}-{self.season % 2000 + 1}/gameweek/'
+        self.root = f'data/fpl_official/{self.season}\
+            -{self.season % 2000 + 1}/gameweek/'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
 
@@ -26,41 +34,62 @@ class FPL_Gameweek:
 
         self.logger = logger
 
-
     def get_fpl_metadata(self):
+        """ Request the FPL API
+
+        Returns:
+            (tuple): Next GW and player ids
+        """
         url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
         res = requests.get(url).json()
-        
+
         # Get current gameweek
         current_gw = self.get_current_gw(res['events'])
         if not os.path.exists(self.root + f'{current_gw}/'):
             os.mkdir(self.root + f'{current_gw}/')
-        
+
         # Get player ids
         cols = ["id", "first_name", "second_name", "team"]
         players = pd.DataFrame(res['elements'])[cols]
         players = players.set_index("id")
-        
+
         return current_gw, players
 
-
     def get_current_gw(self, events):
+        """ Get the next gameweek to be played in the EPL
+
+        Args:
+            events (json): FPL API response
+
+        Returns:
+            (int): Next gameweek
+        """
         for idx, gw in enumerate(events):
             if gw['is_current']:
                 return idx + 1
 
-
     def sample_ranks(self):
+        """Sample every rank to get metadata"""
         # Data management
         transfer_strategy = self.players.copy()
-        transfer_strategy.loc[:, ['Top_100_in', 'Top_1K_in', 'Top_10K_in', 'Top_50K_in', 'Top_100K_in', 'Top_250K_in', 'Top_500K_in',\
-        'Top_100_out', 'Top_1K_out', 'Top_10K_out', 'Top_50K_out', 'Top_100K_out', 'Top_250K_out', 'Top_500K_out']] = 0
-        self.players.loc[:, ['Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K', 'Top_500K']] = 0
+        transfer_strategy.loc[:, [
+            'Top_100_in', 'Top_1K_in', 'Top_10K_in', 'Top_50K_in',
+            'Top_100K_in', 'Top_250K_in', 'Top_500K_in', 'Top_100_out',
+            'Top_1K_out', 'Top_10K_out', 'Top_50K_out', 'Top_100K_out',
+            'Top_250K_out', 'Top_500K_out']] = 0
+        self.players.loc[:, [
+            'Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K',
+            'Top_250K', 'Top_500K']] = 0
         captain = self.players.copy()
-        chip_strategy = pd.DataFrame(index=['wildcard', 'freehit', 'bboost', '3xc'])
-        chip_strategy.loc[:, ['Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K', 'Top_500K']] = 0
+        chip_strategy = pd.DataFrame(index=[
+            'wildcard', 'freehit', 'bboost', '3xc'])
+        chip_strategy.loc[:, [
+            'Top_100', 'Top_1K', 'Top_10K', 'Top_50K',
+            'Top_100K', 'Top_250K', 'Top_500K']] = 0
         hit_strategy = pd.DataFrame(index=['transfers'])
-        hit_strategy.loc[:, ['Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K', 'Top_500K']] = 0
+        hit_strategy.loc[:, [
+            'Top_100', 'Top_1K', 'Top_10K', 'Top_50K',
+            'Top_100K', 'Top_250K', 'Top_500K']] = 0
 
         # Sample ~10% of players teams
         range_limits = [
@@ -79,7 +108,8 @@ class FPL_Gameweek:
 
             # Concurrent API Requests
             with ProcessPoolExecutor(max_workers=8) as executor:
-                team_data = list(executor.map(self.get_fpl_strategy, fpl_ranks))
+                team_data = list(
+                    executor.map(self.get_fpl_strategy, fpl_ranks))
 
             for team, cap, chip, transfer in team_data:
                 # Ownership
@@ -98,55 +128,99 @@ class FPL_Gameweek:
                         transfer_strategy.loc[p_out, col+'_out'] += 1
                     hit_strategy.loc['transfers', col] += len(transfer_in)
 
-            self.players.loc[:, col] = self.players.loc[:, col] / n_samples * 100
+            self.players.loc[:, col] = (
+                self.players.loc[:, col] / n_samples * 100)
             captain.loc[:, col] = captain.loc[:, col] / n_samples * 100
-            chip_strategy.loc[:, col] = chip_strategy.loc[:, col] / n_samples * 100
+            chip_strategy.loc[:, col] = (
+                chip_strategy.loc[:, col] / n_samples * 100)
             hit_strategy.loc[:, col] = hit_strategy.loc[:, col] / n_samples
-            transfer_strategy.loc[:, col+'_in'] = transfer_strategy.loc[:, col+'_in'] / n_samples * 100
-            transfer_strategy.loc[:, col+'_out'] = transfer_strategy.loc[:, col+'_out'] / n_samples * 100
+            transfer_strategy.loc[:, col+'_in'] = (
+                transfer_strategy.loc[:, col + '_in'] / n_samples * 100)
+            transfer_strategy.loc[:, col+'_out'] = (
+                transfer_strategy.loc[:, col + '_out'] / n_samples * 100)
 
-        self.players.to_csv(self.root + f"{self.current_gw}/player_ownership.csv")
-        captain.to_csv(self.root + f"{self.current_gw}/captain.csv")
-        chip_strategy.to_csv(self.root + f"{self.current_gw}/chip_strategy.csv")
-        hit_strategy.to_csv(self.root + f"{self.current_gw}/hit_strategy.csv")
-        transfer_strategy.to_csv(self.root + f"{self.current_gw}/transfer_strategy.csv")
-
+        self.players.to_csv(
+            self.root + f"{self.current_gw}/player_ownership.csv")
+        captain.to_csv(
+            self.root + f"{self.current_gw}/captain.csv")
+        chip_strategy.to_csv(
+            self.root + f"{self.current_gw}/chip_strategy.csv")
+        hit_strategy.to_csv(
+            self.root + f"{self.current_gw}/hit_strategy.csv")
+        transfer_strategy.to_csv(
+            self.root + f"{self.current_gw}/transfer_strategy.csv")
 
     def get_fpl_teamid(self, rank):
+        """ Get the FPL Team ID based on the rank
+
+        Args:
+            rank (int): Manager rank
+
+        Returns:
+            int: FPL Team ID
+        """
         # Scrape the correct page
         page = rank // 50 + 1
         place = rank % 50
-        url = f'https://fantasy.premierleague.com/api/leagues-classic/314/standings/?page_standings={page}'
+        url = f'https://fantasy.premierleague.com/api/leagues-classic/\
+            314/standings/?page_standings={page}'
         res = requests.get(url)
         return res.json()['standings']['results'][place]['entry']
 
-
     def get_fpl_team(self, team_id):
-        res = requests.get(f'https://fantasy.premierleague.com/api/entry/{team_id}/event/{self.current_gw}/picks/').json()
-        return [i['element'] for i in res['picks']], [i['element'] for i in res['picks'] if i['multiplier'] > 1]
+        """ Get the ids of player in a team
 
+        Args:
+            team_id (int): FPL Team ID
+
+        Returns:
+            (list): FPL Player IDs of the players selected
+        """
+        res = requests.get(f'https://fantasy.premierleague.com/api/\
+            entry/{team_id}/event/{self.current_gw}/picks/').json()
+        return (
+            [i['element'] for i in res['picks']],
+            [i['element'] for i in res['picks'] if i['multiplier'] > 1])
 
     def get_fpl_strategy(self, rank):
+        """ Scrape FPL manager metadata
+
+        Args:
+            rank (int): FPL rank
+
+        Returns:
+            (tuple): strategy
+        """
         attempts = 3
         while attempts:
             try:
                 team_id = self.get_fpl_teamid(rank)
-                fpl_team, fpl_cap = self.get_fpl_team(team_id)       
-                fpl_chips = self.get_fpl_chips(team_id)       
-                fpl_transfers = self.get_fpl_transfers(team_id)       
+                fpl_team, fpl_cap = self.get_fpl_team(team_id)
+                fpl_chips = self.get_fpl_chips(team_id)
+                fpl_transfers = self.get_fpl_transfers(team_id)
                 return fpl_team, fpl_cap, fpl_chips, fpl_transfers
             except:
                 attempts -= 1
                 if not attempts:
-                    self.logger.warning(f"API Call to rank {rank} failed after 3 attempts.")
+                    self.logger.warning(f"API Call to rank {rank} failed \
+                        after 3 attempts.")
                     return [], [], [], []
 
-                self.logger.warning(f'API Call failed, retrying in 3 seconds! Rank: {rank}')
+                self.logger.warning(f'API Call failed, retrying in 3 seconds!\
+                    Rank: {rank}')
                 time.sleep(3)
 
-
     def get_fpl_chips(self, team_id):
-        res = requests.get(f'https://fantasy.premierleague.com/api/entry/{team_id}/history/').json()['chips']
+        """ Get the GW when a manager used a chip
+
+        Args:
+            team_id (int): Manager id
+
+        Returns:
+            (int): Gameweek
+        """
+        res = requests.get(f'https://fantasy.premierleague.com/api/\
+            entry/{team_id}/history/').json()['chips']
         if res == []:
             return None
 
@@ -155,10 +229,18 @@ class FPL_Gameweek:
         else:
             return None
 
-
     def get_fpl_transfers(self, team_id):
-        res = requests.get(f'https://fantasy.premierleague.com/api/entry/{team_id}/transfers').json()
-        
+        """ Get the transfer managers did
+
+        Args:
+            team_id (int): Manager id
+
+        Returns:
+            (tuple): FPL player ids
+        """
+        res = requests.get(f'https://fantasy.premierleague.com/api\
+            /entry/{team_id}/transfers').json()
+
         transfer_in = []
         transfer_out = []
 

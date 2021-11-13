@@ -2,59 +2,74 @@ import os
 import sys
 import requests
 import logging
-import time 
 
 import json
 import csv
 import pandas as pd
-import numpy as np
 from bs4 import BeautifulSoup
-
-from concurrent.futures import ProcessPoolExecutor
 
 from git import Git
 
 
 class FPL_Review_Scraper:
+    """ Scrape FPL Review website """
 
     def __init__(self, logger, season_data, team_id):
+        """
+        Args:
+            logger (logging.logger): logging package
+            season_data (int): Season
+            team_id (int): Player team ID
+        """
         self.season = season_data['season']
 
-        self.root = f'data/fpl_review/{self.season}-{self.season % 2000 + 1}/gameweek/'
+        self.root = f'data/fpl_review/{self.season}\
+            -{self.season % 2000 + 1}/gameweek/'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
-        
+
         self.next_gw, self.players = self.get_fpl_metadata()
 
         self.logger = logger
 
         self.team_id = team_id
 
-
     def get_fpl_metadata(self):
+        """ Request the FPL API
+
+        Returns:
+            (tuple): Next GW and player ids
+        """
         url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
         res = requests.get(url).json()
-        
+
         # Get current gameweek
         next_gw = self.get_next_gw(res['events'])
         if not os.path.exists(self.root + str(next_gw) + '/'):
             os.mkdir(self.root + str(next_gw) + '/')
-        
+
         # Get player ids
         cols = ["id", "first_name", "second_name", "team"]
         players = pd.DataFrame(res['elements'])[cols]
         players = players.set_index("id")
-    
+
         return next_gw, players
 
-
     def get_next_gw(self, events):
+        """ Get the next gameweek to be played in the EPL
+
+        Args:
+            events (json): FPL API response
+
+        Returns:
+            (int): Next gameweek
+        """
         for idx, gw in enumerate(events):
             if gw['is_next']:
                 return idx + 1
 
-
-    def get_free_planner_data(self, raw=True):
+    def get_free_planner_data(self):
+        """Get the FPL Review data"""
         period = min(5, 39 - self.next_gw)
         url = 'https://fplreview.com/free-planner/#forecast_table'
         body = {
@@ -71,8 +86,8 @@ class FPL_Review_Scraper:
             # Columns
             csv_cols = ["id", "Pos", "Name", "BV", "SV", "Team"]
             for gw in range(self.next_gw, self.next_gw + period):
-                csv_cols.append(str(gw)+ '_xMins')
-                csv_cols.append(str(gw)+ '_Pts')
+                csv_cols.append(str(gw) + '_xMins')
+                csv_cols.append(str(gw) + '_Pts')
             writer.writerow(csv_cols)
             # Players
             for fplr_api in soup.find(id="fplr_api"):
@@ -92,8 +107,10 @@ class FPL_Review_Scraper:
                             json.loads(fplr_api)[key]['team_abbrev']
                             ]
                         for gw in range(self.next_gw, self.next_gw + period):
-                            row.append(json.loads(fplr_api)[key][str(gw)]['dmins'])
-                            row.append(json.loads(fplr_api)[key][str(gw)]['livpts'])
+                            row.append(
+                                json.loads(fplr_api)[key][str(gw)]['dmins'])
+                            row.append(
+                                json.loads(fplr_api)[key][str(gw)]['livpts'])
                         writer.writerow(row)
                     except:
                         self.logger.warning(f"Failed to save row {key}.")

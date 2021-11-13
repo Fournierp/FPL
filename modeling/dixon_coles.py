@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import logging
 import json
 import sys
 import os
@@ -407,6 +408,8 @@ class Dixon_Coles:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
+    logger: logging.Logger = logging.getLogger(__name__)
 
     with open('info.json') as f:
         season = json.load(f)['season']

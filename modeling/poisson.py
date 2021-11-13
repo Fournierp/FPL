@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import json
-import sys
 import os
 
 from scipy.stats import poisson
@@ -9,8 +8,6 @@ from scipy.optimize import minimize
 
 from utils import odds, clean_sheet, score_mtx, get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
-
-from git import Git
 
 
 class Poisson:
@@ -432,9 +429,3 @@ if __name__ == "__main__":
                 'away_cs_p']]
             .to_csv("data/predictions/scores/poisson.csv", index=False)
         )
-
-    if len(sys.argv) > 1:
-        logger.info("Saving data ...")
-        Git()
-    else:
-        print("Local")
