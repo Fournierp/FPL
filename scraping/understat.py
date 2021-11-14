@@ -29,7 +29,7 @@ class Understat:
         self.last_match_id = season_data['match_id']
 
         self.players = self.get_fpl_metadata()
-        self.players.to_csv(self.root + '/fpl_player_ids.csv')
+        self.players.to_csv(os.path.join(self.root, 'fpl_player_ids.csv'))
 
     def get_fpl_metadata(self):
         """ Request the FPL API
@@ -44,8 +44,9 @@ class Understat:
         cols = ["id", "first_name", "second_name", "team"]
         players = pd.DataFrame(res['elements'])[cols]
         players = players.set_index("id")
-        players["name"] = players[
-            ['first_name', 'second_name']].apply(lambda x: ' '.join(x), axis=1)
+        players["name"] = (
+            players[['first_name', 'second_name']]
+            .apply(lambda x: ' '.join(x), axis=1))
         return players
 
     def get_url(self, url):
@@ -92,9 +93,10 @@ class Understat:
         """
         if history:
             seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020]
+            self.logger.info("Downloading Historical Season Data")
         else:
             seasons = [self.season]
-        self.logger.info("Downloading Historical Season Data")
+            self.logger.info("Downloading Current Season Data")
 
         for season in seasons:
             self.logger.info(f"Season: {season}")
@@ -124,28 +126,44 @@ class Understat:
             self.save_season_data(
                 self.root + f'/{season}-{season % 2000 + 1}', team, player)
 
-    def save_match_data(self, output_file, shots, player):
+    def save_match_data(self, output_file, shots):
         """ Save to CSV
 
         Args:
             output_file (string): path
             shots (json): shots data
-            player (array): player data
         """
         if not os.path.exists(output_file):
             os.makedirs(output_file)
 
         shot_df = pd.DataFrame(shots['h'])
+        season = int(shot_df['season'][0])
         shot_df = shot_df.append(pd.DataFrame(shots['a']))
-        shot_df.to_csv(output_file + '/shots.csv', index=False)
-
-        player_df = pd.DataFrame.from_dict(player['h'], orient='index')
-        player_df = player_df.append(
-            pd.DataFrame.from_dict(player['a'], orient='index'))
-        player_df.to_csv(output_file + '/players.csv', index=False)
+        if os.path.isfile(
+                os.path.join(
+                    output_file,
+                    f"{season}-{season % 2000 + 1}/shots.csv")
+                    ):
+            past_shots = pd.read_csv(
+                os.path.join(
+                    output_file,
+                    f"{season}-{season % 2000 + 1}/shots.csv"))
+            pd.concat(
+                [past_shots, shot_df], ignore_index=True
+            ).to_csv(
+                os.path.join(
+                    output_file,
+                    f"{season}-{season % 2000 + 1}/shots.csv"),
+                index=False)
+        else:
+            shot_df.to_csv(
+                os.path.join(
+                    output_file,
+                    f"{season}-{season % 2000 + 1}/shots.csv"),
+                index=False)
 
     def get_match_data(self):
-        """Scrape match data"""
+        """For every EPL match in a season, scrape the shot data"""
         url = 'https://understat.com/match/'
         league_name = 'EPL'
         last_valid_match_id = 0
@@ -162,7 +180,6 @@ class Understat:
                     # Extract the match's data
                     scripts = parsed_html.findAll('script')
                     shots = {}
-                    player = {}
                     for script in scripts:
                         for c in script.contents:
                             split_data = c.split('=')
@@ -173,26 +190,8 @@ class Understat:
                                 decoded_content = codecs.escape_decode(
                                     content[0], "hex")[0].decode('utf-8')
                                 shots = json.loads(decoded_content)
-                            elif var_name == 'var rostersData':
-                                content = re.findall(
-                                    r'JSON\.parse\(\'(.*)\'\)', split_data[1])
-                                decoded_content = codecs.escape_decode(
-                                    content[0], "hex")[0].decode('utf-8')
-                                player = json.loads(decoded_content)
 
-                    team_home = parsed_html.findAll(
-                        "div", class_="roster roster-home")
-                    for team in team_home:
-                        team_h = team.text.strip().partition('\n')[0]
-
-                    team_away = parsed_html.findAll(
-                        "div", class_="roster roster-away")
-                    for team in team_away:
-                        team_a = team.text.strip().partition('\n')[0]
-
-                    self.save_match_data(
-                        self.root + f'/matches/{league.text.strip()[-11:]}\
-                            _{team_h}_vs_{team_a}', shots, player)
+                    self.save_match_data(self.root, shots)
 
                 if (league.find(text=re.compile(league_name)) or
                         league.find(text=re.compile('La liga')) or
@@ -221,7 +220,6 @@ class Understat:
         """
         name = row['name']
         name = unidecode.unidecode(name)
-        print(name)
 
         url = f'https://understat.com/main/getPlayersName/{name}'
         res = requests.get(url.format(name=name))
@@ -248,42 +246,60 @@ class Understat:
         '''Buggy for complex, long names.'''
         self.players['id'] = self.players.apply(
             lambda row: self._lambda_req(row), axis=1)
-        self.players.to_csv(self.root + '/understat_ids.csv')
+        self.players.to_csv(os.path.join(self.root, 'understat_ids.csv'))
 
-    def save_player_data(self, output_file, groups, shots, matches):
-        """ Save player data to disk
+    def save_player_data(self, output_file, season, shots):
+        """ Save player to CSV
 
         Args:
             output_file (string): path
-            groups ([type]): [description]
+            season (int): season year
             shots (json): shots data
-            matches (array): matches data
         """
         if not os.path.exists(output_file):
             os.makedirs(output_file)
 
-        seasons_df = pd.DataFrame.from_dict(groups['season'])
-        seasons_df.to_csv(output_file + '/seasons.csv', index=False)
-
         shot_df = pd.DataFrame(shots)
-        shot_df.to_csv(output_file + '/shots.csv', index=False)
+        # shot_df = shot_df.loc[shot_df['season'] <= str(season)]
 
-        matches_df = pd.DataFrame.from_records(matches)
-        matches_df.to_csv(output_file + '/matches.csv', index=False)
+        if os.path.isfile(os.path.join(output_file, "shots.csv")):
+            past_shots = pd.read_csv(os.path.join(output_file, "shots.csv"))
+            pd.concat(
+                [past_shots, shot_df], ignore_index=True
+            ).to_csv(os.path.join(output_file, "shots.csv"), index=False)
+        else:
+            shot_df.to_csv(
+                os.path.join(output_file, "shots.csv"),
+                index=False)
 
     def get_player_data(self, history=False):
+        """ For every player in this EPL season, scrape his historical shot data
+        accross any european championship
+
+        Args:
+            history (bool, optional): Scrape historical data. Defaults to False
+        """
         if history:
             seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020]
+            self.logger.info("Downloading Historical Season Data")
         else:
             seasons = [self.season]
+            self.logger.info("Downloading Current Season Data")
 
         url = 'https://understat.com/player/'
 
         for season in seasons:
-            if not os.path.exists(f'data/understat/{season}/'):
-                os.makedirs(f'data/understat/{season}/')
+            if not os.path.exists(os.path.join(
+                    self.root,
+                    f'{season}-{season % 2000 + 1}/')):
+                os.makedirs(os.path.join(
+                    self.root,
+                    f'{season}-{season % 2000 + 1}/'))
 
-            df = pd.read_csv(f'data/understat/{season}/players.csv')
+            df = pd.read_csv(
+                os.path.join(
+                    self.root,
+                    f'{season}-{season % 2000 + 1}/players.csv'))
             player_ids = df['id']
 
             for idx in player_ids:
@@ -292,38 +308,22 @@ class Understat:
                 parsed_html = BeautifulSoup(res.text, 'html.parser')
                 # Extract the match's data
                 scripts = parsed_html.findAll('script')
-                groups = {}
                 shots = {}
-                matches = {}
-                # Get Player name
-                desc = parsed_html.find("ul", class_="breadcrumb")
-                name = list(desc.stripped_strings)[-1]
 
                 for script in scripts:
                     for c in script.contents:
                         split_data = c.split('=')
                         var_name = split_data[0].strip()
-                        if var_name == 'var groupsData':
-                            content = re.findall(
-                                r'JSON\.parse\(\'(.*)\'\)', split_data[1])
-                            decoded_content = codecs.escape_decode(
-                                content[0], "hex")[0].decode('utf-8')
-                            groups = json.loads(decoded_content)
-                        elif var_name == 'var shotsData':
+                        if var_name == 'var shotsData':
                             content = re.findall(
                                 r'JSON\.parse\(\'(.*)\'\)', split_data[1])
                             decoded_content = codecs.escape_decode(
                                 content[0], "hex")[0].decode('utf-8')
                             shots = json.loads(decoded_content)
-                        elif var_name == 'var matchesData':
-                            content = re.findall(
-                                r'JSON\.parse\(\'(.*)\'\)', split_data[1])
-                            decoded_content = codecs.escape_decode(
-                                content[0], "hex")[0].decode('utf-8')
-                            matches = json.loads(decoded_content)
 
                 self.save_player_data(
-                    self.root + f'/players/{name}', groups, shots, matches)
+                    os.path.join(self.root, f'{season}-{season % 2000 + 1}/'),
+                    season, shots)
 
 
 if __name__ == "__main__":
@@ -335,7 +335,7 @@ if __name__ == "__main__":
 
     understat = Understat(logger, season_data)
     # understat.get_raw_season_data()
-    understat.get_match_data()
-    # understat.get_player_data(True)
+    # understat.get_match_data()
+    understat.get_player_data(True)
     # understat.get_player_data()
     # understat.get_fpl_to_understat_ids()
