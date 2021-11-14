@@ -44,8 +44,8 @@ class FPL_Review_Scraper:
 
         # Get current gameweek
         next_gw = self.get_next_gw(res['events'])
-        if not os.path.exists(self.root + str(next_gw) + '/'):
-            os.mkdir(self.root + str(next_gw) + '/')
+        if not os.path.exists(os.path.join(self.root, str(next_gw))):
+            os.mkdir(os.path.join(self.root, str(next_gw)))
 
         # Get player ids
         cols = ["id", "first_name", "second_name", "team"]
@@ -80,7 +80,11 @@ class FPL_Review_Scraper:
         x = requests.post(url, data=body)
         soup = BeautifulSoup(x.content, 'html.parser')
 
-        with open(self.root + str(self.next_gw) + '/fplreview_fp.csv', 'w', newline='', encoding="utf-8") as fplr_file:
+        with open(
+                os.path.join(
+                    os.path.join(self.root, str(self.next_gw)),
+                    '/fplreview_fp.csv'),
+                'w', newline='', encoding="utf-8") as fplr_file:
             writer = csv.writer(fplr_file)
             # Columns
             csv_cols = ["id", "Pos", "Name", "BV", "SV", "Team"]
@@ -91,7 +95,11 @@ class FPL_Review_Scraper:
             # Players
             for fplr_api in soup.find(id="fplr_api"):
                 logger.info("Saving raw data.")
-                with open(self.root + str(self.next_gw) + '/raw_fplreview_fp.json', 'w') as outfile:
+                with open(
+                        os.path.join(
+                            os.path.join(self.root, str(self.next_gw)),
+                            '/raw_fplreview_fp.json'),
+                        'w') as outfile:
                     json.dump(json.loads(fplr_api), outfile)
 
                 logger.info("Saving processed data.")

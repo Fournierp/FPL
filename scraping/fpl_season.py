@@ -101,7 +101,9 @@ class FPL_Season:
                 managers[str(rank)]['overall_rank'] = overall_rank
                 managers[str(rank)]['bench_pts'] = bench_pts
 
-            with open(self.root + f'managers_{ranks}.json', 'w') as outfile:
+            with open(
+                    os.path.join(self.root, f'managers_{ranks}.json'),
+                    'w') as outfile:
                 json.dump(managers, outfile)
 
             if self.git_cli:
@@ -135,11 +137,13 @@ class FPL_Season:
         managers[str(rank)]['overall_rank'] = overall_rank
         managers[str(rank)]['bench_pts'] = bench_pts
 
-        with open(self.root + f'manager_id_{team_id}.json', 'w') as outfile:
+        with open(
+                os.path.join(self.root, f'manager_id_{team_id}.json'),
+                'w') as outfile:
             json.dump(managers, outfile)
 
         if self.git_cli:
-            self.logger.info(f"Saving csv.")
+            self.logger.info("Saving csv.")
             Git()
 
     def get_fpl_teamid(self, rank):

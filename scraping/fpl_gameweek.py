@@ -29,7 +29,7 @@ class FPL_Gameweek:
             os.makedirs(self.root)
 
         self.current_gw, self.players = self.get_fpl_metadata()
-        self.players.to_csv(self.root + f'player_ids.csv')
+        self.players.to_csv(os.path.join(self.root, 'player_ids.csv'))
 
         self.logger = logger
 
@@ -44,8 +44,8 @@ class FPL_Gameweek:
 
         # Get current gameweek
         current_gw = self.get_current_gw(res['events'])
-        if not os.path.exists(self.root + f'{current_gw}/'):
-            os.mkdir(self.root + f'{current_gw}/')
+        if not os.path.exists(os.path.join(self.root, f'{current_gw}')):
+            os.mkdir(os.path.join(self.root, f'{current_gw}'))
 
         # Get player ids
         cols = ["id", "first_name", "second_name", "team"]
@@ -139,15 +139,15 @@ class FPL_Gameweek:
                 transfer_strategy.loc[:, col + '_out'] / n_samples * 100)
 
         self.players.to_csv(
-            self.root + f"{self.current_gw}/player_ownership.csv")
+            os.path.join(self.root, f"{self.current_gw}/player_ownership.csv"))
         captain.to_csv(
-            self.root + f"{self.current_gw}/captain.csv")
+            os.path.join(self.root, f"{self.current_gw}/captain.csv"))
         chip_strategy.to_csv(
-            self.root + f"{self.current_gw}/chip_strategy.csv")
+            os.path.join(self.root, f"{self.current_gw}/chip_strategy.csv"))
         hit_strategy.to_csv(
-            self.root + f"{self.current_gw}/hit_strategy.csv")
+            os.path.join(self.root, f"{self.current_gw}/hit_strategy.csv"))
         transfer_strategy.to_csv(
-            self.root + f"{self.current_gw}/transfer_strategy.csv")
+            os.path.join(self.root, f"{self.current_gw}/transfer_strategy.csv"))
 
     def get_fpl_teamid(self, rank):
         """ Get the FPL Team ID based on the rank

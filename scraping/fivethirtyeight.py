@@ -20,7 +20,7 @@ class FiveThirtyEight:
         """
         self.season = season_data['season']
 
-        self.root = f'data/fivethirtyeight/'
+        self.root = 'data/fivethirtyeight/'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
 
@@ -56,34 +56,56 @@ class FiveThirtyEight:
     def get_historical_data(self):
         """Scrape historical SPI"""
         self.logger.info("Loading spi_matches ...")
-        df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_matches.csv')
-        df.to_csv(self.root + f'/spi_matches.csv', index=False)
+        df = pd.read_csv(
+            'https://projects.fivethirtyeight.com/soccer-api/club/spi_matches.csv')
+        df.to_csv(
+            os.path.join(self.root, '/spi_matches.csv', index=False))
 
         self.logger.info("Loading spi_matches_latest ...")
-        df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_matches_latest.csv')
-        df.to_csv(self.root + f'/spi_matches_latest.csv', index=False)
+        df = pd.read_csv(
+            'https://projects.fivethirtyeight.com/soccer-api/club/spi_matches_latest.csv')
+        df.to_csv(
+            os.path.join(self.root, '/spi_matches_latest.csv', index=False))
 
         self.logger.info("Loading spi_global_rankings ...")
-        df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv')
-        df.to_csv(self.root + f'/spi_global_rankings.csv', index=False)
+        df = pd.read_csv(
+            'https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv')
+        df.to_csv(
+            os.path.join(self.root, '/spi_global_rankings.csv', index=False))
 
     def update_ranking_data(self):
         """Scrape current SPI"""
         self.logger.info("Loading spi_global_rankings ...")
-        df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv')
+        df = pd.read_csv(
+            'https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv')
 
-        if not os.path.exists(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}'):
-            os.makedirs(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}')
+        if not os.path.exists(
+                os.path.join(
+                    self.root,
+                    f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}')
+                ):
+            os.makedirs(
+                os.path.join(
+                    self.root,
+                    f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}'))
 
-        df.to_csv(self.root + f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}/spi_global_rankings.csv', index=False)
+        df.to_csv(
+            os.path.join(
+                self.root,
+                f'{self.season}-{self.season % 2000 + 1}/{self.next_gw}/spi_global_rankings.csv'),
+            index=False)
 
         self.logger.info("Loading spi_matches_latest ...")
-        df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_matches_latest.csv')
-        df.to_csv(self.root + f'spi_matches_latest.csv', index=False)
+        df = pd.read_csv(
+            'https://projects.fivethirtyeight.com/soccer-api/club/spi_matches_latest.csv')
+        df.to_csv(
+            os.path.join(self.root, 'spi_matches_latest.csv'),
+            index=False)
 
         self.logger.info("Loading spi_matches ...")
-        df = pd.read_csv('https://projects.fivethirtyeight.com/soccer-api/club/spi_matches.csv')
-        df.to_csv(self.root + f'spi_matches.csv', index=False)
+        df = pd.read_csv(
+            'https://projects.fivethirtyeight.com/soccer-api/club/spi_matches.csv')
+        df.to_csv(os.path.join(self.root, 'spi_matches.csv'), index=False)
 
 
 if __name__ == "__main__":
