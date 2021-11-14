@@ -61,7 +61,7 @@ class Betting_Odds:
             df = pd.read_csv(
                 f'https://www.football-data.co.uk/mmz4281/{season%2000*1000 + season%2000+1}/E0.csv')
             df.to_csv(
-                os.path.join(self.root, f'/{season}-{season%2000+1}.csv'))
+                os.path.join(self.root, f'{season}-{season%2000+1}.csv'))
 
     def get_live_odds(self, api_key):
         """ Scrape current betting odds

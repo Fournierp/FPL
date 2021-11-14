@@ -59,19 +59,19 @@ class FiveThirtyEight:
         df = pd.read_csv(
             'https://projects.fivethirtyeight.com/soccer-api/club/spi_matches.csv')
         df.to_csv(
-            os.path.join(self.root, '/spi_matches.csv', index=False))
+            os.path.join(self.root, 'spi_matches.csv', index=False))
 
         self.logger.info("Loading spi_matches_latest ...")
         df = pd.read_csv(
             'https://projects.fivethirtyeight.com/soccer-api/club/spi_matches_latest.csv')
         df.to_csv(
-            os.path.join(self.root, '/spi_matches_latest.csv', index=False))
+            os.path.join(self.root, 'spi_matches_latest.csv', index=False))
 
         self.logger.info("Loading spi_global_rankings ...")
         df = pd.read_csv(
             'https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv')
         df.to_csv(
-            os.path.join(self.root, '/spi_global_rankings.csv', index=False))
+            os.path.join(self.root, 'spi_global_rankings.csv', index=False))
 
     def update_ranking_data(self):
         """Scrape current SPI"""

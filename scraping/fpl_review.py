@@ -83,7 +83,7 @@ class FPL_Review_Scraper:
         with open(
                 os.path.join(
                     os.path.join(self.root, str(self.next_gw)),
-                    '/fplreview_fp.csv'),
+                    'fplreview_fp.csv'),
                 'w', newline='', encoding="utf-8") as fplr_file:
             writer = csv.writer(fplr_file)
             # Columns
@@ -98,7 +98,7 @@ class FPL_Review_Scraper:
                 with open(
                         os.path.join(
                             os.path.join(self.root, str(self.next_gw)),
-                            '/raw_fplreview_fp.json'),
+                            'raw_fplreview_fp.json'),
                         'w') as outfile:
                     json.dump(json.loads(fplr_api), outfile)
 
