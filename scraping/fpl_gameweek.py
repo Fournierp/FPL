@@ -24,8 +24,7 @@ class FPL_Gameweek:
         """
         self.season = season_data['season']
 
-        self.root = f'data/fpl_official/{self.season}\
-            -{self.season % 2000 + 1}/gameweek/'
+        self.root = f'data/fpl_official/{self.season}-{self.season % 2000 + 1}/gameweek/'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
 
@@ -162,8 +161,7 @@ class FPL_Gameweek:
         # Scrape the correct page
         page = rank // 50 + 1
         place = rank % 50
-        url = f'https://fantasy.premierleague.com/api/leagues-classic/\
-            314/standings/?page_standings={page}'
+        url = f'https://fantasy.premierleague.com/api/leagues-classic/314/standings/?page_standings={page}'
         res = requests.get(url)
         return res.json()['standings']['results'][place]['entry']
 
@@ -176,8 +174,9 @@ class FPL_Gameweek:
         Returns:
             (list): FPL Player IDs of the players selected
         """
-        res = requests.get(f'https://fantasy.premierleague.com/api/\
-            entry/{team_id}/event/{self.current_gw}/picks/').json()
+        res = requests.get(
+            f'https://fantasy.premierleague.com/api/entry/{team_id}/event/{self.current_gw}/picks/'
+            ).json()
         return (
             [i['element'] for i in res['picks']],
             [i['element'] for i in res['picks'] if i['multiplier'] > 1])
@@ -202,12 +201,12 @@ class FPL_Gameweek:
             except:
                 attempts -= 1
                 if not attempts:
-                    self.logger.warning(f"API Call to rank {rank} failed \
-                        after 3 attempts.")
+                    self.logger.warning(
+                        f"API Call to rank {rank} failed after 3 attempts.")
                     return [], [], [], []
 
-                self.logger.warning(f'API Call failed, retrying in 3 seconds!\
-                    Rank: {rank}')
+                self.logger.warning(
+                    f'API Call failed, retrying in 3 seconds! Rank: {rank}')
                 time.sleep(3)
 
     def get_fpl_chips(self, team_id):
@@ -219,8 +218,9 @@ class FPL_Gameweek:
         Returns:
             (int): Gameweek
         """
-        res = requests.get(f'https://fantasy.premierleague.com/api/\
-            entry/{team_id}/history/').json()['chips']
+        res = requests.get(
+            f'https://fantasy.premierleague.com/api/entry/{team_id}/history/'
+            ).json()['chips']
         if res == []:
             return None
 
@@ -238,8 +238,9 @@ class FPL_Gameweek:
         Returns:
             (tuple): FPL player ids
         """
-        res = requests.get(f'https://fantasy.premierleague.com/api\
-            /entry/{team_id}/transfers').json()
+        res = requests.get(
+            f'https://fantasy.premierleague.com/api/entry/{team_id}/transfers'
+            ).json()
 
         transfer_in = []
         transfer_out = []

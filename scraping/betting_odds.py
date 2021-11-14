@@ -23,8 +23,7 @@ class Betting_Odds:
 
         self.next_gw = self.get_fpl_metadata()
 
-        self.root = f'data/betting/{self.season}-{self.season % 2000 + 1}\
-            /{self.next_gw}'
+        self.root = f'data/betting/{self.season}-{self.season % 2000 + 1}/{self.next_gw}'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
 
@@ -59,8 +58,7 @@ class Betting_Odds:
         """Scrape historical betting odds"""
         self.logger.info("Loading historical odds ...")
         for season in [2016, 2017, 2018, 2019, 2020, 2021]:
-            df = pd.read_csv(f'https://www.football-data.co.uk/mmz4281/\
-                {season%2000*1000 + season%2000+1}/E0.csv')
+            df = pd.read_csv(f'https://www.football-data.co.uk/mmz4281/{season%2000*1000 + season%2000+1}/E0.csv')
             df.to_csv(self.root + f'/{season}-{season%2000+1}.csv')
 
     def get_live_odds(self, api_key):

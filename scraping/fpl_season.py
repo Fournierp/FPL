@@ -17,8 +17,7 @@ class FPL_Season:
     """Get the top 250K FPL managers' season strategy"""
 
     def __init__(self, logger, season_data, argv):
-        """[summary]
-
+        """
         Args:
             logger (logging.logger): logging package
             season_data (int): Season
@@ -26,8 +25,7 @@ class FPL_Season:
         """
         self.season = season_data['season']
 
-        self.root = f'data/fpl_official/{self.season}\
-            -{self.season % 2000 + 1}/season/'
+        self.root = f'data/fpl_official/{self.season}-{self.season % 2000 + 1}/season/'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
 
@@ -64,8 +62,7 @@ class FPL_Season:
         Returns:
             (tuple): Next GW and player ids
         """
-        url = 'https://fantasy.premierleague.com/\
-            api/bootstrap-static/'
+        url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
         res = requests.get(url).json()
 
         # Get player ids
@@ -156,8 +153,7 @@ class FPL_Season:
         """
         page = rank // 50 + 1
         place = rank % 50
-        url = f'https://fantasy.premierleague.com/api/leagues-classic/314\
-            /standings/?page_standings={page}'
+        url = f'https://fantasy.premierleague.com/api/leagues-classic/314/standings/?page_standings={page}'
         res = requests.get(url)
         return res.json()['standings']['results'][place]['entry']
 
@@ -170,8 +166,9 @@ class FPL_Season:
         Returns:
             (tuple): chips, overall rank, bench points
         """
-        res = requests.get(f'https://fantasy.premierleague.com/api\
-            /entry/{team_id}/history/').json()
+        res = requests.get(
+            f'https://fantasy.premierleague.com/api/entry/{team_id}/history/'
+            ).json()
         chips_res = res['chips']
         current_res = res['current']
 
@@ -220,8 +217,9 @@ class FPL_Season:
         }
 
         for gw in range(1, 39):
-            res = requests.get(f'https://fantasy.premierleague.com/api\
-                /entry/{team_id}/event/{gw}/picks/').json()
+            res = requests.get(
+                f'https://fantasy.premierleague.com/api/entry/{team_id}/event/{gw}/picks/'
+                ).json()
             if len(res) == 1:
                 self.logger.warning(f'Team: {team_id} did not play in \
                     GW: {gw} ?!')
@@ -252,8 +250,9 @@ class FPL_Season:
             dict: Data
         """
         data = {}
-        res = requests.get(f'https://fantasy.premierleague.com/api\
-            /entry/{team_id}/transfers').json()
+        res = requests.get(
+            f'https://fantasy.premierleague.com/api/entry/{team_id}/transfers'
+            ).json()
 
         for gameweek in res:
             if str(gameweek['event']) not in data.keys():
@@ -295,8 +294,8 @@ class FPL_Season:
             except:
                 attempts -= 1
                 if not attempts:
-                    self.logger.warning(f"API Call to rank {rank} \
-                        failed after 3 attempts.")
+                    self.logger.warning(
+                        f"API Call to rank {rank} failed after 3 attempts.")
                     data = {
                         'team': {},
                         'cap': {},
@@ -305,8 +304,8 @@ class FPL_Season:
                     }
                     return [], [], [], [], [], data, []
 
-                self.logger.warning(f'API Call failed, retrying in 3 seconds!\
-                     Rank: {rank}')
+                self.logger.warning(
+                    f'API Call failed, retrying in 3 seconds! Rank: {rank}')
                 time.sleep(3)
 
 

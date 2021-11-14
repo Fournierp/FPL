@@ -23,8 +23,7 @@ class FPL_Review_Scraper:
         """
         self.season = season_data['season']
 
-        self.root = f'data/fpl_review/{self.season}\
-            -{self.season % 2000 + 1}/gameweek/'
+        self.root = f'data/fpl_review/{self.season}-{self.season % 2000 + 1}/gameweek/'
         if not os.path.exists(self.root):
             os.makedirs(self.root)
 
