@@ -22,6 +22,14 @@ keepers = [
     "clean_sheets_pct", "pens_att_gk", "pens_allowed", "pens_saved",
     "pens_missed_gk", "pens_save_pct"]
 
+# Player Goalkeeping
+player_keepers = [
+    "nationality", "squad", "age", "birth_year",
+    "games_gk", "games_starts_gk", "minutes_gk", "goals_against_gk",
+    "goals_against_per90_gk", "shots_on_target_against", "saves", "save_pct",
+    "wins_gk", "draws_gk", "losses_gk", "clean_sheets", "clean_sheets_pct",
+    "pens_att_gk", "pens_allowed", "pens_saved", "pens_missed_gk"]
+
 # Squad Advanced Goalkeeping
 keepersadv = [
     "goals_against_gk", "pens_allowed", "free_kick_goals_against_gk",
@@ -200,6 +208,78 @@ class FBRef:
 
         return pd.concat(df, axis=1)
 
+    def get_player_table(self, url, columns):
+        """ Parse the table of goalkeeper data
+
+        Args:
+            url (string): Link
+            columns (list): Column names to select
+
+        Returns:
+            pd.DataFrame: Data
+        """
+        tables = self.get_url(url)
+        player_rows = tables[2].find_all('tr')
+        player_dict = dict()
+
+        for row in player_rows:
+            if row.find('th', {"scope": "row"}) is not None:
+                player_name = (
+                    row.find('td', {"data-stat": "player"})
+                    .text.strip().encode().decode("utf-8"))
+
+                # Add player name
+                if 'player' in player_dict:
+                    player_dict['player'].append(player_name)
+                else:
+                    player_dict['player'] = [player_name]
+
+                # Parse the table
+                for col in columns:
+                    # Get the statistic
+                    cell = row.find("td", {"data-stat": col})
+                    if cell is None:
+                        # Fill na
+                        text = 'None'
+                    else:
+                        a = cell.text.strip().encode()
+                        text = a.decode("utf-8")
+                        # Fill na
+                        if(text == ''):
+                            text = '0'
+
+                        if (
+                                (col != 'player') & (col != 'nationality') &
+                                (col != 'position') & (col != 'squad') &
+                                (col != 'age') & (col != 'birth_year')):
+                            print(col)
+                            text = float(text.replace(',', ''))
+
+                    if col in player_dict:
+                        player_dict[col].append(text)
+                    else:
+                        player_dict[col] = [text]
+
+        return pd.DataFrame.from_dict(player_dict)
+
+    def get_keeper_data(self, url):
+        """ Scrape each table of Goalkeeper data
+
+        Args:
+            url (string): Base link to the team stats
+
+        Returns:
+            (pd.DataFrame): Final data
+        """
+        categories_name = ['keepers', 'keepersadv']
+        categories_cols = [player_keepers, keepersadv]
+        df = []
+        for name, cols in zip(categories_name, categories_cols):
+            df.append(self.get_player_table(url.format(table=name), cols))
+
+        df = pd.concat(df, axis=1)
+        return df.loc[:, ~df.columns.duplicated()]
+
     def get_pl_urls(self):
         """ Get all the links of previous EPL seasons
 
@@ -247,8 +327,12 @@ class FBRef:
                     season.split('/')[-1])
                 year = season.split('/')[-1][:4]
 
-            self.get_team_data(url).to_csv(
-                os.path.join(self.root, f'{year}_teams.csv'),
+            # self.get_team_data(url).to_csv(
+            #     os.path.join(self.root, f'{year}_teams.csv'),
+            #     index=False)
+
+            self.get_keeper_data(url).to_csv(
+                os.path.join(self.root, f'{year}_keeper.csv'),
                 index=False)
 
 
