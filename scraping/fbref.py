@@ -15,6 +15,15 @@ stats = [
     "goals_assists_pens_per90", "xg", "npxg", "xa", "xg_per90", "xa_per90",
     "xg_xa_per90", "npxg_per90", "npxg_xa_per90"]
 
+# Player Standard Stats
+player_stats = [
+    "nationality", "position", "squad", "age", "birth_year", "games",
+    "games_starts", "minutes", "goals", "assists", "goals_pens", "pens_made",
+    "pens_att", "cards_yellow", "cards_red", "goals_per90", "assists_per90",
+    "goals_assists_per90", "goals_pens_per90", "goals_assists_pens_per90",
+    "xg", "npxg", "xa", "xg_per90", "xa_per90", "xg_xa_per90", "npxg_per90",
+    "npxg_xa_per90"]
+
 # Squad Goalkeeping
 keepers = [
     "gk_used", "goals_against_gk", "goals_against_per90_gk",
@@ -48,7 +57,15 @@ shooting = [
     "shots_total", "shots_on_target", "shots_on_target_pct",
     "shots_total_per90", "shots_on_target_per90", "goals_per_shot",
     "goals_per_shot_on_target", "average_shot_distance", "shots_free_kicks",
-    "pens_att", "pens_made"]
+    "pens_made", "pens_att"]
+
+# Player Shooting
+player_shooting = [
+    "shots_total", "shots_on_target", "shots_on_target_pct",
+    "shots_total_per90", "shots_on_target_per90", "goals_per_shot",
+    "goals_per_shot_on_target", "average_shot_distance", "shots_free_kicks",
+    "pens_made", "pens_att", "xg", "npxg", "npxg_per_shot", "xg_net",
+    "npxg_net"]
 
 # Squad Passing
 passing = [
@@ -73,9 +90,9 @@ passing_types = [
 # Squad Goal and Shot Creation
 gca = [
     "sca", "sca_per90", "sca_passes_live", "sca_passes_dead", "sca_dribbles",
-    "sca_shots", "sca_fouled", "gca", "gca_per90", "gca_passes_live",
-    "gca_passes_dead", "gca_dribbles", "gca_shots", "gca_fouled",
-    "gca_defense"]
+    "sca_shots", "sca_fouled", "sca_defense", "gca", "gca_per90",
+    "gca_passes_live", "gca_passes_dead", "gca_dribbles", "gca_shots",
+    "gca_fouled", "gca_defense"]
 
 # Squad Defensive Actions
 defense = [
@@ -206,7 +223,8 @@ class FBRef:
         for name, cols in zip(categories_name, categories_cols):
             df.append(self.get_team_table(url.format(table=name), cols))
 
-        return pd.concat(df, axis=1)
+        df = pd.concat(df, axis=1)
+        return df.loc[:, ~df.columns.duplicated()]
 
     def get_player_table(self, url, columns):
         """ Parse the table of goalkeeper data
@@ -252,7 +270,6 @@ class FBRef:
                                 (col != 'player') & (col != 'nationality') &
                                 (col != 'position') & (col != 'squad') &
                                 (col != 'age') & (col != 'birth_year')):
-                            print(col)
                             text = float(text.replace(',', ''))
 
                     if col in player_dict:
@@ -273,6 +290,22 @@ class FBRef:
         """
         categories_name = ['keepers', 'keepersadv']
         categories_cols = [player_keepers, keepersadv]
+        df = []
+        for name, cols in zip(categories_name, categories_cols):
+            df.append(self.get_player_table(url.format(table=name), cols))
+
+        df = pd.concat(df, axis=1)
+        return df.loc[:, ~df.columns.duplicated()]
+
+    def get_player_data(self, url):
+        categories_name = [
+            'stats', 'shooting', 'passing', 'passing_types',
+            'gca', 'defense', 'possession', 'misc'
+            ]
+        categories_cols = [
+            player_stats, player_shooting, passing, passing_types,
+            gca, defense, possession, misc
+            ]
         df = []
         for name, cols in zip(categories_name, categories_cols):
             df.append(self.get_player_table(url.format(table=name), cols))
@@ -327,13 +360,41 @@ class FBRef:
                     season.split('/')[-1])
                 year = season.split('/')[-1][:4]
 
-            # self.get_team_data(url).to_csv(
-            #     os.path.join(self.root, f'{year}_teams.csv'),
-            #     index=False)
+            df = self.get_team_data(url)
+            df.loc[:, "season"] = year
+            if os.path.isfile(os.path.join(self.root, 'teams.csv')):
+                past_df = pd.read_csv(os.path.join(self.root, 'teams.csv'))
+                pd.concat(
+                    [past_df, df], ignore_index=True
+                ).to_csv(os.path.join(self.root, 'teams.csv'), index=False)
+            else:
+                df.to_csv(
+                    os.path.join(self.root, 'teams.csv'),
+                    index=False)
 
-            self.get_keeper_data(url).to_csv(
-                os.path.join(self.root, f'{year}_keeper.csv'),
-                index=False)
+            df = self.get_keeper_data(url)
+            df.loc[:, "season"] = year
+            if os.path.isfile(os.path.join(self.root, 'keeper.csv')):
+                past_df = pd.read_csv(os.path.join(self.root, 'keeper.csv'))
+                pd.concat(
+                    [past_df, df], ignore_index=True
+                ).to_csv(os.path.join(self.root, 'keeper.csv'), index=False)
+            else:
+                df.to_csv(
+                    os.path.join(self.root, 'keeper.csv'),
+                    index=False)
+
+            df = self.get_player_data(url)
+            df.loc[:, "season"] = year
+            if os.path.isfile(os.path.join(self.root, 'outfield.csv')):
+                past_df = pd.read_csv(os.path.join(self.root, 'outfield.csv'))
+                pd.concat(
+                    [past_df, df], ignore_index=True
+                ).to_csv(os.path.join(self.root, 'outfield.csv'), index=False)
+            else:
+                df.to_csv(
+                    os.path.join(self.root, 'outfield.csv'),
+                    index=False)
 
 
 if __name__ == "__main__":
@@ -344,5 +405,5 @@ if __name__ == "__main__":
         season_data = json.load(stat)
 
     fbref = FBRef(logger, season_data)
-    # fbref.get_pl_season(history=True)
-    fbref.get_pl_season(history=False)
+    fbref.get_pl_season(history=True)
+    # fbref.get_pl_season(history=False)
