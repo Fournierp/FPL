@@ -63,6 +63,15 @@ class Betting_Odds:
             df.to_csv(
                 os.path.join(self.root, f'{season}-{season%2000+1}.csv'))
 
+    def get_deadline_data(self):
+        """Scrape the last betting odds before the FPL deadline"""
+        self.logger.info("Loading historical odds ...")
+        
+        df = pd.read_csv(
+            f'https://www.football-data.co.uk/mmz4281/{self.season%2000*1000 + self.season%2000+1}/E0.csv')
+        df.to_csv(
+            os.path.join(self.root, f'{self.season}-{self.season%2000+1}.csv'))
+
     def get_live_odds(self, api_key):
         """ Scrape current betting odds
 
@@ -136,8 +145,10 @@ if __name__ == "__main__":
     with open('api_key.json') as f:
         api_key = json.load(f)['api_key']
 
-    Betting_Odds(logger, season_data).get_live_odds(api_key)
-
+    bo = Betting_Odds(logger, season_data)
+    bo.get_live_odds(api_key)
+    bo.get_deadline_data()
+    
     if len(sys.argv) > 1:
         logger.info("Saving data ...")
         Git()
