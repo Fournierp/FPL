@@ -128,6 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-data/fpl_official/20-21/season/*
 .vscode/*
+data/fpl_official/20-21/season/*
 data/fpl_official/vaastav
+data/fpl_review/
