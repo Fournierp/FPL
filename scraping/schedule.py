@@ -91,8 +91,7 @@ class Schedule:
             for gw, deadline in enumerate(self.deadlines):
                 # Cronify deadlines
                 delay = (deadline - datetime.timedelta(hours=12))
-                cron_time = f'{delay.minute} {delay.hour} \
-                    {delay.day} {delay.month} *'
+                cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
                 output_file.write(cron_job_template.format(time=cron_time))
             output_file.write(
                 YML_FILE_FOOT.format(dir='scraping', script=f'{script}.py'))
@@ -104,8 +103,7 @@ class Schedule:
             for gw, deadline in enumerate(self.deadlines):
                 # Cronify deadlines
                 delay = (deadline - datetime.timedelta(hours=6))
-                cron_time = f'{delay.minute} {delay.hour} \
-                    {delay.day} {delay.month} *'
+                cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
                 output_file.write(cron_job_template.format(time=cron_time))
             output_file.write(
                 YML_FILE_FOOT.format(dir='modeling', script=f'{script}.py'))
@@ -116,8 +114,7 @@ class Schedule:
             for gw, deadline in enumerate(self.deadlines):
                 # Cronify deadlines
                 delay = (deadline - datetime.timedelta(hours=6))
-                cron_time = f'{delay.minute} {delay.hour} \
-                    {delay.day} {delay.month} *'
+                cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
                 output_file.write(cron_job_template.format(time=cron_time))
             output_file.write(
                 YML_FILE_FOOT.format(dir='modeling', script=f'{script}.py'))
@@ -129,23 +126,10 @@ class Schedule:
             for gw, deadline in enumerate(self.deadlines):
                 # Cronify deadlines
                 delay = (deadline + datetime.timedelta(hours=3))
-                cron_time = f'{delay.minute} {delay.hour} \
-                    {delay.day} {delay.month} *'
+                cron_time = f'{delay.minute} {delay.hour} {delay.day} {delay.month} *'
                 output_file.write(cron_job_template.format(time=cron_time))
             output_file.write(
                 YML_FILE_FOOT.format(dir='scraping', script=f'{script}.py'))
-
-        website = 'fpl_review'
-        with open(f'.github/workflows/{website}.yml', 'w') as output_file:
-            output_file.write(YML_FILE_HEAD)
-            for gw, deadline in enumerate(self.deadlines):
-                # Cronify deadlines
-                eight_hour_prior = (deadline - datetime.timedelta(hours=8))
-                cron_time = f'{eight_hour_prior.minute} {eight_hour_prior.hour} \
-                    {eight_hour_prior.day} {eight_hour_prior.month} *'
-                output_file.write(cron_job_template.format(time=cron_time))
-            output_file.write(
-                YML_FILE_FOOT.format(dir='scraping', script=f'{website}.py'))
 
 
 if __name__ == "__main__":
