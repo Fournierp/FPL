@@ -100,6 +100,7 @@ id,first_name,second_name,team
 594,Mathias,Jorgensen,3
 614,Paris,Maghoma,3
 619,Matthew,Cox,3
+628,Maxwell,Haygarth,3
 53,Adam,Lallana,4
 54,Jason,Steele,4
 55,Pascal,Groß,4
@@ -260,6 +261,7 @@ id,first_name,second_name,team
 616,Harry,Tyrer,8
 622,Cenk,Tosun,8
 623,Reece,Welch,8
+630,Tyler,Onyango,8
 200,Kasper,Schmeichel,9
 201,Jonny,Evans,9
 202,Marc,Albrighton,9
@@ -321,6 +323,7 @@ id,first_name,second_name,team
 601,Stuart,McKinstry,10
 608,Leo Fuhr,Hjelde,10
 624,Lewis,Bate,10
+631,Jack,Jenkins,10
 221,James,Milner,11
 222,Jordan,Henderson,11
 223,Adrián,San Miguel del Castillo,11
@@ -352,6 +355,9 @@ id,first_name,second_name,team
 506,Harvey,Elliott,11
 553,Ben,Woodburn,11
 620,Tyler,Morton,11
+625,Kaide,Gordon,11
+626,Conor,Bradley,11
+627,Owen,Beck,11
 33,Jack,Grealish,12
 249,Kyle,Walker,12
 250,Ilkay,Gündogan,12
@@ -381,6 +387,7 @@ id,first_name,second_name,team
 604,Joshua,Wilson-Esbrand,12
 605,Romeo,Lavia,12
 615,Cieran,Slicker,12
+629,James,McAtee,12
 269,Edinson,Cavani,13
 270,David,de Gea,13
 271,Nemanja,Matic,13
