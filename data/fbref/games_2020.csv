@@ -1,0 +1,381 @@
+date,time,squad_h,squad_a,stadium,referee,attendance
+2020-09-12,12:30 ,Fulham,Arsenal,Craven Cottage,Chris Kavanagh,0
+2020-09-12,15:00 ,Crystal Palace,Southampton,Selhurst Park,Jonathan Moss,0
+2020-09-12,17:30 ,Liverpool,Leeds United,Anfield,Michael Oliver,0
+2020-09-12,20:00 ,West Ham,Newcastle Utd,London Stadium,Stuart Attwell,0
+2020-09-13,14:00 ,West Brom,Leicester City,The Hawthorns,Anthony Taylor,0
+2020-09-13,16:30 ,Tottenham,Everton,Tottenham Hotspur Stadium,Martin Atkinson,0
+2020-09-14,18:00 ,Sheffield Utd,Wolves,Bramall Lane,Mike Dean,0
+2020-09-14,20:15 ,Brighton,Chelsea,The American Express Community Stadium,Craig Pawson,0
+2020-09-19,12:30 ,Everton,West Brom,Goodison Park,Mike Dean,0
+2020-09-19,15:00 ,Leeds United,Fulham,Elland Road,Anthony Taylor,0
+2020-09-19,17:30 ,Manchester Utd,Crystal Palace,Old Trafford,Martin Atkinson,0
+2020-09-19,20:00 ,Arsenal,West Ham,Emirates Stadium,Michael Oliver,0
+2020-09-20,12:00 ,Southampton,Tottenham,St. Mary's Stadium,David Coote,0
+2020-09-20,14:00 ,Newcastle Utd,Brighton,St. James' Park,Kevin Friend,0
+2020-09-20,16:30 ,Chelsea,Liverpool,Stamford Bridge,Paul Tierney,0
+2020-09-20,19:00 ,Leicester City,Burnley,King Power Stadium,Lee Mason,0
+2020-09-21,18:00 ,Aston Villa,Sheffield Utd,Villa Park,Graham Scott,0
+2020-09-21,20:15 ,Wolves,Manchester City,Molineux Stadium,Andre Marriner,0
+2020-09-26,12:30 ,Brighton,Manchester Utd,The American Express Community Stadium,Chris Kavanagh,0
+2020-09-26,15:00 ,Crystal Palace,Everton,Selhurst Park,Kevin Friend,0
+2020-09-26,17:30 ,West Brom,Chelsea,The Hawthorns,Jonathan Moss,0
+2020-09-26,20:00 ,Burnley,Southampton,Turf Moor,Andre Marriner,0
+2020-09-27,12:00 ,Sheffield Utd,Leeds United,Bramall Lane,Paul Tierney,0
+2020-09-27,14:00 ,Tottenham,Newcastle Utd,Tottenham Hotspur Stadium,Peter Bankes,0
+2020-09-27,16:30 ,Manchester City,Leicester City,Etihad Stadium,Michael Oliver,0
+2020-09-27,19:00 ,West Ham,Wolves,London Stadium,Martin Atkinson,0
+2020-09-28,17:45 ,Fulham,Aston Villa,Craven Cottage,Stuart Attwell,0
+2020-09-28,20:00 ,Liverpool,Arsenal,Anfield,Craig Pawson,0
+2020-10-03,12:30 ,Chelsea,Crystal Palace,Stamford Bridge,Michael Oliver,0
+2020-10-03,15:00 ,Everton,Brighton,Goodison Park,Simon Hooper,0
+2020-10-03,17:30 ,Leeds United,Manchester City,Elland Road,Mike Dean,0
+2020-10-03,20:00 ,Newcastle Utd,Burnley,St. James' Park,David Coote,0
+2020-10-04,12:00 ,Leicester City,West Ham,King Power Stadium,Andy Madley,0
+2020-10-04,12:00 ,Southampton,West Brom,St. Mary's Stadium,Chris Kavanagh,0
+2020-10-04,14:00 ,Arsenal,Sheffield Utd,Emirates Stadium,Lee Mason,0
+2020-10-04,14:00 ,Wolves,Fulham,Molineux Stadium,Darren England,0
+2020-10-04,16:30 ,Manchester Utd,Tottenham,Old Trafford,Anthony Taylor,0
+2020-10-04,19:15 ,Aston Villa,Liverpool,Villa Park,Martin Atkinson,0
+2020-10-17,12:30 ,Everton,Liverpool,Goodison Park,Michael Oliver,0
+2020-10-17,15:00 ,Chelsea,Southampton,Stamford Bridge,Peter Bankes,0
+2020-10-17,17:30 ,Manchester City,Arsenal,Etihad Stadium,Chris Kavanagh,0
+2020-10-17,20:00 ,Newcastle Utd,Manchester Utd,St. James' Park,Craig Pawson,0
+2020-10-18,12:00 ,Sheffield Utd,Fulham,Bramall Lane,Andre Marriner,0
+2020-10-18,14:00 ,Crystal Palace,Brighton,Selhurst Park,Stuart Attwell,0
+2020-10-18,16:30 ,Tottenham,West Ham,Tottenham Hotspur Stadium,Paul Tierney,0
+2020-10-18,19:15 ,Leicester City,Aston Villa,King Power Stadium,Jonathan Moss,0
+2020-10-19,17:30 ,West Brom,Burnley,The Hawthorns,Anthony Taylor,0
+2020-10-19,20:00 ,Leeds United,Wolves,Elland Road,David Coote,0
+2020-10-23,20:00 ,Aston Villa,Leeds United,Villa Park,Paul Tierney,0
+2020-10-24,12:30 ,West Ham,Manchester City,London Stadium,Anthony Taylor,0
+2020-10-24,15:00 ,Fulham,Crystal Palace,Craven Cottage,Graham Scott,0
+2020-10-24,17:30 ,Manchester Utd,Chelsea,Old Trafford,Martin Atkinson,0
+2020-10-24,20:00 ,Liverpool,Sheffield Utd,Anfield,Mike Dean,0
+2020-10-25,14:00 ,Southampton,Everton,St. Mary's Stadium,Kevin Friend,0
+2020-10-25,16:30 ,Wolves,Newcastle Utd,Molineux Stadium,Lee Mason,0
+2020-10-25,19:15 ,Arsenal,Leicester City,Emirates Stadium,Craig Pawson,0
+2020-10-26,17:30 ,Brighton,West Brom,The American Express Community Stadium,Jonathan Moss,0
+2020-10-26,20:00 ,Burnley,Tottenham,Turf Moor,Michael Oliver,0
+2020-10-30,20:00 ,Wolves,Crystal Palace,Molineux Stadium,Martin Atkinson,0
+2020-10-31,12:30 ,Sheffield Utd,Manchester City,Bramall Lane,Michael Oliver,0
+2020-10-31,15:00 ,Burnley,Chelsea,Turf Moor,David Coote,0
+2020-10-31,17:30 ,Liverpool,West Ham,Anfield,Kevin Friend,0
+2020-11-01,12:00 ,Aston Villa,Southampton,Villa Park,Darren England,0
+2020-11-01,14:00 ,Newcastle Utd,Everton,St. James' Park,Stuart Attwell,0
+2020-11-01,16:30 ,Manchester Utd,Arsenal,Old Trafford,Mike Dean,0
+2020-11-01,19:15 ,Tottenham,Brighton,Tottenham Hotspur Stadium,Graham Scott,0
+2020-11-02,17:30 ,Fulham,West Brom,Craven Cottage,Simon Hooper,0
+2020-11-02,20:00 ,Leeds United,Leicester City,Elland Road,Andre Marriner,0
+2020-11-06,17:30 ,Brighton,Burnley,The American Express Community Stadium,Mike Dean,0
+2020-11-06,20:00 ,Southampton,Newcastle Utd,St. Mary's Stadium,Peter Bankes,0
+2020-11-07,12:30 ,Everton,Manchester Utd,Goodison Park,Paul Tierney,0
+2020-11-07,15:00 ,Crystal Palace,Leeds United,Selhurst Park,Chris Kavanagh,0
+2020-11-07,17:30 ,Chelsea,Sheffield Utd,Stamford Bridge,Jonathan Moss,0
+2020-11-07,20:00 ,West Ham,Fulham,London Stadium,Robert Jones,0
+2020-11-08,12:00 ,West Brom,Tottenham,The Hawthorns,Andy Madley,0
+2020-11-08,14:00 ,Leicester City,Wolves,King Power Stadium,Anthony Taylor,0
+2020-11-08,16:30 ,Manchester City,Liverpool,Etihad Stadium,Craig Pawson,0
+2020-11-08,19:15 ,Arsenal,Aston Villa,Emirates Stadium,Martin Atkinson,0
+2020-11-21,12:30 ,Newcastle Utd,Chelsea,St. James' Park,Craig Pawson,0
+2020-11-21,15:00 ,Aston Villa,Brighton,Villa Park,Michael Oliver,0
+2020-11-21,17:30 ,Tottenham,Manchester City,Tottenham Hotspur Stadium,Mike Dean,0
+2020-11-21,20:00 ,Manchester Utd,West Brom,Old Trafford,David Coote,0
+2020-11-22,12:00 ,Fulham,Everton,Craven Cottage,Andy Madley,0
+2020-11-22,14:00 ,Sheffield Utd,West Ham,Bramall Lane,Martin Atkinson,0
+2020-11-22,16:30 ,Leeds United,Arsenal,Elland Road,Anthony Taylor,0
+2020-11-22,19:15 ,Liverpool,Leicester City,Anfield,Chris Kavanagh,0
+2020-11-23,17:30 ,Burnley,Crystal Palace,Turf Moor,Kevin Friend,0
+2020-11-23,20:00 ,Wolves,Southampton,Molineux Stadium,Andre Marriner,0
+2020-11-27,20:00 ,Crystal Palace,Newcastle Utd,Selhurst Park,Graham Scott,0
+2020-11-28,12:30 ,Brighton,Liverpool,The American Express Community Stadium,Stuart Attwell,0
+2020-11-28,15:00 ,Manchester City,Burnley,Etihad Stadium,Lee Mason,0
+2020-11-28,17:30 ,Everton,Leeds United,Goodison Park,Chris Kavanagh,0
+2020-11-28,20:00 ,West Brom,Sheffield Utd,The Hawthorns,Mike Dean,0
+2020-11-29,14:00 ,Southampton,Manchester Utd,St. Mary's Stadium,Jonathan Moss,0
+2020-11-29,16:30 ,Chelsea,Tottenham,Stamford Bridge,Paul Tierney,0
+2020-11-29,19:15 ,Arsenal,Wolves,Emirates Stadium,Michael Oliver,0
+2020-11-30,17:30 ,Leicester City,Fulham,King Power Stadium,Simon Hooper,0
+2020-11-30,20:00 ,West Ham,Aston Villa,London Stadium,Peter Bankes,0
+2020-12-05,12:30 ,Burnley,Everton,Turf Moor,Anthony Taylor,0
+2020-12-05,15:00 ,Manchester City,Fulham,Etihad Stadium,Jonathan Moss,0
+2020-12-05,17:30 ,West Ham,Manchester Utd,London Stadium,Andre Marriner,2000
+2020-12-05,20:00 ,Chelsea,Leeds United,Stamford Bridge,Kevin Friend,2000
+2020-12-06,12:00 ,West Brom,Crystal Palace,The Hawthorns,Paul Tierney,0
+2020-12-06,14:15 ,Sheffield Utd,Leicester City,Bramall Lane,Stuart Attwell,0
+2020-12-06,16:30 ,Tottenham,Arsenal,Tottenham Hotspur Stadium,Martin Atkinson,2000
+2020-12-06,19:15 ,Liverpool,Wolves,Anfield,Craig Pawson,2000
+2020-12-07,20:00 ,Brighton,Southampton,The American Express Community Stadium,David Coote,2000
+2020-12-11,20:00 ,Leeds United,West Ham,Elland Road,Michael Oliver,0
+2020-12-12,12:30 ,Wolves,Aston Villa,Molineux Stadium,Mike Dean,0
+2020-12-12,15:00 ,Newcastle Utd,West Brom,St. James' Park,Darren England,0
+2020-12-12,17:30 ,Manchester Utd,Manchester City,Old Trafford,Chris Kavanagh,0
+2020-12-12,20:00 ,Everton,Chelsea,Goodison Park,Jonathan Moss,2000
+2020-12-13,12:00 ,Southampton,Sheffield Utd,St. Mary's Stadium,Andy Madley,2000
+2020-12-13,14:15 ,Crystal Palace,Tottenham,Selhurst Park,Kevin Friend,2000
+2020-12-13,16:30 ,Fulham,Liverpool,Craven Cottage,Andre Marriner,2000
+2020-12-13,19:15 ,Arsenal,Burnley,Emirates Stadium,Graham Scott,2000
+2020-12-13,19:15 ,Leicester City,Brighton,King Power Stadium,Martin Atkinson,0
+2020-12-15,18:00 ,Wolves,Chelsea,Molineux Stadium,Stuart Attwell,0
+2020-12-15,20:00 ,Manchester City,West Brom,Etihad Stadium,Peter Bankes,0
+2020-12-16,18:00 ,Arsenal,Southampton,Emirates Stadium,Paul Tierney,0
+2020-12-16,18:00 ,Leicester City,Everton,King Power Stadium,Lee Mason,0
+2020-12-16,18:00 ,Leeds United,Newcastle Utd,Elland Road,Simon Hooper,0
+2020-12-16,20:00 ,West Ham,Crystal Palace,London Stadium,David Coote,0
+2020-12-16,20:00 ,Fulham,Brighton,Craven Cottage,Robert Jones,0
+2020-12-16,20:00 ,Liverpool,Tottenham,Anfield,Anthony Taylor,2000
+2020-12-17,18:00 ,Aston Villa,Burnley,Villa Park,Craig Pawson,0
+2020-12-17,20:00 ,Sheffield Utd,Manchester Utd,Bramall Lane,Michael Oliver,0
+2020-12-19,12:30 ,Crystal Palace,Liverpool,Selhurst Park,Jonathan Moss,0
+2020-12-19,15:00 ,Southampton,Manchester City,St. Mary's Stadium,Mike Dean,0
+2020-12-19,17:30 ,Everton,Arsenal,Goodison Park,Andre Marriner,0
+2020-12-19,20:00 ,Newcastle Utd,Fulham,St. James' Park,Graham Scott,0
+2020-12-20,12:00 ,Brighton,Sheffield Utd,The American Express Community Stadium,Peter Bankes,0
+2020-12-20,14:15 ,Tottenham,Leicester City,Tottenham Hotspur Stadium,Craig Pawson,0
+2020-12-20,16:30 ,Manchester Utd,Leeds United,Old Trafford,Anthony Taylor,0
+2020-12-20,19:15 ,West Brom,Aston Villa,The Hawthorns,Martin Atkinson,0
+2020-12-21,17:30 ,Burnley,Wolves,Turf Moor,Lee Mason,0
+2020-12-21,20:00 ,Chelsea,West Ham,Stamford Bridge,Chris Kavanagh,0
+2020-12-26,12:30 ,Leicester City,Manchester Utd,King Power Stadium,Mike Dean,0
+2020-12-26,15:00 ,Fulham,Southampton,Craven Cottage,Darren England,0
+2020-12-26,15:00 ,Aston Villa,Crystal Palace,Villa Park,Anthony Taylor,0
+2020-12-26,17:30 ,Arsenal,Chelsea,Emirates Stadium,Michael Oliver,0
+2020-12-26,20:00 ,Sheffield Utd,Everton,Bramall Lane,David Coote,0
+2020-12-26,20:00 ,Manchester City,Newcastle Utd,Etihad Stadium,Andre Marriner,0
+2020-12-27,12:00 ,Leeds United,Burnley,Elland Road,Robert Jones,0
+2020-12-27,14:15 ,West Ham,Brighton,London Stadium,Simon Hooper,0
+2020-12-27,16:30 ,Liverpool,West Brom,Anfield,Kevin Friend,2000
+2020-12-27,19:15 ,Wolves,Tottenham,Molineux Stadium,Paul Tierney,0
+2020-12-28,15:00 ,Crystal Palace,Leicester City,Selhurst Park,Graham Scott,0
+2020-12-28,17:30 ,Chelsea,Aston Villa,Stamford Bridge,Stuart Attwell,0
+2020-12-29,18:00 ,Southampton,West Ham,St. Mary's Stadium,Andy Madley,0
+2020-12-29,18:00 ,West Brom,Leeds United,The Hawthorns,Lee Mason,0
+2020-12-29,18:00 ,Brighton,Arsenal,The American Express Community Stadium,Martin Atkinson,0
+2020-12-29,18:00 ,Burnley,Sheffield Utd,Turf Moor,Chris Kavanagh,0
+2020-12-29,20:00 ,Manchester Utd,Wolves,Old Trafford,Jonathan Moss,0
+2020-12-30,20:00 ,Newcastle Utd,Liverpool,St. James' Park,Paul Tierney,0
+2021-01-01,17:30 ,Everton,West Ham,Goodison Park,Kevin Friend,0
+2021-01-01,20:00 ,Manchester Utd,Aston Villa,Old Trafford,Michael Oliver,0
+2021-01-02,12:30 ,Tottenham,Leeds United,Tottenham Hotspur Stadium,David Coote,0
+2021-01-02,15:00 ,Crystal Palace,Sheffield Utd,Selhurst Park,Stuart Attwell,0
+2021-01-02,17:30 ,Brighton,Wolves,The American Express Community Stadium,Andy Madley,0
+2021-01-02,20:00 ,West Brom,Arsenal,The Hawthorns,Martin Atkinson,0
+2021-01-03,14:15 ,Newcastle Utd,Leicester City,St. James' Park,Robert Jones,0
+2021-01-03,16:30 ,Chelsea,Manchester City,Stamford Bridge,Anthony Taylor,0
+2021-01-04,20:00 ,Southampton,Liverpool,St. Mary's Stadium,Andre Marriner,0
+2021-01-12,18:00 ,Sheffield Utd,Newcastle Utd,Bramall Lane,Andy Madley,0
+2021-01-12,20:15 ,Burnley,Manchester Utd,Turf Moor,Kevin Friend,0
+2021-01-12,20:15 ,Wolves,Everton,Molineux Stadium,Martin Atkinson,0
+2021-01-13,18:00 ,Manchester City,Brighton,Etihad Stadium,Darren England,0
+2021-01-13,20:15 ,Tottenham,Fulham,Tottenham Hotspur Stadium,Paul Tierney,0
+2021-01-14,20:00 ,Arsenal,Crystal Palace,Emirates Stadium,Andre Marriner,0
+2021-01-16,12:30 ,Wolves,West Brom,Molineux Stadium,Michael Oliver,0
+2021-01-16,15:00 ,Leeds United,Brighton,Elland Road,Kevin Friend,0
+2021-01-16,15:00 ,West Ham,Burnley,London Stadium,Chris Kavanagh,0
+2021-01-16,17:30 ,Fulham,Chelsea,Craven Cottage,Peter Bankes,0
+2021-01-16,20:00 ,Leicester City,Southampton,King Power Stadium,Stuart Attwell,0
+2021-01-17,14:00 ,Sheffield Utd,Tottenham,Bramall Lane,Andre Marriner,0
+2021-01-17,16:30 ,Liverpool,Manchester Utd,Anfield,Paul Tierney,0
+2021-01-17,19:15 ,Manchester City,Crystal Palace,Etihad Stadium,Lee Mason,0
+2021-01-18,20:00 ,Arsenal,Newcastle Utd,Emirates Stadium,David Coote,0
+2021-01-19,18:00 ,West Ham,West Brom,London Stadium,Graham Scott,0
+2021-01-19,20:15 ,Leicester City,Chelsea,King Power Stadium,Craig Pawson,0
+2021-01-20,18:00 ,Manchester City,Aston Villa,Etihad Stadium,Jonathan Moss,0
+2021-01-20,20:15 ,Fulham,Manchester Utd,Craven Cottage,Martin Atkinson,0
+2021-01-21,20:00 ,Liverpool,Burnley,Anfield,Mike Dean,0
+2021-01-23,20:00 ,Aston Villa,Newcastle Utd,Villa Park,Simon Hooper,0
+2021-01-26,18:00 ,Newcastle Utd,Leeds United,St. James' Park,Anthony Taylor,0
+2021-01-26,18:00 ,Crystal Palace,West Ham,Selhurst Park,Stuart Attwell,0
+2021-01-26,20:15 ,West Brom,Manchester City,The Hawthorns,Chris Kavanagh,0
+2021-01-26,20:15 ,Southampton,Arsenal,St. Mary's Stadium,Kevin Friend,0
+2021-01-27,18:00 ,Burnley,Aston Villa,Turf Moor,Paul Tierney,0
+2021-01-27,18:00 ,Chelsea,Wolves,Stamford Bridge,Andy Madley,0
+2021-01-27,19:30 ,Brighton,Fulham,The American Express Community Stadium,Craig Pawson,0
+2021-01-27,20:15 ,Manchester Utd,Sheffield Utd,Old Trafford,Peter Bankes,0
+2021-01-27,20:15 ,Everton,Leicester City,Goodison Park,Mike Dean,0
+2021-01-28,20:00 ,Tottenham,Liverpool,Tottenham Hotspur Stadium,Martin Atkinson,0
+2021-01-30,12:30 ,Everton,Newcastle Utd,Goodison Park,Stuart Attwell,0
+2021-01-30,15:00 ,Manchester City,Sheffield Utd,Etihad Stadium,David Coote,0
+2021-01-30,15:00 ,West Brom,Fulham,The Hawthorns,Anthony Taylor,0
+2021-01-30,15:00 ,Crystal Palace,Wolves,Selhurst Park,Simon Hooper,0
+2021-01-30,17:30 ,Arsenal,Manchester Utd,Emirates Stadium,Michael Oliver,0
+2021-01-30,20:00 ,Southampton,Aston Villa,St. Mary's Stadium,Lee Mason,0
+2021-01-31,12:00 ,Chelsea,Burnley,Stamford Bridge,Graham Scott,0
+2021-01-31,14:00 ,Leicester City,Leeds United,King Power Stadium,Chris Kavanagh,0
+2021-01-31,16:30 ,West Ham,Liverpool,London Stadium,Jonathan Moss,0
+2021-01-31,19:15 ,Brighton,Tottenham,The American Express Community Stadium,Peter Bankes,0
+2021-02-02,18:00 ,Sheffield Utd,West Brom,Bramall Lane,Paul Tierney,0
+2021-02-02,18:00 ,Wolves,Arsenal,Molineux Stadium,Craig Pawson,0
+2021-02-02,20:15 ,Newcastle Utd,Crystal Palace,St. James' Park,Darren England,0
+2021-02-02,20:15 ,Manchester Utd,Southampton,Old Trafford,Mike Dean,0
+2021-02-03,18:00 ,Burnley,Manchester City,Turf Moor,Martin Atkinson,0
+2021-02-03,18:00 ,Fulham,Leicester City,Craven Cottage,Robert Jones,0
+2021-02-03,19:30 ,Leeds United,Everton,Elland Road,Michael Oliver,0
+2021-02-03,20:15 ,Aston Villa,West Ham,Villa Park,Andy Madley,0
+2021-02-03,20:15 ,Liverpool,Brighton,Anfield,Kevin Friend,0
+2021-02-04,20:00 ,Tottenham,Chelsea,Tottenham Hotspur Stadium,Andre Marriner,0
+2021-02-06,12:30 ,Aston Villa,Arsenal,Villa Park,Chris Kavanagh,0
+2021-02-06,15:00 ,Burnley,Brighton,Turf Moor,Anthony Taylor,0
+2021-02-06,15:00 ,Newcastle Utd,Southampton,St. James' Park,Craig Pawson,0
+2021-02-06,17:30 ,Fulham,West Ham,Craven Cottage,Mike Dean,0
+2021-02-06,20:00 ,Manchester Utd,Everton,Old Trafford,Jonathan Moss,0
+2021-02-07,12:00 ,Tottenham,West Brom,Tottenham Hotspur Stadium,Stuart Attwell,0
+2021-02-07,14:00 ,Wolves,Leicester City,Molineux Stadium,Martin Atkinson,0
+2021-02-07,16:30 ,Liverpool,Manchester City,Anfield,Michael Oliver,0
+2021-02-07,19:15 ,Sheffield Utd,Chelsea,Bramall Lane,Kevin Friend,0
+2021-02-08,20:00 ,Leeds United,Crystal Palace,Elland Road,Andre Marriner,0
+2021-02-13,12:30 ,Leicester City,Liverpool,King Power Stadium,Anthony Taylor,0
+2021-02-13,15:00 ,Crystal Palace,Burnley,Selhurst Park,Michael Oliver,0
+2021-02-13,17:30 ,Manchester City,Tottenham,Etihad Stadium,Paul Tierney,0
+2021-02-13,20:00 ,Brighton,Aston Villa,The American Express Community Stadium,Darren England,0
+2021-02-14,12:00 ,Southampton,Wolves,St. Mary's Stadium,Graham Scott,0
+2021-02-14,14:00 ,West Brom,Manchester Utd,The Hawthorns,Craig Pawson,0
+2021-02-14,16:30 ,Arsenal,Leeds United,Emirates Stadium,Stuart Attwell,0
+2021-02-14,19:00 ,Everton,Fulham,Goodison Park,Andy Madley,0
+2021-02-15,18:00 ,West Ham,Sheffield Utd,London Stadium,Simon Hooper,0
+2021-02-15,20:00 ,Chelsea,Newcastle Utd,Stamford Bridge,Peter Bankes,0
+2021-02-17,18:00 ,Burnley,Fulham,Turf Moor,Jonathan Moss,0
+2021-02-17,20:15 ,Everton,Manchester City,Goodison Park,Andre Marriner,0
+2021-02-19,20:00 ,Wolves,Leeds United,Molineux Stadium,David Coote,0
+2021-02-20,12:30 ,Southampton,Chelsea,St. Mary's Stadium,Anthony Taylor,0
+2021-02-20,15:00 ,Burnley,West Brom,Turf Moor,Mike Dean,0
+2021-02-20,17:30 ,Liverpool,Everton,Anfield,Chris Kavanagh,0
+2021-02-20,20:00 ,Fulham,Sheffield Utd,Craven Cottage,Martin Atkinson,0
+2021-02-21,12:00 ,West Ham,Tottenham,London Stadium,Craig Pawson,0
+2021-02-21,14:05 ,Aston Villa,Leicester City,Villa Park,Michael Oliver,0
+2021-02-21,16:30 ,Arsenal,Manchester City,Emirates Stadium,Jonathan Moss,0
+2021-02-21,19:00 ,Manchester Utd,Newcastle Utd,Old Trafford,Paul Tierney,0
+2021-02-22,20:00 ,Brighton,Crystal Palace,The American Express Community Stadium,Kevin Friend,0
+2021-02-23,18:00 ,Leeds United,Southampton,Elland Road,Andre Marriner,0
+2021-02-27,12:30 ,Manchester City,West Ham,Etihad Stadium,Michael Oliver,0
+2021-02-27,15:00 ,West Brom,Brighton,The Hawthorns,Lee Mason,0
+2021-02-27,17:30 ,Leeds United,Aston Villa,Elland Road,Peter Bankes,0
+2021-02-27,20:00 ,Newcastle Utd,Wolves,St. James' Park,Mike Dean,0
+2021-02-28,12:00 ,Crystal Palace,Fulham,Selhurst Park,Anthony Taylor,0
+2021-02-28,12:00 ,Leicester City,Arsenal,King Power Stadium,Paul Tierney,0
+2021-02-28,14:00 ,Tottenham,Burnley,Tottenham Hotspur Stadium,Kevin Friend,0
+2021-02-28,16:30 ,Chelsea,Manchester Utd,Stamford Bridge,Stuart Attwell,0
+2021-02-28,19:15 ,Sheffield Utd,Liverpool,Bramall Lane,Jonathan Moss,0
+2021-03-01,20:00 ,Everton,Southampton,Goodison Park,Martin Atkinson,0
+2021-03-02,20:00 ,Manchester City,Wolves,Etihad Stadium,Chris Kavanagh,0
+2021-03-03,18:00 ,Sheffield Utd,Aston Villa,Bramall Lane,Robert Jones,0
+2021-03-03,18:00 ,Burnley,Leicester City,Turf Moor,Andy Madley,0
+2021-03-03,20:15 ,Crystal Palace,Manchester Utd,Selhurst Park,Andre Marriner,0
+2021-03-04,18:00 ,West Brom,Everton,The Hawthorns,Darren England,0
+2021-03-04,18:00 ,Fulham,Tottenham,Craven Cottage,David Coote,0
+2021-03-04,20:15 ,Liverpool,Chelsea,Anfield,Martin Atkinson,0
+2021-03-06,12:30 ,Burnley,Arsenal,Turf Moor,Andre Marriner,0
+2021-03-06,15:00 ,Sheffield Utd,Southampton,Bramall Lane,Paul Tierney,0
+2021-03-06,17:30 ,Aston Villa,Wolves,Villa Park,Andy Madley,0
+2021-03-06,20:00 ,Brighton,Leicester City,The American Express Community Stadium,Michael Oliver,0
+2021-03-07,12:00 ,West Brom,Newcastle Utd,The Hawthorns,Martin Atkinson,0
+2021-03-07,14:00 ,Liverpool,Fulham,Anfield,Kevin Friend,0
+2021-03-07,16:30 ,Manchester City,Manchester Utd,Etihad Stadium,Anthony Taylor,0
+2021-03-07,19:15 ,Tottenham,Crystal Palace,Tottenham Hotspur Stadium,Stuart Attwell,0
+2021-03-08,18:00 ,Chelsea,Everton,Stamford Bridge,David Coote,0
+2021-03-08,20:00 ,West Ham,Leeds United,London Stadium,Mike Dean,0
+2021-03-10,18:00 ,Manchester City,Southampton,Etihad Stadium,Jonathan Moss,0
+2021-03-12,20:00 ,Newcastle Utd,Aston Villa,St. James' Park,Paul Tierney,0
+2021-03-13,12:30 ,Leeds United,Chelsea,Elland Road,Kevin Friend,0
+2021-03-13,15:00 ,Crystal Palace,West Brom,Selhurst Park,Simon Hooper,0
+2021-03-13,17:30 ,Everton,Burnley,Goodison Park,Jonathan Moss,0
+2021-03-13,20:00 ,Fulham,Manchester City,Craven Cottage,Andre Marriner,0
+2021-03-14,12:00 ,Southampton,Brighton,St. Mary's Stadium,Stuart Attwell,0
+2021-03-14,14:00 ,Leicester City,Sheffield Utd,King Power Stadium,Peter Bankes,0
+2021-03-14,16:30 ,Arsenal,Tottenham,Emirates Stadium,Michael Oliver,0
+2021-03-14,19:15 ,Manchester Utd,West Ham,Old Trafford,Martin Atkinson,0
+2021-03-15,20:00 ,Wolves,Liverpool,Molineux Stadium,Craig Pawson,0
+2021-03-19,20:00 ,Fulham,Leeds United,Craven Cottage,David Coote,0
+2021-03-20,20:00 ,Brighton,Newcastle Utd,The American Express Community Stadium,Anthony Taylor,0
+2021-03-21,15:00 ,West Ham,Arsenal,London Stadium,Jonathan Moss,0
+2021-03-21,19:30 ,Aston Villa,Tottenham,Villa Park,Mike Dean,0
+2021-04-03,12:30 ,Chelsea,West Brom,Stamford Bridge,David Coote,0
+2021-04-03,15:00 ,Leeds United,Sheffield Utd,Elland Road,Graham Scott,0
+2021-04-03,17:30 ,Leicester City,Manchester City,King Power Stadium,Anthony Taylor,0
+2021-04-03,20:00 ,Arsenal,Liverpool,Emirates Stadium,Stuart Attwell,0
+2021-04-04,12:00 ,Southampton,Burnley,St. Mary's Stadium,Andre Marriner,0
+2021-04-04,14:05 ,Newcastle Utd,Tottenham,St. James' Park,Craig Pawson,0
+2021-04-04,16:30 ,Aston Villa,Fulham,Villa Park,Andy Madley,0
+2021-04-04,19:30 ,Manchester Utd,Brighton,Old Trafford,Mike Dean,0
+2021-04-05,18:00 ,Everton,Crystal Palace,Goodison Park,Kevin Friend,0
+2021-04-05,20:15 ,Wolves,West Ham,Molineux Stadium,Michael Oliver,0
+2021-04-09,20:00 ,Fulham,Wolves,Craven Cottage,Jonathan Moss,0
+2021-04-10,12:30 ,Manchester City,Leeds United,Etihad Stadium,Andre Marriner,0
+2021-04-10,15:00 ,Liverpool,Aston Villa,Anfield,Paul Tierney,0
+2021-04-10,17:30 ,Crystal Palace,Chelsea,Selhurst Park,Michael Oliver,0
+2021-04-11,12:00 ,Burnley,Newcastle Utd,Turf Moor,Anthony Taylor,0
+2021-04-11,14:05 ,West Ham,Leicester City,London Stadium,Mike Dean,0
+2021-04-11,16:30 ,Tottenham,Manchester Utd,Tottenham Hotspur Stadium,Chris Kavanagh,0
+2021-04-11,19:00 ,Sheffield Utd,Arsenal,Bramall Lane,Peter Bankes,0
+2021-04-12,18:00 ,West Brom,Southampton,The Hawthorns,Simon Hooper,0
+2021-04-12,20:15 ,Brighton,Everton,The American Express Community Stadium,Darren England,0
+2021-04-16,20:00 ,Everton,Tottenham,Goodison Park,Michael Oliver,0
+2021-04-17,12:30 ,Newcastle Utd,West Ham,St. James' Park,Kevin Friend,0
+2021-04-17,20:15 ,Wolves,Sheffield Utd,Molineux Stadium,Robert Jones,0
+2021-04-18,13:30 ,Arsenal,Fulham,Emirates Stadium,Craig Pawson,0
+2021-04-18,16:00 ,Manchester Utd,Burnley,Old Trafford,Jonathan Moss,0
+2021-04-19,20:00 ,Leeds United,Liverpool,Elland Road,Anthony Taylor,0
+2021-04-20,20:15 ,Chelsea,Brighton,Stamford Bridge,Stuart Attwell,0
+2021-04-21,18:00 ,Tottenham,Southampton,Tottenham Hotspur Stadium,David Coote,0
+2021-04-21,20:15 ,Aston Villa,Manchester City,Villa Park,Peter Bankes,0
+2021-04-22,20:00 ,Leicester City,West Brom,King Power Stadium,Andy Madley,0
+2021-04-23,20:00 ,Arsenal,Everton,Emirates Stadium,Jonathan Moss,0
+2021-04-24,12:30 ,Liverpool,Newcastle Utd,Anfield,Andre Marriner,0
+2021-04-24,17:30 ,West Ham,Chelsea,London Stadium,Chris Kavanagh,0
+2021-04-24,20:00 ,Sheffield Utd,Brighton,Bramall Lane,Kevin Friend,0
+2021-04-25,12:00 ,Wolves,Burnley,Molineux Stadium,Darren England,0
+2021-04-25,14:00 ,Leeds United,Manchester Utd,Elland Road,Craig Pawson,0
+2021-04-25,19:00 ,Aston Villa,West Brom,Villa Park,Stuart Attwell,0
+2021-04-26,20:00 ,Leicester City,Crystal Palace,King Power Stadium,Graham Scott,0
+2021-04-30,20:00 ,Southampton,Leicester City,St. Mary's Stadium,Robert Jones,0
+2021-05-01,12:30 ,Crystal Palace,Manchester City,Selhurst Park,David Coote,0
+2021-05-01,15:00 ,Brighton,Leeds United,The American Express Community Stadium,Chris Kavanagh,0
+2021-05-01,17:30 ,Chelsea,Fulham,Stamford Bridge,Kevin Friend,0
+2021-05-01,20:00 ,Everton,Aston Villa,Goodison Park,Simon Hooper,0
+2021-05-02,14:00 ,Newcastle Utd,Arsenal,St. James' Park,Mike Dean,0
+2021-05-02,19:15 ,Tottenham,Sheffield Utd,Tottenham Hotspur Stadium,Andre Marriner,0
+2021-05-03,18:00 ,West Brom,Wolves,The Hawthorns,Paul Tierney,0
+2021-05-03,20:15 ,Burnley,West Ham,Turf Moor,Anthony Taylor,0
+2021-05-07,20:00 ,Leicester City,Newcastle Utd,King Power Stadium,Darren England,0
+2021-05-08,12:30 ,Leeds United,Tottenham,Elland Road,Michael Oliver,0
+2021-05-08,15:00 ,Sheffield Utd,Crystal Palace,Bramall Lane,Simon Hooper,0
+2021-05-08,17:30 ,Manchester City,Chelsea,Etihad Stadium,Anthony Taylor,0
+2021-05-08,20:15 ,Liverpool,Southampton,Anfield,Kevin Friend,0
+2021-05-09,12:00 ,Wolves,Brighton,Molineux Stadium,Jonathan Moss,0
+2021-05-09,14:05 ,Aston Villa,Manchester Utd,Villa Park,Chris Kavanagh,0
+2021-05-09,16:30 ,West Ham,Everton,London Stadium,Stuart Attwell,0
+2021-05-09,19:00 ,Arsenal,West Brom,Emirates Stadium,Peter Bankes,0
+2021-05-10,20:00 ,Fulham,Burnley,Craven Cottage,David Coote,0
+2021-05-11,18:00 ,Manchester Utd,Leicester City,Old Trafford,Craig Pawson,0
+2021-05-11,20:15 ,Southampton,Crystal Palace,St. Mary's Stadium,Andy Madley,0
+2021-05-12,20:15 ,Chelsea,Arsenal,Stamford Bridge,Andre Marriner,0
+2021-05-13,18:00 ,Aston Villa,Everton,Villa Park,Martin Atkinson,0
+2021-05-13,20:15 ,Manchester Utd,Liverpool,Old Trafford,Anthony Taylor,0
+2021-05-14,20:00 ,Newcastle Utd,Manchester City,St. James' Park,Kevin Friend,0
+2021-05-15,12:30 ,Burnley,Leeds United,Turf Moor,Graham Scott,0
+2021-05-15,15:00 ,Southampton,Fulham,St. Mary's Stadium,Craig Pawson,0
+2021-05-15,20:00 ,Brighton,West Ham,The American Express Community Stadium,Andre Marriner,0
+2021-05-16,12:00 ,Crystal Palace,Aston Villa,Selhurst Park,David Coote,0
+2021-05-16,14:05 ,Tottenham,Wolves,Tottenham Hotspur Stadium,Martin Atkinson,0
+2021-05-16,16:30 ,West Brom,Liverpool,The Hawthorns,Mike Dean,0
+2021-05-16,19:00 ,Everton,Sheffield Utd,Goodison Park,Jonathan Moss,0
+2021-05-18,18:00 ,Manchester Utd,Fulham,Old Trafford,Lee Mason,10000
+2021-05-18,18:00 ,Southampton,Leeds United,St. Mary's Stadium,Peter Bankes,8000
+2021-05-18,19:00 ,Brighton,Manchester City,The American Express Community Stadium,Stuart Attwell,7945
+2021-05-18,20:15 ,Chelsea,Leicester City,Stamford Bridge,Mike Dean,8000
+2021-05-19,18:00 ,Tottenham,Aston Villa,Tottenham Hotspur Stadium,Craig Pawson,10000
+2021-05-19,18:00 ,Newcastle Utd,Sheffield Utd,St. James' Park,Robert Jones,10000
+2021-05-19,18:00 ,Everton,Wolves,Goodison Park,Andy Madley,4988
+2021-05-19,19:00 ,Crystal Palace,Arsenal,Selhurst Park,Anthony Taylor,6500
+2021-05-19,20:15 ,West Brom,West Ham,The Hawthorns,Michael Oliver,5371
+2021-05-19,20:15 ,Burnley,Liverpool,Turf Moor,Chris Kavanagh,3387
+2021-05-23,16:00 ,Wolves,Manchester Utd,Molineux Stadium,Mike Dean,4500
+2021-05-23,16:00 ,Leeds United,West Brom,Elland Road,David Coote,8000
+2021-05-23,16:00 ,Leicester City,Tottenham,King Power Stadium,Anthony Taylor,8000
+2021-05-23,16:00 ,Manchester City,Everton,Etihad Stadium,Michael Oliver,10000
+2021-05-23,16:00 ,Aston Villa,Chelsea,Villa Park,Stuart Attwell,10000
+2021-05-23,16:00 ,Arsenal,Brighton,Emirates Stadium,Jonathan Moss,10000
+2021-05-23,16:00 ,West Ham,Southampton,London Stadium,Martin Atkinson,10000
+2021-05-23,16:00 ,Fulham,Newcastle Utd,Craven Cottage,Chris Kavanagh,2000
+2021-05-23,16:00 ,Sheffield Utd,Burnley,Bramall Lane,Kevin Friend,5000
+2021-05-23,16:00 ,Liverpool,Crystal Palace,Anfield,Craig Pawson,9901

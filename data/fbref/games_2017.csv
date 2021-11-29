@@ -1,0 +1,381 @@
+date,time,squad_h,squad_a,stadium,referee,attendance
+2017-08-11,19:45 ,Arsenal,Leicester City,Emirates Stadium,Mike Dean,59387
+2017-08-12,12:30 ,Watford,Liverpool,Vicarage Road Stadium,Anthony Taylor,20407
+2017-08-12,15:00 ,West Brom,Bournemouth,The Hawthorns,Robert Madley,25011
+2017-08-12,15:00 ,Everton,Stoke City,Goodison Park,Niel Swarbrick,39045
+2017-08-12,15:00 ,Southampton,Swansea City,St. Mary's Stadium,Mike Jones,31447
+2017-08-12,15:00 ,Chelsea,Burnley,Stamford Bridge,Craig Pawson,41616
+2017-08-12,15:00 ,Crystal Palace,Huddersfield,Selhurst Park,Jonathan Moss,25448
+2017-08-12,17:30 ,Brighton,Manchester City,The American Express Community Stadium,Michael Oliver,30415
+2017-08-13,13:30 ,Newcastle Utd,Tottenham,St. James' Park,Andre Marriner,52077
+2017-08-13,16:00 ,Manchester Utd,West Ham,Old Trafford,Martin Atkinson,74928
+2017-08-19,12:30 ,Swansea City,Manchester Utd,Liberty Stadium,Jonathan Moss,20862
+2017-08-19,15:00 ,Southampton,West Ham,St. Mary's Stadium,Lee Mason,31424
+2017-08-19,15:00 ,Leicester City,Brighton,King Power Stadium,Lee Probert,31902
+2017-08-19,15:00 ,Bournemouth,Watford,Vitality Stadium,Roger East,10501
+2017-08-19,15:00 ,Burnley,West Brom,Turf Moor,Martin Atkinson,19619
+2017-08-19,15:00 ,Liverpool,Crystal Palace,Anfield,Kevin Friend,53138
+2017-08-19,17:30 ,Stoke City,Arsenal,Bet365 Stadium,Andre Marriner,29459
+2017-08-20,13:30 ,Huddersfield,Newcastle Utd,The John Smith's Stadium,Craig Pawson,24128
+2017-08-20,16:00 ,Tottenham,Chelsea,Wembley Stadium,Anthony Taylor,73587
+2017-08-21,20:00 ,Manchester City,Everton,Etihad Stadium,Robert Madley,49108
+2017-08-26,12:30 ,Bournemouth,Manchester City,Vitality Stadium,Mike Dean,10419
+2017-08-26,15:00 ,Crystal Palace,Swansea City,Selhurst Park,Andre Marriner,23477
+2017-08-26,15:00 ,Huddersfield,Southampton,The John Smith's Stadium,Stuart Attwell,23548
+2017-08-26,15:00 ,Watford,Brighton,Vicarage Road Stadium,Graham Scott,20181
+2017-08-26,15:00 ,Newcastle Utd,West Ham,St. James' Park,Niel Swarbrick,52093
+2017-08-26,17:30 ,Manchester Utd,Leicester City,Old Trafford,Michael Oliver,75021
+2017-08-27,13:30 ,West Brom,Stoke City,The Hawthorns,Anthony Taylor,22704
+2017-08-27,13:30 ,Chelsea,Everton,Stamford Bridge,Jonathan Moss,41382
+2017-08-27,16:00 ,Tottenham,Burnley,Wembley Stadium,Lee Mason,67862
+2017-08-27,16:00 ,Liverpool,Arsenal,Anfield,Craig Pawson,53206
+2017-09-09,12:30 ,Manchester City,Liverpool,Etihad Stadium,Jonathan Moss,54172
+2017-09-09,15:00 ,Southampton,Watford,St. Mary's Stadium,Lee Probert,31435
+2017-09-09,15:00 ,Brighton,West Brom,The American Express Community Stadium,Chris Kavanagh,30381
+2017-09-09,15:00 ,Leicester City,Chelsea,King Power Stadium,Lee Mason,30923
+2017-09-09,15:00 ,Everton,Tottenham,Goodison Park,Graham Scott,38835
+2017-09-09,15:00 ,Arsenal,Bournemouth,Emirates Stadium,Anthony Taylor,59262
+2017-09-09,17:30 ,Stoke City,Manchester Utd,Bet365 Stadium,Niel Swarbrick,29320
+2017-09-10,13:30 ,Burnley,Crystal Palace,Turf Moor,Michael Oliver,18862
+2017-09-10,16:00 ,Swansea City,Newcastle Utd,Liberty Stadium,Mike Jones,20872
+2017-09-11,20:00 ,West Ham,Huddersfield,London Stadium,Kevin Friend,56977
+2017-09-15,20:00 ,Bournemouth,Brighton,Vitality Stadium,Craig Pawson,10369
+2017-09-16,12:30 ,Crystal Palace,Southampton,Selhurst Park,Robert Madley,24199
+2017-09-16,15:00 ,Liverpool,Burnley,Anfield,Roger East,53231
+2017-09-16,15:00 ,Watford,Manchester City,Vicarage Road Stadium,Anthony Taylor,20305
+2017-09-16,15:00 ,West Brom,West Ham,The Hawthorns,Paul Tierney,24942
+2017-09-16,15:00 ,Huddersfield,Leicester City,The John Smith's Stadium,Jonathan Moss,24129
+2017-09-16,15:00 ,Newcastle Utd,Stoke City,St. James' Park,Stuart Attwell,51795
+2017-09-16,17:30 ,Tottenham,Swansea City,Wembley Stadium,Mike Dean,65366
+2017-09-17,13:30 ,Chelsea,Arsenal,Stamford Bridge,Michael Oliver,41478
+2017-09-17,16:00 ,Manchester Utd,Everton,Old Trafford,Andre Marriner,75042
+2017-09-23,12:30 ,West Ham,Tottenham,London Stadium,Michael Oliver,56988
+2017-09-23,15:00 ,Southampton,Manchester Utd,St. Mary's Stadium,Craig Pawson,31930
+2017-09-23,15:00 ,Burnley,Huddersfield,Turf Moor,Chris Kavanagh,20759
+2017-09-23,15:00 ,Everton,Bournemouth,Goodison Park,Martin Atkinson,38133
+2017-09-23,15:00 ,Swansea City,Watford,Liberty Stadium,Lee Mason,20372
+2017-09-23,15:00 ,Stoke City,Chelsea,Bet365 Stadium,Mike Dean,29661
+2017-09-23,15:00 ,Manchester City,Crystal Palace,Etihad Stadium,Niel Swarbrick,53526
+2017-09-23,17:30 ,Leicester City,Liverpool,King Power Stadium,Anthony Taylor,32004
+2017-09-24,16:00 ,Brighton,Newcastle Utd,The American Express Community Stadium,Andre Marriner,30468
+2017-09-25,20:00 ,Arsenal,West Brom,Emirates Stadium,Robert Madley,59134
+2017-09-30,12:30 ,Huddersfield,Tottenham,The John Smith's Stadium,Niel Swarbrick,24169
+2017-09-30,15:00 ,Stoke City,Southampton,Bet365 Stadium,Mike Jones,29285
+2017-09-30,15:00 ,Manchester Utd,Crystal Palace,Old Trafford,Mike Dean,75118
+2017-09-30,15:00 ,Bournemouth,Leicester City,Vitality Stadium,Graham Scott,10444
+2017-09-30,15:00 ,West Brom,Watford,The Hawthorns,Michael Oliver,24606
+2017-09-30,15:00 ,West Ham,Swansea City,London Stadium,Roger East,56922
+2017-09-30,17:30 ,Chelsea,Manchester City,Stamford Bridge,Martin Atkinson,41530
+2017-10-01,12:00 ,Arsenal,Brighton,Emirates Stadium,Kevin Friend,59378
+2017-10-01,14:15 ,Everton,Burnley,Goodison Park,Jonathan Moss,38448
+2017-10-01,16:30 ,Newcastle Utd,Liverpool,St. James' Park,Craig Pawson,52303
+2017-10-14,12:30 ,Liverpool,Manchester Utd,Anfield,Martin Atkinson,52912
+2017-10-14,15:00 ,Tottenham,Bournemouth,Wembley Stadium,Robert Madley,73502
+2017-10-14,15:00 ,Swansea City,Huddersfield,Liberty Stadium,Paul Tierney,20657
+2017-10-14,15:00 ,Crystal Palace,Chelsea,Selhurst Park,Andre Marriner,25480
+2017-10-14,15:00 ,Manchester City,Stoke City,Etihad Stadium,Craig Pawson,54128
+2017-10-14,15:00 ,Burnley,West Ham,Turf Moor,Stuart Attwell,20945
+2017-10-14,17:30 ,Watford,Arsenal,Vicarage Road Stadium,Niel Swarbrick,20384
+2017-10-15,13:30 ,Brighton,Everton,The American Express Community Stadium,Michael Oliver,30565
+2017-10-15,16:00 ,Southampton,Newcastle Utd,St. Mary's Stadium,Kevin Friend,31437
+2017-10-16,20:00 ,Leicester City,West Brom,King Power Stadium,Mike Dean,30203
+2017-10-20,20:00 ,West Ham,Brighton,London Stadium,Martin Atkinson,56977
+2017-10-21,12:30 ,Chelsea,Watford,Stamford Bridge,Jonathan Moss,41467
+2017-10-21,15:00 ,Swansea City,Leicester City,Liberty Stadium,Michael Oliver,20521
+2017-10-21,15:00 ,Newcastle Utd,Crystal Palace,St. James' Park,Stuart Attwell,52251
+2017-10-21,15:00 ,Manchester City,Burnley,Etihad Stadium,Roger East,54118
+2017-10-21,15:00 ,Stoke City,Bournemouth,Bet365 Stadium,Lee Probert,29500
+2017-10-21,15:00 ,Huddersfield,Manchester Utd,The John Smith's Stadium,Lee Mason,24426
+2017-10-21,17:30 ,Southampton,West Brom,St. Mary's Stadium,Graham Scott,29947
+2017-10-22,13:30 ,Everton,Arsenal,Goodison Park,Craig Pawson,39189
+2017-10-22,16:00 ,Tottenham,Liverpool,Wembley Stadium,Andre Marriner,80827
+2017-10-28,12:30 ,Manchester Utd,Tottenham,Old Trafford,Jonathan Moss,75034
+2017-10-28,15:00 ,Liverpool,Huddersfield,Anfield,Kevin Friend,53268
+2017-10-28,15:00 ,Crystal Palace,West Ham,Selhurst Park,Robert Madley,25242
+2017-10-28,15:00 ,West Brom,Manchester City,The Hawthorns,Mike Jones,24003
+2017-10-28,15:00 ,Arsenal,Swansea City,Emirates Stadium,Lee Mason,59493
+2017-10-28,15:00 ,Watford,Stoke City,Vicarage Road Stadium,Michael Oliver,20087
+2017-10-28,17:30 ,Bournemouth,Chelsea,Vitality Stadium,Craig Pawson,10998
+2017-10-29,13:30 ,Brighton,Southampton,The American Express Community Stadium,Niel Swarbrick,30564
+2017-10-29,16:00 ,Leicester City,Everton,King Power Stadium,Andre Marriner,31891
+2017-10-30,20:00 ,Burnley,Newcastle Utd,Turf Moor,Mike Dean,21031
+2017-11-04,12:30 ,Stoke City,Leicester City,Bet365 Stadium,Robert Madley,29602
+2017-11-04,15:00 ,Southampton,Burnley,St. Mary's Stadium,Lee Probert,30491
+2017-11-04,15:00 ,Newcastle Utd,Bournemouth,St. James' Park,Paul Tierney,52237
+2017-11-04,15:00 ,Swansea City,Brighton,Liberty Stadium,Mike Dean,20822
+2017-11-04,15:00 ,Huddersfield,West Brom,The John Smith's Stadium,Roger East,24169
+2017-11-04,17:30 ,West Ham,Liverpool,London Stadium,Niel Swarbrick,56961
+2017-11-05,12:00 ,Tottenham,Crystal Palace,Wembley Stadium,Kevin Friend,65270
+2017-11-05,14:15 ,Manchester City,Arsenal,Etihad Stadium,Michael Oliver,54286
+2017-11-05,16:30 ,Everton,Watford,Goodison Park,Graham Scott,38609
+2017-11-05,16:30 ,Chelsea,Manchester Utd,Stamford Bridge,Anthony Taylor,41615
+2017-11-18,12:30 ,Arsenal,Tottenham,Emirates Stadium,Mike Dean,59530
+2017-11-18,15:00 ,Bournemouth,Huddersfield,Vitality Stadium,Lee Probert,10879
+2017-11-18,15:00 ,Leicester City,Manchester City,King Power Stadium,Graham Scott,31908
+2017-11-18,15:00 ,Burnley,Swansea City,Turf Moor,Martin Atkinson,18895
+2017-11-18,15:00 ,West Brom,Chelsea,The Hawthorns,Jonathan Moss,23592
+2017-11-18,15:00 ,Crystal Palace,Everton,Selhurst Park,Anthony Taylor,25526
+2017-11-18,15:00 ,Liverpool,Southampton,Anfield,Mike Jones,53256
+2017-11-18,17:30 ,Manchester Utd,Newcastle Utd,Old Trafford,Craig Pawson,75035
+2017-11-19,16:00 ,Watford,West Ham,Vicarage Road Stadium,Andre Marriner,20018
+2017-11-20,20:00 ,Brighton,Stoke City,The American Express Community Stadium,Lee Mason,29676
+2017-11-24,20:00 ,West Ham,Leicester City,London Stadium,Martin Atkinson,56897
+2017-11-25,15:00 ,Manchester Utd,Brighton,Old Trafford,Niel Swarbrick,75018
+2017-11-25,15:00 ,Swansea City,Bournemouth,Liberty Stadium,Stuart Attwell,20228
+2017-11-25,15:00 ,Tottenham,West Brom,Wembley Stadium,Mike Jones,65905
+2017-11-25,15:00 ,Newcastle Utd,Watford,St. James' Park,Chris Kavanagh,52188
+2017-11-25,15:00 ,Crystal Palace,Stoke City,Selhurst Park,Mike Dean,23723
+2017-11-25,17:30 ,Liverpool,Chelsea,Anfield,Michael Oliver,53225
+2017-11-26,13:30 ,Southampton,Everton,St. Mary's Stadium,Kevin Friend,30461
+2017-11-26,14:00 ,Burnley,Arsenal,Turf Moor,Lee Mason,21722
+2017-11-26,16:00 ,Huddersfield,Manchester City,The John Smith's Stadium,Craig Pawson,24121
+2017-11-28,19:45 ,Brighton,Crystal Palace,The American Express Community Stadium,Andre Marriner,29889
+2017-11-28,19:45 ,Leicester City,Tottenham,King Power Stadium,Anthony Taylor,31950
+2017-11-28,20:00 ,West Brom,Newcastle Utd,The Hawthorns,Lee Probert,25534
+2017-11-28,20:00 ,Watford,Manchester Utd,Vicarage Road Stadium,Jonathan Moss,20552
+2017-11-29,19:45 ,Arsenal,Huddersfield,Emirates Stadium,Graham Scott,59285
+2017-11-29,19:45 ,Bournemouth,Burnley,Vitality Stadium,Roger East,10302
+2017-11-29,19:45 ,Chelsea,Swansea City,Stamford Bridge,Niel Swarbrick,41365
+2017-11-29,20:00 ,Stoke City,Liverpool,Bet365 Stadium,Martin Atkinson,29423
+2017-11-29,20:00 ,Everton,West Ham,Goodison Park,Michael Oliver,38242
+2017-11-29,20:00 ,Manchester City,Southampton,Etihad Stadium,Paul Tierney,53407
+2017-12-02,12:30 ,Chelsea,Newcastle Utd,Stamford Bridge,Kevin Friend,41538
+2017-12-02,15:00 ,Everton,Huddersfield,Goodison Park,Chris Kavanagh,39167
+2017-12-02,15:00 ,Watford,Tottenham,Vicarage Road Stadium,Martin Atkinson,20278
+2017-12-02,15:00 ,West Brom,Crystal Palace,The Hawthorns,Michael Oliver,23531
+2017-12-02,15:00 ,Brighton,Liverpool,The American Express Community Stadium,Graham Scott,30634
+2017-12-02,15:00 ,Leicester City,Burnley,King Power Stadium,Paul Tierney,30714
+2017-12-02,15:00 ,Stoke City,Swansea City,Bet365 Stadium,Craig Pawson,28261
+2017-12-02,17:30 ,Arsenal,Manchester Utd,Emirates Stadium,Andre Marriner,59547
+2017-12-03,13:30 ,Bournemouth,Southampton,Vitality Stadium,Jonathan Moss,10764
+2017-12-03,16:00 ,Manchester City,West Ham,Etihad Stadium,Mike Dean,54203
+2017-12-09,12:30 ,West Ham,Chelsea,London Stadium,Anthony Taylor,56953
+2017-12-09,15:00 ,Burnley,Watford,Turf Moor,Lee Probert,19479
+2017-12-09,15:00 ,Crystal Palace,Bournemouth,Selhurst Park,Kevin Friend,24823
+2017-12-09,15:00 ,Tottenham,Stoke City,Wembley Stadium,Roger East,62202
+2017-12-09,15:00 ,Huddersfield,Brighton,The John Smith's Stadium,Stuart Attwell,24018
+2017-12-09,15:00 ,Swansea City,West Brom,Liberty Stadium,Mike Dean,19580
+2017-12-09,17:30 ,Newcastle Utd,Leicester City,St. James' Park,Niel Swarbrick,52117
+2017-12-10,12:00 ,Southampton,Arsenal,St. Mary's Stadium,Robert Madley,31643
+2017-12-10,14:15 ,Liverpool,Everton,Anfield,Craig Pawson,53082
+2017-12-10,16:30 ,Manchester Utd,Manchester City,Old Trafford,Michael Oliver,74847
+2017-12-12,19:45 ,Burnley,Stoke City,Turf Moor,Mike Jones,19909
+2017-12-12,20:00 ,Crystal Palace,Watford,Selhurst Park,Lee Mason,23566
+2017-12-12,20:00 ,Huddersfield,Chelsea,The John Smith's Stadium,Andre Marriner,24169
+2017-12-13,19:45 ,Swansea City,Manchester City,Liberty Stadium,Anthony Taylor,20870
+2017-12-13,19:45 ,Southampton,Leicester City,St. Mary's Stadium,Chris Kavanagh,27714
+2017-12-13,19:45 ,Newcastle Utd,Everton,St. James' Park,Martin Atkinson,51042
+2017-12-13,20:00 ,West Ham,Arsenal,London Stadium,Jonathan Moss,56921
+2017-12-13,20:00 ,Liverpool,West Brom,Anfield,Paul Tierney,53243
+2017-12-13,20:00 ,Manchester Utd,Bournemouth,Old Trafford,Graham Scott,74798
+2017-12-13,20:00 ,Tottenham,Brighton,Wembley Stadium,Robert Madley,46438
+2017-12-16,12:30 ,Leicester City,Crystal Palace,King Power Stadium,Martin Atkinson,31081
+2017-12-16,15:00 ,Arsenal,Newcastle Utd,Emirates Stadium,Stuart Attwell,59379
+2017-12-16,15:00 ,Watford,Huddersfield,Vicarage Road Stadium,Michael Oliver,20026
+2017-12-16,15:00 ,Chelsea,Southampton,Stamford Bridge,Roger East,41562
+2017-12-16,15:00 ,Brighton,Burnley,The American Express Community Stadium,Chris Kavanagh,29921
+2017-12-16,16:00 ,Stoke City,West Ham,Bet365 Stadium,Graham Scott,29265
+2017-12-16,17:30 ,Manchester City,Tottenham,Etihad Stadium,Craig Pawson,54214
+2017-12-17,14:15 ,West Brom,Manchester Utd,The Hawthorns,Anthony Taylor,24782
+2017-12-17,16:30 ,Bournemouth,Liverpool,Vitality Stadium,Andre Marriner,10780
+2017-12-18,20:00 ,Everton,Swansea City,Goodison Park,Jonathan Moss,37580
+2017-12-22,19:45 ,Arsenal,Liverpool,Emirates Stadium,Martin Atkinson,59409
+2017-12-23,12:30 ,Everton,Chelsea,Goodison Park,Robert Madley,39191
+2017-12-23,15:00 ,Southampton,Huddersfield,St. Mary's Stadium,Lee Probert,29675
+2017-12-23,15:00 ,Swansea City,Crystal Palace,Liberty Stadium,Craig Pawson,20354
+2017-12-23,15:00 ,West Ham,Newcastle Utd,London Stadium,Lee Mason,56955
+2017-12-23,15:00 ,Stoke City,West Brom,Bet365 Stadium,Niel Swarbrick,29057
+2017-12-23,15:00 ,Manchester City,Bournemouth,Etihad Stadium,Mike Jones,54270
+2017-12-23,15:00 ,Brighton,Watford,The American Express Community Stadium,Paul Tierney,30473
+2017-12-23,17:30 ,Burnley,Tottenham,Turf Moor,Michael Oliver,21650
+2017-12-23,19:45 ,Leicester City,Manchester Utd,King Power Stadium,Jonathan Moss,32202
+2017-12-26,12:30 ,Tottenham,Southampton,Wembley Stadium,Graham Scott,55412
+2017-12-26,15:00 ,Huddersfield,Stoke City,The John Smith's Stadium,Anthony Taylor,24047
+2017-12-26,15:00 ,Bournemouth,West Ham,Vitality Stadium,Stuart Attwell,10596
+2017-12-26,15:00 ,West Brom,Everton,The Hawthorns,Roger East,25364
+2017-12-26,15:00 ,Manchester Utd,Burnley,Old Trafford,Martin Atkinson,75046
+2017-12-26,15:00 ,Chelsea,Brighton,Stamford Bridge,Mike Dean,41568
+2017-12-26,15:00 ,Watford,Leicester City,Vicarage Road Stadium,Chris Kavanagh,20308
+2017-12-26,17:30 ,Liverpool,Swansea City,Anfield,Kevin Friend,52850
+2017-12-27,19:45 ,Newcastle Utd,Manchester City,St. James' Park,Andre Marriner,52311
+2017-12-28,20:00 ,Crystal Palace,Arsenal,Selhurst Park,Michael Oliver,25762
+2017-12-30,15:00 ,Bournemouth,Everton,Vitality Stadium,Lee Probert,10497
+2017-12-30,15:00 ,Watford,Swansea City,Vicarage Road Stadium,Martin Atkinson,20002
+2017-12-30,15:00 ,Chelsea,Stoke City,Stamford Bridge,Kevin Friend,41433
+2017-12-30,15:00 ,Newcastle Utd,Brighton,St. James' Park,Anthony Taylor,52209
+2017-12-30,15:00 ,Huddersfield,Burnley,The John Smith's Stadium,Paul Tierney,24095
+2017-12-30,15:00 ,Liverpool,Leicester City,Anfield,Niel Swarbrick,53226
+2017-12-30,17:30 ,Manchester Utd,Southampton,Old Trafford,Craig Pawson,75051
+2017-12-31,12:00 ,Crystal Palace,Manchester City,Selhurst Park,Jonathan Moss,25804
+2017-12-31,16:30 ,West Brom,Arsenal,The Hawthorns,Mike Dean,26223
+2018-01-01,12:30 ,Brighton,Bournemouth,The American Express Community Stadium,Michael Oliver,30152
+2018-01-01,15:00 ,Stoke City,Newcastle Utd,Bet365 Stadium,Chris Kavanagh,28471
+2018-01-01,15:00 ,Burnley,Liverpool,Turf Moor,Roger East,21756
+2018-01-01,15:00 ,Leicester City,Huddersfield,King Power Stadium,Graham Scott,31748
+2018-01-01,17:30 ,Everton,Manchester Utd,Goodison Park,Andre Marriner,39188
+2018-01-02,19:45 ,West Ham,West Brom,London Stadium,Mike Jones,56888
+2018-01-02,19:45 ,Southampton,Crystal Palace,St. Mary's Stadium,Stuart Attwell,28411
+2018-01-02,19:45 ,Swansea City,Tottenham,Liberty Stadium,Robert Madley,20615
+2018-01-02,20:00 ,Manchester City,Watford,Etihad Stadium,Lee Mason,53556
+2018-01-03,19:45 ,Arsenal,Chelsea,Emirates Stadium,Anthony Taylor,59379
+2018-01-04,20:00 ,Tottenham,West Ham,Wembley Stadium,Mike Dean,50034
+2018-01-13,15:00 ,Huddersfield,West Ham,The John Smith's Stadium,Jonathan Moss,24105
+2018-01-13,15:00 ,Watford,Southampton,Vicarage Road Stadium,Roger East,20018
+2018-01-13,15:00 ,Chelsea,Leicester City,Stamford Bridge,Mike Jones,41552
+2018-01-13,15:00 ,Crystal Palace,Burnley,Selhurst Park,Michael Oliver,24696
+2018-01-13,15:00 ,West Brom,Brighton,The Hawthorns,Martin Atkinson,25240
+2018-01-13,15:00 ,Newcastle Utd,Swansea City,St. James' Park,Graham Scott,51444
+2018-01-13,17:30 ,Tottenham,Everton,Wembley Stadium,Craig Pawson,76251
+2018-01-14,13:30 ,Bournemouth,Arsenal,Vitality Stadium,Kevin Friend,10836
+2018-01-14,16:00 ,Liverpool,Manchester City,Anfield,Andre Marriner,53285
+2018-01-15,20:00 ,Manchester Utd,Stoke City,Old Trafford,Anthony Taylor,74726
+2018-01-20,12:30 ,Brighton,Chelsea,The American Express Community Stadium,Jonathan Moss,30600
+2018-01-20,15:00 ,Burnley,Manchester Utd,Turf Moor,Mike Dean,21841
+2018-01-20,15:00 ,Leicester City,Watford,King Power Stadium,Lee Probert,31891
+2018-01-20,15:00 ,Arsenal,Crystal Palace,Emirates Stadium,Chris Kavanagh,59386
+2018-01-20,15:00 ,Everton,West Brom,Goodison Park,Stuart Attwell,39061
+2018-01-20,15:00 ,Stoke City,Huddersfield,Bet365 Stadium,Michael Oliver,29785
+2018-01-20,15:00 ,West Ham,Bournemouth,London Stadium,Martin Atkinson,56948
+2018-01-20,17:30 ,Manchester City,Newcastle Utd,Etihad Stadium,Paul Tierney,54452
+2018-01-21,16:00 ,Southampton,Tottenham,St. Mary's Stadium,Kevin Friend,31361
+2018-01-22,20:00 ,Swansea City,Liverpool,Liberty Stadium,Niel Swarbrick,20886
+2018-01-30,19:45 ,Swansea City,Arsenal,Liberty Stadium,Lee Mason,20819
+2018-01-30,19:45 ,West Ham,Crystal Palace,London Stadium,Niel Swarbrick,56911
+2018-01-30,20:00 ,Huddersfield,Liverpool,The John Smith's Stadium,Kevin Friend,24121
+2018-01-31,19:45 ,Chelsea,Bournemouth,Stamford Bridge,Lee Probert,41464
+2018-01-31,19:45 ,Everton,Leicester City,Goodison Park,Chris Kavanagh,38390
+2018-01-31,19:45 ,Newcastle Utd,Burnley,St. James' Park,Simon Hooper,50174
+2018-01-31,19:45 ,Southampton,Brighton,St. Mary's Stadium,Mike Dean,30034
+2018-01-31,20:00 ,Tottenham,Manchester Utd,Wembley Stadium,Andre Marriner,81978
+2018-01-31,20:00 ,Stoke City,Watford,Bet365 Stadium,Jonathan Moss,27458
+2018-01-31,20:00 ,Manchester City,West Brom,Etihad Stadium,Robert Madley,53241
+2018-02-03,12:30 ,Burnley,Manchester City,Turf Moor,Martin Atkinson,21658
+2018-02-03,15:00 ,Manchester Utd,Huddersfield,Old Trafford,Stuart Attwell,74742
+2018-02-03,15:00 ,Leicester City,Swansea City,King Power Stadium,Anthony Taylor,31179
+2018-02-03,15:00 ,West Brom,Southampton,The Hawthorns,Michael Oliver,25911
+2018-02-03,15:00 ,Brighton,West Ham,The American Express Community Stadium,Roger East,30589
+2018-02-03,15:00 ,Bournemouth,Stoke City,Vitality Stadium,Paul Tierney,10614
+2018-02-03,17:30 ,Arsenal,Everton,Emirates Stadium,Niel Swarbrick,59306
+2018-02-04,14:15 ,Crystal Palace,Newcastle Utd,Selhurst Park,Andre Marriner,25746
+2018-02-04,16:30 ,Liverpool,Tottenham,Anfield,Jonathan Moss,53213
+2018-02-05,20:00 ,Watford,Chelsea,Vicarage Road Stadium,Mike Dean,20157
+2018-02-10,12:30 ,Tottenham,Arsenal,Wembley Stadium,Anthony Taylor,83222
+2018-02-10,15:00 ,Everton,Crystal Palace,Goodison Park,Jonathan Moss,39139
+2018-02-10,15:00 ,West Ham,Watford,London Stadium,Graham Scott,56197
+2018-02-10,15:00 ,Stoke City,Brighton,Bet365 Stadium,Robert Madley,29876
+2018-02-10,15:00 ,Swansea City,Burnley,Liberty Stadium,Andre Marriner,20179
+2018-02-10,17:30 ,Manchester City,Leicester City,Etihad Stadium,Mike Jones,54416
+2018-02-11,12:00 ,Huddersfield,Bournemouth,The John Smith's Stadium,Michael Oliver,23823
+2018-02-11,14:15 ,Newcastle Utd,Manchester Utd,St. James' Park,Craig Pawson,52309
+2018-02-11,16:30 ,Southampton,Liverpool,St. Mary's Stadium,Martin Atkinson,31915
+2018-02-12,20:00 ,Chelsea,West Brom,Stamford Bridge,Lee Mason,41071
+2018-02-24,12:30 ,Leicester City,Stoke City,King Power Stadium,Michael Oliver,31769
+2018-02-24,15:00 ,Liverpool,West Ham,Anfield,Stuart Attwell,53256
+2018-02-24,15:00 ,West Brom,Huddersfield,The Hawthorns,Jonathan Moss,25920
+2018-02-24,15:00 ,Brighton,Swansea City,The American Express Community Stadium,Mike Dean,30523
+2018-02-24,15:00 ,Burnley,Southampton,Turf Moor,Robert Madley,20982
+2018-02-24,15:00 ,Bournemouth,Newcastle Utd,Vitality Stadium,Roger East,10808
+2018-02-24,17:30 ,Watford,Everton,Vicarage Road Stadium,Anthony Taylor,20430
+2018-02-25,12:00 ,Crystal Palace,Tottenham,Selhurst Park,Kevin Friend,25287
+2018-02-25,14:05 ,Manchester Utd,Chelsea,Old Trafford,Martin Atkinson,75060
+2018-03-01,19:45 ,Arsenal,Manchester City,Emirates Stadium,Andre Marriner,58420
+2018-03-03,12:30 ,Burnley,Everton,Turf Moor,Chris Kavanagh,20802
+2018-03-03,15:00 ,Tottenham,Huddersfield,Wembley Stadium,Kevin Friend,68311
+2018-03-03,15:00 ,Watford,West Brom,Vicarage Road Stadium,Paul Tierney,20022
+2018-03-03,15:00 ,Swansea City,West Ham,Liberty Stadium,Martin Atkinson,20829
+2018-03-03,15:00 ,Leicester City,Bournemouth,King Power Stadium,Lee Probert,31384
+2018-03-03,15:00 ,Southampton,Stoke City,St. Mary's Stadium,Anthony Taylor,30335
+2018-03-03,17:30 ,Liverpool,Newcastle Utd,Anfield,Graham Scott,53287
+2018-03-04,13:30 ,Brighton,Arsenal,The American Express Community Stadium,Stuart Attwell,30620
+2018-03-04,16:00 ,Manchester City,Chelsea,Etihad Stadium,Michael Oliver,54328
+2018-03-05,20:00 ,Crystal Palace,Manchester Utd,Selhurst Park,Niel Swarbrick,25840
+2018-03-10,12:30 ,Manchester Utd,Liverpool,Old Trafford,Craig Pawson,74855
+2018-03-10,15:00 ,Everton,Brighton,Goodison Park,Roger East,39199
+2018-03-10,15:00 ,Newcastle Utd,Southampton,St. James' Park,Andre Marriner,52246
+2018-03-10,15:00 ,West Ham,Burnley,London Stadium,Lee Mason,56904
+2018-03-10,15:00 ,West Brom,Leicester City,The Hawthorns,Robert Madley,23558
+2018-03-10,15:00 ,Huddersfield,Swansea City,The John Smith's Stadium,Michael Oliver,23567
+2018-03-10,17:30 ,Chelsea,Crystal Palace,Stamford Bridge,Anthony Taylor,40800
+2018-03-11,13:30 ,Arsenal,Watford,Emirates Stadium,Martin Atkinson,59131
+2018-03-11,16:00 ,Bournemouth,Tottenham,Vitality Stadium,Mike Dean,10623
+2018-03-12,20:00 ,Stoke City,Manchester City,Bet365 Stadium,Jonathan Moss,29138
+2018-03-17,15:00 ,Stoke City,Everton,Bet365 Stadium,Martin Atkinson,30022
+2018-03-17,15:00 ,Huddersfield,Crystal Palace,The John Smith's Stadium,Mike Dean,23918
+2018-03-17,15:00 ,Bournemouth,West Brom,Vitality Stadium,Graham Scott,10242
+2018-03-17,17:30 ,Liverpool,Watford,Anfield,Anthony Taylor,53287
+2018-03-31,12:30 ,Crystal Palace,Liverpool,Selhurst Park,Niel Swarbrick,25807
+2018-03-31,15:00 ,Newcastle Utd,Huddersfield,St. James' Park,Martin Atkinson,52261
+2018-03-31,15:00 ,West Brom,Burnley,The Hawthorns,Lee Probert,23455
+2018-03-31,15:00 ,West Ham,Southampton,London Stadium,Jonathan Moss,56882
+2018-03-31,15:00 ,Manchester Utd,Swansea City,Old Trafford,Robert Madley,75038
+2018-03-31,15:00 ,Brighton,Leicester City,The American Express Community Stadium,Chris Kavanagh,30629
+2018-03-31,15:00 ,Watford,Bournemouth,Vicarage Road Stadium,Andy Madley,20393
+2018-03-31,17:30 ,Everton,Manchester City,Goodison Park,Paul Tierney,39221
+2018-04-01,13:30 ,Arsenal,Stoke City,Emirates Stadium,Craig Pawson,59371
+2018-04-01,16:00 ,Chelsea,Tottenham,Stamford Bridge,Andre Marriner,41364
+2018-04-07,12:30 ,Everton,Liverpool,Goodison Park,Michael Oliver,39220
+2018-04-07,15:00 ,Leicester City,Newcastle Utd,King Power Stadium,Stuart Attwell,32066
+2018-04-07,15:00 ,Watford,Burnley,Vicarage Road Stadium,Paul Tierney,20044
+2018-04-07,15:00 ,Brighton,Huddersfield,The American Express Community Stadium,Anthony Taylor,30501
+2018-04-07,15:00 ,Bournemouth,Crystal Palace,Vitality Stadium,Jonathan Moss,10730
+2018-04-07,15:00 ,Stoke City,Tottenham,Bet365 Stadium,Graham Scott,29515
+2018-04-07,15:00 ,West Brom,Swansea City,The Hawthorns,Roger East,23297
+2018-04-07,17:30 ,Manchester City,Manchester Utd,Etihad Stadium,Martin Atkinson,54259
+2018-04-08,14:15 ,Arsenal,Southampton,Emirates Stadium,Andre Marriner,59374
+2018-04-08,16:30 ,Chelsea,West Ham,Stamford Bridge,Kevin Friend,41324
+2018-04-14,12:30 ,Southampton,Chelsea,St. Mary's Stadium,Mike Dean,31764
+2018-04-14,15:00 ,Swansea City,Everton,Liberty Stadium,Lee Mason,20933
+2018-04-14,15:00 ,Burnley,Leicester City,Turf Moor,Martin Atkinson,21727
+2018-04-14,15:00 ,Huddersfield,Watford,The John Smith's Stadium,Craig Pawson,23961
+2018-04-14,15:00 ,Crystal Palace,Brighton,Selhurst Park,Andre Marriner,24656
+2018-04-14,17:30 ,Liverpool,Bournemouth,Anfield,Chris Kavanagh,52959
+2018-04-14,19:45 ,Tottenham,Manchester City,Wembley Stadium,Jonathan Moss,80811
+2018-04-15,13:30 ,Newcastle Utd,Arsenal,St. James' Park,Anthony Taylor,52210
+2018-04-15,16:00 ,Manchester Utd,West Brom,Old Trafford,Paul Tierney,75095
+2018-04-16,20:00 ,West Ham,Stoke City,London Stadium,Michael Oliver,56795
+2018-04-17,19:45 ,Brighton,Tottenham,The American Express Community Stadium,Kevin Friend,30440
+2018-04-18,19:45 ,Bournemouth,Manchester Utd,Vitality Stadium,Graham Scott,10952
+2018-04-19,19:45 ,Burnley,Chelsea,Turf Moor,Robert Madley,21264
+2018-04-19,19:45 ,Leicester City,Southampton,King Power Stadium,Roger East,31160
+2018-04-21,12:30 ,West Brom,Liverpool,The Hawthorns,Stuart Attwell,24520
+2018-04-21,15:00 ,Watford,Crystal Palace,Vicarage Road Stadium,Chris Kavanagh,20401
+2018-04-22,13:30 ,Arsenal,West Ham,Emirates Stadium,Lee Mason,59422
+2018-04-22,13:30 ,Stoke City,Burnley,Bet365 Stadium,Mike Dean,29532
+2018-04-22,16:30 ,Manchester City,Swansea City,Etihad Stadium,Craig Pawson,54387
+2018-04-23,20:00 ,Everton,Newcastle Utd,Goodison Park,Robert Madley,39061
+2018-04-28,12:30 ,Liverpool,Stoke City,Anfield,Andre Marriner,53255
+2018-04-28,15:00 ,Newcastle Utd,West Brom,St. James' Park,David Coote,52283
+2018-04-28,15:00 ,Huddersfield,Everton,The John Smith's Stadium,Lee Probert,24121
+2018-04-28,15:00 ,Southampton,Bournemouth,St. Mary's Stadium,Anthony Taylor,31778
+2018-04-28,15:00 ,Burnley,Brighton,Turf Moor,Roger East,19459
+2018-04-28,15:00 ,Crystal Palace,Leicester City,Selhurst Park,Mike Dean,25750
+2018-04-28,17:30 ,Swansea City,Chelsea,Liberty Stadium,Jonathan Moss,20900
+2018-04-29,14:15 ,West Ham,Manchester City,London Stadium,Niel Swarbrick,56904
+2018-04-29,16:30 ,Manchester Utd,Arsenal,Old Trafford,Kevin Friend,75035
+2018-04-30,20:00 ,Tottenham,Watford,Wembley Stadium,Michael Oliver,52675
+2018-05-04,20:00 ,Brighton,Manchester Utd,The American Express Community Stadium,Craig Pawson,30611
+2018-05-05,12:30 ,Stoke City,Crystal Palace,Bet365 Stadium,Martin Atkinson,29687
+2018-05-05,15:00 ,Watford,Newcastle Utd,Vicarage Road Stadium,Roger East,20375
+2018-05-05,15:00 ,West Brom,Tottenham,The Hawthorns,Mike Jones,23685
+2018-05-05,15:00 ,Bournemouth,Swansea City,Vitality Stadium,Kevin Friend,10820
+2018-05-05,15:00 ,Leicester City,West Ham,King Power Stadium,Chris Kavanagh,32013
+2018-05-05,17:30 ,Everton,Southampton,Goodison Park,Jonathan Moss,38225
+2018-05-06,13:30 ,Manchester City,Huddersfield,Etihad Stadium,Mike Dean,54350
+2018-05-06,16:30 ,Arsenal,Burnley,Emirates Stadium,Andre Marriner,59540
+2018-05-06,16:30 ,Chelsea,Liverpool,Stamford Bridge,Anthony Taylor,41314
+2018-05-08,19:45 ,Swansea City,Southampton,Liberty Stadium,Michael Oliver,20858
+2018-05-09,19:45 ,Leicester City,Arsenal,King Power Stadium,Graham Scott,32095
+2018-05-09,19:45 ,Chelsea,Huddersfield,Stamford Bridge,Lee Mason,38910
+2018-05-09,20:00 ,Manchester City,Brighton,Etihad Stadium,Paul Tierney,54013
+2018-05-09,20:00 ,Tottenham,Newcastle Utd,Wembley Stadium,Niel Swarbrick,54923
+2018-05-10,19:45 ,West Ham,Manchester Utd,London Stadium,Jonathan Moss,56902
+2018-05-13,15:00 ,Burnley,Bournemouth,Turf Moor,Paul Tierney,20720
+2018-05-13,15:00 ,Liverpool,Brighton,Anfield,Kevin Friend,50752
+2018-05-13,15:00 ,West Ham,Everton,London Stadium,Graham Scott,56926
+2018-05-13,15:00 ,Newcastle Utd,Chelsea,St. James' Park,Martin Atkinson,52294
+2018-05-13,15:00 ,Southampton,Manchester City,St. Mary's Stadium,Andre Marriner,31882
+2018-05-13,15:00 ,Crystal Palace,West Brom,Selhurst Park,Jonathan Moss,25357
+2018-05-13,15:00 ,Tottenham,Leicester City,Wembley Stadium,Craig Pawson,77841
+2018-05-13,15:00 ,Huddersfield,Arsenal,The John Smith's Stadium,Michael Oliver,24122
+2018-05-13,15:00 ,Manchester Utd,Watford,Old Trafford,Lee Mason,75049
+2018-05-13,15:00 ,Swansea City,Stoke City,Liberty Stadium,Anthony Taylor,20673

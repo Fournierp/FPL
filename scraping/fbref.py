@@ -1,6 +1,7 @@
 import os
 import requests
 import logging
+import time
 
 import json
 from bs4 import BeautifulSoup
@@ -121,6 +122,27 @@ misc = [
     "pens_conceded", "own_goals", "ball_recoveries", "aerials_won",
     "aerials_lost", "aerials_won_pct"]
 
+# Game Summary
+summary = [
+    "position", "age", "minutes", "goals", "assists", "pens_made", "pens_att",
+    "shots_total", "shots_on_target", "cards_yellow", "cards_red", "touches", "pressures",
+    "tackles", "interceptions", "blocks", "xg", "npxg", "xa", "sca", "gca", "passes_completed",
+    "passes", "passes_pct", "progressive_passes", "carries", "progressive_carries",
+    "dribbles_completed", "dribbles"]
+
+# Game Goalkeeping
+game_keepers = [
+    "shots_on_target_against", "goals_against_gk", "saves", "save_pct", "psxg_gk",
+    "passes_completed_launched_gk", "passes_launched_gk", "passes_pct_launched_gk",
+    "passes_gk", "passes_throws_gk", "pct_passes_launched_gk", "passes_length_avg_gk",
+    "goal_kicks", "pct_goal_kicks_launched", "goal_kick_length_avg", "crosses_gk",
+    "crosses_stopped_gk", "crosses_stopped_pct_gk", "def_actions_outside_pen_area_gk",
+    "avg_distance_def_actions_gk"]
+
+# Game shots
+game_shots = [
+    "minute", "squad", "outcome", "distance", "body_part", "notes",
+    "sca_1_player", "sca_1_type", "sca_2_player", "sca_2_type"]
 
 class FBRef:
     """Scrape FBRef website"""
@@ -148,11 +170,29 @@ class FBRef:
         Returns:
             [type]: Parsed html
         """
-        res = requests.get(url)
-        # Handle hidden table.
-        comm = re.compile("<!--|-->")
-        soup = BeautifulSoup(comm.sub("", res.text), 'lxml')
-        return soup.findAll("tbody")
+        attempts = 3
+        while attempts:
+            try:
+                res = requests.get(url)
+
+                if res.status_code != 200:
+                    raise Exception('Bad request response.')
+
+                # Handle hidden table.
+                comm = re.compile("<!--|-->")
+                soup = BeautifulSoup(comm.sub("", res.text), 'lxml')
+                return soup.findAll("tbody")
+
+            except:
+                attempts -= 1
+                if not attempts:
+                    self.logger.warning(
+                        f"URL Request to {url} failed after 3 attempts.")
+                    return None
+
+                self.logger.warning(
+                    f'URL Request failed, retrying in 3 seconds! URL: {url}')
+                time.sleep(30)
 
     def get_team_table(self, url, columns):
         """ Parse the table of team data
@@ -396,6 +436,277 @@ class FBRef:
                     os.path.join(self.root, 'outfield.csv'),
                     index=False)
 
+    def get_match_data_players(self, page, categories_cols):
+        df = pd.DataFrame()
+
+        for h in [1, 0]:
+            df_tables = []
+
+            for i, columns in enumerate(categories_cols):
+                table_rows = page[i + (7 if not h else 0)].find_all('tr')
+                match_dict = dict()
+
+                for row in table_rows:
+                    if row.find('th', {"scope": "row"}) is not None:
+                        player_name = (
+                            row.find('th', {"data-stat": "player"})
+                            .text.strip().encode().decode("utf-8"))
+
+                        # Add player name
+                        if 'player' in match_dict:
+                            match_dict['player'].append(player_name)
+                        else:
+                            match_dict['player'] = [player_name]
+
+                        # Parse the table
+                        for col in columns:
+                            # Get the statistic
+                            cell = row.find("td", {"data-stat": col})
+                            if cell is None:
+                                # Fill na
+                                text = 'None'
+                            else:
+                                a = cell.text.strip().encode()
+                                text = a.decode("utf-8")
+                                # Fill na
+                                if(text == ''):
+                                    text = '0'
+
+                                if ((col != 'position') & (col != 'age')):
+                                    text = float(text.replace(',', ''))
+
+                            if col in match_dict:
+                                match_dict[col].append(text)
+                            else:
+                                match_dict[col] = [text]
+
+                df_tables.append(pd.DataFrame.from_dict(match_dict))
+
+            df = df.append(pd.concat(df_tables, axis=1))
+        return df.loc[:, ~df.columns.duplicated()]
+
+    def get_match_data_keepers(self, page, columns):
+        df = pd.DataFrame()
+
+        for h in [1, 0]:
+            df_tables = []
+            table_rows = page[(6 if h else 13)].find_all('tr')
+            match_dict = dict()
+
+            for row in table_rows:
+                if row.find('th', {"scope": "row"}) is not None:
+                    player_name = (
+                        row.find('th', {"data-stat": "player"})
+                        .text.strip().encode().decode("utf-8"))
+
+                    # Add player name
+                    if 'player' in match_dict:
+                        match_dict['player'].append(player_name)
+                    else:
+                        match_dict['player'] = [player_name]
+
+                    # Parse the table
+                    for col in columns:
+                        # Get the statistic
+                        cell = row.find("td", {"data-stat": col})
+                        if cell is None:
+                            # Fill na
+                            text = 'None'
+                        else:
+                            a = cell.text.strip().encode()
+                            text = a.decode("utf-8")
+                            # Fill na
+                            if(text == ''):
+                                text = '0'
+
+                            if ((col != 'position') & (col != 'age')):
+                                text = float(text.replace(',', ''))
+
+                        if col in match_dict:
+                            match_dict[col].append(text)
+                        else:
+                            match_dict[col] = [text]
+
+            df = df.append(pd.DataFrame.from_dict(match_dict))
+
+        return df.loc[:, ~df.columns.duplicated()]
+
+    def get_match_data_shots(self, page, columns):
+        table_rows = page[14].find_all('tr')
+        match_dict = dict()
+
+        for row in table_rows:
+            if (
+                    row.find('th', {"scope": "row"}) is not None
+                    and row.find('th', {"scope": "row"}).text
+                    ):
+                player_name = (
+                    row.find('td', {"data-stat": "player"})
+                    .text.strip().encode().decode("utf-8"))
+
+                # Add player name
+                if 'player' in match_dict:
+                    match_dict['player'].append(player_name)
+                else:
+                    match_dict['player'] = [player_name]
+
+                # Parse the table
+                for col in columns:
+                    # Get the statistic
+                    cell = row.find("td", {"data-stat": col})
+                    if cell is None:
+                        # Fill na
+                        text = 'None'
+
+                        if col == 'minute':
+                            text = row.find("th", {"data-stat": "minute"}).text
+                            text = float(text.replace('+', '.'))
+
+                    else:
+                        a = cell.text.strip().encode()
+                        text = a.decode("utf-8")
+                        # Fill na
+                        if(text == ''):
+                            text = '0'
+
+                    if col in match_dict:
+                        match_dict[col].append(text)
+                    else:
+                        match_dict[col] = [text]
+
+        df = pd.DataFrame.from_dict(match_dict)
+        return df.loc[:, ~df.columns.duplicated()]
+
+    def get_pl_season_games(self, history=False):
+        seasons = self.get_pl_urls()
+
+        if not history:
+            seasons = [seasons[0]]
+        else:
+            seasons = seasons[1:]
+
+        self.logger.info("Downloading Historical Season Data")
+
+        for season in seasons:
+            self.logger.info(f"Season: {season}")
+            if season.split('/')[-2] == '9':
+                url = (
+                    'https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures')
+                year = self.season
+
+            else:
+                url = (
+                    'https://fbref.com/en/comps/9/' +
+                    season.split('/')[-2] +
+                    '/schedule/' +
+                    season.split('/')[-1][:-6] +
+                    '-Scores-and-Fixtures')
+                year = season.split('/')[-1][:4]
+
+            # Skip years with no underlying stats
+            if int(year) > 2016:
+                table_rows = self.get_url(url)[0].find_all('tr')
+
+                for row in table_rows:
+                    # Skip blank rows, and postponed games
+                    if (
+                            row.find('th', {"scope": "row"}) is not None
+                            and row.find('td', {"data-stat": "match_report"}).text != ""
+                            ):
+
+                        # Skip upcoming games
+                        if 'stathead' in row.find('td', {"data-stat": "match_report"}).find('a')['href']:
+                            continue
+
+                        date = row.find('td', {"data-stat": "date"}).text
+                        squad_h = row.find('td', {"data-stat": "squad_a"}).text
+                        squad_a = row.find('td', {"data-stat": "squad_b"}).text
+                        att = row.find('td', {"data-stat": "attendance"}).text.replace(',', '')
+
+                        df = pd.DataFrame.from_records(
+                            [
+                                {
+                                    'date': date,
+                                    'time': row.find('td', {"data-stat": "time"}).text,
+                                    'squad_h': squad_h,
+                                    'squad_a': squad_a,
+                                    'stadium': row.find('td', {"data-stat": "venue"}).text,
+                                    'referee': row.find('td', {"data-stat": "referee"}).text,
+                                    'attendance': (
+                                        0 if att == '' else int(att)
+                                        )
+                                }
+                            ]
+                        )
+
+                        if os.path.isfile(os.path.join(self.root, f'games_{year}.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games_{year}.csv'))
+                            pd.concat(
+                                [past_df, df], ignore_index=True
+                            ).to_csv(os.path.join(self.root, f'games_{year}.csv'), index=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_{year}.csv'),
+                                index=False)
+
+                        page = self.get_url(
+                            "https://fbref.com" +
+                            row.find('td', {"data-stat": "match_report"}).find('a')['href']
+                            )
+
+                        df = self.get_match_data_players(
+                            page,
+                            [summary, passing, passing_types, defense, possession, misc]
+                            )
+                        df['date'] = date
+                        df['squad_h'] = squad_h
+                        df['squad_a'] = squad_a
+
+                        if os.path.isfile(os.path.join(self.root, f'games_players_{year}.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games_players_{year}.csv'))
+                            pd.concat(
+                                [past_df, df], ignore_index=True
+                            ).to_csv(os.path.join(self.root, f'games_players_{year}.csv'), index=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_players_{year}.csv'),
+                                index=False)
+
+                        df = self.get_match_data_keepers(
+                            page,
+                            game_keepers)
+                        df['date'] = date
+                        df['squad_h'] = squad_h
+                        df['squad_a'] = squad_a
+
+                        if os.path.isfile(os.path.join(self.root, f'games_keepers_{year}.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games_keepers_{year}.csv'))
+                            pd.concat(
+                                [past_df, df], ignore_index=True
+                            ).to_csv(os.path.join(self.root, f'games_keepers_{year}.csv'), index=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_keepers_{year}.csv'),
+                                index=False)
+
+                        df = self.get_match_data_shots(
+                            page,
+                            game_shots
+                            )
+                        df['date'] = date
+                        df['squad_h'] = squad_h
+                        df['squad_a'] = squad_a
+
+                        if os.path.isfile(os.path.join(self.root, f'games_shots_{year}.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games_shots_{year}.csv'))
+                            pd.concat(
+                                [past_df, df], ignore_index=True
+                            ).to_csv(os.path.join(self.root, f'games_shots_{year}.csv'), index=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_shots_{year}.csv'),
+                                index=False)
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -405,5 +716,7 @@ if __name__ == "__main__":
         season_data = json.load(stat)
 
     fbref = FBRef(logger, season_data)
-    fbref.get_pl_season(history=True)
+    # fbref.get_pl_season(history=True)
     # fbref.get_pl_season(history=False)
+    # fbref.get_pl_season_games(history=True)
+    fbref.get_pl_season_games(history=False)

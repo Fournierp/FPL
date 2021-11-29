@@ -1,0 +1,381 @@
+date,time,squad_h,squad_a,stadium,referee,attendance
+2019-08-09,20:00 ,Liverpool,Norwich City,Anfield,Michael Oliver,53333
+2019-08-10,12:30 ,West Ham,Manchester City,London Stadium,Mike Dean,59870
+2019-08-10,15:00 ,Watford,Brighton,Vicarage Road Stadium,Craig Pawson,20245
+2019-08-10,15:00 ,Burnley,Southampton,Turf Moor,Graham Scott,19784
+2019-08-10,15:00 ,Bournemouth,Sheffield Utd,Vitality Stadium,Kevin Friend,10714
+2019-08-10,15:00 ,Crystal Palace,Everton,Selhurst Park,Jonathan Moss,25151
+2019-08-10,17:30 ,Tottenham,Aston Villa,Tottenham Hotspur Stadium,Chris Kavanagh,60407
+2019-08-11,14:00 ,Newcastle Utd,Arsenal,St. James' Park,Martin Atkinson,47635
+2019-08-11,14:00 ,Leicester City,Wolves,King Power Stadium,Andre Marriner,32015
+2019-08-11,16:30 ,Manchester Utd,Chelsea,Old Trafford,Anthony Taylor,73620
+2019-08-17,12:30 ,Arsenal,Burnley,Emirates Stadium,Mike Dean,60214
+2019-08-17,15:00 ,Southampton,Liverpool,St. Mary's Stadium,Andre Marriner,31712
+2019-08-17,15:00 ,Norwich City,Newcastle Utd,Carrow Road,Stuart Attwell,27059
+2019-08-17,15:00 ,Brighton,West Ham,The American Express Community Stadium,Anthony Taylor,30459
+2019-08-17,15:00 ,Everton,Watford,Goodison Park,Lee Mason,39066
+2019-08-17,15:00 ,Aston Villa,Bournemouth,Villa Park,Martin Atkinson,40996
+2019-08-17,17:30 ,Manchester City,Tottenham,Etihad Stadium,Michael Oliver,54503
+2019-08-18,14:00 ,Sheffield Utd,Crystal Palace,Bramall Lane,David Coote,30197
+2019-08-18,16:30 ,Chelsea,Leicester City,Stamford Bridge,Oliver Langford,40629
+2019-08-19,20:00 ,Wolves,Manchester Utd,Molineux Stadium,Jonathan Moss,31314
+2019-08-23,20:00 ,Aston Villa,Everton,Villa Park,Michael Oliver,41922
+2019-08-24,12:30 ,Norwich City,Chelsea,Carrow Road,Martin Atkinson,27032
+2019-08-24,15:00 ,Brighton,Southampton,The American Express Community Stadium,Kevin Friend,30019
+2019-08-24,15:00 ,Manchester Utd,Crystal Palace,Old Trafford,Paul Tierney,73454
+2019-08-24,15:00 ,Watford,West Ham,Vicarage Road Stadium,Chris Kavanagh,20035
+2019-08-24,15:00 ,Sheffield Utd,Leicester City,Bramall Lane,Andy Madley,30079
+2019-08-24,17:30 ,Liverpool,Arsenal,Anfield,Anthony Taylor,53298
+2019-08-25,14:00 ,Bournemouth,Manchester City,Vitality Stadium,Andre Marriner,10486
+2019-08-25,16:30 ,Tottenham,Newcastle Utd,Tottenham Hotspur Stadium,Mike Dean,59245
+2019-08-25,16:30 ,Wolves,Burnley,Molineux Stadium,Craig Pawson,30522
+2019-08-31,12:30 ,Southampton,Manchester Utd,St. Mary's Stadium,Mike Dean,30499
+2019-08-31,15:00 ,Chelsea,Sheffield Utd,Stamford Bridge,Stuart Attwell,40560
+2019-08-31,15:00 ,West Ham,Norwich City,London Stadium,Paul Tierney,59950
+2019-08-31,15:00 ,Crystal Palace,Aston Villa,Selhurst Park,Kevin Friend,25248
+2019-08-31,15:00 ,Leicester City,Bournemouth,King Power Stadium,Peter Bankes,31613
+2019-08-31,15:00 ,Newcastle Utd,Watford,St. James' Park,Graham Scott,44157
+2019-08-31,15:00 ,Manchester City,Brighton,Etihad Stadium,Jonathan Moss,54386
+2019-08-31,17:30 ,Burnley,Liverpool,Turf Moor,Chris Kavanagh,21762
+2019-09-01,14:00 ,Everton,Wolves,Goodison Park,Anthony Taylor,39374
+2019-09-01,16:30 ,Arsenal,Tottenham,Emirates Stadium,Martin Atkinson,60333
+2019-09-14,12:30 ,Liverpool,Newcastle Utd,Anfield,Andre Marriner,51430
+2019-09-14,15:00 ,Manchester Utd,Leicester City,Old Trafford,Martin Atkinson,73689
+2019-09-14,15:00 ,Wolves,Chelsea,Molineux Stadium,Graham Scott,31534
+2019-09-14,15:00 ,Sheffield Utd,Southampton,Bramall Lane,Lee Mason,30985
+2019-09-14,15:00 ,Tottenham,Crystal Palace,Tottenham Hotspur Stadium,Craig Pawson,59812
+2019-09-14,15:00 ,Brighton,Burnley,The American Express Community Stadium,Michael Oliver,29398
+2019-09-14,17:30 ,Norwich City,Manchester City,Carrow Road,Kevin Friend,27035
+2019-09-15,14:00 ,Bournemouth,Everton,Vitality Stadium,Paul Tierney,10416
+2019-09-15,16:30 ,Watford,Arsenal,Vicarage Road Stadium,Anthony Taylor,21360
+2019-09-16,20:00 ,Aston Villa,West Ham,Villa Park,Mike Dean,42010
+2019-09-20,20:00 ,Southampton,Bournemouth,St. Mary's Stadium,Chris Kavanagh,30168
+2019-09-21,12:30 ,Leicester City,Tottenham,King Power Stadium,Paul Tierney,32129
+2019-09-21,15:00 ,Burnley,Norwich City,Turf Moor,David Coote,19712
+2019-09-21,15:00 ,Everton,Sheffield Utd,Goodison Park,Simon Hooper,39354
+2019-09-21,15:00 ,Manchester City,Watford,Etihad Stadium,Mike Dean,54273
+2019-09-21,17:30 ,Newcastle Utd,Brighton,St. James' Park,Martin Atkinson,43316
+2019-09-22,14:00 ,West Ham,Manchester Utd,London Stadium,Anthony Taylor,59936
+2019-09-22,14:00 ,Crystal Palace,Wolves,Selhurst Park,Stuart Attwell,25122
+2019-09-22,16:30 ,Chelsea,Liverpool,Stamford Bridge,Michael Oliver,40638
+2019-09-22,16:30 ,Arsenal,Aston Villa,Emirates Stadium,Jonathan Moss,60331
+2019-09-28,12:30 ,Sheffield Utd,Liverpool,Bramall Lane,Anthony Taylor,31774
+2019-09-28,15:00 ,Crystal Palace,Norwich City,Selhurst Park,Jonathan Moss,25477
+2019-09-28,15:00 ,Aston Villa,Burnley,Villa Park,Lee Mason,41546
+2019-09-28,15:00 ,Wolves,Watford,Molineux Stadium,Paul Tierney,30711
+2019-09-28,15:00 ,Tottenham,Southampton,Tottenham Hotspur Stadium,Graham Scott,59645
+2019-09-28,15:00 ,Chelsea,Brighton,Stamford Bridge,Chris Kavanagh,40683
+2019-09-28,15:00 ,Bournemouth,West Ham,Vitality Stadium,Stuart Attwell,10729
+2019-09-28,17:30 ,Everton,Manchester City,Goodison Park,Michael Oliver,39222
+2019-09-29,16:30 ,Leicester City,Newcastle Utd,King Power Stadium,Craig Pawson,32168
+2019-09-30,20:00 ,Manchester Utd,Arsenal,Old Trafford,Kevin Friend,73201
+2019-10-05,12:30 ,Brighton,Tottenham,The American Express Community Stadium,Jonathan Moss,30610
+2019-10-05,15:00 ,Burnley,Everton,Turf Moor,Graham Scott,20650
+2019-10-05,15:00 ,Norwich City,Aston Villa,Carrow Road,Andy Madley,27045
+2019-10-05,15:00 ,Liverpool,Leicester City,Anfield,Chris Kavanagh,53322
+2019-10-05,15:00 ,Watford,Sheffield Utd,Vicarage Road Stadium,Andre Marriner,20811
+2019-10-05,17:30 ,West Ham,Crystal Palace,London Stadium,Michael Oliver,59912
+2019-10-06,14:00 ,Arsenal,Bournemouth,Emirates Stadium,Martin Atkinson,60326
+2019-10-06,14:00 ,Manchester City,Wolves,Etihad Stadium,Craig Pawson,54435
+2019-10-06,14:00 ,Southampton,Chelsea,St. Mary's Stadium,Paul Tierney,31473
+2019-10-06,16:30 ,Newcastle Utd,Manchester Utd,St. James' Park,Mike Dean,51198
+2019-10-19,12:30 ,Everton,West Ham,Goodison Park,Paul Tierney,39263
+2019-10-19,15:00 ,Bournemouth,Norwich City,Vitality Stadium,Lee Mason,10669
+2019-10-19,15:00 ,Chelsea,Newcastle Utd,Stamford Bridge,Andre Marriner,40513
+2019-10-19,15:00 ,Aston Villa,Brighton,Villa Park,David Coote,41826
+2019-10-19,15:00 ,Wolves,Southampton,Molineux Stadium,Peter Bankes,30915
+2019-10-19,15:00 ,Tottenham,Watford,Tottenham Hotspur Stadium,Chris Kavanagh,58754
+2019-10-19,15:00 ,Leicester City,Burnley,King Power Stadium,Jonathan Moss,32105
+2019-10-19,17:30 ,Crystal Palace,Manchester City,Selhurst Park,Anthony Taylor,25480
+2019-10-20,16:30 ,Manchester Utd,Liverpool,Old Trafford,Martin Atkinson,73737
+2019-10-21,20:00 ,Sheffield Utd,Arsenal,Bramall Lane,Mike Dean,30775
+2019-10-25,20:00 ,Southampton,Leicester City,St. Mary's Stadium,Andre Marriner,28762
+2019-10-26,12:30 ,Manchester City,Aston Villa,Etihad Stadium,Graham Scott,54506
+2019-10-26,15:00 ,West Ham,Sheffield Utd,London Stadium,David Coote,59878
+2019-10-26,15:00 ,Brighton,Everton,The American Express Community Stadium,Andy Madley,30529
+2019-10-26,15:00 ,Watford,Bournemouth,Vicarage Road Stadium,Mike Dean,20821
+2019-10-26,17:30 ,Burnley,Chelsea,Turf Moor,Michael Oliver,20975
+2019-10-27,14:00 ,Newcastle Utd,Wolves,St. James' Park,Kevin Friend,46019
+2019-10-27,16:30 ,Arsenal,Crystal Palace,Emirates Stadium,Martin Atkinson,60345
+2019-10-27,16:30 ,Norwich City,Manchester Utd,Carrow Road,Stuart Attwell,27108
+2019-10-27,16:30 ,Liverpool,Tottenham,Anfield,Anthony Taylor,53222
+2019-11-02,12:30 ,Bournemouth,Manchester Utd,Vitality Stadium,Chris Kavanagh,10669
+2019-11-02,15:00 ,Sheffield Utd,Burnley,Bramall Lane,Simon Hooper,31131
+2019-11-02,15:00 ,Manchester City,Southampton,Etihad Stadium,Lee Mason,53922
+2019-11-02,15:00 ,Brighton,Norwich City,The American Express Community Stadium,Kevin Friend,30539
+2019-11-02,15:00 ,Aston Villa,Liverpool,Villa Park,Jonathan Moss,41878
+2019-11-02,15:00 ,Arsenal,Wolves,Emirates Stadium,Michael Oliver,60383
+2019-11-02,15:00 ,West Ham,Newcastle Utd,London Stadium,Stuart Attwell,59907
+2019-11-02,17:30 ,Watford,Chelsea,Vicarage Road Stadium,Anthony Taylor,21011
+2019-11-03,14:00 ,Crystal Palace,Leicester City,Selhurst Park,Paul Tierney,25480
+2019-11-03,16:30 ,Everton,Tottenham,Goodison Park,Martin Atkinson,39001
+2019-11-08,20:00 ,Norwich City,Watford,Carrow Road,Andre Marriner,27074
+2019-11-09,12:30 ,Chelsea,Crystal Palace,Stamford Bridge,Mike Dean,40525
+2019-11-09,15:00 ,Newcastle Utd,Bournemouth,St. James' Park,Martin Atkinson,44424
+2019-11-09,15:00 ,Burnley,West Ham,Turf Moor,Kevin Friend,20255
+2019-11-09,15:00 ,Tottenham,Sheffield Utd,Tottenham Hotspur Stadium,Graham Scott,59781
+2019-11-09,15:00 ,Southampton,Everton,St. Mary's Stadium,Paul Tierney,29754
+2019-11-09,17:30 ,Leicester City,Arsenal,King Power Stadium,Chris Kavanagh,32209
+2019-11-10,14:00 ,Wolves,Aston Villa,Molineux Stadium,Anthony Taylor,31607
+2019-11-10,14:00 ,Manchester Utd,Brighton,Old Trafford,Jonathan Moss,73556
+2019-11-10,16:30 ,Liverpool,Manchester City,Anfield,Michael Oliver,53324
+2019-11-23,12:30 ,West Ham,Tottenham,London Stadium,Michael Oliver,59930
+2019-11-23,15:00 ,Crystal Palace,Liverpool,Selhurst Park,Kevin Friend,25486
+2019-11-23,15:00 ,Arsenal,Southampton,Emirates Stadium,Stuart Attwell,60295
+2019-11-23,15:00 ,Bournemouth,Wolves,Vitality Stadium,Simon Hooper,10539
+2019-11-23,15:00 ,Everton,Norwich City,Goodison Park,Anthony Taylor,39241
+2019-11-23,15:00 ,Watford,Burnley,Vicarage Road Stadium,Paul Tierney,19711
+2019-11-23,15:00 ,Brighton,Leicester City,The American Express Community Stadium,Mike Dean,30640
+2019-11-23,17:30 ,Manchester City,Chelsea,Etihad Stadium,Martin Atkinson,54486
+2019-11-24,16:30 ,Sheffield Utd,Manchester Utd,Bramall Lane,Andre Marriner,32024
+2019-11-25,20:00 ,Aston Villa,Newcastle Utd,Villa Park,Lee Mason,41821
+2019-11-30,12:30 ,Newcastle Utd,Manchester City,St. James' Park,Chris Kavanagh,49937
+2019-11-30,15:00 ,Tottenham,Bournemouth,Tottenham Hotspur Stadium,Lee Mason,59626
+2019-11-30,15:00 ,Liverpool,Brighton,Anfield,Martin Atkinson,53319
+2019-11-30,15:00 ,Burnley,Crystal Palace,Turf Moor,Peter Bankes,19818
+2019-11-30,15:00 ,Chelsea,West Ham,Stamford Bridge,Jonathan Moss,40595
+2019-11-30,17:30 ,Southampton,Watford,St. Mary's Stadium,Michael Oliver,26929
+2019-12-01,14:00 ,Norwich City,Arsenal,Carrow Road,Paul Tierney,27067
+2019-12-01,14:00 ,Wolves,Sheffield Utd,Molineux Stadium,David Coote,31642
+2019-12-01,16:30 ,Leicester City,Everton,King Power Stadium,Graham Scott,32144
+2019-12-01,16:30 ,Manchester Utd,Aston Villa,Old Trafford,Craig Pawson,73381
+2019-12-03,19:30 ,Crystal Palace,Bournemouth,Selhurst Park,Anthony Taylor,23497
+2019-12-03,20:15 ,Burnley,Manchester City,Turf Moor,Jonathan Moss,20101
+2019-12-04,19:30 ,Wolves,West Ham,Molineux Stadium,Andre Marriner,31217
+2019-12-04,19:30 ,Manchester Utd,Tottenham,Old Trafford,Paul Tierney,73252
+2019-12-04,19:30 ,Leicester City,Watford,King Power Stadium,Craig Pawson,31763
+2019-12-04,19:30 ,Southampton,Norwich City,St. Mary's Stadium,Kevin Friend,27019
+2019-12-04,19:30 ,Chelsea,Aston Villa,Stamford Bridge,Chris Kavanagh,40628
+2019-12-04,20:15 ,Liverpool,Everton,Anfield,Mike Dean,53094
+2019-12-05,19:30 ,Sheffield Utd,Newcastle Utd,Bramall Lane,Stuart Attwell,30409
+2019-12-05,20:15 ,Arsenal,Brighton,Emirates Stadium,Graham Scott,60164
+2019-12-07,12:30 ,Everton,Chelsea,Goodison Park,Craig Pawson,39114
+2019-12-07,15:00 ,Watford,Crystal Palace,Vicarage Road Stadium,Martin Atkinson,20070
+2019-12-07,15:00 ,Bournemouth,Liverpool,Vitality Stadium,Chris Kavanagh,10832
+2019-12-07,15:00 ,Tottenham,Burnley,Tottenham Hotspur Stadium,Kevin Friend,58401
+2019-12-07,17:30 ,Manchester City,Manchester Utd,Etihad Stadium,Anthony Taylor,54403
+2019-12-08,14:00 ,Aston Villa,Leicester City,Villa Park,Michael Oliver,41908
+2019-12-08,14:00 ,Newcastle Utd,Southampton,St. James' Park,David Coote,42303
+2019-12-08,14:00 ,Norwich City,Sheffield Utd,Carrow Road,Simon Hooper,26881
+2019-12-08,16:30 ,Brighton,Wolves,The American Express Community Stadium,Jonathan Moss,30189
+2019-12-09,20:00 ,West Ham,Arsenal,London Stadium,Mike Dean,59936
+2019-12-14,12:30 ,Liverpool,Watford,Anfield,Andre Marriner,53311
+2019-12-14,15:00 ,Chelsea,Bournemouth,Stamford Bridge,Graham Scott,40243
+2019-12-14,15:00 ,Leicester City,Norwich City,King Power Stadium,Andy Madley,32101
+2019-12-14,15:00 ,Sheffield Utd,Aston Villa,Bramall Lane,Peter Bankes,30396
+2019-12-14,15:00 ,Burnley,Newcastle Utd,Turf Moor,Tim Robinson,19798
+2019-12-14,17:30 ,Southampton,West Ham,St. Mary's Stadium,Martin Atkinson,27701
+2019-12-15,14:00 ,Wolves,Tottenham,Molineux Stadium,Stuart Attwell,31674
+2019-12-15,14:00 ,Manchester Utd,Everton,Old Trafford,Michael Oliver,63328
+2019-12-15,16:30 ,Arsenal,Manchester City,Emirates Stadium,Paul Tierney,60031
+2019-12-16,19:45 ,Crystal Palace,Brighton,Selhurst Park,Craig Pawson,24175
+2019-12-21,12:30 ,Everton,Arsenal,Goodison Park,Kevin Friend,39336
+2019-12-21,15:00 ,Newcastle Utd,Crystal Palace,St. James' Park,Simon Hooper,45453
+2019-12-21,15:00 ,Aston Villa,Southampton,Villa Park,Craig Pawson,41834
+2019-12-21,15:00 ,Brighton,Sheffield Utd,The American Express Community Stadium,Robert Jones,30505
+2019-12-21,15:00 ,Norwich City,Wolves,Carrow Road,Peter Bankes,27053
+2019-12-21,15:00 ,Bournemouth,Burnley,Vitality Stadium,Martin Atkinson,10020
+2019-12-21,17:30 ,Manchester City,Leicester City,Etihad Stadium,Mike Dean,54415
+2019-12-22,14:00 ,Watford,Manchester Utd,Vicarage Road Stadium,Lee Mason,21488
+2019-12-22,16:30 ,Tottenham,Chelsea,Tottenham Hotspur Stadium,Anthony Taylor,61104
+2019-12-26,12:30 ,Tottenham,Brighton,Tottenham Hotspur Stadium,Graham Scott,56308
+2019-12-26,15:00 ,Bournemouth,Arsenal,Vitality Stadium,Stuart Attwell,10234
+2019-12-26,15:00 ,Everton,Burnley,Goodison Park,Anthony Taylor,39177
+2019-12-26,15:00 ,Sheffield Utd,Watford,Bramall Lane,David Coote,30222
+2019-12-26,15:00 ,Aston Villa,Norwich City,Villa Park,Chris Kavanagh,41289
+2019-12-26,15:00 ,Crystal Palace,West Ham,Selhurst Park,Andre Marriner,25462
+2019-12-26,15:00 ,Chelsea,Southampton,Stamford Bridge,Jonathan Moss,40651
+2019-12-26,17:30 ,Manchester Utd,Newcastle Utd,Old Trafford,Kevin Friend,73206
+2019-12-26,20:00 ,Leicester City,Liverpool,King Power Stadium,Michael Oliver,32211
+2019-12-27,19:45 ,Wolves,Manchester City,Molineux Stadium,Martin Atkinson,31737
+2019-12-28,12:30 ,Brighton,Bournemouth,The American Express Community Stadium,Paul Tierney,30441
+2019-12-28,15:00 ,Watford,Aston Villa,Vicarage Road Stadium,Simon Hooper,21348
+2019-12-28,15:00 ,Newcastle Utd,Everton,St. James' Park,Lee Mason,52211
+2019-12-28,15:00 ,Southampton,Crystal Palace,St. Mary's Stadium,Andy Madley,31108
+2019-12-28,17:30 ,West Ham,Leicester City,London Stadium,David Coote,59919
+2019-12-28,17:30 ,Norwich City,Tottenham,Carrow Road,Kevin Friend,27072
+2019-12-28,19:45 ,Burnley,Manchester Utd,Turf Moor,Mike Dean,21924
+2019-12-29,14:00 ,Arsenal,Chelsea,Emirates Stadium,Craig Pawson,60309
+2019-12-29,16:30 ,Liverpool,Wolves,Anfield,Anthony Taylor,53326
+2019-12-29,18:00 ,Manchester City,Sheffield Utd,Etihad Stadium,Chris Kavanagh,54512
+2020-01-01,12:30 ,Brighton,Chelsea,The American Express Community Stadium,Stuart Attwell,30559
+2020-01-01,12:30 ,Burnley,Aston Villa,Turf Moor,Michael Oliver,19561
+2020-01-01,15:00 ,Watford,Wolves,Vicarage Road Stadium,Andy Madley,20584
+2020-01-01,15:00 ,Newcastle Utd,Leicester City,St. James' Park,Martin Atkinson,52178
+2020-01-01,15:00 ,Southampton,Tottenham,St. Mary's Stadium,Mike Dean,30976
+2020-01-01,17:30 ,Norwich City,Crystal Palace,Carrow Road,Jonathan Moss,27021
+2020-01-01,17:30 ,West Ham,Bournemouth,London Stadium,Graham Scott,59917
+2020-01-01,17:30 ,Manchester City,Everton,Etihad Stadium,Andre Marriner,54407
+2020-01-01,20:00 ,Arsenal,Manchester Utd,Emirates Stadium,Chris Kavanagh,60328
+2020-01-02,20:00 ,Liverpool,Sheffield Utd,Anfield,Paul Tierney,53321
+2020-01-10,20:00 ,Sheffield Utd,West Ham,Bramall Lane,Michael Oliver,30124
+2020-01-11,12:30 ,Crystal Palace,Arsenal,Selhurst Park,Paul Tierney,25468
+2020-01-11,15:00 ,Chelsea,Burnley,Stamford Bridge,Kevin Friend,40396
+2020-01-11,15:00 ,Manchester Utd,Norwich City,Old Trafford,Anthony Taylor,73271
+2020-01-11,15:00 ,Leicester City,Southampton,King Power Stadium,Lee Mason,32115
+2020-01-11,15:00 ,Everton,Brighton,Goodison Park,David Coote,38772
+2020-01-11,15:00 ,Wolves,Newcastle Utd,Molineux Stadium,Peter Bankes,31570
+2020-01-11,17:30 ,Tottenham,Liverpool,Tottenham Hotspur Stadium,Martin Atkinson,61023
+2020-01-12,14:00 ,Bournemouth,Watford,Vitality Stadium,Mike Dean,10384
+2020-01-12,16:30 ,Aston Villa,Manchester City,Villa Park,Jonathan Moss,41823
+2020-01-18,12:30 ,Watford,Tottenham,Vicarage Road Stadium,Michael Oliver,21366
+2020-01-18,15:00 ,Brighton,Aston Villa,The American Express Community Stadium,Andy Madley,30551
+2020-01-18,15:00 ,Manchester City,Crystal Palace,Etihad Stadium,Graham Scott,54439
+2020-01-18,15:00 ,West Ham,Everton,London Stadium,Andre Marriner,59915
+2020-01-18,15:00 ,Norwich City,Bournemouth,Carrow Road,Paul Tierney,26781
+2020-01-18,15:00 ,Southampton,Wolves,St. Mary's Stadium,Darren England,31152
+2020-01-18,15:00 ,Arsenal,Sheffield Utd,Emirates Stadium,Mike Dean,60310
+2020-01-18,17:30 ,Newcastle Utd,Chelsea,St. James' Park,Chris Kavanagh,52217
+2020-01-19,14:00 ,Burnley,Leicester City,Turf Moor,Anthony Taylor,19788
+2020-01-19,16:30 ,Liverpool,Manchester Utd,Anfield,Craig Pawson,52916
+2020-01-21,19:30 ,Crystal Palace,Southampton,Selhurst Park,Andre Marriner,23739
+2020-01-21,19:30 ,Bournemouth,Brighton,Vitality Stadium,Kevin Friend,10065
+2020-01-21,19:30 ,Sheffield Utd,Manchester City,Bramall Lane,Lee Mason,31285
+2020-01-21,19:30 ,Aston Villa,Watford,Villa Park,Martin Atkinson,40867
+2020-01-21,19:30 ,Everton,Newcastle Utd,Goodison Park,Simon Hooper,38822
+2020-01-21,20:15 ,Chelsea,Arsenal,Stamford Bridge,Stuart Attwell,40577
+2020-01-22,19:30 ,Leicester City,West Ham,King Power Stadium,David Coote,31968
+2020-01-22,19:30 ,Tottenham,Norwich City,Tottenham Hotspur Stadium,Chris Kavanagh,58182
+2020-01-22,20:15 ,Manchester Utd,Burnley,Old Trafford,Jonathan Moss,73198
+2020-01-23,20:00 ,Wolves,Liverpool,Molineux Stadium,Michael Oliver,31746
+2020-01-29,19:45 ,West Ham,Liverpool,London Stadium,Jonathan Moss,59959
+2020-02-01,12:30 ,Leicester City,Chelsea,King Power Stadium,Lee Mason,32186
+2020-02-01,15:00 ,Watford,Everton,Vicarage Road Stadium,Craig Pawson,21229
+2020-02-01,15:00 ,Bournemouth,Aston Villa,Vitality Stadium,Anthony Taylor,10722
+2020-02-01,15:00 ,Newcastle Utd,Norwich City,St. James' Park,Martin Atkinson,52204
+2020-02-01,15:00 ,Liverpool,Southampton,Anfield,Kevin Friend,53291
+2020-02-01,15:00 ,Crystal Palace,Sheffield Utd,Selhurst Park,Andy Madley,25170
+2020-02-01,15:00 ,West Ham,Brighton,London Stadium,Michael Oliver,59952
+2020-02-01,17:30 ,Manchester Utd,Wolves,Old Trafford,Paul Tierney,73363
+2020-02-02,14:00 ,Burnley,Arsenal,Turf Moor,Chris Kavanagh,21048
+2020-02-02,16:30 ,Tottenham,Manchester City,Tottenham Hotspur Stadium,Mike Dean,61022
+2020-02-08,12:30 ,Everton,Crystal Palace,Goodison Park,David Coote,38987
+2020-02-08,17:30 ,Brighton,Watford,The American Express Community Stadium,Kevin Friend,30443
+2020-02-09,14:00 ,Sheffield Utd,Bournemouth,Bramall Lane,Jonathan Moss,30361
+2020-02-14,20:00 ,Wolves,Leicester City,Molineux Stadium,Mike Dean,31682
+2020-02-15,12:30 ,Southampton,Burnley,St. Mary's Stadium,Simon Hooper,26302
+2020-02-15,17:30 ,Norwich City,Liverpool,Carrow Road,Stuart Attwell,27110
+2020-02-16,14:00 ,Aston Villa,Tottenham,Villa Park,Martin Atkinson,41874
+2020-02-16,16:30 ,Arsenal,Newcastle Utd,Emirates Stadium,Lee Mason,60188
+2020-02-17,20:00 ,Chelsea,Manchester Utd,Stamford Bridge,Anthony Taylor,40504
+2020-02-19,19:30 ,Manchester City,West Ham,Etihad Stadium,Kevin Friend,52159
+2020-02-22,12:30 ,Chelsea,Tottenham,Stamford Bridge,Michael Oliver,40608
+2020-02-22,15:00 ,Southampton,Aston Villa,St. Mary's Stadium,Craig Pawson,31478
+2020-02-22,15:00 ,Sheffield Utd,Brighton,Bramall Lane,Graham Scott,31888
+2020-02-22,15:00 ,Burnley,Bournemouth,Turf Moor,Mike Dean,18227
+2020-02-22,15:00 ,Crystal Palace,Newcastle Utd,Selhurst Park,Peter Bankes,25486
+2020-02-22,17:30 ,Leicester City,Manchester City,King Power Stadium,Paul Tierney,32068
+2020-02-23,14:00 ,Wolves,Norwich City,Molineux Stadium,Chris Kavanagh,31046
+2020-02-23,14:00 ,Manchester Utd,Watford,Old Trafford,Martin Atkinson,73347
+2020-02-23,16:30 ,Arsenal,Everton,Emirates Stadium,Stuart Attwell,60296
+2020-02-24,20:00 ,Liverpool,West Ham,Anfield,Jonathan Moss,53313
+2020-02-28,20:00 ,Norwich City,Leicester City,Carrow Road,Craig Pawson,27010
+2020-02-29,12:30 ,Brighton,Crystal Palace,The American Express Community Stadium,Martin Atkinson,30124
+2020-02-29,15:00 ,Bournemouth,Chelsea,Vitality Stadium,Andre Marriner,10667
+2020-02-29,15:00 ,West Ham,Southampton,London Stadium,Anthony Taylor,59962
+2020-02-29,15:00 ,Newcastle Utd,Burnley,St. James' Park,Andy Madley,52219
+2020-02-29,17:30 ,Watford,Liverpool,Vicarage Road Stadium,Michael Oliver,21634
+2020-03-01,14:00 ,Everton,Manchester Utd,Goodison Park,Chris Kavanagh,39374
+2020-03-01,14:00 ,Tottenham,Wolves,Tottenham Hotspur Stadium,Stuart Attwell,58064
+2020-03-07,12:30 ,Liverpool,Bournemouth,Anfield,Paul Tierney,53323
+2020-03-07,15:00 ,Sheffield Utd,Norwich City,Bramall Lane,Simon Hooper,31379
+2020-03-07,15:00 ,Southampton,Newcastle Utd,St. Mary's Stadium,Graham Scott,30096
+2020-03-07,15:00 ,Wolves,Brighton,Molineux Stadium,Andre Marriner,31490
+2020-03-07,15:00 ,Arsenal,West Ham,Emirates Stadium,Martin Atkinson,60335
+2020-03-07,15:00 ,Crystal Palace,Watford,Selhurst Park,Anthony Taylor,25461
+2020-03-07,17:30 ,Burnley,Tottenham,Turf Moor,Jonathan Moss,20496
+2020-03-08,14:00 ,Chelsea,Everton,Stamford Bridge,Kevin Friend,40694
+2020-03-08,16:30 ,Manchester Utd,Manchester City,Old Trafford,Mike Dean,73288
+2020-03-09,20:00 ,Leicester City,Aston Villa,King Power Stadium,Michael Oliver,32125
+2020-06-17,18:00 ,Aston Villa,Sheffield Utd,Villa Park,Michael Oliver,0
+2020-06-17,20:15 ,Manchester City,Arsenal,Etihad Stadium,Anthony Taylor,0
+2020-06-19,18:00 ,Norwich City,Southampton,Carrow Road,Kevin Friend,0
+2020-06-19,20:15 ,Tottenham,Manchester Utd,Tottenham Hotspur Stadium,Jonathan Moss,0
+2020-06-20,12:30 ,Watford,Leicester City,Vicarage Road Stadium,Craig Pawson,0
+2020-06-20,15:00 ,Brighton,Arsenal,The American Express Community Stadium,Martin Atkinson,0
+2020-06-20,17:30 ,West Ham,Wolves,London Stadium,Anthony Taylor,0
+2020-06-20,19:45 ,Bournemouth,Crystal Palace,Vitality Stadium,Stuart Attwell,0
+2020-06-21,14:00 ,Newcastle Utd,Sheffield Utd,St. James' Park,David Coote,0
+2020-06-21,16:15 ,Aston Villa,Chelsea,Villa Park,Paul Tierney,0
+2020-06-21,19:00 ,Everton,Liverpool,Goodison Park,Mike Dean,0
+2020-06-22,20:00 ,Manchester City,Burnley,Etihad Stadium,Andre Marriner,0
+2020-06-23,18:00 ,Leicester City,Brighton,King Power Stadium,Lee Mason,0
+2020-06-23,20:15 ,Tottenham,West Ham,Tottenham Hotspur Stadium,Craig Pawson,0
+2020-06-24,18:00 ,Manchester Utd,Sheffield Utd,Old Trafford,Anthony Taylor,0
+2020-06-24,18:00 ,Norwich City,Everton,Carrow Road,Andy Madley,0
+2020-06-24,18:00 ,Newcastle Utd,Aston Villa,St. James' Park,Chris Kavanagh,0
+2020-06-24,18:00 ,Wolves,Bournemouth,Molineux Stadium,Michael Oliver,0
+2020-06-24,20:15 ,Liverpool,Crystal Palace,Anfield,Martin Atkinson,0
+2020-06-25,18:00 ,Southampton,Arsenal,St. Mary's Stadium,Graham Scott,0
+2020-06-25,18:00 ,Burnley,Watford,Turf Moor,Mike Dean,0
+2020-06-25,20:15 ,Chelsea,Manchester City,Stamford Bridge,Stuart Attwell,0
+2020-06-27,12:30 ,Aston Villa,Wolves,Villa Park,Craig Pawson,0
+2020-06-28,16:30 ,Watford,Southampton,Vicarage Road Stadium,Michael Oliver,0
+2020-06-29,20:00 ,Crystal Palace,Burnley,Selhurst Park,Simon Hooper,0
+2020-06-30,20:15 ,Brighton,Manchester Utd,The American Express Community Stadium,Andre Marriner,0
+2020-07-01,18:00 ,Everton,Leicester City,Goodison Park,David Coote,0
+2020-07-01,18:00 ,Bournemouth,Newcastle Utd,Vitality Stadium,Kevin Friend,0
+2020-07-01,18:00 ,Arsenal,Norwich City,Emirates Stadium,Peter Bankes,0
+2020-07-01,20:15 ,West Ham,Chelsea,London Stadium,Martin Atkinson,0
+2020-07-02,18:00 ,Sheffield Utd,Tottenham,Bramall Lane,Chris Kavanagh,0
+2020-07-02,20:15 ,Manchester City,Liverpool,Etihad Stadium,Anthony Taylor,0
+2020-07-04,12:30 ,Norwich City,Brighton,Carrow Road,Stuart Attwell,0
+2020-07-04,15:00 ,Leicester City,Crystal Palace,King Power Stadium,Jonathan Moss,0
+2020-07-04,15:00 ,Manchester Utd,Bournemouth,Old Trafford,Mike Dean,0
+2020-07-04,17:30 ,Wolves,Arsenal,Molineux Stadium,Michael Oliver,0
+2020-07-04,20:00 ,Chelsea,Watford,Stamford Bridge,Kevin Friend,0
+2020-07-05,12:00 ,Burnley,Sheffield Utd,Turf Moor,Peter Bankes,0
+2020-07-05,14:15 ,Newcastle Utd,West Ham,St. James' Park,Craig Pawson,0
+2020-07-05,16:30 ,Liverpool,Aston Villa,Anfield,Paul Tierney,0
+2020-07-05,19:00 ,Southampton,Manchester City,St. Mary's Stadium,Andre Marriner,0
+2020-07-06,20:00 ,Tottenham,Everton,Tottenham Hotspur Stadium,Graham Scott,0
+2020-07-07,18:00 ,Watford,Norwich City,Vicarage Road Stadium,Anthony Taylor,0
+2020-07-07,18:00 ,Crystal Palace,Chelsea,Selhurst Park,David Coote,0
+2020-07-07,20:15 ,Arsenal,Leicester City,Emirates Stadium,Chris Kavanagh,0
+2020-07-08,18:00 ,West Ham,Burnley,London Stadium,Michael Oliver,0
+2020-07-08,18:00 ,Manchester City,Newcastle Utd,Etihad Stadium,Andy Madley,0
+2020-07-08,18:00 ,Sheffield Utd,Wolves,Bramall Lane,Martin Atkinson,0
+2020-07-08,20:15 ,Brighton,Liverpool,The American Express Community Stadium,Craig Pawson,0
+2020-07-09,18:00 ,Bournemouth,Tottenham,Vitality Stadium,Paul Tierney,0
+2020-07-09,18:00 ,Everton,Southampton,Goodison Park,Lee Mason,0
+2020-07-09,20:15 ,Aston Villa,Manchester Utd,Villa Park,Jonathan Moss,0
+2020-07-11,12:30 ,Watford,Newcastle Utd,Vicarage Road Stadium,Craig Pawson,0
+2020-07-11,12:30 ,Norwich City,West Ham,Carrow Road,Kevin Friend,0
+2020-07-11,15:00 ,Liverpool,Burnley,Anfield,David Coote,0
+2020-07-11,17:30 ,Sheffield Utd,Chelsea,Bramall Lane,Andre Marriner,0
+2020-07-11,20:00 ,Brighton,Manchester City,The American Express Community Stadium,Graham Scott,0
+2020-07-12,12:00 ,Wolves,Everton,Molineux Stadium,Anthony Taylor,0
+2020-07-12,14:15 ,Aston Villa,Crystal Palace,Villa Park,Martin Atkinson,0
+2020-07-12,16:30 ,Tottenham,Arsenal,Tottenham Hotspur Stadium,Michael Oliver,0
+2020-07-12,19:00 ,Bournemouth,Leicester City,Vitality Stadium,Stuart Attwell,0
+2020-07-13,20:00 ,Manchester Utd,Southampton,Old Trafford,Chris Kavanagh,0
+2020-07-14,20:15 ,Chelsea,Norwich City,Stamford Bridge,Jonathan Moss,0
+2020-07-15,18:00 ,Burnley,Wolves,Turf Moor,Mike Dean,0
+2020-07-15,18:00 ,Manchester City,Bournemouth,Etihad Stadium,Lee Mason,0
+2020-07-15,18:00 ,Newcastle Utd,Tottenham,St. James' Park,David Coote,0
+2020-07-15,20:15 ,Arsenal,Liverpool,Emirates Stadium,Paul Tierney,0
+2020-07-16,18:00 ,Leicester City,Sheffield Utd,King Power Stadium,Michael Oliver,0
+2020-07-16,18:00 ,Everton,Aston Villa,Goodison Park,Anthony Taylor,0
+2020-07-16,20:15 ,Southampton,Brighton,St. Mary's Stadium,Andre Marriner,0
+2020-07-16,20:15 ,Crystal Palace,Manchester Utd,Selhurst Park,Graham Scott,0
+2020-07-17,20:00 ,West Ham,Watford,London Stadium,Martin Atkinson,0
+2020-07-18,17:30 ,Norwich City,Burnley,Carrow Road,Kevin Friend,0
+2020-07-19,14:00 ,Bournemouth,Southampton,Vitality Stadium,Craig Pawson,0
+2020-07-19,16:00 ,Tottenham,Leicester City,Tottenham Hotspur Stadium,Anthony Taylor,0
+2020-07-20,18:00 ,Brighton,Newcastle Utd,The American Express Community Stadium,Simon Hooper,0
+2020-07-20,18:00 ,Sheffield Utd,Everton,Bramall Lane,Stuart Attwell,0
+2020-07-20,20:15 ,Wolves,Crystal Palace,Molineux Stadium,Peter Bankes,0
+2020-07-21,18:00 ,Watford,Manchester City,Vicarage Road Stadium,Michael Oliver,0
+2020-07-21,20:15 ,Aston Villa,Arsenal,Villa Park,Chris Kavanagh,0
+2020-07-22,18:00 ,Manchester Utd,West Ham,Old Trafford,Paul Tierney,0
+2020-07-22,20:15 ,Liverpool,Chelsea,Anfield,Andre Marriner,0
+2020-07-26,16:00 ,Southampton,Sheffield Utd,St. Mary's Stadium,Peter Bankes,0
+2020-07-26,16:00 ,Burnley,Brighton,Turf Moor,Jonathan Moss,0
+2020-07-26,16:00 ,West Ham,Aston Villa,London Stadium,Michael Oliver,0
+2020-07-26,16:00 ,Chelsea,Wolves,Stamford Bridge,Stuart Attwell,0
+2020-07-26,16:00 ,Everton,Bournemouth,Goodison Park,Chris Kavanagh,0
+2020-07-26,16:00 ,Crystal Palace,Tottenham,Selhurst Park,Andre Marriner,0
+2020-07-26,16:00 ,Arsenal,Watford,Emirates Stadium,Mike Dean,0
+2020-07-26,16:00 ,Manchester City,Norwich City,Etihad Stadium,Craig Pawson,0
+2020-07-26,16:00 ,Newcastle Utd,Liverpool,St. James' Park,Anthony Taylor,0
+2020-07-26,16:00 ,Leicester City,Manchester Utd,King Power Stadium,Martin Atkinson,0
