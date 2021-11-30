@@ -338,6 +338,14 @@ class FBRef:
         return df.loc[:, ~df.columns.duplicated()]
 
     def get_player_data(self, url):
+        """ Scrape each table of Outfield player data
+
+        Args:
+            url (string): Base link to the team stats
+
+        Returns:
+            (pd.DataFrame): Final data
+        """
         categories_name = [
             'stats', 'shooting', 'passing', 'passing_types',
             'gca', 'defense', 'possession', 'misc'
@@ -385,13 +393,12 @@ class FBRef:
         self.logger.info("Downloading Historical Season Data")
 
         for season in seasons:
-            self.logger.info(f"Season: {season}")
-
             if season.split('/')[-2] == '9':
                 url = (
                     'https://fbref.com/en/comps/9/{table}/' +
                     season.split('/')[-1])
                 year = self.season
+            
             else:
                 url = (
                     'https://fbref.com/en/comps/9/' +
@@ -400,41 +407,44 @@ class FBRef:
                     season.split('/')[-1])
                 year = season.split('/')[-1][:4]
 
-            df = self.get_team_data(url)
-            df.loc[:, "season"] = year
-            if os.path.isfile(os.path.join(self.root, 'teams.csv')):
-                past_df = pd.read_csv(os.path.join(self.root, 'teams.csv'))
-                pd.concat(
-                    [past_df, df], ignore_index=True
-                ).to_csv(os.path.join(self.root, 'teams.csv'), index=False)
-            else:
-                df.to_csv(
-                    os.path.join(self.root, 'teams.csv'),
-                    index=False)
+            if int(year) > 2016:
+                self.logger.info(f"Season: {season}")
 
-            df = self.get_keeper_data(url)
-            df.loc[:, "season"] = year
-            if os.path.isfile(os.path.join(self.root, 'keeper.csv')):
-                past_df = pd.read_csv(os.path.join(self.root, 'keeper.csv'))
-                pd.concat(
-                    [past_df, df], ignore_index=True
-                ).to_csv(os.path.join(self.root, 'keeper.csv'), index=False)
-            else:
-                df.to_csv(
-                    os.path.join(self.root, 'keeper.csv'),
-                    index=False)
+                df = self.get_team_data(url)
+                df.loc[:, "season"] = year
+                if os.path.isfile(os.path.join(self.root, 'teams.csv')):
+                    past_df = pd.read_csv(os.path.join(self.root, 'teams.csv'))
+                    pd.concat(
+                        [past_df, df], ignore_index=True
+                    ).to_csv(os.path.join(self.root, 'teams.csv'), index=False)
+                else:
+                    df.to_csv(
+                        os.path.join(self.root, 'teams.csv'),
+                        index=False)
 
-            df = self.get_player_data(url)
-            df.loc[:, "season"] = year
-            if os.path.isfile(os.path.join(self.root, 'outfield.csv')):
-                past_df = pd.read_csv(os.path.join(self.root, 'outfield.csv'))
-                pd.concat(
-                    [past_df, df], ignore_index=True
-                ).to_csv(os.path.join(self.root, 'outfield.csv'), index=False)
-            else:
-                df.to_csv(
-                    os.path.join(self.root, 'outfield.csv'),
-                    index=False)
+                df = self.get_keeper_data(url)
+                df.loc[:, "season"] = year
+                if os.path.isfile(os.path.join(self.root, 'keeper.csv')):
+                    past_df = pd.read_csv(os.path.join(self.root, 'keeper.csv'))
+                    pd.concat(
+                        [past_df, df], ignore_index=True
+                    ).to_csv(os.path.join(self.root, 'keeper.csv'), index=False)
+                else:
+                    df.to_csv(
+                        os.path.join(self.root, 'keeper.csv'),
+                        index=False)
+
+                df = self.get_player_data(url)
+                df.loc[:, "season"] = year
+                if os.path.isfile(os.path.join(self.root, 'outfield.csv')):
+                    past_df = pd.read_csv(os.path.join(self.root, 'outfield.csv'))
+                    pd.concat(
+                        [past_df, df], ignore_index=True
+                    ).to_csv(os.path.join(self.root, 'outfield.csv'), index=False)
+                else:
+                    df.to_csv(
+                        os.path.join(self.root, 'outfield.csv'),
+                        index=False)
 
     def get_match_data_players(self, page, categories_cols):
         df = pd.DataFrame()
@@ -709,6 +719,7 @@ class FBRef:
                                 index=False)
 
     def get_fixtures(self):
+        """ Scrape data fixture data """
 
         for index, comp in zip(
                 ["9", "690", "514", "8", "19"],
