@@ -708,21 +708,18 @@ class FBRef:
                                 os.path.join(self.root, f'games_shots.csv'),
                                 index=False)
 
-    def get_fixtures(self, history=False):
+    def get_fixtures(self):
 
         for index, comp in zip(
-                ["690", "514", "8", "19"], ['EFL-Cup', "FA-Cup", "Champions-League", "Europa-League"]):
+                ["9", "690", "514", "8", "19"],
+                ['Premier-League', 'EFL-Cup', "FA-Cup", "Champions-League", "Europa-League"]):
+            
+            # Get links of historical competitions
             seasons = self.get_competition_urls(
                 f'https://fbref.com/en/comps/{index}/history/{comp}-Seasons')
 
-            if not history:
-                seasons = [seasons[0]]
-
             self.logger.info(f"Downloading {comp} Fixtures Data")
-
             for season in seasons:
-                self.logger.info(f"Season: {season}")
-                
                 if season.split('/')[-2] == index:
                     url = (
                         f'https://fbref.com/en/comps/{index}/schedule/{comp}-Scores-and-Fixtures')
@@ -739,41 +736,33 @@ class FBRef:
 
                 # Skip years with no underlying stats
                 if int(year) > 2016:
-                    table_rows = self.get_url(url)[0].find_all('tr')
+                    self.logger.info(f"Season: {season}")
 
-                    for row in table_rows:
-                        # Skip blank rows, and postponed games
-                        if (
-                                row.find('th', {"scope": "row"}) is not None
-                                and row.find('td', {"data-stat": "match_report"}).text != ""
-                                ):
+                    df = pd.read_html(url)[0]
+                    # Remove empty row
+                    df = df[~(df.Date.isna())]
+                    # Add Competition label
+                    df["Competition"] = comp
 
-                            df = pd.DataFrame.from_records(
-                                [
-                                    {
-                                        'date': row.find('td', {"data-stat": "date"}).text,
-                                        'time': row.find('td', {"data-stat": "time"}).text,
-                                        'competition': comp,
-                                        'squad_h': row.find('td', {"data-stat": "squad_a"}).text,
-                                        'squad_a': row.find('td', {"data-stat": "squad_b"}).text,
-                                        'notes': row.find('td', {"data-stat": "notes"}).text,
-                                        'finished': (
-                                            1 if "Match Report" in row.find('td', {"data-stat": "match_report"}).text
-                                            else 0
-                                            ),
-                                    }
-                                ]
-                            )
+                    if "Wk" in df.columns :
+                        if comp == "Champions-League" or comp == "Europa-League":
+                            df = df.drop(["Wk"], axis=1)
+                        else:
+                            df = df.rename(columns={'Wk': "Round"})
 
-                            if os.path.isfile(os.path.join(self.root, f'fixtures.csv')):
-                                past_df = pd.read_csv(os.path.join(self.root, f'fixtures.csv'))
-                                pd.concat(
-                                    [past_df, df], ignore_index=True
-                                ).to_csv(os.path.join(self.root, f'fixtures.csv'), index=False)
-                            else:
-                                df.to_csv(
-                                    os.path.join(self.root, f'fixtures.csv'),
-                                    index=False)
+                    df = df.loc[:, [
+                        "Round", "Day", "Date", "Time", "Home", "Score", "Away",
+                        "Attendance", "Venue", "Referee",
+                        "Notes", "Competition"]]
+
+                    if os.path.isfile(os.path.join(self.root, 'fixtures.csv')):
+                        df.to_csv(
+                            os.path.join(self.root, 'fixtures.csv'),
+                            index=False, mode='a', header=False)
+                    else:
+                        df.to_csv(
+                            os.path.join(self.root, 'fixtures.csv'),
+                            index=False)
 
 
 if __name__ == "__main__":
