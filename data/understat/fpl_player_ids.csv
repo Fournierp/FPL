@@ -100,6 +100,7 @@ id,first_name,second_name,team,name
 594,Mathias,Jorgensen,3,Mathias Jorgensen
 614,Paris,Maghoma,3,Paris Maghoma
 619,Matthew,Cox,3,Matthew Cox
+628,Maxwell,Haygarth,3,Maxwell Haygarth
 53,Adam,Lallana,4,Adam Lallana
 54,Jason,Steele,4,Jason Steele
 55,Pascal,Groß,4,Pascal Groß
@@ -260,6 +261,7 @@ id,first_name,second_name,team,name
 616,Harry,Tyrer,8,Harry Tyrer
 622,Cenk,Tosun,8,Cenk Tosun
 623,Reece,Welch,8,Reece Welch
+630,Tyler,Onyango,8,Tyler Onyango
 200,Kasper,Schmeichel,9,Kasper Schmeichel
 201,Jonny,Evans,9,Jonny Evans
 202,Marc,Albrighton,9,Marc Albrighton
@@ -321,6 +323,7 @@ id,first_name,second_name,team,name
 601,Stuart,McKinstry,10,Stuart McKinstry
 608,Leo Fuhr,Hjelde,10,Leo Fuhr Hjelde
 624,Lewis,Bate,10,Lewis Bate
+631,Jack,Jenkins,10,Jack Jenkins
 221,James,Milner,11,James Milner
 222,Jordan,Henderson,11,Jordan Henderson
 223,Adrián,San Miguel del Castillo,11,Adrián San Miguel del Castillo
@@ -352,6 +355,9 @@ id,first_name,second_name,team,name
 506,Harvey,Elliott,11,Harvey Elliott
 553,Ben,Woodburn,11,Ben Woodburn
 620,Tyler,Morton,11,Tyler Morton
+625,Kaide,Gordon,11,Kaide Gordon
+626,Conor,Bradley,11,Conor Bradley
+627,Owen,Beck,11,Owen Beck
 33,Jack,Grealish,12,Jack Grealish
 249,Kyle,Walker,12,Kyle Walker
 250,Ilkay,Gündogan,12,Ilkay Gündogan
@@ -381,6 +387,7 @@ id,first_name,second_name,team,name
 604,Joshua,Wilson-Esbrand,12,Joshua Wilson-Esbrand
 605,Romeo,Lavia,12,Romeo Lavia
 615,Cieran,Slicker,12,Cieran Slicker
+629,James,McAtee,12,James McAtee
 269,Edinson,Cavani,13,Edinson Cavani
 270,David,de Gea,13,David de Gea
 271,Nemanja,Matic,13,Nemanja Matic
@@ -408,6 +415,7 @@ id,first_name,second_name,team,name
 512,Anthony,Elanga,13,Anthony Elanga
 555,Raphaël,Varane,13,Raphaël Varane
 579,Cristiano Ronaldo,dos Santos Aveiro,13,Cristiano Ronaldo dos Santos Aveiro
+632,Phil,Jones,13,Phil Jones
 19,Joseph,Willock,14,Joseph Willock
 291,Jonjo,Shelvey,14,Jonjo Shelvey
 292,Matt,Ritchie,14,Matt Ritchie
@@ -563,6 +571,7 @@ id,first_name,second_name,team,name
 557,Ozan,Tufan,18,Ozan Tufan
 574,Robert,Elliot,18,Robert Elliot
 618,Nicolas,Nkoulou,18,Nicolas Nkoulou
+633,James,Morris,18,James Morris
 128,Kurt,Zouma,19,Kurt Zouma
 406,Mark,Noble,19,Mark Noble
 407,Darren,Randolph,19,Darren Randolph

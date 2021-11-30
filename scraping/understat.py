@@ -26,7 +26,7 @@ class Understat:
         self.logger = logger
 
         self.season = season_data['season']
-        self.last_match_id = season_data['match_id']
+        # self.last_match_id = season_data['match_id']
 
         self.players = self.get_fpl_metadata()
         self.players.to_csv(os.path.join(self.root, 'fpl_player_ids.csv'))
@@ -272,6 +272,34 @@ class Understat:
                 os.path.join(output_file, "shots.csv"),
                 index=False)
 
+    def get_player_page(self, url):
+        """ Scrape a players page for shot data
+
+        Args:
+            url (string): Url to player page
+
+        Returns:
+            shots (json): Json of the player shots
+        """
+        res = requests.get(url)
+        parsed_html = BeautifulSoup(res.text, 'html.parser')
+        # Extract the match's data
+        scripts = parsed_html.findAll('script')
+        shots = {}
+
+        for script in scripts:
+            for c in script.contents:
+                split_data = c.split('=')
+                var_name = split_data[0].strip()
+                if var_name == 'var shotsData':
+                    content = re.findall(
+                        r'JSON\.parse\(\'(.*)\'\)', split_data[1])
+                    decoded_content = codecs.escape_decode(
+                        content[0], "hex")[0].decode('utf-8')
+                    shots = json.loads(decoded_content)
+
+        return shots
+
     def get_player_data(self, history=False):
         """ For every player in this EPL season, scrape his historical shot data
         accross any european championship
@@ -304,22 +332,8 @@ class Understat:
 
             for idx in player_ids:
                 self.logger.info(f"Downloading Player: {idx} Data")
-                res = requests.get(url + f'{idx}')
-                parsed_html = BeautifulSoup(res.text, 'html.parser')
-                # Extract the match's data
-                scripts = parsed_html.findAll('script')
-                shots = {}
 
-                for script in scripts:
-                    for c in script.contents:
-                        split_data = c.split('=')
-                        var_name = split_data[0].strip()
-                        if var_name == 'var shotsData':
-                            content = re.findall(
-                                r'JSON\.parse\(\'(.*)\'\)', split_data[1])
-                            decoded_content = codecs.escape_decode(
-                                content[0], "hex")[0].decode('utf-8')
-                            shots = json.loads(decoded_content)
+                shots = self.get_player_page(url + f'{idx}')
 
                 self.save_player_data(
                     os.path.join(self.root, f'{season}-{season % 2000 + 1}/'),
@@ -339,3 +353,10 @@ if __name__ == "__main__":
     understat.get_player_data(True)
     # understat.get_player_data()
     # understat.get_fpl_to_understat_ids()
+
+    # # Scrape Messi Data for Ballon d'Or Viz
+    # pd.DataFrame(
+    #     understat.get_player_page(f'https://understat.com/player/{2097}')
+    #     ).to_csv(
+    #         os.path.join(understat.root, f'messi_shots.csv'),
+    #         index=False)
