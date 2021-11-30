@@ -4,7 +4,6 @@ import requests
 import logging
 
 import json
-import csv
 import pandas as pd
 from bs4 import BeautifulSoup
 
@@ -80,48 +79,56 @@ class FPL_Review_Scraper:
         x = requests.post(url, data=body)
         soup = BeautifulSoup(x.content, 'html.parser')
 
-        with open(
-                os.path.join(
-                    os.path.join(self.root, str(self.next_gw)),
-                    'fplreview_fp.csv'),
-                'w', newline='', encoding="utf-8") as fplr_file:
-            writer = csv.writer(fplr_file)
-            # Columns
-            csv_cols = ["id", "Pos", "Name", "BV", "SV", "Team"]
-            for gw in range(self.next_gw, self.next_gw + period):
-                csv_cols.append(str(gw) + '_xMins')
-                csv_cols.append(str(gw) + '_Pts')
-            writer.writerow(csv_cols)
-            # Players
-            for fplr_api in soup.find(id="fplr_api"):
-                logger.info("Saving raw data.")
-                with open(
-                        os.path.join(
-                            os.path.join(self.root, str(self.next_gw)),
-                            'raw_fplreview_fp.json'),
-                        'w') as outfile:
-                    json.dump(json.loads(fplr_api), outfile)
+        logger.info("Saving raw data.")
+        for fplr_api in soup.find(id="fplr_api"):
+            with open(
+                    os.path.join(
+                        os.path.join(self.root, str(self.next_gw)),
+                        'raw_fplreview_fp.json'),
+                    'w') as outfile:
+                json.dump(json.loads(fplr_api), outfile)
 
-                logger.info("Saving processed data.")
-                for idx, key in enumerate(json.loads(fplr_api).keys()):
-                    try:
-                        row = [
-                            key,
-                            json.loads(fplr_api)[key]['pos'],
-                            json.loads(fplr_api)[key]['name'],
-                            json.loads(fplr_api)[key]['def_cost'],
-                            json.loads(fplr_api)[key]['now_cost'],
-                            json.loads(fplr_api)[key]['team_abbrev']
-                            ]
-                        for gw in range(self.next_gw, self.next_gw + period):
-                            row.append(
-                                json.loads(fplr_api)[key][str(gw)]['dmins'])
-                            row.append(
-                                json.loads(fplr_api)[key][str(gw)]['livpts'])
-                        writer.writerow(row)
-                    except:
-                        self.logger.warning(f"Failed to save row {key}.")
-                        continue
+        # Columns
+        csv_cols = ["id", "Pos", "Name", "BV", "SV", "Team"]
+        for gw in range(self.next_gw, self.next_gw + period):
+            csv_cols.append(str(gw) + '_xMins')
+            csv_cols.append(str(gw) + '_Pts')
+
+        logger.info("Saving processed data.")
+        pd.DataFrame(columns=csv_cols).to_csv(
+            os.path.join(
+                os.path.join(self.root, str(self.next_gw)),
+                'fplreview_fp.csv'),
+            index=False)
+
+        for fplr_api in soup.find(id="fplr_api"):
+            for idx, key in enumerate(json.loads(fplr_api).keys()):
+                try:
+                    row = [
+                        key,
+                        json.loads(fplr_api)[key]['pos'],
+                        json.loads(fplr_api)[key]['name'],
+                        json.loads(fplr_api)[key]['def_cost'],
+                        json.loads(fplr_api)[key]['now_cost'],
+                        json.loads(fplr_api)[key]['team_abbrev']
+                        ]
+                    for gw in range(self.next_gw, self.next_gw + period):
+                        row.append(
+                            json.loads(fplr_api)[key][str(gw)]['dmins'])
+                        row.append(
+                            json.loads(fplr_api)[key][str(gw)]['livpts'])
+
+                    (
+                        pd.DataFrame([row], columns=csv_cols)
+                        .to_csv(
+                            os.path.join(
+                                os.path.join(self.root, str(self.next_gw)),
+                                'fplreview_fp.csv'),
+                            index=False, mode='a', header=False))
+
+                except:
+                    self.logger.warning(f"Failed to save row {key}.")
+                    continue
 
 
 if __name__ == "__main__":
