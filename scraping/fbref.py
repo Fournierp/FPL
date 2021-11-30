@@ -353,13 +353,12 @@ class FBRef:
         df = pd.concat(df, axis=1)
         return df.loc[:, ~df.columns.duplicated()]
 
-    def get_pl_urls(self):
+    def get_competition_urls(self, url):
         """ Get all the links of previous EPL seasons
 
         Returns:
             (list): past url seasons
         """
-        url = 'https://fbref.com/en/comps/9/history/Premier-League-Seasons'
         res = requests.get(url)
         parsed_html = BeautifulSoup(res.text, 'html.parser')
         past_seasons = []
@@ -377,7 +376,8 @@ class FBRef:
         Args:
             history (bool, optional): Scrape current. Defaults to False.
         """
-        seasons = self.get_pl_urls()
+        seasons = self.get_competition_urls(
+            'https://fbref.com/en/comps/9/history/Premier-League-Seasons')
 
         if not history:
             seasons = [seasons[0]]
@@ -578,7 +578,8 @@ class FBRef:
         return df.loc[:, ~df.columns.duplicated()]
 
     def get_pl_season_games(self, history=False):
-        seasons = self.get_pl_urls()
+        seasons = self.get_competition_urls(
+            'https://fbref.com/en/comps/9/history/Premier-League-Seasons')
 
         if not history:
             seasons = [seasons[0]]
@@ -639,14 +640,14 @@ class FBRef:
                             ]
                         )
 
-                        if os.path.isfile(os.path.join(self.root, f'games_{year}.csv')):
-                            past_df = pd.read_csv(os.path.join(self.root, f'games_{year}.csv'))
+                        if os.path.isfile(os.path.join(self.root, f'games.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games.csv'))
                             pd.concat(
                                 [past_df, df], ignore_index=True
-                            ).to_csv(os.path.join(self.root, f'games_{year}.csv'), index=False)
+                            ).to_csv(os.path.join(self.root, f'games.csv'), index=False)
                         else:
                             df.to_csv(
-                                os.path.join(self.root, f'games_{year}.csv'),
+                                os.path.join(self.root, f'games.csv'),
                                 index=False)
 
                         page = self.get_url(
@@ -662,14 +663,14 @@ class FBRef:
                         df['squad_h'] = squad_h
                         df['squad_a'] = squad_a
 
-                        if os.path.isfile(os.path.join(self.root, f'games_players_{year}.csv')):
-                            past_df = pd.read_csv(os.path.join(self.root, f'games_players_{year}.csv'))
+                        if os.path.isfile(os.path.join(self.root, f'games_players.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games_players.csv'))
                             pd.concat(
                                 [past_df, df], ignore_index=True
-                            ).to_csv(os.path.join(self.root, f'games_players_{year}.csv'), index=False)
+                            ).to_csv(os.path.join(self.root, f'games_players.csv'), index=False)
                         else:
                             df.to_csv(
-                                os.path.join(self.root, f'games_players_{year}.csv'),
+                                os.path.join(self.root, f'games_players.csv'),
                                 index=False)
 
                         df = self.get_match_data_keepers(
@@ -679,14 +680,14 @@ class FBRef:
                         df['squad_h'] = squad_h
                         df['squad_a'] = squad_a
 
-                        if os.path.isfile(os.path.join(self.root, f'games_keepers_{year}.csv')):
-                            past_df = pd.read_csv(os.path.join(self.root, f'games_keepers_{year}.csv'))
+                        if os.path.isfile(os.path.join(self.root, f'games_keepers.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games_keepers.csv'))
                             pd.concat(
                                 [past_df, df], ignore_index=True
-                            ).to_csv(os.path.join(self.root, f'games_keepers_{year}.csv'), index=False)
+                            ).to_csv(os.path.join(self.root, f'games_keepers.csv'), index=False)
                         else:
                             df.to_csv(
-                                os.path.join(self.root, f'games_keepers_{year}.csv'),
+                                os.path.join(self.root, f'games_keepers.csv'),
                                 index=False)
 
                         df = self.get_match_data_shots(
@@ -697,15 +698,82 @@ class FBRef:
                         df['squad_h'] = squad_h
                         df['squad_a'] = squad_a
 
-                        if os.path.isfile(os.path.join(self.root, f'games_shots_{year}.csv')):
-                            past_df = pd.read_csv(os.path.join(self.root, f'games_shots_{year}.csv'))
+                        if os.path.isfile(os.path.join(self.root, f'games_shots.csv')):
+                            past_df = pd.read_csv(os.path.join(self.root, f'games_shots.csv'))
                             pd.concat(
                                 [past_df, df], ignore_index=True
-                            ).to_csv(os.path.join(self.root, f'games_shots_{year}.csv'), index=False)
+                            ).to_csv(os.path.join(self.root, f'games_shots.csv'), index=False)
                         else:
                             df.to_csv(
-                                os.path.join(self.root, f'games_shots_{year}.csv'),
+                                os.path.join(self.root, f'games_shots.csv'),
                                 index=False)
+
+    def get_fixtures(self, history=False):
+
+        for index, comp in zip(
+                ["690", "514", "8", "19"], ['EFL-Cup', "FA-Cup", "Champions-League", "Europa-League"]):
+            seasons = self.get_competition_urls(
+                f'https://fbref.com/en/comps/{index}/history/{comp}-Seasons')
+
+            if not history:
+                seasons = [seasons[0]]
+
+            self.logger.info(f"Downloading {comp} Fixtures Data")
+
+            for season in seasons:
+                self.logger.info(f"Season: {season}")
+                
+                if season.split('/')[-2] == index:
+                    url = (
+                        f'https://fbref.com/en/comps/{index}/schedule/{comp}-Scores-and-Fixtures')
+                    year = self.season
+
+                else:
+                    url = (
+                        f'https://fbref.com/en/comps/{index}/' +
+                        season.split('/')[-2] +
+                        '/schedule/' +
+                        season.split('/')[-1][:-6] +
+                        '-Scores-and-Fixtures')
+                    year = season.split('/')[-1][:4]
+
+                # Skip years with no underlying stats
+                if int(year) > 2016:
+                    table_rows = self.get_url(url)[0].find_all('tr')
+
+                    for row in table_rows:
+                        # Skip blank rows, and postponed games
+                        if (
+                                row.find('th', {"scope": "row"}) is not None
+                                and row.find('td', {"data-stat": "match_report"}).text != ""
+                                ):
+
+                            df = pd.DataFrame.from_records(
+                                [
+                                    {
+                                        'date': row.find('td', {"data-stat": "date"}).text,
+                                        'time': row.find('td', {"data-stat": "time"}).text,
+                                        'competition': comp,
+                                        'squad_h': row.find('td', {"data-stat": "squad_a"}).text,
+                                        'squad_a': row.find('td', {"data-stat": "squad_b"}).text,
+                                        'notes': row.find('td', {"data-stat": "notes"}).text,
+                                        'finished': (
+                                            1 if "Match Report" in row.find('td', {"data-stat": "match_report"}).text
+                                            else 0
+                                            ),
+                                    }
+                                ]
+                            )
+
+                            if os.path.isfile(os.path.join(self.root, f'fixtures.csv')):
+                                past_df = pd.read_csv(os.path.join(self.root, f'fixtures.csv'))
+                                pd.concat(
+                                    [past_df, df], ignore_index=True
+                                ).to_csv(os.path.join(self.root, f'fixtures.csv'), index=False)
+                            else:
+                                df.to_csv(
+                                    os.path.join(self.root, f'fixtures.csv'),
+                                    index=False)
 
 
 if __name__ == "__main__":
@@ -718,5 +786,6 @@ if __name__ == "__main__":
     fbref = FBRef(logger, season_data)
     # fbref.get_pl_season(history=True)
     # fbref.get_pl_season(history=False)
-    # fbref.get_pl_season_games(history=True)
+    fbref.get_pl_season_games(history=True)
     fbref.get_pl_season_games(history=False)
+    # fbref.get_fixtures(True)
