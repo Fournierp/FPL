@@ -81,8 +81,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 8.0,Mon,2021-10-18,20:00,Arsenal,2–2,Crystal Palace,59475.0,Emirates Stadium,Mike Dean,,Premier-League
 9.0,Fri,2021-10-22,20:00,Arsenal,3–1,Aston Villa,59496.0,Emirates Stadium,Craig Pawson,,Premier-League
 9.0,Sat,2021-10-23,12:30,Chelsea,7–0,Norwich City,40113.0,Stamford Bridge,Andy Madley,,Premier-League
-9.0,Sat,2021-10-23,15:00,Southampton,2–2,Burnley,29145.0,St. Mary's Stadium,Chris Kavanagh,,Premier-League
 9.0,Sat,2021-10-23,15:00,Leeds United,1–1,Wolves,36475.0,Elland Road,Robert Jones,,Premier-League
+9.0,Sat,2021-10-23,15:00,Southampton,2–2,Burnley,29145.0,St. Mary's Stadium,Chris Kavanagh,,Premier-League
 9.0,Sat,2021-10-23,15:00,Everton,2–5,Watford,38834.0,Goodison Park,Graham Scott,,Premier-League
 9.0,Sat,2021-10-23,15:00,Crystal Palace,1–1,Newcastle Utd,24609.0,Selhurst Park,Darren England,,Premier-League
 9.0,Sat,2021-10-23,17:30,Brighton,1–4,Manchester City,31215.0,The American Express Community Stadium,Kevin Friend,,Premier-League
@@ -114,8 +114,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 12.0,Sat,2021-11-20,15:00,Burnley,3–3,Crystal Palace,18028.0,Turf Moor,Simon Hooper,,Premier-League
 12.0,Sat,2021-11-20,15:00,Norwich City,2–1,Southampton,26885.0,Carrow Road,Martin Atkinson,,Premier-League
 12.0,Sat,2021-11-20,15:00,Wolves,1–0,West Ham,30667.0,Molineux Stadium,Mike Dean,,Premier-League
-12.0,Sat,2021-11-20,15:00,Newcastle Utd,3–3,Brentford,52131.0,St. James' Park,Robert Jones,,Premier-League
 12.0,Sat,2021-11-20,15:00,Watford,4–1,Manchester Utd,21087.0,Vicarage Road Stadium,Jonathan Moss,,Premier-League
+12.0,Sat,2021-11-20,15:00,Newcastle Utd,3–3,Brentford,52131.0,St. James' Park,Robert Jones,,Premier-League
 12.0,Sat,2021-11-20,17:30,Liverpool,4–0,Arsenal,53092.0,Anfield,Michael Oliver,,Premier-League
 12.0,Sun,2021-11-21,14:00,Manchester City,3–0,Everton,52571.0,Etihad Stadium,Stuart Attwell,,Premier-League
 12.0,Sun,2021-11-21,16:30,Tottenham,2–1,Leeds United,58989.0,Tottenham Hotspur Stadium,Andre Marriner,,Premier-League
@@ -129,8 +129,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 13.0,Sun,2021-11-28,14:00,Burnley,,Tottenham,,Turf Moor,Peter Bankes,Match Postponed,Premier-League
 13.0,Sun,2021-11-28,14:00,Manchester City,2–1,West Ham,53245.0,Etihad Stadium,Michael Oliver,,Premier-League
 13.0,Sun,2021-11-28,16:30,Chelsea,1–1,Manchester Utd,40041.0,Stamford Bridge,Anthony Taylor,,Premier-League
-14.0,Tue,2021-11-30,19:30,Newcastle Utd,,Norwich City,,St. James' Park,,,Premier-League
-14.0,Tue,2021-11-30,20:15,Leeds United,,Crystal Palace,,Elland Road,,,Premier-League
+14.0,Tue,2021-11-30,19:30,Newcastle Utd,1–1,Norwich City,50757.0,St. James' Park,Andy Madley,,Premier-League
+14.0,Tue,2021-11-30,20:15,Leeds United,1–0,Crystal Palace,35558.0,Elland Road,Kevin Friend,,Premier-League
 14.0,Wed,2021-12-01,19:30,West Ham,,Brighton,,London Stadium,,,Premier-League
 14.0,Wed,2021-12-01,19:30,Wolves,,Burnley,,Molineux Stadium,,,Premier-League
 14.0,Wed,2021-12-01,19:30,Watford,,Chelsea,,Vicarage Road Stadium,,,Premier-League
@@ -182,8 +182,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 19.0,Sun,2021-12-26,12:30,Wolves,,Watford,,Molineux Stadium,,,Premier-League
 19.0,Sun,2021-12-26,12:30,Liverpool,,Leeds United,,Anfield,,,Premier-League
 19.0,Sun,2021-12-26,15:00,Manchester City,,Leicester City,,Etihad Stadium,,,Premier-League
-19.0,Sun,2021-12-26,15:00,Norwich City,,Arsenal,,Carrow Road,,,Premier-League
 19.0,Sun,2021-12-26,15:00,West Ham,,Southampton,,London Stadium,,,Premier-League
+19.0,Sun,2021-12-26,15:00,Norwich City,,Arsenal,,Carrow Road,,,Premier-League
 19.0,Sun,2021-12-26,15:00,Burnley,,Everton,,Turf Moor,,,Premier-League
 19.0,Sun,2021-12-26,15:00,Tottenham,,Crystal Palace,,Tottenham Hotspur Stadium,,,Premier-League
 19.0,Sun,2021-12-26,17:30,Aston Villa,,Chelsea,,Villa Park,,,Premier-League
@@ -204,8 +204,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 21.0,Sat,2022-01-01,15:00,Watford,,Tottenham,,Vicarage Road Stadium,,,Premier-League
 21.0,Sat,2022-01-01,17:30,Crystal Palace,,West Ham,,Selhurst Park,,,Premier-League
 21.0,Sun,2022-01-02,14:00,Brentford,,Aston Villa,,Brentford Community Stadium,,,Premier-League
-21.0,Sun,2022-01-02,14:00,Everton,,Brighton,,Goodison Park,,,Premier-League
 21.0,Sun,2022-01-02,14:00,Leeds United,,Burnley,,Elland Road,,,Premier-League
+21.0,Sun,2022-01-02,14:00,Everton,,Brighton,,Goodison Park,,,Premier-League
 21.0,Sun,2022-01-02,14:00,Southampton,,Newcastle Utd,,St. Mary's Stadium,,,Premier-League
 21.0,Sun,2022-01-02,16:30,Chelsea,,Liverpool,,Stamford Bridge,,,Premier-League
 21.0,Mon,2022-01-03,17:30,Manchester Utd,,Wolves,,Old Trafford,,,Premier-League
@@ -223,16 +223,16 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 23.0,Sat,2022-01-22,12:30,Everton,,Aston Villa,,Goodison Park,,,Premier-League
 23.0,Sat,2022-01-22,15:00,Brentford,,Wolves,,Brentford Community Stadium,,,Premier-League
 23.0,Sat,2022-01-22,15:00,Arsenal,,Burnley,,Emirates Stadium,,,Premier-League
-23.0,Sat,2022-01-22,15:00,Manchester Utd,,West Ham,,Old Trafford,,,Premier-League
-23.0,Sat,2022-01-22,15:00,Leeds United,,Newcastle Utd,,Elland Road,,,Premier-League
 23.0,Sat,2022-01-22,15:00,Leicester City,,Brighton,,King Power Stadium,,,Premier-League
+23.0,Sat,2022-01-22,15:00,Leeds United,,Newcastle Utd,,Elland Road,,,Premier-League
+23.0,Sat,2022-01-22,15:00,Manchester Utd,,West Ham,,Old Trafford,,,Premier-League
 23.0,Sat,2022-01-22,17:30,Southampton,,Manchester City,,St. Mary's Stadium,,,Premier-League
 23.0,Sun,2022-01-23,14:00,Crystal Palace,,Liverpool,,Selhurst Park,,,Premier-League
 23.0,Sun,2022-01-23,16:30,Chelsea,,Tottenham,,Stamford Bridge,,,Premier-League
-24.0,Tue,2022-02-08,19:45,Brighton,,Chelsea,,The American Express Community Stadium,,,Premier-League
 24.0,Tue,2022-02-08,19:45,Burnley,,Manchester Utd,,Turf Moor,,,Premier-League
-24.0,Tue,2022-02-08,19:45,Aston Villa,,Leeds United,,Villa Park,,,Premier-League
+24.0,Tue,2022-02-08,19:45,Brighton,,Chelsea,,The American Express Community Stadium,,,Premier-League
 24.0,Tue,2022-02-08,19:45,Norwich City,,Crystal Palace,,Carrow Road,,,Premier-League
+24.0,Tue,2022-02-08,19:45,Aston Villa,,Leeds United,,Villa Park,,,Premier-League
 24.0,Tue,2022-02-08,19:45,West Ham,,Watford,,London Stadium,,,Premier-League
 24.0,Tue,2022-02-08,19:45,Wolves,,Arsenal,,Molineux Stadium,,,Premier-League
 24.0,Wed,2022-02-09,19:45,Tottenham,,Southampton,,Tottenham Hotspur Stadium,,,Premier-League
@@ -250,82 +250,82 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 25.0,Sat,2022-02-12,15:00,Norwich City,,Manchester City,,Carrow Road,,,Premier-League
 25.0,Sat,2022-02-12,15:00,Watford,,Brighton,,Vicarage Road Stadium,,,Premier-League
 26.0,Sat,2022-02-19,15:00,Leeds United,,Manchester Utd,,Elland Road,,,Premier-League
+26.0,Sat,2022-02-19,15:00,Aston Villa,,Watford,,Villa Park,,,Premier-League
 26.0,Sat,2022-02-19,15:00,Manchester City,,Tottenham,,Etihad Stadium,,,Premier-League
 26.0,Sat,2022-02-19,15:00,Southampton,,Everton,,St. Mary's Stadium,,,Premier-League
 26.0,Sat,2022-02-19,15:00,Arsenal,,Brentford,,Emirates Stadium,,,Premier-League
-26.0,Sat,2022-02-19,15:00,Aston Villa,,Watford,,Villa Park,,,Premier-League
 26.0,Sat,2022-02-19,15:00,Liverpool,,Norwich City,,Anfield,,,Premier-League
 26.0,Sat,2022-02-19,15:00,Crystal Palace,,Chelsea,,Selhurst Park,,,Premier-League
-26.0,Sat,2022-02-19,15:00,Wolves,,Leicester City,,Molineux Stadium,,,Premier-League
 26.0,Sat,2022-02-19,15:00,West Ham,,Newcastle Utd,,London Stadium,,,Premier-League
+26.0,Sat,2022-02-19,15:00,Wolves,,Leicester City,,Molineux Stadium,,,Premier-League
 26.0,Sat,2022-02-19,15:00,Brighton,,Burnley,,The American Express Community Stadium,,,Premier-League
-27.0,Sat,2022-02-26,15:00,Everton,,Manchester City,,Goodison Park,,,Premier-League
 27.0,Sat,2022-02-26,15:00,Brighton,,Aston Villa,,The American Express Community Stadium,,,Premier-League
+27.0,Sat,2022-02-26,15:00,Everton,,Manchester City,,Goodison Park,,,Premier-League
 27.0,Sat,2022-02-26,15:00,Brentford,,Newcastle Utd,,Brentford Community Stadium,,,Premier-League
 27.0,Sat,2022-02-26,15:00,Crystal Palace,,Burnley,,Selhurst Park,,,Premier-League
 27.0,Sat,2022-02-26,15:00,West Ham,,Wolves,,London Stadium,,,Premier-League
-27.0,Sat,2022-02-26,15:00,Southampton,,Norwich City,,St. Mary's Stadium,,,Premier-League
 27.0,Sat,2022-02-26,15:00,Manchester Utd,,Watford,,Old Trafford,,,Premier-League
+27.0,Sat,2022-02-26,15:00,Southampton,,Norwich City,,St. Mary's Stadium,,,Premier-League
 27.0,Sat,2022-02-26,15:00,Arsenal,,Liverpool,,Emirates Stadium,,,Premier-League
-27.0,Sat,2022-02-26,15:00,Leeds United,,Tottenham,,Elland Road,,,Premier-League
 27.0,Sat,2022-02-26,15:00,Chelsea,,Leicester City,,Stamford Bridge,,,Premier-League
+27.0,Sat,2022-02-26,15:00,Leeds United,,Tottenham,,Elland Road,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Watford,,Arsenal,,Vicarage Road Stadium,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Leicester City,,Leeds United,,King Power Stadium,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Liverpool,,West Ham,,Anfield,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Manchester City,,Manchester Utd,,Etihad Stadium,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Burnley,,Chelsea,,Turf Moor,,,Premier-League
-28.0,Sat,2022-03-05,15:00,Wolves,,Crystal Palace,,Molineux Stadium,,,Premier-League
+28.0,Sat,2022-03-05,15:00,Newcastle Utd,,Brighton,,St. James' Park,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Norwich City,,Brentford,,Carrow Road,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Tottenham,,Everton,,Tottenham Hotspur Stadium,,,Premier-League
+28.0,Sat,2022-03-05,15:00,Wolves,,Crystal Palace,,Molineux Stadium,,,Premier-League
 28.0,Sat,2022-03-05,15:00,Aston Villa,,Southampton,,Villa Park,,,Premier-League
-28.0,Sat,2022-03-05,15:00,Newcastle Utd,,Brighton,,St. James' Park,,,Premier-League
 29.0,Sat,2022-03-12,15:00,Manchester Utd,,Tottenham,,Old Trafford,,,Premier-League
 29.0,Sat,2022-03-12,15:00,Brighton,,Liverpool,,The American Express Community Stadium,,,Premier-League
 29.0,Sat,2022-03-12,15:00,Arsenal,,Leicester City,,Emirates Stadium,,,Premier-League
-29.0,Sat,2022-03-12,15:00,Brentford,,Burnley,,Brentford Community Stadium,,,Premier-League
 29.0,Sat,2022-03-12,15:00,Everton,,Wolves,,Goodison Park,,,Premier-League
+29.0,Sat,2022-03-12,15:00,Brentford,,Burnley,,Brentford Community Stadium,,,Premier-League
 29.0,Sat,2022-03-12,15:00,Southampton,,Watford,,St. Mary's Stadium,,,Premier-League
 29.0,Sat,2022-03-12,15:00,West Ham,,Aston Villa,,London Stadium,,,Premier-League
 29.0,Sat,2022-03-12,15:00,Crystal Palace,,Manchester City,,Selhurst Park,,,Premier-League
-29.0,Sat,2022-03-12,15:00,Leeds United,,Norwich City,,Elland Road,,,Premier-League
 29.0,Sat,2022-03-12,15:00,Chelsea,,Newcastle Utd,,Stamford Bridge,,,Premier-League
+29.0,Sat,2022-03-12,15:00,Leeds United,,Norwich City,,Elland Road,,,Premier-League
 30.0,Sat,2022-03-19,15:00,Newcastle Utd,,Crystal Palace,,St. James' Park,,,Premier-League
-30.0,Sat,2022-03-19,15:00,Norwich City,,Chelsea,,Carrow Road,,,Premier-League
 30.0,Sat,2022-03-19,15:00,Watford,,Everton,,Vicarage Road Stadium,,,Premier-League
+30.0,Sat,2022-03-19,15:00,Norwich City,,Chelsea,,Carrow Road,,,Premier-League
 30.0,Sat,2022-03-19,15:00,Aston Villa,,Arsenal,,Villa Park,,,Premier-League
 30.0,Sat,2022-03-19,15:00,Leicester City,,Brentford,,King Power Stadium,,,Premier-League
 30.0,Sat,2022-03-19,15:00,Burnley,,Southampton,,Turf Moor,,,Premier-League
-30.0,Sat,2022-03-19,15:00,Manchester City,,Brighton,,Etihad Stadium,,,Premier-League
-30.0,Sat,2022-03-19,15:00,Wolves,,Leeds United,,Molineux Stadium,,,Premier-League
 30.0,Sat,2022-03-19,15:00,Tottenham,,West Ham,,Tottenham Hotspur Stadium,,,Premier-League
+30.0,Sat,2022-03-19,15:00,Wolves,,Leeds United,,Molineux Stadium,,,Premier-League
+30.0,Sat,2022-03-19,15:00,Manchester City,,Brighton,,Etihad Stadium,,,Premier-League
 30.0,Sat,2022-03-19,15:00,Liverpool,,Manchester Utd,,Anfield,,,Premier-League
 31.0,Sat,2022-04-02,15:00,Chelsea,,Brentford,,Stamford Bridge,,,Premier-League
 31.0,Sat,2022-04-02,15:00,Tottenham,,Newcastle Utd,,Tottenham Hotspur Stadium,,,Premier-League
-31.0,Sat,2022-04-02,15:00,Wolves,,Aston Villa,,Molineux Stadium,,,Premier-League
 31.0,Sat,2022-04-02,15:00,West Ham,,Everton,,London Stadium,,,Premier-League
-31.0,Sat,2022-04-02,15:00,Brighton,,Norwich City,,The American Express Community Stadium,,,Premier-League
+31.0,Sat,2022-04-02,15:00,Wolves,,Aston Villa,,Molineux Stadium,,,Premier-League
 31.0,Sat,2022-04-02,15:00,Leeds United,,Southampton,,Elland Road,,,Premier-League
+31.0,Sat,2022-04-02,15:00,Brighton,,Norwich City,,The American Express Community Stadium,,,Premier-League
 31.0,Sat,2022-04-02,15:00,Liverpool,,Watford,,Anfield,,,Premier-League
 31.0,Sat,2022-04-02,15:00,Manchester Utd,,Leicester City,,Old Trafford,,,Premier-League
-31.0,Sat,2022-04-02,15:00,Burnley,,Manchester City,,Turf Moor,,,Premier-League
 31.0,Sat,2022-04-02,15:00,Crystal Palace,,Arsenal,,Selhurst Park,,,Premier-League
+31.0,Sat,2022-04-02,15:00,Burnley,,Manchester City,,Turf Moor,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Southampton,,Chelsea,,St. Mary's Stadium,,,Premier-League
-32.0,Sat,2022-04-09,15:00,Watford,,Leeds United,,Vicarage Road Stadium,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Aston Villa,,Tottenham,,Villa Park,,,Premier-League
+32.0,Sat,2022-04-09,15:00,Watford,,Leeds United,,Vicarage Road Stadium,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Arsenal,,Brighton,,Emirates Stadium,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Brentford,,West Ham,,Brentford Community Stadium,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Manchester City,,Liverpool,,Etihad Stadium,,,Premier-League
+32.0,Sat,2022-04-09,15:00,Newcastle Utd,,Wolves,,St. James' Park,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Leicester City,,Crystal Palace,,King Power Stadium,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Norwich City,,Burnley,,Carrow Road,,,Premier-League
-32.0,Sat,2022-04-09,15:00,Newcastle Utd,,Wolves,,St. James' Park,,,Premier-League
 32.0,Sat,2022-04-09,15:00,Everton,,Manchester Utd,,Goodison Park,,,Premier-League
-33.0,Sat,2022-04-16,15:00,Southampton,,Arsenal,,St. Mary's Stadium,,,Premier-League
 33.0,Sat,2022-04-16,15:00,Everton,,Crystal Palace,,Goodison Park,,,Premier-League
+33.0,Sat,2022-04-16,15:00,Southampton,,Arsenal,,St. Mary's Stadium,,,Premier-League
 33.0,Sat,2022-04-16,15:00,Wolves,,Manchester City,,Molineux Stadium,,,Premier-League
 33.0,Sat,2022-04-16,15:00,Leeds United,,Chelsea,,Elland Road,,,Premier-League
 33.0,Sat,2022-04-16,15:00,Manchester Utd,,Norwich City,,Old Trafford,,,Premier-League
-33.0,Sat,2022-04-16,15:00,Watford,,Brentford,,Vicarage Road Stadium,,,Premier-League
 33.0,Sat,2022-04-16,15:00,Newcastle Utd,,Leicester City,,St. James' Park,,,Premier-League
+33.0,Sat,2022-04-16,15:00,Watford,,Brentford,,Vicarage Road Stadium,,,Premier-League
 33.0,Sat,2022-04-16,15:00,Tottenham,,Brighton,,Tottenham Hotspur Stadium,,,Premier-League
 33.0,Sat,2022-04-16,15:00,West Ham,,Burnley,,London Stadium,,,Premier-League
 33.0,Sat,2022-04-16,15:00,Aston Villa,,Liverpool,,Villa Park,,,Premier-League
@@ -333,29 +333,29 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 34.0,Sat,2022-04-23,15:00,Liverpool,,Everton,,Anfield,,,Premier-League
 34.0,Sat,2022-04-23,15:00,Leicester City,,Aston Villa,,King Power Stadium,,,Premier-League
 34.0,Sat,2022-04-23,15:00,Brentford,,Tottenham,,Brentford Community Stadium,,,Premier-League
-34.0,Sat,2022-04-23,15:00,Manchester City,,Watford,,Etihad Stadium,,,Premier-League
 34.0,Sat,2022-04-23,15:00,Arsenal,,Manchester Utd,,Emirates Stadium,,,Premier-League
 34.0,Sat,2022-04-23,15:00,Crystal Palace,,Leeds United,,Selhurst Park,,,Premier-League
+34.0,Sat,2022-04-23,15:00,Manchester City,,Watford,,Etihad Stadium,,,Premier-League
 34.0,Sat,2022-04-23,15:00,Brighton,,Southampton,,The American Express Community Stadium,,,Premier-League
 34.0,Sat,2022-04-23,15:00,Burnley,,Wolves,,Turf Moor,,,Premier-League
 34.0,Sat,2022-04-23,15:00,Chelsea,,West Ham,,Stamford Bridge,,,Premier-League
 35.0,Sat,2022-04-30,15:00,Newcastle Utd,,Liverpool,,St. James' Park,,,Premier-League
 35.0,Sat,2022-04-30,15:00,Wolves,,Brighton,,Molineux Stadium,,,Premier-League
-35.0,Sat,2022-04-30,15:00,West Ham,,Arsenal,,London Stadium,,,Premier-League
-35.0,Sat,2022-04-30,15:00,Watford,,Burnley,,Vicarage Road Stadium,,,Premier-League
-35.0,Sat,2022-04-30,15:00,Tottenham,,Leicester City,,Tottenham Hotspur Stadium,,,Premier-League
 35.0,Sat,2022-04-30,15:00,Leeds United,,Manchester City,,Elland Road,,,Premier-League
+35.0,Sat,2022-04-30,15:00,Tottenham,,Leicester City,,Tottenham Hotspur Stadium,,,Premier-League
+35.0,Sat,2022-04-30,15:00,Watford,,Burnley,,Vicarage Road Stadium,,,Premier-League
+35.0,Sat,2022-04-30,15:00,West Ham,,Arsenal,,London Stadium,,,Premier-League
 35.0,Sat,2022-04-30,15:00,Aston Villa,,Norwich City,,Villa Park,,,Premier-League
 35.0,Sat,2022-04-30,15:00,Everton,,Chelsea,,Goodison Park,,,Premier-League
 35.0,Sat,2022-04-30,15:00,Manchester Utd,,Brentford,,Old Trafford,,,Premier-League
 35.0,Sat,2022-04-30,15:00,Southampton,,Crystal Palace,,St. Mary's Stadium,,,Premier-League
 36.0,Sat,2022-05-07,15:00,Chelsea,,Wolves,,Stamford Bridge,,,Premier-League
 36.0,Sat,2022-05-07,15:00,Liverpool,,Tottenham,,Anfield,,,Premier-League
-36.0,Sat,2022-05-07,15:00,Burnley,,Aston Villa,,Turf Moor,,,Premier-League
-36.0,Sat,2022-05-07,15:00,Manchester City,,Newcastle Utd,,Etihad Stadium,,,Premier-League
 36.0,Sat,2022-05-07,15:00,Brentford,,Southampton,,Brentford Community Stadium,,,Premier-League
-36.0,Sat,2022-05-07,15:00,Crystal Palace,,Watford,,Selhurst Park,,,Premier-League
 36.0,Sat,2022-05-07,15:00,Norwich City,,West Ham,,Carrow Road,,,Premier-League
+36.0,Sat,2022-05-07,15:00,Burnley,,Aston Villa,,Turf Moor,,,Premier-League
+36.0,Sat,2022-05-07,15:00,Crystal Palace,,Watford,,Selhurst Park,,,Premier-League
+36.0,Sat,2022-05-07,15:00,Manchester City,,Newcastle Utd,,Etihad Stadium,,,Premier-League
 36.0,Sat,2022-05-07,15:00,Arsenal,,Leeds United,,Emirates Stadium,,,Premier-League
 36.0,Sat,2022-05-07,15:00,Brighton,,Manchester Utd,,The American Express Community Stadium,,,Premier-League
 36.0,Sat,2022-05-07,15:00,Leicester City,,Everton,,King Power Stadium,,,Premier-League
@@ -366,15 +366,15 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 37.0,Sun,2022-05-15,15:00,Watford,,Leicester City,,Vicarage Road Stadium,,,Premier-League
 37.0,Sun,2022-05-15,15:00,Southampton,,Liverpool,,St. Mary's Stadium,,,Premier-League
 37.0,Sun,2022-05-15,15:00,West Ham,,Manchester City,,London Stadium,,,Premier-League
-37.0,Sun,2022-05-15,15:00,Newcastle Utd,,Arsenal,,St. James' Park,,,Premier-League
 37.0,Sun,2022-05-15,15:00,Wolves,,Norwich City,,Molineux Stadium,,,Premier-League
+37.0,Sun,2022-05-15,15:00,Newcastle Utd,,Arsenal,,St. James' Park,,,Premier-League
 37.0,Sun,2022-05-15,15:00,Tottenham,,Burnley,,Tottenham Hotspur Stadium,,,Premier-League
 38.0,Sun,2022-05-22,16:00,Norwich City,,Tottenham,,Carrow Road,,,Premier-League
 38.0,Sun,2022-05-22,16:00,Brentford,,Leeds United,,Brentford Community Stadium,,,Premier-League
-38.0,Sun,2022-05-22,16:00,Liverpool,,Wolves,,Anfield,,,Premier-League
 38.0,Sun,2022-05-22,16:00,Brighton,,West Ham,,The American Express Community Stadium,,,Premier-League
-38.0,Sun,2022-05-22,16:00,Burnley,,Newcastle Utd,,Turf Moor,,,Premier-League
+38.0,Sun,2022-05-22,16:00,Liverpool,,Wolves,,Anfield,,,Premier-League
 38.0,Sun,2022-05-22,16:00,Manchester City,,Aston Villa,,Etihad Stadium,,,Premier-League
+38.0,Sun,2022-05-22,16:00,Burnley,,Newcastle Utd,,Turf Moor,,,Premier-League
 38.0,Sun,2022-05-22,16:00,Chelsea,,Watford,,Stamford Bridge,,,Premier-League
 38.0,Sun,2022-05-22,16:00,Arsenal,,Everton,,Emirates Stadium,,,Premier-League
 38.0,Sun,2022-05-22,16:00,Crystal Palace,,Manchester Utd,,Selhurst Park,,,Premier-League
@@ -591,12 +591,12 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 22.0,Wed,2021-02-03,18:00,Burnley,0–2,Manchester City,,Turf Moor,Martin Atkinson,,Premier-League
 22.0,Wed,2021-02-03,18:00,Fulham,0–2,Leicester City,,Craven Cottage,Robert Jones,,Premier-League
 22.0,Wed,2021-02-03,19:30,Leeds United,1–2,Everton,,Elland Road,Michael Oliver,,Premier-League
-22.0,Wed,2021-02-03,20:15,Liverpool,0–1,Brighton,,Anfield,Kevin Friend,,Premier-League
 22.0,Wed,2021-02-03,20:15,Aston Villa,1–3,West Ham,,Villa Park,Andy Madley,,Premier-League
+22.0,Wed,2021-02-03,20:15,Liverpool,0–1,Brighton,,Anfield,Kevin Friend,,Premier-League
 22.0,Thu,2021-02-04,20:00,Tottenham,0–1,Chelsea,,Tottenham Hotspur Stadium,Andre Marriner,,Premier-League
 23.0,Sat,2021-02-06,12:30,Aston Villa,1–0,Arsenal,,Villa Park,Chris Kavanagh,,Premier-League
-23.0,Sat,2021-02-06,15:00,Burnley,1–1,Brighton,,Turf Moor,Anthony Taylor,,Premier-League
 23.0,Sat,2021-02-06,15:00,Newcastle Utd,3–2,Southampton,,St. James' Park,Craig Pawson,,Premier-League
+23.0,Sat,2021-02-06,15:00,Burnley,1–1,Brighton,,Turf Moor,Anthony Taylor,,Premier-League
 23.0,Sat,2021-02-06,17:30,Fulham,0–0,West Ham,,Craven Cottage,Mike Dean,,Premier-League
 23.0,Sat,2021-02-06,20:00,Manchester Utd,3–3,Everton,,Old Trafford,Jonathan Moss,,Premier-League
 23.0,Sun,2021-02-07,12:00,Tottenham,2–0,West Brom,,Tottenham Hotspur Stadium,Stuart Attwell,,Premier-League
@@ -751,12 +751,12 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 37.0,Wed,2021-05-19,20:15,West Brom,1–3,West Ham,5371.0,The Hawthorns,Michael Oliver,,Premier-League
 38.0,Sun,2021-05-23,16:00,Wolves,1–2,Manchester Utd,4500.0,Molineux Stadium,Mike Dean,,Premier-League
 38.0,Sun,2021-05-23,16:00,Leeds United,3–1,West Brom,8000.0,Elland Road,David Coote,,Premier-League
+38.0,Sun,2021-05-23,16:00,Manchester City,5–0,Everton,10000.0,Etihad Stadium,Michael Oliver,,Premier-League
 38.0,Sun,2021-05-23,16:00,Leicester City,2–4,Tottenham,8000.0,King Power Stadium,Anthony Taylor,,Premier-League
 38.0,Sun,2021-05-23,16:00,Aston Villa,2–1,Chelsea,10000.0,Villa Park,Stuart Attwell,,Premier-League
-38.0,Sun,2021-05-23,16:00,Manchester City,5–0,Everton,10000.0,Etihad Stadium,Michael Oliver,,Premier-League
-38.0,Sun,2021-05-23,16:00,Fulham,0–2,Newcastle Utd,2000.0,Craven Cottage,Chris Kavanagh,,Premier-League
-38.0,Sun,2021-05-23,16:00,West Ham,3–0,Southampton,10000.0,London Stadium,Martin Atkinson,,Premier-League
 38.0,Sun,2021-05-23,16:00,Arsenal,2–0,Brighton,10000.0,Emirates Stadium,Jonathan Moss,,Premier-League
+38.0,Sun,2021-05-23,16:00,West Ham,3–0,Southampton,10000.0,London Stadium,Martin Atkinson,,Premier-League
+38.0,Sun,2021-05-23,16:00,Fulham,0–2,Newcastle Utd,2000.0,Craven Cottage,Chris Kavanagh,,Premier-League
 38.0,Sun,2021-05-23,16:00,Sheffield Utd,1–0,Burnley,5000.0,Bramall Lane,Kevin Friend,,Premier-League
 38.0,Sun,2021-05-23,16:00,Liverpool,2–0,Crystal Palace,9901.0,Anfield,Craig Pawson,,Premier-League
 1.0,Fri,2019-08-09,20:00,Liverpool,4–1,Norwich City,53333.0,Anfield,Michael Oliver,,Premier-League
@@ -790,10 +790,10 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 3.0,Sun,2019-08-25,16:30,Tottenham,0–1,Newcastle Utd,59245.0,Tottenham Hotspur Stadium,Mike Dean,,Premier-League
 3.0,Sun,2019-08-25,16:30,Wolves,1–1,Burnley,30522.0,Molineux Stadium,Craig Pawson,,Premier-League
 4.0,Sat,2019-08-31,12:30,Southampton,1–1,Manchester Utd,30499.0,St. Mary's Stadium,Mike Dean,,Premier-League
-4.0,Sat,2019-08-31,15:00,West Ham,2–0,Norwich City,59950.0,London Stadium,Paul Tierney,,Premier-League
 4.0,Sat,2019-08-31,15:00,Crystal Palace,1–0,Aston Villa,25248.0,Selhurst Park,Kevin Friend,,Premier-League
-4.0,Sat,2019-08-31,15:00,Chelsea,2–2,Sheffield Utd,40560.0,Stamford Bridge,Stuart Attwell,,Premier-League
 4.0,Sat,2019-08-31,15:00,Leicester City,3–1,Bournemouth,31613.0,King Power Stadium,Peter Bankes,,Premier-League
+4.0,Sat,2019-08-31,15:00,West Ham,2–0,Norwich City,59950.0,London Stadium,Paul Tierney,,Premier-League
+4.0,Sat,2019-08-31,15:00,Chelsea,2–2,Sheffield Utd,40560.0,Stamford Bridge,Stuart Attwell,,Premier-League
 4.0,Sat,2019-08-31,15:00,Newcastle Utd,1–1,Watford,44157.0,St. James' Park,Graham Scott,,Premier-League
 4.0,Sat,2019-08-31,15:00,Manchester City,4–0,Brighton,54386.0,Etihad Stadium,Jonathan Moss,,Premier-League
 4.0,Sat,2019-08-31,17:30,Burnley,0–3,Liverpool,21762.0,Turf Moor,Chris Kavanagh,,Premier-League
@@ -801,9 +801,9 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 4.0,Sun,2019-09-01,16:30,Arsenal,2–2,Tottenham,60333.0,Emirates Stadium,Martin Atkinson,,Premier-League
 5.0,Sat,2019-09-14,12:30,Liverpool,3–1,Newcastle Utd,51430.0,Anfield,Andre Marriner,,Premier-League
 5.0,Sat,2019-09-14,15:00,Manchester Utd,1–0,Leicester City,73689.0,Old Trafford,Martin Atkinson,,Premier-League
-5.0,Sat,2019-09-14,15:00,Tottenham,4–0,Crystal Palace,59812.0,Tottenham Hotspur Stadium,Craig Pawson,,Premier-League
 5.0,Sat,2019-09-14,15:00,Sheffield Utd,0–1,Southampton,30985.0,Bramall Lane,Lee Mason,,Premier-League
 5.0,Sat,2019-09-14,15:00,Wolves,2–5,Chelsea,31534.0,Molineux Stadium,Graham Scott,,Premier-League
+5.0,Sat,2019-09-14,15:00,Tottenham,4–0,Crystal Palace,59812.0,Tottenham Hotspur Stadium,Craig Pawson,,Premier-League
 5.0,Sat,2019-09-14,15:00,Brighton,1–1,Burnley,29398.0,The American Express Community Stadium,Michael Oliver,,Premier-League
 5.0,Sat,2019-09-14,17:30,Norwich City,3–2,Manchester City,27035.0,Carrow Road,Kevin Friend,,Premier-League
 5.0,Sun,2019-09-15,14:00,Bournemouth,3–1,Everton,10416.0,Vitality Stadium,Paul Tierney,,Premier-League
@@ -817,11 +817,11 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 6.0,Sat,2019-09-21,17:30,Newcastle Utd,0–0,Brighton,43316.0,St. James' Park,Martin Atkinson,,Premier-League
 6.0,Sun,2019-09-22,14:00,West Ham,2–0,Manchester Utd,59936.0,London Stadium,Anthony Taylor,,Premier-League
 6.0,Sun,2019-09-22,14:00,Crystal Palace,1–1,Wolves,25122.0,Selhurst Park,Stuart Attwell,,Premier-League
-6.0,Sun,2019-09-22,16:30,Chelsea,1–2,Liverpool,40638.0,Stamford Bridge,Michael Oliver,,Premier-League
 6.0,Sun,2019-09-22,16:30,Arsenal,3–2,Aston Villa,60331.0,Emirates Stadium,Jonathan Moss,,Premier-League
+6.0,Sun,2019-09-22,16:30,Chelsea,1–2,Liverpool,40638.0,Stamford Bridge,Michael Oliver,,Premier-League
 7.0,Sat,2019-09-28,12:30,Sheffield Utd,0–1,Liverpool,31774.0,Bramall Lane,Anthony Taylor,,Premier-League
-7.0,Sat,2019-09-28,15:00,Aston Villa,2–2,Burnley,41546.0,Villa Park,Lee Mason,,Premier-League
 7.0,Sat,2019-09-28,15:00,Crystal Palace,2–0,Norwich City,25477.0,Selhurst Park,Jonathan Moss,,Premier-League
+7.0,Sat,2019-09-28,15:00,Aston Villa,2–2,Burnley,41546.0,Villa Park,Lee Mason,,Premier-League
 7.0,Sat,2019-09-28,15:00,Wolves,2–0,Watford,30711.0,Molineux Stadium,Paul Tierney,,Premier-League
 7.0,Sat,2019-09-28,15:00,Tottenham,2–1,Southampton,59645.0,Tottenham Hotspur Stadium,Graham Scott,,Premier-League
 7.0,Sat,2019-09-28,15:00,Chelsea,2–0,Brighton,40683.0,Stamford Bridge,Chris Kavanagh,,Premier-League
@@ -830,8 +830,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 7.0,Sun,2019-09-29,16:30,Leicester City,5–0,Newcastle Utd,32168.0,King Power Stadium,Craig Pawson,,Premier-League
 7.0,Mon,2019-09-30,20:00,Manchester Utd,1–1,Arsenal,73201.0,Old Trafford,Kevin Friend,,Premier-League
 8.0,Sat,2019-10-05,12:30,Brighton,3–0,Tottenham,30610.0,The American Express Community Stadium,Jonathan Moss,,Premier-League
-8.0,Sat,2019-10-05,15:00,Burnley,1–0,Everton,20650.0,Turf Moor,Graham Scott,,Premier-League
 8.0,Sat,2019-10-05,15:00,Norwich City,1–5,Aston Villa,27045.0,Carrow Road,Andy Madley,,Premier-League
+8.0,Sat,2019-10-05,15:00,Burnley,1–0,Everton,20650.0,Turf Moor,Graham Scott,,Premier-League
 8.0,Sat,2019-10-05,15:00,Liverpool,2–1,Leicester City,53322.0,Anfield,Chris Kavanagh,,Premier-League
 8.0,Sat,2019-10-05,15:00,Watford,0–0,Sheffield Utd,20811.0,Vicarage Road Stadium,Andre Marriner,,Premier-League
 8.0,Sat,2019-10-05,17:30,West Ham,1–2,Crystal Palace,59912.0,London Stadium,Michael Oliver,,Premier-League
@@ -841,8 +841,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 8.0,Sun,2019-10-06,16:30,Newcastle Utd,1–0,Manchester Utd,51198.0,St. James' Park,Mike Dean,,Premier-League
 9.0,Sat,2019-10-19,12:30,Everton,2–0,West Ham,39263.0,Goodison Park,Paul Tierney,,Premier-League
 9.0,Sat,2019-10-19,15:00,Bournemouth,0–0,Norwich City,10669.0,Vitality Stadium,Lee Mason,,Premier-League
-9.0,Sat,2019-10-19,15:00,Aston Villa,2–1,Brighton,41826.0,Villa Park,David Coote,,Premier-League
 9.0,Sat,2019-10-19,15:00,Chelsea,1–0,Newcastle Utd,40513.0,Stamford Bridge,Andre Marriner,,Premier-League
+9.0,Sat,2019-10-19,15:00,Aston Villa,2–1,Brighton,41826.0,Villa Park,David Coote,,Premier-League
 9.0,Sat,2019-10-19,15:00,Wolves,1–1,Southampton,30915.0,Molineux Stadium,Peter Bankes,,Premier-League
 9.0,Sat,2019-10-19,15:00,Tottenham,1–1,Watford,58754.0,Tottenham Hotspur Stadium,Chris Kavanagh,,Premier-League
 9.0,Sat,2019-10-19,15:00,Leicester City,2–1,Burnley,32105.0,King Power Stadium,Jonathan Moss,,Premier-League
@@ -961,18 +961,18 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 21.0,Wed,2020-01-01,12:30,Brighton,1–1,Chelsea,30559.0,The American Express Community Stadium,Stuart Attwell,,Premier-League
 21.0,Wed,2020-01-01,12:30,Burnley,1–2,Aston Villa,19561.0,Turf Moor,Michael Oliver,,Premier-League
 21.0,Wed,2020-01-01,15:00,Watford,2–1,Wolves,20584.0,Vicarage Road Stadium,Andy Madley,,Premier-League
-21.0,Wed,2020-01-01,15:00,Newcastle Utd,0–3,Leicester City,52178.0,St. James' Park,Martin Atkinson,,Premier-League
 21.0,Wed,2020-01-01,15:00,Southampton,1–0,Tottenham,30976.0,St. Mary's Stadium,Mike Dean,,Premier-League
-21.0,Wed,2020-01-01,17:30,Norwich City,1–1,Crystal Palace,27021.0,Carrow Road,Jonathan Moss,,Premier-League
+21.0,Wed,2020-01-01,15:00,Newcastle Utd,0–3,Leicester City,52178.0,St. James' Park,Martin Atkinson,,Premier-League
 21.0,Wed,2020-01-01,17:30,West Ham,4–0,Bournemouth,59917.0,London Stadium,Graham Scott,,Premier-League
+21.0,Wed,2020-01-01,17:30,Norwich City,1–1,Crystal Palace,27021.0,Carrow Road,Jonathan Moss,,Premier-League
 21.0,Wed,2020-01-01,17:30,Manchester City,2–1,Everton,54407.0,Etihad Stadium,Andre Marriner,,Premier-League
 21.0,Wed,2020-01-01,20:00,Arsenal,2–0,Manchester Utd,60328.0,Emirates Stadium,Chris Kavanagh,,Premier-League
 21.0,Thu,2020-01-02,20:00,Liverpool,2–0,Sheffield Utd,53321.0,Anfield,Paul Tierney,,Premier-League
 22.0,Fri,2020-01-10,20:00,Sheffield Utd,1–0,West Ham,30124.0,Bramall Lane,Michael Oliver,,Premier-League
 22.0,Sat,2020-01-11,12:30,Crystal Palace,1–1,Arsenal,25468.0,Selhurst Park,Paul Tierney,,Premier-League
 22.0,Sat,2020-01-11,15:00,Chelsea,3–0,Burnley,40396.0,Stamford Bridge,Kevin Friend,,Premier-League
-22.0,Sat,2020-01-11,15:00,Manchester Utd,4–0,Norwich City,73271.0,Old Trafford,Anthony Taylor,,Premier-League
 22.0,Sat,2020-01-11,15:00,Leicester City,1–2,Southampton,32115.0,King Power Stadium,Lee Mason,,Premier-League
+22.0,Sat,2020-01-11,15:00,Manchester Utd,4–0,Norwich City,73271.0,Old Trafford,Anthony Taylor,,Premier-League
 22.0,Sat,2020-01-11,15:00,Everton,1–0,Brighton,38772.0,Goodison Park,David Coote,,Premier-League
 22.0,Sat,2020-01-11,15:00,Wolves,1–1,Newcastle Utd,31570.0,Molineux Stadium,Peter Bankes,,Premier-League
 22.0,Sat,2020-01-11,17:30,Tottenham,0–1,Liverpool,61023.0,Tottenham Hotspur Stadium,Martin Atkinson,,Premier-League
@@ -990,8 +990,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 23.0,Sun,2020-01-19,16:30,Liverpool,2–0,Manchester Utd,52916.0,Anfield,Craig Pawson,,Premier-League
 24.0,Tue,2020-01-21,19:30,Crystal Palace,0–2,Southampton,23739.0,Selhurst Park,Andre Marriner,,Premier-League
 24.0,Tue,2020-01-21,19:30,Bournemouth,3–1,Brighton,10065.0,Vitality Stadium,Kevin Friend,,Premier-League
-24.0,Tue,2020-01-21,19:30,Aston Villa,2–1,Watford,40867.0,Villa Park,Martin Atkinson,,Premier-League
 24.0,Tue,2020-01-21,19:30,Sheffield Utd,0–1,Manchester City,31285.0,Bramall Lane,Lee Mason,,Premier-League
+24.0,Tue,2020-01-21,19:30,Aston Villa,2–1,Watford,40867.0,Villa Park,Martin Atkinson,,Premier-League
 24.0,Tue,2020-01-21,19:30,Everton,2–2,Newcastle Utd,38822.0,Goodison Park,Simon Hooper,,Premier-League
 24.0,Tue,2020-01-21,20:15,Chelsea,2–2,Arsenal,40577.0,Stamford Bridge,Stuart Attwell,,Premier-League
 24.0,Wed,2020-01-22,19:30,Leicester City,4–1,West Ham,31968.0,King Power Stadium,David Coote,,Premier-League
@@ -1000,9 +1000,9 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 24.0,Thu,2020-01-23,20:00,Wolves,1–2,Liverpool,31746.0,Molineux Stadium,Michael Oliver,,Premier-League
 18.0,Wed,2020-01-29,19:45,West Ham,0–2,Liverpool,59959.0,London Stadium,Jonathan Moss,,Premier-League
 25.0,Sat,2020-02-01,12:30,Leicester City,2–2,Chelsea,32186.0,King Power Stadium,Lee Mason,,Premier-League
-25.0,Sat,2020-02-01,15:00,Watford,2–3,Everton,21229.0,Vicarage Road Stadium,Craig Pawson,,Premier-League
 25.0,Sat,2020-02-01,15:00,Bournemouth,2–1,Aston Villa,10722.0,Vitality Stadium,Anthony Taylor,,Premier-League
 25.0,Sat,2020-02-01,15:00,Newcastle Utd,0–0,Norwich City,52204.0,St. James' Park,Martin Atkinson,,Premier-League
+25.0,Sat,2020-02-01,15:00,Watford,2–3,Everton,21229.0,Vicarage Road Stadium,Craig Pawson,,Premier-League
 25.0,Sat,2020-02-01,15:00,Liverpool,4–0,Southampton,53291.0,Anfield,Kevin Friend,,Premier-League
 25.0,Sat,2020-02-01,15:00,Crystal Palace,0–1,Sheffield Utd,25170.0,Selhurst Park,Andy Madley,,Premier-League
 25.0,Sat,2020-02-01,15:00,West Ham,3–3,Brighton,59952.0,London Stadium,Michael Oliver,,Premier-League
@@ -1021,8 +1021,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 26.0,Wed,2020-02-19,19:30,Manchester City,2–0,West Ham,52159.0,Etihad Stadium,Kevin Friend,,Premier-League
 27.0,Sat,2020-02-22,12:30,Chelsea,2–1,Tottenham,40608.0,Stamford Bridge,Michael Oliver,,Premier-League
 27.0,Sat,2020-02-22,15:00,Southampton,2–0,Aston Villa,31478.0,St. Mary's Stadium,Craig Pawson,,Premier-League
-27.0,Sat,2020-02-22,15:00,Sheffield Utd,1–1,Brighton,31888.0,Bramall Lane,Graham Scott,,Premier-League
 27.0,Sat,2020-02-22,15:00,Burnley,3–0,Bournemouth,18227.0,Turf Moor,Mike Dean,,Premier-League
+27.0,Sat,2020-02-22,15:00,Sheffield Utd,1–1,Brighton,31888.0,Bramall Lane,Graham Scott,,Premier-League
 27.0,Sat,2020-02-22,15:00,Crystal Palace,1–0,Newcastle Utd,25486.0,Selhurst Park,Peter Bankes,,Premier-League
 27.0,Sat,2020-02-22,17:30,Leicester City,0–1,Manchester City,32068.0,King Power Stadium,Paul Tierney,,Premier-League
 27.0,Sun,2020-02-23,14:00,Wolves,3–0,Norwich City,31046.0,Molineux Stadium,Chris Kavanagh,,Premier-League
@@ -1039,8 +1039,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 28.0,Sun,2020-03-01,14:00,Tottenham,2–3,Wolves,58064.0,Tottenham Hotspur Stadium,Stuart Attwell,,Premier-League
 29.0,Sat,2020-03-07,12:30,Liverpool,2–1,Bournemouth,53323.0,Anfield,Paul Tierney,,Premier-League
 29.0,Sat,2020-03-07,15:00,Sheffield Utd,1–0,Norwich City,31379.0,Bramall Lane,Simon Hooper,,Premier-League
-29.0,Sat,2020-03-07,15:00,Arsenal,1–0,West Ham,60335.0,Emirates Stadium,Martin Atkinson,,Premier-League
 29.0,Sat,2020-03-07,15:00,Wolves,0–0,Brighton,31490.0,Molineux Stadium,Andre Marriner,,Premier-League
+29.0,Sat,2020-03-07,15:00,Arsenal,1–0,West Ham,60335.0,Emirates Stadium,Martin Atkinson,,Premier-League
 29.0,Sat,2020-03-07,15:00,Southampton,0–1,Newcastle Utd,30096.0,St. Mary's Stadium,Graham Scott,,Premier-League
 29.0,Sat,2020-03-07,15:00,Crystal Palace,1–0,Watford,25461.0,Selhurst Park,Anthony Taylor,,Premier-League
 29.0,Sat,2020-03-07,17:30,Burnley,1–1,Tottenham,20496.0,Turf Moor,Jonathan Moss,,Premier-League
@@ -1062,8 +1062,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 31.0,Tue,2020-06-23,18:00,Leicester City,0–0,Brighton,,King Power Stadium,Lee Mason,,Premier-League
 31.0,Tue,2020-06-23,20:15,Tottenham,2–0,West Ham,,Tottenham Hotspur Stadium,Craig Pawson,,Premier-League
 31.0,Wed,2020-06-24,18:00,Manchester Utd,3–0,Sheffield Utd,,Old Trafford,Anthony Taylor,,Premier-League
-31.0,Wed,2020-06-24,18:00,Norwich City,0–1,Everton,,Carrow Road,Andy Madley,,Premier-League
 31.0,Wed,2020-06-24,18:00,Newcastle Utd,1–1,Aston Villa,,St. James' Park,Chris Kavanagh,,Premier-League
+31.0,Wed,2020-06-24,18:00,Norwich City,0–1,Everton,,Carrow Road,Andy Madley,,Premier-League
 31.0,Wed,2020-06-24,18:00,Wolves,1–0,Bournemouth,,Molineux Stadium,Michael Oliver,,Premier-League
 31.0,Wed,2020-06-24,20:15,Liverpool,4–0,Crystal Palace,,Anfield,Martin Atkinson,,Premier-League
 31.0,Thu,2020-06-25,18:00,Southampton,0–2,Arsenal,,St. Mary's Stadium,Graham Scott,,Premier-League
@@ -1114,31 +1114,31 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 36.0,Wed,2020-07-15,18:00,Manchester City,2–1,Bournemouth,,Etihad Stadium,Lee Mason,,Premier-League
 36.0,Wed,2020-07-15,18:00,Newcastle Utd,1–3,Tottenham,,St. James' Park,David Coote,,Premier-League
 36.0,Wed,2020-07-15,20:15,Arsenal,2–1,Liverpool,,Emirates Stadium,Paul Tierney,,Premier-League
-36.0,Thu,2020-07-16,18:00,Everton,1–1,Aston Villa,,Goodison Park,Anthony Taylor,,Premier-League
 36.0,Thu,2020-07-16,18:00,Leicester City,2–0,Sheffield Utd,,King Power Stadium,Michael Oliver,,Premier-League
+36.0,Thu,2020-07-16,18:00,Everton,1–1,Aston Villa,,Goodison Park,Anthony Taylor,,Premier-League
 36.0,Thu,2020-07-16,20:15,Southampton,1–1,Brighton,,St. Mary's Stadium,Andre Marriner,,Premier-League
 36.0,Thu,2020-07-16,20:15,Crystal Palace,0–2,Manchester Utd,,Selhurst Park,Graham Scott,,Premier-League
 36.0,Fri,2020-07-17,20:00,West Ham,3–1,Watford,,London Stadium,Martin Atkinson,,Premier-League
 37.0,Sat,2020-07-18,17:30,Norwich City,0–2,Burnley,,Carrow Road,Kevin Friend,,Premier-League
 37.0,Sun,2020-07-19,14:00,Bournemouth,0–2,Southampton,,Vitality Stadium,Craig Pawson,,Premier-League
 37.0,Sun,2020-07-19,16:00,Tottenham,3–0,Leicester City,,Tottenham Hotspur Stadium,Anthony Taylor,,Premier-League
-37.0,Mon,2020-07-20,18:00,Sheffield Utd,0–1,Everton,,Bramall Lane,Stuart Attwell,,Premier-League
 37.0,Mon,2020-07-20,18:00,Brighton,0–0,Newcastle Utd,,The American Express Community Stadium,Simon Hooper,,Premier-League
+37.0,Mon,2020-07-20,18:00,Sheffield Utd,0–1,Everton,,Bramall Lane,Stuart Attwell,,Premier-League
 37.0,Mon,2020-07-20,20:15,Wolves,2–0,Crystal Palace,,Molineux Stadium,Peter Bankes,,Premier-League
 37.0,Tue,2020-07-21,18:00,Watford,0–4,Manchester City,,Vicarage Road Stadium,Michael Oliver,,Premier-League
 37.0,Tue,2020-07-21,20:15,Aston Villa,1–0,Arsenal,,Villa Park,Chris Kavanagh,,Premier-League
 37.0,Wed,2020-07-22,18:00,Manchester Utd,1–1,West Ham,,Old Trafford,Paul Tierney,,Premier-League
 37.0,Wed,2020-07-22,20:15,Liverpool,5–3,Chelsea,,Anfield,Andre Marriner,,Premier-League
+38.0,Sun,2020-07-26,16:00,Burnley,1–2,Brighton,,Turf Moor,Jonathan Moss,,Premier-League
 38.0,Sun,2020-07-26,16:00,West Ham,1–1,Aston Villa,,London Stadium,Michael Oliver,,Premier-League
 38.0,Sun,2020-07-26,16:00,Southampton,3–1,Sheffield Utd,,St. Mary's Stadium,Peter Bankes,,Premier-League
-38.0,Sun,2020-07-26,16:00,Burnley,1–2,Brighton,,Turf Moor,Jonathan Moss,,Premier-League
 38.0,Sun,2020-07-26,16:00,Chelsea,2–0,Wolves,,Stamford Bridge,Stuart Attwell,,Premier-League
 38.0,Sun,2020-07-26,16:00,Everton,1–3,Bournemouth,,Goodison Park,Chris Kavanagh,,Premier-League
 38.0,Sun,2020-07-26,16:00,Crystal Palace,1–1,Tottenham,,Selhurst Park,Andre Marriner,,Premier-League
 38.0,Sun,2020-07-26,16:00,Arsenal,3–2,Watford,,Emirates Stadium,Mike Dean,,Premier-League
 38.0,Sun,2020-07-26,16:00,Manchester City,5–0,Norwich City,,Etihad Stadium,Craig Pawson,,Premier-League
-38.0,Sun,2020-07-26,16:00,Newcastle Utd,1–3,Liverpool,,St. James' Park,Anthony Taylor,,Premier-League
 38.0,Sun,2020-07-26,16:00,Leicester City,0–2,Manchester Utd,,King Power Stadium,Martin Atkinson,,Premier-League
+38.0,Sun,2020-07-26,16:00,Newcastle Utd,1–3,Liverpool,,St. James' Park,Anthony Taylor,,Premier-League
 1.0,Fri,2018-08-10,20:00,Manchester Utd,2–1,Leicester City,74439.0,Old Trafford,Andre Marriner,,Premier-League
 1.0,Sat,2018-08-11,12:30,Newcastle Utd,1–2,Tottenham,51749.0,St. James' Park,Martin Atkinson,,Premier-League
 1.0,Sat,2018-08-11,15:00,Watford,2–0,Brighton,20051.0,Vicarage Road Stadium,Jonathan Moss,,Premier-League
@@ -1182,8 +1182,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 5.0,Sat,2018-09-15,12:30,Tottenham,1–2,Liverpool,80188.0,Wembley Stadium,Michael Oliver,,Premier-League
 5.0,Sat,2018-09-15,15:00,Manchester City,3–0,Fulham,53307.0,Etihad Stadium,Stuart Attwell,,Premier-League
 5.0,Sat,2018-09-15,15:00,Bournemouth,4–2,Leicester City,10543.0,Vitality Stadium,Craig Pawson,,Premier-League
-5.0,Sat,2018-09-15,15:00,Newcastle Utd,1–2,Arsenal,52165.0,St. James' Park,Lee Probert,,Premier-League
 5.0,Sat,2018-09-15,15:00,Chelsea,4–1,Cardiff City,40499.0,Stamford Bridge,Jonathan Moss,,Premier-League
+5.0,Sat,2018-09-15,15:00,Newcastle Utd,1–2,Arsenal,52165.0,St. James' Park,Lee Probert,,Premier-League
 5.0,Sat,2018-09-15,15:00,Huddersfield,0–1,Crystal Palace,23696.0,The John Smith's Stadium,Lee Mason,,Premier-League
 5.0,Sat,2018-09-15,17:30,Watford,1–2,Manchester Utd,20537.0,Vicarage Road Stadium,Mike Dean,,Premier-League
 5.0,Sun,2018-09-16,13:30,Wolves,1–0,Burnley,30406.0,Molineux Stadium,Andre Marriner,,Premier-League
@@ -1204,8 +1204,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 7.0,Sat,2018-09-29,15:00,Newcastle Utd,0–2,Leicester City,51523.0,St. James' Park,Simon Hooper,,Premier-League
 7.0,Sat,2018-09-29,15:00,Arsenal,2–0,Watford,60019.0,Emirates Stadium,Anthony Taylor,,Premier-League
 7.0,Sat,2018-09-29,15:00,Everton,3–0,Fulham,38788.0,Goodison Park,Roger East,,Premier-League
-7.0,Sat,2018-09-29,15:00,Manchester City,2–0,Brighton,54152.0,Etihad Stadium,Lee Mason,,Premier-League
 7.0,Sat,2018-09-29,15:00,Wolves,2–0,Southampton,31147.0,Molineux Stadium,Stuart Attwell,,Premier-League
+7.0,Sat,2018-09-29,15:00,Manchester City,2–0,Brighton,54152.0,Etihad Stadium,Lee Mason,,Premier-League
 7.0,Sat,2018-09-29,17:30,Chelsea,1–1,Liverpool,40625.0,Stamford Bridge,Andre Marriner,,Premier-League
 7.0,Sun,2018-09-30,16:00,Cardiff City,1–2,Burnley,30411.0,Cardiff City Stadium,Martin Atkinson,,Premier-League
 7.0,Mon,2018-10-01,20:00,Bournemouth,2–1,Crystal Palace,10199.0,Vitality Stadium,Mike Dean,,Premier-League
@@ -1213,15 +1213,15 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 8.0,Sat,2018-10-06,15:00,Crystal Palace,0–1,Wolves,25715.0,Selhurst Park,Michael Oliver,,Premier-League
 8.0,Sat,2018-10-06,15:00,Watford,0–4,Bournemouth,20139.0,Vicarage Road Stadium,Jonathan Moss,,Premier-League
 8.0,Sat,2018-10-06,15:00,Burnley,1–1,Huddersfield,20533.0,Turf Moor,Chris Kavanagh,,Premier-League
-8.0,Sat,2018-10-06,15:00,Leicester City,1–2,Everton,32007.0,King Power Stadium,Andre Marriner,,Premier-League
 8.0,Sat,2018-10-06,15:00,Tottenham,1–0,Cardiff City,43268.0,Wembley Stadium,Mike Dean,,Premier-League
+8.0,Sat,2018-10-06,15:00,Leicester City,1–2,Everton,32007.0,King Power Stadium,Andre Marriner,,Premier-League
 8.0,Sat,2018-10-06,17:30,Manchester Utd,3–2,Newcastle Utd,74519.0,Old Trafford,Anthony Taylor,,Premier-League
 8.0,Sun,2018-10-07,12:00,Fulham,1–5,Arsenal,25401.0,Craven Cottage,Paul Tierney,,Premier-League
 8.0,Sun,2018-10-07,14:15,Southampton,0–3,Chelsea,27077.0,St. Mary's Stadium,Craig Pawson,,Premier-League
 8.0,Sun,2018-10-07,16:30,Liverpool,0–0,Manchester City,52117.0,Anfield,Martin Atkinson,,Premier-League
 9.0,Sat,2018-10-20,12:30,Chelsea,2–2,Manchester Utd,40721.0,Stamford Bridge,Mike Dean,,Premier-League
-9.0,Sat,2018-10-20,15:00,Newcastle Utd,0–1,Brighton,50329.0,St. James' Park,Andre Marriner,,Premier-League
 9.0,Sat,2018-10-20,15:00,Wolves,0–2,Watford,31144.0,Molineux Stadium,Lee Mason,,Premier-League
+9.0,Sat,2018-10-20,15:00,Newcastle Utd,0–1,Brighton,50329.0,St. James' Park,Andre Marriner,,Premier-League
 9.0,Sat,2018-10-20,15:00,West Ham,0–1,Tottenham,56921.0,London Stadium,Martin Atkinson,,Premier-League
 9.0,Sat,2018-10-20,15:00,Manchester City,5–0,Burnley,54094.0,Etihad Stadium,Jonathan Moss,,Premier-League
 9.0,Sat,2018-10-20,15:00,Bournemouth,0–0,Southampton,10986.0,Vitality Stadium,Lee Probert,,Premier-League
@@ -1232,11 +1232,11 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 10.0,Sat,2018-10-27,15:00,Fulham,0–3,Bournemouth,25071.0,Craven Cottage,Andre Marriner,,Premier-League
 10.0,Sat,2018-10-27,15:00,Liverpool,4–1,Cardiff City,53373.0,Anfield,Stuart Attwell,,Premier-League
 10.0,Sat,2018-10-27,15:00,Watford,3–0,Huddersfield,20457.0,Vicarage Road Stadium,Mike Dean,,Premier-League
-10.0,Sat,2018-10-27,15:00,Southampton,0–0,Newcastle Utd,30736.0,St. Mary's Stadium,Chris Kavanagh,,Premier-League
 10.0,Sat,2018-10-27,15:00,Brighton,1–0,Wolves,30654.0,The American Express Community Stadium,Anthony Taylor,,Premier-League
+10.0,Sat,2018-10-27,15:00,Southampton,0–0,Newcastle Utd,30736.0,St. Mary's Stadium,Chris Kavanagh,,Premier-League
 10.0,Sat,2018-10-27,17:30,Leicester City,1–1,West Ham,31848.0,King Power Stadium,Michael Oliver,,Premier-League
-10.0,Sun,2018-10-28,13:30,Burnley,0–4,Chelsea,21430.0,Turf Moor,Craig Pawson,,Premier-League
 10.0,Sun,2018-10-28,13:30,Crystal Palace,2–2,Arsenal,25718.0,Selhurst Park,Martin Atkinson,,Premier-League
+10.0,Sun,2018-10-28,13:30,Burnley,0–4,Chelsea,21430.0,Turf Moor,Craig Pawson,,Premier-League
 10.0,Sun,2018-10-28,16:00,Manchester Utd,2–1,Everton,74525.0,Old Trafford,Jonathan Moss,,Premier-League
 10.0,Mon,2018-10-29,20:00,Tottenham,0–1,Manchester City,56854.0,Wembley Stadium,Kevin Friend,,Premier-League
 11.0,Sat,2018-11-03,12:30,Bournemouth,1–2,Manchester Utd,10792.0,Vitality Stadium,Paul Tierney,,Premier-League
@@ -1252,8 +1252,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 12.0,Sat,2018-11-10,12:30,Cardiff City,2–1,Brighton,29402.0,Cardiff City Stadium,Martin Atkinson,,Premier-League
 12.0,Sat,2018-11-10,15:00,Newcastle Utd,2–1,Bournemouth,49266.0,St. James' Park,Lee Probert,,Premier-League
 12.0,Sat,2018-11-10,15:00,Leicester City,0–0,Burnley,32184.0,King Power Stadium,Mike Dean,,Premier-League
-12.0,Sat,2018-11-10,15:00,Huddersfield,1–1,West Ham,24069.0,The John Smith's Stadium,Chris Kavanagh,,Premier-League
 12.0,Sat,2018-11-10,15:00,Southampton,1–1,Watford,28153.0,St. Mary's Stadium,Simon Hooper,,Premier-League
+12.0,Sat,2018-11-10,15:00,Huddersfield,1–1,West Ham,24069.0,The John Smith's Stadium,Chris Kavanagh,,Premier-League
 12.0,Sat,2018-11-10,17:30,Crystal Palace,0–1,Tottenham,25685.0,Selhurst Park,Jonathan Moss,,Premier-League
 12.0,Sun,2018-11-11,12:00,Liverpool,2–0,Fulham,53128.0,Anfield,Paul Tierney,,Premier-League
 12.0,Sun,2018-11-11,14:15,Chelsea,0–0,Everton,40345.0,Stamford Bridge,Kevin Friend,,Premier-League
@@ -1262,8 +1262,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 13.0,Sat,2018-11-24,15:00,Fulham,3–2,Southampton,24603.0,Craven Cottage,Michael Oliver,,Premier-League
 13.0,Sat,2018-11-24,15:00,Everton,1–0,Cardiff City,39139.0,Goodison Park,Paul Tierney,,Premier-League
 13.0,Sat,2018-11-24,15:00,Manchester Utd,0–0,Crystal Palace,74516.0,Old Trafford,Lee Mason,,Premier-League
-13.0,Sat,2018-11-24,15:00,Watford,0–3,Liverpool,20540.0,Vicarage Road Stadium,Jonathan Moss,,Premier-League
 13.0,Sat,2018-11-24,15:00,Brighton,1–1,Leicester City,30553.0,The American Express Community Stadium,Chris Kavanagh,,Premier-League
+13.0,Sat,2018-11-24,15:00,Watford,0–3,Liverpool,20540.0,Vicarage Road Stadium,Jonathan Moss,,Premier-League
 13.0,Sat,2018-11-24,15:00,West Ham,0–4,Manchester City,56886.0,London Stadium,Andre Marriner,,Premier-League
 13.0,Sat,2018-11-24,17:30,Tottenham,3–1,Chelsea,55465.0,Wembley Stadium,Martin Atkinson,,Premier-League
 13.0,Sun,2018-11-25,13:30,Bournemouth,1–2,Arsenal,10792.0,Vitality Stadium,Craig Pawson,,Premier-League
@@ -1300,8 +1300,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 16.0,Sun,2018-12-09,16:00,Newcastle Utd,1–2,Wolves,50223.0,St. James' Park,Mike Dean,,Premier-League
 16.0,Mon,2018-12-10,20:00,Everton,2–2,Watford,38400.0,Goodison Park,Kevin Friend,,Premier-League
 17.0,Sat,2018-12-15,12:30,Manchester City,3–1,Everton,54173.0,Etihad Stadium,Craig Pawson,,Premier-League
-17.0,Sat,2018-12-15,15:00,Huddersfield,0–1,Newcastle Utd,24036.0,The John Smith's Stadium,Anthony Taylor,,Premier-League
 17.0,Sat,2018-12-15,15:00,Wolves,2–0,Bournemouth,30997.0,Molineux Stadium,Simon Hooper,,Premier-League
+17.0,Sat,2018-12-15,15:00,Huddersfield,0–1,Newcastle Utd,24036.0,The John Smith's Stadium,Anthony Taylor,,Premier-League
 17.0,Sat,2018-12-15,15:00,Watford,3–2,Cardiff City,20032.0,Vicarage Road Stadium,Andy Madley,,Premier-League
 17.0,Sat,2018-12-15,15:00,Crystal Palace,1–0,Leicester City,24738.0,Selhurst Park,Michael Oliver,,Premier-League
 17.0,Sat,2018-12-15,15:00,Tottenham,1–0,Burnley,41645.0,Wembley Stadium,Graham Scott,,Premier-League
@@ -1323,8 +1323,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 19.0,Wed,2018-12-26,15:00,Leicester City,2–1,Manchester City,32090.0,King Power Stadium,Mike Dean,,Premier-League
 19.0,Wed,2018-12-26,15:00,Crystal Palace,0–0,Cardiff City,25206.0,Selhurst Park,Lee Probert,,Premier-League
 19.0,Wed,2018-12-26,15:00,Tottenham,5–0,Bournemouth,45154.0,Wembley Stadium,Chris Kavanagh,,Premier-League
-19.0,Wed,2018-12-26,15:00,Manchester Utd,3–1,Huddersfield,74523.0,Old Trafford,Jonathan Moss,,Premier-League
 19.0,Wed,2018-12-26,15:00,Burnley,1–5,Everton,21484.0,Turf Moor,Michael Oliver,,Premier-League
+19.0,Wed,2018-12-26,15:00,Manchester Utd,3–1,Huddersfield,74523.0,Old Trafford,Jonathan Moss,,Premier-League
 19.0,Wed,2018-12-26,15:00,Liverpool,4–0,Newcastle Utd,53318.0,Anfield,Graham Scott,,Premier-League
 19.0,Wed,2018-12-26,17:15,Brighton,1–1,Arsenal,30608.0,The American Express Community Stadium,Anthony Taylor,,Premier-League
 19.0,Wed,2018-12-26,19:30,Watford,1–2,Chelsea,20415.0,Vicarage Road Stadium,Martin Atkinson,,Premier-League
@@ -1361,18 +1361,18 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 22.0,Mon,2019-01-14,20:00,Manchester City,3–0,Wolves,54171.0,Etihad Stadium,Craig Pawson,,Premier-League
 23.0,Sat,2019-01-19,12:30,Wolves,4–3,Leicester City,31278.0,Molineux Stadium,Chris Kavanagh,,Premier-League
 23.0,Sat,2019-01-19,15:00,Watford,0–0,Burnley,19510.0,Vicarage Road Stadium,Michael Oliver,,Premier-League
-23.0,Sat,2019-01-19,15:00,Manchester Utd,2–1,Brighton,74532.0,Old Trafford,Paul Tierney,,Premier-League
 23.0,Sat,2019-01-19,15:00,Liverpool,4–3,Crystal Palace,53171.0,Anfield,Jonathan Moss,,Premier-League
+23.0,Sat,2019-01-19,15:00,Manchester Utd,2–1,Brighton,74532.0,Old Trafford,Paul Tierney,,Premier-League
 23.0,Sat,2019-01-19,15:00,Southampton,2–1,Everton,29989.0,St. Mary's Stadium,Graham Scott,,Premier-League
 23.0,Sat,2019-01-19,15:00,Bournemouth,2–0,West Ham,10495.0,Vitality Stadium,Simon Hooper,,Premier-League
 23.0,Sat,2019-01-19,15:00,Newcastle Utd,3–0,Cardiff City,49864.0,St. James' Park,Stuart Attwell,,Premier-League
 23.0,Sat,2019-01-19,17:30,Arsenal,2–0,Chelsea,59979.0,Emirates Stadium,Anthony Taylor,,Premier-League
 23.0,Sun,2019-01-20,13:30,Huddersfield,0–3,Manchester City,24190.0,The John Smith's Stadium,Andre Marriner,,Premier-League
 23.0,Sun,2019-01-20,16:00,Fulham,1–2,Tottenham,24807.0,Craven Cottage,Craig Pawson,,Premier-League
-24.0,Tue,2019-01-29,19:45,Fulham,4–2,Brighton,22008.0,Craven Cottage,Lee Probert,,Premier-League
 24.0,Tue,2019-01-29,19:45,Wolves,3–0,West Ham,31122.0,Molineux Stadium,David Coote,,Premier-League
-24.0,Tue,2019-01-29,19:45,Huddersfield,0–1,Everton,23699.0,The John Smith's Stadium,Stuart Attwell,,Premier-League
+24.0,Tue,2019-01-29,19:45,Fulham,4–2,Brighton,22008.0,Craven Cottage,Lee Probert,,Premier-League
 24.0,Tue,2019-01-29,19:45,Arsenal,2–1,Cardiff City,59933.0,Emirates Stadium,Mike Dean,,Premier-League
+24.0,Tue,2019-01-29,19:45,Huddersfield,0–1,Everton,23699.0,The John Smith's Stadium,Stuart Attwell,,Premier-League
 24.0,Tue,2019-01-29,20:00,Newcastle Utd,2–1,Manchester City,50861.0,St. James' Park,Paul Tierney,,Premier-League
 24.0,Tue,2019-01-29,20:00,Manchester Utd,2–2,Burnley,74529.0,Old Trafford,Jonathan Moss,,Premier-League
 24.0,Wed,2019-01-30,19:45,Bournemouth,4–0,Chelsea,10227.0,Vitality Stadium,Roger East,,Premier-League
@@ -1382,8 +1382,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 25.0,Sat,2019-02-02,12:30,Tottenham,1–0,Newcastle Utd,41219.0,Wembley Stadium,Andre Marriner,,Premier-League
 25.0,Sat,2019-02-02,15:00,Burnley,1–1,Southampton,19787.0,Turf Moor,Anthony Taylor,,Premier-League
 25.0,Sat,2019-02-02,15:00,Crystal Palace,2–0,Fulham,25355.0,Selhurst Park,Michael Oliver,,Premier-League
-25.0,Sat,2019-02-02,15:00,Everton,1–3,Wolves,39380.0,Goodison Park,Lee Mason,,Premier-League
 25.0,Sat,2019-02-02,15:00,Brighton,0–0,Watford,30414.0,The American Express Community Stadium,Simon Hooper,,Premier-League
+25.0,Sat,2019-02-02,15:00,Everton,1–3,Wolves,39380.0,Goodison Park,Lee Mason,,Premier-League
 25.0,Sat,2019-02-02,15:00,Chelsea,5–0,Huddersfield,40626.0,Stamford Bridge,Paul Tierney,,Premier-League
 25.0,Sat,2019-02-02,17:30,Cardiff City,2–0,Bournemouth,31939.0,Cardiff City Stadium,Jonathan Moss,,Premier-League
 25.0,Sun,2019-02-03,14:05,Leicester City,0–1,Manchester Utd,32148.0,King Power Stadium,Mike Dean,,Premier-League
@@ -1415,14 +1415,14 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 28.0,Wed,2019-02-27,19:45,Southampton,2–0,Fulham,27597.0,St. Mary's Stadium,Anthony Taylor,,Premier-League
 28.0,Wed,2019-02-27,19:45,Arsenal,5–1,Bournemouth,59618.0,Emirates Stadium,Chris Kavanagh,,Premier-League
 28.0,Wed,2019-02-27,20:00,Crystal Palace,1–3,Manchester Utd,25754.0,Selhurst Park,Martin Atkinson,,Premier-League
-28.0,Wed,2019-02-27,20:00,Chelsea,2–0,Tottenham,40542.0,Stamford Bridge,Andre Marriner,,Premier-League
 28.0,Wed,2019-02-27,20:00,Manchester City,1–0,West Ham,53528.0,Etihad Stadium,Stuart Attwell,,Premier-League
+28.0,Wed,2019-02-27,20:00,Chelsea,2–0,Tottenham,40542.0,Stamford Bridge,Andre Marriner,,Premier-League
 28.0,Wed,2019-02-27,20:00,Liverpool,5–0,Watford,53316.0,Anfield,Graham Scott,,Premier-League
 29.0,Sat,2019-03-02,12:30,Tottenham,1–1,Arsenal,81332.0,Wembley Stadium,Anthony Taylor,,Premier-League
 29.0,Sat,2019-03-02,15:00,Manchester Utd,3–2,Southampton,74459.0,Old Trafford,Stuart Attwell,,Premier-League
-29.0,Sat,2019-03-02,15:00,Bournemouth,0–1,Manchester City,10699.0,Vitality Stadium,Kevin Friend,,Premier-League
 29.0,Sat,2019-03-02,15:00,Burnley,1–3,Crystal Palace,19223.0,Turf Moor,Lee Probert,,Premier-League
 29.0,Sat,2019-03-02,15:00,Wolves,2–0,Cardiff City,31309.0,Molineux Stadium,Andre Marriner,,Premier-League
+29.0,Sat,2019-03-02,15:00,Bournemouth,0–1,Manchester City,10699.0,Vitality Stadium,Kevin Friend,,Premier-League
 29.0,Sat,2019-03-02,15:00,Brighton,1–0,Huddersfield,30182.0,The American Express Community Stadium,Mike Dean,,Premier-League
 29.0,Sat,2019-03-02,17:30,West Ham,2–0,Newcastle Utd,59910.0,London Stadium,Chris Kavanagh,,Premier-League
 29.0,Sun,2019-03-03,12:00,Watford,2–1,Leicester City,20062.0,Vicarage Road Stadium,Jonathan Moss,,Premier-League
@@ -1445,9 +1445,9 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 31.0,Sun,2019-03-17,16:30,Everton,2–0,Chelsea,39356.0,Goodison Park,Anthony Taylor,,Premier-League
 32.0,Sat,2019-03-30,12:30,Fulham,0–2,Manchester City,25001.0,Craven Cottage,Kevin Friend,,Premier-League
 32.0,Sat,2019-03-30,15:00,Manchester Utd,2–1,Watford,74543.0,Old Trafford,Stuart Attwell,,Premier-League
-32.0,Sat,2019-03-30,15:00,Burnley,2–0,Wolves,20990.0,Turf Moor,Chris Kavanagh,,Premier-League
 32.0,Sat,2019-03-30,15:00,Crystal Palace,2–0,Huddersfield,25193.0,Selhurst Park,Lee Probert,,Premier-League
 32.0,Sat,2019-03-30,15:00,Brighton,0–1,Southampton,30636.0,The American Express Community Stadium,Michael Oliver,,Premier-League
+32.0,Sat,2019-03-30,15:00,Burnley,2–0,Wolves,20990.0,Turf Moor,Chris Kavanagh,,Premier-League
 32.0,Sat,2019-03-30,15:00,Leicester City,2–0,Bournemouth,31530.0,King Power Stadium,Lee Mason,,Premier-League
 32.0,Sat,2019-03-30,17:30,West Ham,0–2,Everton,59988.0,London Stadium,Paul Tierney,,Premier-League
 32.0,Sun,2019-03-31,14:05,Cardiff City,1–2,Chelsea,32657.0,Cardiff City Stadium,Craig Pawson,,Premier-League
@@ -1478,8 +1478,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 35.0,Sat,2019-04-20,12:30,Manchester City,1–0,Tottenham,54489.0,Etihad Stadium,Michael Oliver,,Premier-League
 35.0,Sat,2019-04-20,15:00,Huddersfield,1–2,Watford,23957.0,The John Smith's Stadium,Roger East,,Premier-League
 35.0,Sat,2019-04-20,15:00,Bournemouth,0–1,Fulham,10511.0,Vitality Stadium,David Coote,,Premier-League
-35.0,Sat,2019-04-20,15:00,West Ham,2–2,Leicester City,59960.0,London Stadium,Lee Probert,,Premier-League
 35.0,Sat,2019-04-20,15:00,Wolves,0–0,Brighton,31096.0,Molineux Stadium,Craig Pawson,,Premier-League
+35.0,Sat,2019-04-20,15:00,West Ham,2–2,Leicester City,59960.0,London Stadium,Lee Probert,,Premier-League
 35.0,Sat,2019-04-20,17:30,Newcastle Utd,3–1,Southampton,52191.0,St. James' Park,Anthony Taylor,,Premier-League
 35.0,Sun,2019-04-21,13:30,Everton,4–0,Manchester Utd,39395.0,Goodison Park,Paul Tierney,,Premier-League
 35.0,Sun,2019-04-21,16:00,Arsenal,2–3,Crystal Palace,59929.0,Emirates Stadium,Jonathan Moss,,Premier-League
@@ -1509,14 +1509,14 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 37.0,Sun,2019-05-05,14:00,Chelsea,3–0,Watford,40560.0,Stamford Bridge,Paul Tierney,,Premier-League
 37.0,Sun,2019-05-05,16:30,Arsenal,1–1,Brighton,59965.0,Emirates Stadium,Anthony Taylor,,Premier-League
 37.0,Mon,2019-05-06,20:00,Manchester City,1–0,Leicester City,54506.0,Etihad Stadium,Mike Dean,,Premier-League
-38.0,Sun,2019-05-12,15:00,Brighton,1–4,Manchester City,30662.0,The American Express Community Stadium,Michael Oliver,,Premier-League
 38.0,Sun,2019-05-12,15:00,Manchester Utd,0–2,Cardiff City,74457.0,Old Trafford,Jonathan Moss,,Premier-League
+38.0,Sun,2019-05-12,15:00,Brighton,1–4,Manchester City,30662.0,The American Express Community Stadium,Michael Oliver,,Premier-League
 38.0,Sun,2019-05-12,15:00,Liverpool,2–0,Wolves,53331.0,Anfield,Martin Atkinson,,Premier-League
 38.0,Sun,2019-05-12,15:00,Southampton,1–1,Huddersfield,30367.0,St. Mary's Stadium,Lee Probert,,Premier-League
 38.0,Sun,2019-05-12,15:00,Fulham,0–4,Newcastle Utd,24979.0,Craven Cottage,Kevin Friend,,Premier-League
 38.0,Sun,2019-05-12,15:00,Crystal Palace,5–3,Bournemouth,25433.0,Selhurst Park,Roger East,,Premier-League
-38.0,Sun,2019-05-12,15:00,Burnley,1–3,Arsenal,21461.0,Turf Moor,Mike Dean,,Premier-League
 38.0,Sun,2019-05-12,15:00,Leicester City,0–0,Chelsea,32140.0,King Power Stadium,Anthony Taylor,,Premier-League
+38.0,Sun,2019-05-12,15:00,Burnley,1–3,Arsenal,21461.0,Turf Moor,Mike Dean,,Premier-League
 38.0,Sun,2019-05-12,15:00,Tottenham,2–2,Everton,60124.0,Tottenham Hotspur Stadium,Andre Marriner,,Premier-League
 38.0,Sun,2019-05-12,15:00,Watford,1–4,West Ham,20067.0,Vicarage Road Stadium,Chris Kavanagh,,Premier-League
 1.0,Fri,2017-08-11,19:45,Arsenal,4–3,Leicester City,59387.0,Emirates Stadium,Mike Dean,,Premier-League
@@ -1541,8 +1541,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 2.0,Mon,2017-08-21,20:00,Manchester City,1–1,Everton,49108.0,Etihad Stadium,Robert Madley,,Premier-League
 3.0,Sat,2017-08-26,12:30,Bournemouth,1–2,Manchester City,10419.0,Vitality Stadium,Mike Dean,,Premier-League
 3.0,Sat,2017-08-26,15:00,Crystal Palace,0–2,Swansea City,23477.0,Selhurst Park,Andre Marriner,,Premier-League
-3.0,Sat,2017-08-26,15:00,Watford,0–0,Brighton,20181.0,Vicarage Road Stadium,Graham Scott,,Premier-League
 3.0,Sat,2017-08-26,15:00,Huddersfield,0–0,Southampton,23548.0,The John Smith's Stadium,Stuart Attwell,,Premier-League
+3.0,Sat,2017-08-26,15:00,Watford,0–0,Brighton,20181.0,Vicarage Road Stadium,Graham Scott,,Premier-League
 3.0,Sat,2017-08-26,15:00,Newcastle Utd,3–0,West Ham,52093.0,St. James' Park,Niel Swarbrick,,Premier-League
 3.0,Sat,2017-08-26,17:30,Manchester Utd,2–0,Leicester City,75021.0,Old Trafford,Michael Oliver,,Premier-League
 3.0,Sun,2017-08-27,13:30,West Brom,1–1,Stoke City,22704.0,The Hawthorns,Anthony Taylor,,Premier-League
@@ -1571,8 +1571,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 5.0,Sun,2017-09-17,16:00,Manchester Utd,4–0,Everton,75042.0,Old Trafford,Andre Marriner,,Premier-League
 6.0,Sat,2017-09-23,12:30,West Ham,2–3,Tottenham,56988.0,London Stadium,Michael Oliver,,Premier-League
 6.0,Sat,2017-09-23,15:00,Southampton,0–1,Manchester Utd,31930.0,St. Mary's Stadium,Craig Pawson,,Premier-League
-6.0,Sat,2017-09-23,15:00,Everton,2–1,Bournemouth,38133.0,Goodison Park,Martin Atkinson,,Premier-League
 6.0,Sat,2017-09-23,15:00,Burnley,0–0,Huddersfield,20759.0,Turf Moor,Chris Kavanagh,,Premier-League
+6.0,Sat,2017-09-23,15:00,Everton,2–1,Bournemouth,38133.0,Goodison Park,Martin Atkinson,,Premier-League
 6.0,Sat,2017-09-23,15:00,Swansea City,1–2,Watford,20372.0,Liberty Stadium,Lee Mason,,Premier-League
 6.0,Sat,2017-09-23,15:00,Stoke City,0–4,Chelsea,29661.0,Bet365 Stadium,Mike Dean,,Premier-League
 6.0,Sat,2017-09-23,15:00,Manchester City,5–0,Crystal Palace,53526.0,Etihad Stadium,Niel Swarbrick,,Premier-League
@@ -1593,8 +1593,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 8.0,Sat,2017-10-14,15:00,Tottenham,1–0,Bournemouth,73502.0,Wembley Stadium,Robert Madley,,Premier-League
 8.0,Sat,2017-10-14,15:00,Swansea City,2–0,Huddersfield,20657.0,Liberty Stadium,Paul Tierney,,Premier-League
 8.0,Sat,2017-10-14,15:00,Crystal Palace,2–1,Chelsea,25480.0,Selhurst Park,Andre Marriner,,Premier-League
-8.0,Sat,2017-10-14,15:00,Manchester City,7–2,Stoke City,54128.0,Etihad Stadium,Craig Pawson,,Premier-League
 8.0,Sat,2017-10-14,15:00,Burnley,1–1,West Ham,20945.0,Turf Moor,Stuart Attwell,,Premier-League
+8.0,Sat,2017-10-14,15:00,Manchester City,7–2,Stoke City,54128.0,Etihad Stadium,Craig Pawson,,Premier-League
 8.0,Sat,2017-10-14,17:30,Watford,2–1,Arsenal,20384.0,Vicarage Road Stadium,Niel Swarbrick,,Premier-League
 8.0,Sun,2017-10-15,13:30,Brighton,1–1,Everton,30565.0,The American Express Community Stadium,Michael Oliver,,Premier-League
 8.0,Sun,2017-10-15,16:00,Southampton,2–2,Newcastle Utd,31437.0,St. Mary's Stadium,Kevin Friend,,Premier-League
@@ -1621,8 +1621,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 10.0,Mon,2017-10-30,20:00,Burnley,1–0,Newcastle Utd,21031.0,Turf Moor,Mike Dean,,Premier-League
 11.0,Sat,2017-11-04,12:30,Stoke City,2–2,Leicester City,29602.0,Bet365 Stadium,Robert Madley,,Premier-League
 11.0,Sat,2017-11-04,15:00,Southampton,0–1,Burnley,30491.0,St. Mary's Stadium,Lee Probert,,Premier-League
-11.0,Sat,2017-11-04,15:00,Newcastle Utd,0–1,Bournemouth,52237.0,St. James' Park,Paul Tierney,,Premier-League
 11.0,Sat,2017-11-04,15:00,Swansea City,0–1,Brighton,20822.0,Liberty Stadium,Mike Dean,,Premier-League
+11.0,Sat,2017-11-04,15:00,Newcastle Utd,0–1,Bournemouth,52237.0,St. James' Park,Paul Tierney,,Premier-League
 11.0,Sat,2017-11-04,15:00,Huddersfield,1–0,West Brom,24169.0,The John Smith's Stadium,Roger East,,Premier-League
 11.0,Sat,2017-11-04,17:30,West Ham,1–4,Liverpool,56961.0,London Stadium,Niel Swarbrick,,Premier-League
 11.0,Sun,2017-11-05,12:00,Tottenham,1–0,Crystal Palace,65270.0,Wembley Stadium,Kevin Friend,,Premier-League
@@ -1631,8 +1631,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 11.0,Sun,2017-11-05,16:30,Chelsea,1–0,Manchester Utd,41615.0,Stamford Bridge,Anthony Taylor,,Premier-League
 12.0,Sat,2017-11-18,12:30,Arsenal,2–0,Tottenham,59530.0,Emirates Stadium,Mike Dean,,Premier-League
 12.0,Sat,2017-11-18,15:00,Bournemouth,4–0,Huddersfield,10879.0,Vitality Stadium,Lee Probert,,Premier-League
-12.0,Sat,2017-11-18,15:00,Leicester City,0–2,Manchester City,31908.0,King Power Stadium,Graham Scott,,Premier-League
 12.0,Sat,2017-11-18,15:00,Burnley,2–0,Swansea City,18895.0,Turf Moor,Martin Atkinson,,Premier-League
+12.0,Sat,2017-11-18,15:00,Leicester City,0–2,Manchester City,31908.0,King Power Stadium,Graham Scott,,Premier-League
 12.0,Sat,2017-11-18,15:00,Crystal Palace,2–2,Everton,25526.0,Selhurst Park,Anthony Taylor,,Premier-League
 12.0,Sat,2017-11-18,15:00,West Brom,0–4,Chelsea,23592.0,The Hawthorns,Jonathan Moss,,Premier-League
 12.0,Sat,2017-11-18,15:00,Liverpool,3–0,Southampton,53256.0,Anfield,Mike Jones,,Premier-League
@@ -1662,16 +1662,16 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 15.0,Sat,2017-12-02,12:30,Chelsea,3–1,Newcastle Utd,41538.0,Stamford Bridge,Kevin Friend,,Premier-League
 15.0,Sat,2017-12-02,15:00,Everton,2–0,Huddersfield,39167.0,Goodison Park,Chris Kavanagh,,Premier-League
 15.0,Sat,2017-12-02,15:00,West Brom,0–0,Crystal Palace,23531.0,The Hawthorns,Michael Oliver,,Premier-League
-15.0,Sat,2017-12-02,15:00,Brighton,1–5,Liverpool,30634.0,The American Express Community Stadium,Graham Scott,,Premier-League
 15.0,Sat,2017-12-02,15:00,Watford,1–1,Tottenham,20278.0,Vicarage Road Stadium,Martin Atkinson,,Premier-League
+15.0,Sat,2017-12-02,15:00,Brighton,1–5,Liverpool,30634.0,The American Express Community Stadium,Graham Scott,,Premier-League
 15.0,Sat,2017-12-02,15:00,Leicester City,1–0,Burnley,30714.0,King Power Stadium,Paul Tierney,,Premier-League
 15.0,Sat,2017-12-02,15:00,Stoke City,2–1,Swansea City,28261.0,Bet365 Stadium,Craig Pawson,,Premier-League
 15.0,Sat,2017-12-02,17:30,Arsenal,1–3,Manchester Utd,59547.0,Emirates Stadium,Andre Marriner,,Premier-League
 15.0,Sun,2017-12-03,13:30,Bournemouth,1–1,Southampton,10764.0,Vitality Stadium,Jonathan Moss,,Premier-League
 15.0,Sun,2017-12-03,16:00,Manchester City,2–1,West Ham,54203.0,Etihad Stadium,Mike Dean,,Premier-League
 16.0,Sat,2017-12-09,12:30,West Ham,1–0,Chelsea,56953.0,London Stadium,Anthony Taylor,,Premier-League
-16.0,Sat,2017-12-09,15:00,Burnley,1–0,Watford,19479.0,Turf Moor,Lee Probert,,Premier-League
 16.0,Sat,2017-12-09,15:00,Crystal Palace,2–2,Bournemouth,24823.0,Selhurst Park,Kevin Friend,,Premier-League
+16.0,Sat,2017-12-09,15:00,Burnley,1–0,Watford,19479.0,Turf Moor,Lee Probert,,Premier-League
 16.0,Sat,2017-12-09,15:00,Tottenham,5–1,Stoke City,62202.0,Wembley Stadium,Roger East,,Premier-League
 16.0,Sat,2017-12-09,15:00,Huddersfield,2–0,Brighton,24018.0,The John Smith's Stadium,Stuart Attwell,,Premier-League
 16.0,Sat,2017-12-09,15:00,Swansea City,1–0,West Brom,19580.0,Liberty Stadium,Mike Dean,,Premier-League
@@ -1680,14 +1680,14 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 16.0,Sun,2017-12-10,14:15,Liverpool,1–1,Everton,53082.0,Anfield,Craig Pawson,,Premier-League
 16.0,Sun,2017-12-10,16:30,Manchester Utd,1–2,Manchester City,74847.0,Old Trafford,Michael Oliver,,Premier-League
 17.0,Tue,2017-12-12,19:45,Burnley,1–0,Stoke City,19909.0,Turf Moor,Mike Jones,,Premier-League
-17.0,Tue,2017-12-12,20:00,Huddersfield,1–3,Chelsea,24169.0,The John Smith's Stadium,Andre Marriner,,Premier-League
 17.0,Tue,2017-12-12,20:00,Crystal Palace,2–1,Watford,23566.0,Selhurst Park,Lee Mason,,Premier-League
+17.0,Tue,2017-12-12,20:00,Huddersfield,1–3,Chelsea,24169.0,The John Smith's Stadium,Andre Marriner,,Premier-League
 17.0,Wed,2017-12-13,19:45,Swansea City,0–4,Manchester City,20870.0,Liberty Stadium,Anthony Taylor,,Premier-League
-17.0,Wed,2017-12-13,19:45,Newcastle Utd,0–1,Everton,51042.0,St. James' Park,Martin Atkinson,,Premier-League
 17.0,Wed,2017-12-13,19:45,Southampton,1–4,Leicester City,27714.0,St. Mary's Stadium,Chris Kavanagh,,Premier-League
+17.0,Wed,2017-12-13,19:45,Newcastle Utd,0–1,Everton,51042.0,St. James' Park,Martin Atkinson,,Premier-League
 17.0,Wed,2017-12-13,20:00,West Ham,0–0,Arsenal,56921.0,London Stadium,Jonathan Moss,,Premier-League
-17.0,Wed,2017-12-13,20:00,Liverpool,0–0,West Brom,53243.0,Anfield,Paul Tierney,,Premier-League
 17.0,Wed,2017-12-13,20:00,Manchester Utd,1–0,Bournemouth,74798.0,Old Trafford,Graham Scott,,Premier-League
+17.0,Wed,2017-12-13,20:00,Liverpool,0–0,West Brom,53243.0,Anfield,Paul Tierney,,Premier-League
 17.0,Wed,2017-12-13,20:00,Tottenham,2–0,Brighton,46438.0,Wembley Stadium,Robert Madley,,Premier-League
 18.0,Sat,2017-12-16,12:30,Leicester City,0–3,Crystal Palace,31081.0,King Power Stadium,Martin Atkinson,,Premier-League
 18.0,Sat,2017-12-16,15:00,Watford,1–4,Huddersfield,20026.0,Vicarage Road Stadium,Michael Oliver,,Premier-League
@@ -1703,10 +1703,10 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 19.0,Sat,2017-12-23,12:30,Everton,0–0,Chelsea,39191.0,Goodison Park,Robert Madley,,Premier-League
 19.0,Sat,2017-12-23,15:00,Southampton,1–1,Huddersfield,29675.0,St. Mary's Stadium,Lee Probert,,Premier-League
 19.0,Sat,2017-12-23,15:00,Swansea City,1–1,Crystal Palace,20354.0,Liberty Stadium,Craig Pawson,,Premier-League
-19.0,Sat,2017-12-23,15:00,Stoke City,3–1,West Brom,29057.0,Bet365 Stadium,Niel Swarbrick,,Premier-League
 19.0,Sat,2017-12-23,15:00,West Ham,2–3,Newcastle Utd,56955.0,London Stadium,Lee Mason,,Premier-League
-19.0,Sat,2017-12-23,15:00,Manchester City,4–0,Bournemouth,54270.0,Etihad Stadium,Mike Jones,,Premier-League
+19.0,Sat,2017-12-23,15:00,Stoke City,3–1,West Brom,29057.0,Bet365 Stadium,Niel Swarbrick,,Premier-League
 19.0,Sat,2017-12-23,15:00,Brighton,1–0,Watford,30473.0,The American Express Community Stadium,Paul Tierney,,Premier-League
+19.0,Sat,2017-12-23,15:00,Manchester City,4–0,Bournemouth,54270.0,Etihad Stadium,Mike Jones,,Premier-League
 19.0,Sat,2017-12-23,17:30,Burnley,0–3,Tottenham,21650.0,Turf Moor,Michael Oliver,,Premier-League
 19.0,Sat,2017-12-23,19:45,Leicester City,2–2,Manchester Utd,32202.0,King Power Stadium,Jonathan Moss,,Premier-League
 20.0,Tue,2017-12-26,12:30,Tottenham,5–2,Southampton,55412.0,Wembley Stadium,Graham Scott,,Premier-League
@@ -1739,8 +1739,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 22.0,Tue,2018-01-02,20:00,Manchester City,3–1,Watford,53556.0,Etihad Stadium,Lee Mason,,Premier-League
 22.0,Wed,2018-01-03,19:45,Arsenal,2–2,Chelsea,59379.0,Emirates Stadium,Anthony Taylor,,Premier-League
 21.0,Thu,2018-01-04,20:00,Tottenham,1–1,West Ham,50034.0,Wembley Stadium,Mike Dean,,Premier-League
-23.0,Sat,2018-01-13,15:00,Watford,2–2,Southampton,20018.0,Vicarage Road Stadium,Roger East,,Premier-League
 23.0,Sat,2018-01-13,15:00,Huddersfield,1–4,West Ham,24105.0,The John Smith's Stadium,Jonathan Moss,,Premier-League
+23.0,Sat,2018-01-13,15:00,Watford,2–2,Southampton,20018.0,Vicarage Road Stadium,Roger East,,Premier-League
 23.0,Sat,2018-01-13,15:00,Chelsea,0–0,Leicester City,41552.0,Stamford Bridge,Mike Jones,,Premier-League
 23.0,Sat,2018-01-13,15:00,Crystal Palace,1–0,Burnley,24696.0,Selhurst Park,Michael Oliver,,Premier-League
 23.0,Sat,2018-01-13,15:00,Newcastle Utd,1–1,Swansea City,51444.0,St. James' Park,Graham Scott,,Premier-League
@@ -1750,20 +1750,20 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 23.0,Sun,2018-01-14,16:00,Liverpool,4–3,Manchester City,53285.0,Anfield,Andre Marriner,,Premier-League
 23.0,Mon,2018-01-15,20:00,Manchester Utd,3–0,Stoke City,74726.0,Old Trafford,Anthony Taylor,,Premier-League
 24.0,Sat,2018-01-20,12:30,Brighton,0–4,Chelsea,30600.0,The American Express Community Stadium,Jonathan Moss,,Premier-League
-24.0,Sat,2018-01-20,15:00,Burnley,0–1,Manchester Utd,21841.0,Turf Moor,Mike Dean,,Premier-League
 24.0,Sat,2018-01-20,15:00,Leicester City,2–0,Watford,31891.0,King Power Stadium,Lee Probert,,Premier-League
+24.0,Sat,2018-01-20,15:00,Burnley,0–1,Manchester Utd,21841.0,Turf Moor,Mike Dean,,Premier-League
 24.0,Sat,2018-01-20,15:00,Arsenal,4–1,Crystal Palace,59386.0,Emirates Stadium,Chris Kavanagh,,Premier-League
 24.0,Sat,2018-01-20,15:00,Everton,1–1,West Brom,39061.0,Goodison Park,Stuart Attwell,,Premier-League
-24.0,Sat,2018-01-20,15:00,West Ham,1–1,Bournemouth,56948.0,London Stadium,Martin Atkinson,,Premier-League
 24.0,Sat,2018-01-20,15:00,Stoke City,2–0,Huddersfield,29785.0,Bet365 Stadium,Michael Oliver,,Premier-League
+24.0,Sat,2018-01-20,15:00,West Ham,1–1,Bournemouth,56948.0,London Stadium,Martin Atkinson,,Premier-League
 24.0,Sat,2018-01-20,17:30,Manchester City,3–1,Newcastle Utd,54452.0,Etihad Stadium,Paul Tierney,,Premier-League
 24.0,Sun,2018-01-21,16:00,Southampton,1–1,Tottenham,31361.0,St. Mary's Stadium,Kevin Friend,,Premier-League
 24.0,Mon,2018-01-22,20:00,Swansea City,1–0,Liverpool,20886.0,Liberty Stadium,Niel Swarbrick,,Premier-League
 25.0,Tue,2018-01-30,19:45,Swansea City,3–1,Arsenal,20819.0,Liberty Stadium,Lee Mason,,Premier-League
 25.0,Tue,2018-01-30,19:45,West Ham,1–1,Crystal Palace,56911.0,London Stadium,Niel Swarbrick,,Premier-League
 25.0,Tue,2018-01-30,20:00,Huddersfield,0–3,Liverpool,24121.0,The John Smith's Stadium,Kevin Friend,,Premier-League
-25.0,Wed,2018-01-31,19:45,Everton,2–1,Leicester City,38390.0,Goodison Park,Chris Kavanagh,,Premier-League
 25.0,Wed,2018-01-31,19:45,Chelsea,0–3,Bournemouth,41464.0,Stamford Bridge,Lee Probert,,Premier-League
+25.0,Wed,2018-01-31,19:45,Everton,2–1,Leicester City,38390.0,Goodison Park,Chris Kavanagh,,Premier-League
 25.0,Wed,2018-01-31,19:45,Newcastle Utd,1–1,Burnley,50174.0,St. James' Park,Simon Hooper,,Premier-League
 25.0,Wed,2018-01-31,19:45,Southampton,1–1,Brighton,30034.0,St. Mary's Stadium,Mike Dean,,Premier-League
 25.0,Wed,2018-01-31,20:00,Tottenham,2–0,Manchester Utd,81978.0,Wembley Stadium,Andre Marriner,,Premier-League
@@ -1772,8 +1772,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 26.0,Sat,2018-02-03,12:30,Burnley,1–1,Manchester City,21658.0,Turf Moor,Martin Atkinson,,Premier-League
 26.0,Sat,2018-02-03,15:00,Manchester Utd,2–0,Huddersfield,74742.0,Old Trafford,Stuart Attwell,,Premier-League
 26.0,Sat,2018-02-03,15:00,Leicester City,1–1,Swansea City,31179.0,King Power Stadium,Anthony Taylor,,Premier-League
-26.0,Sat,2018-02-03,15:00,West Brom,2–3,Southampton,25911.0,The Hawthorns,Michael Oliver,,Premier-League
 26.0,Sat,2018-02-03,15:00,Brighton,3–1,West Ham,30589.0,The American Express Community Stadium,Roger East,,Premier-League
+26.0,Sat,2018-02-03,15:00,West Brom,2–3,Southampton,25911.0,The Hawthorns,Michael Oliver,,Premier-League
 26.0,Sat,2018-02-03,15:00,Bournemouth,2–1,Stoke City,10614.0,Vitality Stadium,Paul Tierney,,Premier-League
 26.0,Sat,2018-02-03,17:30,Arsenal,5–1,Everton,59306.0,Emirates Stadium,Niel Swarbrick,,Premier-League
 26.0,Sun,2018-02-04,14:15,Crystal Palace,1–1,Newcastle Utd,25746.0,Selhurst Park,Andre Marriner,,Premier-League
@@ -1835,8 +1835,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 32.0,Sun,2018-04-01,16:00,Chelsea,1–3,Tottenham,41364.0,Stamford Bridge,Andre Marriner,,Premier-League
 33.0,Sat,2018-04-07,12:30,Everton,0–0,Liverpool,39220.0,Goodison Park,Michael Oliver,,Premier-League
 33.0,Sat,2018-04-07,15:00,Leicester City,1–2,Newcastle Utd,32066.0,King Power Stadium,Stuart Attwell,,Premier-League
-33.0,Sat,2018-04-07,15:00,Watford,1–2,Burnley,20044.0,Vicarage Road Stadium,Paul Tierney,,Premier-League
 33.0,Sat,2018-04-07,15:00,Brighton,1–1,Huddersfield,30501.0,The American Express Community Stadium,Anthony Taylor,,Premier-League
+33.0,Sat,2018-04-07,15:00,Watford,1–2,Burnley,20044.0,Vicarage Road Stadium,Paul Tierney,,Premier-League
 33.0,Sat,2018-04-07,15:00,Bournemouth,2–2,Crystal Palace,10730.0,Vitality Stadium,Jonathan Moss,,Premier-League
 33.0,Sat,2018-04-07,15:00,Stoke City,1–2,Tottenham,29515.0,Bet365 Stadium,Graham Scott,,Premier-League
 33.0,Sat,2018-04-07,15:00,West Brom,1–1,Swansea City,23297.0,The Hawthorns,Roger East,,Premier-League
@@ -1846,8 +1846,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 34.0,Sat,2018-04-14,12:30,Southampton,2–3,Chelsea,31764.0,St. Mary's Stadium,Mike Dean,,Premier-League
 34.0,Sat,2018-04-14,15:00,Swansea City,1–1,Everton,20933.0,Liberty Stadium,Lee Mason,,Premier-League
 34.0,Sat,2018-04-14,15:00,Burnley,2–1,Leicester City,21727.0,Turf Moor,Martin Atkinson,,Premier-League
-34.0,Sat,2018-04-14,15:00,Crystal Palace,3–2,Brighton,24656.0,Selhurst Park,Andre Marriner,,Premier-League
 34.0,Sat,2018-04-14,15:00,Huddersfield,1–0,Watford,23961.0,The John Smith's Stadium,Craig Pawson,,Premier-League
+34.0,Sat,2018-04-14,15:00,Crystal Palace,3–2,Brighton,24656.0,Selhurst Park,Andre Marriner,,Premier-League
 34.0,Sat,2018-04-14,17:30,Liverpool,3–0,Bournemouth,52959.0,Anfield,Chris Kavanagh,,Premier-League
 34.0,Sat,2018-04-14,19:45,Tottenham,1–3,Manchester City,80811.0,Wembley Stadium,Jonathan Moss,,Premier-League
 34.0,Sun,2018-04-15,13:30,Newcastle Utd,2–1,Arsenal,52210.0,St. James' Park,Anthony Taylor,,Premier-League
@@ -1865,8 +1865,8 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 35.0,Mon,2018-04-23,20:00,Everton,1–0,Newcastle Utd,39061.0,Goodison Park,Robert Madley,,Premier-League
 36.0,Sat,2018-04-28,12:30,Liverpool,0–0,Stoke City,53255.0,Anfield,Andre Marriner,,Premier-League
 36.0,Sat,2018-04-28,15:00,Newcastle Utd,0–1,West Brom,52283.0,St. James' Park,David Coote,,Premier-League
-36.0,Sat,2018-04-28,15:00,Huddersfield,0–2,Everton,24121.0,The John Smith's Stadium,Lee Probert,,Premier-League
 36.0,Sat,2018-04-28,15:00,Southampton,2–1,Bournemouth,31778.0,St. Mary's Stadium,Anthony Taylor,,Premier-League
+36.0,Sat,2018-04-28,15:00,Huddersfield,0–2,Everton,24121.0,The John Smith's Stadium,Lee Probert,,Premier-League
 36.0,Sat,2018-04-28,15:00,Burnley,0–0,Brighton,19459.0,Turf Moor,Roger East,,Premier-League
 36.0,Sat,2018-04-28,15:00,Crystal Palace,5–0,Leicester City,25750.0,Selhurst Park,Mike Dean,,Premier-League
 36.0,Sat,2018-04-28,17:30,Swansea City,0–1,Chelsea,20900.0,Liberty Stadium,Jonathan Moss,,Premier-League
@@ -1891,12 +1891,12 @@ Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Competition
 31.0,Thu,2018-05-10,19:45,West Ham,0–0,Manchester Utd,56902.0,London Stadium,Jonathan Moss,,Premier-League
 38.0,Sun,2018-05-13,15:00,Burnley,1–2,Bournemouth,20720.0,Turf Moor,Paul Tierney,,Premier-League
 38.0,Sun,2018-05-13,15:00,Liverpool,4–0,Brighton,50752.0,Anfield,Kevin Friend,,Premier-League
-38.0,Sun,2018-05-13,15:00,Newcastle Utd,3–0,Chelsea,52294.0,St. James' Park,Martin Atkinson,,Premier-League
 38.0,Sun,2018-05-13,15:00,West Ham,3–1,Everton,56926.0,London Stadium,Graham Scott,,Premier-League
-38.0,Sun,2018-05-13,15:00,Southampton,0–1,Manchester City,31882.0,St. Mary's Stadium,Andre Marriner,,Premier-League
+38.0,Sun,2018-05-13,15:00,Newcastle Utd,3–0,Chelsea,52294.0,St. James' Park,Martin Atkinson,,Premier-League
 38.0,Sun,2018-05-13,15:00,Crystal Palace,2–0,West Brom,25357.0,Selhurst Park,Jonathan Moss,,Premier-League
-38.0,Sun,2018-05-13,15:00,Tottenham,5–4,Leicester City,77841.0,Wembley Stadium,Craig Pawson,,Premier-League
+38.0,Sun,2018-05-13,15:00,Southampton,0–1,Manchester City,31882.0,St. Mary's Stadium,Andre Marriner,,Premier-League
 38.0,Sun,2018-05-13,15:00,Huddersfield,0–1,Arsenal,24122.0,The John Smith's Stadium,Michael Oliver,,Premier-League
+38.0,Sun,2018-05-13,15:00,Tottenham,5–4,Leicester City,77841.0,Wembley Stadium,Craig Pawson,,Premier-League
 38.0,Sun,2018-05-13,15:00,Manchester Utd,1–0,Watford,75049.0,Old Trafford,Lee Mason,,Premier-League
 38.0,Sun,2018-05-13,15:00,Swansea City,1–2,Stoke City,20673.0,Liberty Stadium,Anthony Taylor,,Premier-League
 First round,Sat,2021-07-31,15:00,Bournemouth,5–0,MK Dons,5746,Vitality Stadium,Sam Purkiss,,EFL-Cup
@@ -1906,25 +1906,25 @@ First round,Tue,2021-08-10,19:00,Cardiff City,3–2,Sutton United,3500,Cardiff C
 First round,Tue,2021-08-10,19:30,Crawley Town,(9) 2–2 (10),Gillingham,1904,Checkatrade.com Stadium,Paul Howard,Gillingham won on penalty kicks following normal time,EFL-Cup
 First round,Tue,2021-08-10,19:45,Walsall,(3) 0–0 (4),Doncaster,2384,The Banks's Stadium,John Busby,Doncaster won on penalty kicks following normal time,EFL-Cup
 First round,Tue,2021-08-10,19:45,Barrow,1–0,Scunthorpe Utd,1320,Holker Street,Oliver Langford,,EFL-Cup
-First round,Tue,2021-08-10,19:45,Bristol Rovers,0–2,Cheltenham,2409,Memorial Stadium,Lee Swabey,,EFL-Cup
 First round,Tue,2021-08-10,19:45,Port Vale,1–2,Sunderland,3267,Vale Park,Samuel Allison,,EFL-Cup
-First round,Tue,2021-08-10,19:45,Hull City,(7) 1–1 (8),Wigan Athletic,4139,Kingston Communications Stadium,Martin Coy,Wigan Athletic won on penalty kicks following normal time,EFL-Cup
+First round,Tue,2021-08-10,19:45,Bristol Rovers,0–2,Cheltenham,2409,Memorial Stadium,Lee Swabey,,EFL-Cup
 First round,Tue,2021-08-10,19:45,Charlton Ath,0–1,AFC Wimbledon,3372,The Valley,Rob Lewis,,EFL-Cup
+First round,Tue,2021-08-10,19:45,Hull City,(7) 1–1 (8),Wigan Athletic,4139,Kingston Communications Stadium,Martin Coy,Wigan Athletic won on penalty kicks following normal time,EFL-Cup
 First round,Tue,2021-08-10,19:45,Rotherham Utd,1–2,Acc'ton Stanley,3131,New York Stadium,Will Finnie,,EFL-Cup
-First round,Tue,2021-08-10,19:45,Millwall,2–1,Portsmouth,4021,The Den,Charles Breakspear,,EFL-Cup
 First round,Tue,2021-08-10,19:45,FG Rovers,(6) 2–2 (5),Bristol City,2554,The New Lawn,Darren Drysdale,FG Rovers won on penalty kicks following normal time,EFL-Cup
-First round,Tue,2021-08-10,19:45,Birmingham City,1–0,Colchester Utd,6199,St Andrew's Trillion Trophy Stadium,Declan Bourne,,EFL-Cup
-First round,Tue,2021-08-10,19:45,Sheffield Utd,1–0,Carlisle United,6778,Bramall Lane,James Oldham,,EFL-Cup
-First round,Tue,2021-08-10,19:45,Stevenage,(3) 2–2 (0),Luton Town,3052,The Lamex Stadium,Andy Woolmer,Stevenage won on penalty kicks following normal time,EFL-Cup
+First round,Tue,2021-08-10,19:45,Millwall,2–1,Portsmouth,4021,The Den,Charles Breakspear,,EFL-Cup
 First round,Tue,2021-08-10,19:45,Oldham Athletic,(4) 2–2 (3),Tranmere Rovers,2684,Boundary Park,Scott Oldham,Oldham Athletic won on penalty kicks following normal time,EFL-Cup
+First round,Tue,2021-08-10,19:45,Sheffield Utd,1–0,Carlisle United,6778,Bramall Lane,James Oldham,,EFL-Cup
+First round,Tue,2021-08-10,19:45,Birmingham City,1–0,Colchester Utd,6199,St Andrew's Trillion Trophy Stadium,Declan Bourne,,EFL-Cup
+First round,Tue,2021-08-10,19:45,Stevenage,(3) 2–2 (0),Luton Town,3052,The Lamex Stadium,Andy Woolmer,Stevenage won on penalty kicks following normal time,EFL-Cup
 First round,Tue,2021-08-10,19:45,Ipswich Town,0–1,Newport County,6144,Portman Road Stadium,Neil Hair,,EFL-Cup
 First round,Tue,2021-08-10,19:45,Blackburn,1–2,Morecambe,5283,Ewood Park,Steve Martin,,EFL-Cup
 First round,Tue,2021-08-10,19:45,Shrewsbury,(4) 2–2 (2),Lincoln City,2069,Montgomery Waters Meadow,Andy Haines,Shrewsbury won on penalty kicks following normal time,EFL-Cup
-First round,Tue,2021-08-10,19:45,Derby County,(5) 3–3 (3),Salford City,4747,iPro Stadium,James Bell,Derby County won on penalty kicks following normal time,EFL-Cup
-First round,Tue,2021-08-10,19:45,Cambridge Utd,(3) 0–0 (1),Swindon Town,1825,The Cambs Glass Stadium,Trevor Kettle,Cambridge Utd won on penalty kicks following normal time,EFL-Cup
-First round,Tue,2021-08-10,19:45,Exeter City,(3) 0–0 (4),Wycombe,2555,St. James' Park,David Rock,Wycombe won on penalty kicks following normal time,EFL-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
 First round,Tue,2021-08-10,19:45,Mansfield Town,0–3,Preston,2526,One Call Stadium,Ross Joyce,,EFL-Cup
+First round,Tue,2021-08-10,19:45,Exeter City,(3) 0–0 (4),Wycombe,2555,St. James' Park,David Rock,Wycombe won on penalty kicks following normal time,EFL-Cup
+First round,Tue,2021-08-10,19:45,Derby County,(5) 3–3 (3),Salford City,4747,iPro Stadium,James Bell,Derby County won on penalty kicks following normal time,EFL-Cup
+Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
+First round,Tue,2021-08-10,19:45,Cambridge Utd,(3) 0–0 (1),Swindon Town,1825,The Cambs Glass Stadium,Trevor Kettle,Cambridge Utd won on penalty kicks following normal time,EFL-Cup
 First round,Tue,2021-08-10,19:45,Stoke City,2–1,Fleetwood Town,4694,Bet365 Stadium,Anthony Backhouse,,EFL-Cup
 First round,Tue,2021-08-10,19:45,P'borough Utd,0–4,Plymouth Argyle,4021,ABAX Stadium,Ben Toner,,EFL-Cup
 First round,Tue,2021-08-10,19:45,Harrogate,,Rochdale,,CNG Stadium,,Match awarded to Rochdale,EFL-Cup
@@ -1938,24 +1938,24 @@ First round,Wed,2021-08-11,19:45,Burton Albion,(2) 1–1 (4),Oxford United,1868,
 Second round,Tue,2021-08-24,19:00,Norwich City,6–0,Bournemouth,20090,Carrow Road,Charles Breakspear,,EFL-Cup
 Second round,Tue,2021-08-24,19:00,Oldham Athletic,(5) 0–0 (4),Acc'ton Stanley,2362,Boundary Park,Seb Stockbridge,Oldham Athletic won on penalty kicks following normal time,EFL-Cup
 Second round,Tue,2021-08-24,19:00,Swansea City,4–1,Plymouth Argyle,17491,Liberty Stadium,Robert Madley,,EFL-Cup
-Second round,Tue,2021-08-24,19:45,Sheffield Utd,2–1,Derby County,7973,Bramall Lane,Anthony Backhouse,,EFL-Cup
-Second round,Tue,2021-08-24,19:45,Shrewsbury,0–2,Rochdale,2229,Montgomery Waters Meadow,Scott Oldham,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Morecambe,2–4,Preston,4334,Globe Arena,James Oldham,,EFL-Cup
+Second round,Tue,2021-08-24,19:45,Shrewsbury,0–2,Rochdale,2229,Montgomery Waters Meadow,Scott Oldham,,EFL-Cup
+Second round,Tue,2021-08-24,19:45,Sheffield Utd,2–1,Derby County,7973,Bramall Lane,Anthony Backhouse,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Cardiff City,0–2,Brighton,6013,Cardiff City Stadium,James Bell,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Stoke City,2–0,Doncaster,6193,Bet365 Stadium,Marc Edwards,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,QPR,2–0,Oxford United,8154,Loftus Road Stadium,Tom Nield,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Millwall,3–1,Cambridge Utd,4005,The Den,Neil Hair,,EFL-Cup
-Second round,Tue,2021-08-24,19:45,Barrow,0–6,Aston Villa,5349,Holker Street,Martin Coy,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Birmingham City,0–2,Fulham,4783,St Andrew's Trillion Trophy Stadium,Samuel Barrott,,EFL-Cup
+Second round,Tue,2021-08-24,19:45,Barrow,0–6,Aston Villa,5349,Holker Street,Martin Coy,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Stevenage,(3) 2–2 (5),Wycombe,3292,The Lamex Stadium,Declan Bourne,Wycombe won on penalty kicks following normal time,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Northampton,0–1,AFC Wimbledon,3257,Sixfields Stadium,Ross Joyce,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Brentford,3–1,FG Rovers,12137,Brentford Community Stadium,Will Finnie,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Huddersfield,1–2,Everton,10459,The John Smith's Stadium,Matt Donohue,,EFL-Cup
-Second round,Tue,2021-08-24,19:45,Leeds United,3–0,Crewe Alexandra,34154,Elland Road,Ben Speedie,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Wigan Athletic,(5) 0–0 (4),Bolton,11660,The DW Stadium,Thomas Bramall,Wigan Athletic won on penalty kicks following normal time,EFL-Cup
-Second round,Tue,2021-08-24,19:45,Gillingham,(4) 1–1 (5),Cheltenham,,MEMS Priestfield Stadium,David Rock,Cheltenham won on penalty kicks following normal time,EFL-Cup
-Second round,Tue,2021-08-24,19:45,Blackpool,2–3,Sunderland,5756,Bloomfield Road,Peter Wright,,EFL-Cup
+Second round,Tue,2021-08-24,19:45,Leeds United,3–0,Crewe Alexandra,34154,Elland Road,Ben Speedie,,EFL-Cup
 Second round,Tue,2021-08-24,19:45,Watford,1–0,Crystal Palace,9011,Vicarage Road Stadium,Tim Robinson,,EFL-Cup
+Second round,Tue,2021-08-24,19:45,Blackpool,2–3,Sunderland,5756,Bloomfield Road,Peter Wright,,EFL-Cup
+Second round,Tue,2021-08-24,19:45,Gillingham,(4) 1–1 (5),Cheltenham,,MEMS Priestfield Stadium,David Rock,Cheltenham won on penalty kicks following normal time,EFL-Cup
 Second round,Tue,2021-08-24,20:00,Nott'ham Forest,0–4,Wolves,10769,The City Ground,Andrew Davies,,EFL-Cup
 Second round,Wed,2021-08-25,19:45,Newport County,0–8,Southampton,7002,Rodney Parade,Darren Drysdale,,EFL-Cup
 Second round,Wed,2021-08-25,19:45,Newcastle Utd,(3) 0–0 (4),Burnley,30082,St. James' Park,Oliver Langford,Burnley won on penalty kicks following normal time,EFL-Cup
@@ -1989,8 +1989,8 @@ Quarter-finals,Wed,2021-12-22,19:45,Brentford,,Chelsea,,Brentford Community Stad
 Quarter-finals,Wed,2021-12-22,19:45,Tottenham,,West Ham,,Tottenham Hotspur Stadium,,,EFL-Cup
 Quarter-finals,Wed,2021-12-22,19:45,Liverpool,,Leicester City,,Anfield,,,EFL-Cup
 First round,Sat,2020-08-29,15:00,Stevenage,(1) 3–3 (3),Portsmouth,,The Lamex Stadium,Sam Purkiss,Portsmouth won on penalty kicks following normal time,EFL-Cup
-First round,Sat,2020-08-29,15:00,Blackburn,3–2,Doncaster,,Ewood Park,Anthony Backhouse,,EFL-Cup
 First round,Sat,2020-08-29,15:00,Stoke City,(5) 0–0 (4),Blackpool,,Bet365 Stadium,James Adcock,Stoke City won on penalty kicks following normal time,EFL-Cup
+First round,Sat,2020-08-29,15:00,Blackburn,3–2,Doncaster,,Ewood Park,Anthony Backhouse,,EFL-Cup
 First round,Sat,2020-08-29,15:00,Preston,4–0,Mansfield Town,,Deepdale Stadium,Ross Joyce,,EFL-Cup
 First round,Fri,2020-09-04,17:30,Middlesbrough,4–3,Shrewsbury,,Riverside Stadium,Michael Salisbury,,EFL-Cup
 First round,Fri,2020-09-04,19:30,Burton Albion,(4) 1–1 (2),Acc'ton Stanley,,Pirelli Stadium,Andy Haines,Burton Albion won on penalty kicks following normal time,EFL-Cup
@@ -2000,26 +2000,26 @@ First round,Sat,2020-09-05,13:00,Gillingham,1–0,Southend United,,MEMS Priestfi
 First round,Sat,2020-09-05,13:00,Crawley Town,1–3,Millwall,,Checkatrade.com Stadium,David Rock,,EFL-Cup
 First round,Sat,2020-09-05,14:00,Bristol City,2–0,Exeter City,,Ashton Gate Stadium,Chris Sarginson,,EFL-Cup
 First round,Sat,2020-09-05,14:15,Walsall,(2) 0–0 (4),Sheffield Weds,,The Banks's Stadium,Peter Wright,Sheffield Weds won on penalty kicks following normal time,EFL-Cup
-First round,Sat,2020-09-05,15:00,MK Dons,0–1,Coventry City,,Stadium mk,Trevor Kettle,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Barnsley,1–0,Nott'ham Forest,,Oakwell Stadium,Marc Edwards,,EFL-Cup
-First round,Sat,2020-09-05,15:00,Newport County,2–0,Swansea City,,Rodney Parade,Kevin Johnson,,EFL-Cup
-First round,Sat,2020-09-05,15:00,Scunthorpe Utd,1–2,Port Vale,,Glanford Park,Neil Hair,,EFL-Cup
-First round,Sat,2020-09-05,15:00,Huddersfield,0–1,Rochdale,,Crown Oil Arena,Ben Toner,,EFL-Cup
+First round,Sat,2020-09-05,15:00,MK Dons,0–1,Coventry City,,Stadium mk,Trevor Kettle,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Grimsby Town,(3) 1–1 (4),Morecambe,,Blundell Park,Graham Salisbury,Morecambe won on penalty kicks following normal time,EFL-Cup
-First round,Sat,2020-09-05,15:00,Luton Town,3–1,Norwich City,,Kenilworth Road Stadium,John Busby,,EFL-Cup
+First round,Sat,2020-09-05,15:00,Newport County,2–0,Swansea City,,Rodney Parade,Kevin Johnson,,EFL-Cup
+First round,Sat,2020-09-05,15:00,Huddersfield,0–1,Rochdale,,Crown Oil Arena,Ben Toner,,EFL-Cup
+First round,Sat,2020-09-05,15:00,Scunthorpe Utd,1–2,Port Vale,,Glanford Park,Neil Hair,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Swindon Town,1–3,Charlton Ath,,The Energy Check County Ground,Brett Huxtable,,EFL-Cup
-First round,Sat,2020-09-05,15:00,P'borough Utd,0–1,Cheltenham,,ABAX Stadium,Alan Young,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Salford City,(4) 1–1 (2),Rotherham Utd,,The Peninsula Stadium,James Oldham,Salford City won on penalty kicks following normal time,EFL-Cup
+First round,Sat,2020-09-05,15:00,Luton Town,3–1,Norwich City,,Kenilworth Road Stadium,John Busby,,EFL-Cup
+First round,Sat,2020-09-05,15:00,P'borough Utd,0–1,Cheltenham,,ABAX Stadium,Alan Young,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Sunderland,(4) 0–0 (5),Hull City,,Stadium of Light,Thomas Bramall,Hull City won on penalty kicks following normal time,EFL-Cup
 First round,Sat,2020-09-05,15:00,Oxford United,(4) 1–1 (3),AFC Wimbledon,,The Kassam Stadium,Lee Swabey,Oxford United won on penalty kicks following normal time,EFL-Cup
 Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
-First round,Sat,2020-09-05,15:00,Ipswich Town,3–0,Bristol Rovers,,Portman Road Stadium,Will Finnie,,EFL-Cup
-First round,Sat,2020-09-05,15:00,Tranmere Rovers,(7) 1–1 (8),Harrogate,,Prenton Park,Tom Nield,Harrogate won on penalty kicks following normal time,EFL-Cup
 First round,Sat,2020-09-05,15:00,FG Rovers,1–2,Leyton Orient,,The New Lawn,Craig Hicks,,EFL-Cup
+First round,Sat,2020-09-05,15:00,Tranmere Rovers,(7) 1–1 (8),Harrogate,,Prenton Park,Tom Nield,Harrogate won on penalty kicks following normal time,EFL-Cup
+First round,Sat,2020-09-05,15:00,Ipswich Town,3–0,Bristol Rovers,,Portman Road Stadium,Will Finnie,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Birmingham City,0–1,Cambridge Utd,,St Andrew's Trillion Trophy Stadium,Leigh Doughty,,EFL-Cup
+First round,Sat,2020-09-05,15:00,Fleetwood Town,3–2,Wigan Athletic,,Highbury Stadium,Seb Stockbridge,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Northampton,3–0,Cardiff City,,Sixfields Stadium,Darren Drysdale,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Bolton,1–2,Bradford City,,Macron Stadium,Martin Coy,,EFL-Cup
-First round,Sat,2020-09-05,15:00,Fleetwood Town,3–2,Wigan Athletic,,Highbury Stadium,Seb Stockbridge,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Oldham Athletic,3–0,Carlisle United,,Boundary Park,Carl Boyeson,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Crewe Alexandra,1–2,Lincoln City,,Alexandra Stadium,Scott Oldham,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Reading,3–1,Colchester Utd,,Madejski Stadium,Joshua Smith,,EFL-Cup
@@ -2036,8 +2036,8 @@ Second round,Tue,2020-09-15,19:00,Fleetwood Town,2–1,Port Vale,,Highbury Stadi
 Second round,Tue,2020-09-15,19:30,West Ham,3–0,Charlton Ath,,London Stadium,Andre Marriner,,EFL-Cup
 Second round,Tue,2020-09-15,19:30,Newcastle Utd,1–0,Blackburn,,St. James' Park,Jarred Gillett,,EFL-Cup
 Second round,Tue,2020-09-15,19:45,Bournemouth,(11) 0–0 (10),Crystal Palace,,Vitality Stadium,Keith Stroud,Bournemouth won on penalty kicks following normal time,EFL-Cup
-Second round,Tue,2020-09-15,19:45,Leyton Orient,3–2,Plymouth Argyle,,Matchroom Stadium,Joshua Smith,,EFL-Cup
 Second round,Tue,2020-09-15,19:45,Burton Albion,1–3,Aston Villa,,Pirelli Stadium,Oliver Langford,,EFL-Cup
+Second round,Tue,2020-09-15,19:45,Leyton Orient,3–2,Plymouth Argyle,,Matchroom Stadium,Joshua Smith,,EFL-Cup
 Second round,Tue,2020-09-15,19:45,Rochdale,0–2,Sheffield Weds,,Crown Oil Arena,Seb Stockbridge,,EFL-Cup
 Second round,Tue,2020-09-15,19:45,Morecambe,1–0,Oldham Athletic,,Globe Arena,Ben Toner,,EFL-Cup
 Second round,Wed,2020-09-16,18:00,West Brom,3–0,Harrogate,,The Hawthorns,Thomas Bramall,,EFL-Cup
@@ -2085,73 +2085,73 @@ First round,Tue,2019-08-13,19:45,Oxford United,1–0,P'borough Utd,2798,The Kass
 First round,Tue,2019-08-13,19:45,Gillingham,(1) 2–2 (4),Newport County,1996,MEMS Priestfield Stadium,Trevor Kettle,Newport County won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2019-08-13,19:45,Scunthorpe Utd,0–1,Derby County,3679,Glanford Park,Robert Jones,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Bristol Rovers,3–0,Cheltenham,2909,Memorial Stadium,Graham Salisbury,,EFL-Cup
+First round,Tue,2019-08-13,19:45,Coventry City,4–1,Exeter City,1155,St Andrew's Trillion Trophy Stadium,Scott Oldham,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Stevenage,1–2,Southend United,1315,The Lamex Stadium,Chris Sarginson,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Sheffield Weds,,Bury,,Hillsborough Stadium,,Match Cancelled,EFL-Cup
 First round,Tue,2019-08-13,19:45,Port Vale,1–2,Burton Albion,2252,Vale Park,Paul Marsden,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Luton Town,3–1,Ipswich Town,5435,Kenilworth Road Stadium,Brett Huxtable,,EFL-Cup
-First round,Tue,2019-08-13,19:45,Coventry City,4–1,Exeter City,1155,St Andrew's Trillion Trophy Stadium,Scott Oldham,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Plymouth Argyle,2–0,Leyton Orient,5573,Home Park,Anthony Coggins,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Colchester Utd,3–0,Swindon Town,1595,JobServe Community Stadium,Charles Breakspear,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Blackpool,(2) 2–2 (4),Macclesfield,3715,Bloomfield Road,Martin Coy,Macclesfield won on penalty kicks following extra time,EFL-Cup
+First round,Tue,2019-08-13,19:45,Acc'ton Stanley,1–3,Sunderland,2343,Wham Stadium,Darren Drysdale,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Bradford City,0–4,Preston,3456,Northern Commercials Stadium,Matt Donohue,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Wycombe,(2) 1–1 (4),Reading,4802,Adams Park,Darren England,Reading won on penalty kicks following extra time,EFL-Cup
-First round,Tue,2019-08-13,19:45,Acc'ton Stanley,1–3,Sunderland,2343,Wham Stadium,Darren Drysdale,,EFL-Cup
+First round,Tue,2019-08-13,19:45,Swansea City,3–1,Northampton,8058,Liberty Stadium,Kevin Johnson,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Charlton Ath,(3) 0–0 (5),FG Rovers,2693,The Valley,John Busby,FG Rovers won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2019-08-13,19:45,Wigan Athletic,0–1,Stoke City,3821,The DW Stadium,Dean Whitestone,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Brentford,(4) 1–1 (5),Cambridge Utd,5215,Griffin Park,Lee Swabey,Cambridge Utd won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2019-08-13,19:45,Walsall,2–3,Crawley Town,2451,The Banks's Stadium,Carl Boyeson,,EFL-Cup
-First round,Tue,2019-08-13,19:45,Swansea City,3–1,Northampton,8058,Liberty Stadium,Kevin Johnson,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Rochdale,5–2,Bolton,3362,Crown Oil Arena,Andy Haines,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Huddersfield,0–1,Lincoln City,6908,The John Smith's Stadium,Peter Wright,,EFL-Cup
 First round,Tue,2019-08-13,19:45,AFC Wimbledon,(2) 2–2 (4),MK Dons,2191,Cherry Red Records Fans' Stadium,Craig Hicks,MK Dons won on penalty kicks following extra time,EFL-Cup
 Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
 First round,Tue,2019-08-13,19:45,Nott'ham Forest,1–0,Fleetwood Town,7432,The City Ground,Alan Young,,EFL-Cup
+First round,Tue,2019-08-13,19:45,Barnsley,0–3,Carlisle United,5208,Oakwell Stadium,Ben Toner,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Blackburn,3–2,Oldham Athletic,5215,Ewood Park,Tom Nield,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Grimsby Town,1–0,Doncaster,2470,Blundell Park,John Brooks,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Salford City,0–3,Leeds United,4518,The Peninsula Stadium,Keith Stroud,,EFL-Cup
-First round,Tue,2019-08-13,19:45,Barnsley,0–3,Carlisle United,5208,Oakwell Stadium,Ben Toner,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Shrewsbury,0–4,Rotherham Utd,2813,Montgomery Waters Meadow,Anthony Backhouse,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Mansfield Town,(5) 2–2 (6),Morecambe,1884,One Call Stadium,Rob Lewis,Morecambe won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2019-08-13,19:45,Middlesbrough,(2) 2–2 (4),Crewe Alexandra,7897,Riverside Stadium,Michael Salisbury,Crewe Alexandra won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2019-08-13,19:45,QPR,(5) 3–3 (4),Bristol City,5795,Loftus Road Stadium,Andrew Davies,QPR won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2019-08-13,19:45,Tranmere Rovers,0–3,Hull City,3421,Prenton Park,Seb Stockbridge,,EFL-Cup
 First round,Tue,2019-08-13,20:00,West Brom,1–2,Millwall,10704,The Hawthorns,Ross Joyce,,EFL-Cup
-Second round,Tue,2019-08-27,19:45,Watford,3–0,Coventry City,12257,Vicarage Road Stadium,Gavin Ward,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Oxford United,(4) 2–2 (2),Millwall,3693,The Kassam Stadium,Craig Hicks,Oxford United won on penalty kicks following extra time,EFL-Cup
-Second round,Tue,2019-08-27,19:45,Southend United,1–4,MK Dons,2433,Roots Hall Stadium,Neil Hair,,EFL-Cup
+Second round,Tue,2019-08-27,19:45,Watford,3–0,Coventry City,12257,Vicarage Road Stadium,Gavin Ward,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Crawley Town,1–0,Norwich City,5109,Checkatrade.com Stadium,John Busby,,EFL-Cup
+Second round,Tue,2019-08-27,19:45,Southend United,1–4,MK Dons,2433,Roots Hall Stadium,Neil Hair,,EFL-Cup
+Second round,Tue,2019-08-27,19:45,Cardiff City,0–3,Luton Town,4111,Cardiff City Stadium,Tony Harrington,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Nott'ham Forest,3–0,Derby County,26971,The City Ground,John Brooks,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Preston,(5) 2–2 (4),Hull City,6093,Deepdale Stadium,David Webb,Preston won on penalty kicks following extra time,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Rochdale,2–1,Carlisle United,1974,Crown Oil Arena,Peter Wright,,EFL-Cup
-Second round,Tue,2019-08-27,19:45,Cardiff City,0–3,Luton Town,4111,Cardiff City Stadium,Tony Harrington,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Fulham,0–1,Southampton,8467,Craven Cottage,Robert Jones,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Crewe Alexandra,1–6,Aston Villa,7173,Alexandra Stadium,Jarred Gillett,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Plymouth Argyle,2–4,Reading,8365,Home Park,Kevin Johnson,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Crystal Palace,(4) 0–0 (5),Colchester Utd,8898,Selhurst Park,Andy Woolmer,Colchester Utd won on penalty kicks following extra time,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Leeds United,(4) 2–2 (5),Stoke City,30002,Elland Road,Oliver Langford,Stoke City won on penalty kicks following extra time,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Newport County,0–2,West Ham,6382,Rodney Parade,Steve Martin,,EFL-Cup
-Second round,Tue,2019-08-27,19:45,Bristol Rovers,1–2,Brighton,5864,Memorial Stadium,Matt Donohue,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Burton Albion,4–0,Morecambe,1500,Pirelli Stadium,Seb Stockbridge,,EFL-Cup
 Second round,Tue,2019-08-27,19:45,Sheffield Utd,2–1,Blackburn,9714,Bramall Lane,Geoff Eltringham,,EFL-Cup
+Second round,Tue,2019-08-27,19:45,Bristol Rovers,1–2,Brighton,5864,Memorial Stadium,Matt Donohue,,EFL-Cup
 Second round,Wed,2019-08-28,19:45,Lincoln City,2–4,Everton,9971,Sincil Bank Stadium,Darren Bond,,EFL-Cup
 Second round,Wed,2019-08-28,19:45,QPR,0–2,Portsmouth,7783,Loftus Road Stadium,Ross Joyce,,EFL-Cup
 Second round,Wed,2019-08-28,19:45,Burnley,1–3,Sunderland,7445,Turf Moor,Darren England,,EFL-Cup
 Second round,Wed,2019-08-28,19:45,Newcastle Utd,(2) 1–1 (4),Leicester City,22727,St. James' Park,Tim Robinson,Leicester City won on penalty kicks following extra time,EFL-Cup
-Second round,Wed,2019-08-28,19:45,Bournemouth,(3) 0–0 (0),FG Rovers,9657,Vitality Stadium,Dean Whitestone,Bournemouth won on penalty kicks following extra time,EFL-Cup
 Second round,Wed,2019-08-28,19:45,Swansea City,6–0,Cambridge Utd,8763,Liberty Stadium,Michael Salisbury,,EFL-Cup
+Second round,Wed,2019-08-28,19:45,Bournemouth,(3) 0–0 (0),FG Rovers,9657,Vitality Stadium,Dean Whitestone,Bournemouth won on penalty kicks following extra time,EFL-Cup
 Second round,Wed,2019-08-28,19:45,Rotherham Utd,0–1,Sheffield Weds,8679,New York Stadium,Charles Breakspear,,EFL-Cup
 Second round,Tue,2019-09-10,19:45,Grimsby Town,(5) 0–0 (4),Macclesfield,3011,Blundell Park,Darren Drysdale,Grimsby Town won on penalty kicks following extra time,EFL-Cup
 Third round,Tue,2019-09-24,19:45,Luton Town,0–4,Leicester City,8260,Kenilworth Road Stadium,Matt Donohue,,EFL-Cup
-Third round,Tue,2019-09-24,19:45,Portsmouth,0–4,Southampton,18707,Fratton Park,Kevin Friend,,EFL-Cup
 Third round,Tue,2019-09-24,19:45,Colchester Utd,(4) 0–0 (3),Tottenham,9481,JobServe Community Stadium,Jarred Gillett,Colchester Utd won on penalty kicks following extra time,EFL-Cup
+Third round,Tue,2019-09-24,19:45,Portsmouth,0–4,Southampton,18707,Fratton Park,Kevin Friend,,EFL-Cup
 Third round,Tue,2019-09-24,19:45,Arsenal,5–0,Nott'ham Forest,53160,Emirates Stadium,Darren England,,EFL-Cup
 Third round,Tue,2019-09-24,19:45,Sheffield Weds,0–2,Everton,21485,Hillsborough Stadium,Jeremy Simpson,,EFL-Cup
 Third round,Tue,2019-09-24,19:45,Crawley Town,(5) 1–1 (3),Stoke City,4165,Checkatrade.com Stadium,Kevin Johnson,Crawley Town won on penalty kicks following extra time,EFL-Cup
 Third round,Tue,2019-09-24,19:45,Preston,0–3,Manchester City,22025,Deepdale Stadium,Lee Mason,,EFL-Cup
 Third round,Tue,2019-09-24,19:45,Watford,2–1,Swansea City,8903,Vicarage Road Stadium,Darren Bond,,EFL-Cup
 Third round,Wed,2019-09-25,19:45,Oxford United,4–0,West Ham,10450,The Kassam Stadium,Robert Jones,,EFL-Cup
-Third round,Wed,2019-09-25,19:45,Wolves,(4) 1–1 (2),Reading,20702,Molineux Stadium,Peter Bankes,Wolves won on penalty kicks following extra time,EFL-Cup
 Third round,Wed,2019-09-25,19:45,MK Dons,0–2,Liverpool,28521,Stadium mk,Oliver Langford,,EFL-Cup
+Third round,Wed,2019-09-25,19:45,Wolves,(4) 1–1 (2),Reading,20702,Molineux Stadium,Peter Bankes,Wolves won on penalty kicks following extra time,EFL-Cup
 Third round,Wed,2019-09-25,19:45,Sheffield Utd,0–1,Sunderland,11675,Bramall Lane,Tim Robinson,,EFL-Cup
 Third round,Wed,2019-09-25,19:45,Burton Albion,2–0,Bournemouth,2505,Pirelli Stadium,John Busby,,EFL-Cup
 Third round,Wed,2019-09-25,19:45,Brighton,1–3,Aston Villa,14982,The American Express Community Stadium,Graham Scott,,EFL-Cup
@@ -2178,11 +2178,11 @@ First round,Tue,2018-08-14,19:30,Nott'ham Forest,(10) 1–1 (9),Bury,8172,The Ci
 First round,Tue,2018-08-14,19:45,Cheltenham,(6) 2–2 (5),Colchester Utd,1179,Jonny-Rocks Stadium,Chris Sarginson,Cheltenham won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2018-08-14,19:45,Crewe Alexandra,(3) 1–1 (4),Fleetwood Town,1783,Alexandra Stadium,Trevor Kettle,Fleetwood Town won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2018-08-14,19:45,Carlisle United,1–5,Blackburn,3156,Brunton Park,Ross Joyce,,EFL-Cup
-First round,Tue,2018-08-14,19:45,Leeds United,2–1,Bolton,19617,Elland Road,Andy Haines,,EFL-Cup
 First round,Tue,2018-08-14,19:45,MK Dons,3–0,Charlton Ath,3052,Stadium mk,John Busby,,EFL-Cup
 First round,Tue,2018-08-14,19:45,Scunthorpe Utd,1–2,Doncaster,3272,Glanford Park,Geoff Eltringham,,EFL-Cup
 First round,Tue,2018-08-14,19:45,Macclesfield,(4) 1–1 (2),Bradford City,1422,Moss Rose Ground,Jeremy Simpson,Macclesfield won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2018-08-14,19:45,Wycombe,(7) 1–1 (6),Northampton,1999,Adams Park,Steve Martin,Wycombe won on penalty kicks following extra time,EFL-Cup
+First round,Tue,2018-08-14,19:45,Leeds United,2–1,Bolton,19617,Elland Road,Andy Haines,,EFL-Cup
 First round,Tue,2018-08-14,19:45,Tranmere Rovers,1–3,Walsall,3817,Prenton Park,Michael Salisbury,,EFL-Cup
 First round,Tue,2018-08-14,19:45,Exeter City,(4) 1–1 (2),Ipswich Town,3675,St. James' Park,Brett Huxtable,Exeter City won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2018-08-14,19:45,Grimsby Town,0–2,Rochdale,1781,Blundell Park,Darren England,,EFL-Cup
@@ -2213,22 +2213,22 @@ First round,Thu,2018-08-16,19:45,Sunderland,0–2,Sheffield Weds,13890,Stadium o
 Second round,Tue,2018-08-28,19:30,Swansea City,0–1,Crystal Palace,9122,Liberty Stadium,John Brooks,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Blackburn,4–1,Lincoln City,5211,Ewood Park,Geoff Eltringham,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Leicester City,4–0,Fleetwood Town,10671,King Power Stadium,Lee Mason,,EFL-Cup
-Second round,Tue,2018-08-28,19:45,Bournemouth,3–0,MK Dons,9747,Vitality Stadium,James Linington,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Hull City,0–4,Derby County,4666,Kingston Communications Stadium,Oliver Langford,,EFL-Cup
+Second round,Tue,2018-08-28,19:45,Bournemouth,3–0,MK Dons,9747,Vitality Stadium,James Linington,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Walsall,(1) 3–3 (3),Macclesfield,2352,The Banks's Stadium,Darren Drysdale,Macclesfield won on penalty kicks following extra time,EFL-Cup
-Second round,Tue,2018-08-28,19:45,Fulham,2–0,Exeter City,9333,Craven Cottage,Kevin Friend,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Brighton,0–1,Southampton,13651,The American Express Community Stadium,Andre Marriner,,EFL-Cup
+Second round,Tue,2018-08-28,19:45,Fulham,2–0,Exeter City,9333,Craven Cottage,Kevin Friend,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Middlesbrough,2–1,Rochdale,10344,Riverside Stadium,Ben Toner,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,QPR,3–1,Bristol Rovers,5007,Loftus Road Stadium,Charles Breakspear,,EFL-Cup
-Second round,Tue,2018-08-28,19:45,Burton Albion,1–0,Aston Villa,3411,Pirelli Stadium,Darren Bond,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Cardiff City,1–3,Norwich City,6953,Cardiff City Stadium,Andy Madley,,EFL-Cup
-Second round,Tue,2018-08-28,19:45,Doncaster,1–2,Blackpool,3188,Keepmoat Stadium,Anthony Backhouse,,EFL-Cup
+Second round,Tue,2018-08-28,19:45,Burton Albion,1–0,Aston Villa,3411,Pirelli Stadium,Darren Bond,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Sheffield Weds,0–2,Wolves,13597,Hillsborough Stadium,Robert Jones,,EFL-Cup
+Second round,Tue,2018-08-28,19:45,Doncaster,1–2,Blackpool,3188,Keepmoat Stadium,Anthony Backhouse,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,AFC Wimbledon,1–3,West Ham,3962,Cherry Red Records Fans' Stadium,Tim Robinson,,EFL-Cup
-Second round,Tue,2018-08-28,19:45,Leeds United,0–2,Preston,18652,Elland Road,Tony Harrington,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Brentford,1–0,Cheltenham,4384,Griffin Park,Ross Joyce,,EFL-Cup
-Second round,Tue,2018-08-28,19:45,Wycombe,(4) 2–2 (3),FG Rovers,1934,Adams Park,Anthony Coggins,Wycombe won on penalty kicks following extra time,EFL-Cup
+Second round,Tue,2018-08-28,19:45,Leeds United,0–2,Preston,18652,Elland Road,Tony Harrington,,EFL-Cup
 Second round,Tue,2018-08-28,19:45,Newport County,0–3,Oxford United,2228,Rodney Parade,Scott Duncan,,EFL-Cup
+Second round,Tue,2018-08-28,19:45,Wycombe,(4) 2–2 (3),FG Rovers,1934,Adams Park,Anthony Coggins,Wycombe won on penalty kicks following extra time,EFL-Cup
 Second round,Tue,2018-08-28,20:00,Stoke City,2–0,Huddersfield,7290,Bet365 Stadium,Peter Bankes,,EFL-Cup
 Second round,Tue,2018-08-28,20:00,West Brom,2–1,Mansfield Town,10574,The Hawthorns,Steve Martin,,EFL-Cup
 Second round,Wed,2018-08-29,19:45,Millwall,3–2,Plymouth Argyle,3645,The Den,Darren England,,EFL-Cup
@@ -2245,8 +2245,8 @@ Third round,Tue,2018-09-25,19:45,Blackpool,2–0,QPR,1910,Bloomfield Road,Tim Ro
 Third round,Tue,2018-09-25,19:45,Wolves,(1) 0–0 (3),Leicester City,21562,Molineux Stadium,Paul Tierney,Leicester City won on penalty kicks following extra time,EFL-Cup
 Third round,Tue,2018-09-25,20:00,West Brom,0–3,Crystal Palace,10818,The Hawthorns,Peter Bankes,,EFL-Cup
 Third round,Tue,2018-09-25,20:00,Manchester Utd,(7) 2–2 (8),Derby County,55227,Old Trafford,Stuart Attwell,Derby County won on penalty kicks following extra time,EFL-Cup
-Third round,Wed,2018-09-26,19:45,West Ham,8–0,Macclesfield,24833,London Stadium,Craig Pawson,,EFL-Cup
 Third round,Wed,2018-09-26,19:45,Liverpool,1–2,Chelsea,45503,Anfield,Kevin Friend,,EFL-Cup
+Third round,Wed,2018-09-26,19:45,West Ham,8–0,Macclesfield,24833,London Stadium,Craig Pawson,,EFL-Cup
 Third round,Wed,2018-09-26,19:45,Nott'ham Forest,3–2,Stoke City,12915,The City Ground,Darren England,,EFL-Cup
 Third round,Wed,2018-09-26,19:45,Arsenal,3–1,Brentford,49586,Emirates Stadium,Mike Dean,,EFL-Cup
 Third round,Wed,2018-09-26,20:00,Tottenham,(4) 2–2 (2),Watford,23650,Stadium mk,Lee Mason,Tottenham won on penalty kicks following extra time,EFL-Cup
@@ -2268,34 +2268,34 @@ Semi-finals,Wed,2019-01-09,19:45,Manchester City,9–0,Burton Albion,32089,Etiha
 Semi-finals,Wed,2019-01-23,19:45,Burton Albion,0–1,Manchester City,6519,Pirelli Stadium,Kevin Friend,Leg 2 of 2; Manchester City won,EFL-Cup
 Semi-finals,Thu,2019-01-24,19:45,Chelsea,(4) 2–1 (2),Tottenham,38610,Stamford Bridge,Martin Atkinson,Leg 2 of 2; Chelsea won; Chelsea won on penalty kicks following extra time,EFL-Cup
 Final,Sun,2019-02-24,16:30,Chelsea,(3) 0–0 (4),Manchester City,81775,Wembley Stadium,Jonathan Moss,Manchester City won on penalty kicks following extra time,EFL-Cup
-First round,Tue,2017-08-08,19:45,Millwall,2–0,Stevenage,3096,The Den,Simon Hooper,,EFL-Cup
 First round,Tue,2017-08-08,19:45,AFC Wimbledon,1–3,Brentford,3229,Cherry Red Records Fans' Stadium,Dean Whitestone,Required Extra Time,EFL-Cup
 First round,Tue,2017-08-08,19:45,Mansfield Town,0–1,Rochdale,1457,One Call Stadium,Andy Madley,,EFL-Cup
+First round,Tue,2017-08-08,19:45,Millwall,2–0,Stevenage,3096,The Den,Simon Hooper,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Luton Town,0–2,Ipswich Town,4610,Kenilworth Road Stadium,Andy Haines,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Bradford City,2–3,Doncaster,3175,Northern Commercials Stadium,Darren Drysdale,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Rotherham Utd,2–1,Lincoln City,5489,New York Stadium,Seb Stockbridge,,EFL-Cup
 First round,Tue,2017-08-08,19:45,QPR,1–0,Northampton,4317,Loftus Road Stadium,Charles Breakspear,,EFL-Cup
+First round,Tue,2017-08-08,19:45,Oxford United,3–4,Cheltenham,3179,The Kassam Stadium,Graham Horwood,Required Extra Time,EFL-Cup
 First round,Tue,2017-08-08,19:45,Southend United,0–2,Newport County,2998,Roots Hall Stadium,Anthony Coggins,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Sheffield Weds,4–1,Chesterfield,11682,Hillsborough Stadium,Ross Joyce,,EFL-Cup
-First round,Tue,2017-08-08,19:45,Oxford United,3–4,Cheltenham,3179,The Kassam Stadium,Graham Horwood,Required Extra Time,EFL-Cup
 First round,Tue,2017-08-08,19:45,Bristol City,5–0,Plymouth Argyle,9838,Ashton Gate Stadium,Oliver Langford,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Bristol Rovers,4–1,Cambridge Utd,4114,Memorial Stadium,Kevin Johnson,,EFL-Cup
 First round,Tue,2017-08-08,19:45,FG Rovers,0–1,MK Dons,1608,The New Lawn,Anthony Backhouse,Required Extra Time,EFL-Cup
 First round,Tue,2017-08-08,19:45,Scunthorpe Utd,(6) 3–3 (5),Notts County,1874,Glanford Park,David Webb,Scunthorpe Utd won on penalty kicks following extra time,EFL-Cup
-First round,Tue,2017-08-08,19:45,Acc'ton Stanley,3–2,Preston,2879,Wham Stadium,Eddie Ilderton,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Wolves,1–0,Yeovil Town,9478,Molineux Stadium,Rob Lewis,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Barnsley,4–3,Morecambe,4062,Oakwell Stadium,Darren Bond,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Nott'ham Forest,2–1,Shrewsbury,7546,The City Ground,John Busby,,EFL-Cup
-First round,Tue,2017-08-08,19:45,Coventry City,1–3,Blackburn,5372,City of Coventry Stadium,Darren England,,EFL-Cup
-First round,Tue,2017-08-08,19:45,Cardiff City,2–1,Portsmouth,6592,Cardiff City Stadium,Steve Martin,Required Extra Time,EFL-Cup
+First round,Tue,2017-08-08,19:45,Acc'ton Stanley,3–2,Preston,2879,Wham Stadium,Eddie Ilderton,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Wigan Athletic,2–1,Blackpool,3391,The DW Stadium,Chris Sarginson,,EFL-Cup
 First round,Tue,2017-08-08,19:45,P'borough Utd,1–3,Barnet,2725,ABAX Stadium,Tony Harrington,,EFL-Cup
-First round,Tue,2017-08-08,19:45,Birmingham City,5–1,Crawley Town,7814,St Andrew's Trillion Trophy Stadium,Michael Salisbury,,EFL-Cup
+First round,Tue,2017-08-08,19:45,Coventry City,1–3,Blackburn,5372,City of Coventry Stadium,Darren England,,EFL-Cup
+First round,Tue,2017-08-08,19:45,Cardiff City,2–1,Portsmouth,6592,Cardiff City Stadium,Steve Martin,Required Extra Time,EFL-Cup
 First round,Tue,2017-08-08,19:45,Wycombe,0–2,Fulham,3639,Adams Park,Gavin Ward,,EFL-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
 First round,Tue,2017-08-08,19:45,Exeter City,1–2,Charlton Ath,2699,St. James' Park,Tim Robinson,,EFL-Cup
-First round,Tue,2017-08-08,19:45,Norwich City,3–2,Swindon Town,13166,Carrow Road,Geoff Eltringham,,EFL-Cup
+Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
+First round,Tue,2017-08-08,19:45,Birmingham City,5–1,Crawley Town,7814,St Andrew's Trillion Trophy Stadium,Michael Salisbury,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Fleetwood Town,1–2,Carlisle United,1711,Highbury Stadium,Graham Salisbury,Required Extra Time,EFL-Cup
+First round,Tue,2017-08-08,19:45,Norwich City,3–2,Swindon Town,13166,Carrow Road,Geoff Eltringham,,EFL-Cup
 First round,Tue,2017-08-08,20:00,Reading,2–0,Gillingham,5936,Madejski Stadium,Brett Huxtable,,EFL-Cup
 First round,Wed,2017-08-09,19:45,Crewe Alexandra,1–2,Bolton,3167,Alexandra Stadium,Mark Heywood,,EFL-Cup
 First round,Wed,2017-08-09,19:45,Colchester Utd,1–2,Aston Villa,6603,JobServe Community Stadium,John Brooks,,EFL-Cup
@@ -2305,19 +2305,19 @@ First round,Wed,2017-08-09,19:45,Sheffield Utd,3–2,Walsall,5210,Bramall Lane,K
 First round,Thu,2017-08-10,19:45,Bury,0–1,Sunderland,3470,Gigg Lane,Robert Jones,,EFL-Cup
 Second round,Tue,2017-08-22,19:30,Crystal Palace,2–1,Ipswich Town,9837,Selhurst Park,Andrew Davies,,EFL-Cup
 First round,Tue,2017-08-22,19:45,Grimsby Town,0–1,Derby County,3033,Blundell Park,Trevor Kettle,,EFL-Cup
-Second round,Tue,2017-08-22,19:45,Brighton,1–0,Barnet,11414,The American Express Community Stadium,Steve Martin,,EFL-Cup
-Second round,Tue,2017-08-22,19:45,Norwich City,4–1,Charlton Ath,12521,Carrow Road,Andy Haines,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,Birmingham City,1–2,Bournemouth,8245,St Andrew's Trillion Trophy Stadium,Geoff Eltringham,,EFL-Cup
+Second round,Tue,2017-08-22,19:45,Norwich City,4–1,Charlton Ath,12521,Carrow Road,Andy Haines,,EFL-Cup
+Second round,Tue,2017-08-22,19:45,Brighton,1–0,Barnet,11414,The American Express Community Stadium,Steve Martin,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,QPR,1–4,Brentford,9719,Loftus Road Stadium,Chris Sarginson,,EFL-Cup
-Second round,Tue,2017-08-22,19:45,Cardiff City,1–2,Burton Albion,5820,Cardiff City Stadium,John Busby,,EFL-Cup
-Second round,Tue,2017-08-22,19:45,MK Dons,1–4,Swansea City,5162,Stadium mk,Robert Jones,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,Watford,2–3,Bristol City,9003,Vicarage Road Stadium,Tim Robinson,,EFL-Cup
-Second round,Tue,2017-08-22,19:45,Leeds United,5–1,Newport County,17098,Elland Road,Ross Joyce,,EFL-Cup
-Second round,Tue,2017-08-22,19:45,Carlisle United,1–2,Sunderland,8187,Brunton Park,Darren Bond,,EFL-Cup
+Second round,Tue,2017-08-22,19:45,MK Dons,1–4,Swansea City,5162,Stadium mk,Robert Jones,,EFL-Cup
+Second round,Tue,2017-08-22,19:45,Cardiff City,1–2,Burton Albion,5820,Cardiff City Stadium,John Busby,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,Acc'ton Stanley,1–3,West Brom,2699,Wham Stadium,Jeremy Simpson,,EFL-Cup
+Second round,Tue,2017-08-22,19:45,Carlisle United,1–2,Sunderland,8187,Brunton Park,Darren Bond,,EFL-Cup
+Second round,Tue,2017-08-22,19:45,Leeds United,5–1,Newport County,17098,Elland Road,Ross Joyce,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,Doncaster,2–0,Hull City,7139,Keepmoat Stadium,Graham Salisbury,,EFL-Cup
-Second round,Tue,2017-08-22,19:45,Aston Villa,4–1,Wigan Athletic,18108,Villa Park,Darren Drysdale,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,Sheffield Utd,1–4,Leicester City,11280,Bramall Lane,Tony Harrington,,EFL-Cup
+Second round,Tue,2017-08-22,19:45,Aston Villa,4–1,Wigan Athletic,18108,Villa Park,Darren Drysdale,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,Fulham,0–1,Bristol Rovers,6243,Craven Cottage,Dean Whitestone,,EFL-Cup
 Second round,Tue,2017-08-22,19:45,Middlesbrough,3–0,Scunthorpe Utd,12679,Riverside Stadium,Andy Madley,,EFL-Cup
 Second round,Tue,2017-08-22,20:00,Reading,3–1,Millwall,7148,Madejski Stadium,Charles Breakspear,Required Extra Time,EFL-Cup
@@ -2325,8 +2325,8 @@ Second round,Tue,2017-08-22,20:00,Bolton,3–2,Sheffield Weds,6385,Macron Stadiu
 Second round,Wed,2017-08-23,19:45,Newcastle Utd,2–3,Nott'ham Forest,27709,St. James' Park,Darren England,Required Extra Time,EFL-Cup
 Second round,Wed,2017-08-23,19:45,Cheltenham,0–2,West Ham,6259,Jonny-Rocks Stadium,Oliver Langford,,EFL-Cup
 Second round,Wed,2017-08-23,19:45,Blackburn,0–2,Burnley,16313,Ewood Park,Simon Hooper,,EFL-Cup
-Second round,Wed,2017-08-23,19:45,Huddersfield,2–1,Rotherham Utd,8290,The John Smith's Stadium,Peter Bankes,,EFL-Cup
 Second round,Wed,2017-08-23,19:45,Southampton,0–2,Wolves,17931,St. Mary's Stadium,James Linington,,EFL-Cup
+Second round,Wed,2017-08-23,19:45,Huddersfield,2–1,Rotherham Utd,8290,The John Smith's Stadium,Peter Bankes,,EFL-Cup
 Second round,Wed,2017-08-23,20:00,Stoke City,4–0,Rochdale,9930,Bet365 Stadium,Scott Duncan,,EFL-Cup
 Second round,Tue,2017-09-12,19:45,Barnsley,3–2,Derby County,7163,Oakwell Stadium,Eddie Ilderton,,EFL-Cup
 Third round,Tue,2017-09-19,19:45,West Ham,3–0,Bolton,35806,London Stadium,Simon Hooper,,EFL-Cup
@@ -2334,8 +2334,8 @@ Third round,Tue,2017-09-19,19:45,Burnley,(3) 2–2 (5),Leeds United,11799,Turf M
 Third round,Tue,2017-09-19,19:45,Crystal Palace,1–0,Huddersfield,6607,Selhurst Park,Lee Probert,,EFL-Cup
 Third round,Tue,2017-09-19,19:45,Bournemouth,1–0,Brighton,10372,Vitality Stadium,Kevin Friend,Required Extra Time,EFL-Cup
 Third round,Tue,2017-09-19,19:45,Bristol City,2–0,Stoke City,13826,Ashton Gate Stadium,Geoff Eltringham,,EFL-Cup
-Third round,Tue,2017-09-19,19:45,Wolves,1–0,Bristol Rovers,12740,Molineux Stadium,Tony Harrington,Required Extra Time,EFL-Cup
 Third round,Tue,2017-09-19,19:45,Leicester City,2–0,Liverpool,31609,King Power Stadium,Stuart Attwell,,EFL-Cup
+Third round,Tue,2017-09-19,19:45,Wolves,1–0,Bristol Rovers,12740,Molineux Stadium,Tony Harrington,Required Extra Time,EFL-Cup
 Third round,Tue,2017-09-19,19:45,Aston Villa,0–2,Middlesbrough,11197,Villa Park,Steve Martin,,EFL-Cup
 Third round,Tue,2017-09-19,19:45,Brentford,1–3,Norwich City,4863,Griffin Park,James Linington,,EFL-Cup
 Third round,Tue,2017-09-19,20:00,Tottenham,1–0,Barnsley,23826,Wembley Stadium,Tim Robinson,,EFL-Cup
@@ -2415,7 +2415,7 @@ First round proper,Tue,2021-11-16,19:45,Notts County,1–2,Rochdale,4416,Meadow 
 Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round proper,Tue,2021-11-16,19:45,Oldham Athletic,1–2,Ipswich Town,,Boundary Park,Carl Boyeson,,FA-Cup
 First round proper,Wed,2021-11-17,19:45,Stockport,5–3,Bolton,,Edgeley Park,Samuel Barrott,Required Extra Time,FA-Cup
-First round proper,Tue,2021-11-30,19:45,Exeter City,,Bradford City,,St. James' Park,,,FA-Cup
+First round proper,Tue,2021-11-30,19:45,Exeter City,2–1,Bradford City,3228,St. James' Park,Charles Breakspear,,FA-Cup
 Second round proper,Fri,2021-12-03,19:45,Gateshead,,Charlton Ath,,Gateshead International Stadium,,,FA-Cup
 Second round proper,Fri,2021-12-03,19:45,Rotherham Utd,,Stockport,,New York Stadium,,,FA-Cup
 Second round proper,Sat,2021-12-04,12:45,Buxton,,Morecambe,,The Silverlands,,,FA-Cup
@@ -3082,7 +3082,7 @@ Group stage,Wed,2021-10-20,20:00,Chelsea eng,4–0,se Malmö,39095.0,Stamford Br
 Group stage,Wed,2021-10-20,21:00,Lille fr,0–0,es Sevilla,34362.0,Stade Pierre-Mauroy,Michael Oliver,,Champions-League
 Group stage,Wed,2021-10-20,21:00,Young Boys ch,1–4,es Villarreal,27398.0,Wankdorfstadion,Sergey Karasev,,Champions-League
 Group stage,Wed,2021-10-20,22:00,Zenit ru,0–1,it Juventus,18717.0,Gazprom Arena,Sandro Schärer,,Champions-League
-Group stage,Tue,2021-11-02,18:45,Wolfsburg de,2–1,at RB Salzburg,,Volkswagen Arena,Artur Dias,,Champions-League
+Group stage,Tue,2021-11-02,18:45,Wolfsburg de,2–1,at RB Salzburg,16112.0,Volkswagen Arena,Artur Dias,,Champions-League
 Group stage,Tue,2021-11-02,18:45,Malmö se,0–1,eng Chelsea,19551.0,Swedbank Stadion,Felix Brych,,Champions-League
 Group stage,Tue,2021-11-02,21:00,Bayern Munich de,5–2,pt Benfica,50000.0,Allianz Arena,Szymon Marciniak,,Champions-League
 Group stage,Tue,2021-11-02,21:00,Atalanta it,2–2,eng Manchester Utd,14443.0,Stadio Atleti Azzurri d'Italia,Slavko Vinčič,,Champions-League
@@ -3675,38 +3675,38 @@ Group stage,Thu,2021-10-21,21:00,Sturm Graz at,0–1,es Real Sociedad,14809.0,Me
 Group stage,Thu,2021-10-21,21:00,PSV Eindhoven nl,1–2,fr Monaco,33000.0,Philips Stadion,Davide Massa,,Europa-League
 Group stage,Thu,2021-10-21,21:00,Napoli it,3–0,pl Legia Warsaw,10346.0,Stadio San Paolo,Carlos Grande Rabadán,,Europa-League
 Group stage,Thu,2021-10-21,22:00,Loko Moscow ru,0–1,tr Galatasaray,8100.0,RZD Arena,Harald Lechner,,Europa-League
-Group stage,Thu,2021-11-04,18:45,Real Sociedad es,1–1,at Sturm Graz,,Estadio Municipal de Anoeta,Andris Treimanis,,Europa-League
-Group stage,Thu,2021-11-04,18:45,Brøndby dk,1–1,sct Rangers,,Brøndby Stadion,Nikola Dabanović,,Europa-League
-Group stage,Thu,2021-11-04,18:45,Monaco fr,0–0,nl PSV Eindhoven,,Stade Louis II.,Cüneyt Çakιr,,Europa-League
-Group stage,Thu,2021-11-04,18:45,Legia Warsaw pl,1–4,it Napoli,,Stadion Miejski Legii Warszawa im. Marsz...,Lawrence Visser,,Europa-League
-Group stage,Thu,2021-11-04,18:45,Lyon fr,3–0,cz Sparta Prague,,Groupama Stadium,Maurizio Mariani,,Europa-League
-Group stage,Thu,2021-11-04,18:45,Genk be,2–2,eng West Ham,,Luminus Arena,Aleksandar Stavrev,,Europa-League
-Group stage,Thu,2021-11-04,19:45,Olympiacos gr,1–2,de Eint Frankfurt,,Stadio Georgios Karaiskáki,Aliaksei Kulbakou,,Europa-League
-Group stage,Thu,2021-11-04,20:45,Galatasaray tr,1–1,ru Loko Moscow,,Türk Telekom Arena,Sandro Schärer,,Europa-League
-Group stage,Thu,2021-11-04,20:00,Braga pt,4–2,bg Ludogorets,,Estádio Municipal de Braga,Glenn Nyberg,,Europa-League
-Group stage,Thu,2021-11-04,20:00,Leicester City eng,1–1,ru Spartak Moscow,,King Power Stadium,Halil Umut Meler,,Europa-League
-Group stage,Thu,2021-11-04,21:00,Ferencváros hu,2–3,sct Celtic,,Groupama Arena,Fábio Veríssimo,,Europa-League
-Group stage,Thu,2021-11-04,21:00,Red Star rs,0–1,dk Midtjylland,,Stadion Rajko Mitić,Tamás Bognár,,Europa-League
-Group stage,Thu,2021-11-04,21:00,Leverkusen de,4–0,es Betis,,BayArena,Anthony Taylor,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Real Sociedad es,1–1,at Sturm Graz,25010.0,Estadio Municipal de Anoeta,Andris Treimanis,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Brøndby dk,1–1,sct Rangers,20462.0,Brøndby Stadion,Nikola Dabanović,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Monaco fr,0–0,nl PSV Eindhoven,5840.0,Stade Louis II.,Cüneyt Çakιr,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Legia Warsaw pl,1–4,it Napoli,25706.0,Stadion Miejski Legii Warszawa im. Marsz...,Lawrence Visser,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Lyon fr,3–0,cz Sparta Prague,33934.0,Groupama Stadium,Maurizio Mariani,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Genk be,2–2,eng West Ham,12239.0,Luminus Arena,Aleksandar Stavrev,,Europa-League
+Group stage,Thu,2021-11-04,19:45,Olympiacos gr,1–2,de Eint Frankfurt,23050.0,Stadio Georgios Karaiskáki,Aliaksei Kulbakou,,Europa-League
+Group stage,Thu,2021-11-04,20:45,Galatasaray tr,1–1,ru Loko Moscow,27776.0,Türk Telekom Arena,Sandro Schärer,,Europa-League
+Group stage,Thu,2021-11-04,20:00,Braga pt,4–2,bg Ludogorets,6221.0,Estádio Municipal de Braga,Glenn Nyberg,,Europa-League
+Group stage,Thu,2021-11-04,20:00,Leicester City eng,1–1,ru Spartak Moscow,30222.0,King Power Stadium,Halil Umut Meler,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Ferencváros hu,2–3,sct Celtic,16501.0,Groupama Arena,Fábio Veríssimo,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Red Star rs,0–1,dk Midtjylland,23070.0,Stadion Rajko Mitić,Tamás Bognár,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Leverkusen de,4–0,es Betis,15208.0,BayArena,Anthony Taylor,,Europa-League
 Group stage,Thu,2021-11-04,21:00,Antwerp be,0–3,tr Fenerbahçe,,Bosuilstadion,Irfan Peljto,,Europa-League
-Group stage,Thu,2021-11-04,21:00,Marseille fr,2–2,it Lazio,,Orange Vélodrome,José Sánchez,,Europa-League
-Group stage,Thu,2021-11-04,21:00,Dinamo Zagreb hr,3–1,at Rapid Wien,,Stadion Maksimir,John Beaton,,Europa-League
-Group stage,Wed,2021-11-24,18:30,Spartak Moscow ru,2–1,it Napoli,,Otkrytie Arena,Clément Turpin,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Marseille fr,2–2,it Lazio,59163.0,Orange Vélodrome,José Sánchez,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Dinamo Zagreb hr,3–1,at Rapid Wien,7835.0,Stadion Maksimir,John Beaton,,Europa-League
+Group stage,Wed,2021-11-24,18:30,Spartak Moscow ru,2–1,it Napoli,25706.0,Otkrytie Arena,Clément Turpin,,Europa-League
 Group stage,Thu,2021-11-25,18:45,Rapid Wien at,0–2,eng West Ham,,Allianz Stadion,Sergey Ivanov,,Europa-League
-Group stage,Thu,2021-11-25,18:45,Betis es,2–0,hu Ferencváros,,Estadio Benito Villamarín,Ruddy Buquet,,Europa-League
-Group stage,Thu,2021-11-25,18:45,Red Star rs,1–0,bg Ludogorets,,Stadion Rajko Mitić,José Sánchez,,Europa-League
-Group stage,Thu,2021-11-25,18:45,Leverkusen de,3–2,sct Celtic,,BayArena,Anastasios Sidiropoulos,,Europa-League
-Group stage,Thu,2021-11-25,18:45,Midtjylland dk,3–2,pt Braga,,MCH Arena,Matej Jug,,Europa-League
-Group stage,Thu,2021-11-25,18:45,Dinamo Zagreb hr,1–1,be Genk,,Stadion Maksimir,Glenn Nyberg,,Europa-League
-Group stage,Thu,2021-11-25,20:45,Galatasaray tr,4–2,fr Marseille,,Ali Sami Yen Stadyumu,Tobias Stieler,,Europa-League
-Group stage,Thu,2021-11-25,20:45,Loko Moscow ru,0–3,it Lazio,,RZD Arena,Artur Dias,,Europa-League
-Group stage,Thu,2021-11-25,20:00,Leicester City eng,3–1,pl Legia Warsaw,,King Power Stadium,Deniz Aytekin,,Europa-League
-Group stage,Thu,2021-11-25,20:00,Rangers sct,2–0,cz Sparta Prague,,Ibrox Stadium,Danny Makkelie,,Europa-League
-Group stage,Thu,2021-11-25,21:00,Eint Frankfurt de,2–2,be Antwerp,,Commerzbank-Arena,Paul Tierney,,Europa-League
-Group stage,Thu,2021-11-25,21:00,Monaco fr,2–1,es Real Sociedad,,Stade Louis II.,Ivan Kružliak,,Europa-League
-Group stage,Thu,2021-11-25,21:00,Brøndby dk,1–3,fr Lyon,,Brøndby Stadion,Georgi Kabakov,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Betis es,2–0,hu Ferencváros,30137.0,Estadio Benito Villamarín,Ruddy Buquet,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Red Star rs,1–0,bg Ludogorets,11252.0,Stadion Rajko Mitić,José Sánchez,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Leverkusen de,3–2,sct Celtic,19830.0,BayArena,Anastasios Sidiropoulos,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Midtjylland dk,3–2,pt Braga,7189.0,MCH Arena,Matej Jug,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Dinamo Zagreb hr,1–1,be Genk,6892.0,Stadion Maksimir,Glenn Nyberg,,Europa-League
+Group stage,Thu,2021-11-25,20:45,Galatasaray tr,4–2,fr Marseille,39758.0,Ali Sami Yen Stadyumu,Tobias Stieler,,Europa-League
+Group stage,Thu,2021-11-25,20:45,Loko Moscow ru,0–3,it Lazio,8100.0,RZD Arena,Artur Dias,,Europa-League
+Group stage,Thu,2021-11-25,20:00,Leicester City eng,3–1,pl Legia Warsaw,30658.0,King Power Stadium,Deniz Aytekin,,Europa-League
+Group stage,Thu,2021-11-25,20:00,Rangers sct,2–0,cz Sparta Prague,48370.0,Ibrox Stadium,Danny Makkelie,,Europa-League
+Group stage,Thu,2021-11-25,21:00,Eint Frankfurt de,2–2,be Antwerp,30000.0,Commerzbank-Arena,Paul Tierney,,Europa-League
+Group stage,Thu,2021-11-25,21:00,Monaco fr,2–1,es Real Sociedad,3834.0,Stade Louis II.,Ivan Kružliak,,Europa-League
+Group stage,Thu,2021-11-25,21:00,Brøndby dk,1–3,fr Lyon,16645.0,Brøndby Stadion,Georgi Kabakov,,Europa-League
 Group stage,Thu,2021-11-25,21:00,PSV Eindhoven nl,2–0,at Sturm Graz,,Philips Stadion,Paweł Raczkowski,,Europa-League
-Group stage,Thu,2021-11-25,22:00,Olympiacos gr,1–0,tr Fenerbahçe,,Stadio Georgios Karaiskáki,Antonio Matéu Lahoz,,Europa-League
+Group stage,Thu,2021-11-25,22:00,Olympiacos gr,1–0,tr Fenerbahçe,22405.0,Stadio Georgios Karaiskáki,Antonio Matéu Lahoz,,Europa-League
 Group stage,Thu,2021-12-09,18:45,Legia Warsaw pl,,ru Spartak Moscow,,Stadion Miejski Legii Warszawa im. Marsz...,,,Europa-League
 Group stage,Thu,2021-12-09,18:45,Antwerp be,,gr Olympiacos,,Bosuilstadion,,,Europa-League
 Group stage,Thu,2021-12-09,18:45,Sparta Prague cz,,dk Brøndby,,Generali Arena,,,Europa-League
