@@ -416,6 +416,7 @@ id,first_name,second_name,team
 555,Raphaël,Varane,13
 579,Cristiano Ronaldo,dos Santos Aveiro,13
 632,Phil,Jones,13
+636,Amad,Diallo,13
 19,Joseph,Willock,14
 291,Jonjo,Shelvey,14
 292,Matt,Ritchie,14
@@ -600,6 +601,7 @@ id,first_name,second_name,team
 582,Nikola,Vlasic,19
 589,Alex,Kral,19
 617,Harrison,Ashby,19
+634,Sonny,Perkins,19
 426,João Filipe Iria,Santos Moutinho,20
 427,Rui Pedro,dos Santos Patrício,20
 428,Willy,Boly,20
@@ -632,3 +634,4 @@ id,first_name,second_name,team
 583,Hee-Chan,Hwang,20
 611,Louie,Moulden,20
 621,James,Storer,20
+635,Hugo,Bueno,20
