@@ -423,6 +423,159 @@ class FBRef:
                         os.path.join(self.root, 'outfield.csv'),
                         index=False)
 
+    def get_games_players(self, tables):
+        df_h = []
+        df_a = []
+
+        # Home player
+        for i in range(3, 9):
+            table = tables[i].copy()
+            table.columns = [' '.join(col).strip() if i > 5 else col[1] for i, col in enumerate(table.columns.values)]
+            table = table.dropna(subset=["Nation"])
+            table.loc[:, 'home'] = 1
+            df_h.append(table)
+
+        # Away player
+        for i in range(10, 16):
+            table = tables[i].copy()
+            table.columns = [' '.join(col).strip() if i > 5 else col[1] for i, col in enumerate(table.columns.values)]
+            table = table.dropna(subset=["Nation"])
+            table.loc[:, 'home'] = 0
+            df_a.append(table)
+
+        df = pd.concat(
+            [pd.concat(df_h, axis=1),
+            pd.concat(df_a, axis=1)])
+        return df.loc[:, ~df.columns.duplicated()]
+
+    def get_games_keepers(self, tables):
+        # Home keeper
+        table_h = tables[9].copy()
+        table_h.columns = [' '.join(col).strip() if i > 5 else col[1] for i, col in enumerate(table_h.columns.values)]
+        table_h = table_h.dropna(subset=["Nation"])
+        table_h.loc[:, 'home'] = 1
+
+        # Away keeper
+        table_a = tables[16].copy()
+        table_a.columns = [' '.join(col).strip() if i > 5 else col[1] for i, col in enumerate(table_a.columns.values)]
+        table_a = table_a.dropna(subset=["Nation"])
+        table_a.loc[:, 'home'] = 0
+
+        df = pd.concat([table_h, table_a])
+        return df.loc[:, ~df.columns.duplicated()]
+
+    def get_pl_games(self, history=False):
+        seasons = self.get_competition_urls(
+            'https://fbref.com/en/comps/9/history/Premier-League-Seasons')
+
+        if not history:
+            seasons = [seasons[0]]
+
+        self.logger.info("Downloading Match Data")
+
+        for season in seasons:
+            if season.split('/')[-2] == '9':
+                url = (
+                    'https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures')
+                year = self.season
+
+            else:
+                url = (
+                    'https://fbref.com/en/comps/9/' +
+                    season.split('/')[-2] +
+                    '/schedule/' +
+                    season.split('/')[-1][:-6] +
+                    '-Scores-and-Fixtures')
+                year = season.split('/')[-1][:4]
+
+            # Skip years with no underlying stats
+            if int(year) > 2016:
+                self.logger.info(f"Season: {season}")
+
+                # URL Request
+                df = (
+                    pd.read_html(url)[0]
+                    .loc[:, [
+                        'Wk', 'Day', 'Date', 'Time', 'Home', 'Away',
+                        'Attendance', 'Venue', 'Referee', 'Notes']]
+                        )
+                # Remove empty row
+                df = df[~df.Wk.isna()]
+                # Save
+                if os.path.isfile(os.path.join(self.root, f'games.csv')):
+                    df.to_csv(
+                        os.path.join(self.root, 'games.csv'),
+                        index=False, mode='a', header=False)
+                else:
+                    df.to_csv(
+                        os.path.join(self.root, f'games.csv'),
+                        index=False)
+
+                # Get urls to games
+                table_rows = self.get_url(url)[0].find_all('tr')
+
+                for row in table_rows:
+                    # Skip blank rows, and postponed games
+                    if (
+                            row.find('th', {"scope": "row"}) is not None
+                            and row.find('td', {"data-stat": "match_report"}).text != ""
+                            ):
+
+                        # Skip upcoming games
+                        if 'stathead' in row.find('td', {"data-stat": "match_report"}).find('a')['href']:
+                            continue
+
+                        date = row.find('td', {"data-stat": "date"}).text
+                        squad_h = row.find('td', {"data-stat": "squad_a"}).text
+                        squad_a = row.find('td', {"data-stat": "squad_b"}).text
+
+                        tables = pd.read_html(
+                            "https://fbref.com" +
+                            row.find('td', {"data-stat": "match_report"}).find('a')['href'])
+
+                        df = self.get_games_players(tables)
+                        df.loc[:, 'date'] = date
+                        df.loc[:, 'squad_h'] = squad_h
+                        df.loc[:, 'squad_a'] = squad_a
+
+                        if os.path.isfile(os.path.join(self.root, f'games_players.csv')):
+                            df.to_csv(
+                                os.path.join(self.root, 'games_players.csv'),
+                                index=False, mode='a', header=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_players.csv'),
+                                index=False)
+
+                        df = self.get_games_keepers(tables)
+                        df.loc[:, 'date'] = date
+                        df.loc[:, 'squad_h'] = squad_h
+                        df.loc[:, 'squad_a'] = squad_a
+
+                        if os.path.isfile(os.path.join(self.root, f'games_keepers.csv')):
+                            df.to_csv(
+                                os.path.join(self.root, 'games_keepers.csv'),
+                                index=False, mode='a', header=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_keepers.csv'),
+                                index=False)
+
+                        df = tables[17].copy()
+                        df.columns = [' '.join(col).strip() if i > 6 else col[1] for i, col in enumerate(df.columns.values)]
+                        df = df[~df.Player.isna()]
+                        df.loc[:, 'date'] = date
+
+                        if os.path.isfile(os.path.join(self.root, f'games_shots.csv')):
+                            df.to_csv(
+                                os.path.join(self.root, 'games_shots.csv'),
+                                index=False, mode='a', header=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_shots.csv'),
+                                index=False)
+
+        # TODO: Drop dupplicates in case I run the latest season scraper to update it.
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -434,4 +587,6 @@ if __name__ == "__main__":
     fbref = FBRef(logger, season_data)
     # fbref.get_fixtures()
 
-    fbref.get_pl_season(True)
+    # fbref.get_pl_season(True)
+
+    fbref.get_pl_games(True)
