@@ -2,6 +2,7 @@ import os
 import requests
 import logging
 import time
+from datetime import datetime
 
 import json
 from bs4 import BeautifulSoup
@@ -501,6 +502,8 @@ class FBRef:
                         )
                 # Remove empty row
                 df = df[~df.Wk.isna()]
+                # Remove upcoming games
+                df = df[df.Date < datetime.now().strftime("%Y-%m-%d")]
                 # Save
                 if os.path.isfile(os.path.join(self.root, f'games.csv')):
                     df.to_csv(
@@ -575,7 +578,27 @@ class FBRef:
                                 os.path.join(self.root, f'games_shots.csv'),
                                 index=False)
 
-        # TODO: Drop dupplicates in case I run the latest season scraper to update it.
+        # Drop dupplicates in case I run the latest season scraper to update it.
+        (
+            pd.read_csv(os.path.join(self.root, 'games.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'games.csv'), index=False))
+        
+        (
+            pd.read_csv(os.path.join(self.root, 'games_players.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'games_players.csv'), index=False))
+        
+        (
+            pd.read_csv(os.path.join(self.root, 'games_keepers.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'games_keepers.csv'), index=False))
+        
+        (
+            pd.read_csv(os.path.join(self.root, 'games_shots.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'games_shots.csv'), index=False))
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -589,4 +612,4 @@ if __name__ == "__main__":
 
     # fbref.get_pl_season(True)
 
-    fbref.get_pl_games(True)
+    fbref.get_pl_games()
