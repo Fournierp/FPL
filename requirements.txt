@@ -6,4 +6,6 @@ requests==2.24.0
 scikit-learn==1.0
 scipy==1.7.0
 sklearn==0.0
+sasoptpy==1.0.4
+saspy==3.3.7
 Theano-PyMC==1.1.2
