@@ -212,8 +212,12 @@ class FBRef:
         # URL Request
         tables = pd.read_html(url.format(table=""))
         for i, table in enumerate(tables):
-            if i > 0 :
-                table.columns = [' '.join(col).strip() if "Unnamed" not in col[0] else col[1] for i, col in enumerate(table.columns.values)]
+            if i > 1 or i == 0 :
+                if i != 0 :
+                    table.columns = [' '.join(col).strip() if "Unnamed" not in col[0] else col[1] for i, col in enumerate(table.columns.values)]
+                else:
+                    table = table.sort_values(by=['Squad']).reset_index().drop(['Rk', 'index'], 1)
+
                 if not i % 2:
                     df.append(table)
                 else:
