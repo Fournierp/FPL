@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+from subprocess import Popen, DEVNULL
 import sasoptpy as so
 from utils import (
     get_team,
@@ -58,6 +59,7 @@ two_ft_gw = []
 nb_differentials = 3
 differential_threshold = 10
 
+log = False
 
 # Data collection
 # Predicted points from https://fplreview.com/
@@ -327,8 +329,12 @@ for i in range(nb_suboptimal):
     model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
     command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
     # command = f'cbc optimization/tmp/{model_name}.mps cost column solve solu optimization/tmp/{model_name}_solution.txt'
-    # !{command}
-    os.system(command)
+
+    if log:
+        os.system(command)
+    else:
+        process = Popen(command, shell=True, stdout=DEVNULL)
+        process.wait()
 
     # Reset variables for next passes
     for v in model.get_variables():
