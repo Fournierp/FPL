@@ -9,7 +9,18 @@ def get_team(team_id, gw):
     return [i['element'] for i in res['picks']], res['entry_history']['bank']
 
 
-def get_predictions():
+def randomize(seed, df, start):
+    rng = np.random.default_rng(seed=seed)
+    gws = np.arange(start, start+len([col for col in df.columns if '_Pts' in col]))
+
+    for w in gws:
+        noise = df[f"{w}_Pts"] * (92 - df[f"{w}_xMins"]) / 134 * rng.standard_normal(size=len(df))
+        df[f"{w}_Pts"] = df[f"{w}_Pts"] + noise
+
+    return df
+
+
+def get_predictions(noise=False):
     start = get_next_gw()
     df = pd.read_csv(f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
     df["Pos"] = df["Pos"].map(
@@ -22,6 +33,11 @@ def get_predictions():
     # One hot encoded values for the constraints
     df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
     df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
+
+    # Apply random noise
+    if noise:
+        df = randomize(None, df, start)
+
     return df.fillna(0)
 
 

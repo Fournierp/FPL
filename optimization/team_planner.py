@@ -61,7 +61,7 @@ differential_threshold = 10
 
 # Data collection
 # Predicted points from https://fplreview.com/
-df = get_predictions()
+df = get_predictions(noise=False)
 data = df.copy()
 data.set_index('id', inplace=True)
 
@@ -86,6 +86,10 @@ assert not (freehit_used and freehit_gw >= 0), "Freehit chip was already used."
 assert not (wildcard_used and wildcard_gw >= 0), "Wildcard chip was already used."
 assert not (bboost_used and bboost_gw >= 0), "Bench boost chip was already used."
 assert not (threexc_used and threexc_gw >= 0), "Tripple captain chip was already used."
+
+# Sort DF by EV for efficient optimization
+data['total_ev'] = data[[col for col in df.columns if '_Pts' in col]].sum(axis=1)
+data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
 
 # Model
@@ -322,6 +326,7 @@ for i in range(nb_suboptimal):
     # Solve
     model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
     command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
+    # command = f'cbc optimization/tmp/{model_name}.mps cost column solve solu optimization/tmp/{model_name}_solution.txt'
     # !{command}
     os.system(command)
 
