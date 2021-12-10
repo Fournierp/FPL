@@ -59,7 +59,7 @@ two_ft_gw = []
 nb_differentials = 3
 differential_threshold = 10
 
-log = False
+log = True #False
 
 # Data collection
 # Predicted points from https://fplreview.com/
@@ -134,6 +134,12 @@ xp = so.expr_sum(
             4 * (hits[w] - wildcard[w] - freehit[w])
     ) for w in gameweeks)
 
+ft = so.expr_sum(
+    (np.power(decay_gameweek, w - start - 1) if objective_type == 'linear' else 1) *
+    (
+        2 * rolling_transfers[w] # Value of having 2FT
+    ) for w in gameweeks[1:]) # Value is added to the GW when a FT is rolled so exclude the first Gw 
+
 if bboost_gw + 1:
     xp_bb = (np.power(decay_gameweek, bboost_gw) if objective_type == 'linear' else 1) * (
                 so.expr_sum(
@@ -144,7 +150,7 @@ if bboost_gw + 1:
 else:
     xp_bb = 0
 
-model.set_objective(- xp - xp_bb, name='total_xp_obj', sense='N')
+model.set_objective(- xp - ft - xp_bb, name='total_xp_obj', sense='N')
 
 # Initial conditions: set team and FT depending on the team
 model.add_constraints((team[p, start - 1] == 1 for p in initial_team), name='initial_team')
