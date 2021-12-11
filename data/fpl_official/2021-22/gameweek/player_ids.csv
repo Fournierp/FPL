@@ -68,6 +68,7 @@ id,first_name,second_name,team
 568,Cameron,Archer,2
 596,Viljami,Sinisalo,2
 610,Lamare,Bogarde,2
+638,Tim,Iroegbunam,2
 76,Pontus,Jansson,3
 77,Christian,Nørgaard,3
 78,Ivan,Toney,3
@@ -101,6 +102,7 @@ id,first_name,second_name,team
 614,Paris,Maghoma,3
 619,Matthew,Cox,3
 628,Maxwell,Haygarth,3
+640,Nathan,Young-Coombes,3
 53,Adam,Lallana,4
 54,Jason,Steele,4
 55,Pascal,Groß,4
@@ -290,6 +292,7 @@ id,first_name,second_name,team
 505,Kiernan,Dewsbury-Hall,9
 573,Eldin,Jakupovic,9
 587,Ademola,Lookman,9
+639,Vontae,Daley-Campbell,9
 182,Pablo,Hernández Domínguez,10
 183,Francisco,Casilla Cortés,10
 184,Liam,Cooper,10
@@ -502,6 +505,8 @@ id,first_name,second_name,team
 525,Adam,Armstrong,16
 546,Yan,Valery,16
 567,Lyanco Evangelista,Silveira Neves Vojnovic,16
+637,Harry,Lewis,16
+641,Willy,Caballero,16
 352,Joe,Hart,17
 353,Hugo,Lloris,17
 355,Toby,Alderweireld,17
