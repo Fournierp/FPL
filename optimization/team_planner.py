@@ -254,6 +254,70 @@ class Team_Planner:
             # The unused chip must not contribute
             self.model.add_constraint(so.expr_sum(threexc[p, w] for p in self.players for w in self.gameweeks) == 0, name='tc_unused')
 
+    def biased_model(self, love, hate, hit_limit, two_ft_gw):
+        force_in = self.model.add_variables(self.players, self.gameweeks, name='fi', vartype=so.binary)
+        force_out = self.model.add_variables(self.players, self.gameweeks, name='fo', vartype=so.binary)
+
+        for bias in love:
+            if bias == 'buy' and love[bias]:
+                assert all([w in self.gameweeks for (_, w) in love['buy']]), 'Gameweek selected does not exist.'
+                assert all([bias[0] in self.players for bias in love['buy']]), 'Player selected to buy does not exist.'
+                # The forced-buy player must be bought 
+                self.model.add_constraints((buy[p, w] == 1 for (p, w) in love[bias]), name="force_buy")
+            if bias == 'start'and love[bias]:
+                print([w for w in love['start']])
+                assert all([w in self.gameweeks for (_, w) in love['start']]), 'Gameweek selected does not exist.'
+                assert all([bias[0] in self.players for bias in love['start']]), 'Player selected to start does not exist.'
+                # The forced-in team player must be in the team 
+                self.model.add_constraints((team[p, w] == 1 for (p, w) in love[bias]), name="force_in")
+            if bias == 'team' and love[bias]:
+                assert all([w in self.gameweeks for (_, w) in love['team']]), 'Gameweek selected does not exist.'
+                assert all([bias[0] in self.players for bias in love['team']]), 'Player selected to be in the team does not exist.'
+                # The forced-in starter player must be a starter 
+                self.model.add_constraints((self.starter[p, w] == 1 for (p, w) in love[bias]), name="force_starter")
+            if bias == 'cap' and love[bias]:
+                assert all([w in self.gameweeks for (_, w) in love['cap']]), 'Gameweek selected does not exist.'
+                assert all([bias[0] in self.players for bias in love['cap']]), 'Player selected to be the captain does not exist.'
+                # The forced-in cap player must be the captain
+                self.model.add_constraints((self.captain[p, w] == 1 for (p, w) in love[bias]), name="force_captain")
+
+        for bias in hate:
+            if bias == 'sell' and hate[bias]:
+                assert all([w in self.gameweeks for (_, w) in hate['sell']]), 'Gameweek selected does not exist.'
+                assert all([bias[0] in self.players for bias in hate['sell']]), 'Player selected to sell does not exist.'
+                # The forced-out player must be sold 
+                self.model.add_constraints((sell[p, w] == 1 for (p, w) in hate[bias]), name="force_sell")
+            if bias == 'bench' and hate[bias]:
+                assert all([w in self.gameweeks for (_, w) in hate['bench']]), 'Gameweek selected does not exist.'
+                assert all([bias[0] in self.players for bias in hate['bench']]), 'Player selected to start does not exist.'
+                # The forced-out of starter player must not be starting
+                self.model.add_constraints((self.starter[p, w] == 0 for (p, w) in hate[bias]), name="force_bench") # Force player out by a certain gw
+            if bias == 'team' and hate[bias]:
+                assert all([w in self.gameweeks for (_, w) in hate['team']]), 'Gameweek selected does not exist.'
+                assert all([bias[0] in self.players for bias in hate['team']]), 'Player selected to be out of the team does not exist.'
+                # The forced-out of team player must not be in team
+                self.model.add_constraints((self.team[p, w] == 0 for (p, w) in hate[bias]), name="force_out") # Force player out by a certain gw (the player can get transfered sooner )
+
+        for bias in hit_limit:
+            if bias == 'max' and hit_limit[bias]:
+                assert all([w in self.gameweeks for (w, _) in hit_limit['max']]), 'Gameweek selected does not exist.'
+                # The number of hits under the maximum
+                self.model.add_constraints((self.hits[w] < max_hit for (w, max_hit) in hit_limit[bias]), name='hits_max')
+            if bias == 'eq' and hit_limit[bias]:
+                assert all([w in self.gameweeks for (w, _) in hit_limit['eq']]), 'Gameweek selected does not exist.'
+                # The number of hits equal to the choice
+                self.model.add_constraints((self.hits[w] == nb_hit for (w, nb_hit) in hit_limit[bias]), name='hits_eq')
+            if bias == 'min' and hit_limit[bias]:
+                assert all([w in self.gameweeks for (w, _) in hit_limit['min']]), 'Gameweek selected does not exist.'
+                # The number of hits above the minumum
+                self.model.add_constraints((self.hits[w] > min_hit for (w, min_hit) in hit_limit[bias]), name='hits_min')
+
+        for gw in two_ft_gw:
+            assert gw > self.start and gw <= self.start + self.horizon, 'Gameweek selected cannot be constrained.'
+            # Force rolling free transfer
+            self.model.add_constraint(self.free_transfers[gw] == 2, name=f'force_roll_{gw}')
+
+
     def solve(self, model_name, log=False):
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
@@ -306,4 +370,32 @@ if __name__ == "__main__":
     threexc_gw = -1
 
     # tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type, decay_gameweek, decay_bench)
+
+    # Biased decisions for player choices 
+    # Example usage: {(index, gw)}
+    love = {
+        'buy': {},
+        'start': {},
+        'team': {},
+        'cap': {}
+    }
+
+    hate = {
+        'sell': {},
+        'team': {},
+        'bench': {}
+    }
+
+    # Biased decisions for transfter limits (gw, limit)
+    # Example usage: {(gw, amount)}: {(17, 5)}
+    hit_limit = {
+        'max': {},
+        'eq': {},
+        'min': {}
+    }
+    
+    # Gameweeks where 2FT are desired. In other words the (GW-1) where a FT is rolled.
+    two_ft_gw = []
+
+    tp.biased_model(love, hate, hit_limit, two_ft_gw)
     tp.solve("vanilla", False)
