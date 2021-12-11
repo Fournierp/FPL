@@ -28,9 +28,13 @@ class Team_Planner:
     def get_data(self, team_id, horizon):
         # Data collection
         # Predicted points from https://fplreview.com/
-        self.df = get_predictions()
-        self.team_names = self.df.columns[-20:].values
-        self.data = self.df.copy().set_index('id')
+        df = get_predictions()
+        self.team_names = df.columns[-20:].values
+        self.data = df.copy().set_index('id')
+        
+        # Ownership data
+        ownership = get_ownership_data()
+        self.data = pd.concat([self.data, ownership], axis=1, join="inner")
         self.players = self.data.index.tolist()
 
         # FPL data
@@ -39,14 +43,14 @@ class Team_Planner:
         self.freehit_used, self.wildcard_used, self.bboost_used, self.threexc_used = get_chips(team_id, self.start - 1)
 
         # GW
-        self.period = min(horizon, len([col for col in self.df.columns if '_Pts' in col]))
+        self.period = min(horizon, len([col for col in df.columns if '_Pts' in col]))
         self.rolling_transfer, self.transfer = get_rolling(team_id, self.start - 1) 
         self.budget = np.sum([self.data.loc[p, 'SV'] for p in self.initial_team]) + self.bank
         self.all_gameweeks = np.arange(self.start-1, self.start+self.period)
         self.gameweeks = np.arange(self.start, self.start+self.period)
 
         # Sort DF by EV for efficient optimization
-        self.data['total_ev'] = self.data[[col for col in self.df.columns if '_Pts' in col]].sum(axis=1)
+        self.data['total_ev'] = self.data[[col for col in df.columns if '_Pts' in col]].sum(axis=1)
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
     def random_noise(self, seed):
@@ -152,6 +156,14 @@ class Team_Planner:
         # The number of hits must be the number of transfer except the free ones.
         self.model.add_constraints((self.hits[w] >= number_of_transfers[w] - self.free_transfers[w] for w in self.gameweeks), name='hits')
 
+    def differential_model(self, nb_differentials=3, threshold=10, target='Top_100K'):
+        self.data['Differential'] = np.where(self.data[target] < threshold, 1, 0)
+        # A min numberof starter players must be differentials
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.starter[p, w] * self.data.loc[p, 'Differential'] for p in self.players) >= nb_differentials for w in self.gameweeks
+            ), name='differentials')
+
     def solve(self, model_name, log=False):
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
@@ -188,4 +200,5 @@ if __name__ == "__main__":
 
     tp = Team_Planner(team_id=35868, horizon=3, noise=False)
     tp.build_model(model_name="vanilla")
+    tp.differential_model()
     tp.solve(False)
