@@ -34,10 +34,6 @@ def get_predictions(noise=False):
     df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
     df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
 
-    # Apply random noise
-    if noise:
-        df = randomize(None, df, start)
-
     return df.fillna(0)
 
 

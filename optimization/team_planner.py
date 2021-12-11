@@ -20,12 +20,13 @@ from utils import (
 class Team_Planner:
 
     def __init__(self, team_id=35868, horizon=5, noise=False):
-        self.get_data(team_id, horizon)
+        self.horizon = horizon
+        self.get_data(team_id)
 
         if noise:
             self.random_noise(None)
 
-    def get_data(self, team_id, horizon):
+    def get_data(self, team_id):
         # Data collection
         # Predicted points from https://fplreview.com/
         df = get_predictions()
@@ -43,7 +44,7 @@ class Team_Planner:
         self.freehit_used, self.wildcard_used, self.bboost_used, self.threexc_used = get_chips(team_id, self.start - 1)
 
         # GW
-        self.period = min(horizon, len([col for col in df.columns if '_Pts' in col]))
+        self.period = min(self.horizon, len([col for col in df.columns if '_Pts' in col]))
         self.rolling_transfer, self.transfer = get_rolling(team_id, self.start - 1) 
         self.budget = np.sum([self.data.loc[p, 'SV'] for p in self.initial_team]) + self.bank
         self.all_gameweeks = np.arange(self.start-1, self.start+self.period)
@@ -85,7 +86,7 @@ class Team_Planner:
                             self.starter[p, w] + self.captain[p, w] + decay_bench * (
                                 self.vicecaptain[p, w] + self.team[p, w] - self.starter[p, w])
                         ) *
-                        self.data.loc[p, str(w) + '_Pts'] for p in self.players
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
                     ) -
                     4 * self.hits[w]
             ) for w in self.gameweeks)
@@ -95,7 +96,6 @@ class Team_Planner:
         # Initial conditions: set team and FT depending on the team
         self.model.add_constraints((self.team[p, self.start - 1] == 1 for p in self.initial_team), name='initial_team')
         self.model.add_constraint(self.free_transfers[self.start - 1] == self.rolling_transfer + 1, name='initial_ft')
-
 
         # Constraints
         # The cost of the squad must exceed the budget
@@ -165,6 +165,11 @@ class Team_Planner:
             ), name='differentials')
 
     def select_chips_model(self, freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type='decay', decay_gameweek=0.9, decay_bench=0.1):
+        assert (freehit_gw < self.horizon), "Select a gameweek within the horizon."
+        assert (wildcard_gw < self.horizon), "Select a gameweek within the horizon."
+        assert (bboost_gw < self.horizon), "Select a gameweek within the horizon."
+        assert (threexc_gw < self.horizon), "Select a gameweek within the horizon."
+
         assert not (self.freehit_used and freehit_gw >= 0), "Freehit chip was already used."
         assert not (self.wildcard_used and wildcard_gw >= 0), "Wildcard chip was already used."
         assert not (self.bboost_used and bboost_gw >= 0), "Bench boost chip was already used."
@@ -184,7 +189,7 @@ class Team_Planner:
                     so.expr_sum(
                         (self.starter[p, w] + self.captain[p, w] + threexc[p, w] +
                         decay_bench * (self.vicecaptain[p, w] + self.team[p, w] - self.starter[p, w])) *
-                        self.data.loc[p, str(w) + '_Pts'] for p in self.players
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
                     ) -
                     4 * (self.hits[w] - wildcard[w] - freehit[w])
             ) for w in self.gameweeks)
@@ -193,7 +198,7 @@ class Team_Planner:
             xp_bb = (np.power(decay_gameweek, bboost_gw) if objective_type == 'linear' else 1) * (
                         so.expr_sum(
                             ((1 - decay_bench) * (self.team[p, self.start + bboost_gw] - self.starter[p, self.start + bboost_gw])) *
-                            self.data.loc[p, str(self.start + bboost_gw) + '_Pts'] for p in self.players
+                            self.data.loc[p, f'{self.start + bboost_gw}_Pts'] for p in self.players
                         )
                 )
         else:
@@ -208,8 +213,8 @@ class Team_Planner:
             # The chip must only be used once
             self.model.add_constraint(so.expr_sum(freehit[w] for w in self.gameweeks) == self.hits[self.start + freehit_gw] + self.hits[self.start + freehit_gw + 1], name='freehit_once')
             # The freehit team must be kept only one gameweek
-            self.model.add_constraints((buy[p, self.start + freehit_gw] == sell[p, self.start + freehit_gw + 1] for p in self.players), name='freehit1')
-            self.model.add_constraints((sell[p, self.start + freehit_gw] == buy[p, self.start + freehit_gw + 1] for p in self.players), name='freehit2')
+            self.model.add_constraints((self.buy[p, self.start + freehit_gw] == self.sell[p, self.start + freehit_gw + 1] for p in self.players), name='freehit1')
+            self.model.add_constraints((self.sell[p, self.start + freehit_gw] == self.buy[p, self.start + freehit_gw + 1] for p in self.players), name='freehit2')
         else:
             # The unused chip must not contribute
             self.model.add_constraint(so.expr_sum(freehit[w] for w in self.gameweeks) == 0, name='freehit_unused')
@@ -278,20 +283,20 @@ if __name__ == "__main__":
     logger: logging.Logger = logging.getLogger(__name__)
 
     horizon = 3
+    objective_type = 'decay'
+    decay_gameweek = 0.85
+    decay_bench = 0.1
+
     tp = Team_Planner(team_id=35868, horizon=horizon, noise=False)
     tp.build_model(model_name="vanilla")
+    # tp.differential_model(model_name="differential")
 
     # Chip strategy: set to (-1) if you don't want to use
-    # Choose a value in range [0-5] as the number of gameweeks after the current one
+    # Choose a value in range [0-horizon] as the number of gameweeks after the current one
     freehit_gw = -1
     wildcard_gw = -1
     bboost_gw = -1
-    threexc_gw = 1
+    threexc_gw = -1
 
-    assert (freehit_gw < horizon), "Select a gameweek within the horizon."
-    assert (wildcard_gw < horizon), "Select a gameweek within the horizon."
-    assert (bboost_gw < horizon), "Select a gameweek within the horizon."
-    assert (threexc_gw < horizon), "Select a gameweek within the horizon."
-
-    tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw)
-    tp.solve(model_name="vanilla", False)
+    tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type, decay_gameweek, decay_bench)
+    tp.solve("vanilla", False)
