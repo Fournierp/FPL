@@ -164,6 +164,85 @@ class Team_Planner:
                 so.expr_sum(self.starter[p, w] * self.data.loc[p, 'Differential'] for p in self.players) >= nb_differentials for w in self.gameweeks
             ), name='differentials')
 
+    def select_chips_model(self, freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type='decay', decay_gameweek=0.9, decay_bench=0.1):
+        assert not (self.freehit_used and freehit_gw >= 0), "Freehit chip was already used."
+        assert not (self.wildcard_used and wildcard_gw >= 0), "Wildcard chip was already used."
+        assert not (self.bboost_used and bboost_gw >= 0), "Bench boost chip was already used."
+        assert not (self.threexc_used and threexc_gw >= 0), "Tripple captain chip was already used."
+    
+        freehit = self.model.add_variables(self.gameweeks, name='fh', vartype=so.integer, lb=0, ub=15)
+        wildcard = self.model.add_variables(self.gameweeks, name='wc', vartype=so.integer, lb=0, ub=15)
+        bboost = self.model.add_variables(self.gameweeks, name='bb', vartype=so.binary)
+        threexc = self.model.add_variables(self.players, self.gameweeks, name='3xc', vartype=so.binary)
+
+        # Objective: maximize total expected points
+        # Assume a 10% (decay_bench) chance of a player not playing
+        # Assume a 80% (decay_gameweek) reliability of next week's xPts
+        xp = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
+            (
+                    so.expr_sum(
+                        (self.starter[p, w] + self.captain[p, w] + threexc[p, w] +
+                        decay_bench * (self.vicecaptain[p, w] + self.team[p, w] - self.starter[p, w])) *
+                        self.data.loc[p, str(w) + '_Pts'] for p in self.players
+                    ) -
+                    4 * (self.hits[w] - wildcard[w] - freehit[w])
+            ) for w in self.gameweeks)
+
+        if bboost_gw + 1:
+            xp_bb = (np.power(decay_gameweek, bboost_gw) if objective_type == 'linear' else 1) * (
+                        so.expr_sum(
+                            ((1 - decay_bench) * (self.team[p, self.start + bboost_gw] - self.starter[p, self.start + bboost_gw])) *
+                            self.data.loc[p, str(self.start + bboost_gw) + '_Pts'] for p in self.players
+                        )
+                )
+        else:
+            xp_bb = 0
+
+        self.model.set_objective(- xp - xp_bb, name='total_xp_obj', sense='N')
+
+        if freehit_gw + 1:
+            # The chip must be used on the defined gameweek
+            self.model.add_constraint(freehit[self.start + freehit_gw] == self.hits[self.start + freehit_gw], name='initial_freehit')
+            self.model.add_constraint(freehit[self.start + freehit_gw + 1] == self.hits[self.start + freehit_gw], name='initial_freehit2')
+            # The chip must only be used once
+            self.model.add_constraint(so.expr_sum(freehit[w] for w in self.gameweeks) == self.hits[self.start + freehit_gw] + self.hits[self.start + freehit_gw + 1], name='freehit_once')
+            # The freehit team must be kept only one gameweek
+            self.model.add_constraints((buy[p, self.start + freehit_gw] == sell[p, self.start + freehit_gw + 1] for p in self.players), name='freehit1')
+            self.model.add_constraints((sell[p, self.start + freehit_gw] == buy[p, self.start + freehit_gw + 1] for p in self.players), name='freehit2')
+        else:
+            # The unused chip must not contribute
+            self.model.add_constraint(so.expr_sum(freehit[w] for w in self.gameweeks) == 0, name='freehit_unused')
+
+        if wildcard_gw + 1:
+            # The chip must be used on the defined gameweek
+            self.model.add_constraint(wildcard[self.start + wildcard_gw] == self.hits[self.start + wildcard_gw], name='initial_wildcard')
+            # The chip must only be used once
+            self.model.add_constraint(so.expr_sum(wildcard[w] for w in self.gameweeks) == self.hits[self.start + wildcard_gw], name='wc_once')
+        else:
+            # The unused chip must not contribute
+            self.model.add_constraint(so.expr_sum(wildcard[w] for w in self.gameweeks) == 0, name='wildcard_unused')
+
+        if bboost_gw + 1:
+            # The chip must be used on the defined gameweek
+            self.model.add_constraint(bboost[self.start + bboost_gw] == 1, name='initial_bboost')
+            # The chip must only be used once
+            self.model.add_constraint(so.expr_sum(bboost[w] for w in self.gameweeks) == 1, name='bboost_once')
+        else:
+            # The unused chip must not contribute
+            self.model.add_constraint(so.expr_sum(bboost[w] for w in self.gameweeks) == 0, name='bboost_unused')
+            
+        if threexc_gw + 1:
+            # The chip must be used on the defined gameweek
+            self.model.add_constraint(so.expr_sum(threexc[p, self.start + threexc_gw] for p in self.players) == 1, name='initial_3xc')
+            # The chips must only be used once
+            self.model.add_constraint(so.expr_sum(threexc[p, w] for p in self.players for w in self.gameweeks) == 1, name='tc_once')
+            # The TC player must be the captain
+            self.model.add_constraints((threexc[p, w] <= self.captain[p, w] for p in self.players for w in self.gameweeks), name='3xc_is_cap')
+        else:
+            # The unused chip must not contribute
+            self.model.add_constraint(so.expr_sum(threexc[p, w] for p in self.players for w in self.gameweeks) == 0, name='tc_unused')
+
     def solve(self, model_name, log=False):
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
@@ -198,7 +277,21 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
 
-    tp = Team_Planner(team_id=35868, horizon=3, noise=False)
+    horizon = 3
+    tp = Team_Planner(team_id=35868, horizon=horizon, noise=False)
     tp.build_model(model_name="vanilla")
-    tp.differential_model()
-    tp.solve(False)
+
+    # Chip strategy: set to (-1) if you don't want to use
+    # Choose a value in range [0-5] as the number of gameweeks after the current one
+    freehit_gw = -1
+    wildcard_gw = -1
+    bboost_gw = -1
+    threexc_gw = 1
+
+    assert (freehit_gw < horizon), "Select a gameweek within the horizon."
+    assert (wildcard_gw < horizon), "Select a gameweek within the horizon."
+    assert (bboost_gw < horizon), "Select a gameweek within the horizon."
+    assert (threexc_gw < horizon), "Select a gameweek within the horizon."
+
+    tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw)
+    tp.solve(model_name="vanilla", False)
