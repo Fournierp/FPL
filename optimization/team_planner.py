@@ -58,7 +58,7 @@ class Team_Planner:
         # Apply random noise
         self.data = randomize(seed, self.data, self.start)
 
-    def build_model(self, model_name, objective_type='decay', decay_gameweek=0.9, decay_bench=0.1):
+    def build_model(self, model_name, objective_type='decay', decay_gameweek=0.9, decay_bench=0.1, ft_val=0):
         # Model
         self.model = so.Model(name=f'{model_name}_model')
 
@@ -91,7 +91,13 @@ class Team_Planner:
                     4 * self.hits[w]
             ) for w in self.gameweeks)
 
-        self.model.set_objective(- xp, name='total_xp_obj', sense='N')
+        ftv = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
+            (
+                ft_val * self.rolling_transfers[w] # Value of having 2FT
+            ) for w in self.gameweeks[1:]) # Value is added to the GW when a FT is rolled so exclude the first Gw 
+
+        self.model.set_objective(- xp - ftv, name='total_xp_obj', sense='N')
 
         # Initial conditions: set team and FT depending on the team
         self.model.add_constraints((self.team[p, self.start - 1] == 1 for p in self.initial_team), name='initial_team')
@@ -286,9 +292,10 @@ if __name__ == "__main__":
     objective_type = 'decay'
     decay_gameweek = 0.85
     decay_bench = 0.1
+    ft_val = 1.5
 
     tp = Team_Planner(team_id=35868, horizon=horizon, noise=False)
-    tp.build_model(model_name="vanilla")
+    tp.build_model(model_name="vanilla", ft_val=1.5)
     # tp.differential_model(model_name="differential")
 
     # Chip strategy: set to (-1) if you don't want to use
@@ -298,5 +305,5 @@ if __name__ == "__main__":
     bboost_gw = -1
     threexc_gw = -1
 
-    tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type, decay_gameweek, decay_bench)
+    # tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type, decay_gameweek, decay_bench)
     tp.solve("vanilla", False)
