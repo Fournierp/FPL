@@ -150,17 +150,17 @@ class Team_Planner:
         self.model.add_constraints((self.sell[p, w] + self.buy[p, w] <= 1 for p in self.players for w in self.gameweeks), name='single_buy_or_sell')
 
         # Rolling transfers
-        number_of_transfers = {w: so.expr_sum(self.sell[p, w] for p in self.players) for w in self.gameweeks}
-        number_of_transfers[self.start - 1] = self.transfer
-        self.model.add_constraints((self.free_transfers[w - 1] - number_of_transfers[w - 1] <= 2 * self.rolling_transfers[w] for w in self.gameweeks),
+        self.number_of_transfers = {w: so.expr_sum(self.sell[p, w] for p in self.players) for w in self.gameweeks}
+        self.number_of_transfers[self.start - 1] = self.transfer
+        self.model.add_constraints((self.free_transfers[w - 1] - self.number_of_transfers[w - 1] <= 2 * self.rolling_transfers[w] for w in self.gameweeks),
                             name='rolling_condition_1')
         self.model.add_constraints(
-            (self.free_transfers[w - 1] - number_of_transfers[w - 1] >= self.rolling_transfers[w] + (-14) * (1 - self.rolling_transfers[w])
+            (self.free_transfers[w - 1] - self.number_of_transfers[w - 1] >= self.rolling_transfers[w] + (-14) * (1 - self.rolling_transfers[w])
             for w in self.gameweeks),
             name='rolling_condition_2')
 
         # The number of hits must be the number of transfer except the free ones.
-        self.model.add_constraints((self.hits[w] >= number_of_transfers[w] - self.free_transfers[w] for w in self.gameweeks), name='hits')
+        self.model.add_constraints((self.hits[w] >= self.number_of_transfers[w] - self.free_transfers[w] for w in self.gameweeks), name='hits')
 
     def differential_model(self, nb_differentials=3, threshold=10, target='Top_100K'):
         self.data['Differential'] = np.where(self.data[target] < threshold, 1, 0)
@@ -317,7 +317,6 @@ class Team_Planner:
             # Force rolling free transfer
             self.model.add_constraint(self.free_transfers[gw] == 2, name=f'force_roll_{gw}')
 
-
     def solve(self, model_name, log=False):
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
@@ -346,6 +345,42 @@ class Team_Planner:
             self.captain, self.vicecaptain,
             self.buy, self.sell,
             self.free_transfers, self.hits)
+
+    def suboptimals(self, model_name, iterations=3, cutoff_search='first_transfer'):
+        for i in range(iterations):
+
+            print(f"\n----- {i} -----")
+            self.solve(model_name + f'_{i}')
+
+            if i != iterations - 1:
+                # Select the players that have been transfered in/out
+                if cutoff_search == 'first_buy':
+                    actions = so.expr_sum(self.buy[p, self.start] for p in self.players if self.buy[p, self.start].get_value() > 0.5)
+                    gw_range = [self.start]
+                elif cutoff_search == 'horizon_buy':
+                    actions = so.expr_sum(so.expr_sum(self.buy[p, w] for p in self.players if self.buy[p, w].get_value() > 0.5) for w in self.gameweeks)
+                    gw_range = self.gameweeks
+                elif cutoff_search == 'first_transfer':
+                    actions = (
+                        so.expr_sum(self.buy[p, self.start] for p in self.players if self.buy[p, self.start].get_value() > 0.5) +
+                        so.expr_sum(self.sell[p, self.start] for p in self.players if self.sell[p, self.start].get_value() > 0.5)
+                        )
+                    gw_range = [self.start]
+                elif cutoff_search == 'horizon_transfer':
+                    actions = (
+                        so.expr_sum(so.expr_sum(self.buy[p, w] for p in self.players if self.buy[p, w].get_value() > 0.5) for w in self.gameweeks) +
+                        so.expr_sum(so.expr_sum(self.sell[p, w] for p in self.players if self.sell[p, w].get_value() > 0.5) for w in self.gameweeks)
+                        )
+                    gw_range = self.gameweeks
+
+                if actions.get_value() != 0:
+                    # This step forces one transfer to be unfeasible
+                    # Note: the constraint is only applied to the activated transfers
+                    # so the ones not activated are thus allowed.
+                    self.model.add_constraint(actions <= actions.get_value() - 1, name=f'cutoff_{i}')
+                else:
+                    # Force one transfer in case of sub-optimal solution choosing to roll transfer
+                    self.model.add_constraint(so.expr_sum(self.number_of_transfers[w] for w in gw_range) >= 1, name=f'cutoff_{i}')
 
 
 if __name__ == "__main__":
@@ -393,9 +428,10 @@ if __name__ == "__main__":
         'eq': {},
         'min': {}
     }
-    
+
     # Gameweeks where 2FT are desired. In other words the (GW-1) where a FT is rolled.
     two_ft_gw = []
 
     tp.biased_model(love, hate, hit_limit, two_ft_gw)
-    tp.solve("vanilla", False)
+    # tp.solve("vanilla", False)
+    tp.suboptimals("vanilla")
