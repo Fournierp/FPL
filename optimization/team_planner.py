@@ -179,7 +179,7 @@ class Team_Planner:
                 so.expr_sum(self.starter[p, w] * self.data.loc[p, 'Differential'] for p in self.players) >= nb_differentials for w in self.gameweeks
             ), name='differentials')
 
-    def select_chips_model(self, freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type='decay', decay_gameweek=0.9, decay_bench=0.1):
+    def select_chips_model(self, freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1]):
         assert (freehit_gw < self.horizon), "Select a gameweek within the horizon."
         assert (wildcard_gw < self.horizon), "Select a gameweek within the horizon."
         assert (bboost_gw < self.horizon), "Select a gameweek within the horizon."
@@ -195,6 +195,8 @@ class Team_Planner:
         bboost = self.model.add_variables(self.gameweeks, name='bb', vartype=so.binary)
         threexc = self.model.add_variables(self.players, self.gameweeks, name='3xc', vartype=so.binary)
 
+        order = [0, 1, 2, 3]
+
         # Objective: maximize total expected points
         # Assume a 10% (decay_bench) chance of a player not playing
         # Assume a 80% (decay_gameweek) reliability of next week's xPts
@@ -202,8 +204,11 @@ class Team_Planner:
             (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
             (
                     so.expr_sum(
-                        (self.starter[p, w] + self.captain[p, w] + threexc[p, w] +
-                        decay_bench * (self.vicecaptain[p, w] + self.team[p, w] - self.starter[p, w])) *
+                        (
+                            self.starter[p, w] + self.captain[p, w] + threexc[p, w] +
+                            (vicecap_decay * self.vicecaptain[p, w]) +
+                            so.expr_sum(decay_bench[o] * self.bench[p, w, o] for o in order)
+                        ) *
                         self.data.loc[p, f'{w}_Pts'] for p in self.players
                     ) -
                     4 * (self.hits[w] - wildcard[w] - freehit[w])
@@ -212,7 +217,7 @@ class Team_Planner:
         if bboost_gw + 1:
             xp_bb = (np.power(decay_gameweek, bboost_gw) if objective_type == 'linear' else 1) * (
                         so.expr_sum(
-                            ((1 - decay_bench) * (self.team[p, self.start + bboost_gw] - self.starter[p, self.start + bboost_gw])) *
+                            so.expr_sum((1 - decay_bench[o]) * self.bench[p, self.start + bboost_gw, o] for o in order) *
                             self.data.loc[p, f'{self.start + bboost_gw}_Pts'] for p in self.players
                         )
                 )
@@ -400,6 +405,7 @@ if __name__ == "__main__":
     horizon = 3
     objective_type = 'decay'
     decay_gameweek = 0.85
+    vicecap_decay = 0.1
     decay_bench = [0.03, 0.21, 0.06, 0.002]
     ft_val = 1.5
 
@@ -411,10 +417,10 @@ if __name__ == "__main__":
     # Choose a value in range [0-horizon] as the number of gameweeks after the current one
     freehit_gw = -1
     wildcard_gw = -1
-    bboost_gw = -1
+    bboost_gw = 1
     threexc_gw = -1
 
-    # tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type, decay_gameweek, decay_bench)
+    tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type=objective_type, decay_gameweek=decay_gameweek, vicecap_decay=0.1, decay_bench=decay_bench)
 
     # Biased decisions for player choices 
     # Example usage: {(index, gw)}
