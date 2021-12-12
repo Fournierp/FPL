@@ -58,13 +58,15 @@ class Team_Planner:
         # Apply random noise
         self.data = randomize(seed, self.data, self.start)
 
-    def build_model(self, model_name, objective_type='decay', decay_gameweek=0.9, decay_bench=0.1, ft_val=0):
+    def build_model(self, model_name, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1], ft_val=0):
         # Model
         self.model = so.Model(name=f'{model_name}_model')
 
+        order = [0, 1, 2, 3]
         # Variables
         self.team = self.model.add_variables(self.players, self.all_gameweeks, name='team', vartype=so.binary)
         self.starter = self.model.add_variables(self.players, self.gameweeks, name='starter', vartype=so.binary)
+        self.bench = self.model.add_variables(self.players, self.gameweeks, order, name='bench', vartype=so.binary)
         self.captain = self.model.add_variables(self.players, self.gameweeks, name='captain', vartype=so.binary)
         self.vicecaptain = self.model.add_variables(self.players, self.gameweeks, name='vicecaptain', vartype=so.binary)
 
@@ -76,15 +78,16 @@ class Team_Planner:
         self.rolling_transfers = self.model.add_variables(self.gameweeks, name='rolling', vartype=so.binary)
 
         # Objective: maximize total expected points
-        # Assume a % (decay_bench) chance of a player not playing
+        # Assume a % (decay_bench) chance of a player being subbed on
         # Assume a % (decay_gameweek) reliability of next week's xPts
         xp = so.expr_sum(
             (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
             (
                     so.expr_sum(
                         (
-                            self.starter[p, w] + self.captain[p, w] + decay_bench * (
-                                self.vicecaptain[p, w] + self.team[p, w] - self.starter[p, w])
+                            self.starter[p, w] + self.captain[p, w] +
+                            (vicecap_decay * self.vicecaptain[p, w]) +
+                            so.expr_sum(decay_bench[o] * self.bench[p, w, o] for o in order)
                         ) *
                         self.data.loc[p, f'{w}_Pts'] for p in self.players
                     ) -
@@ -112,6 +115,12 @@ class Team_Planner:
         self.model.add_constraints((so.expr_sum(self.starter[p, w] for p in self.players) == 11 for w in self.gameweeks), name='11_starters')
         self.model.add_constraints((so.expr_sum(self.captain[p, w] for p in self.players) == 1 for w in self.gameweeks), name='1_captain')
         self.model.add_constraints((so.expr_sum(self.vicecaptain[p, w] for p in self.players) == 1 for w in self.gameweeks), name='1_vicecaptain')
+
+        # Bench constraints
+        self.model.add_constraints((so.expr_sum(self.bench[p, w, 0] for p in self.players if self.data.loc[p, 'G'] == 1) == 1 for w in self.gameweeks), name='one_bench_gk')
+        self.model.add_constraints((so.expr_sum(self.bench[p, w, o] for p in self.players) == 1 for w in self.gameweeks for o in [1, 2, 3]), name='one_per_bench_spot')
+        self.model.add_constraints((self.bench[p, w, o] <= self.team[p, w] for p in self.players for w in self.gameweeks for o in order), name='bench_in_team')
+        self.model.add_constraints((self.starter[p, w] + so.expr_sum(self.bench[p, w, o] for o in order) <= 1 for p in self.players for w in self.gameweeks), name='bench_not_a_starter')
 
         # A captain must not be picked more than once
         self.model.add_constraints((self.captain[p, w] + self.vicecaptain[p, w] <= 1 for p in self.players for w in self.gameweeks), name='cap_or_vice')
@@ -342,6 +351,7 @@ class Team_Planner:
         pretty_print(
             self.data, self.start, self.period,
             self.team, self.starter,
+            self.bench,
             self.captain, self.vicecaptain,
             self.buy, self.sell,
             self.free_transfers, self.hits)
@@ -390,11 +400,11 @@ if __name__ == "__main__":
     horizon = 3
     objective_type = 'decay'
     decay_gameweek = 0.85
-    decay_bench = 0.1
+    decay_bench = [0.03, 0.21, 0.06, 0.002]
     ft_val = 1.5
 
     tp = Team_Planner(team_id=35868, horizon=horizon, noise=False)
-    tp.build_model(model_name="vanilla", ft_val=1.5)
+    tp.build_model(model_name="vanilla", decay_bench=decay_bench, ft_val=ft_val)
     # tp.differential_model(model_name="differential")
 
     # Chip strategy: set to (-1) if you don't want to use
@@ -432,6 +442,6 @@ if __name__ == "__main__":
     # Gameweeks where 2FT are desired. In other words the (GW-1) where a FT is rolled.
     two_ft_gw = []
 
-    tp.biased_model(love, hate, hit_limit, two_ft_gw)
-    # tp.solve("vanilla", False)
-    tp.suboptimals("vanilla")
+    # tp.biased_model(love, hate, hit_limit, two_ft_gw)
+    tp.solve("vanilla", False)
+    # tp.suboptimals("vanilla")

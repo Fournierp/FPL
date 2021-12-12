@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import numpy as np
+import sasoptpy as so
 
 
 def get_team(team_id, gw):
@@ -102,24 +103,30 @@ def get_ownership_data():
     return df.set_index('id')
 
 
-def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, sell, free_transfers, hits, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=1):
-    df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'Start', 'Cap', 'Vice', 'Buy', 'Sell'])
+def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain, buy, sell, free_transfers, hits, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=1):
+    df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
 
     for w in np.arange(start, start+period):
         print(f"GW: {w} - FT: {int(free_transfers[w].get_value())}")
         for p in data.index.tolist():
             if team[p, w].get_value():
+                if not starter[p, w].get_value():
+                    bo = [-1] + [bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
+                else:
+                    bo = [0]
+
                 df = df.append({'GW': w, 'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
                                 'SV': data.loc[p]['SV'], 'xP': data.loc[p][str(w) + '_Pts'], 'Start': int(starter[p, w].get_value()),
+                                'Bench': int(np.argmax(bo)),
                                 'Cap': int(captain[p, w].get_value()), 'Vice': int(vicecaptain[p, w].get_value()),
-                                'Sell': int(sell[p, w].get_value()), 'Buy': int(buy[p, w].get_value()), 'Ownership': data.loc[p]["Top_100"]},
+                                'Ownership': data.loc[p]["Top_100"]},
                                ignore_index=True)
 
             if buy[p, w].get_value():
                 print(f"Buy: {data.loc[p, 'Name']}")
             if sell[p, w].get_value():
                 print(f"Sell: {data.loc[p, 'Name']}")
-        
+
         chip = ""
         av = ""
         if freehit == w-start:
@@ -128,7 +135,7 @@ def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, 
             chip = " - Chip: Wildcard"
         if bboost == w-start:
             chip = "- Chip: Bench Boost"
-            av = f" - Added value: {np.sum(df.loc[(df['Team'] == 1) & (df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
+            av = f" - Added value: {np.sum(df.loc[(df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
         if threexc == w-start:
             chip = " - Chip: Triple Captain"
             av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
@@ -138,4 +145,4 @@ def pretty_print(data, start, period, team, starter, captain, vicecaptain, buy, 
 
     custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
     df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start'], ascending=[True, False]).to_csv(f'optimization/tmp/{nb_suboptimal}.csv')
-    print(df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start'], ascending=[True, False]))
+    print(df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start', 'Bench'], ascending=[True, False, True]))
