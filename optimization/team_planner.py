@@ -268,6 +268,52 @@ class Team_Planner:
             # The unused chip must not contribute
             self.model.add_constraint(so.expr_sum(threexc[p, w] for p in self.players for w in self.gameweeks) == 0, name='tc_unused')
 
+    def chips_strategy_model(self, freehit_val=15, wildcard_val=20, bboost_val=12, threexc_val=11, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1]):
+        self.bboost = self.model.add_variables(self.gameweeks, name='bb', vartype=so.binary)
+
+        # Objective: maximize total expected points
+        # Assume a % (decay_bench) chance of a player not playing
+        # Assume a % (decay_gameweek) reliability of next week's xPts
+        xp = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
+            (
+                    so.expr_sum(
+                        (
+                            self.starter[p, w] + self.captain[p, w] +
+                            (vicecap_decay * self.vicecaptain[p, w]) +
+                            so.expr_sum(decay_bench[o] * self.bench[p, w, o] for o in [0, 1, 2, 3])
+                        ) *
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
+                    ) -
+                    4 * self.hits[w]
+            ) for w in self.gameweeks)
+
+        xp_bb = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
+            (
+                    so.expr_sum(
+                        so.expr_sum((1 - decay_bench[o]) * (self.bench[p, w, o] - 1 - self.bboost[w]) for o in [0, 1, 2, 3]) *
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
+                    )
+            ) for w in self.gameweeks)
+
+        bboost_handicap = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
+            self.bboost[w] for w in self.gameweeks
+            ) * bboost_val
+
+        self.model.set_objective(
+            - xp - xp_bb +
+            bboost_handicap,
+            name='total_xp_obj', sense='N')
+
+        if not self.bboost_used:
+            # The chip must only be used maximum once
+            self.model.add_constraint(so.expr_sum(self.bboost[w] for w in self.gameweeks) <= 1, name='bboost_once')
+        else:
+            # The unused chip must not contribute
+            self.model.add_constraint(so.expr_sum(self.bboost[w] for w in self.gameweeks) == 0, name='bboost_unused')
+
     def biased_model(self, love, hate, hit_limit, two_ft_gw):
         force_in = self.model.add_variables(self.players, self.gameweeks, name='fi', vartype=so.binary)
         force_out = self.model.add_variables(self.players, self.gameweeks, name='fo', vartype=so.binary)
@@ -359,7 +405,10 @@ class Team_Planner:
             self.bench,
             self.captain, self.vicecaptain,
             self.buy, self.sell,
-            self.free_transfers, self.hits)
+            self.free_transfers, self.hits,
+            freehit=-1, wildcard=-1,
+            bboost=self.bboost, threexc=-1,
+            nb_suboptimal=0)
 
     def suboptimals(self, model_name, iterations=3, cutoff_search='first_transfer'):
         for i in range(iterations):
@@ -411,16 +460,24 @@ if __name__ == "__main__":
 
     tp = Team_Planner(team_id=35868, horizon=horizon, noise=False)
     tp.build_model(model_name="vanilla", decay_bench=decay_bench, ft_val=ft_val)
-    # tp.differential_model(model_name="differential")
+    # tp.differential_model(nb_differentials=3, threshold=10, target='Top_100K')
 
     # Chip strategy: set to (-1) if you don't want to use
     # Choose a value in range [0-horizon] as the number of gameweeks after the current one
     freehit_gw = -1
     wildcard_gw = -1
-    bboost_gw = 1
+    bboost_gw = -1
     threexc_gw = -1
 
-    tp.select_chips_model(freehit_gw, wildcard_gw, bboost_gw, threexc_gw, objective_type=objective_type, decay_gameweek=decay_gameweek, vicecap_decay=0.1, decay_bench=decay_bench)
+    # tp.select_chips_model(
+    #     freehit_gw,
+    #     wildcard_gw,
+    #     bboost_gw,
+    #     threexc_gw,
+    #     objective_type,
+    #     decay_gameweek,
+    #     0.1,
+    #     decay_bench)
 
     # Biased decisions for player choices 
     # Example usage: {(index, gw)}
@@ -449,5 +506,22 @@ if __name__ == "__main__":
     two_ft_gw = []
 
     # tp.biased_model(love, hate, hit_limit, two_ft_gw)
+
+    # Minimum acceptable added value of using chips
+    freehit_val = 15
+    wildcard_val = 20
+    bboost_val = 12
+    threexc_val = 11
+
+    tp.chips_strategy_model(
+        freehit_val,
+        wildcard_val,
+        bboost_val,
+        threexc_val,
+        objective_type,
+        decay_gameweek,
+        vicecap_decay,
+        decay_bench)
+
     tp.solve("vanilla", False)
     # tp.suboptimals("vanilla")
