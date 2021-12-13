@@ -361,7 +361,7 @@ class Team_Planner:
             self.buy, self.sell,
             self.free_transfers, self.hits,
             freehit=-1, wildcard=-1,
-            bboost=self.bboost, threexc=-1,
+            bboost=-1, threexc=-1,
             nb_suboptimal=0)
 
     def suboptimals(self, model_name, iterations=3, cutoff_search='first_transfer'):
@@ -405,33 +405,35 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
 
-    horizon = 3
-    objective_type = 'decay'
-    decay_gameweek = 0.85
-    vicecap_decay = 0.1
-    decay_bench = [0.03, 0.21, 0.06, 0.002]
-    ft_val = 1.5
+    tp = Team_Planner(
+        team_id=35868,
+        horizon=5,
+        noise=False)
 
-    tp = Team_Planner(team_id=35868, horizon=horizon, noise=False)
-    tp.build_model(model_name="vanilla", decay_bench=decay_bench, ft_val=ft_val)
-    # tp.differential_model(nb_differentials=3, threshold=10, target='Top_100K')
+    tp.build_model(
+        model_name="vanilla",
+        objective_type='decay',
+        decay_gameweek=0.85,
+        vicecap_decay=0.1,
+        decay_bench=[0.03, 0.21, 0.06, 0.002],
+        ft_val=1.5)
+
+    # tp.differential_model(
+    #     nb_differentials=3,
+    #     threshold=10,
+    #     target='Top_100K')
 
     # Chip strategy: set to (-1) if you don't want to use
     # Choose a value in range [0-horizon] as the number of gameweeks after the current one
-    freehit_gw = -1
-    wildcard_gw = -1
-    bboost_gw = -1
-    threexc_gw = -1
-
     # tp.select_chips_model(
-    #     freehit_gw,
-    #     wildcard_gw,
-    #     bboost_gw,
-    #     threexc_gw,
-    #     objective_type,
-    #     decay_gameweek,
-    #     0.1,
-    #     decay_bench)
+    #     freehit_gw=-1,
+    #     wildcard_gw=-1,
+    #     bboost_gw=-1,
+    #     threexc_gw=-1,
+    #     objective_type='decay',
+    #     decay_gameweek=0.85,
+    #     vicecap_decay=0.1,
+    #     decay_bench=[0.03, 0.21, 0.06, 0.002])
 
     # Biased decisions for player choices 
     # Example usage: {(index, gw)}
@@ -459,7 +461,17 @@ if __name__ == "__main__":
     # Gameweeks where 2FT are desired. In other words the (GW-1) where a FT is rolled.
     two_ft_gw = []
 
-    # tp.biased_model(love, hate, hit_limit, two_ft_gw)
+    # tp.biased_model(
+    #     love=love,
+    #     hate=hate,
+    #     hit_limit=hit_limit,
+    #     two_ft_gw=two_ft_gw)
 
-    tp.solve("vanilla", False)
-    # tp.suboptimals("vanilla")
+    # tp.solve(
+    #     model_name="vanilla",
+    #     log=False)
+
+    tp.suboptimals(
+        model_name="vanilla",
+        iterations=3,
+        cutoff_search='first_transfer')
