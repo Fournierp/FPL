@@ -331,7 +331,7 @@ class Team_Planner:
             # Force rolling free transfer
             self.model.add_constraint(self.free_transfers[gw] == 2, name=f'force_roll_{gw}')
 
-    def solve(self, model_name, log=False):
+    def solve(self, model_name, log=False, i=0):
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
 
@@ -362,13 +362,13 @@ class Team_Planner:
             self.free_transfers, self.hits,
             freehit=-1, wildcard=-1,
             bboost=-1, threexc=-1,
-            nb_suboptimal=0)
+            nb_suboptimal=i)
 
     def suboptimals(self, model_name, iterations=3, cutoff_search='first_transfer'):
         for i in range(iterations):
 
             print(f"\n----- {i} -----")
-            self.solve(model_name + f'_{i}')
+            self.solve(model_name + f'_{i}', i=i)
 
             if i != iterations - 1:
                 # Select the players that have been transfered in/out
