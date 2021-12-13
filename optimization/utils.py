@@ -103,8 +103,8 @@ def get_ownership_data():
     return df.set_index('id')
 
 
-def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain, buy, sell, free_transfers, hits, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=0):
-    df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
+def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain, buy, sell, free_transfers, hits, in_the_bank, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=0):
+    df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'xMins', 'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
 
     for w in np.arange(start, start+period):
         print(f"GW: {w} - FT: {int(free_transfers[w].get_value())}")
@@ -115,12 +115,21 @@ def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain
                 else:
                     bo = [0]
 
-                df = df.append({'GW': w, 'Name': data.loc[p]['Name'], 'Pos': data.loc[p]['Pos'], 'Team': data.loc[p]['Team'],
-                                'SV': data.loc[p]['SV'], 'xP': data.loc[p][str(w) + '_Pts'], 'Start': int(starter[p, w].get_value()),
-                                'Bench': int(np.argmax(bo)),
-                                'Cap': int(captain[p, w].get_value()), 'Vice': int(vicecaptain[p, w].get_value()),
-                                'Ownership': data.loc[p]["Top_100"]},
-                               ignore_index=True)
+                df = df.append(
+                    {
+                        'GW': w,
+                        'Name': data.loc[p]['Name'],
+                        'Pos': data.loc[p]['Pos'],
+                        'Team': data.loc[p]['Team'],
+                        'SV': data.loc[p]['SV'],
+                        'xP': data.loc[p][str(w) + '_Pts'],
+                        'xMins' : data.loc[p][str(w) + '_xMins'],
+                        'Start': int(starter[p, w].get_value()),
+                        'Bench': int(np.argmax(bo)),
+                        'Cap': int(captain[p, w].get_value()),
+                        'Vice': int(vicecaptain[p, w].get_value()),
+                        'Ownership': data.loc[p]["Top_100"]},
+                    ignore_index=True)
 
             if buy[p, w].get_value():
                 print(f"Buy: {data.loc[p, 'Name']}")
@@ -140,7 +149,7 @@ def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain
             chip = " - Chip: Triple Captain"
             av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
 
-        print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) - hits[w].get_value()*4*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1):.2f} - Hits: {int(hits[w].get_value())*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1)}" + chip + av)
+        print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) - hits[w].get_value()*4*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1):.2f} - Hits: {int(hits[w].get_value())*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1)}" + chip + av + f" - ITB: {in_the_bank[w].get_value()/10:.1f}")
         print(" ____ ")
 
     custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}

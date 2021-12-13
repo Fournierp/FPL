@@ -58,7 +58,7 @@ class Team_Planner:
         # Apply random noise
         self.data = randomize(seed, self.data, self.start)
 
-    def build_model(self, model_name, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1], ft_val=0):
+    def build_model(self, model_name, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1], ft_val=0, itb_val=0):
         # Model
         self.model = so.Model(name=f'{model_name}_model')
 
@@ -76,6 +76,7 @@ class Team_Planner:
         self.free_transfers = self.model.add_variables(self.all_gameweeks, name='ft', vartype=so.integer, lb=1, ub=2)
         self.hits = self.model.add_variables(self.gameweeks, name='hits', vartype=so.integer, lb=0, ub=15)
         self.rolling_transfers = self.model.add_variables(self.gameweeks, name='rolling', vartype=so.binary)
+        self.in_the_bank = self.model.add_variables(self.all_gameweeks, name='itb', vartype=so.continuous, lb=0)
 
         # Objective: maximize total expected points
         # Assume a % (decay_bench) chance of a player being subbed on
@@ -100,15 +101,24 @@ class Team_Planner:
                 ft_val * self.rolling_transfers[w] # Value of having 2FT
             ) for w in self.gameweeks[1:]) # Value is added to the GW when a FT is rolled so exclude the first Gw 
 
-        self.model.set_objective(- xp - ftv, name='total_xp_obj', sense='N')
+        itbv = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
+            (
+                itb_val * self.in_the_bank[w] # Value of having 2FT
+            ) for w in self.gameweeks) # Value is added to the GW when a FT is rolled so exclude the first Gw 
+
+        self.model.set_objective(- xp - ftv - itbv, name='total_xp_obj', sense='N')
 
         # Initial conditions: set team and FT depending on the team
         self.model.add_constraints((self.team[p, self.start - 1] == 1 for p in self.initial_team), name='initial_team')
         self.model.add_constraint(self.free_transfers[self.start - 1] == self.rolling_transfer + 1, name='initial_ft')
+        self.model.add_constraint(self.in_the_bank[self.start - 1] == self.bank, name='initial_itb')
 
         # Constraints
         # The cost of the squad must exceed the budget
-        self.model.add_constraints((so.expr_sum(self.team[p, w] * self.data.loc[p, 'SV'] for p in self.players) <= self.budget for w in self.all_gameweeks), name='budget')
+        sold_amount = {w: so.expr_sum(self.sell[p, w] * self.data.loc[p, 'SV'] for p in self.players) for w in self.gameweeks}
+        bought_amount = {w: so.expr_sum(self.buy[p, w] * self.data.loc[p, 'BV'] for p in self.players) for w in self.gameweeks}
+        self.model.add_constraints((self.in_the_bank[w] == self.in_the_bank[w - 1] + sold_amount[w] - bought_amount[w] for w in self.gameweeks), name='budget')
 
         # The number of players must be 11 on field, 4 on bench, 1 captain & 1 vicecaptain
         self.model.add_constraints((so.expr_sum(self.team[p, w] for p in self.players) == 15 for w in self.all_gameweeks), name='15_players')
@@ -360,6 +370,7 @@ class Team_Planner:
             self.captain, self.vicecaptain,
             self.buy, self.sell,
             self.free_transfers, self.hits,
+            self.in_the_bank,
             freehit=-1, wildcard=-1,
             bboost=-1, threexc=-1,
             nb_suboptimal=i)
@@ -407,7 +418,7 @@ if __name__ == "__main__":
 
     tp = Team_Planner(
         team_id=35868,
-        horizon=5,
+        horizon=3,
         noise=False)
 
     tp.build_model(
@@ -416,7 +427,8 @@ if __name__ == "__main__":
         decay_gameweek=0.85,
         vicecap_decay=0.1,
         decay_bench=[0.03, 0.21, 0.06, 0.002],
-        ft_val=1.5)
+        ft_val=1.5,
+        itb_val=0.05)
 
     # tp.differential_model(
     #     nb_differentials=3,
@@ -467,11 +479,11 @@ if __name__ == "__main__":
     #     hit_limit=hit_limit,
     #     two_ft_gw=two_ft_gw)
 
-    # tp.solve(
-    #     model_name="vanilla",
-    #     log=False)
-
-    tp.suboptimals(
+    tp.solve(
         model_name="vanilla",
-        iterations=3,
-        cutoff_search='first_transfer')
+        log=True)
+
+    # tp.suboptimals(
+    #     model_name="vanilla",
+    #     iterations=3,
+    #     cutoff_search='first_transfer')
