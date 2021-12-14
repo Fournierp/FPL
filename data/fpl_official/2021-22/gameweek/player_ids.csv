@@ -293,6 +293,9 @@ id,first_name,second_name,team
 573,Eldin,Jakupovic,9
 587,Ademola,Lookman,9
 639,Vontae,Daley-Campbell,9
+645,Ben,Nelson,9
+646,Lewis,Brunt,9
+647,Kasey,McAteer,9
 182,Pablo,Hernández Domínguez,10
 183,Francisco,Casilla Cortés,10
 184,Liam,Cooper,10
@@ -479,6 +482,7 @@ id,first_name,second_name,team
 528,Christos,Tzolis,15
 580,Ozan,Kabak,15
 581,Mathias,Normann,15
+643,Jonathan,Tomkinson,15
 332,Theo,Walcott,16
 333,Fraser,Forster,16
 334,Alex,McCarthy,16
@@ -578,6 +582,7 @@ id,first_name,second_name,team
 574,Robert,Elliot,18
 618,Nicolas,Nkoulou,18
 633,James,Morris,18
+642,Vincent,Angelini,18
 128,Kurt,Zouma,19
 406,Mark,Noble,19
 407,Darren,Randolph,19
@@ -607,6 +612,7 @@ id,first_name,second_name,team
 589,Alex,Kral,19
 617,Harrison,Ashby,19
 634,Sonny,Perkins,19
+644,Ajibola,Alese,19
 426,João Filipe Iria,Santos Moutinho,20
 427,Rui Pedro,dos Santos Patrício,20
 428,Willy,Boly,20
