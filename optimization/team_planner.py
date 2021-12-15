@@ -14,8 +14,7 @@ from utils import (
     get_chips,
     get_next_gw,
     get_ownership_data,
-    randomize,
-    pretty_print2)
+    randomize)
 
 
 class Team_Planner:
@@ -805,6 +804,65 @@ class Team_Planner:
             wildcard=0,
             nb_suboptimal=model_name)
 
+    def chips_model(self, threexc_val=11, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1], ft_val=0, itb_val=0):
+        self.threexc = self.model.add_variables(self.players, self.gameweeks, name='3xc', vartype=so.binary)
+
+        order = [0, 1, 2, 3]
+
+        # Objective: maximize total expected points
+        # Assume a % (decay_bench) chance of a player being subbed on
+        # Assume a % (decay_gameweek) reliability of next week's xPts
+        xp = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
+            (
+                    so.expr_sum(
+                        (
+                            self.starter[p, w] + self.captain[p, w] +
+                            (vicecap_decay * self.vicecaptain[p, w]) +
+                            so.expr_sum(decay_bench[o] * self.bench[p, w, o] for o in order)
+                        ) *
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
+                    ) -
+                    4 * self.hits[w]
+            ) for w in self.gameweeks)
+
+        ftv = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
+            (
+                ft_val * self.rolling_transfers[w] # Value of having 2FT
+            ) for w in self.gameweeks[1:]) # Value is added to the GW when a FT is rolled so exclude the first Gw 
+
+        itbv = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
+            (
+                itb_val * self.in_the_bank[w] # Value of having 2FT
+            ) for w in self.gameweeks) # Value is added to the GW when a FT is rolled so exclude the first Gw 
+
+        xp_txc = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
+            so.expr_sum(
+                self.threexc[p, w] *
+                self.data.loc[p, f'{w}_Pts'] for p in self.players
+            ) for w in self.gameweeks)
+
+        threexc_handicap = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
+            so.expr_sum(
+                self.threexc[p, w] *
+                threexc_val for p in self.players
+            ) for w in self.gameweeks)
+
+        self.model.set_objective(- xp - ftv - itbv - xp_txc + threexc_handicap, name='total_xp_obj', sense='N')
+
+        if not self.threexc_used:
+            # The chips must only be used maximum once
+            self.model.add_constraint(so.expr_sum(self.threexc[p, w] for p in self.players for w in self.gameweeks) <= 1, name='tc_once')
+            # The TC player must be the captain
+            self.model.add_constraints((self.threexc[p, w] <= self.captain[p, w] for p in self.players for w in self.gameweeks), name='3xc_is_cap')
+        else:
+            # The unused chip must not contribute
+            self.model.add_constraint(so.expr_sum(self.threexc[p, w] for p in self.players for w in self.gameweeks) == 0, name='tc_unused')
+
     def solve(self, model_name, log=False, i=0):
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = f'cbc optimization/tmp/{model_name}.mps solve solu optimization/tmp/{model_name}_solution.txt'
@@ -836,7 +894,7 @@ class Team_Planner:
             self.free_transfers, self.hits,
             self.in_the_bank,
             freehit=-1, wildcard=-1,
-            bboost=-1, threexc=-1,
+            bboost=-1, threexc=self.threexc,
             nb_suboptimal=i)
 
     def suboptimals(self, model_name, iterations=3, cutoff_search='first_transfer'):
@@ -885,14 +943,14 @@ if __name__ == "__main__":
         horizon=3,
         noise=False)
 
-    # tp.build_model(
-    #     model_name="vanilla",
-    #     objective_type='decay',
-    #     decay_gameweek=0.85,
-    #     vicecap_decay=0.1,
-    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
-    #     ft_val=1.5,
-    #     itb_val=0.05)
+    tp.build_model(
+        model_name="vanilla",
+        objective_type='decay',
+        decay_gameweek=0.9,
+        vicecap_decay=0.1,
+        decay_bench=[0.03, 0.21, 0.06, 0.002],
+        ft_val=1.5,
+        itb_val=0.008)
 
     # tp.differential_model(
     #     nb_differentials=3,
@@ -943,20 +1001,29 @@ if __name__ == "__main__":
     #     hit_limit=hit_limit,
     #     two_ft_gw=two_ft_gw)
 
-    tp.advanced_wildcard(
-        objective_type='decay',
-        decay_gameweek=[0.9, 0.75, 0.6],
-        vicecap_decay=0.1,
-        decay_bench=[0.03, 0.21, 0.06, 0.002],
-        ft_val=1.5,
-        itb_val=0.05
-    )
+    # tp.advanced_wildcard(
+    #     objective_type='decay',
+    #     decay_gameweek=[0.9, 0.75, 0.6],
+    #     vicecap_decay=0.1,
+    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
+    #     ft_val=1.5,
+    #     itb_val=0.008
+    # )
 
-    # tp.solve(
-    #     model_name="vanilla",
-    #     log=True)
+    tp.chips_model(
+        threexc_val=11,
+        objective_type='decay',
+        decay_gameweek=0.9,
+        vicecap_decay=0.1,
+        decay_bench=[0.1, 0.1, 0.1, 0.1],
+        ft_val=0,
+        itb_val=0)
+
+    tp.solve(
+        model_name="vanilla",
+        log=True)
 
     # tp.suboptimals(
     #     model_name="vanilla",
-    #     iterations=3,
+    #     iterations=5,
     #     cutoff_search='first_transfer')

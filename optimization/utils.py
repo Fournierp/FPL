@@ -145,7 +145,7 @@ def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain
         if bboost == w-start:
             chip = " - Chip: Bench Boost"
             av = f" - Added value: {np.sum(df.loc[(df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
-        if threexc == w-start:
+        if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
             chip = " - Chip: Triple Captain"
             av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
 
