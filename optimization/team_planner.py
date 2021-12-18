@@ -5,6 +5,7 @@ import os
 from subprocess import Popen, DEVNULL
 import sasoptpy as so
 import logging
+import json
 
 from utils import (
     get_team,
@@ -885,22 +886,24 @@ class Team_Planner:
                 var = self.model.get_variable(words[1])
                 var.set_value(float(words[2]))
 
-        pretty_print(
-            self.data, self.start, self.period,
-            self.team, self.starter,
-            self.bench,
-            self.captain, self.vicecaptain,
-            self.buy, self.sell,
-            self.free_transfers, self.hits,
-            self.in_the_bank,
-            freehit=-1, wildcard=-1,
-            bboost=-1, threexc=self.threexc,
-            nb_suboptimal=i)
+        # pretty_print(
+        #     self.data, self.start, self.period,
+        #     self.team, self.starter,
+        #     self.bench,
+        #     self.captain, self.vicecaptain,
+        #     self.buy, self.sell,
+        #     self.free_transfers, self.hits,
+        #     self.in_the_bank,
+        #     freehit=-1, wildcard=-1,
+        #     bboost=-1, threexc=-1,
+        #     nb_suboptimal=i)
 
     def suboptimals(self, model_name, iterations=3, cutoff_search='first_transfer'):
+        sa = {}
+
         for i in range(iterations):
 
-            print(f"\n----- {i} -----")
+            print(f"\n----- Solution {i} -----")
             self.solve(model_name + f'_{i}', i=i)
 
             if i != iterations - 1:
@@ -933,6 +936,47 @@ class Team_Planner:
                     # Force one transfer in case of sub-optimal solution choosing to roll transfer
                     self.model.add_constraint(so.expr_sum(self.number_of_transfers[w] for w in gw_range) >= 1, name=f'cutoff_{i}')
 
+            sa[i] = [
+                [p for p in self.players if self.buy[p, self.start].get_value() > 0.5],
+                [p for p in self.players if self.sell[p, self.start].get_value() > 0.5]
+            ]
+
+        return sa
+
+    def sensitivity_analysis(self, repeats=3, iterations=3):
+        podium = pd.DataFrame(columns=np.arange(iterations)[1:])
+        hashes = {}
+        raw_data = self.data
+
+        # Reproduce the optimization from scratch
+        for r in range(repeats):
+            print(f"\n----- Trial {r+1} -----")
+
+            # Apply random noise to the original prediction (i.e not stacking noise)
+            self.data = raw_data
+            self.random_noise(None)
+            # Find optimal solutions
+            sa = self.suboptimals("sensitivity_analysis", iterations=iterations)
+
+            # Store data
+            for i, (k, v) in enumerate(sa.items()):
+                transfer = hash(tuple((tuple(v[0]), tuple(v[1]))))
+                hashes[transfer] = v
+
+                if transfer in podium.index:
+                    podium.loc[transfer, i+1] += 1
+
+                else:
+                    for pos in range(1, iterations):
+                        podium.loc[transfer, pos+1] = 0
+
+                    podium.loc[transfer, i+1] = 1
+
+            self.build_model("sensitivity_analysis")
+
+        podium.to_csv("optimization/tmp/podium.csv")
+        with open("optimization/tmp/hashes.json", "w") as outfile:
+            json.dump(hashes, outfile)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -1010,20 +1054,22 @@ if __name__ == "__main__":
     #     itb_val=0.008
     # )
 
-    tp.chips_model(
-        threexc_val=11,
-        objective_type='decay',
-        decay_gameweek=0.9,
-        vicecap_decay=0.1,
-        decay_bench=[0.1, 0.1, 0.1, 0.1],
-        ft_val=0,
-        itb_val=0)
+    # tp.chips_model(
+    #     threexc_val=11,
+    #     objective_type='decay',
+    #     decay_gameweek=0.9,
+    #     vicecap_decay=0.1,
+    #     decay_bench=[0.1, 0.1, 0.1, 0.1],
+    #     ft_val=0,
+    #     itb_val=0)
 
-    tp.solve(
-        model_name="vanilla",
-        log=True)
+    # tp.solve(
+    #     model_name="vanilla",
+    #     log=True)
 
     # tp.suboptimals(
     #     model_name="vanilla",
     #     iterations=5,
     #     cutoff_search='first_transfer')
+
+    tp.sensitivity_analysis(repeats=1, iterations=3)
