@@ -472,7 +472,7 @@ class Team_Planner:
             self.captain, self.vicecaptain,
             self.buy, self.sell,
             self.free_transfers, self.hits,
-            self.in_the_bank,
+            self.in_the_bank, self.model.get_objective_value(),
             wildcard=0,
             nb_suboptimal=model_name)
 
@@ -637,7 +637,7 @@ class Team_Planner:
             self.captain, self.vicecaptain,
             self.buy, self.sell,
             self.free_transfers, self.hits,
-            self.in_the_bank,
+            self.in_the_bank, self.model.get_objective_value(),
             wildcard=0,
             nb_suboptimal=model_name)
 
@@ -801,7 +801,7 @@ class Team_Planner:
             self.captain, self.vicecaptain,
             self.buy, self.sell,
             self.free_transfers, self.hits,
-            self.in_the_bank,
+            self.in_the_bank, self.model.get_objective_value(),
             wildcard=0,
             nb_suboptimal=model_name)
 
@@ -886,24 +886,24 @@ class Team_Planner:
                 var = self.model.get_variable(words[1])
                 var.set_value(float(words[2]))
 
-        # pretty_print(
-        #     self.data, self.start, self.period,
-        #     self.team, self.starter,
-        #     self.bench,
-        #     self.captain, self.vicecaptain,
-        #     self.buy, self.sell,
-        #     self.free_transfers, self.hits,
-        #     self.in_the_bank,
-        #     freehit=-1, wildcard=-1,
-        #     bboost=-1, threexc=-1,
-        #     nb_suboptimal=i)
+        pretty_print(
+            self.data, self.start, self.period,
+            self.team, self.starter,
+            self.bench,
+            self.captain, self.vicecaptain,
+            self.buy, self.sell,
+            self.free_transfers, self.hits,
+            self.in_the_bank, self.model.get_objective_value(),
+            freehit=-1, wildcard=-1,
+            bboost=-1, threexc=-1,
+            nb_suboptimal=i)
 
     def suboptimals(self, model_name, iterations=3, cutoff_search='first_transfer'):
         sa = {}
 
         for i in range(iterations):
 
-            print(f"\n----- Solution {i} -----")
+            print(f"\n----- Solution {i+1} -----")
             self.solve(model_name + f'_{i}', i=i)
 
             if i != iterations - 1:
@@ -938,13 +938,14 @@ class Team_Planner:
 
             sa[i] = [
                 [p for p in self.players if self.buy[p, self.start].get_value() > 0.5],
-                [p for p in self.players if self.sell[p, self.start].get_value() > 0.5]
+                [p for p in self.players if self.sell[p, self.start].get_value() > 0.5],
+                self.model.get_objective_value()
             ]
 
         return sa
 
     def sensitivity_analysis(self, repeats=3, iterations=3):
-        podium = pd.DataFrame(columns=np.arange(iterations)[1:])
+        podium = pd.DataFrame(columns=list(np.arange(3)[1:]) + ["EV"])
         hashes = {}
         raw_data = self.data
 
@@ -965,11 +966,13 @@ class Team_Planner:
 
                 if transfer in podium.index:
                     podium.loc[transfer, i+1] += 1
+                    podium.loc[transfer, "EV"] = podium.loc[transfer, "EV"] + [v[2]]
 
                 else:
                     for pos in range(1, iterations):
                         podium.loc[transfer, pos+1] = 0
 
+                    podium.loc[transfer, "EV"] = [v[2]]
                     podium.loc[transfer, i+1] = 1
 
             self.build_model("sensitivity_analysis")
@@ -1072,4 +1075,6 @@ if __name__ == "__main__":
     #     iterations=5,
     #     cutoff_search='first_transfer')
 
-    tp.sensitivity_analysis(repeats=1, iterations=3)
+    tp.sensitivity_analysis(
+        repeats=2,
+        iterations=2)
