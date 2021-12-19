@@ -103,7 +103,7 @@ def get_ownership_data():
     return df.set_index('id')
 
 
-def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain, buy, sell, free_transfers, hits, in_the_bank, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=0):
+def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain, buy, sell, free_transfers, hits, in_the_bank, objective_value, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=0):
     df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'xMins', 'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
 
     for w in np.arange(start, start+period):
@@ -145,13 +145,14 @@ def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain
         if bboost == w-start:
             chip = " - Chip: Bench Boost"
             av = f" - Added value: {np.sum(df.loc[(df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
-        if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
-            chip = " - Chip: Triple Captain"
-            av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
+        # if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
+        #     chip = " - Chip: Triple Captain"
+        #     av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
 
         print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) - hits[w].get_value()*4*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1):.2f} - Hits: {int(hits[w].get_value())*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1)}" + chip + av + f" - ITB: {in_the_bank[w].get_value()/10:.1f}")
         print(" ____ ")
 
     custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
     df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start'], ascending=[True, False]).to_csv(f'optimization/tmp/{nb_suboptimal}.csv')
+    print(f"Objective Val: {-objective_value:.2f}")
     print(df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start', 'Bench'], ascending=[True, False, True]))
