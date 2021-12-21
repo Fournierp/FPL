@@ -334,6 +334,8 @@ id,first_name,second_name,team
 608,Leo Fuhr,Hjelde,10
 624,Lewis,Bate,10
 631,Jack,Jenkins,10
+657,Kris,Moore,10
+658,Archie,Gray,10
 221,James,Milner,11
 222,Jordan,Henderson,11
 223,Adrián,San Miguel del Castillo,11
@@ -369,6 +371,7 @@ id,first_name,second_name,team
 626,Conor,Bradley,11
 627,Owen,Beck,11
 656,Marcelo,de Araújo Pitaluga Filho,11
+660,Jarell,Quansah,11
 33,Jack,Grealish,12
 249,Kyle,Walker,12
 250,Ilkay,Gündogan,12
@@ -549,6 +552,7 @@ id,first_name,second_name,team
 588,Emerson Aparecido,Leite de Souza Junior,17
 597,Dilan,Markanday,17
 598,Tobi,Omole,17
+659,Brandon,Austin,17
 354,Moussa,Sissoko,18
 376,Ben,Foster,18
 377,Danny,Rose,18
@@ -655,3 +659,4 @@ id,first_name,second_name,team
 611,Louie,Moulden,20
 621,James,Storer,20
 635,Hugo,Bueno,20
+661,Bruno André,Cavaco Jordão,20
