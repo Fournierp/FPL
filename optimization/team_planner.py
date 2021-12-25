@@ -180,7 +180,7 @@ class Team_Planner:
             name='rolling_condition_2')
 
         # The number of hits must be the number of transfer except the free ones.
-        self.model.add_constraints((self.hits[w] >= self.number_of_transfers[w] - self.free_transfers[w] for w in self.gameweeks), name='hits')
+        self.model.add_constraints((self.hits[w] == self.number_of_transfers[w] - self.free_transfers[w] for w in self.gameweeks), name='hits')
 
     def differential_model(self, nb_differentials=3, threshold=10, target='Top_100K'):
         self.data['Differential'] = np.where(self.data[target] < threshold, 1, 0)
@@ -1066,15 +1066,15 @@ if __name__ == "__main__":
     #     ft_val=0,
     #     itb_val=0)
 
-    # tp.solve(
-    #     model_name="vanilla",
-    #     log=True)
+    tp.solve(
+        model_name="vanilla",
+        log=True)
 
     # tp.suboptimals(
     #     model_name="vanilla",
     #     iterations=5,
     #     cutoff_search='first_transfer')
 
-    tp.sensitivity_analysis(
-        repeats=2,
-        iterations=2)
+    # tp.sensitivity_analysis(
+    #     repeats=2,
+    #     iterations=2)
