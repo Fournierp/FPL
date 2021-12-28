@@ -63,9 +63,10 @@ class FPL_Gameweek:
         Returns:
             (int): Next gameweek
         """
-        for idx, gw in enumerate(events):
-            if gw['is_current']:
-                return idx + 1
+        # for idx, gw in enumerate(events):
+        #     if gw['is_current']:
+        #         return idx + 1
+        return 19
 
     def sample_ranks(self):
         """Sample every rank to get metadata"""
