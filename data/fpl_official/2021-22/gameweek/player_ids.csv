@@ -35,6 +35,7 @@ id,first_name,second_name,team
 559,Aaron,Ramsdale,1
 572,Arthur,Okonkwo,1
 590,Takehiro,Tomiyasu,1
+664,Charlie,Patino,1
 28,Jed,Steer,2
 29,Conor,Hourihane,2
 30,Emiliano,Martínez,2
@@ -104,6 +105,7 @@ id,first_name,second_name,team
 619,Matthew,Cox,3
 628,Maxwell,Haygarth,3
 640,Nathan,Young-Coombes,3
+662,Myles,Peart-Harris,3
 53,Adam,Lallana,4
 54,Jason,Steele,4
 55,Pascal,Groß,4
@@ -403,6 +405,7 @@ id,first_name,second_name,team
 615,Cieran,Slicker,12
 629,James,McAtee,12
 651,Conrad,Egan-Riley,12
+663,Kayky da Silva,Chagas,12
 269,Edinson,Cavani,13
 270,David,de Gea,13
 271,Nemanja,Matic,13
@@ -522,6 +525,7 @@ id,first_name,second_name,team
 567,Lyanco Evangelista,Silveira Neves Vojnovic,16
 637,Harry,Lewis,16
 641,Willy,Caballero,16
+665,Dynel,Simeu,16
 352,Joe,Hart,17
 353,Hugo,Lloris,17
 355,Toby,Alderweireld,17
