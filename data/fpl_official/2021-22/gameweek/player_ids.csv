@@ -497,6 +497,7 @@ id,first_name,second_name,team
 643,Jonathan,Tomkinson,15
 648,Jonathan,Rowe,15
 649,Thomas,Dickson-Peters,15
+666,Jon,McCracken,15
 332,Theo,Walcott,16
 333,Fraser,Forster,16
 334,Alex,McCarthy,16
@@ -526,6 +527,7 @@ id,first_name,second_name,team
 637,Harry,Lewis,16
 641,Willy,Caballero,16
 665,Dynel,Simeu,16
+667,Thierry,Small,16
 352,Joe,Hart,17
 353,Hugo,Lloris,17
 355,Toby,Alderweireld,17
@@ -557,6 +559,7 @@ id,first_name,second_name,team
 597,Dilan,Markanday,17
 598,Tobi,Omole,17
 659,Brandon,Austin,17
+668,Harvey,White,17
 354,Moussa,Sissoko,18
 376,Ben,Foster,18
 377,Danny,Rose,18
@@ -599,6 +602,7 @@ id,first_name,second_name,team
 618,Nicolas,Nkoulou,18
 633,James,Morris,18
 642,Vincent,Angelini,18
+669,Kamil,Conteh,18
 128,Kurt,Zouma,19
 406,Mark,Noble,19
 407,Darren,Randolph,19
