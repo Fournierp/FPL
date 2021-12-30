@@ -84,6 +84,10 @@ def get_chips(team_id, last_gw):
         if chip == 'freehit':
             freehit = gw
 
+    # Handle the WC reset at GW 20
+    if wildcard <= 20 and last_gw >= 20:
+        wildcard = 0
+
     return freehit, wildcard, bboost, threexc
 
 
@@ -138,16 +142,16 @@ def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain
 
         chip = ""
         av = ""
-        if freehit == w-start:
+        if freehit[w].get_value():
             chip = " - Chip: Freehit"
-        if wildcard == w-start:
+        if wildcard[w].get_value():
             chip = " - Chip: Wildcard"
-        if bboost == w-start:
+        if bboost[w].get_value():
             chip = " - Chip: Bench Boost"
             av = f" - Added value: {np.sum(df.loc[(df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
-        # if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
-        #     chip = " - Chip: Triple Captain"
-        #     av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
+        if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
+            chip = " - Chip: Triple Captain"
+            av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
 
         print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) - hits[w].get_value()*4*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1):.2f} - Hits: {int(hits[w].get_value())*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1)}" + chip + av + f" - ITB: {in_the_bank[w].get_value()/10:.1f}")
         print(" ____ ")
