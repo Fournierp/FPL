@@ -805,68 +805,9 @@ class Team_Planner:
             wildcard=0,
             nb_suboptimal=model_name)
 
-    def chips_model(self, threexc_val=11, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1], ft_val=0, itb_val=0):
-        self.threexc = self.model.add_variables(self.players, self.gameweeks, name='3xc', vartype=so.binary)
-
-        order = [0, 1, 2, 3]
-
-        # Objective: maximize total expected points
-        # Assume a % (decay_bench) chance of a player being subbed on
-        # Assume a % (decay_gameweek) reliability of next week's xPts
-        xp = so.expr_sum(
-            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
-            (
-                    so.expr_sum(
-                        (
-                            self.starter[p, w] + self.captain[p, w] +
-                            (vicecap_decay * self.vicecaptain[p, w]) +
-                            so.expr_sum(decay_bench[o] * self.bench[p, w, o] for o in order)
-                        ) *
-                        self.data.loc[p, f'{w}_Pts'] for p in self.players
-                    ) -
-                    4 * self.hits[w]
-            ) for w in self.gameweeks)
-
-        ftv = so.expr_sum(
-            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
-            (
-                ft_val * self.rolling_transfers[w] # Value of having 2FT
-            ) for w in self.gameweeks[1:]) # Value is added to the GW when a FT is rolled so exclude the first Gw 
-
-        itbv = so.expr_sum(
-            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
-            (
-                itb_val * self.in_the_bank[w] # Value of having 2FT
-            ) for w in self.gameweeks) # Value is added to the GW when a FT is rolled so exclude the first Gw 
-
-        xp_txc = so.expr_sum(
-            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
-            so.expr_sum(
-                self.threexc[p, w] *
-                self.data.loc[p, f'{w}_Pts'] for p in self.players
-            ) for w in self.gameweeks)
-
-        threexc_handicap = so.expr_sum(
-            (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
-            so.expr_sum(
-                self.threexc[p, w] *
-                threexc_val for p in self.players
-            ) for w in self.gameweeks)
-
-        self.model.set_objective(- xp - ftv - itbv - xp_txc + threexc_handicap, name='total_xp_obj', sense='N')
-
-        if not self.threexc_used:
-            # The chips must only be used maximum once
-            self.model.add_constraint(so.expr_sum(self.threexc[p, w] for p in self.players for w in self.gameweeks) <= 1, name='tc_once')
-            # The TC player must be the captain
-            self.model.add_constraints((self.threexc[p, w] <= self.captain[p, w] for p in self.players for w in self.gameweeks), name='3xc_is_cap')
-        else:
-            # The unused chip must not contribute
-            self.model.add_constraint(so.expr_sum(self.threexc[p, w] for p in self.players for w in self.gameweeks) == 0, name='tc_unused')
-
-    def ntnu(self, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1], ft_val=0, itb_val=0, triple_val=12, bboost_val=14, freehit_val=18, wildcard_val=18):
+    def automated_chips_model(self, objective_type='decay', decay_gameweek=0.9, vicecap_decay=0.1, decay_bench=[0.1, 0.1, 0.1, 0.1], ft_val=0, itb_val=0, triple_val=12, bboost_val=14, freehit_val=18, wildcard_val=18):
         # Model
-        self.model = so.Model(name='NTNU_model')
+        self.model = so.Model(name='auto_chips_model')
 
         order = [0, 1, 2, 3]
         # Variables
@@ -921,6 +862,18 @@ class Team_Planner:
             (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
             (4 * self.hits[w]) for w in self.gameweeks)
 
+        ftv = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
+            (
+                ft_val * (self.free_transfers[w] - 1) # Value of having 2FT
+            ) for w in self.gameweeks[1:]) # Value is added to the GW when a FT is rolled so exclude the first Gw 
+
+        itbv = so.expr_sum(
+            (np.power(decay_gameweek, w - self.start - 1) if objective_type == 'linear' else 1) *
+            (
+                itb_val * self.in_the_bank[w] # Value of having 2FT
+            ) for w in self.gameweeks) # Value is added to the GW when a FT is rolled so exclude the first Gw 
+
         triple_penalty = so.expr_sum(
             (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
             (triple_val * so.expr_sum(self.triple[p, w] for p in self.players)) for w in self.gameweeks)
@@ -937,7 +890,7 @@ class Team_Planner:
             (np.power(decay_gameweek, w - self.start) if objective_type == 'linear' else 1) *
             (wildcard_val * self.wildcard[w]) for w in self.gameweeks)
 
-        self.model.set_objective(- starter - cap - vice - bench - txc + hits + triple_penalty + bboost_penalty + freehit_penalty + wildcard_penalty, name='total_xp_obj', sense='N')
+        self.model.set_objective(- starter - cap - vice - bench - txc - ftv - itbv + hits + triple_penalty + bboost_penalty + freehit_penalty + wildcard_penalty, name='total_xp_obj', sense='N')
 
         # Initial conditions: set team and FT depending on the team
         self.model.add_constraints((self.team[p, self.start - 1] == 1 for p in self.initial_team), name='initial_team')
@@ -1244,7 +1197,7 @@ if __name__ == "__main__":
     #     ft_val=0,
     #     itb_val=0)
 
-    tp.ntnu(
+    tp.automated_chips_model(
         objective_type='decay',
         decay_gameweek=0.9,
         vicecap_decay=0.1,
@@ -1253,7 +1206,7 @@ if __name__ == "__main__":
         itb_val=0.008)
 
     tp.solve(
-        model_name="vanilla2",
+        model_name="vanilla",
         log=True)
 
     # tp.suboptimals(
