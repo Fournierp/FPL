@@ -5,6 +5,15 @@ import sasoptpy as so
 
 
 def get_team(team_id, gw):
+    """ Get the players in a team
+
+    Args:
+        team_id (int): Team id to get the data from
+        gw (int): GW in which the team is taken
+
+    Returns:
+        (tuple): List of integers, Remaining budget
+    """
     res = requests.get(
         'https://fantasy.premierleague.com/api/entry/' +
         f'{team_id}/event/{gw}/picks/').json()
@@ -13,6 +22,16 @@ def get_team(team_id, gw):
 
 
 def randomize(seed, df, start):
+    """ Apply random noise to EV data
+
+    Args:
+        seed (int): Seed for the random number generator (for reproducibility)
+        df (pd.DataFrame): EV data
+        start (int): Next GW
+
+    Returns:
+        (pd.DataFrame): Randomized EV data
+    """
     rng = np.random.default_rng(seed=seed)
     gws = np.arange(
         start,
@@ -31,6 +50,14 @@ def randomize(seed, df, start):
 
 
 def get_predictions(noise=False):
+    """ Load CSV file of EV Data
+
+    Args:
+        noise (bool, optional): Apply noise. Defaults to False.
+
+    Returns:
+        (pd.DataFrame): EV Data
+    """
     start = get_next_gw()
     df = pd.read_csv(
         f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
@@ -49,6 +76,15 @@ def get_predictions(noise=False):
 
 
 def get_transfer_history(team_id, last_gw):
+    """ Load team transfer strategy data
+
+    Args:
+        team_id (int): Team id to get the data from
+        last_gw (int): GW in which the team is taken
+
+    Returns:
+        (list): List of transfers made
+    """
     transfers = []
     # Reversing GW history until a chip is played or 2+ transfers were made
     for gw in range(last_gw, 0, -1):
@@ -69,6 +105,15 @@ def get_transfer_history(team_id, last_gw):
 
 
 def get_rolling(team_id, last_gw):
+    """ Load team transfer strategy data
+
+    Args:
+        team_id (int): Team id to get the data from
+        last_gw (int): GW in which the team is taken
+
+    Returns:
+        (tuple): Rolling transfer value, Last GW transfer
+    """
     transfers = get_transfer_history(team_id, last_gw)
 
     # Start from gw where last chip used or when hits were taken
@@ -82,6 +127,15 @@ def get_rolling(team_id, last_gw):
 
 
 def get_chips(team_id, last_gw):
+    """ Get team chip strategy
+
+    Args:
+        team_id (int): Team id to get the data from
+        last_gw (int): GW in which the team is taken
+
+    Returns:
+        (tuple): Availability for freehit, wildcard, bboost, threexc
+    """
     freehit, wildcard, bboost, threexc = 0, 0, 0, 0
     # Reversing GW history until a chip is played or 2+ transfers were made
     for gw in range(last_gw, 0, -1):
@@ -108,6 +162,11 @@ def get_chips(team_id, last_gw):
 
 
 def get_next_gw():
+    """ Get the value of the next GW to be played
+
+    Returns:
+        (int): GW value
+    """
     url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
     res = requests.get(url).json()
 
@@ -117,6 +176,11 @@ def get_next_gw():
 
 
 def get_ownership_data():
+    """ Load CSV Ownership Data
+
+    Returns:
+        (pd.DataFrame): Ownership Data
+    """
     gw = get_next_gw() - 1
     df = pd.read_csv(
         f"data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv"
@@ -147,6 +211,29 @@ def pretty_print(
         bboost=-1,
         threexc=-1,
         nb_suboptimal=0):
+    """ Print and save model solution
+
+    Args:
+        data (pd.DataFrame): EV and Ownership data
+        start (int): Start GW
+        period (int): Horizon
+        team (so.Variable): Selected teams
+        starter (so.Variable): Team that will bring points
+        bench (so.Variable): Benched players
+        captain (so.Variable): Captain player
+        vicecaptain (so.Variable): Vicecaptain player
+        buy (so.Variable): Bought players
+        sell (so.Variable): Sold players
+        free_transfers (so.Variable): Free transfer values
+        hits (so.Variable): Penalized transfers
+        in_the_bank (so.Variable): Remaining budget
+        objective_value (so.Objective): Objective function
+        freehit (int, optional): Use Freehit chip in this GW. Defaults to -1.
+        wildcard (int, optional): Use Wildcard chip in this GW. Defaults to -1.
+        bboost (int, optional): Use bboost chip in this GW. Defaults to -1.
+        threexc (int, optional): Use Threexc chip in this GW. Defaults to -1.
+        nb_suboptimal (int, optional): Iteration when runing suboptimals.
+    """
 
     df = pd.DataFrame(
         [],
