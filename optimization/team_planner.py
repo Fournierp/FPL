@@ -2571,12 +2571,21 @@ class Team_Planner:
             repeats (int): Repeating the randomization/solving
             iterations (int): Iterations of suboptimals
         """
-        podium = pd.DataFrame(columns=list(np.arange(3)[1:]) + ["EV"])
+        podium = pd.DataFrame(columns=list(np.arange(3)[1:]))
         hashes = {}
         raw_data = self.data.copy()
 
         # Reproduce the optimization from scratch
         for r in range(repeats):
+            self.build_model(
+                model_name="sensitivity_analysis",
+                objective_type='decay',
+                decay_gameweek=0.9,
+                vicecap_decay=0.1,
+                decay_bench=[0.03, 0.21, 0.06, 0.002],
+                ft_val=1.5,
+                itb_val=0.008)
+
             print(f"\n----- Trial {r+1} -----")
 
             # Apply random noise to the original prediction
@@ -2585,7 +2594,7 @@ class Team_Planner:
             self.random_noise(None)
             # Find optimal solutions
             sa = self.suboptimals(
-                "sensitivity_analysis",
+                f"sensitivity_analysis_{r}",
                 iterations=iterations)
 
             # Store data
@@ -2595,18 +2604,17 @@ class Team_Planner:
 
                 if transfer in podium.index:
                     podium.loc[transfer, i+1] += 1
-                    podium.loc[transfer, "EV"] = (
-                        podium.loc[transfer, "EV"] +
-                        [v[2]])
 
                 else:
-                    for pos in range(1, iterations):
+                    for pos in range(1, iterations+1):
                         podium.loc[transfer, pos] = 0
 
-                    podium.loc[transfer, "EV"] = [v[2]]
                     podium.loc[transfer, i+1] = 1
 
-            self.build_model("sensitivity_analysis")
+                num_cols = podium.loc[transfer, 1] + podium.loc[transfer, 2] + podium.loc[transfer, 3]
+                podium.loc[
+                    transfer,
+                    f"EV_{int(num_cols)}"] = v[2]
 
         podium.to_csv("optimization/tmp/podium.csv")
         with open("optimization/tmp/hashes.json", "w") as outfile:
@@ -2684,15 +2692,15 @@ if __name__ == "__main__":
     #     ft_val=1.5,
     #     itb_val=0.008)
 
-    tp.solve(
-        model_name="vanilla",
-        log=True)
+    # tp.solve(
+    #     model_name="vanilla",
+    #     log=True)
 
     # tp.suboptimals(
     #     model_name="vanilla",
     #     iterations=3,
     #     cutoff_search='first_transfer')
 
-    # tp.sensitivity_analysis(
-    #     repeats=5,
-    #     iterations=4)
+    tp.sensitivity_analysis(
+        repeats=2,
+        iterations=3)
