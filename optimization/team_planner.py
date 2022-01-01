@@ -175,6 +175,24 @@ class Team_Planner:
             vartype=so.continuous,
             lb=0)
 
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
+            vartype=so.binary)
+
         # Objective: maximize total expected points
         # Assume a % (decay_bench) chance of a player being subbed on
         # Assume a % (decay_gameweek) reliability of next week's xPts
@@ -495,24 +513,42 @@ class Team_Planner:
 
         freehit = self.model.add_variables(
             self.gameweeks,
-            name='fh',
+            name='fh_real',
             vartype=so.integer,
             lb=0,
             ub=15)
         wildcard = self.model.add_variables(
             self.gameweeks,
-            name='wc',
+            name='wc_real',
             vartype=so.integer,
             lb=0,
             ub=15)
         bboost = self.model.add_variables(
             self.gameweeks,
-            name='bb',
+            name='bb_real',
             vartype=so.binary)
         threexc = self.model.add_variables(
             self.players,
             self.gameweeks,
+            name='3xc_real',
+            vartype=so.binary)
+
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
             name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
             vartype=so.binary)
 
         order = [0, 1, 2, 3]
@@ -589,6 +625,10 @@ class Team_Planner:
                     self.buy[p, self.start + freehit_gw + 1]
                     for p in self.players),
                 name='freehit2')
+            # For printing
+            self.model.add_constraint(
+                (self.freehit[self.start + freehit_gw] == 1),
+                name='freehit_print')
         else:
             # The unused chip must not contribute
             self.model.add_constraint(
@@ -608,6 +648,10 @@ class Team_Planner:
                     so.expr_sum(wildcard[w] for w in self.gameweeks) ==
                     self.hits[self.start + wildcard_gw]),
                 name='wc_once')
+            # For printing
+            self.model.add_constraint(
+                (self.wildcard[self.start + wildcard_gw] == 1),
+                name='wildcard_print')
         else:
             # The unused chip must not contribute
             self.model.add_constraint(
@@ -623,6 +667,11 @@ class Team_Planner:
             self.model.add_constraint(
                 so.expr_sum(bboost[w] for w in self.gameweeks) == 1,
                 name='bboost_once')
+
+            # For printing
+            self.model.add_constraint(
+                (self.bboost[self.start + bboost_gw] == 1),
+                name='bboost_print')
         else:
             # The unused chip must not contribute
             self.model.add_constraint(
@@ -648,6 +697,10 @@ class Team_Planner:
                     threexc[p, w] <= self.captain[p, w]
                     for p in self.players for w in self.gameweeks),
                 name='3xc_is_cap')
+            # For printing
+            self.model.add_constraint(
+                (self.triple[self.start + threexc_gw] == 1),
+                name='triple_print')
         else:
             # The unused chip must not contribute
             self.model.add_constraint(
@@ -676,7 +729,6 @@ class Team_Planner:
                         ),
                     name="force_buy")
             if bias == 'start' and love[bias]:
-                print([w for w in love['start']])
                 assert all([w in self.gameweeks for (_, w) in love['start']]), 'Gameweek selected does not exist.'
                 assert all([bias[0] in self.players for bias in love['start']]), 'Player selected to start does not exist.'
                 # The forced-in team player must be in the team
@@ -2419,8 +2471,8 @@ class Team_Planner:
             self.free_transfers,
             self.hits,
             self.in_the_bank, self.model.get_objective_value(),
-            # freehit=self.freehit, wildcard=self.wildcard,
-            # bboost=self.bboost, threexc=self.triple,
+            freehit=self.freehit, wildcard=self.wildcard,
+            bboost=self.bboost, threexc=self.triple,
             nb_suboptimal=i)
 
     def suboptimals(
@@ -2567,7 +2619,7 @@ if __name__ == "__main__":
 
     tp = Team_Planner(
         team_id=35868,
-        horizon=5,
+        horizon=3,
         noise=False)
 
     tp.build_model(
@@ -2596,24 +2648,24 @@ if __name__ == "__main__":
     #     vicecap_decay=0.1,
     #     decay_bench=[0.03, 0.21, 0.06, 0.002])
 
-    tp.biased_model(
-        love={
-            'buy': {},
-            'start': {},
-            'team': {},
-            'cap': {}
-        },
-        hate={
-            'sell': {},
-            'team': {},
-            'bench': {}
-        },
-        hit_limit={
-            'max': {},
-            'eq': {},
-            'min': {}
-        },
-        two_ft_gw=[])
+    # tp.biased_model(
+    #     love={
+    #         'buy': {},
+    #         'start': {},
+    #         'team': {},
+    #         'cap': {}
+    #     },
+    #     hate={
+    #         'sell': {},
+    #         'team': {},
+    #         'bench': {}
+    #     },
+    #     hit_limit={
+    #         'max': {},
+    #         'eq': {},
+    #         'min': {}
+    #     },
+    #     two_ft_gw=[])
 
     # tp.advanced_wildcard(
     #     objective_type='decay',
@@ -2638,9 +2690,9 @@ if __name__ == "__main__":
 
     # tp.suboptimals(
     #     model_name="vanilla",
-    #     iterations=5,
+    #     iterations=3,
     #     cutoff_search='first_transfer')
 
     # tp.sensitivity_analysis(
-    #     repeats=3,
-    #     iterations=3)
+    #     repeats=5,
+    #     iterations=4)

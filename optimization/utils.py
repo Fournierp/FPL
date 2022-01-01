@@ -228,11 +228,11 @@ def pretty_print(
         hits (so.Variable): Penalized transfers
         in_the_bank (so.Variable): Remaining budget
         objective_value (so.Objective): Objective function
-        freehit (int, optional): Use Freehit chip in this GW. Defaults to -1.
-        wildcard (int, optional): Use Wildcard chip in this GW. Defaults to -1.
-        bboost (int, optional): Use bboost chip in this GW. Defaults to -1.
-        threexc (int, optional): Use Threexc chip in this GW. Defaults to -1.
-        nb_suboptimal (int, optional): Iteration when runing suboptimals.
+        freehit (so.Variable): Use Freehit chip
+        wildcard (so.Variable): Use Wildcard chip
+        bboost (so.Variable): Use bboost chip
+        threexc (so.Variable): Use Threexc chip
+        nb_suboptimal (int): Iteration when runing suboptimals.
     """
 
     df = pd.DataFrame(
