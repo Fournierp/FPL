@@ -72,6 +72,8 @@ id,first_name,second_name,team
 650,Filip,Marschall,2
 670,Josh,Feeney,2
 681,Philippe,Coutinho Correia,2
+684,Kaine,Hayden,2
+691,Robin,Olsen,2
 76,Pontus,Jansson,3
 77,Christian,Nørgaard,3
 78,Ivan,Toney,3
@@ -145,6 +147,7 @@ id,first_name,second_name,team
 653,Ed,Turns,4
 654,Marc,Leonard,4
 655,Evan,Ferguson,4
+688,Thomas,McGill,4
 98,James,Tarkowski,5
 99,Phil,Bardsley,5
 100,Erik,Pieters,5
@@ -205,6 +208,7 @@ id,first_name,second_name,team
 606,Marcus,Bettinelli,6
 671,Lewis,Hall,6
 672,Harvey,Vale,6
+690,Robert Kenedy,Nunes do Nascimento,6
 144,Conor,Gallagher,7
 146,Vicente,Guaita,7
 147,James,Tomkins,7
@@ -682,3 +686,7 @@ id,first_name,second_name,team
 621,James,Storer,20
 635,Hugo,Bueno,20
 661,Bruno André,Cavaco Jordão,20
+685,Toti António,Gomes,20
+686,Dion,Sanderson,20
+687,Ryan,Giles,20
+689,Francisco Jorge,Tomás Oliveira,20
