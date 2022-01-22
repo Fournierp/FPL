@@ -49,30 +49,49 @@ def randomize(seed, df, start):
     return df
 
 
-def get_predictions(noise=False):
+def get_predictions(noise=False, premium=False):
     """ Load CSV file of EV Data
 
     Args:
         noise (bool, optional): Apply noise. Defaults to False.
+        premium (bool, optional): Load premium data. Defaults to False.
 
     Returns:
         (pd.DataFrame): EV Data
     """
-    start = get_next_gw()
-    df = pd.read_csv(
-        f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
-    df["Pos"] = df["Pos"].map(
-        {
-            1: 'G',
-            2: 'D',
-            3: 'M',
-            4: 'F'
-        })
-    # One hot encoded values for the constraints
-    df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
-    df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
+    if premium: 
+        start = get_next_gw()
+        df = pd.read_csv(
+            f"data/fpl_review/2021-22/gameweek/{start}/fplreview.csv")
 
-    return df.fillna(0)
+        df['BV'] = df['BV']*10
+        df['SV'] = df['SV']*10
+
+        # One hot encoded values for the constraints
+        df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
+        df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
+        df.index = df.index + 1
+        df = df.rename_axis("id")
+
+        return df.fillna(0)
+
+    else:
+        start = get_next_gw()
+        df = pd.read_csv(
+            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
+        df["Pos"] = df["Pos"].map(
+            {
+                1: 'G',
+                2: 'D',
+                3: 'M',
+                4: 'F'
+            })
+        # One hot encoded values for the constraints
+        df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
+        df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
+        df = df.set_index('id')
+
+        return df.fillna(0)
 
 
 def get_transfer_history(team_id, last_gw):
@@ -172,6 +191,7 @@ def get_next_gw():
 
     for idx, gw in enumerate(res['events']):
         if not gw['finished']:
+        # if gw['is_next']:
             return idx + 1
 
 

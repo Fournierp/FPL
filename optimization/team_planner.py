@@ -43,9 +43,9 @@ class Team_Planner:
         """
         # Data collection
         # Predicted points from https://fplreview.com/
-        df = get_predictions()
+        df = get_predictions(premium=True)
         self.team_names = df.columns[-20:].values
-        self.data = df.copy().set_index('id')
+        self.data = df.copy()
 
         # Ownership data
         ownership = get_ownership_data()
@@ -2627,7 +2627,7 @@ if __name__ == "__main__":
 
     tp = Team_Planner(
         team_id=35868,
-        horizon=3,
+        horizon=5,
         noise=False)
 
     tp.build_model(
@@ -2696,11 +2696,11 @@ if __name__ == "__main__":
     #     model_name="vanilla",
     #     log=True)
 
-    # tp.suboptimals(
-    #     model_name="vanilla",
-    #     iterations=3,
-    #     cutoff_search='first_transfer')
+    tp.suboptimals(
+        model_name="vanilla",
+        iterations=3,
+        cutoff_search='first_transfer')
 
-    tp.sensitivity_analysis(
-        repeats=2,
-        iterations=3)
+    # tp.sensitivity_analysis(
+    #     repeats=2,
+    #     iterations=3)
