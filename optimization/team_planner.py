@@ -21,15 +21,17 @@ from utils import (
 class Team_Planner:
     """ Mathematical optimization of FPL """
 
-    def __init__(self, team_id=35868, horizon=5, noise=False):
+    def __init__(self, team_id=35868, horizon=5, noise=False, premium=False):
         """
 
         Args:
             team_id (int): Team to optimize
             horizon (int): Planning horizon
             noise (bool): Apply noise
+            premium (bool, optional): Load premium data.
         """
         self.horizon = horizon
+        self.premium = premium
         self.get_data(team_id)
 
         if noise:
@@ -43,7 +45,7 @@ class Team_Planner:
         """
         # Data collection
         # Predicted points from https://fplreview.com/
-        df = get_predictions(premium=True)
+        df = get_predictions(premium=self.premium)
         self.team_names = df.columns[-20:].values
         self.data = df.copy()
 
@@ -2628,7 +2630,8 @@ if __name__ == "__main__":
     tp = Team_Planner(
         team_id=35868,
         horizon=5,
-        noise=False)
+        noise=False,
+        premium=True)
 
     tp.build_model(
         model_name="vanilla",
