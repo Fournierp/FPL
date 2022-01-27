@@ -130,6 +130,66 @@ class FPL_Review_Scraper:
                     self.logger.warning(f"Failed to save row {key}.")
                     continue
 
+    def get_free_planner_data_fast(self):
+        """Get the FPL Review data"""
+        period = min(5, 39 - self.next_gw)
+        url = 'https://fplreview.com/free-planner/#forecast_table'
+        body = {
+            'HiveMind': 'Yes',
+            'Weeks': period,
+            'TeamID': self.team_id,
+        }
+
+        x = requests.post(url, data=body)
+        soup = BeautifulSoup(x.content, 'html.parser')
+
+        logger.info("Saving raw data.")
+        for fplr_api in soup.find(id="fplr_api"):
+            with open(
+                    os.path.join(
+                        os.path.join(self.root, str(self.next_gw)),
+                        'raw_fplreview_fp.json'),
+                    'w') as outfile:
+                json.dump(json.loads(fplr_api), outfile)
+
+        logger.info("Saving processed data.")
+
+        # Columns
+        csv_cols = ["id", "Pos", "Name", "BV", "SV", "Team"]
+        df = pd.DataFrame(columns=csv_cols)
+
+        df_json = pd.read_json(
+            os.path.join(
+                os.path.join(self.root, str(self.next_gw)),
+                'raw_fplreview_fp.json')
+                ).T
+
+        df[['id', 'Pos', 'Name', 'BV', 'SV', 'Team']] = df_json[[
+            'alt_id', 'pos', 'name', 'def_cost', 'now_cost', 'team_abbrev']]
+        df_json.index -= 1
+
+        for gw in range(self.next_gw, self.next_gw + period):
+            df_gw = pd.json_normalize(df_json[str(gw)]).join(df_json.reset_index()['alt_id'])
+
+            df_gw = df_gw.rename(
+                columns={
+                    'dmins': f'{gw}_xMins',
+                    'livpts': f'{gw}_Pts',
+                    'alt_id': 'id'
+                    })
+
+            df = pd.merge(
+                df,
+                df_gw[[f'{gw}_xMins', f'{gw}_Pts', 'id']],
+                left_on='id',
+                right_on='id',
+                )
+
+        df.to_csv(
+            os.path.join(
+                os.path.join(self.root, str(self.next_gw)),
+                'fplreview_fp.csv'),
+            index=False)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -140,7 +200,8 @@ if __name__ == "__main__":
 
     fplrs = FPL_Review_Scraper(logger, season_data, team_id=35868)
     logger.info("Scraping Free Planner Data.")
-    fplrs.get_free_planner_data()
+    # fplrs.get_free_planner_data()
+    fplrs.get_free_planner_data_fast()
 
     if len(sys.argv) > 1:
         logger.info("Saving data ...")
