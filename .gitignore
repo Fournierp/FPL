@@ -133,3 +133,5 @@ data/fpl_official/20-21/season/*
 data/fpl_official/vaastav
 data/fpl_review/
 optimization/tmp/
+fplr_credentials.json
+cookies.pkl
