@@ -195,30 +195,30 @@ class FPL_Review_Scraper:
     def get_premium_planner_data_fast(self):
         """Get the FPL Review data"""
         period = min(8, 39 - self.next_gw)
-        # url = 'https://fplreview.com/massive-data-planner/#forecast_table'
-        # body = {
-        #     'HiveMind': 'Yes',
-        #     'Weeks': period,
-        #     'TeamID': self.team_id,
-        # }
+        url = 'https://fplreview.com/massive-data-planner/#forecast_table'
+        body = {
+            'HiveMind': 'Yes',
+            'Weeks': period,
+            'TeamID': self.team_id,
+        }
 
-        # logger.info("Logging in with cookies.")
-        # # Get the saved cookies.
-        # cookies = pickle.load(open("cookies.pkl", "rb"))
-        # # Set cookies
-        # session = requests.Session()
-        # session.cookies.set(cookies['name'], cookies['value'])
-        # # Request url
-        # x = session.post(url, data=body)
-        # soup = BeautifulSoup(x.content, 'html.parser')
+        logger.info("Logging in with cookies.")
+        # Get the saved cookies.
+        cookies = pickle.load(open("cookies.pkl", "rb"))
+        # Set cookies
+        session = requests.Session()
+        session.cookies.set(cookies['name'], cookies['value'])
+        # Request url
+        x = session.post(url, data=body)
+        soup = BeautifulSoup(x.content, 'html.parser')
 
-        # for fplr_api in soup.find(id="fplr_api"):
-        #     with open(
-        #         os.path.join(
-        #             os.path.join(self.root, str(self.next_gw)),
-        #             'raw_fplreview_mp.json'),
-        #             'w') as outfile:
-        #         json.dump(json.loads(fplr_api), outfile)
+        for fplr_api in soup.find(id="fplr_api"):
+            with open(
+                os.path.join(
+                    os.path.join(self.root, str(self.next_gw)),
+                    'raw_fplreview_mp.json'),
+                    'w') as outfile:
+                json.dump(json.loads(fplr_api), outfile)
 
         logger.info("Processing data.")
         # Columns
