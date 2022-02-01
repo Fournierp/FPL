@@ -5,44 +5,112 @@ import sasoptpy as so
 
 
 def get_team(team_id, gw):
-    res = requests.get(f'https://fantasy.premierleague.com/api/entry/{team_id}/event/{gw}/picks/').json()
+    """ Get the players in a team
+
+    Args:
+        team_id (int): Team id to get the data from
+        gw (int): GW in which the team is taken
+
+    Returns:
+        (tuple): List of integers, Remaining budget
+    """
+    res = requests.get(
+        'https://fantasy.premierleague.com/api/entry/' +
+        f'{team_id}/event/{gw}/picks/').json()
     # Adjust the player id with fplreview indices
     return [i['element'] for i in res['picks']], res['entry_history']['bank']
 
 
 def randomize(seed, df, start):
+    """ Apply random noise to EV data
+
+    Args:
+        seed (int): Seed for the random number generator (for reproducibility)
+        df (pd.DataFrame): EV data
+        start (int): Next GW
+
+    Returns:
+        (pd.DataFrame): Randomized EV data
+    """
     rng = np.random.default_rng(seed=seed)
-    gws = np.arange(start, start+len([col for col in df.columns if '_Pts' in col]))
+    gws = np.arange(
+        start,
+        start+len([col for col in df.columns if '_Pts' in col])
+        )
 
     for w in gws:
-        noise = df[f"{w}_Pts"] * (92 - df[f"{w}_xMins"]) / 134 * rng.standard_normal(size=len(df))
+        noise = (
+            df[f"{w}_Pts"] *
+            (92 - df[f"{w}_xMins"]) / 134 *
+            rng.standard_normal(size=len(df))
+            )
         df[f"{w}_Pts"] = df[f"{w}_Pts"] + noise
 
     return df
 
 
-def get_predictions(noise=False):
-    start = get_next_gw()
-    df = pd.read_csv(f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
-    df["Pos"] = df["Pos"].map(
-        {
-            1: 'G',
-            2: 'D',
-            3: 'M',
-            4: 'F'
-        })
-    # One hot encoded values for the constraints
-    df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
-    df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
+def get_predictions(noise=False, premium=False):
+    """ Load CSV file of EV Data
 
-    return df.fillna(0)
+    Args:
+        noise (bool, optional): Apply noise. Defaults to False.
+        premium (bool, optional): Load premium data. Defaults to False.
+
+    Returns:
+        (pd.DataFrame): EV Data
+    """
+    if premium: 
+        start = get_next_gw()
+        df = pd.read_csv(
+            f"data/fpl_review/2021-22/gameweek/{start}/fplreview.csv")
+
+        df['BV'] = df['BV']*10
+        df['SV'] = df['SV']*10
+
+        # One hot encoded values for the constraints
+        df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
+        df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
+        df.index = df.index + 1
+        df = df.rename_axis("id")
+
+        return df.fillna(0)
+
+    else:
+        start = get_next_gw()
+        df = pd.read_csv(
+            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
+        df["Pos"] = df["Pos"].map(
+            {
+                1: 'G',
+                2: 'D',
+                3: 'M',
+                4: 'F'
+            })
+        # One hot encoded values for the constraints
+        df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
+        df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
+        df = df.set_index('id')
+
+        return df.fillna(0)
 
 
 def get_transfer_history(team_id, last_gw):
+    """ Load team transfer strategy data
+
+    Args:
+        team_id (int): Team id to get the data from
+        last_gw (int): GW in which the team is taken
+
+    Returns:
+        (list): List of transfers made
+    """
     transfers = []
     # Reversing GW history until a chip is played or 2+ transfers were made
     for gw in range(last_gw, 0, -1):
-        res = requests.get(f'https://fantasy.premierleague.com/api/entry/{team_id}/event/{gw}/picks/').json()
+        res = requests.get(
+            'https://fantasy.premierleague.com/api/entry/' +
+            f'{team_id}/event/{gw}/picks/'
+            ).json()
         transfer = res['entry_history']['event_transfers']
         chip = res['active_chip']
 
@@ -56,6 +124,15 @@ def get_transfer_history(team_id, last_gw):
 
 
 def get_rolling(team_id, last_gw):
+    """ Load team transfer strategy data
+
+    Args:
+        team_id (int): Team id to get the data from
+        last_gw (int): GW in which the team is taken
+
+    Returns:
+        (tuple): Rolling transfer value, Last GW transfer
+    """
     transfers = get_transfer_history(team_id, last_gw)
 
     # Start from gw where last chip used or when hits were taken
@@ -69,10 +146,22 @@ def get_rolling(team_id, last_gw):
 
 
 def get_chips(team_id, last_gw):
+    """ Get team chip strategy
+
+    Args:
+        team_id (int): Team id to get the data from
+        last_gw (int): GW in which the team is taken
+
+    Returns:
+        (tuple): Availability for freehit, wildcard, bboost, threexc
+    """
     freehit, wildcard, bboost, threexc = 0, 0, 0, 0
     # Reversing GW history until a chip is played or 2+ transfers were made
     for gw in range(last_gw, 0, -1):
-        res = requests.get(f'https://fantasy.premierleague.com/api/entry/{team_id}/event/{gw}/picks/').json()
+        res = requests.get(
+            'https://fantasy.premierleague.com/api/entry/' +
+            f'{team_id}/event/{gw}/picks/'
+            ).json()
         chip = res['active_chip']
 
         if chip == '3xc':
@@ -84,34 +173,101 @@ def get_chips(team_id, last_gw):
         if chip == 'freehit':
             freehit = gw
 
+    # Handle the WC reset at GW 20
+    if wildcard <= 20 and last_gw >= 20:
+        wildcard = 0
+
     return freehit, wildcard, bboost, threexc
 
 
 def get_next_gw():
+    """ Get the value of the next GW to be played
+
+    Returns:
+        (int): GW value
+    """
     url = 'https://fantasy.premierleague.com/api/bootstrap-static/'
     res = requests.get(url).json()
-        
+
     for idx, gw in enumerate(res['events']):
         if not gw['finished']:
+        # if gw['is_next']:
             return idx + 1
 
 
 def get_ownership_data():
+    """ Load CSV Ownership Data
+
+    Returns:
+        (pd.DataFrame): Ownership Data
+    """
     gw = get_next_gw() - 1
-    df = pd.read_csv(f"data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv")[['id', 'Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K']]
+    df = pd.read_csv(
+        f"data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv"
+        )[[
+            'id', 'Top_100', 'Top_1K', 'Top_10K',
+            'Top_50K', 'Top_100K', 'Top_250K']]
     df['id'] = df['id']
     return df.set_index('id')
 
 
-def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain, buy, sell, free_transfers, hits, in_the_bank, objective_value, freehit=-1, wildcard=-1, bboost=-1, threexc=-1, nb_suboptimal=0):
-    df = pd.DataFrame([], columns=['GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'xMins', 'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
+def pretty_print(
+        data,
+        start,
+        period,
+        team,
+        starter,
+        bench,
+        captain,
+        vicecaptain,
+        buy,
+        sell,
+        free_transfers,
+        hits,
+        in_the_bank,
+        objective_value,
+        freehit=-1,
+        wildcard=-1,
+        bboost=-1,
+        threexc=-1,
+        nb_suboptimal=0):
+    """ Print and save model solution
+
+    Args:
+        data (pd.DataFrame): EV and Ownership data
+        start (int): Start GW
+        period (int): Horizon
+        team (so.Variable): Selected teams
+        starter (so.Variable): Team that will bring points
+        bench (so.Variable): Benched players
+        captain (so.Variable): Captain player
+        vicecaptain (so.Variable): Vicecaptain player
+        buy (so.Variable): Bought players
+        sell (so.Variable): Sold players
+        free_transfers (so.Variable): Free transfer values
+        hits (so.Variable): Penalized transfers
+        in_the_bank (so.Variable): Remaining budget
+        objective_value (so.Objective): Objective function
+        freehit (so.Variable): Use Freehit chip
+        wildcard (so.Variable): Use Wildcard chip
+        bboost (so.Variable): Use bboost chip
+        threexc (so.Variable): Use Threexc chip
+        nb_suboptimal (int): Iteration when runing suboptimals.
+    """
+
+    df = pd.DataFrame(
+        [],
+        columns=[
+            'GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'xMins',
+            'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
 
     for w in np.arange(start, start+period):
         print(f"GW: {w} - FT: {int(free_transfers[w].get_value())}")
         for p in data.index.tolist():
             if team[p, w].get_value():
                 if not starter[p, w].get_value():
-                    bo = [-1] + [bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
+                    bo = [-1] + [
+                        bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
                 else:
                     bo = [0]
 
@@ -123,7 +279,7 @@ def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain
                         'Team': data.loc[p]['Team'],
                         'SV': data.loc[p]['SV'],
                         'xP': data.loc[p][str(w) + '_Pts'],
-                        'xMins' : data.loc[p][str(w) + '_xMins'],
+                        'xMins': data.loc[p][str(w) + '_xMins'],
                         'Start': int(starter[p, w].get_value()),
                         'Bench': int(np.argmax(bo)),
                         'Cap': int(captain[p, w].get_value()),
@@ -138,21 +294,47 @@ def pretty_print(data, start, period, team, starter, bench, captain, vicecaptain
 
         chip = ""
         av = ""
-        if freehit == w-start:
+        if freehit[w].get_value():
             chip = " - Chip: Freehit"
-        if wildcard == w-start:
+        if wildcard[w].get_value():
             chip = " - Chip: Wildcard"
-        if bboost == w-start:
+        if bboost[w].get_value():
             chip = " - Chip: Bench Boost"
-            av = f" - Added value: {np.sum(df.loc[(df['GW'] == w), 'xP']) - np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])}"
-        # if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
-        #     chip = " - Chip: Triple Captain"
-        #     av = f" - Added value: {np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])}"
+            val = (
+                np.sum(df.loc[(df['GW'] == w), 'xP']) -
+                np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])
+                )
+            av = f" - Added value: {val}"
+        if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
+            chip = " - Chip: Triple Captain"
+            val = np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])
+            av = f" - Added value: {val}"
 
-        print(f"xPts: {np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) - hits[w].get_value()*4*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1):.2f} - Hits: {int(hits[w].get_value())*(0 if wildcard == w-start else 1)*(0 if freehit == w-start else 1)}" + chip + av + f" - ITB: {in_the_bank[w].get_value()/10:.1f}")
+        xpts_val = (
+            np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) -
+            hits[w].get_value() * 4 *
+            (0 if wildcard == w-start else 1) *
+            (0 if freehit == w-start else 1)
+            )
+        hits_val = (
+            int(hits[w].get_value()) *
+            (0 if wildcard == w-start else 1) *
+            (0 if freehit == w-start else 1)
+            )
+        print(
+            f"xPts: {xpts_val:.2f} - Hits: {hits_val}" + chip + av +
+            f" - ITB: {in_the_bank[w].get_value()/10:.1f}")
         print(" ____ ")
 
     custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
-    df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start'], ascending=[True, False]).to_csv(f'optimization/tmp/{nb_suboptimal}.csv')
+    (
+        df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order))
+        .sort_values(by=['GW', 'Start'], ascending=[True, False])
+        .to_csv(f'optimization/tmp/{nb_suboptimal}.csv')
+        )
     print(f"Objective Val: {-objective_value:.2f}")
-    print(df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order)).sort_values(by=['GW', 'Start', 'Bench'], ascending=[True, False, True]))
+    print(
+        df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order))
+        .sort_values(
+            by=['GW', 'Start', 'Bench'],
+            ascending=[True, False, True]))

@@ -63,6 +63,9 @@ python3 /home/FPL/modeling/dixon_coles.py
 
 [Understat](https://understat.com/league/EPL) - Shot Expected goals and locations
 
+[Forecast-Based Optimization Model for Fantasy Premier League](https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/2577003) - Linear Optimization model
+
+[sertalpbilal/FPL-Optimization-Tools](https://github.com/sertalpbilal/FPL-Optimization-Tools) - Tutorials and recipes to use optimization for winning Fantasy Premier League
 
 ## Contribute
 
