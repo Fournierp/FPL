@@ -165,18 +165,19 @@ class FPL_Review_Scraper:
                 'raw_fplreview_fp.json')
                 ).T
 
-        df[['id', 'Pos', 'Name', 'BV', 'SV', 'Team']] = df_json[[
-            'alt_id', 'pos', 'name', 'def_cost', 'now_cost', 'team_abbrev']]
-        df_json.index -= 1
+        df[['Pos', 'Name', 'BV', 'SV', 'Team']] = df_json[['pos', 'name', 'def_cost', 'now_cost', 'team_abbrev']]
+        df['id'] = df_json.index
+
+        df_json = df_json.reset_index()
 
         for gw in range(self.next_gw, self.next_gw + period):
-            df_gw = pd.json_normalize(df_json[str(gw)]).join(df_json.reset_index()['alt_id'])
+            df_gw = pd.json_normalize(df_json[str(gw)]).join(df_json['index'])
 
             df_gw = df_gw.rename(
                 columns={
                     'dmins': f'{gw}_xMins',
                     'livpts': f'{gw}_Pts',
-                    'alt_id': 'id'
+                    'index': 'id'
                     })
 
             df = pd.merge(

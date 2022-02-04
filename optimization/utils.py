@@ -62,16 +62,19 @@ def get_predictions(noise=False, premium=False):
     if premium: 
         start = get_next_gw()
         df = pd.read_csv(
-            f"data/fpl_review/2021-22/gameweek/{start}/fplreview.csv")
-
-        df['BV'] = df['BV']*10
-        df['SV'] = df['SV']*10
+            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv")
 
         # One hot encoded values for the constraints
+        df["Pos"] = df["Pos"].map(
+            {
+                1: 'G',
+                2: 'D',
+                3: 'M',
+                4: 'F'
+            })
         df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
         df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
-        df.index = df.index + 1
-        df = df.rename_axis("id")
+        df = df.set_index('id')
 
         return df.fillna(0)
 
@@ -190,8 +193,8 @@ def get_next_gw():
     res = requests.get(url).json()
 
     for idx, gw in enumerate(res['events']):
-        if not gw['finished']:
-        # if gw['is_next']:
+        # if not gw['finished']:
+        if gw['is_next']:
             return idx + 1
 
 
