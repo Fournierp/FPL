@@ -101,7 +101,8 @@ class Team_Planner:
             vicecap_decay=0.1,
             decay_bench=[0.1, 0.1, 0.1, 0.1],
             ft_val=0,
-            itb_val=0):
+            itb_val=0,
+            hit_val=6):
         """ Build regular linear optimization model
 
         Args:
@@ -113,6 +114,7 @@ class Team_Planner:
             decay_bench (list): Weight applied to points scored by bench.
             ft_val (int): Value of rolling a transfer.
             itb_val (int): Value of having money in the bank.
+            hit_val (int): Penalty of taking a hit.
         """
         # Model
         self.model = so.Model(name=f'{model_name}_model')
@@ -213,7 +215,7 @@ class Team_Planner:
                         ) *
                         self.data.loc[p, f'{w}_Pts'] for p in self.players
                     ) -
-                    4 * self.hits[w]
+                    hit_val * self.hits[w]
             ) for w in self.gameweeks)
 
         ftv = so.expr_sum(
@@ -489,7 +491,8 @@ class Team_Planner:
             objective_type='decay',
             decay_gameweek=0.9,
             vicecap_decay=0.1,
-            decay_bench=[0.1, 0.1, 0.1, 0.1]):
+            decay_bench=[0.1, 0.1, 0.1, 0.1],
+            hit_val=6):
         """ Build a model that where chips are hardcoded
 
         Args:
@@ -502,6 +505,7 @@ class Team_Planner:
             decay_gameweek (float): Weight decay per gameweek
             vicecap_decay (float): Weight applied to points scored by vice
             decay_bench (list): Weight applied to points scored by bench.
+            hit_val (int): Penalty of taking a hit.
         """
         assert (freehit_gw < self.horizon), "Select a GW within the horizon."
         assert (wildcard_gw < self.horizon), "Select a GW within the horizon."
@@ -574,7 +578,7 @@ class Team_Planner:
                         ) *
                         self.data.loc[p, f'{w}_Pts'] for p in self.players
                     ) -
-                    4 * (self.hits[w] - wildcard[w] - freehit[w])
+                    hit_val * (self.hits[w] - wildcard[w] - freehit[w])
             ) for w in self.gameweeks)
 
         if bboost_gw + 1:
@@ -821,7 +825,8 @@ class Team_Planner:
             vicecap_decay=0.1,
             decay_bench=[0.1, 0.1, 0.1, 0.1],
             ft_val=0,
-            itb_val=0):
+            itb_val=0,
+            hit_val=6):
         """ Build wildcard model for iteratively long horizon
 
         Args:
@@ -832,6 +837,7 @@ class Team_Planner:
             decay_bench (list): Weight applied to points scored by bench.
             ft_val (int): Value of rolling a transfer.
             itb_val (int): Value of having money in the bank.
+            hit_val (int): Penalty of taking a hit.
         """
         # Longterm Model
         model_name = 'longterm'
@@ -1245,7 +1251,7 @@ class Team_Planner:
             (
                 np.power(decay_gameweek[1], w - self.start)
                 if objective_type == 'linear' else 1) *
-            (4 * self.hits[w]) for w in self.gameweeks[1:])
+            (hit_val * self.hits[w]) for w in self.gameweeks[1:])
 
         ftv = so.expr_sum(
             (
@@ -1626,7 +1632,7 @@ class Team_Planner:
             (
                 np.power(decay_gameweek[2], w - self.start)
                 if objective_type == 'linear' else 1) *
-            (4 * self.hits[w]) for w in self.gameweeks[1:])
+            (hit_val * self.hits[w]) for w in self.gameweeks[1:])
 
         ftv = so.expr_sum(
             (
@@ -2066,7 +2072,7 @@ class Team_Planner:
             (
                 np.power(decay_gameweek, w - self.start)
                 if objective_type == 'linear' else 1) *
-            (4 * self.hits[w]) for w in self.gameweeks)
+            (hit_val * self.hits[w]) for w in self.gameweeks)
 
         ftv = so.expr_sum(
             (
@@ -2241,7 +2247,7 @@ class Team_Planner:
         self.model.add_constraints(
             (
                 so.expr_sum(self.starter[p, w] for p in self.players) == 11 +
-                4 * self.bboost[w] for w in self.gameweeks),
+                hit_val * self.bboost[w] for w in self.gameweeks),
             name='11_starters')
         self.model.add_constraints(
             (
