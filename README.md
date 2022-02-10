@@ -67,6 +67,8 @@ python3 /home/FPL/modeling/dixon_coles.py
 
 [sertalpbilal/FPL-Optimization-Tools](https://github.com/sertalpbilal/FPL-Optimization-Tools) - Tutorials and recipes to use optimization for winning Fantasy Premier League
 
+[livefpl.net](https://www.livefpl.net/elite) - Best 1000 Managers of All Time
+
 ## Contribute
 
 To build on this tool, please fork it and make pull requests. Or simply send me some suggestions !
