@@ -6,6 +6,7 @@ from subprocess import Popen, DEVNULL
 import sasoptpy as so
 import logging
 import json
+from concurrent.futures import ProcessPoolExecutor
 
 from utils import (
     get_team,
@@ -705,7 +706,9 @@ class Team_Planner:
                 name='3xc_is_cap')
             # For printing
             self.model.add_constraint(
-                (self.triple[self.start + threexc_gw] == 1),
+                (so.expr_sum(
+                    self.triple[p, self.start + threexc_gw]
+                    for p in self.players) == 1),
                 name='triple_print')
         else:
             # The unused chip must not contribute
@@ -1915,6 +1918,7 @@ class Team_Planner:
             decay_bench=[0.1, 0.1, 0.1, 0.1],
             ft_val=0,
             itb_val=0,
+            hit_val=6,
             triple_val=12,
             bboost_val=14,
             freehit_val=18,
@@ -1929,6 +1933,7 @@ class Team_Planner:
             decay_bench (list): Weight applied to points scored by bench.
             ft_val (int): Value of rolling a transfer.
             itb_val (int): Value of having money in the bank.
+            hit_val (int): Penalty of taking a hit.
             triple_val (int): Minumum expected added value of using this chip
             bboost_val (int): Minumum expected added value of using this chip
             freehit_val (int): Minumum expected added value of using this chip

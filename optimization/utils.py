@@ -316,13 +316,13 @@ def pretty_print(
         xpts_val = (
             np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) -
             hits[w].get_value() * 4 *
-            (0 if wildcard == w-start else 1) *
-            (0 if freehit == w-start else 1)
+            (0 if wildcard[w].get_value() else 1) *
+            (0 if freehit[w].get_value() else 1)
             )
         hits_val = (
             int(hits[w].get_value()) *
-            (0 if wildcard == w-start else 1) *
-            (0 if freehit == w-start else 1)
+            (0 if wildcard[w].get_value() else 1) *
+            (0 if freehit[w].get_value() else 1)
             )
         print(
             f"xPts: {xpts_val:.2f} - Hits: {hits_val}" + chip + av +
