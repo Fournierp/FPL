@@ -53,7 +53,6 @@ class Team_Planner:
         # Ownership data
         ownership = get_ownership_data()
         self.data = pd.concat([self.data, ownership], axis=1, join="inner")
-        self.players = self.data.index.tolist()
 
         # FPL data
         self.start = get_next_gw()
@@ -84,6 +83,10 @@ class Team_Planner:
             [col for col in df.columns if '_Pts' in col]
             ].sum(axis=1)
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
+
+        # Drop players that are not predicted to play much to reduce the search space
+        self.data.drop(self.data[self.data.total_ev <= 3].index, inplace=True)
+        self.players = self.data.index.tolist()
 
     def random_noise(self, seed):
         """ Apply random Normal noise to EV Data
@@ -2156,10 +2159,14 @@ class Team_Planner:
             -- (not self.wildcard_used),
             name='wc_once')
 
-        # self.model.add_constraint(so.expr_sum(self.triple[p, w] for p in self.players for w in self.gameweeks) <= 0, name='tc_once')
-        # self.model.add_constraint(so.expr_sum(self.bboost[w] for w in self.gameweeks) <= 0, name='bb_once')
-        # self.model.add_constraint(so.expr_sum(self.freehit[w] for w in self.gameweeks) <= 0, name='fh_once')
-        # self.model.add_constraint(so.expr_sum(self.wildcard[w] for w in self.gameweeks) <= 0, name='wc_once')
+        # Hardcode GW with FH
+        # self.model.add_constraint(
+        #     self.freehit[27] == 1,
+        #     name='fh_gw11')
+        # # Hardcode GW with TC
+        # self.model.add_constraint(
+        #     so.expr_sum(self.triple[p, 26] for p in self.players) == 1,
+        #     name='tc_gw11')
 
         # The chips must not be used on the same GW
         self.model.add_constraint(
