@@ -2446,24 +2446,45 @@ class Team_Planner:
                 self.freehit[w] for w in self.gameweeks),
             name='max_ft')
 
-    def solve(self, model_name, log=False, i=0):
+    def solve(self, model_name, log=False, i=0, time_lim=0):
         """ Solves the model
 
         Args:
             model_name (string): Model name
             log (bool): Sasoptpy logging progress
             i (int): Iteration (as part of suboptimals)
+            time_lim (int): Time upper bound for the duration
+                of optimization past the initial feasible solution
         """
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
-        command = (
-            f'cbc optimization/tmp/{model_name}.mps solve solu ' +
-            f'optimization/tmp/{model_name}_solution.txt')
+        if time_lim == 0:
+            command = (
+                f'cbc optimization/tmp/{model_name}.mps solve solu ' +
+                f'optimization/tmp/{model_name}_solution.txt')
+            if log:
+                os.system(command)
+            else:
+                process = Popen(command, shell=True, stdout=DEVNULL)
+                process.wait()
 
-        if log:
-            os.system(command)
         else:
-            process = Popen(command, shell=True, stdout=DEVNULL)
-            process.wait()
+            command = (
+                f'cbc optimization/tmp/{model_name}.mps ratio 1 solve solu ' +
+                f'optimization/tmp/{model_name}_solution_feasible.txt')
+            if log:
+                os.system(command)
+            else:
+                process = Popen(command, shell=True, stdout=DEVNULL)
+                process.wait()
+
+            command = (
+                f'cbc optimization/tmp/{model_name}.mps mips optimization/tmp/{model_name}_solution_feasible.txt ' +
+                f'sec {time_lim} solve solu optimization/tmp/{model_name}_solution.txt')
+            if log:
+                os.system(command)
+            else:
+                process = Popen(command, shell=True, stdout=DEVNULL)
+                process.wait()
 
         # Reset variables for next passes
         for v in self.model.get_variables():
@@ -2713,14 +2734,15 @@ if __name__ == "__main__":
     #     ft_val=1.5,
     #     itb_val=0.008)
 
-    # tp.solve(
-    #     model_name="vanilla",
-    #     log=True)
-
-    tp.suboptimals(
+    tp.solve(
         model_name="vanilla",
-        iterations=3,
-        cutoff_search='first_transfer')
+        log=True,
+        time_lim=0)
+
+    # tp.suboptimals(
+    #     model_name="vanilla",
+    #     iterations=3,
+    #     cutoff_search='first_transfer')
 
     # tp.sensitivity_analysis(
     #     repeats=2,
