@@ -2459,7 +2459,7 @@ class Team_Planner:
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         if time_lim == 0:
             command = (
-                f'cbc optimization/tmp/{model_name}.mps solve solu ' +
+                f'cbc optimization/tmp/{model_name}.mps cost column solve solu ' +
                 f'optimization/tmp/{model_name}_solution.txt')
             if log:
                 os.system(command)
@@ -2469,7 +2469,7 @@ class Team_Planner:
 
         else:
             command = (
-                f'cbc optimization/tmp/{model_name}.mps ratio 1 solve solu ' +
+                f'cbc optimization/tmp/{model_name}.mps cost column ratio 1 solve solu ' +
                 f'optimization/tmp/{model_name}_solution_feasible.txt')
             if log:
                 os.system(command)
@@ -2479,7 +2479,7 @@ class Team_Planner:
 
             command = (
                 f'cbc optimization/tmp/{model_name}.mps mips optimization/tmp/{model_name}_solution_feasible.txt ' +
-                f'sec {time_lim} solve solu optimization/tmp/{model_name}_solution.txt')
+                f'cost column sec {time_lim} solve solu optimization/tmp/{model_name}_solution.txt')
             if log:
                 os.system(command)
             else:
