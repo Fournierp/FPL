@@ -1341,8 +1341,8 @@ class Team_Planner:
         self.model.add_constraints(
             (self.team[p, self.start - 1] == 1 for p in self.initial_team),
             name='initial_team')
-        self.model.add_constraints(
-            (self.team[p, self.start] == 1 for p in random_sampled_team),
+        self.model.add_constraint(
+            (so.expr_sum(self.team[p, self.start] for p in random_sampled_team) >= 10),
             name='initial_wc_team')
         self.model.add_constraint(
             self.free_transfers[self.start - 1] == 1,
@@ -1747,8 +1747,8 @@ class Team_Planner:
         self.model.add_constraints(
             (self.team[p, self.start - 1] == 1 for p in self.initial_team),
             name='initial_team')
-        self.model.add_constraints(
-            (self.team[p, self.start] == 1 for p in random_sampled_team),
+        self.model.add_constraint(
+            (so.expr_sum(self.team[p, self.start] for p in random_sampled_team) >= 13),
             name='initial_wc_team')
         self.model.add_constraint(
             self.free_transfers[self.start - 1] == 1,
