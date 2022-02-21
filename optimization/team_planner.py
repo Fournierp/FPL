@@ -463,6 +463,20 @@ class Team_Planner:
                 self.free_transfers[w] for w in self.gameweeks),
             name='hits')
 
+        # For printing
+        self.model.add_constraint(
+            (so.expr_sum(self.triple[p, w] for p in self.players for w in self.gameweeks) == 0),
+            name='triple_print')
+        self.model.add_constraint(
+            (so.expr_sum(self.bboost[w] for w in self.gameweeks) == 0),
+            name='bboost_print')
+        self.model.add_constraint(
+            (so.expr_sum(self.freehit[w] for w in self.gameweeks) == 0),
+            name='freehit_print')
+        self.model.add_constraint(
+            (so.expr_sum(self.wildcard[w] for w in self.gameweeks) == 0),
+            name='wildcard_print')
+
     def differential_model(
             self,
             nb_differentials=3,
@@ -543,6 +557,7 @@ class Team_Planner:
             name='3xc_real',
             vartype=so.binary)
 
+        # Dummy variables for printing
         self.triple = self.model.add_variables(
             self.players,
             self.gameweeks,
@@ -907,6 +922,23 @@ class Team_Planner:
             vartype=so.integer,
             lb=0,
             ub=15)
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
+            vartype=so.binary)
 
         # Objective: maximize total expected points
         # Assume a % (decay_bench) chance of a player not playing
@@ -1121,6 +1153,11 @@ class Team_Planner:
                 for p in self.players for w in self.gameweeks[1:]),
             name='no_team_transfer')
 
+        # For printing
+        self.model.add_constraint(
+            (self.wildcard[self.start] == 1),
+            name='wildcard_print')
+
         # Solve
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = (
@@ -1157,7 +1194,10 @@ class Team_Planner:
             self.hits,
             self.in_the_bank,
             self.model.get_objective_value(),
-            wildcard=0,
+            self.freehit,
+            self.wildcard,
+            self.bboost,
+            self.triple,
             nb_suboptimal=model_name)
 
         # GW
@@ -1231,6 +1271,23 @@ class Team_Planner:
             name='itb',
             vartype=so.continuous,
             lb=0)
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
+            vartype=so.binary)
 
         # Objective: maximize total expected points
         # Assume a % (decay_bench) chance of a player not playing
@@ -1499,6 +1556,11 @@ class Team_Planner:
             (self.hits[w] == 0 for w in self.gameweeks[1:]),
             name='hits_max')
 
+        # For printing
+        self.model.add_constraint(
+            (self.wildcard[self.start] == 1),
+            name='wildcard_print')
+
         # Solve
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = (
@@ -1535,7 +1597,10 @@ class Team_Planner:
             self.hits,
             self.in_the_bank,
             self.model.get_objective_value(),
-            wildcard=0,
+            self.freehit,
+            self.wildcard,
+            self.bboost,
+            self.triple,
             nb_suboptimal=model_name)
 
         # GW
@@ -1612,6 +1677,23 @@ class Team_Planner:
             name='itb',
             vartype=so.continuous,
             lb=0)
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
+            vartype=so.binary)
 
         # Objective: maximize total expected points
         # Assume a % (decay_bench) chance of a player being subbed on
@@ -1874,6 +1956,11 @@ class Team_Planner:
                 self.free_transfers[w] for w in self.gameweeks),
             name='hits')
 
+        # For printing
+        self.model.add_constraint(
+            (self.wildcard[self.start] == 1),
+            name='wildcard_print')
+
         # Solve
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = (
@@ -1910,7 +1997,10 @@ class Team_Planner:
             self.hits,
             self.in_the_bank,
             self.model.get_objective_value(),
-            wildcard=0,
+            self.freehit,
+            self.wildcard,
+            self.bboost,
+            self.triple,
             nb_suboptimal=model_name)
 
     def automated_chips_model(
@@ -2158,15 +2248,6 @@ class Team_Planner:
             so.expr_sum(self.wildcard[w] for w in self.gameweeks) <=
             -- (not self.wildcard_used),
             name='wc_once')
-
-        # Hardcode GW with FH
-        # self.model.add_constraint(
-        #     self.freehit[27] == 1,
-        #     name='fh_gw11')
-        # # Hardcode GW with TC
-        # self.model.add_constraint(
-        #     so.expr_sum(self.triple[p, 26] for p in self.players) == 1,
-        #     name='tc_gw11')
 
         # The chips must not be used on the same GW
         self.model.add_constraint(
@@ -2512,8 +2593,10 @@ class Team_Planner:
             self.free_transfers,
             self.hits,
             self.in_the_bank, self.model.get_objective_value(),
-            freehit=self.freehit, wildcard=self.wildcard,
-            bboost=self.bboost, threexc=self.triple,
+            self.freehit,
+            self.wildcard,
+            self.bboost,
+            self.triple,
             nb_suboptimal=i)
 
     def suboptimals(
@@ -2717,14 +2800,14 @@ if __name__ == "__main__":
     #     },
     #     two_ft_gw=[])
 
-    # tp.advanced_wildcard(
-    #     objective_type='decay',
-    #     decay_gameweek=[0.9, 0.75, 0.6],
-    #     vicecap_decay=0.1,
-    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
-    #     ft_val=1.5,
-    #     itb_val=0.008
-    # )
+    tp.advanced_wildcard(
+        objective_type='decay',
+        decay_gameweek=[0.9, 0.75, 0.6],
+        vicecap_decay=0.1,
+        decay_bench=[0.03, 0.21, 0.06, 0.002],
+        ft_val=1.5,
+        itb_val=0.008
+    )
 
     # tp.automated_chips_model(
     #     objective_type='decay',
@@ -2734,10 +2817,10 @@ if __name__ == "__main__":
     #     ft_val=1.5,
     #     itb_val=0.008)
 
-    tp.solve(
-        model_name="vanilla",
-        log=True,
-        time_lim=0)
+    # tp.solve(
+    #     model_name="vanilla",
+    #     log=True,
+    #     time_lim=0)
 
     # tp.suboptimals(
     #     model_name="vanilla",

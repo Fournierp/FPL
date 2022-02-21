@@ -229,10 +229,10 @@ def pretty_print(
         hits,
         in_the_bank,
         objective_value,
-        freehit=-1,
-        wildcard=-1,
-        bboost=-1,
-        threexc=-1,
+        freehit,
+        wildcard,
+        bboost,
+        threexc,
         nb_suboptimal=0):
     """ Print and save model solution
 
