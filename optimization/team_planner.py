@@ -1964,7 +1964,7 @@ class Team_Planner:
         # Solve
         self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
         command = (
-            f'cbc optimization/tmp/{model_name}.mps solve solu' +
+            f'cbc optimization/tmp/{model_name}.mps solve solu ' +
             f'optimization/tmp/{model_name}_solution.txt')
 
         process = Popen(command, shell=True, stdout=DEVNULL)
