@@ -219,6 +219,7 @@ def pretty_print(
         start,
         period,
         team,
+        team_fh,
         starter,
         bench,
         captain,
@@ -241,6 +242,7 @@ def pretty_print(
         start (int): Start GW
         period (int): Horizon
         team (so.Variable): Selected teams
+        team_fh (so.Variable): Selected Freehit teams
         starter (so.Variable): Team that will bring points
         bench (so.Variable): Benched players
         captain (so.Variable): Captain player
@@ -267,29 +269,53 @@ def pretty_print(
     for w in np.arange(start, start+period):
         print(f"GW: {w} - FT: {int(free_transfers[w].get_value())}")
         for p in data.index.tolist():
-            if team[p, w].get_value():
-                if not starter[p, w].get_value():
-                    bo = [-1] + [
-                        bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
-                else:
-                    bo = [0]
+            if not freehit[w].get_value():
+                if team[p, w].get_value():
+                    if not starter[p, w].get_value():
+                        bo = [-1] + [
+                            bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
+                    else:
+                        bo = [0]
 
-                df = df.append(
-                    {
-                        'GW': w,
-                        'Name': data.loc[p]['Name'],
-                        'Pos': data.loc[p]['Pos'],
-                        'Team': data.loc[p]['Team'],
-                        'SV': data.loc[p]['SV'],
-                        'xP': data.loc[p][str(w) + '_Pts'],
-                        'xMins': data.loc[p][str(w) + '_xMins'],
-                        'Start': int(starter[p, w].get_value()),
-                        'Bench': int(np.argmax(bo)),
-                        'Cap': int(captain[p, w].get_value()),
-                        'Vice': int(vicecaptain[p, w].get_value()),
-                        'Ownership': data.loc[p]["Top_100"]},
-                    ignore_index=True)
+                    df = df.append(
+                        {
+                            'GW': w,
+                            'Name': data.loc[p]['Name'],
+                            'Pos': data.loc[p]['Pos'],
+                            'Team': data.loc[p]['Team'],
+                            'SV': data.loc[p]['SV'],
+                            'xP': data.loc[p][str(w) + '_Pts'],
+                            'xMins': data.loc[p][str(w) + '_xMins'],
+                            'Start': int(starter[p, w].get_value()),
+                            'Bench': int(np.argmax(bo)),
+                            'Cap': int(captain[p, w].get_value()),
+                            'Vice': int(vicecaptain[p, w].get_value()),
+                            'Ownership': data.loc[p]["Top_100"]},
+                        ignore_index=True)
+            
+            else:
+                if team_fh[p, w].get_value():
+                    if not starter[p, w].get_value():
+                        bo = [-1] + [
+                            bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
+                    else:
+                        bo = [0]
 
+                    df = df.append(
+                        {
+                            'GW': w,
+                            'Name': data.loc[p]['Name'],
+                            'Pos': data.loc[p]['Pos'],
+                            'Team': data.loc[p]['Team'],
+                            'SV': data.loc[p]['SV'],
+                            'xP': data.loc[p][str(w) + '_Pts'],
+                            'xMins': data.loc[p][str(w) + '_xMins'],
+                            'Start': int(starter[p, w].get_value()),
+                            'Bench': int(np.argmax(bo)),
+                            'Cap': int(captain[p, w].get_value()),
+                            'Vice': int(vicecaptain[p, w].get_value()),
+                            'Ownership': data.loc[p]["Top_100"]},
+                        ignore_index=True)
             if buy[p, w].get_value():
                 print(f"Buy: {data.loc[p, 'Name']}")
             if sell[p, w].get_value():
