@@ -2340,7 +2340,7 @@ class Team_Planner:
         self.model.add_constraints(
             (
                 so.expr_sum(self.starter[p, w] for p in self.players) == 11 +
-                hit_val * self.bboost[w] for w in self.gameweeks),
+                4 * self.bboost[w] for w in self.gameweeks),
             name='11_starters')
         self.model.add_constraints(
             (
@@ -2414,13 +2414,13 @@ class Team_Planner:
             (
                 so.expr_sum(
                     self.bench[p, w, 0] for p in self.players
-                    if self.data.loc[p, 'G'] == 1) ==
+                    if self.data.loc[p, 'G'] == 1) <=
                 1 for w in self.gameweeks),
             name='one_bench_gk')
         # There must be a single substitute per bench spot
         self.model.add_constraints(
             (
-                so.expr_sum(self.bench[p, w, o] for p in self.players) == 1
+                so.expr_sum(self.bench[p, w, o] for p in self.players) <= 1
                 for w in self.gameweeks for o in [1, 2, 3]),
             name='one_per_bench_spot')
 
@@ -2800,27 +2800,27 @@ if __name__ == "__main__":
     #     },
     #     two_ft_gw=[])
 
-    tp.advanced_wildcard(
-        objective_type='decay',
-        decay_gameweek=[0.9, 0.75, 0.6],
-        vicecap_decay=0.1,
-        decay_bench=[0.03, 0.21, 0.06, 0.002],
-        ft_val=1.5,
-        itb_val=0.008
-    )
-
-    # tp.automated_chips_model(
+    # tp.advanced_wildcard(
     #     objective_type='decay',
-    #     decay_gameweek=0.9,
+    #     decay_gameweek=[0.9, 0.75, 0.6],
     #     vicecap_decay=0.1,
     #     decay_bench=[0.03, 0.21, 0.06, 0.002],
     #     ft_val=1.5,
-    #     itb_val=0.008)
+    #     itb_val=0.008
+    # )
 
-    # tp.solve(
-    #     model_name="vanilla",
-    #     log=True,
-    #     time_lim=0)
+    tp.automated_chips_model(
+        objective_type='decay',
+        decay_gameweek=0.9,
+        vicecap_decay=0.1,
+        decay_bench=[0.03, 0.21, 0.06, 0.002],
+        ft_val=1.5,
+        itb_val=0.008)
+
+    tp.solve(
+        model_name="vanilla",
+        log=True,
+        time_lim=0)
 
     # tp.suboptimals(
     #     model_name="vanilla",
