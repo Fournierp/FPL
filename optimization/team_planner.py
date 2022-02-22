@@ -130,6 +130,11 @@ class Team_Planner:
             self.all_gameweeks,
             name='team',
             vartype=so.binary)
+        self.team_fh = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='team_fh',
+            vartype=so.binary)
         self.starter = self.model.add_variables(
             self.players,
             self.gameweeks,
@@ -2523,7 +2528,7 @@ class Team_Planner:
         # The maximum number of FT is 2 on regular GWs
         self.model.add_constraints(
             (
-                self.free_transfers[w + 1] <= 2 + self.wildcard[w] +
+                self.free_transfers[w + 1] <= 2 - self.wildcard[w] -
                 self.freehit[w] for w in self.gameweeks),
             name='max_ft')
 
@@ -2584,6 +2589,7 @@ class Team_Planner:
             self.start,
             self.period,
             self.team,
+            self.team_fh,
             self.starter,
             self.bench,
             self.captain,
