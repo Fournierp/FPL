@@ -40,6 +40,7 @@ id,first_name,second_name,team
 694,Mika,Biereth,1
 695,Ryan,Alebiosu,1
 705,Zach,Awe,1
+711,Zak,Swanson,1
 10,Calum,Chambers,2
 28,Jed,Steer,2
 29,Conor,Hourihane,2
@@ -182,6 +183,7 @@ id,first_name,second_name,team
 578,Maxwel,Cornet,5
 585,Connor,Roberts,5
 700,Wout,Weghorst,5
+708,Sam,Waller,5
 119,César,Azpilicueta,6
 120,Olivier,Giroud,6
 121,Thiago,Emiliano da Silva,6
@@ -245,6 +247,7 @@ id,first_name,second_name,team
 543,Scott,Banks,7
 561,Remi,Matthews,7
 586,Odsonne,Edouard,7
+709,Tayo,Adaramola,7
 42,Anwar,El Ghazi,8
 163,Fabian,Delph,8
 164,Gylfi,Sigurdsson,8
@@ -668,6 +671,7 @@ id,first_name,second_name,team
 644,Ajibola,Alese,19
 652,Armstrong,Oko-Flex,19
 682,Pierre,Ekwah,19
+710,Daniel,Chesters,19
 426,João Filipe Iria,Santos Moutinho,20
 427,Rui Pedro,dos Santos Patrício,20
 428,Willy,Boly,20
