@@ -86,6 +86,24 @@ class Baselines:
 
         return aggregate_df
 
+    def random_odds(self, games):
+        parameter_df = (
+            pd.DataFrame()
+            .assign(team=self.teams)
+        )
+
+        aggregate_df = (
+            pd.merge(games, parameter_df, left_on='team1', right_on='team')
+            .merge(parameter_df, left_on='team2', right_on='team')
+        )
+        
+        odds = np.random.rand(3, aggregate_df.shape[0])
+        aggregate_df["home_win_p"] = odds[0] / np.sum(odds, 0)
+        aggregate_df["draw_p"] = odds[1] / np.sum(odds, 0)
+        aggregate_df["away_win_p"] = odds[2] / np.sum(odds, 0)
+
+        return aggregate_df
+
     def evaluate(self, games, function_name):
         if function_name == "uniform":
             aggregate_df = self.uniform(games)
@@ -95,6 +113,8 @@ class Baselines:
             aggregate_df = self.draw_bias(games)
         if function_name == "away":
             aggregate_df = self.away_bias(games)
+        if function_name == "random":
+            aggregate_df = self.random_odds(games)
 
         aggregate_df["winner"] = match_outcome(aggregate_df)
 
@@ -165,5 +185,5 @@ if __name__ == "__main__":
         .sort_values("date")
     )
 
-    predictions = baselines.evaluate(season_games[season_games['event'] == next_gw], 'uniform')
+    predictions = baselines.evaluate(season_games[season_games['event'] == 25], 'random')
     print(f"{(np.mean(predictions.rps)*100):.2f}")
