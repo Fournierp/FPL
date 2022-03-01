@@ -62,16 +62,19 @@ def get_predictions(noise=False, premium=False):
     if premium: 
         start = get_next_gw()
         df = pd.read_csv(
-            f"data/fpl_review/2021-22/gameweek/{start}/fplreview.csv")
-
-        df['BV'] = df['BV']*10
-        df['SV'] = df['SV']*10
+            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv")
 
         # One hot encoded values for the constraints
+        df["Pos"] = df["Pos"].map(
+            {
+                1: 'G',
+                2: 'D',
+                3: 'M',
+                4: 'F'
+            })
         df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
         df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
-        df.index = df.index + 1
-        df = df.rename_axis("id")
+        df = df.set_index('id')
 
         return df.fillna(0)
 
@@ -190,8 +193,8 @@ def get_next_gw():
     res = requests.get(url).json()
 
     for idx, gw in enumerate(res['events']):
-        if not gw['finished']:
-        # if gw['is_next']:
+        # if not gw['finished']:
+        if gw['is_next']:
             return idx + 1
 
 
@@ -216,6 +219,7 @@ def pretty_print(
         start,
         period,
         team,
+        team_fh,
         starter,
         bench,
         captain,
@@ -226,10 +230,10 @@ def pretty_print(
         hits,
         in_the_bank,
         objective_value,
-        freehit=-1,
-        wildcard=-1,
-        bboost=-1,
-        threexc=-1,
+        freehit,
+        wildcard,
+        bboost,
+        threexc,
         nb_suboptimal=0):
     """ Print and save model solution
 
@@ -238,6 +242,7 @@ def pretty_print(
         start (int): Start GW
         period (int): Horizon
         team (so.Variable): Selected teams
+        team_fh (so.Variable): Selected Freehit teams
         starter (so.Variable): Team that will bring points
         bench (so.Variable): Benched players
         captain (so.Variable): Captain player
@@ -264,29 +269,53 @@ def pretty_print(
     for w in np.arange(start, start+period):
         print(f"GW: {w} - FT: {int(free_transfers[w].get_value())}")
         for p in data.index.tolist():
-            if team[p, w].get_value():
-                if not starter[p, w].get_value():
-                    bo = [-1] + [
-                        bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
-                else:
-                    bo = [0]
+            if not freehit[w].get_value():
+                if team[p, w].get_value():
+                    if not starter[p, w].get_value():
+                        bo = [-1] + [
+                            bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
+                    else:
+                        bo = [0]
 
-                df = df.append(
-                    {
-                        'GW': w,
-                        'Name': data.loc[p]['Name'],
-                        'Pos': data.loc[p]['Pos'],
-                        'Team': data.loc[p]['Team'],
-                        'SV': data.loc[p]['SV'],
-                        'xP': data.loc[p][str(w) + '_Pts'],
-                        'xMins': data.loc[p][str(w) + '_xMins'],
-                        'Start': int(starter[p, w].get_value()),
-                        'Bench': int(np.argmax(bo)),
-                        'Cap': int(captain[p, w].get_value()),
-                        'Vice': int(vicecaptain[p, w].get_value()),
-                        'Ownership': data.loc[p]["Top_100"]},
-                    ignore_index=True)
+                    df = df.append(
+                        {
+                            'GW': w,
+                            'Name': data.loc[p]['Name'],
+                            'Pos': data.loc[p]['Pos'],
+                            'Team': data.loc[p]['Team'],
+                            'SV': data.loc[p]['SV'],
+                            'xP': data.loc[p][str(w) + '_Pts'],
+                            'xMins': data.loc[p][str(w) + '_xMins'],
+                            'Start': int(starter[p, w].get_value()),
+                            'Bench': int(np.argmax(bo)),
+                            'Cap': int(captain[p, w].get_value()),
+                            'Vice': int(vicecaptain[p, w].get_value()),
+                            'Ownership': data.loc[p]["Top_100"]},
+                        ignore_index=True)
+            
+            else:
+                if team_fh[p, w].get_value():
+                    if not starter[p, w].get_value():
+                        bo = [-1] + [
+                            bench[p, w, o].get_value() for o in [0, 1, 2, 3]]
+                    else:
+                        bo = [0]
 
+                    df = df.append(
+                        {
+                            'GW': w,
+                            'Name': data.loc[p]['Name'],
+                            'Pos': data.loc[p]['Pos'],
+                            'Team': data.loc[p]['Team'],
+                            'SV': data.loc[p]['SV'],
+                            'xP': data.loc[p][str(w) + '_Pts'],
+                            'xMins': data.loc[p][str(w) + '_xMins'],
+                            'Start': int(starter[p, w].get_value()),
+                            'Bench': int(np.argmax(bo)),
+                            'Cap': int(captain[p, w].get_value()),
+                            'Vice': int(vicecaptain[p, w].get_value()),
+                            'Ownership': data.loc[p]["Top_100"]},
+                        ignore_index=True)
             if buy[p, w].get_value():
                 print(f"Buy: {data.loc[p, 'Name']}")
             if sell[p, w].get_value():
@@ -313,13 +342,13 @@ def pretty_print(
         xpts_val = (
             np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) -
             hits[w].get_value() * 4 *
-            (0 if wildcard == w-start else 1) *
-            (0 if freehit == w-start else 1)
+            (0 if wildcard[w].get_value() else 1) *
+            (0 if freehit[w].get_value() else 1)
             )
         hits_val = (
             int(hits[w].get_value()) *
-            (0 if wildcard == w-start else 1) *
-            (0 if freehit == w-start else 1)
+            (0 if wildcard[w].get_value() else 1) *
+            (0 if freehit[w].get_value() else 1)
             )
         print(
             f"xPts: {xpts_val:.2f} - Hits: {hits_val}" + chip + av +

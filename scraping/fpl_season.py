@@ -312,6 +312,43 @@ class FPL_Season:
                     f'API Call failed, retrying in 3 seconds! Rank: {rank}')
                 time.sleep(3)
 
+    def sample_hof(self):
+        """ Get one manager's season data """
+        df = pd.read_csv('data/hof/top_managers.csv')
+
+        managers = {}
+        for team_id in df['team_id']:
+            self.logger.info(f"Starting to scrape manager {team_id}.")
+
+            # API Requests
+            res = requests.get(
+                f'https://fantasy.premierleague.com/api/entry/{team_id}/history/'
+                ).json()
+            rank = res['current'][23]['overall_rank']
+
+            team_data = self.get_fpl_strategy(team_id, False)
+
+            (_, team_id, chips, overall_rank,
+                bench_pts, team, transfers) = team_data
+            managers[str(rank)] = {}
+            managers[str(rank)]['id'] = team_id
+            managers[str(rank)]['chips'] = chips
+            managers[str(rank)]['team'] = team['team']
+            managers[str(rank)]['cap'] = team['cap']
+            managers[str(rank)]['vice'] = team['vice']
+            managers[str(rank)]['subs'] = team['subs']
+            managers[str(rank)]['transfers'] = transfers
+            managers[str(rank)]['overall_rank'] = overall_rank
+            managers[str(rank)]['bench_pts'] = bench_pts
+
+            with open(
+                    os.path.join(self.root, f'managers_hof.json'),
+                    'w') as outfile:
+                json.dump(managers, outfile)
+
+            if self.git_cli:
+                self.logger.info("Saving csv.")
+                Git()
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -323,3 +360,4 @@ if __name__ == "__main__":
     fpls = FPL_Season(logger, season_data, sys.argv[1:])
     # fpls.sample_ranks()
     fpls.sample_one_manager(team_id=35868)
+    # fpls.sample_hof()
