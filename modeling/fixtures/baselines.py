@@ -35,9 +35,66 @@ class Baselines:
 
         return aggregate_df
 
+    def home_bias(self, games):
+        parameter_df = (
+            pd.DataFrame()
+            .assign(team=self.teams)
+        )
+
+        aggregate_df = (
+            pd.merge(games, parameter_df, left_on='team1', right_on='team')
+            .merge(parameter_df, left_on='team2', right_on='team')
+        )
+
+        aggregate_df["home_win_p"] = 1
+        aggregate_df["draw_p"] = 0
+        aggregate_df["away_win_p"] = 0
+
+        return aggregate_df
+
+    def draw_bias(self, games):
+        parameter_df = (
+            pd.DataFrame()
+            .assign(team=self.teams)
+        )
+
+        aggregate_df = (
+            pd.merge(games, parameter_df, left_on='team1', right_on='team')
+            .merge(parameter_df, left_on='team2', right_on='team')
+        )
+
+        aggregate_df["home_win_p"] = 0
+        aggregate_df["draw_p"] = 1
+        aggregate_df["away_win_p"] = 0
+
+        return aggregate_df
+
+    def away_bias(self, games):
+        parameter_df = (
+            pd.DataFrame()
+            .assign(team=self.teams)
+        )
+
+        aggregate_df = (
+            pd.merge(games, parameter_df, left_on='team1', right_on='team')
+            .merge(parameter_df, left_on='team2', right_on='team')
+        )
+
+        aggregate_df["home_win_p"] = 0
+        aggregate_df["draw_p"] = 0
+        aggregate_df["away_win_p"] = 1
+
+        return aggregate_df
+
     def evaluate(self, games, function_name):
         if function_name == "uniform":
             aggregate_df = self.uniform(games)
+        if function_name == "home":
+            aggregate_df = self.home_bias(games)
+        if function_name == "draw":
+            aggregate_df = self.draw_bias(games)
+        if function_name == "away":
+            aggregate_df = self.away_bias(games)
 
         aggregate_df["winner"] = match_outcome(aggregate_df)
 
