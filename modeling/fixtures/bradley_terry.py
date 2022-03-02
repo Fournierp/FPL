@@ -43,7 +43,7 @@ class Bradley_Terry:
             games (pd.DataFrame): Fixtures
 
         Returns:
-            (float): Negative log likelihood
+            (float): Likelihood of the estimated parameters
         """
         parameter_df = (
             pd.DataFrame()
