@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+from tqdm import tqdm
 
 from scipy.stats import norm
 from scipy.optimize import minimize
@@ -40,7 +41,7 @@ class Thurstone_Mosteller:
 
         fixtures_df = (
             pd.merge(
-                season_games,
+                games,
                 parameter_df,
                 left_on='team1',
                 right_on='team')
@@ -81,7 +82,7 @@ class Thurstone_Mosteller:
             args=self.games,
             constraints=constraints,
             bounds=bounds,
-            options={'disp': True, 'maxiter':100})
+            options={'disp': False, 'maxiter':100})
 
         self.parameters = self.solution["x"]
 
@@ -129,6 +130,79 @@ class Thurstone_Mosteller:
                  row["away_win_p"]], row["winner"]), axis=1)
 
         return fixtures_df
+
+    def backtest(self, train_games, test_season, path=''):
+        # Get training data
+        self.train_games = train_games
+
+        # Initialize model
+        self.__init__(self.train_games[
+            self.train_games['season'] != test_season])
+
+        # Initial train on past seasons
+        self.maximum_likelihood_estimation()
+
+        # Get test data
+        # Separate testing based on per GW intervals
+        fixtures = (
+            pd.read_csv(f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            .loc[:, ['event', 'kickoff_time']])
+        fixtures["kickoff_time"] = (
+            pd.to_datetime(fixtures["kickoff_time"]).dt.date)
+        # Get only EPL games from the test season
+        self.test_games = (
+            self.train_games
+            .loc[self.train_games['league_id'] == 2411]
+            .loc[self.train_games['season'] == test_season]
+            .dropna()
+            )
+        self.test_games["kickoff_time"] = (
+            pd.to_datetime(self.test_games["date"]).dt.date)
+        # Merge on date
+        self.test_games = pd.merge(
+            self.test_games,
+            fixtures,
+            left_on='kickoff_time',
+            right_on='kickoff_time')
+        # Add the home team and away team index for running inference
+        idx = (
+            pd.DataFrame()
+            .assign(team=self.teams)
+            .assign(team_index=np.arange(self.league_size)))
+        self.test_games = (
+            pd.merge(self.test_games, idx, left_on="team1", right_on="team")
+            .rename(columns={"team_index": "hg"})
+            .drop(["team"], axis=1)
+            .drop_duplicates()
+            .merge(idx, left_on="team2", right_on="team")
+            .rename(columns={"team_index": "ag"})
+            .drop(["team"], axis=1)
+            .sort_values("date")
+        )
+
+        predictions = pd.DataFrame()
+
+        for gw in tqdm(range(1, 39)):
+            # For each GW of the season
+            if gw in self.test_games['event'].values:
+
+                # Run inference on the specific GW and save data.
+                predictions = pd.concat([
+                    predictions,
+                    self.evaluate(
+                        self.test_games[self.test_games['event'] == gw])
+                    ])
+
+                # Retrain model with the new GW added to the train set.
+                self.__init__(
+                    pd.concat([
+                        self.train_games[self.train_games['season'] != 2021],
+                        self.test_games[self.test_games['event'] <= gw]
+                        ])
+                    .drop(columns=['ag', 'hg']))
+                self.maximum_likelihood_estimation()
+
+        return predictions
 
 
 if __name__ == "__main__":
