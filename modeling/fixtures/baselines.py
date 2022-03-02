@@ -24,16 +24,16 @@ class Baselines:
             .assign(team=self.teams)
         )
 
-        aggregate_df = (
+        fixtures_df = (
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
 
-        aggregate_df["home_win_p"] = 0.333
-        aggregate_df["draw_p"] = 0.333
-        aggregate_df["away_win_p"] = 0.333
+        fixtures_df["home_win_p"] = 0.333
+        fixtures_df["draw_p"] = 0.333
+        fixtures_df["away_win_p"] = 0.333
 
-        return aggregate_df
+        return fixtures_df
 
     def home_bias(self, games):
         parameter_df = (
@@ -41,16 +41,16 @@ class Baselines:
             .assign(team=self.teams)
         )
 
-        aggregate_df = (
+        fixtures_df = (
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
 
-        aggregate_df["home_win_p"] = 1
-        aggregate_df["draw_p"] = 0
-        aggregate_df["away_win_p"] = 0
+        fixtures_df["home_win_p"] = 1
+        fixtures_df["draw_p"] = 0
+        fixtures_df["away_win_p"] = 0
 
-        return aggregate_df
+        return fixtures_df
 
     def draw_bias(self, games):
         parameter_df = (
@@ -58,16 +58,16 @@ class Baselines:
             .assign(team=self.teams)
         )
 
-        aggregate_df = (
+        fixtures_df = (
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
 
-        aggregate_df["home_win_p"] = 0
-        aggregate_df["draw_p"] = 1
-        aggregate_df["away_win_p"] = 0
+        fixtures_df["home_win_p"] = 0
+        fixtures_df["draw_p"] = 1
+        fixtures_df["away_win_p"] = 0
 
-        return aggregate_df
+        return fixtures_df
 
     def away_bias(self, games):
         parameter_df = (
@@ -75,16 +75,16 @@ class Baselines:
             .assign(team=self.teams)
         )
 
-        aggregate_df = (
+        fixtures_df = (
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
 
-        aggregate_df["home_win_p"] = 0
-        aggregate_df["draw_p"] = 0
-        aggregate_df["away_win_p"] = 1
+        fixtures_df["home_win_p"] = 0
+        fixtures_df["draw_p"] = 0
+        fixtures_df["away_win_p"] = 1
 
-        return aggregate_df
+        return fixtures_df
 
     def random_odds(self, games):
         parameter_df = (
@@ -92,17 +92,17 @@ class Baselines:
             .assign(team=self.teams)
         )
 
-        aggregate_df = (
+        fixtures_df = (
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
         
-        odds = np.random.rand(3, aggregate_df.shape[0])
-        aggregate_df["home_win_p"] = odds[0] / np.sum(odds, 0)
-        aggregate_df["draw_p"] = odds[1] / np.sum(odds, 0)
-        aggregate_df["away_win_p"] = odds[2] / np.sum(odds, 0)
+        odds = np.random.rand(3, fixtures_df.shape[0])
+        fixtures_df["home_win_p"] = odds[0] / np.sum(odds, 0)
+        fixtures_df["draw_p"] = odds[1] / np.sum(odds, 0)
+        fixtures_df["away_win_p"] = odds[2] / np.sum(odds, 0)
 
-        return aggregate_df
+        return fixtures_df
 
     def bookies_odds(self, games, path):
         parameter_df = (
@@ -110,7 +110,7 @@ class Baselines:
             .assign(team=self.teams)
         )
 
-        aggregate_df = (
+        fixtures_df = (
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
@@ -138,19 +138,19 @@ class Baselines:
             'Wolves': 'Wolverhampton'
         })
 
-        aggregate_df = pd.merge(
-            aggregate_df,
+        fixtures_df = pd.merge(
+            fixtures_df,
             predictions_market,
             left_on=['team1', 'team2'],
             right_on=['team1', 'team2'])
 
-        aggregate_df['total'] = (100 / aggregate_df['home_win_p'] + 100 /
-                    aggregate_df['draw_p'] + 100 / aggregate_df['away_win_p'])
-        aggregate_df['home_win_p'] = 100 / aggregate_df['home_win_p'] / aggregate_df['total']
-        aggregate_df['away_win_p'] = 100 / aggregate_df['away_win_p'] / aggregate_df['total']
-        aggregate_df['draw_p'] = 100 / aggregate_df['draw_p'] / aggregate_df['total']
+        fixtures_df['total'] = (100 / fixtures_df['home_win_p'] + 100 /
+                    fixtures_df['draw_p'] + 100 / fixtures_df['away_win_p'])
+        fixtures_df['home_win_p'] = 100 / fixtures_df['home_win_p'] / fixtures_df['total']
+        fixtures_df['away_win_p'] = 100 / fixtures_df['away_win_p'] / fixtures_df['total']
+        fixtures_df['draw_p'] = 100 / fixtures_df['draw_p'] / fixtures_df['total']
 
-        return aggregate_df
+        return fixtures_df
 
     def bookies_favorite(self, games, path):
         parameter_df = (
@@ -158,7 +158,7 @@ class Baselines:
             .assign(team=self.teams)
         )
 
-        aggregate_df = (
+        fixtures_df = (
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
@@ -186,47 +186,47 @@ class Baselines:
             'Wolves': 'Wolverhampton'
         })
 
-        aggregate_df = pd.merge(
-            aggregate_df,
+        fixtures_df = pd.merge(
+            fixtures_df,
             predictions_market,
             left_on=['team1', 'team2'],
             right_on=['team1', 'team2'])
 
-        max_odds = np.argmax(aggregate_df[['home_win_p', 'draw_p', 'away_win_p']].values, 1)
+        max_odds = np.argmax(fixtures_df[['home_win_p', 'draw_p', 'away_win_p']].values, 1)
 
-        favorites = np.zeros(aggregate_df[['home_win_p', 'draw_p', 'away_win_p']].values.shape)
+        favorites = np.zeros(fixtures_df[['home_win_p', 'draw_p', 'away_win_p']].values.shape)
         favorites[np.arange(0, max_odds.shape[0]), max_odds] = 1
 
-        aggregate_df['home_win_p'] = favorites[:, 0]
-        aggregate_df['away_win_p'] = favorites[:, 2]
-        aggregate_df['draw_p'] = favorites[:, 1]
+        fixtures_df['home_win_p'] = favorites[:, 0]
+        fixtures_df['away_win_p'] = favorites[:, 2]
+        fixtures_df['draw_p'] = favorites[:, 1]
 
-        return aggregate_df
+        return fixtures_df
 
     def evaluate(self, games, function_name, path=''):
         if function_name == "uniform":
-            aggregate_df = self.uniform(games)
+            fixtures_df = self.uniform(games)
         if function_name == "home":
-            aggregate_df = self.home_bias(games)
+            fixtures_df = self.home_bias(games)
         if function_name == "draw":
-            aggregate_df = self.draw_bias(games)
+            fixtures_df = self.draw_bias(games)
         if function_name == "away":
-            aggregate_df = self.away_bias(games)
+            fixtures_df = self.away_bias(games)
         if function_name == "random":
-            aggregate_df = self.random_odds(games)
+            fixtures_df = self.random_odds(games)
         if function_name == "bookies":
-            aggregate_df = self.bookies_odds(games, path)
+            fixtures_df = self.bookies_odds(games, path)
         if function_name == "favorite":
-            aggregate_df = self.bookies_favorite(games, path)
+            fixtures_df = self.bookies_favorite(games, path)
 
-        aggregate_df["winner"] = match_outcome(aggregate_df)
+        fixtures_df["winner"] = match_outcome(fixtures_df)
 
-        aggregate_df["rps"] = aggregate_df.apply(
+        fixtures_df["rps"] = fixtures_df.apply(
             lambda row: ranked_probability_score(
                 [row["home_win_p"], row["draw_p"],
                  row["away_win_p"]], row["winner"]), axis=1)
 
-        return aggregate_df
+        return fixtures_df
 
 
 if __name__ == "__main__":
