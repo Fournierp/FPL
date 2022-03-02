@@ -11,9 +11,15 @@ from ranked_probability_score import ranked_probability_score, match_outcome
 
 
 class Thurstone_Mosteller:
-    """ Model """
+    """ Model game outcomes using normal distribution """
 
     def __init__(self, games, threshold=0.1, scale=1):
+        """
+        Args:
+            games (pd.DataFrame): Finished games to used for training.
+            threshold (float): Threshold to differentiate team performances
+            scale (float): Variance of strength ratings
+        """
         self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
         self.games = self.games.dropna()
         self.games["score1"] = self.games["score1"].astype(int)
@@ -25,14 +31,21 @@ class Thurstone_Mosteller:
         self.scale = scale
 
         # Initial parameters
-        self.parameters = np.concatenate(
-            (
-                np.random.uniform(0, 1, (self.league_size)),  # Strengths ratings
-                [.3],  # Home advantage
-            )
-        )
+        self.parameters = np.concatenate((
+            np.random.uniform(0, 1, (self.league_size)),  # Strengths ratings
+            [.3],  # Home advantage
+        ))
 
     def likelihood(self, parameters, games):
+        """ Perform sample prediction and compare with outcome
+
+        Args:
+            parameters (pd.DataFrame): Current estimate of the parameters
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (float): Negative log likelihood
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(rating=parameters[:self.league_size])
@@ -52,7 +65,7 @@ class Thurstone_Mosteller:
             .drop("team_x", axis=1)
             .assign(home_adv=parameters[-1])
         )
-        
+
         outcome = match_outcome(fixtures_df)
         outcome_ma = np.ones((fixtures_df.shape[0], 3))
         outcome_ma[np.arange(0, fixtures_df.shape[0]), outcome] = 0
@@ -65,7 +78,11 @@ class Thurstone_Mosteller:
         return np.ma.masked_array(odds, outcome_ma).sum()
 
     def maximum_likelihood_estimation(self):
-        # Set the strength rating to have unique set of values for reproducibility
+        """
+        Maximum likelihood estimation of the model parameters for team
+        strengths and the home field advantage.
+        """
+        # Set strength ratings to have unique set of values for reproducibility
         constraints = [{
             "type": "eq",
             "fun": lambda x:
@@ -82,11 +99,19 @@ class Thurstone_Mosteller:
             args=self.games,
             constraints=constraints,
             bounds=bounds,
-            options={'disp': False, 'maxiter':100})
+            options={'disp': False, 'maxiter': 100})
 
         self.parameters = self.solution["x"]
 
     def predict(self, games):
+        """ Predict score for several fixtures
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            pd.DataFrame: Fixtures with appended odds
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(rating=self.parameters[:self.league_size])
@@ -104,6 +129,14 @@ class Thurstone_Mosteller:
         )
 
         def synthesize_odds(row):
+            """ Lambda function that parses row by row to compute score matrix
+
+            Args:
+                row (array): Fixture
+
+            Returns:
+                (tuple): Home and Away win and clean sheets odds
+            """
             home_win_p = norm.cdf((row["rating1"] + row["home_adv"] - row["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
             away_win_p = norm.cdf((row["rating2"] - row["home_adv"] - row["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
             draw_p = 1 - home_win_p - away_win_p
@@ -120,6 +153,14 @@ class Thurstone_Mosteller:
         return fixtures_df
 
     def evaluate(self, games):
+        """ Evaluate the model's prediction accuracy
+
+        Args:
+            games (pd.DataFrame): Fixtured to evaluate on
+
+        Returns:
+            pd.DataFrame: df with appended metrics
+        """
         fixtures_df = self.predict(games)
 
         fixtures_df["winner"] = match_outcome(fixtures_df)
@@ -132,6 +173,17 @@ class Thurstone_Mosteller:
         return fixtures_df
 
     def backtest(self, train_games, test_season, path=''):
+        """ Test the model's accuracy on past/finished games by iteratively
+        training and testing on parts of the data.
+
+        Args:
+            train_games (pd.DataFrame): All the training samples
+            test_season (pd.DataFrame): Fixtures to use as test/train
+            path (string): Path extension to adjust to ipynb use
+
+        Returns:
+            (float): Evaluation metric
+        """
         # Get training data
         self.train_games = train_games
 
@@ -145,7 +197,8 @@ class Thurstone_Mosteller:
         # Get test data
         # Separate testing based on per GW intervals
         fixtures = (
-            pd.read_csv(f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            pd.read_csv(
+                f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
             .loc[:, ['event', 'kickoff_time']])
         fixtures["kickoff_time"] = (
             pd.to_datetime(fixtures["kickoff_time"]).dt.date)
@@ -265,5 +318,6 @@ if __name__ == "__main__":
         .sort_values("date")
     )
 
-    predictions = model.evaluate(season_games[season_games['event'] == next_gw])
+    predictions = model.evaluate(
+        season_games[season_games['event'] == next_gw])
     print(predictions.rps.mean())

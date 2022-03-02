@@ -10,6 +10,10 @@ class Baselines:
     """ Baselines and dummy models """
 
     def __init__(self, games):
+        """
+        Args:
+            games (pd.DataFrame): Finished games to used for training.
+        """
         self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
         self.games = self.games.dropna()
         self.games["score1"] = self.games["score1"].astype(int)
@@ -19,6 +23,14 @@ class Baselines:
         self.league_size = len(self.teams)
 
     def uniform(self, games):
+        """ Uniform outcome odds
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (pd.DataFrame): Fixture with outcome prediction
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(team=self.teams)
@@ -36,6 +48,14 @@ class Baselines:
         return fixtures_df
 
     def home_bias(self, games):
+        """ Odds biased towards home team
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (pd.DataFrame): Fixture with outcome prediction
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(team=self.teams)
@@ -53,6 +73,14 @@ class Baselines:
         return fixtures_df
 
     def draw_bias(self, games):
+        """ Odds biased towards draw
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (pd.DataFrame): Fixture with outcome prediction
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(team=self.teams)
@@ -70,6 +98,14 @@ class Baselines:
         return fixtures_df
 
     def away_bias(self, games):
+        """ Odds biased towards away team
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (pd.DataFrame): Fixture with outcome prediction
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(team=self.teams)
@@ -87,6 +123,14 @@ class Baselines:
         return fixtures_df
 
     def random_odds(self, games):
+        """ Random odds
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (pd.DataFrame): Fixture with outcome prediction
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(team=self.teams)
@@ -96,7 +140,7 @@ class Baselines:
             pd.merge(games, parameter_df, left_on='team1', right_on='team')
             .merge(parameter_df, left_on='team2', right_on='team')
         )
-        
+
         odds = np.random.rand(3, fixtures_df.shape[0])
         fixtures_df["home_win_p"] = odds[0] / np.sum(odds, 0)
         fixtures_df["draw_p"] = odds[1] / np.sum(odds, 0)
@@ -105,6 +149,14 @@ class Baselines:
         return fixtures_df
 
     def bookies_odds(self, games, path):
+        """ Bookies odds
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (pd.DataFrame): Fixture with outcome prediction
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(team=self.teams)
@@ -144,15 +196,27 @@ class Baselines:
             left_on=['team1', 'team2'],
             right_on=['team1', 'team2'])
 
-        fixtures_df['total'] = (100 / fixtures_df['home_win_p'] + 100 /
-                    fixtures_df['draw_p'] + 100 / fixtures_df['away_win_p'])
-        fixtures_df['home_win_p'] = 100 / fixtures_df['home_win_p'] / fixtures_df['total']
-        fixtures_df['away_win_p'] = 100 / fixtures_df['away_win_p'] / fixtures_df['total']
-        fixtures_df['draw_p'] = 100 / fixtures_df['draw_p'] / fixtures_df['total']
+        fixtures_df['total'] = (
+            100 / fixtures_df['home_win_p'] + 100 /
+            fixtures_df['draw_p'] + 100 / fixtures_df['away_win_p'])
+        fixtures_df['home_win_p'] = (
+            100 / fixtures_df['home_win_p'] / fixtures_df['total'])
+        fixtures_df['away_win_p'] = (
+            100 / fixtures_df['away_win_p'] / fixtures_df['total'])
+        fixtures_df['draw_p'] = (
+            100 / fixtures_df['draw_p'] / fixtures_df['total'])
 
         return fixtures_df
 
     def bookies_favorite(self, games, path):
+        """ Bookies Odds biased towards the favorite
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            (pd.DataFrame): Fixture with outcome prediction
+        """
         parameter_df = (
             pd.DataFrame()
             .assign(team=self.teams)
@@ -192,9 +256,11 @@ class Baselines:
             left_on=['team1', 'team2'],
             right_on=['team1', 'team2'])
 
-        max_odds = np.argmax(fixtures_df[['home_win_p', 'draw_p', 'away_win_p']].values, 1)
+        max_odds = np.argmax(
+            fixtures_df[['home_win_p', 'draw_p', 'away_win_p']].values, 1)
 
-        favorites = np.zeros(fixtures_df[['home_win_p', 'draw_p', 'away_win_p']].values.shape)
+        favorites = np.zeros(
+            fixtures_df[['home_win_p', 'draw_p', 'away_win_p']].values.shape)
         favorites[np.arange(0, max_odds.shape[0]), max_odds] = 1
 
         fixtures_df['home_win_p'] = favorites[:, 0]
@@ -204,6 +270,16 @@ class Baselines:
         return fixtures_df
 
     def evaluate(self, games, function_name, path=''):
+        """ Evaluate the model's prediction accuracy
+
+        Args:
+            games (pd.DataFrame): Fixtured to evaluate on
+            function_name (string): Function to execute
+            path (string): Path extension to adjust to ipynb use
+
+        Returns:
+            pd.DataFrame: df with appended metrics
+        """
         if function_name == "uniform":
             fixtures_df = self.uniform(games)
         if function_name == "home":
@@ -288,5 +364,6 @@ if __name__ == "__main__":
         .sort_values("date")
     )
 
-    predictions = baselines.evaluate(season_games[season_games['event'] == next_gw], 'favorite')
+    predictions = baselines.evaluate(
+        season_games[season_games['event'] == next_gw], 'favorite')
     print(f"{(np.mean(predictions.rps)*100):.2f}")
