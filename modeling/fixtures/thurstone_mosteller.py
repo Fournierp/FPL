@@ -63,7 +63,6 @@ class Thurstone_Mosteller:
             .rename(columns={"rating": "rating2"})
             .drop("team_y", axis=1)
             .drop("team_x", axis=1)
-            .assign(home_adv=parameters[-1])
         )
 
         outcome = match_outcome(fixtures_df)
@@ -71,8 +70,8 @@ class Thurstone_Mosteller:
         outcome_ma[np.arange(0, fixtures_df.shape[0]), outcome] = 0
 
         odds = np.zeros((fixtures_df.shape[0], 3))
-        odds[:, 0] = norm.cdf((fixtures_df["rating1"] + fixtures_df["home_adv"] - fixtures_df["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
-        odds[:, 2] = norm.cdf((fixtures_df["rating2"] - fixtures_df["home_adv"] - fixtures_df["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
+        odds[:, 0] = norm.cdf((fixtures_df["rating1"] + parameters[-1] - fixtures_df["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
+        odds[:, 2] = norm.cdf((fixtures_df["rating2"] - parameters[-1] - fixtures_df["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
         odds[:, 1] = 1 - odds[:, 0] - odds[:, 2]
 
         return np.ma.masked_array(odds, outcome_ma).sum()
@@ -90,7 +89,7 @@ class Thurstone_Mosteller:
             }]
 
         # Set the maximum and minimum values the parameters can take
-        bounds = [(0, 5)] * self.league_size
+        bounds = [(0, 3)] * self.league_size
         bounds += [(0, 1)]
 
         self.solution = minimize(
@@ -125,7 +124,6 @@ class Thurstone_Mosteller:
             .rename(columns={"rating": "rating2"})
             .drop("team_y", axis=1)
             .drop("team_x", axis=1)
-            .assign(home_adv=self.parameters[-1])
         )
 
         def synthesize_odds(row):
@@ -137,8 +135,8 @@ class Thurstone_Mosteller:
             Returns:
                 (tuple): Home and Away win and clean sheets odds
             """
-            home_win_p = norm.cdf((row["rating1"] + row["home_adv"] - row["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
-            away_win_p = norm.cdf((row["rating2"] - row["home_adv"] - row["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
+            home_win_p = norm.cdf((row["rating1"] + self.parameters[-1] - row["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
+            away_win_p = norm.cdf((row["rating2"] - self.parameters[-1] - row["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
             draw_p = 1 - home_win_p - away_win_p
 
             return home_win_p, draw_p, away_win_p
