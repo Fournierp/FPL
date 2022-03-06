@@ -80,6 +80,7 @@ id,first_name,second_name,team
 684,Kaine,Hayden,2
 691,Robin,Olsen,2
 703,Benjamin,Chrisene,2
+713,Tommi,O'Reilly,2
 76,Pontus,Jansson,3
 77,Christian,Nørgaard,3
 78,Ivan,Toney,3
@@ -154,6 +155,7 @@ id,first_name,second_name,team
 654,Marc,Leonard,4
 655,Evan,Ferguson,4
 688,Thomas,McGill,4
+712,Odeluga,Offiah,4
 98,James,Tarkowski,5
 99,Phil,Bardsley,5
 100,Erik,Pieters,5
@@ -592,6 +594,7 @@ id,first_name,second_name,team
 668,Harvey,White,17
 701,Dejan,Kulusevski,17
 702,Rodrigo,Bentancur,17
+714,Alfie,Devine,17
 354,Moussa,Sissoko,18
 376,Ben,Foster,18
 377,Danny,Rose,18
