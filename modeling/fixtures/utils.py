@@ -51,6 +51,19 @@ def clean_sheet(m):
     return (home, away)
 
 
+def time_decay(xi, t):
+    """ Compute importance weight based on time elapsed
+
+    Args:
+        xi (float): Decay rate
+        t (int): Days elapsed
+
+    Returns:
+        (float): importance weight
+    """
+    return np.exp(-xi * t)
+
+
 def get_next_gw():
     """ Scrapes the FPL api to get the next GW number
 
