@@ -7,31 +7,41 @@ from tqdm import tqdm
 from scipy.stats import poisson
 from scipy.optimize import minimize
 
-from utils import odds, clean_sheet, score_mtx, get_next_gw
+from utils import odds, clean_sheet, score_mtx, get_next_gw, time_decay
 from ranked_probability_score import ranked_probability_score, match_outcome
 
 
 class Independent_Poisson:
     """ Model team strength with Poisson Random variables """
 
-    def __init__(self, games):
+    def __init__(self, games, parameters=None, decay=False):
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
         """
         self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
         self.games = self.games.dropna()
+
+        self.games["date"] = pd.to_datetime(self.games["date"])
+        self.games["days_since"] = (
+            self.games["date"].max() - self.games["date"]).dt.days
+        self.games["weight"] = time_decay(0.001, self.games["days_since"])
+        self.decay = decay
+
         self.games["score1"] = self.games["score1"].astype(int)
         self.games["score2"] = self.games["score2"].astype(int)
 
         self.teams = np.sort(np.unique(self.games["team1"]))
         self.league_size = len(self.teams)
 
-        self.parameters = np.concatenate((
-            np.random.uniform(0, 3, (self.league_size)),  # Attack ratings
-            [np.random.random()],  # Home advantage
-            [np.random.random()],  # Intercept
-        ))
+        if parameters is not None:
+            self.parameters = np.concatenate((
+                np.random.uniform(0, 3, (self.league_size)),  # Attack ratings
+                [np.random.random()],  # Home advantage
+                [np.random.random()],  # Intercept
+            ))
+        else:
+            self.parameters = parameters
 
     def neg_log_likelihood(self, parameters, games):
         """ Perform sample prediction and compare with outcome
@@ -77,9 +87,9 @@ class Independent_Poisson:
                 )
 
         score1_loglikelihood = (
-            poisson.logpmf(fixtures_df["score1"], score1_inferred))
+            poisson.logpmf(fixtures_df["score1"], score1_inferred)) * (self.decay * fixtures_df['weight'])
         score2_loglikelihood = (
-            poisson.logpmf(fixtures_df["score2"], score2_inferred))
+            poisson.logpmf(fixtures_df["score2"], score2_inferred)) * (self.decay * fixtures_df['weight'])
 
         return -(score1_loglikelihood + score2_loglikelihood).sum()
 
@@ -192,7 +202,7 @@ class Independent_Poisson:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, path=''):
+    def backtest(self, train_games, test_season, cold_start=True, path=''):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -265,13 +275,26 @@ class Independent_Poisson:
                         self.test_games[self.test_games['event'] == gw])
                     ])
 
-                # Retrain model with the new GW added to the train set.
-                self.__init__(
-                    pd.concat([
-                        self.train_games[self.train_games['season'] != 2021],
-                        self.test_games[self.test_games['event'] <= gw]
-                        ])
-                    .drop(columns=['ag', 'hg']))
+                if cold_start:
+                    # Retrain model with the new GW added to the train set
+                    # Use previous GW's paramaters as initial parameters
+                    self.__init__(
+                        pd.concat([
+                            self.train_games[self.train_games['season'] != 2021],
+                            self.test_games[self.test_games['event'] <= gw]
+                            ])
+                        .drop(columns=['ag', 'hg']),
+                        parameters=self.parameters)
+
+                else:
+                    # Retrain model with the new GW added to the train set.
+                    self.__init__(
+                        pd.concat([
+                            self.train_games[self.train_games['season'] != 2021],
+                            self.test_games[self.test_games['event'] <= gw]
+                            ])
+                        .drop(columns=['ag', 'hg']))
+
                 self.maximum_likelihood_estimation()
 
         return predictions
