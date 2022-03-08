@@ -13,12 +13,13 @@ from ranked_probability_score import ranked_probability_score, match_outcome
 class Thurstone_Mosteller:
     """ Model game outcomes using normal distribution """
 
-    def __init__(self, games, threshold=0.1, scale=1):
+    def __init__(self, games, threshold=0.1, scale=1, parameters=None):
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
             threshold (float): Threshold to differentiate team performances
             scale (float): Variance of strength ratings
+            parameters (array): Initial parameters to use
         """
         self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
         self.games = self.games.dropna()
@@ -31,10 +32,13 @@ class Thurstone_Mosteller:
         self.scale = scale
 
         # Initial parameters
-        self.parameters = np.concatenate((
-            np.random.uniform(0, 1, (self.league_size)),  # Strengths ratings
-            [.3],  # Home advantage
-        ))
+        if parameters is None:
+            self.parameters = np.concatenate((
+                np.random.uniform(0, 1, (self.league_size)),  # Strengths ratings
+                [.3],  # Home advantage
+            ))
+        else:
+            self.parameters = parameters
 
     def likelihood(self, parameters, games):
         """ Perform sample prediction and compare with outcome
@@ -124,6 +128,7 @@ class Thurstone_Mosteller:
             .rename(columns={"rating": "rating2"})
             .drop("team_y", axis=1)
             .drop("team_x", axis=1)
+            .assign(home_adv=self.parameters[-1])
         )
 
         def synthesize_odds(row):
@@ -135,8 +140,8 @@ class Thurstone_Mosteller:
             Returns:
                 (tuple): Home and Away win and clean sheets odds
             """
-            home_win_p = norm.cdf((row["rating1"] + self.parameters[-1] - row["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
-            away_win_p = norm.cdf((row["rating2"] - self.parameters[-1] - row["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
+            home_win_p = norm.cdf((row["rating1"] + row["home_adv"] - row["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
+            away_win_p = norm.cdf((row["rating2"] - row["home_adv"] - row["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
             draw_p = 1 - home_win_p - away_win_p
 
             return home_win_p, draw_p, away_win_p
@@ -170,7 +175,7 @@ class Thurstone_Mosteller:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, path=''):
+    def backtest(self, train_games, test_season, path='', cold_start=True, save=False):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -178,6 +183,8 @@ class Thurstone_Mosteller:
             train_games (pd.DataFrame): All the training samples
             test_season (pd.DataFrame): Fixtures to use as test/train
             path (string): Path extension to adjust to ipynb use
+            cold_start (boolean): Resume training with random parameters
+            save (boolean): Save predictions to disk
 
         Returns:
             (float): Evaluation metric
@@ -244,14 +251,32 @@ class Thurstone_Mosteller:
                         self.test_games[self.test_games['event'] == gw])
                     ])
 
+                if cold_start:
+                    previous_parameters = None
+                else:
+                    previous_parameters = self.parameters
+
                 # Retrain model with the new GW added to the train set.
                 self.__init__(
                     pd.concat([
                         self.train_games[self.train_games['season'] != 2021],
                         self.test_games[self.test_games['event'] <= gw]
                         ])
-                    .drop(columns=['ag', 'hg']))
+                    .drop(columns=['ag', 'hg']),
+                    parameters=previous_parameters)
                 self.maximum_likelihood_estimation()
+
+        if save:
+            (
+                predictions
+                .loc[:, [
+                    'date', 'team1', 'team2', 'event', 'hg', 'ag',
+                    'rating1', 'rating2', 'home_adv',
+                    'home_win_p', 'draw_p', 'away_win_p']]
+                .to_csv(
+                    f"{path}data/predictions/scores/thurstone_mosteller.csv",
+                    index=False)
+            )
 
         return predictions
 
