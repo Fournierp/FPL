@@ -313,7 +313,7 @@ class Independent_Poisson:
                     'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p',
                     'away_cs_p']]
                 .to_csv(
-                    f"{path}data/predictions/scores/independent_poisson{'_decay' if self.decay else ''}.csv",
+                    f"{path}data/predictions/fixtures/independent_poisson{'_decay' if self.decay else ''}.csv",
                     index=False)
             )
 

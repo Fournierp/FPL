@@ -285,7 +285,7 @@ class Thurstone_Mosteller:
                     'rating1', 'rating2', 'home_adv',
                     'home_win_p', 'draw_p', 'away_win_p']]
                 .to_csv(
-                    f"{path}data/predictions/scores/thurstone_mosteller.csv",
+                    f"{path}data/predictions/fixtures/thurstone_mosteller.csv",
                     index=False)
             )
 

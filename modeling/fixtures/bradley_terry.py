@@ -285,7 +285,7 @@ class Bradley_Terry:
                     'rating1', 'rating2', 'home_adv',
                     'home_win_p', 'draw_p', 'away_win_p']]
                 .to_csv(
-                    f"{path}data/predictions/scores/bradley_terry.csv",
+                    f"{path}data/predictions/fixtures/bradley_terry.csv",
                     index=False)
             )
 
