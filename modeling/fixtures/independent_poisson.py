@@ -303,9 +303,6 @@ class Independent_Poisson:
                     decay=self.decay)
                 self.maximum_likelihood_estimation()
 
-            if gw == 3:
-                break
-        
         if save:
             (
                 predictions
