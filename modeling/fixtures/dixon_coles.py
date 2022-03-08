@@ -22,6 +22,8 @@ class Dixon_Coles:
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
+            parameters (array): Initial parameters to use
+            decay (boolean): Apply time decay
         """
         self.games = games.loc[:, ["score1", "score2", "team1", "team2", "date"]]
         self.games = self.games.dropna()
