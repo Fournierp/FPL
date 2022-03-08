@@ -367,7 +367,7 @@ class Elo:
                     'date', 'team1', 'team2', 'event', 'home_rating',
                     'away_rating', 'home_win_p', 'draw_p', 'away_win_p']]
                 .to_csv(
-                    f"{path}data/predictions/scores/elo.csv",
+                    f"{path}data/predictions/fixtures/elo.csv",
                     index=False)
             )
 
