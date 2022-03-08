@@ -23,7 +23,7 @@ class Dixon_Coles:
         Args:
             games (pd.DataFrame): Finished games to used for training.
         """
-        self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
+        self.games = games.loc[:, ["score1", "score2", "team1", "team2", "date"]]
         self.games = self.games.dropna()
 
         self.games["date"] = pd.to_datetime(self.games["date"])
@@ -38,7 +38,7 @@ class Dixon_Coles:
         self.teams = np.sort(np.unique(self.games["team1"]))
         self.league_size = len(self.teams)
 
-        if parameters is not None:
+        if parameters is None:
             self.parameters = np.concatenate((
                 np.random.uniform(0, 3, (self.league_size)),  # Attack ratings
                 np.random.uniform(0, 3, (self.league_size)),  # Defense ratings
@@ -103,26 +103,33 @@ class Dixon_Coles:
             .rename(columns={"attack": "attack2", "defence": "defence2"})
             .drop("team_y", axis=1)
             .drop("team_x", axis=1)
+            .assign(intercept=self.parameters[-1])
+            .assign(home_adv=self.parameters[-2])
+            .assign(rho=self.parameters[-3])
         )
 
         score1_inferred = (
             np.exp(
-                parameters[-1] +
-                parameters[-2] +
+                fixtures_df["home_adv"] +
+                fixtures_df["intercept"] +
                 fixtures_df["attack1"] -
                 fixtures_df["defence2"])
                 )
         score2_inferred = (
             np.exp(
-                parameters[-1] +
+                fixtures_df["intercept"] +
                 fixtures_df["attack2"] -
                 fixtures_df["defence1"])
                 )
 
         score1_loglikelihood = (
-            poisson.logpmf(fixtures_df["score1"], score1_inferred)) * (self.decay * fixtures_df['weight'])
+            poisson.logpmf(fixtures_df["score1"], score1_inferred) *
+            (fixtures_df['weight'] if self.decay else 1)
+        )
         score2_loglikelihood = (
-            poisson.logpmf(fixtures_df["score2"], score2_inferred)) * (self.decay * fixtures_df['weight'])
+            poisson.logpmf(fixtures_df["score2"], score2_inferred) *
+            (fixtures_df['weight'] if self.decay else 1)
+        )
 
         return -(
             score1_loglikelihood +
@@ -185,17 +192,20 @@ class Dixon_Coles:
             .rename(columns={"attack": "attack2", "defence": "defence2"})
             .drop("team_y", axis=1)
             .drop("team_x", axis=1)
+            .assign(intercept=self.parameters[-1])
+            .assign(home_adv=self.parameters[-2])
+            .assign(rho=self.parameters[-3])
         )
 
         fixtures_df["score1_infered"] = (
             np.exp(
-                self.parameters[-1] +
-                self.parameters[-2] +
+                fixtures_df["home_adv"] +
+                fixtures_df["intercept"] +
                 fixtures_df["attack1"] -
                 fixtures_df["defence2"]))
         fixtures_df["score2_infered"] = (
             np.exp(
-                self.parameters[-1] +
+                fixtures_df["intercept"] +
                 fixtures_df["attack2"] -
                 fixtures_df["defence1"]))
 
@@ -212,10 +222,10 @@ class Dixon_Coles:
 
             # Apply Dixon and Coles adjustment
             m[0, 0] *= (
-                1 - row["score1_infered"] * row["score2_infered"] * self.parameters[-3])
-            m[0, 1] *= 1 + row["score1_infered"] * self.parameters[-3]
-            m[1, 0] *= 1 + row["score2_infered"] * self.parameters[-3]
-            m[1, 1] *= 1 - self.parameters[-3]
+                1 - row["score1_infered"] * row["score2_infered"] * row["rho"])
+            m[0, 1] *= 1 + row["score1_infered"] * row["rho"]
+            m[1, 0] *= 1 + row["score2_infered"] * row["rho"]
+            m[1, 1] *= 1 - row["rho"]
 
             home_win_p, draw_p, away_win_p = odds(m)
             home_cs_p, away_cs_p = clean_sheet(m)
@@ -253,7 +263,7 @@ class Dixon_Coles:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, cold_start=True, path=''):
+    def backtest(self, train_games, test_season, path='', cold_start=True, save=False):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -261,6 +271,8 @@ class Dixon_Coles:
             train_games (pd.DataFrame): All the training samples
             test_season (pd.DataFrame): Fixtures to use iteratively as test/train
             path (string): Path extension to adjust to ipynb use
+            cold_start (boolean): Resume training with random parameters
+            save (boolean): Save predictions to disk
 
         Returns:
             (float): Evaluation metric
@@ -269,8 +281,9 @@ class Dixon_Coles:
         self.train_games = train_games
 
         # Initialize model
-        self.__init__(self.train_games[
-            self.train_games['season'] != test_season])
+        self.__init__(
+            self.train_games[self.train_games['season'] != test_season],
+            decay=self.decay)
 
         # Initial train
         self.maximum_likelihood_estimation()
@@ -327,26 +340,34 @@ class Dixon_Coles:
                     ])
 
                 if cold_start:
-                    # Retrain model with the new GW added to the train set
-                    # Use previous GW's paramaters as initial parameters
-                    self.__init__(
-                        pd.concat([
-                            self.train_games[self.train_games['season'] != 2021],
-                            self.test_games[self.test_games['event'] <= gw]
-                            ])
-                        .drop(columns=['ag', 'hg']),
-                        parameters=self.parameters)
-
+                    previous_parameters = None
                 else:
-                    # Retrain model with the new GW added to the train set.
-                    self.__init__(
-                        pd.concat([
-                            self.train_games[self.train_games['season'] != 2021],
-                            self.test_games[self.test_games['event'] <= gw]
-                            ])
-                        .drop(columns=['ag', 'hg']))
+                    previous_parameters = self.parameters
 
+                # Retrain model with the new GW added to the train set.
+                self.__init__(
+                    pd.concat([
+                        self.train_games[self.train_games['season'] != 2021],
+                        self.test_games[self.test_games['event'] <= gw]
+                        ])
+                    .drop(columns=['ag', 'hg']),
+                    parameters=previous_parameters,
+                    decay=self.decay)
                 self.maximum_likelihood_estimation()
+
+        if save:
+            (
+                predictions
+                .loc[:, [
+                    'date', 'team1', 'team2', 'event', 'hg', 'ag',
+                    'attack1', 'defence1', 'attack2', 'defence2',
+                    'home_adv', 'intercept', 'rho', 'score1_infered', 'score2_infered',
+                    'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p',
+                    'away_cs_p']]
+                .to_csv(
+                    f"{path}data/predictions/scores/dixon_coles{'_decay' if self.decay else ''}.csv",
+                    index=False)
+            )
 
         return predictions
 
@@ -414,8 +435,3 @@ if __name__ == "__main__":
     predictions = model.evaluate(
         season_games[season_games['event'] == next_gw])
     print(predictions.rps.mean())
-    print(model.parameters)
-    print(dict(zip(["attack_"+team for team in model.teams] + 
-                ["defence_"+team for team in model.teams] +
-                ['rho', 'home_adv', 'intercept'],
-                model.parameters)))
