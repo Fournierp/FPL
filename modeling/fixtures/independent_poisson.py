@@ -18,8 +18,10 @@ class Independent_Poisson:
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
+            parameters (array): Initial parameters to use
+            decay (boolean): Apply time decay
         """
-        self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
+        self.games = games.loc[:, ["score1", "score2", "team1", "team2", "date"]]
         self.games = self.games.dropna()
 
         self.games["date"] = pd.to_datetime(self.games["date"])
@@ -34,7 +36,8 @@ class Independent_Poisson:
         self.teams = np.sort(np.unique(self.games["team1"]))
         self.league_size = len(self.teams)
 
-        if parameters is not None:
+        # Initial parameters
+        if parameters is None:
             self.parameters = np.concatenate((
                 np.random.uniform(0, 3, (self.league_size)),  # Attack ratings
                 [np.random.random()],  # Home advantage
@@ -87,9 +90,13 @@ class Independent_Poisson:
                 )
 
         score1_loglikelihood = (
-            poisson.logpmf(fixtures_df["score1"], score1_inferred)) * (self.decay * fixtures_df['weight'])
+            poisson.logpmf(fixtures_df["score1"], score1_inferred) *
+            (fixtures_df['weight'] if self.decay else 1)
+        )
         score2_loglikelihood = (
-            poisson.logpmf(fixtures_df["score2"], score2_inferred)) * (self.decay * fixtures_df['weight'])
+            poisson.logpmf(fixtures_df["score2"], score2_inferred) *
+            (fixtures_df['weight'] if self.decay else 1)
+        )
 
         return -(score1_loglikelihood + score2_loglikelihood).sum()
 
@@ -141,17 +148,19 @@ class Independent_Poisson:
             .rename(columns={"rating": "rating2"})
             .drop("team_y", axis=1)
             .drop("team_x", axis=1)
+            .assign(intercept=self.parameters[-1])
+            .assign(home_adv=self.parameters[-2])
         )
 
         fixtures_df["score1_infered"] = (
             np.exp(
-                self.parameters[-2] +
-                self.parameters[-1] +
+                fixtures_df["home_adv"] +
+                fixtures_df["intercept"] +
                 fixtures_df["rating1"] -
                 fixtures_df["rating2"]))
         fixtures_df["score2_infered"] = (
             np.exp(
-                self.parameters[-1] +
+                fixtures_df["intercept"] +
                 fixtures_df["rating2"] -
                 fixtures_df["rating1"]))
 
@@ -202,7 +211,7 @@ class Independent_Poisson:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, cold_start=True, path=''):
+    def backtest(self, train_games, test_season, path='', cold_start=True, save=False):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -210,6 +219,8 @@ class Independent_Poisson:
             train_games (pd.DataFrame): All the training samples
             test_season (pd.DataFrame): Fixtures to use iteratively as test/train
             path (string): Path extension to adjust to ipynb use
+            cold_start (boolean): Resume training with random parameters
+            save (boolean): Save predictions to disk
 
         Returns:
             (float): Evaluation metric
@@ -218,8 +229,9 @@ class Independent_Poisson:
         self.train_games = train_games
 
         # Initialize model
-        self.__init__(self.train_games[
-            self.train_games['season'] != test_season])
+        self.__init__(
+            self.train_games[self.train_games['season'] != test_season],
+            decay=self.decay)
 
         # Initial train
         self.maximum_likelihood_estimation()
@@ -276,26 +288,36 @@ class Independent_Poisson:
                     ])
 
                 if cold_start:
-                    # Retrain model with the new GW added to the train set
-                    # Use previous GW's paramaters as initial parameters
-                    self.__init__(
-                        pd.concat([
-                            self.train_games[self.train_games['season'] != 2021],
-                            self.test_games[self.test_games['event'] <= gw]
-                            ])
-                        .drop(columns=['ag', 'hg']),
-                        parameters=self.parameters)
-
+                    previous_parameters = None
                 else:
-                    # Retrain model with the new GW added to the train set.
-                    self.__init__(
-                        pd.concat([
-                            self.train_games[self.train_games['season'] != 2021],
-                            self.test_games[self.test_games['event'] <= gw]
-                            ])
-                        .drop(columns=['ag', 'hg']))
+                    previous_parameters = self.parameters
 
+                # Retrain model with the new GW added to the train set.
+                self.__init__(
+                    pd.concat([
+                        self.train_games[self.train_games['season'] != 2021],
+                        self.test_games[self.test_games['event'] <= gw]
+                        ])
+                    .drop(columns=['ag', 'hg']),
+                    parameters=previous_parameters,
+                    decay=self.decay)
                 self.maximum_likelihood_estimation()
+
+            if gw == 3:
+                break
+        
+        if save:
+            (
+                predictions
+                .loc[:, [
+                    'date', 'team1', 'team2', 'event', 'hg', 'ag',
+                    'rating1', 'rating2', 'home_adv', 'intercept',
+                    'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p',
+                    'away_cs_p']]
+                .to_csv(
+                    f"{path}data/predictions/scores/independent_poisson{'_decay' if self.decay else ''}.csv",
+                    index=False)
+            )
 
         return predictions
 
@@ -337,7 +359,7 @@ if __name__ == "__main__":
         )
 
     # Train model on all games up to the previous GW
-    model = Poisson(
+    model = Independent_Poisson(
         pd.concat([
             df.loc[df['season'] != season],
             season_games[season_games['event'] < next_gw]
