@@ -191,7 +191,7 @@ class Bradley_Terry:
 
         Args:
             train_games (pd.DataFrame): All the training samples
-            test_season (pd.DataFrame): Fixtures to use as test/train
+            test_season (string): Season to use a test set
             path (string): Path extension to adjust to ipynb use
             cold_start (boolean): Resume training with random parameters
             save (boolean): Save predictions to disk
@@ -253,6 +253,7 @@ class Bradley_Terry:
         for gw in tqdm(range(1, 39)):
             # For each GW of the season
             if gw in self.test_games['event'].values:
+                # Handle case when the season is not finished
 
                 # Run inference on the specific GW and save data.
                 predictions = pd.concat([
