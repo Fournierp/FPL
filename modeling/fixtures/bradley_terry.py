@@ -5,23 +5,31 @@ from tqdm import tqdm
 
 from scipy.optimize import minimize
 
-from utils import get_next_gw
+from utils import get_next_gw, time_decay
 from ranked_probability_score import ranked_probability_score, match_outcome
 
 
 class Bradley_Terry:
     """ Model game outcomes using logistic distribution """
 
-    def __init__(self, games, threshold=0.1, scale=1, parameters=None):
+    def __init__(self, games, threshold=0.1, scale=1, parameters=None, decay=False):
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
             threshold (float): Threshold to differentiate team performances
             scale (float): Variance of strength ratings
             parameters (array): Initial parameters to use
+            decay (boolean): Apply time decay
         """
-        self.games = games.loc[:, ["score1", "score2", "team1", "team2"]]
+        self.games = games.loc[:, ["score1", "score2", "team1", "team2", "date"]]
         self.games = self.games.dropna()
+
+        self.games["date"] = pd.to_datetime(self.games["date"])
+        self.games["days_since"] = (
+            self.games["date"].max() - self.games["date"]).dt.days
+        self.games["weight"] = time_decay(0.001, self.games["days_since"]) if decay else 1
+        self.decay = decay
+
         self.games["score1"] = self.games["score1"].astype(int)
         self.games["score2"] = self.games["score2"].astype(int)
 
@@ -77,7 +85,10 @@ class Bradley_Terry:
         odds[:, 2] = 1 / (1 + np.exp(-(fixtures_df["rating2"] - parameters[-1] - fixtures_df["rating1"] - self.threshold) / self.scale))
         odds[:, 1] = 1 - odds[:, 0] - odds[:, 2]
 
-        return np.ma.masked_array(odds, outcome_ma).sum()
+        return np.power(
+            np.ma.masked_array(odds, outcome_ma),
+            np.repeat(np.array(fixtures_df["weight"].values).reshape(-1, 1), 3, axis=1)
+        ).sum()
 
     def maximum_likelihood_estimation(self):
         """
@@ -321,7 +332,8 @@ if __name__ == "__main__":
         pd.concat([
             df.loc[df['season'] != season],
             season_games[season_games['event'] < next_gw]
-            ]))
+            ]),
+        decay=False)
     model.maximum_likelihood_estimation()
 
     # Add the home team and away team index for running inference
