@@ -3,7 +3,7 @@ import numpy as np
 import json
 from tqdm import tqdm
 
-from utils import odds, clean_sheet, score_mtx, get_next_gw
+from utils import odds, clean_sheet, time_decay, score_mtx, get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
 
 import pymc3 as pm
@@ -13,7 +13,13 @@ import theano.tensor as tt
 class Bayesian:
     """ Model scored goals at home and away as Bayesian Random variables """
 
-    def __init__(self, games):
+    def __init__(self, games, performance='score', decay=False):
+        """
+        Args:
+            games (pd.DataFrame): Finished games to used for training.
+            performance (string): Observed performance metric to use in model
+            decay (boolean): Apply time decay
+        """
         teams = np.sort(np.unique(games["team1"]))
         league_size = len(teams)
 
@@ -37,15 +43,30 @@ class Bayesian:
             .drop(["team"], axis=1)
             .sort_values("date")
         )
+
+        df["date"] = pd.to_datetime(df["date"])
+        df["days_since"] = (df["date"].max() - df["date"]).dt.days
+        df["weight"] = time_decay(0.0001, df["days_since"]) if decay else 1
+
+        # Handle different data to infer
+        assert performance == 'score' or performance == 'xg'
+        self.performance = performance
         
         self.games = df.loc[:, [
-            "xg1", "xg2", "team1", "team2", "hg", "ag", "weight"]]
+            f"{performance}1", f"{performance}2", "team1", "team2", "hg", "ag", "weight"]]
         self.games = self.games.dropna()
+
+        if performance == 'xg':
+            self.games = (
+                self.games
+                .rename(columns={"xg1": "score1", "xg2": "score2"})
+            )
 
         self.goals_home_obs = self.games["score1"].values
         self.goals_away_obs = self.games["score2"].values
         self.home_team = self.games["hg"].values
         self.away_team = self.games["ag"].values
+        self.w = self.games["weight"].values
 
         self.model = self._build_model()
 
@@ -92,10 +113,12 @@ class Bayesian:
                 intercept + atts[self.away_team] + defs[self.home_team])
 
             # goal expectation
-            home_points = pm.Poisson(
-                "home_goals", mu=home_theta, observed=self.goals_home_obs)
-            away_points = pm.Poisson(
-                "away_goals", mu=away_theta, observed=self.goals_away_obs)
+            home_points_ = pm.Potential(
+                'home_goals',
+                self.w * pm.Poisson.dist(mu=home_theta).logp(self.goals_home_obs))
+            away_points_ = pm.Potential(
+                'away_goals',
+                self.w * pm.Poisson.dist(mu=away_theta).logp(self.goals_away_obs))
 
         return model
 
@@ -291,7 +314,7 @@ class Bayesian:
                     'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p',
                     'away_cs_p']]
                 .to_csv(
-                    f"{path}data/predictions/fixtures/bayesian.csv",
+                    f"{path}data/predictions/fixtures/bayesian{'_decay' if self.decay else ''}{'_xg' if self.performance == 'xg' else ''}.csv",
                     index=False)
             )
 
