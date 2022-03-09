@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import json
-import os
 from tqdm import tqdm
 
 from scipy.stats import poisson
@@ -21,7 +20,8 @@ class Independent_Poisson:
             parameters (array): Initial parameters to use
             decay (boolean): Apply time decay
         """
-        self.games = games.loc[:, ["score1", "score2", "team1", "team2", "date"]]
+        self.games = games.loc[:, [
+            "score1", "score2", "team1", "team2", "date"]]
         self.games = self.games.dropna()
 
         self.games["date"] = pd.to_datetime(self.games["date"])
@@ -211,13 +211,19 @@ class Independent_Poisson:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, path='', cold_start=True, save=False):
+    def backtest(
+            self,
+            train_games,
+            test_season,
+            path='',
+            cold_start=True,
+            save=False):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
         Args:
             train_games (pd.DataFrame): All the training samples
-            test_season (string): Season to use a test set
+            test_season (int): Season to use a test set
             path (string): Path extension to adjust to ipynb use
             cold_start (boolean): Resume training with random parameters
             save (boolean): Save predictions to disk
@@ -239,7 +245,8 @@ class Independent_Poisson:
         # Get test data
         # Separate testing based on per GW intervals
         fixtures = (
-            pd.read_csv(f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            pd.read_csv(
+                f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
             .loc[:, ['event', 'kickoff_time']])
         fixtures["kickoff_time"] = (
             pd.to_datetime(fixtures["kickoff_time"]).dt.date)
@@ -296,7 +303,8 @@ class Independent_Poisson:
                 # Retrain model with the new GW added to the train set.
                 self.__init__(
                     pd.concat([
-                        self.train_games[self.train_games['season'] != 2021],
+                        self.train_games[
+                            self.train_games['season'] != test_season],
                         self.test_games[self.test_games['event'] <= gw]
                         ])
                     .drop(columns=['ag', 'hg']),
@@ -313,7 +321,8 @@ class Independent_Poisson:
                     'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p',
                     'away_cs_p']]
                 .to_csv(
-                    f"{path}data/predictions/fixtures/independent_poisson{'_decay' if self.decay else ''}.csv",
+                    f"{path}data/predictions/fixtures/independent_poisson" +
+                    f"{'_decay' if self.decay else ''}.csv",
                     index=False)
             )
 

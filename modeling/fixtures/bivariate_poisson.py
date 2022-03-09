@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import json
-import os
 from tqdm import tqdm
 
 from scipy.stats import poisson
@@ -12,7 +11,10 @@ from ranked_probability_score import ranked_probability_score, match_outcome
 
 
 class Bivariate_Poisson:
-    """ Model team attacking and defense strength with Poisson Random variables """
+    """
+    Model team attacking and defense strength with
+    Poisson Random variables
+    """
 
     def __init__(self, games, parameters=None, decay=False):
         """
@@ -21,7 +23,8 @@ class Bivariate_Poisson:
             parameters (array): Initial parameters to use
             decay (boolean): Apply time decay
         """
-        self.games = games.loc[:, ["score1", "score2", "team1", "team2", "date"]]
+        self.games = games.loc[:, [
+            "score1", "score2", "team1", "team2", "date"]]
         self.games = self.games.dropna()
 
         self.games["date"] = pd.to_datetime(self.games["date"])
@@ -217,13 +220,19 @@ class Bivariate_Poisson:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, path='', cold_start=True, save=False):
+    def backtest(
+            self,
+            train_games,
+            test_season,
+            path='',
+            cold_start=True,
+            save=False):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
         Args:
             train_games (pd.DataFrame): All the training samples
-            test_season (string): Season to use a test set
+            test_season (int): Season to use a test set
             path (string): Path extension to adjust to ipynb use
             cold_start (boolean): Resume training with random parameters
             save (boolean): Save predictions to disk
@@ -245,7 +254,8 @@ class Bivariate_Poisson:
         # Get test data
         # Separate testing based on per GW intervals
         fixtures = (
-            pd.read_csv(f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            pd.read_csv(
+                f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
             .loc[:, ['event', 'kickoff_time']])
         fixtures["kickoff_time"] = (
             pd.to_datetime(fixtures["kickoff_time"]).dt.date)
@@ -302,7 +312,8 @@ class Bivariate_Poisson:
                 # Retrain model with the new GW added to the train set.
                 self.__init__(
                     pd.concat([
-                        self.train_games[self.train_games['season'] != 2021],
+                        self.train_games[
+                            self.train_games['season'] != test_season],
                         self.test_games[self.test_games['event'] <= gw]
                         ])
                     .drop(columns=['ag', 'hg']),
@@ -316,11 +327,13 @@ class Bivariate_Poisson:
                 .loc[:, [
                     'date', 'team1', 'team2', 'event', 'hg', 'ag',
                     'attack1', 'defence1', 'attack2', 'defence2',
-                    'home_adv', 'intercept', 'score1_infered', 'score2_infered',
+                    'home_adv', 'intercept',
+                    'score1_infered', 'score2_infered',
                     'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p',
                     'away_cs_p']]
                 .to_csv(
-                    f"{path}data/predictions/fixtures/bivariate_poisson{'_decay' if self.decay else ''}.csv",
+                    f"{path}data/predictions/fixtures/bivariate_poisson" +
+                    f"{'_decay' if self.decay else ''}.csv",
                     index=False)
             )
 
@@ -364,7 +377,7 @@ if __name__ == "__main__":
         )
 
     # Train model on all games up to the previous GW
-    model = BivariatePoisson(
+    model = Bivariate_Poisson(
         pd.concat([
             df.loc[df['season'] != season],
             season_games[season_games['event'] < next_gw]

@@ -13,7 +13,13 @@ from ranked_probability_score import ranked_probability_score, match_outcome
 class Thurstone_Mosteller:
     """ Model game outcomes using normal distribution """
 
-    def __init__(self, games, threshold=0.1, scale=1, parameters=None, decay=False):
+    def __init__(
+            self,
+            games,
+            threshold=0.1,
+            scale=1,
+            parameters=None,
+            decay=False):
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
@@ -21,13 +27,15 @@ class Thurstone_Mosteller:
             scale (float): Variance of strength ratings
             parameters (array): Initial parameters to use
         """
-        self.games = games.loc[:, ["score1", "score2", "team1", "team2", "date"]]
+        self.games = games.loc[:, [
+            "score1", "score2", "team1", "team2", "date"]]
         self.games = self.games.dropna()
 
         self.games["date"] = pd.to_datetime(self.games["date"])
         self.games["days_since"] = (
             self.games["date"].max() - self.games["date"]).dt.days
-        self.games["weight"] = time_decay(0.001, self.games["days_since"]) if decay else 1
+        self.games["weight"] = (
+            time_decay(0.001, self.games["days_since"]) if decay else 1)
         self.decay = decay
         print(self.games["weight"])
         self.games["score1"] = self.games["score1"].astype(int)
@@ -41,7 +49,7 @@ class Thurstone_Mosteller:
         # Initial parameters
         if parameters is None:
             self.parameters = np.concatenate((
-                np.random.uniform(0, 1, (self.league_size)),  # Strengths ratings
+                np.random.uniform(0, 1, (self.league_size)),  # Strength
                 [.3],  # Home advantage
             ))
         else:
@@ -81,13 +89,26 @@ class Thurstone_Mosteller:
         outcome_ma[np.arange(0, fixtures_df.shape[0]), outcome] = 0
 
         odds = np.zeros((fixtures_df.shape[0], 3))
-        odds[:, 0] = norm.cdf((fixtures_df["rating1"] + parameters[-1] - fixtures_df["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
-        odds[:, 2] = norm.cdf((fixtures_df["rating2"] - parameters[-1] - fixtures_df["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
+        odds[:, 0] = norm.cdf(
+            (
+                fixtures_df["rating1"] + parameters[-1] -
+                fixtures_df["rating2"] - self.threshold
+            ) / (np.sqrt(2) * self.scale)
+        )
+        odds[:, 2] = norm.cdf(
+            (
+                fixtures_df["rating2"] - parameters[-1] -
+                fixtures_df["rating1"] - self.threshold
+            ) / (np.sqrt(2) * self.scale)
+        )
         odds[:, 1] = 1 - odds[:, 0] - odds[:, 2]
 
         return np.power(
             np.ma.masked_array(odds, outcome_ma),
-            np.repeat(np.array(fixtures_df["weight"].values).reshape(-1, 1), 3, axis=1)
+            np.repeat(
+                np.array(fixtures_df["weight"].values).reshape(-1, 1),
+                3,
+                axis=1)
         ).sum()
 
     def maximum_likelihood_estimation(self):
@@ -150,8 +171,18 @@ class Thurstone_Mosteller:
             Returns:
                 (tuple): Home and Away win and clean sheets odds
             """
-            home_win_p = norm.cdf((row["rating1"] + row["home_adv"] - row["rating2"] - self.threshold) / (np.sqrt(2) * self.scale))
-            away_win_p = norm.cdf((row["rating2"] - row["home_adv"] - row["rating1"] - self.threshold) / (np.sqrt(2) * self.scale))
+            home_win_p = norm.cdf(
+                (
+                    row["rating1"] + row["home_adv"] -
+                    row["rating2"] - self.threshold
+                ) / (np.sqrt(2) * self.scale)
+            )
+            away_win_p = norm.cdf(
+                (
+                    row["rating2"] - row["home_adv"] -
+                    row["rating1"] - self.threshold
+                ) / (np.sqrt(2) * self.scale)
+            )
             draw_p = 1 - home_win_p - away_win_p
 
             return home_win_p, draw_p, away_win_p
@@ -185,13 +216,19 @@ class Thurstone_Mosteller:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, path='', cold_start=True, save=False):
+    def backtest(
+            self,
+            train_games,
+            test_season,
+            path='',
+            cold_start=True,
+            save=False):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
         Args:
             train_games (pd.DataFrame): All the training samples
-            test_season (string): Season to use a test set
+            test_season (int): Season to use a test set
             path (string): Path extension to adjust to ipynb use
             cold_start (boolean): Resume training with random parameters
             save (boolean): Save predictions to disk
@@ -270,7 +307,8 @@ class Thurstone_Mosteller:
                 # Retrain model with the new GW added to the train set.
                 self.__init__(
                     pd.concat([
-                        self.train_games[self.train_games['season'] != 2021],
+                        self.train_games[
+                            self.train_games['season'] != test_season],
                         self.test_games[self.test_games['event'] <= gw]
                         ])
                     .drop(columns=['ag', 'hg']),

@@ -51,9 +51,10 @@ class Bayesian:
         # Handle different data to infer
         assert performance == 'score' or performance == 'xg'
         self.performance = performance
-        
+
         self.games = df.loc[:, [
-            f"{performance}1", f"{performance}2", "team1", "team2", "hg", "ag", "weight"]]
+            f"{performance}1", f"{performance}2", "team1", "team2",
+            "hg", "ag", "weight"]]
         self.games = self.games.dropna()
 
         if performance == 'xg':
@@ -113,12 +114,16 @@ class Bayesian:
                 intercept + atts[self.away_team] + defs[self.home_team])
 
             # goal expectation
-            home_points_ = pm.Potential(
+            pm.Potential(
                 'home_goals',
-                self.w * pm.Poisson.dist(mu=home_theta).logp(self.goals_home_obs))
-            away_points_ = pm.Potential(
+                self.w * pm.Poisson.dist(mu=home_theta).logp(
+                    self.goals_home_obs)
+            )
+            pm.Potential(
                 'away_goals',
-                self.w * pm.Poisson.dist(mu=away_theta).logp(self.goals_away_obs))
+                self.w * pm.Poisson.dist(mu=away_theta).logp(
+                    self.goals_away_obs)
+            )
 
         return model
 
@@ -245,7 +250,8 @@ class Bayesian:
         # Get test data
         # Separate testing based on per GW intervals
         fixtures = (
-            pd.read_csv(f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            pd.read_csv(
+                f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
             .loc[:, ['event', 'kickoff_time']])
         fixtures["kickoff_time"] = (
             pd.to_datetime(fixtures["kickoff_time"]).dt.date)
@@ -297,7 +303,8 @@ class Bayesian:
                 # Retrain model with the new GW added to the train set.
                 self.__init__(
                     pd.concat([
-                        self.train_games[self.train_games['season'] != test_season],
+                        self.train_games[
+                            self.train_games['season'] != test_season],
                         self.test_games[self.test_games['event'] <= gw]
                         ])
                     .drop(columns=['ag', 'hg'])
@@ -310,11 +317,14 @@ class Bayesian:
                 .loc[:, [
                     'date', 'team1', 'team2', 'event', 'hg', 'ag',
                     'attack1', 'defence1', 'attack2', 'defence2',
-                    'home_adv', 'intercept', 'score1_infered', 'score2_infered',
+                    'home_adv', 'intercept',
+                    'score1_infered', 'score2_infered',
                     'home_win_p', 'draw_p', 'away_win_p', 'home_cs_p',
                     'away_cs_p']]
                 .to_csv(
-                    f"{path}data/predictions/fixtures/bayesian{'_decay' if self.decay else ''}{'_xg' if self.performance == 'xg' else ''}.csv",
+                    f"{path}data/predictions/fixtures/bayesian" +
+                    f"{'_decay' if self.decay else ''}" +
+                    f"{'_xg' if self.performance == 'xg' else ''}.csv",
                     index=False)
             )
 

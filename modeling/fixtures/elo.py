@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import os
 from tqdm import tqdm
 
 from utils import get_next_gw
@@ -185,7 +184,8 @@ class Elo:
                 home_rating = 1375
                 self.teams.loc[self.league_size, 'team'] = row['team1']
                 self.teams.loc[self.league_size, 'rating'] = home_rating
-                self.teams.loc[self.league_size, 'team_index'] = self.league_size
+                self.teams.loc[
+                    self.league_size, 'team_index'] = self.league_size
                 self.league_size += 1
 
             try:
@@ -196,7 +196,8 @@ class Elo:
                 away_rating = 1375
                 self.teams.loc[self.league_size, 'team'] = row['team2']
                 self.teams.loc[self.league_size, 'rating'] = away_rating
-                self.teams.loc[self.league_size, 'team_index'] = self.league_size
+                self.teams.loc[
+                    self.league_size, 'team_index'] = self.league_size
                 self.league_size += 1
 
             exp_h = self.odds(home_rating + hfa, away_rating)
@@ -215,8 +216,12 @@ class Elo:
             fixtures_df["home_win_p"],
             fixtures_df["draw_p"],
             fixtures_df["away_win_p"]
-            ) = zip(*fixtures_df.apply(lambda row: synthesize_odds(row), axis=1))
-        
+            ) = zip(
+                *fixtures_df.apply(
+                    lambda row: synthesize_odds(row), axis=1
+                    )
+                )
+
         return fixtures_df
 
     def evaluate(self, games):
@@ -289,7 +294,7 @@ class Elo:
             pd.read_csv(
                 f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
                 usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'],
-                encoding= 'unicode_escape')
+                encoding='unicode_escape')
             for season in [
                 '9394', '9495', '9596', '9697', '9798',
                 '9899', '9900', '0001', '0102', '0203',
@@ -315,7 +320,8 @@ class Elo:
 
         # Get GW dates
         fixtures = (
-            pd.read_csv(f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            pd.read_csv(
+                f"{path}data/fpl_official/vaastav/data/2021-22/fixtures.csv")
             .loc[:, ['event', 'kickoff_time']])
         fixtures["kickoff_time"] = (
             pd.to_datetime(fixtures["kickoff_time"]).dt.date)
@@ -343,7 +349,7 @@ class Elo:
                 right_on='kickoff_time')
             .drop_duplicates()
             )
-        
+
         predictions = pd.DataFrame()
 
         for gw in tqdm(range(1, 39)):
@@ -373,20 +379,20 @@ class Elo:
 
         return predictions
 
+
 if __name__ == "__main__":
     df = (
         pd.read_csv(
             f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
             usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'],
-            encoding= 'unicode_escape')
+            encoding='unicode_escape')
         for season in [
-            # '9394', '9495', '9596', '9697', '9798',
-            # '9899', '9900', '0001', '0102', '0203',
-            # '0304', '0405', '0506', '0607', '0708',
-            # '0809', '0910', '1011', '1112', '1213',
-            # '1314', '1415', '1516', '1617', '1718',
-            # '1819', '1920', 
-            '2021'])
+            '9394', '9495', '9596', '9697', '9798',
+            '9899', '9900', '0001', '0102', '0203',
+            '0304', '0405', '0506', '0607', '0708',
+            '0809', '0910', '1011', '1112', '1213',
+            '1314', '1415', '1516', '1617', '1718',
+            '1819', '1920', '2021'])
 
     df = (
         pd.concat(df)
