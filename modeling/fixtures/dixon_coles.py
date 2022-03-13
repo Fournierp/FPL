@@ -17,7 +17,7 @@ warnings.filterwarnings("ignore")
 class Dixon_Coles:
     """ Model scored goals at home and away as Poisson Random variables """
 
-    def __init__(self, games, parameters=None, decay=False):
+    def __init__(self, games, parameters=None, decay=True):
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
@@ -31,7 +31,8 @@ class Dixon_Coles:
         self.games["date"] = pd.to_datetime(self.games["date"])
         self.games["days_since"] = (
             self.games["date"].max() - self.games["date"]).dt.days
-        self.games["weight"] = time_decay(0.001, self.games["days_since"])
+        self.games["weight"] = (
+            time_decay(0.001, self.games["days_since"]) if decay else 1)
         self.decay = decay
 
         self.games["score1"] = self.games["score1"].astype(int)
@@ -42,11 +43,11 @@ class Dixon_Coles:
 
         if parameters is None:
             self.parameters = np.concatenate((
-                np.random.uniform(0, 3, (self.league_size)),  # Attack ratings
-                np.random.uniform(0, 3, (self.league_size)),  # Defense ratings
-                [0],  # Rho
-                [np.random.random()],  # Home advantage
-                [np.random.random()],  # Intercept
+                np.random.uniform(0, 1, (self.league_size)),  # Attack ratings
+                np.random.uniform(0, 1, (self.league_size)),  # Defense ratings
+                [-0.1],  # Rho
+                [0.1],  # Home advantage
+                [0.1],  # Intercept
             ))
         else:
             self.parameters = parameters
@@ -124,24 +125,24 @@ class Dixon_Coles:
                 fixtures_df["defence1"])
                 )
 
-        score1_loglikelihood = (
-            poisson.logpmf(fixtures_df["score1"], score1_inferred) *
-            (fixtures_df['weight'] if self.decay else 1)
-        )
-        score2_loglikelihood = (
-            poisson.logpmf(fixtures_df["score2"], score2_inferred) *
-            (fixtures_df['weight'] if self.decay else 1)
-        )
+        score1_loglikelihood = poisson.logpmf(
+            fixtures_df["score1"],
+            score1_inferred)
+        score2_loglikelihood = poisson.logpmf(
+            fixtures_df["score2"],
+            score2_inferred)
 
         return -(
-            score1_loglikelihood +
-            score2_loglikelihood +
-            np.log(self._rho_correction(
-                fixtures_df["score1"],
-                fixtures_df["score2"],
-                score1_inferred,
-                score2_inferred,
-                parameters[-3]))
+            (
+                score1_loglikelihood +
+                score2_loglikelihood +
+                np.log(self._rho_correction(
+                    fixtures_df["score1"],
+                    fixtures_df["score2"],
+                    score1_inferred,
+                    score2_inferred,
+                    parameters[-3]))
+                ) * fixtures_df['weight']
             ).sum()
 
     def maximum_likelihood_estimation(self):
@@ -158,7 +159,7 @@ class Dixon_Coles:
 
         # Set the maximum and minimum values the parameters can take
         bounds = [(0, 3)] * self.league_size * 2
-        bounds += [(-1, 1)]
+        bounds += [(-.2, .2)]
         bounds += [(0, 1)] * 2
 
         self.solution = minimize(
@@ -271,8 +272,8 @@ class Dixon_Coles:
             train_games,
             test_season,
             path='',
-            cold_start=True,
-            save=False):
+            cold_start=False,
+            save=True):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -379,7 +380,7 @@ class Dixon_Coles:
                     'away_cs_p']]
                 .to_csv(
                     f"{path}data/predictions/fixtures/dixon_coles" +
-                    f"{'_decay' if self.decay else ''}.csv",
+                    f"{self.weight if self.decay else '_no_decay'}.csv",
                     index=False)
             )
 

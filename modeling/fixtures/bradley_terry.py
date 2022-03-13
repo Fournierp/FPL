@@ -18,7 +18,7 @@ class Bradley_Terry:
             threshold=0.1,
             scale=1,
             parameters=None,
-            decay=False):
+            decay=True):
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
@@ -35,7 +35,7 @@ class Bradley_Terry:
         self.games["days_since"] = (
             self.games["date"].max() - self.games["date"]).dt.days
         self.games["weight"] = (
-            time_decay(0.001, self.games["days_since"]) if decay else 1)
+            time_decay(0.0026, self.games["days_since"]) if decay else 1)
         self.decay = decay
 
         self.games["score1"] = self.games["score1"].astype(int)
@@ -50,7 +50,7 @@ class Bradley_Terry:
         if parameters is None:
             self.parameters = np.concatenate((
                 np.random.uniform(0, 1, (self.league_size)),  # Strength
-                [.3],  # Home advantage
+                [.1],  # Home advantage
             ))
         else:
             self.parameters = parameters
@@ -107,7 +107,7 @@ class Bradley_Terry:
         )
         odds[:, 1] = 1 - odds[:, 0] - odds[:, 2]
 
-        return np.power(
+        return - np.power(
             np.ma.masked_array(odds, outcome_ma),
             np.repeat(
                 np.array(fixtures_df["weight"].values).reshape(-1, 1),
@@ -231,8 +231,8 @@ class Bradley_Terry:
             train_games,
             test_season,
             path='',
-            cold_start=True,
-            save=False):
+            cold_start=False,
+            save=True):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -251,7 +251,8 @@ class Bradley_Terry:
 
         # Initialize model
         self.__init__(self.train_games[
-            self.train_games['season'] != test_season])
+            self.train_games['season'] != test_season],
+            decay=self.decay)
 
         # Initial train on past seasons
         self.maximum_likelihood_estimation()
@@ -322,7 +323,8 @@ class Bradley_Terry:
                         self.test_games[self.test_games['event'] <= gw]
                         ])
                     .drop(columns=['ag', 'hg']),
-                    parameters=previous_parameters)
+                    parameters=previous_parameters,
+                    decay=self.decay)
                 self.maximum_likelihood_estimation()
 
         if save:
@@ -333,7 +335,8 @@ class Bradley_Terry:
                     'rating1', 'rating2', 'home_adv',
                     'home_win_p', 'draw_p', 'away_win_p']]
                 .to_csv(
-                    f"{path}data/predictions/fixtures/bradley_terry.csv",
+                    f"{path}data/predictions/fixtures/bradley_terry" +
+                    f"{'' if self.decay else '_no_decay'}.csv",
                     index=False)
             )
 
