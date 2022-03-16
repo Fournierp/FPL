@@ -13,7 +13,7 @@ import theano.tensor as tt
 class Bayesian:
     """ Model scored goals at home and away as Bayesian Random variables """
 
-    def __init__(self, games, performance='score', decay=False):
+    def __init__(self, games, performance='score', decay=True):
         """
         Args:
             games (pd.DataFrame): Finished games to used for training.
@@ -46,7 +46,8 @@ class Bayesian:
 
         df["date"] = pd.to_datetime(df["date"])
         df["days_since"] = (df["date"].max() - df["date"]).dt.days
-        df["weight"] = time_decay(0.0001, df["days_since"]) if decay else 1
+        df["weight"] = time_decay(0.00003, df["days_since"]) if decay else 1
+        self.decay = decay
 
         # Handle different data to infer
         assert performance == 'score' or performance == 'xg'
@@ -63,12 +64,6 @@ class Bayesian:
                 .rename(columns={"xg1": "score1", "xg2": "score2"})
             )
 
-        self.goals_home_obs = self.games["score1"].values
-        self.goals_away_obs = self.games["score2"].values
-        self.home_team = self.games["hg"].values
-        self.away_team = self.games["ag"].values
-        self.w = self.games["weight"].values
-
         self.model = self._build_model()
 
     def _build_model(self):
@@ -77,52 +72,58 @@ class Bayesian:
         Returns:
             pymc3.Model: untrained model
         """
-        with pm.Model() as model:
-            # home advantage
-            # Flat only:
-            # Normal only:
-            # Flat + Intercept:
-            # Normal + Intercept:
-            # home = pm.Flat("home")
-            home = pm.Normal('home', mu=0, tau=.0001)
-            intercept = pm.Normal('intercept', mu=0, tau=.0001)
+        home_idx, teams = pd.factorize(self.games["team1"], sort=True)
+        away_idx, _ = pd.factorize(self.games["team2"], sort=True)
 
-            # attack ratings
-            tau_att = pm.Gamma("tau_att", 0.1, 0.1)
+        with pm.Model() as model:
+            # constant data
+            home_team = pm.Data("home_team", home_idx)
+            away_team = pm.Data("away_team", away_idx)
+            score1_obs = pm.Data("score1_obs", self.games["score1"])
+            score2_obs = pm.Data("score2_obs", self.games["score2"])
+
+            # global model parameters
+            home = pm.Normal("home", mu=0, sigma=1)
+            intercept = pm.Normal("intercept", mu=0, sigma=1)
+            sd_att = pm.HalfNormal("sd_att", sigma=2)
+            sd_def = pm.HalfNormal("sd_def", sigma=2)
+
+            # team-specific model parameters
             atts_star = pm.Normal(
                 "atts_star",
                 mu=0,
-                tau=tau_att,
+                sigma=sd_att,
                 shape=self.league_size)
-
-            # defence ratings
-            tau_def = pm.Gamma("tau_def", 0.1, 0.1)
-            def_star = pm.Normal(
-                "def_star",
+            defs_star = pm.Normal(
+                "defs_star",
                 mu=0,
-                tau=tau_def,
+                sigma=sd_def,
                 shape=self.league_size)
 
             # apply sum zero constraints
-            atts = pm.Deterministic("atts", atts_star - tt.mean(atts_star))
-            defs = pm.Deterministic("defs", def_star - tt.mean(def_star))
+            atts = pm.Deterministic(
+                "atts",
+                atts_star - tt.mean(atts_star))
+            defs = pm.Deterministic(
+                "defs",
+                defs_star - tt.mean(defs_star))
 
             # calulate theta
             home_theta = tt.exp(
-                intercept + home + atts[self.home_team] + defs[self.away_team])
+                intercept + atts[home_team] + defs[away_team] + home)
             away_theta = tt.exp(
-                intercept + atts[self.away_team] + defs[self.home_team])
+                intercept + atts[away_team] + defs[home_team])
 
-            # goal expectation
+            # likelihood of observed data
             pm.Potential(
                 'home_goals',
-                self.w * pm.Poisson.dist(mu=home_theta).logp(
-                    self.goals_home_obs)
+                self.games["weight"].values * pm.Poisson.dist(mu=home_theta).logp(
+                    score1_obs)
             )
             pm.Potential(
                 'away_goals',
-                self.w * pm.Poisson.dist(mu=away_theta).logp(
-                    self.goals_away_obs)
+                self.games["weight"].values * pm.Poisson.dist(mu=away_theta).logp(
+                    score2_obs)
             )
 
         return model
@@ -134,7 +135,8 @@ class Bayesian:
                 2000,
                 tune=1000,
                 cores=6,
-                return_inferencedata=False)
+                return_inferencedata=False,
+                target_accept=0.85)
 
     def predict(self, games):
         """Predict the outcome of games
@@ -204,6 +206,65 @@ class Bayesian:
 
         return fixtures_df
 
+    def predict_posterior(self, games):
+        """Predict the outcome of games using posterior sampling
+        Although I think this method is mathematically more sound,
+        it gives worst results
+
+        Args:
+            games (pd.DataFrame): Fixtures
+
+        Returns:
+            pd.DataFrame: Fixtures with game odds
+        """
+        with self.model:
+            pm.set_data(
+                {
+                    "home_team": games.hg.values,
+                    "away_team": games.ag.values,
+                    "score1_obs": np.repeat(0, games.ag.values.shape[0]),
+                    "score2_obs": np.repeat(0, games.ag.values.shape[0]),
+                }
+            )
+
+            post_pred = pm.sample_posterior_predictive(self.trace.posterior)
+
+        parameter_df = (
+            pd.DataFrame()
+            .assign(attack=[
+                np.mean([x[team] for x in self.trace.posterior["atts"]])
+                for team in range(self.league_size)])
+            .assign(defence=[
+                np.mean([x[team] for x in self.trace.posterior["defs"]])
+                for team in range(self.league_size)])
+            .assign(team=np.array(self.teams.team_index.values))
+        )
+
+        fixtures_df = (
+            pd.merge(games, parameter_df, left_on='hg', right_on='team')
+            .rename(columns={"attack": "attack1", "defence": "defence1"})
+            .merge(parameter_df, left_on='ag', right_on='team')
+            .rename(columns={"attack": "attack2", "defence": "defence2"})
+            .drop("team_y", axis=1)
+            .drop("team_x", axis=1)
+            .assign(home_adv=np.mean([x for x in self.trace.posterior["home"]]))
+            .assign(intercept=np.mean([x for x in self.trace.posterior["intercept"]]))
+        )
+
+        fixtures_df["score1_infered"] = post_pred["home_goals"].mean(axis=0)
+        fixtures_df["score2_infered"] = post_pred["away_goals"].mean(axis=0)
+        fixtures_df["home_win_p"] = (
+            (post_pred["home_goals"] > post_pred["away_goals"]).mean(axis=0)
+            )
+        fixtures_df["away_win_p"] = (
+            (post_pred["home_goals"] < post_pred["away_goals"]).mean(axis=0)
+            )
+        fixtures_df["draw_p"] = (
+            (post_pred["home_goals"] == post_pred["away_goals"]).mean(axis=0)
+            )
+
+        return fixtures_df
+
     def evaluate(self, games):
         """ Evaluate the model's prediction accuracy
 
@@ -224,7 +285,7 @@ class Bayesian:
 
         return fixtures_df
 
-    def backtest(self, train_games, test_season, path='', save=False):
+    def backtest(self, train_games, test_season, path='', save=True):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -242,7 +303,9 @@ class Bayesian:
 
         # Initialize model
         self.__init__(
-            self.train_games[self.train_games['season'] != test_season])
+            self.train_games[self.train_games['season'] != test_season],
+            performance=self.performance,
+            decay=self.decay)
 
         # Initial train
         self.fit()
@@ -307,8 +370,9 @@ class Bayesian:
                             self.train_games['season'] != test_season],
                         self.test_games[self.test_games['event'] <= gw]
                         ])
-                    .drop(columns=['ag', 'hg'])
-                    )
+                    .drop(columns=['ag', 'hg']),
+                    performance=self.performance,
+                    decay=self.decay)
                 self.fit()
 
         if save:
@@ -323,7 +387,7 @@ class Bayesian:
                     'away_cs_p']]
                 .to_csv(
                     f"{path}data/predictions/fixtures/bayesian" +
-                    f"{'_decay' if self.decay else ''}" +
+                    f"{'' if self.decay else '_no_decay'}" +
                     f"{'_xg' if self.performance == 'xg' else ''}.csv",
                     index=False)
             )
