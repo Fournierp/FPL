@@ -65,7 +65,7 @@ def current_table():
         (pd.DataFrame): Current league table
     """
     fixtures = pd.read_csv(
-        '../data/fpl_official/vaastav/data/2021-22/fixtures.csv')
+        '../../data/fpl_official/vaastav/data/2021-22/fixtures.csv')
     results = (
         fixtures[fixtures['finished']]
         .loc[:, ['team_a', 'team_a_score', 'team_h', 'team_h_score', 'event']]
@@ -75,11 +75,11 @@ def current_table():
             }))
 
     league_table = (
-        pd.read_csv('../data/fpl_official/vaastav/data/2021-22/teams.csv')
+        pd.read_csv('../../data/fpl_official/vaastav/data/2021-22/teams.csv')
         [['id', 'name', 'short_name']])
     league_table['Points'] = 0
 
-    games = pd.read_csv("../data/fivethirtyeight/spi_matches.csv")
+    games = pd.read_csv("../../data/fivethirtyeight/spi_matches.csv")
     games = (
         games
         .loc[games['league_id'] == 2411]
