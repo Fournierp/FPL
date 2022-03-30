@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import sasoptpy as so
 
+import warnings
+warnings.filterwarnings("ignore")
+
 
 def get_team(team_id, gw):
     """ Get the players in a team
@@ -65,16 +68,20 @@ def get_predictions(noise=False, premium=False):
             f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv")
 
         # One hot encoded values for the constraints
-        df["Pos"] = df["Pos"].map(
-            {
-                1: 'G',
-                2: 'D',
-                3: 'M',
-                4: 'F'
-            })
+        if df.Pos.dtype == np.int:
+            df["Pos"] = df["Pos"].map(
+                {
+                    1: 'G',
+                    2: 'D',
+                    3: 'M',
+                    4: 'F'
+                })
+
         df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
         df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
-        df = df.set_index('id')
+        df = df.set_index('ID')
+        df.BV = df.BV*10
+        df.SV = df.SV*10
 
         return df.fillna(0)
 
@@ -82,17 +89,18 @@ def get_predictions(noise=False, premium=False):
         start = get_next_gw()
         df = pd.read_csv(
             f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
-        df["Pos"] = df["Pos"].map(
-            {
-                1: 'G',
-                2: 'D',
-                3: 'M',
-                4: 'F'
-            })
+        if df.Pos.dtype == np.int:
+            df["Pos"] = df["Pos"].map(
+                {
+                    1: 'G',
+                    2: 'D',
+                    3: 'M',
+                    4: 'F'
+                })
         # One hot encoded values for the constraints
         df = pd.concat([df, pd.get_dummies(df.Pos)], axis=1)
         df = pd.concat([df, pd.get_dummies(df.Team)], axis=1)
-        df = df.set_index('id')
+        df = df.set_index('ID')
 
         return df.fillna(0)
 
@@ -265,6 +273,7 @@ def pretty_print(
         columns=[
             'GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'xMins',
             'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
+    total_ev = 0
 
     for w in np.arange(start, start+period):
         print(f"GW: {w} - FT: {int(free_transfers[w].get_value())}")
@@ -345,25 +354,49 @@ def pretty_print(
             (0 if wildcard[w].get_value() else 1) *
             (0 if freehit[w].get_value() else 1)
             )
+        total_ev += xpts_val
         hits_val = (
             int(hits[w].get_value()) *
             (0 if wildcard[w].get_value() else 1) *
             (0 if freehit[w].get_value() else 1)
             )
+
+        print("")
+        print(
+            df
+            .loc[df.GW == w]
+            .sort_values(
+                by=['Pos'],
+                key=lambda x: x.map({
+                    'G': 0,
+                    'D': 1,
+                    'M': 2,
+                    'F': 3})
+                    )
+            .sort_values(
+                by=['Start', 'Bench'],
+                ascending=[False, True])
+                )
+
         print(
             f"xPts: {xpts_val:.2f} - Hits: {hits_val}" + chip + av +
             f" - ITB: {in_the_bank[w].get_value()/10:.1f}")
         print(" ____ ")
 
-    custom_order = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
-    (
-        df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order))
-        .sort_values(by=['GW', 'Start'], ascending=[True, False])
-        .to_csv(f'optimization/tmp/{nb_suboptimal}.csv')
-        )
-    print(f"Objective Val: {-objective_value:.2f}")
-    print(
-        df.sort_values(by=['Pos'], key=lambda x: x.map(custom_order))
+    df = (
+        df
+        .sort_values(
+            by=['Pos'],
+            key=lambda x: x.map({
+                'G': 0,
+                'D': 1,
+                'M': 2,
+                'F': 3})
+            )
         .sort_values(
             by=['GW', 'Start', 'Bench'],
             ascending=[True, False, True]))
+    df.to_csv(f'optimization/tmp/{nb_suboptimal}.csv')
+
+    # print(df)
+    print(f"EV: {total_ev:.2f}  |  Objective Val: {-objective_value:.2f}")
