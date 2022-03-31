@@ -167,7 +167,7 @@ def write():
                                 transfer_.head(1).index[0],
                                 transfer_.tail(1).index[0]])
 
-                elif i < horizon-1:
+                else:
                     transfers = df.loc[df.GW==gw-1].append(df_gw, ignore_index=True)[['Name', 'Pos']]
                     transfers = transfers.drop_duplicates(keep=False).sort_index()
 
