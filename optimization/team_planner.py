@@ -88,6 +88,20 @@ class Team_Planner:
         self.data.drop(self.data[self.data.total_ev <= 3].index, inplace=True)
         self.players = self.data.index.tolist()
 
+        self.initial_team_df = pd.DataFrame(
+            [],
+            columns=['GW', 'Name', 'Pos', 'Team', 'SV'])
+
+        for p in self.initial_team:
+            self.initial_team_df = self.initial_team_df.append(
+                {
+                    'GW': self.start-1,
+                    'Name': self.data.loc[p]['Name'],
+                    'Pos': self.data.loc[p]['Pos'],
+                    'Team': self.data.loc[p]['Team'],
+                    'SV': self.data.loc[p]['SV']},
+                ignore_index=True)
+
     def random_noise(self, seed):
         """ Apply random Normal noise to EV Data
 

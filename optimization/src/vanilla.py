@@ -1,5 +1,13 @@
 import streamlit as st
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from highlight_text import fig_text
+from matplotlib.colors import ListedColormap
+
 from team_planner import Team_Planner
+
 
 def write():
     st.title('FPL - Vanilla Model')
@@ -7,8 +15,6 @@ def write():
         """
         Vanilla FPL Optimization.
         """)
-
-    st.subheader("Optimization parameters")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -39,10 +45,9 @@ def write():
         hit_val = st.slider("Hit value", min_value=2., max_value=8., value=6., step=0.5)
     with col5:
         itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
-    
-    
-    if st.button(
-            'Run Optimization'):
+
+
+    if st.button('Run Optimization'):
 
         with st.spinner("Running Optimization ..."):
             tp = Team_Planner(
@@ -66,4 +71,79 @@ def write():
                 log=False,
                 time_lim=0)
 
-            st.dataframe(df)
+            fig, ax = plt.subplots(figsize=(8, 6))
+            # Set up the axis limits with a bit of padding
+            ax.set_ylim(0, 15 + 1)
+            ax.set_xlim(0, (horizon+1)*15 + 2.5)
+            ax.axis('off')
+            header_pos = 15.25
+
+            # st.dataframe(tp.initial_team_df)
+            for j, row in tp.initial_team_df.iterrows():
+                rectangle = patches.Rectangle(
+                    (0, 14-j),
+                    12, .75,
+                    facecolor={'G': "#ebff00", 'D': "#00ff87", 'M': "#05f0ff", 'F': "#e90052"}[row['Pos']])
+                ax.add_patch(rectangle)
+                rx, ry = rectangle.get_xy()
+                cx = rx + rectangle.get_width()/2.0
+                cy = ry + rectangle.get_height()/2.0
+                ax.annotate(
+                    'TAA' if row['Name']=='Alexander-Arnold' else row['Name'],
+                    (cx, cy),
+                    color='black',
+                    weight='bold',
+                    fontsize=9,
+                    ha='center',
+                    va='center')
+
+            # Column headers
+            ax.text(
+                cx, header_pos,
+                'Base',
+                weight='bold', ha='center',
+                color={'FH': "#ebff00", 'BB': "#00ff87", 'WC': "#05f0ff", 'TC': "#e90052", None: 'black'}[None])
+
+            # Bench separator
+            ax.plot(
+                [0, 12],
+                [3.875, 3.875],
+                ls=':', lw='1.5', c='grey')
+
+            for i, gw in enumerate(np.sort(df.GW.unique())):
+                df_gw = df.loc[df.GW == gw].reset_index(drop=True)
+                # st.dataframe(df_gw)
+
+                for j, row in df_gw.iterrows():
+                    rectangle = patches.Rectangle(
+                        ((i+1)*16, 14-j),
+                        12, .75,
+                        facecolor={'G': "#ebff00", 'D': "#00ff87", 'M': "#05f0ff", 'F': "#e90052"}[row['Pos']])
+                    ax.add_patch(rectangle)
+                    rx, ry = rectangle.get_xy()
+                    cx = rx + rectangle.get_width()/2.0
+                    cy = ry + rectangle.get_height()/2.0
+                    ax.annotate(
+                        'TAA' if row['Name']=='Alexander-Arnold' else row['Name'],
+                        (cx, cy),
+                        color='black',
+                        weight='bold',
+                        fontsize=9,
+                        ha='center',
+                        va='center')
+
+                # Column headers
+                ax.text(
+                    cx, header_pos,
+                    str(gw),
+                    weight='bold', ha='center',
+                    color={'FH': "#ebff00", 'BB': "#00ff87", 'WC': "#05f0ff", 'TC': "#e90052", None: 'black'}[None])
+
+                # Bench separator
+                ax.plot(
+                    [(i+1)*16, (i+1)*16+12],
+                    [3.875, 3.875],
+                    ls=':', lw='1.5', c='grey')
+
+            st.pyplot(fig, ax)
+            plt.close(fig)
