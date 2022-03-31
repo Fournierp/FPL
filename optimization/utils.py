@@ -274,6 +274,7 @@ def pretty_print(
             'GW', 'Name', 'Pos', 'Team', 'SV', 'xP', 'xMins',
             'Start', 'Bench', 'Cap', 'Vice', 'Ownership'])
     total_ev = 0
+    chip_strat = []
 
     for w in np.arange(start, start+period):
         print(f"GW: {w} - FT: {int(free_transfers[w].get_value())}")
@@ -334,19 +335,25 @@ def pretty_print(
         av = ""
         if freehit[w].get_value():
             chip = " - Chip: Freehit"
-        if wildcard[w].get_value():
+            chip_strat.append('FH')
+        elif wildcard[w].get_value():
             chip = " - Chip: Wildcard"
-        if bboost[w].get_value():
+            chip_strat.append('WC')
+        elif bboost[w].get_value():
             chip = " - Chip: Bench Boost"
             val = (
                 np.sum(df.loc[(df['GW'] == w), 'xP']) -
                 np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP'])
                 )
             av = f" - Added value: {val}"
-        if so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
+            chip_strat.append('BB')
+        elif so.expr_sum(threexc[p, w] for p in data.index.tolist()).get_value():
             chip = " - Chip: Triple Captain"
             val = np.sum(df.loc[(df['Cap'] == 1) & (df['GW'] == w), 'xP'])
             av = f" - Added value: {val}"
+            chip_strat.append('TC')
+        else:
+            chip_strat.append(None)
 
         xpts_val = (
             np.sum(df.loc[(df['Start'] == 1) & (df['GW'] == w), 'xP']) -
@@ -401,4 +408,4 @@ def pretty_print(
     # print(df)
     print(f"EV: {total_ev:.2f}  |  Objective Val: {-objective_value:.2f}")
 
-    return df
+    return df, chip_strat

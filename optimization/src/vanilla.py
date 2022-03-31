@@ -66,7 +66,7 @@ def write():
                 itb_val=itb_val,
                 hit_val=hit_val)
 
-            df = tp.solve(
+            df, chip_strat = tp.solve(
                 model_name="vanilla",
                 log=False,
                 time_lim=0)
@@ -101,8 +101,7 @@ def write():
             ax.text(
                 cx, header_pos,
                 'Base',
-                weight='bold', ha='center',
-                color={'FH': "#ebff00", 'BB': "#00ff87", 'WC': "#05f0ff", 'TC': "#e90052", None: 'black'}[None])
+                weight='bold', ha='center')
 
             # Bench separator
             ax.plot(
@@ -136,8 +135,12 @@ def write():
                 ax.text(
                     cx, header_pos,
                     str(gw),
-                    weight='bold', ha='center',
-                    color={'FH': "#ebff00", 'BB': "#00ff87", 'WC': "#05f0ff", 'TC': "#e90052", None: 'black'}[None])
+                    weight='bold', ha='center')
+                if chip_strat[i] is not None:
+                    ax.text(
+                        cx, header_pos+1,
+                        chip_strat[i],
+                        weight='bold', ha='center')
 
                 # Bench separator
                 ax.plot(
