@@ -1,8 +1,10 @@
 import streamlit as st
 
 import numpy as np
+
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import matplotlib.path as mpath
 from highlight_text import fig_text
 from matplotlib.colors import ListedColormap
 
@@ -68,7 +70,7 @@ def write():
 
             df, chip_strat = tp.solve(
                 model_name="vanilla",
-                log=False,
+                log=True,
                 time_lim=0)
 
             fig, ax = plt.subplots(figsize=(8, 6))
@@ -78,12 +80,13 @@ def write():
             ax.axis('off')
             header_pos = 15.25
 
-            # st.dataframe(tp.initial_team_df)
+            color_position = {'G': "#ebff00", 'D': "#00ff87", 'M': "#05f0ff", 'F': "#e90052"}
+
             for j, row in tp.initial_team_df.iterrows():
                 rectangle = patches.Rectangle(
                     (0, 14-j),
                     12, .75,
-                    facecolor={'G': "#ebff00", 'D': "#00ff87", 'M': "#05f0ff", 'F': "#e90052"}[row['Pos']])
+                    facecolor=color_position[row['Pos']])
                 ax.add_patch(rectangle)
                 rx, ry = rectangle.get_xy()
                 cx = rx + rectangle.get_width()/2.0
@@ -110,14 +113,13 @@ def write():
                 ls=':', lw='1.5', c='grey')
 
             for i, gw in enumerate(np.sort(df.GW.unique())):
-                df_gw = df.loc[df.GW == gw].reset_index(drop=True)
-                # st.dataframe(df_gw)
+                df_gw = df.loc[df.GW==gw].reset_index(drop=True)
 
                 for j, row in df_gw.iterrows():
                     rectangle = patches.Rectangle(
                         ((i+1)*16, 14-j),
                         12, .75,
-                        facecolor={'G': "#ebff00", 'D': "#00ff87", 'M': "#05f0ff", 'F': "#e90052"}[row['Pos']])
+                        facecolor=color_position[row['Pos']])
                     ax.add_patch(rectangle)
                     rx, ry = rectangle.get_xy()
                     cx = rx + rectangle.get_width()/2.0
@@ -148,5 +150,68 @@ def write():
                     [3.875, 3.875],
                     ls=':', lw='1.5', c='grey')
 
+                if i == 0:
+                    transfers = tp.initial_team_df.append(df_gw, ignore_index=True)[['Name', 'Pos']]
+                    transfers = transfers.drop_duplicates(keep=False).sort_index()
+
+                    for pos in ['G', 'D', 'M', 'F']:
+                        transfer_ = transfers.loc[transfers.Pos==pos]
+
+                        for _ in range(int(transfer_.shape[0]/2)):
+                            # Plot the lines
+                            ax.add_patch(
+                                bezier_path(
+                                    (12, 14-transfer_.head(1).index[0]+.75/2),
+                                    (16, 14-transfer_.tail(1).index[0]+15+.75/2)))
+                            transfer_ = transfer_.drop([
+                                transfer_.head(1).index[0],
+                                transfer_.tail(1).index[0]])
+
+                elif i < horizon-1:
+                    transfers = df.loc[df.GW==gw-1].append(df_gw, ignore_index=True)[['Name', 'Pos']]
+                    transfers = transfers.drop_duplicates(keep=False).sort_index()
+
+                    for pos in ['G', 'D', 'M', 'F']:
+                        transfer_ = transfers.loc[transfers.Pos==pos]
+
+                        for _ in range(int(transfer_.shape[0]/2)):
+                            # Plot the lines
+                            ax.add_patch(
+                                bezier_path(
+                                    (i*16+12, 14-transfer_.head(1).index[0]+.75/2),
+                                    ((i+1)*16, 14-transfer_.tail(1).index[0]+15+.75/2)))
+                            transfer_ = transfer_.drop([
+                                transfer_.head(1).index[0],
+                                transfer_.tail(1).index[0]])
+
             st.pyplot(fig, ax)
             plt.close(fig)
+
+
+def bezier_path(p1, p2, color='black'):
+    Path = mpath.Path
+    x1, y1 = p1
+    x2, y2 = p2
+
+    if y2 != y1:
+        path_data = [
+            (Path.MOVETO, (x1, y1)),
+            (Path.CURVE3, (x1+(x2-x1)/2, y1)),
+            (Path.CURVE3, (x1+(x2-x1)/2, y1+(y2-y1)/2)),
+            (Path.CURVE3, (x1+(x2-x1)/2, y2)),
+            (Path.CURVE3, (x2, y2)),
+            ]
+        codes, verts = zip(*path_data)
+        path = mpath.Path(verts, codes)
+        patch = patches.PathPatch(path, ec=color, fc='none', zorder=2)
+
+    else:
+        path_data = [
+            (Path.MOVETO, (x1, y1)),
+            (Path.LINETO, (x2, y2)),
+            ]
+        codes, verts = zip(*path_data)
+        path = mpath.Path(verts, codes)
+        patch = patches.PathPatch(path, ec=color, fc='none', zorder=2)
+
+    return patch
