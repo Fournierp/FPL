@@ -2897,7 +2897,7 @@ class Team_Planner:
                 var = self.model.get_variable(words[1])
                 var.set_value(float(words[2]))
 
-        pretty_print(
+        return pretty_print(
             self.data,
             self.start,
             self.period,
