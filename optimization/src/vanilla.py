@@ -75,10 +75,10 @@ def write():
                 log=True,
                 time_lim=0)
 
-            fig, ax = plt.subplots(figsize=(8, 6))
+            fig, ax = plt.subplots(figsize=(16, 12))
             # Set up the axis limits with a bit of padding
             ax.set_ylim(0, 15 + 1)
-            ax.set_xlim(0, (horizon+1)*15 + 2.5)
+            ax.set_xlim(0, (horizon+1)*16+2.5)
             ax.axis('off')
             header_pos = 15.25
 
@@ -98,7 +98,7 @@ def write():
                     (cx, cy),
                     color='black',
                     weight='bold',
-                    fontsize=9,
+                    fontsize=14,
                     ha='center',
                     va='center')
 
@@ -106,13 +106,19 @@ def write():
             ax.text(
                 cx, header_pos,
                 'Base',
-                weight='bold', ha='center')
+                fontsize=14, weight='bold', ha='center')
 
             # Bench separator
             ax.plot(
                 [0, 12],
                 [3.875, 3.875],
-                ls=':', lw='1.5', c='grey')
+                ls=':', lw='2.5', c='grey')
+
+            # Header separator
+            ax.plot(
+                [0, 12],
+                [15., 15.],
+                ls='-', lw='2.5', c='grey')
 
             for i, gw in enumerate(np.sort(df.GW.unique())):
                 df_gw = df.loc[df.GW==gw].reset_index(drop=True)
@@ -131,7 +137,7 @@ def write():
                         (cx, cy),
                         color='black',
                         weight='bold',
-                        fontsize=9,
+                        fontsize=14,
                         ha='center',
                         va='center')
 
@@ -139,18 +145,18 @@ def write():
                 ax.text(
                     cx, header_pos,
                     str(gw),
-                    weight='bold', ha='center')
+                    fontsize=14, weight='bold', ha='center')
                 if chip_strat[i] is not None:
                     ax.text(
                         cx, header_pos+1,
                         chip_strat[i],
-                        weight='bold', ha='center')
+                        fontsize=14, weight='bold', ha='center')
 
                 # Bench separator
                 ax.plot(
                     [(i+1)*16, (i+1)*16+12],
                     [3.875, 3.875],
-                    ls=':', lw='1.5', c='grey')
+                    ls=':', lw='2.5', c='grey')
 
                 if i == 0:
                     transfers = tp.initial_team_df.append(df_gw, ignore_index=True)[['Name', 'Pos']]
@@ -186,6 +192,12 @@ def write():
                                 transfer_.head(1).index[0],
                                 transfer_.tail(1).index[0]])
 
+                # Header separator
+                ax.plot(
+                    [(i+1)*16, (i+1)*16+12],
+                    [15., 15.],
+                    ls='-', lw='2.5', c='grey')
+
             st.pyplot(fig, ax)
             plt.close(fig)
 
@@ -205,7 +217,7 @@ def bezier_path(p1, p2, color='white'):
             ]
         codes, verts = zip(*path_data)
         path = mpath.Path(verts, codes)
-        patch = patches.PathPatch(path, ec=color, fc='none', zorder=2)
+        patch = patches.PathPatch(path, ec=color, fc='none', zorder=2, lw=2)
 
     else:
         path_data = [
@@ -214,6 +226,6 @@ def bezier_path(p1, p2, color='white'):
             ]
         codes, verts = zip(*path_data)
         path = mpath.Path(verts, codes)
-        patch = patches.PathPatch(path, ec=color, fc='none', zorder=2)
+        patch = patches.PathPatch(path, ec=color, fc='none', zorder=2, lw=2)
 
     return patch
