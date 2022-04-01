@@ -136,7 +136,7 @@ def write():
                         (
                             ('TAA' if row['Name']=='Alexander-Arnold' else row['Name']) +
                             (" (C)" if row['Cap'] else '') +
-                            (" (V)" if row['Cap'] else '')),
+                            (" (V)" if row['Vice'] else '')),
                         (cx, cy),
                         color='black',
                         weight='bold',
