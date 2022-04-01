@@ -18,6 +18,8 @@ def write():
         Vanilla FPL Optimization.
         """)
 
+    plt.style.use(".streamlit/style.mplstyle")
+
     col1, col2 = st.columns(2)
     with col1:
         horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
@@ -188,7 +190,7 @@ def write():
             plt.close(fig)
 
 
-def bezier_path(p1, p2, color='black'):
+def bezier_path(p1, p2, color='white'):
     Path = mpath.Path
     x1, y1 = p1
     x2, y2 = p2
