@@ -133,7 +133,10 @@ def write():
                     cx = rx + rectangle.get_width()/2.0
                     cy = ry + rectangle.get_height()/2.0
                     ax.annotate(
-                        'TAA' if row['Name']=='Alexander-Arnold' else row['Name'],
+                        (
+                            ('TAA' if row['Name']=='Alexander-Arnold' else row['Name']) +
+                            (" (C)" if row['Cap'] else '') +
+                            (" (V)" if row['Cap'] else '')),
                         (cx, cy),
                         color='black',
                         weight='bold',
