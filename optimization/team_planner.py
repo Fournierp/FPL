@@ -1516,6 +1516,7 @@ class Team_Planner:
             self.start,
             self.period,
             self.team,
+            self.team,
             self.starter,
             self.bench,
             self.captain,
@@ -1534,10 +1535,8 @@ class Team_Planner:
 
         # GW
         print("\n----------")
-        # Sample 10 of the 15 players
-        random_sampled_team = np.random.choice(
-            [p for p in self.players if self.team[p, self.start].get_value()],
-            10, replace=False)
+        # Get all players selected by longterm WC
+        wc_team = [p for p in self.players if self.team[p, self.start].get_value()]
 
         # Medium range planning Model
         model_name = 'medium'
@@ -1674,7 +1673,7 @@ class Team_Planner:
             (self.team[p, self.start - 1] == 1 for p in self.initial_team),
             name='initial_team')
         self.model.add_constraint(
-            (so.expr_sum(self.team[p, self.start] for p in random_sampled_team) >= 10),
+            (so.expr_sum(self.team[p, self.start] for p in wc_team) >= 10),
             name='initial_wc_team')
         self.model.add_constraint(
             self.free_transfers[self.start - 1] == 1,
@@ -1919,6 +1918,7 @@ class Team_Planner:
             self.start,
             self.period,
             self.team,
+            self.team,
             self.starter,
             self.bench,
             self.captain,
@@ -1938,12 +1938,8 @@ class Team_Planner:
         # GW
         print("\n----------")
 
-        # Sample 2 more players
-        more_players = np.random.choice(
-            [p for p in self.players if (self.team[p, self.start].get_value() and p not in random_sampled_team)],
-            2,
-            replace=False)
-        random_sampled_team = np.append(random_sampled_team, more_players)
+        # Get longterm+midterm WC players
+        wc_team = [p for p in self.players if self.team[p, self.start].get_value()]
 
         # Short range planning Model
         model_name = 'short'
@@ -2080,7 +2076,7 @@ class Team_Planner:
             (self.team[p, self.start - 1] == 1 for p in self.initial_team),
             name='initial_team')
         self.model.add_constraint(
-            (so.expr_sum(self.team[p, self.start] for p in random_sampled_team) >= 13),
+            (so.expr_sum(self.team[p, self.start] for p in wc_team) >= 13),
             name='initial_wc_team')
         self.model.add_constraint(
             self.free_transfers[self.start - 1] == 1,
@@ -2314,10 +2310,11 @@ class Team_Planner:
                 var = self.model.get_variable(words[1])
                 var.set_value(float(words[2]))
 
-        pretty_print(
+        return pretty_print(
             self.data,
             self.start,
             self.period,
+            self.team,
             self.team,
             self.starter,
             self.bench,
