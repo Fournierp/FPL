@@ -1,7 +1,7 @@
 import streamlit as st
 import awesome_streamlit as ast
 
-from src import home, vanilla, differential, select_chips, automated_chips
+from src import home, vanilla, differential, wildcard, select_chips, automated_chips, biased
 
 st.set_page_config(
         page_title="FPL Optimization",
@@ -14,6 +14,8 @@ PAGES = {
     "Home": home,
     "Vanilla": vanilla,
     "Differential": differential,
+    "Biased": biased,
+    "Wildcard": wildcard,
     "Select Chips": select_chips,
     "Automated Chips": automated_chips,
     }
