@@ -1,7 +1,7 @@
 import streamlit as st
 import awesome_streamlit as ast
 
-from src import home, vanilla
+from src import home, vanilla, differential, select_chips
 
 st.set_page_config(
         page_title="FPL Optimization",
@@ -13,7 +13,8 @@ ast.core.services.other.set_logging_format()
 PAGES = {
     "Home": home,
     "Vanilla": vanilla,
-}
+    "Select Chips": select_chips,
+    }
 
 
 def main():
