@@ -81,6 +81,15 @@ def write():
         team_out_3 = st.multiselect(f"Out GW {start+3}", player_names.values)
 
 
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        hit_1 = st.slider(f"Maximim hits in GW {start+1}", min_value=0, max_value=5, value=5)
+    with col2:
+        hit_2 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
+    with col3:
+        hit_3 = st.slider(f"GW {start+3}", min_value=0, max_value=5, value=5)
+
+
     if st.button('Run Optimization'):
 
         with st.spinner("Running Optimization ..."):
@@ -120,7 +129,13 @@ def write():
                         [(player[0], start+2) for player in player_names[player_names.isin(team_out_3)].iteritems()]
                         ),
                     'bench': {}
-                })
+                },
+                hit_limit={
+                    'max': [(start, hit_1), (start+1, hit_2), (start+2, hit_3)],
+                    'eq': {},
+                    'min': {}
+                },
+                two_ft_gw=[])
 
 
             df, chip_strat = tp.solve(
