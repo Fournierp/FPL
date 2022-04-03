@@ -85,7 +85,7 @@ class Team_Planner:
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
         # Drop players that are not predicted to play much to reduce the search space
-        self.data.drop(self.data[self.data.total_ev <= 3].index, inplace=True)
+        self.data.drop(self.data[self.data.total_ev <= 2].index, inplace=True)
         self.players = self.data.index.tolist()
 
         self.initial_team_df = pd.DataFrame(
@@ -1144,7 +1144,7 @@ class Team_Planner:
                 # The number of hits under the maximum
                 self.model.add_constraints(
                     (
-                        self.hits[w] < max_hit
+                        self.hits[w] <= max_hit
                         for (w, max_hit) in hit_limit[bias]),
                     name='hits_max')
             if bias == 'eq' and hit_limit[bias]:
@@ -1160,7 +1160,7 @@ class Team_Planner:
                 # The number of hits above the minumum
                 self.model.add_constraints(
                     (
-                        self.hits[w] > min_hit
+                        self.hits[w] >= min_hit
                         for (w, min_hit) in hit_limit[bias]),
                     name='hits_min')
 
