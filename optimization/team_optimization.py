@@ -2546,6 +2546,151 @@ class Team_Optimization:
             self.triple,
             nb_suboptimal=i)
 
+    def suboptimals(
+            self,
+            model_name,
+            iterations=3,
+            cutoff_search='first_transfer'):
+        """ Solves model and gives suboptimal solution
+
+        Args:
+            model_name (string): Model name
+            iterations (int): Iteration
+            cutoff_search (str): Suboptimal solving method
+
+        Returns:
+            (dict): Dictionnary of hashes representing transfers
+        """
+        sa = {}
+
+        for i in range(iterations):
+
+            print(f"\n----- Solution {i+1} -----")
+            self.solve(model_name + f'_{i}', i=i)
+
+            if i != iterations - 1:
+                # Select the players that have been transfered in/out
+                if cutoff_search == 'first_buy':
+                    actions = so.expr_sum(
+                        self.buy[p, self.start] for p in self.players
+                        if self.buy[p, self.start].get_value() > 0.5)
+                    gw_range = [self.start]
+                elif cutoff_search == 'horizon_buy':
+                    actions = so.expr_sum(
+                        so.expr_sum(
+                            self.buy[p, w] for p in self.players
+                            if self.buy[p, w].get_value() > 0.5)
+                        for w in self.gameweeks)
+                    gw_range = self.gameweeks
+                elif cutoff_search == 'first_transfer':
+                    actions = (
+                        so.expr_sum(
+                            self.buy[p, self.start] for p in self.players
+                            if self.buy[p, self.start].get_value() > 0.5) +
+                        so.expr_sum(
+                            self.sell[p, self.start] for p in self.players
+                            if self.sell[p, self.start].get_value() > 0.5)
+                        )
+                    gw_range = [self.start]
+                elif cutoff_search == 'horizon_transfer':
+                    actions = (
+                        so.expr_sum(
+                            so.expr_sum(
+                                self.buy[p, w] for p in self.players
+                                if self.buy[p, w].get_value() > 0.5)
+                            for w in self.gameweeks) +
+                        so.expr_sum(
+                            so.expr_sum(
+                                self.sell[p, w] for p in self.players
+                                if self.sell[p, w].get_value() > 0.5)
+                            for w in self.gameweeks)
+                        )
+                    gw_range = self.gameweeks
+
+                if actions.get_value() != 0:
+                    # This step forces one transfer to be unfeasible
+                    # Note: the constraint is only applied to the activated
+                    # transfers so the ones not activated are thus allowed.
+                    self.model.add_constraint(
+                        actions <= actions.get_value() - 1,
+                        name=f'cutoff_{i}')
+                else:
+                    # Force one transfer in case of sub-optimal solution
+                    # choosing to roll transfer
+                    self.model.add_constraint(
+                        so.expr_sum(
+                            self.number_of_transfers[w]
+                            for w in gw_range) >= 1,
+                        name=f'cutoff_{i}')
+
+            sa[i] = [
+                [
+                    p for p in self.players
+                    if self.buy[p, self.start].get_value() > 0.5],
+                [
+                    p for p in self.players
+                    if self.sell[p, self.start].get_value() > 0.5],
+                self.model.get_objective_value()
+            ]
+
+        return sa
+
+    def sensitivity_analysis(self, repeats=3, iterations=3):
+        """ Solving model with randomized EV
+
+        Args:
+            repeats (int): Repeating the randomization/solving
+            iterations (int): Iterations of suboptimals
+        """
+        podium = pd.DataFrame(columns=list(np.arange(3)[1:]))
+        hashes = {}
+        raw_data = self.data.copy()
+
+        # Reproduce the optimization from scratch
+        for r in range(repeats):
+            self.build_model(
+                model_name="sensitivity_analysis",
+                objective_type='decay',
+                decay_gameweek=0.9,
+                vicecap_decay=0.1,
+                decay_bench=[0.03, 0.21, 0.06, 0.002],
+                ft_val=1.5,
+                itb_val=0.008)
+
+            print(f"\n----- Trial {r+1} -----")
+
+            # Apply random noise to the original prediction
+            # (i.e not stacking noise)
+            self.data = raw_data.copy()
+            self.random_noise(None)
+            # Find optimal solutions
+            sa = self.suboptimals(
+                f"sensitivity_analysis_{r}",
+                iterations=iterations)
+
+            # Store data
+            for i, (k, v) in enumerate(sa.items()):
+                transfer = hash(tuple((tuple(v[0]), tuple(v[1]))))
+                hashes[transfer] = v
+
+                if transfer in podium.index:
+                    podium.loc[transfer, i+1] += 1
+
+                else:
+                    for pos in range(1, iterations+1):
+                        podium.loc[transfer, pos] = 0
+
+                    podium.loc[transfer, i+1] = 1
+
+                num_cols = podium.loc[transfer, 1] + podium.loc[transfer, 2] + podium.loc[transfer, 3]
+                podium.loc[
+                    transfer,
+                    f"EV_{int(num_cols)}"] = v[2]
+
+        podium.to_csv("optimization/tmp/podium.csv")
+        with open("optimization/tmp/hashes.json", "w") as outfile:
+            json.dump(hashes, outfile)
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -2590,26 +2735,35 @@ if __name__ == "__main__":
     #     itb_val=0.008,
     #     hit_val=6)
 
-    to.biased_model(
-        love={
-            'buy': {},
-            'start': {},
-            'team': {},
-            'cap': {}
-        },
-        hate={
-            'sell': {},
-            'team': {},
-            'bench': {}
-        },
-        hit_limit={
-            'max': {},
-            'eq': {},
-            'min': {}
-        },
-        two_ft_gw=[])
+    # to.biased_model(
+    #     love={
+    #         'buy': {},
+    #         'start': {},
+    #         'team': {},
+    #         'cap': {}
+    #     },
+    #     hate={
+    #         'sell': {},
+    #         'team': {},
+    #         'bench': {}
+    #     },
+    #     hit_limit={
+    #         'max': {},
+    #         'eq': {},
+    #         'min': {}
+    #     },
+    #     two_ft_gw=[])
 
-    to.solve(
+    # to.solve(
+    #     model_name="vanilla",
+    #     log=True,
+    #     time_lim=0)
+
+    tp.suboptimals(
         model_name="vanilla",
-        log=True,
-        time_lim=0)
+        iterations=3,
+        cutoff_search='first_transfer')
+
+    # tp.sensitivity_analysis(
+    #     repeats=2,
+    #     iterations=3)
