@@ -344,11 +344,11 @@ class Team_Optimization:
             name='wc_once')
 
         # The chips must not be used on the same GW
-        self.model.add_constraint(
-            so.expr_sum(
+        self.model.add_constraints(
+            (
                 so.expr_sum(self.triple[p, w] for p in self.players) +
-                self.bboost[w] + self.freehit[w] + self.wildcard[w]
-                for w in self.gameweeks) <= 1,
+                self.bboost[w] + self.freehit[w] + self.wildcard[w] <= 1
+                for w in self.gameweeks),
             name='chip_once')
 
         # The chips must be used on the selected GW
@@ -1035,11 +1035,11 @@ class Team_Optimization:
             name='wc_once')
 
         # The chips must not be used on the same GW
-        self.model.add_constraint(
-            so.expr_sum(
+        self.model.add_constraints(
+            (
                 so.expr_sum(self.triple[p, w] for p in self.players) +
-                self.bboost[w] + self.freehit[w] + self.wildcard[w]
-                for w in self.gameweeks) <= 1,
+                self.bboost[w] + self.freehit[w] + self.wildcard[w] <= 1
+                for w in self.gameweeks),
             name='chip_once')
 
         # Team
