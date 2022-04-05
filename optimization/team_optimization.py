@@ -662,6 +662,29 @@ class Team_Optimization:
                 self.freehit[w] for w in self.gameweeks),
             name='max_ft')
 
+    def differential_model(
+            self,
+            nb_differentials=3,
+            threshold=10,
+            target='Top_100K'):
+        """ Build a model that select differential players
+
+        Args:
+            nb_differentials (int): Number of differential players to include
+            threshold (int): Percent after which a player is a differential
+            target (str): Rank
+        """
+        self.data['Differential'] = np.where(
+            self.data[target] < threshold, 1, 0)
+        # A min numberof starter players must be differentials
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'Differential']
+                    for p in self.players) >= nb_differentials
+                for w in self.gameweeks),
+            name='differentials')
+
     def solve(self, model_name, log=False, i=0, time_lim=0):
         """ Solves the model
 
@@ -754,6 +777,11 @@ if __name__ == "__main__":
         decay_bench=[0.03, 0.21, 0.06, 0.002],
         ft_val=1.5,
         itb_val=0.008)
+
+    to.differential_model(
+        nb_differentials=3,
+        threshold=10,
+        target='Top_100K')
 
     to.solve(
         model_name="vanilla",
