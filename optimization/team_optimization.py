@@ -1209,6 +1209,1167 @@ class Team_Optimization:
                 self.freehit[w] for w in self.gameweeks),
             name='max_ft')
 
+    def advanced_wildcard(
+            self,
+            objective_type='decay',
+            decay_gameweek=[0.9, 0.8, 0.7],
+            vicecap_decay=0.1,
+            decay_bench=[0.1, 0.1, 0.1, 0.1],
+            ft_val=0,
+            itb_val=0,
+            hit_val=6):
+        """ Build wildcard model for iteratively long horizon
+
+        Args:
+            objective_type (str): Decay to apply higher importance to early GW
+                and Linear to apply uniform weights
+            decay_gameweek (float): Weight decay per gameweek
+            vicecap_decay (float): Weight applied to points scored by vice
+            decay_bench (list): Weight applied to points scored by bench.
+            ft_val (int): Value of rolling a transfer.
+            itb_val (int): Value of having money in the bank.
+            hit_val (int): Penalty of taking a hit.
+        """
+        # Longterm Model
+        model_name = 'longterm'
+        self.model = so.Model(name=model_name + '_model')
+
+        order = [0, 1, 2, 3]
+        # Variables
+        self.team = self.model.add_variables(
+            self.players,
+            self.all_gameweeks,
+            name='team',
+            vartype=so.binary)
+        self.starter = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='starter',
+            vartype=so.binary)
+        self.bench = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            order,
+            name='bench',
+            vartype=so.binary)
+        self.captain = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='captain',
+            vartype=so.binary)
+        self.vicecaptain = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='vicecaptain',
+            vartype=so.binary)
+
+        self.buy = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='buy',
+            vartype=so.binary)
+        self.sell = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='sell',
+            vartype=so.binary)
+
+        self.in_the_bank = self.model.add_variables(
+            self.all_gameweeks,
+            name='itb',
+            vartype=so.continuous,
+            lb=0)
+        # Dummy variables for printing
+        self.free_transfers = self.model.add_variables(
+            self.all_gameweeks,
+            name='ft',
+            vartype=so.integer,
+            lb=1,
+            ub=2)
+        self.hits = self.model.add_variables(
+            self.gameweeks,
+            name='hits',
+            vartype=so.integer,
+            lb=0,
+            ub=15)
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
+            vartype=so.binary)
+
+        # Objective: maximize total expected points
+        # Assume a % (decay_bench) chance of a player not playing
+        # Assume a % (decay_gameweek) reliability of next week's xPts
+        xp = so.expr_sum(
+            (
+                np.power(decay_gameweek[0], w - self.start)
+                if objective_type == 'linear' else 1) *
+            (
+                    so.expr_sum(
+                        (
+                            self.starter[p, w] + self.captain[p, w] +
+                            (vicecap_decay * self.vicecaptain[p, w]) +
+                            so.expr_sum(
+                                decay_bench[o] *
+                                self.bench[p, w, o] for o in order)
+                        ) *
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
+                    )
+            ) for w in self.gameweeks)
+
+        itbv = so.expr_sum(
+            (
+                np.power(decay_gameweek[0], w - self.start - 1)
+                if objective_type == 'linear' else 1) *
+            (
+                itb_val * self.in_the_bank[w]
+            ) for w in self.gameweeks)
+
+        self.model.set_objective(- xp - itbv, name='total_xp_obj', sense='N')
+
+        # Initial conditions: set team and FT depending on the team
+        self.model.add_constraints(
+            (self.team[p, self.start - 1] == 1 for p in self.initial_team),
+            name='initial_team')
+        self.model.add_constraint(
+            self.in_the_bank[self.start - 1] == self.bank,
+            name='initial_itb')
+
+        # Constraints
+        # The cost of the squad must exceed the budget
+        sold_amount = {
+            w: so.expr_sum(
+                self.sell[p, w] * self.data.loc[p, 'SV'] for p in self.players)
+            for w in self.gameweeks}
+        bought_amount = {
+            w: so.expr_sum(
+                self.buy[p, w] * self.data.loc[p, 'BV'] for p in self.players)
+            for w in self.gameweeks}
+        self.model.add_constraints(
+            (
+                self.in_the_bank[w] == self.in_the_bank[w - 1] + sold_amount[w]
+                - bought_amount[w] for w in self.gameweeks),
+            name='budget')
+
+        # The number of players must be 11 on field, 4 on bench, 1 captain
+        # & 1 vicecaptain
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.team[p, w] for p in self.players) == 15
+                for w in self.all_gameweeks),
+            name='15_players')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.starter[p, w] for p in self.players) == 11
+                for w in self.gameweeks),
+            name='11_starters')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.captain[p, w] for p in self.players) == 1
+                for w in self.gameweeks),
+            name='1_captain')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.vicecaptain[p, w] for p in self.players) == 1
+                for w in self.gameweeks),
+            name='1_vicecaptain')
+
+        # Bench constraints
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.bench[p, w, 0] for p in self.players
+                    if self.data.loc[p, 'G'] == 1) == 1
+                for w in self.gameweeks),
+            name='one_bench_gk')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.bench[p, w, o] for p in self.players) == 1
+                for w in self.gameweeks for o in [1, 2, 3]),
+            name='one_per_bench_spot')
+        self.model.add_constraints(
+            (
+                self.bench[p, w, o] <= self.team[p, w]
+                for p in self.players for w in self.gameweeks for o in order),
+            name='bench_in_team')
+        self.model.add_constraints(
+            (
+                self.starter[p, w] +
+                so.expr_sum(self.bench[p, w, o] for o in order) <= 1
+                for p in self.players for w in self.gameweeks),
+            name='bench_not_a_starter')
+
+        # A captain must not be picked more than once
+        self.model.add_constraints(
+            (
+                self.captain[p, w] + self.vicecaptain[p, w] <= 1
+                for p in self.players for w in self.gameweeks),
+            name='cap_or_vice')
+
+        # The number of players from a team must not be more than three
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, team_name]
+                    for p in self.players) <= 3
+                for team_name in self.team_names for w in self.gameweeks),
+            name='team_limit')
+
+        # The number of players fit the requirements 2 Gk, 5 Def, 5 Mid, 3 For
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'G']
+                    for p in self.players) == 2 for w in self.all_gameweeks),
+            name='gk_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'D']
+                    for p in self.players) == 5 for w in self.all_gameweeks),
+            name='def_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'M']
+                    for p in self.players) == 5 for w in self.all_gameweeks),
+            name='mid_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'F']
+                    for p in self.players) == 3 for w in self.all_gameweeks),
+            name='for_limit')
+
+        # The formation is valid i.e. Minimum one goalkeeper, 3 defenders,
+        # 2 midfielders and 1 striker on the lineup
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'G']
+                    for p in self.players) == 1 for w in self.gameweeks),
+            name='gk_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'D']
+                    for p in self.players) >= 3 for w in self.gameweeks),
+            name='def_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'M']
+                    for p in self.players) >= 2 for w in self.gameweeks),
+            name='mid_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'F']
+                    for p in self.players) >= 1 for w in self.gameweeks),
+            name='for_min')
+
+        # The captain & vicecap must be a player on the field
+        self.model.add_constraints(
+            (
+                self.captain[p, w] <= self.starter[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='captain_in_starters')
+        self.model.add_constraints(
+            (
+                self.vicecaptain[p, w] <= self.starter[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='vicecaptain_in_starters')
+
+        # The starters must be in the team
+        self.model.add_constraints(
+            (
+                self.starter[p, w] <= self.team[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='starters_in_team')
+
+        # The team must be equal to the next week excluding transfers
+        self.model.add_constraints(
+            (
+                self.team[p, w] == self.team[p, w - 1] + self.buy[p, w] -
+                self.sell[p, w] for p in self.players for w in self.gameweeks),
+            name='team_transfer')
+
+        # The player must not be sold and bought simultaneously 
+        # (on wildcard/freehit)
+        self.model.add_constraints(
+            (
+                self.sell[p, w] + self.buy[p, w] <= 1
+                for p in self.players for w in self.gameweeks),
+            name='single_buy_or_sell')
+
+        # Enforce longterm planning by having no transfer past WC GW
+        self.model.add_constraints(
+            (
+                self.team[p, w] == self.team[p, w - 1]
+                for p in self.players for w in self.gameweeks[1:]),
+            name='no_team_transfer')
+
+        # For printing
+        self.model.add_constraint(
+            (self.wildcard[self.start] == 1),
+            name='wildcard_print')
+
+        # Solve
+        self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
+        command = (
+            f'cbc optimization/tmp/{model_name}.mps solve solu ' +
+            f'optimization/tmp/{model_name}_solution.txt')
+
+        process = Popen(command, shell=True, stdout=DEVNULL)
+        process.wait()
+
+        # Reset variables for next passes
+        for v in self.model.get_variables():
+            v.set_value(0)
+
+        with open(f'optimization/tmp/{model_name}_solution.txt', 'r') as f:
+            for line in f:
+                if 'objective value' in line:
+                    continue
+                words = line.split()
+                var = self.model.get_variable(words[1])
+                var.set_value(float(words[2]))
+
+        pretty_print(
+            self.data,
+            self.start,
+            self.period,
+            self.team,
+            self.team,
+            self.starter,
+            self.bench,
+            self.captain,
+            self.vicecaptain,
+            self.buy,
+            self.sell,
+            self.free_transfers,
+            self.hits,
+            self.in_the_bank,
+            self.model.get_objective_value(),
+            self.freehit,
+            self.wildcard,
+            self.bboost,
+            self.triple,
+            nb_suboptimal=model_name)
+
+        # GW
+        print("\n----------")
+        # Get all players selected by longterm WC
+        wc_team = [p for p in self.players if self.team[p, self.start].get_value()]
+
+        # Medium range planning Model
+        model_name = 'medium'
+        self.model = so.Model(name=model_name + '_model')
+
+        # Variables
+        self.team = self.model.add_variables(
+            self.players,
+            self.all_gameweeks,
+            name='team',
+            vartype=so.binary)
+        self.starter = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='starter',
+            vartype=so.binary)
+        self.bench = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            order,
+            name='bench',
+            vartype=so.binary)
+        self.captain = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='captain',
+            vartype=so.binary)
+        self.vicecaptain = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='vicecaptain',
+            vartype=so.binary)
+
+        self.buy = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='buy',
+            vartype=so.binary)
+        self.sell = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='sell',
+            vartype=so.binary)
+
+        self.free_transfers = self.model.add_variables(
+            self.all_gameweeks,
+            name='ft',
+            vartype=so.integer,
+            lb=1,
+            ub=2)
+        self.hits = self.model.add_variables(
+            self.gameweeks,
+            name='hits',
+            vartype=so.integer,
+            lb=0,
+            ub=15)
+        self.rolling_transfers = self.model.add_variables(
+            self.gameweeks,
+            name='rolling',
+            vartype=so.binary)
+        self.in_the_bank = self.model.add_variables(
+            self.all_gameweeks,
+            name='itb',
+            vartype=so.continuous,
+            lb=0)
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
+            vartype=so.binary)
+
+        # Objective: maximize total expected points
+        # Assume a % (decay_bench) chance of a player not playing
+        # Assume a % (decay_gameweek) reliability of next week's xPts
+        xp = so.expr_sum(
+            (
+                np.power(decay_gameweek[1], w - self.start)
+                if objective_type == 'linear' else 1) *
+            (
+                    so.expr_sum(
+                        (
+                            self.starter[p, w] + self.captain[p, w] +
+                            (vicecap_decay * self.vicecaptain[p, w]) +
+                            so.expr_sum(
+                                decay_bench[o] *
+                                self.bench[p, w, o] for o in order)
+                        ) *
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
+                    )
+            ) for w in self.gameweeks)
+
+        # Hits handicap except for the first (WC) gameweek
+        hits_handicap = so.expr_sum(
+            (
+                np.power(decay_gameweek[1], w - self.start)
+                if objective_type == 'linear' else 1) *
+            (hit_val * self.hits[w]) for w in self.gameweeks[1:])
+
+        ftv = so.expr_sum(
+            (
+                np.power(decay_gameweek[1], w - self.start - 1)
+                if objective_type == 'linear' else 1) *
+            (
+                ft_val * self.rolling_transfers[w]
+            ) for w in self.gameweeks[1:])
+
+        itbv = so.expr_sum(
+            (
+                np.power(decay_gameweek[1], w - self.start - 1)
+                if objective_type == 'linear' else 1) *
+            (
+                itb_val * self.in_the_bank[w]
+            ) for w in self.gameweeks)
+
+        self.model.set_objective(
+            - xp - ftv - itbv + hits_handicap,
+            name='total_xp_obj',
+            sense='N')
+
+        # Initial conditions: set team and FT depending on the team
+        self.model.add_constraints(
+            (self.team[p, self.start - 1] == 1 for p in self.initial_team),
+            name='initial_team')
+        self.model.add_constraint(
+            (so.expr_sum(self.team[p, self.start] for p in wc_team) >= 10),
+            name='initial_wc_team')
+        self.model.add_constraint(
+            self.free_transfers[self.start - 1] == 1,
+            name='initial_ft')
+        self.model.add_constraint(
+            self.in_the_bank[self.start - 1] == self.bank,
+            name='initial_itb')
+
+        # Constraints
+        # The cost of the squad must exceed the budget
+        sold_amount = {
+            w: so.expr_sum(
+                self.sell[p, w] * self.data.loc[p, 'SV'] for p in self.players)
+            for w in self.gameweeks}
+        bought_amount = {
+            w: so.expr_sum(
+                self.buy[p, w] * self.data.loc[p, 'BV'] for p in self.players)
+            for w in self.gameweeks}
+        self.model.add_constraints(
+            (
+                self.in_the_bank[w] == self.in_the_bank[w - 1] +
+                sold_amount[w] - bought_amount[w] for w in self.gameweeks),
+            name='budget')
+
+        # The number of players must be 11 on field, 4 on bench, 1 captain
+        # & 1 vicecaptain
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.team[p, w] for p in self.players) == 15
+                for w in self.all_gameweeks),
+            name='15_players')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.starter[p, w] for p in self.players) == 11
+                for w in self.gameweeks),
+            name='11_starters')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.captain[p, w] for p in self.players) == 1
+                for w in self.gameweeks),
+            name='1_captain')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.vicecaptain[p, w] for p in self.players) == 1
+                for w in self.gameweeks),
+            name='1_vicecaptain')
+
+        # Bench constraints
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.bench[p, w, 0] for p in self.players
+                    if self.data.loc[p, 'G'] == 1) == 1 for w in self.gameweeks),
+            name='one_bench_gk')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.bench[p, w, o] for p in self.players) == 1
+                for w in self.gameweeks for o in [1, 2, 3]),
+            name='one_per_bench_spot')
+        self.model.add_constraints(
+            (
+                self.bench[p, w, o] <= self.team[p, w]
+                for p in self.players for w in self.gameweeks for o in order),
+            name='bench_in_team')
+        self.model.add_constraints(
+            (
+                self.starter[p, w] +
+                so.expr_sum(self.bench[p, w, o] for o in order) <= 1
+                for p in self.players for w in self.gameweeks),
+            name='bench_not_a_starter')
+
+        # A captain must not be picked more than once
+        self.model.add_constraints(
+            (
+                self.captain[p, w] + self.vicecaptain[p, w] <= 1
+                for p in self.players for w in self.gameweeks),
+            name='cap_or_vice')
+
+        # The number of players from a team must not be more than three
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, team_name]
+                    for p in self.players) <= 3
+                for team_name in self.team_names for w in self.gameweeks),
+            name='team_limit')
+
+        # The number of players fit the requirements 2 Gk, 5 Def, 5 Mid, 3 For
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'G']
+                    for p in self.players) == 2 for w in self.gameweeks),
+            name='gk_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'D']
+                    for p in self.players) == 5 for w in self.gameweeks),
+            name='def_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'M']
+                    for p in self.players) == 5 for w in self.gameweeks),
+            name='mid_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'F']
+                    for p in self.players) == 3 for w in self.gameweeks),
+            name='for_limit')
+
+        # The formation is valid i.e. Minimum one goalkeeper, 3 defenders,
+        # 2 midfielders and 1 striker on the lineup
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'G']
+                    for p in self.players) == 1 for w in self.gameweeks),
+            name='gk_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'D']
+                    for p in self.players) >= 3 for w in self.gameweeks),
+            name='def_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'M']
+                    for p in self.players) >= 2 for w in self.gameweeks),
+            name='mid_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'F']
+                    for p in self.players) >= 1 for w in self.gameweeks),
+            name='for_min')
+
+        # The captain & vicecap must be a player on the field
+        self.model.add_constraints(
+            (
+                self.captain[p, w] <= self.starter[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='captain_in_starters')
+        self.model.add_constraints(
+            (
+                self.vicecaptain[p, w] <= self.starter[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='vicecaptain_in_starters')
+
+        # The starters must be in the team
+        self.model.add_constraints(
+            (
+                self.starter[p, w] <= self.team[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='starters_in_team')
+
+        # The team must be equal to the next week excluding transfers
+        self.model.add_constraints(
+            (
+                self.team[p, w] == self.team[p, w - 1] + self.buy[p, w] -
+                self.sell[p, w] for p in self.players for w in self.gameweeks),
+            name='team_transfer')
+
+        # The rolling transfer must be equal to the number of free
+        # transfers not used (+ 1)
+        self.model.add_constraints(
+            (
+                self.free_transfers[w] == self.rolling_transfers[w] + 1
+                for w in self.gameweeks),
+            name='rolling_ft_rel')
+
+        # The player must not be sold and bought simultaneously
+        # (on wildcard/freehit)
+        self.model.add_constraints(
+            (
+                self.sell[p, w] + self.buy[p, w] <= 1
+                for p in self.players for w in self.gameweeks),
+            name='single_buy_or_sell')
+
+        # Rolling transfers
+        self.number_of_transfers = {
+            w: so.expr_sum(self.sell[p, w] for p in self.players)
+            for w in self.gameweeks}
+        self.number_of_transfers[self.start - 1] = self.transfer
+        self.model.add_constraints(
+            (
+                self.free_transfers[w - 1] - self.number_of_transfers[w - 1] <=
+                2 * self.rolling_transfers[w] for w in self.gameweeks),
+            name='rolling_condition_1')
+        self.model.add_constraints(
+            (
+                self.free_transfers[w - 1] - self.number_of_transfers[w - 1] >=
+                self.rolling_transfers[w] + (-14) * (1 - self.rolling_transfers[w])
+                for w in self.gameweeks),
+            name='rolling_condition_2')
+
+        # The number of hits must be the number of transfer except the
+        # free ones.
+        self.model.add_constraints(
+            (
+                self.hits[w] >= self.number_of_transfers[w] -
+                self.free_transfers[w] for w in self.gameweeks),
+            name='hits')
+
+        # Enforce midterm planning by having no hits past WC GW
+        self.model.add_constraints(
+            (self.hits[w] == 0 for w in self.gameweeks[1:]),
+            name='hits_max')
+
+        # For printing
+        self.model.add_constraint(
+            (self.wildcard[self.start] == 1),
+            name='wildcard_print')
+
+        # Solve
+        self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
+        command = (
+            f'cbc optimization/tmp/{model_name}.mps solve solu ' +
+            f'optimization/tmp/{model_name}_solution.txt')
+
+        process = Popen(command, shell=True, stdout=DEVNULL)
+        process.wait()
+
+        # Reset variables for next passes
+        for v in self.model.get_variables():
+            v.set_value(0)
+
+        with open(f'optimization/tmp/{model_name}_solution.txt', 'r') as f:
+            for line in f:
+                if 'objective value' in line:
+                    continue
+                words = line.split()
+                var = self.model.get_variable(words[1])
+                var.set_value(float(words[2]))
+
+        pretty_print(
+            self.data,
+            self.start,
+            self.period,
+            self.team,
+            self.team,
+            self.starter,
+            self.bench,
+            self.captain,
+            self.vicecaptain,
+            self.buy,
+            self.sell,
+            self.free_transfers,
+            self.hits,
+            self.in_the_bank,
+            self.model.get_objective_value(),
+            self.freehit,
+            self.wildcard,
+            self.bboost,
+            self.triple,
+            nb_suboptimal=model_name)
+
+        # GW
+        print("\n----------")
+
+        # Get longterm+midterm WC players
+        wc_team = [p for p in self.players if self.team[p, self.start].get_value()]
+
+        # Short range planning Model
+        model_name = 'short'
+        self.model = so.Model(name=f'{model_name}_model')
+
+        # Variables
+        self.team = self.model.add_variables(
+            self.players,
+            self.all_gameweeks,
+            name='team',
+            vartype=so.binary)
+        self.starter = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='starter',
+            vartype=so.binary)
+        self.bench = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            order,
+            name='bench',
+            vartype=so.binary)
+        self.captain = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='captain',
+            vartype=so.binary)
+        self.vicecaptain = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='vicecaptain',
+            vartype=so.binary)
+
+        self.buy = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='buy',
+            vartype=so.binary)
+        self.sell = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='sell',
+            vartype=so.binary)
+
+        self.free_transfers = self.model.add_variables(
+            self.all_gameweeks,
+            name='ft',
+            vartype=so.integer,
+            lb=1,
+            ub=2)
+        self.hits = self.model.add_variables(
+            self.gameweeks,
+            name='hits',
+            vartype=so.integer,
+            lb=0,
+            ub=15)
+        self.rolling_transfers = self.model.add_variables(
+            self.gameweeks,
+            name='rolling',
+            vartype=so.binary)
+        self.in_the_bank = self.model.add_variables(
+            self.all_gameweeks,
+            name='itb',
+            vartype=so.continuous,
+            lb=0)
+        self.triple = self.model.add_variables(
+            self.players,
+            self.gameweeks,
+            name='3xc',
+            vartype=so.binary)
+        self.bboost = self.model.add_variables(
+            self.gameweeks,
+            name='bb',
+            vartype=so.binary)
+        self.freehit = self.model.add_variables(
+            self.gameweeks,
+            name='fh',
+            vartype=so.binary)
+        self.wildcard = self.model.add_variables(
+            self.gameweeks,
+            name='wc',
+            vartype=so.binary)
+
+        # Objective: maximize total expected points
+        # Assume a % (decay_bench) chance of a player being subbed on
+        # Assume a % (decay_gameweek) reliability of next week's xPts
+        xp = so.expr_sum(
+            (
+                np.power(decay_gameweek[2], w - self.start)
+                if objective_type == 'linear' else 1) *
+            (
+                    so.expr_sum(
+                        (
+                            self.starter[p, w] + self.captain[p, w] +
+                            (vicecap_decay * self.vicecaptain[p, w]) +
+                            so.expr_sum(
+                                decay_bench[o] *
+                                self.bench[p, w, o] for o in order)
+                        ) *
+                        self.data.loc[p, f'{w}_Pts'] for p in self.players
+                    )
+            ) for w in self.gameweeks)
+
+        # Hits handicap except for the first (WC) gameweek
+        hits_handicap = so.expr_sum(
+            (
+                np.power(decay_gameweek[2], w - self.start)
+                if objective_type == 'linear' else 1) *
+            (hit_val * self.hits[w]) for w in self.gameweeks[1:])
+
+        ftv = so.expr_sum(
+            (
+                np.power(decay_gameweek[2], w - self.start - 1)
+                if objective_type == 'linear' else 1) *
+            (
+                ft_val * self.rolling_transfers[w]
+            ) for w in self.gameweeks[1:])
+
+        itbv = so.expr_sum(
+            (
+                np.power(decay_gameweek[2], w - self.start - 1)
+                if objective_type == 'linear' else 1) *
+            (
+                itb_val * self.in_the_bank[w]
+            ) for w in self.gameweeks)
+
+        self.model.set_objective(
+            - xp - ftv - itbv + hits_handicap,
+            name='total_xp_obj',
+            sense='N')
+
+        # Initial conditions: set team and FT depending on the team
+        self.model.add_constraints(
+            (self.team[p, self.start - 1] == 1 for p in self.initial_team),
+            name='initial_team')
+        self.model.add_constraint(
+            (so.expr_sum(self.team[p, self.start] for p in wc_team) >= 13),
+            name='initial_wc_team')
+        self.model.add_constraint(
+            self.free_transfers[self.start - 1] == 1,
+            name='initial_ft')
+        self.model.add_constraint(
+            self.in_the_bank[self.start - 1] == self.bank,
+            name='initial_itb')
+
+        # Constraints
+        # The cost of the squad must exceed the budget
+        sold_amount = {
+            w: so.expr_sum(
+                self.sell[p, w] * self.data.loc[p, 'SV'] for p in self.players)
+            for w in self.gameweeks}
+        bought_amount = {
+            w: so.expr_sum(
+                self.buy[p, w] * self.data.loc[p, 'BV'] for p in self.players)
+            for w in self.gameweeks}
+        self.model.add_constraints(
+            (
+                self.in_the_bank[w] == self.in_the_bank[w - 1] +
+                sold_amount[w] - bought_amount[w] for w in self.gameweeks),
+            name='budget')
+
+        # The number of players must be 11 on field, 4 on bench, 1 captain
+        # & 1 vicecaptain
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.team[p, w] for p in self.players) == 15
+                for w in self.all_gameweeks),
+            name='15_players')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.starter[p, w] for p in self.players) == 11
+                for w in self.gameweeks),
+            name='11_starters')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.captain[p, w] for p in self.players) == 1
+                for w in self.gameweeks),
+            name='1_captain')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.vicecaptain[p, w] for p in self.players) == 1
+                for w in self.gameweeks),
+            name='1_vicecaptain')
+
+        # Bench constraints
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.bench[p, w, 0] for p in self.players
+                    if self.data.loc[p, 'G'] == 1) == 1 for w in self.gameweeks),
+            name='one_bench_gk')
+        self.model.add_constraints(
+            (
+                so.expr_sum(self.bench[p, w, o] for p in self.players) == 1
+                for w in self.gameweeks for o in [1, 2, 3]),
+            name='one_per_bench_spot')
+        self.model.add_constraints(
+            (
+                self.bench[p, w, o] <= self.team[p, w]
+                for p in self.players for w in self.gameweeks for o in order),
+            name='bench_in_team')
+        self.model.add_constraints(
+            (
+                self.starter[p, w] +
+                so.expr_sum(self.bench[p, w, o] for o in order) <= 1
+                for p in self.players for w in self.gameweeks),
+            name='bench_not_a_starter')
+
+        # A captain must not be picked more than once
+        self.model.add_constraints(
+            (
+                self.captain[p, w] + self.vicecaptain[p, w] <= 1
+                for p in self.players for w in self.gameweeks),
+            name='cap_or_vice')
+
+        # The number of players from a team must not be more than three
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, team_name]
+                    for p in self.players) <= 3
+                for team_name in self.team_names for w in self.gameweeks),
+            name='team_limit')
+
+        # The number of players fit the requirements 2 Gk, 5 Def, 5 Mid, 3 For
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'G']
+                    for p in self.players) == 2 for w in self.all_gameweeks),
+            name='gk_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'D']
+                    for p in self.players) == 5 for w in self.all_gameweeks),
+            name='def_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'M']
+                    for p in self.players) == 5 for w in self.all_gameweeks),
+            name='mid_limit')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.team[p, w] * self.data.loc[p, 'F']
+                    for p in self.players) == 3 for w in self.all_gameweeks),
+            name='for_limit')
+
+        # The formation is valid i.e. Minimum one goalkeeper, 3 defenders,
+        # 2 midfielders and 1 striker on the lineup
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'G']
+                    for p in self.players) == 1 for w in self.gameweeks),
+            name='gk_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'D']
+                    for p in self.players) >= 3 for w in self.gameweeks),
+            name='def_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'M']
+                    for p in self.players) >= 2 for w in self.gameweeks),
+            name='mid_min')
+        self.model.add_constraints(
+            (
+                so.expr_sum(
+                    self.starter[p, w] * self.data.loc[p, 'F']
+                    for p in self.players) >= 1 for w in self.gameweeks),
+            name='for_min')
+
+        # The captain & vicecap must be a player on the field
+        self.model.add_constraints(
+            (
+                self.captain[p, w] <= self.starter[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='captain_in_starters')
+        self.model.add_constraints(
+            (
+                self.vicecaptain[p, w] <= self.starter[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='vicecaptain_in_starters')
+
+        # The starters must be in the team
+        self.model.add_constraints(
+            (
+                self.starter[p, w] <= self.team[p, w]
+                for p in self.players for w in self.gameweeks),
+            name='starters_in_team')
+
+        # The team must be equal to the next week excluding transfers
+        self.model.add_constraints(
+            (
+                self.team[p, w] == self.team[p, w - 1] + self.buy[p, w] -
+                self.sell[p, w] for p in self.players for w in self.gameweeks),
+            name='team_transfer')
+
+        # The rolling transfer must be equal to the number of free transfers
+        # not used (+ 1)
+        self.model.add_constraints(
+            (
+                self.free_transfers[w] == self.rolling_transfers[w] + 1
+                for w in self.gameweeks),
+            name='rolling_ft_rel')
+
+        # The player must not be sold and bought simultaneously
+        # (on wildcard/freehit)
+        self.model.add_constraints(
+            (
+                self.sell[p, w] + self.buy[p, w] <= 1
+                for p in self.players for w in self.gameweeks),
+            name='single_buy_or_sell')
+
+        # Rolling transfers
+        self.number_of_transfers = {
+            w: so.expr_sum(self.sell[p, w] for p in self.players)
+            for w in self.gameweeks}
+        self.number_of_transfers[self.start - 1] = self.transfer
+        self.model.add_constraints(
+            (
+                self.free_transfers[w - 1] - self.number_of_transfers[w - 1] <=
+                2 * self.rolling_transfers[w] for w in self.gameweeks),
+            name='rolling_condition_1')
+        self.model.add_constraints(
+            (
+                self.free_transfers[w - 1] - self.number_of_transfers[w - 1] >=
+                self.rolling_transfers[w] + (-14) * (1 - self.rolling_transfers[w])
+                for w in self.gameweeks),
+            name='rolling_condition_2')
+
+        # The number of hits must be the number of transfer except
+        # the free ones.
+        self.model.add_constraints(
+            (
+                self.hits[w] >= self.number_of_transfers[w] -
+                self.free_transfers[w] for w in self.gameweeks),
+            name='hits')
+
+        # For printing
+        self.model.add_constraint(
+            (self.wildcard[self.start] == 1),
+            name='wildcard_print')
+
+        # Solve
+        self.model.export_mps(filename=f"optimization/tmp/{model_name}.mps")
+        command = (
+            f'cbc optimization/tmp/{model_name}.mps solve solu ' +
+            f'optimization/tmp/{model_name}_solution.txt')
+
+        process = Popen(command, shell=True, stdout=DEVNULL)
+        process.wait()
+
+        # Reset variables for next passes
+        for v in self.model.get_variables():
+            v.set_value(0)
+
+        with open(f'optimization/tmp/{model_name}_solution.txt', 'r') as f:
+            for line in f:
+                if 'objective value' in line:
+                    continue
+                words = line.split()
+                var = self.model.get_variable(words[1])
+                var.set_value(float(words[2]))
+
+        return pretty_print(
+            self.data,
+            self.start,
+            self.period,
+            self.team,
+            self.team,
+            self.starter,
+            self.bench,
+            self.captain,
+            self.vicecaptain,
+            self.buy,
+            self.sell,
+            self.free_transfers,
+            self.hits,
+            self.in_the_bank,
+            self.model.get_objective_value(),
+            self.freehit,
+            self.wildcard,
+            self.bboost,
+            self.triple,
+            nb_suboptimal=model_name)
+
     def solve(self, model_name, log=False, i=0, time_lim=0):
         """ Solves the model
 
@@ -1308,9 +2469,18 @@ if __name__ == "__main__":
     #     threshold=10,
     #     target='Top_100K')
 
-    to.automated_chips_model(
+    # to.automated_chips_model(
+    #     objective_type='decay',
+    #     decay_gameweek=0.9,
+    #     vicecap_decay=0.1,
+    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
+    #     ft_val=1.5,
+    #     itb_val=0.008,
+    #     hit_val=6)
+
+    to.advanced_wildcard(
         objective_type='decay',
-        decay_gameweek=0.9,
+        decay_gameweek=[0.9, 0.75, 0.6],
         vicecap_decay=0.1,
         decay_bench=[0.03, 0.21, 0.06, 0.002],
         ft_val=1.5,
