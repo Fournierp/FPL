@@ -8,7 +8,7 @@ import matplotlib.path as mpath
 from highlight_text import fig_text
 from matplotlib.colors import ListedColormap
 
-from team_planner import Team_Planner
+from team_optimization import Team_Optimization
 
 
 def write():
@@ -61,13 +61,13 @@ def write():
     if st.button('Run Optimization'):
 
         with st.spinner("Running Optimization ..."):
-            tp = Team_Planner(
+            to = Team_Optimization(
                 team_id=35868,
                 horizon=horizon,
                 noise=False,
                 premium=True if premium=='Premium' else False)
 
-            df, chip_strat = tp.advanced_wildcard(
+            df, chip_strat = to.advanced_wildcard(
                 objective_type='decay',
                 decay_gameweek=[decay_short, decay_med, decay_long],
                 vicecap_decay=vicecap_decay,
@@ -85,7 +85,7 @@ def write():
 
             color_position = {'G': "#ebff00", 'D': "#00ff87", 'M': "#05f0ff", 'F': "#e90052"}
 
-            for j, row in tp.initial_team_df.iterrows():
+            for j, row in to.initial_team_df.iterrows():
                 rectangle = patches.Rectangle(
                     (0, 14-j),
                     12, .75,
@@ -163,7 +163,7 @@ def write():
                     ls=':', lw='2.5', c='grey')
 
                 if i == 0:
-                    transfers = tp.initial_team_df.append(df_gw, ignore_index=True)[['Name', 'Pos']]
+                    transfers = to.initial_team_df.append(df_gw, ignore_index=True)[['Name', 'Pos']]
                     transfers = transfers.drop_duplicates(keep=False).sort_index()
 
                     for pos in ['G', 'D', 'M', 'F']:

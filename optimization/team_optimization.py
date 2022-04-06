@@ -2459,8 +2459,8 @@ class Team_Optimization:
         # Get all players selected by medium term WC
         wc_team = [p for p in self.players if self.team[p, self.start].get_value()]
 
-        # Medium range planning Model
-        model_name = 'medium'
+        # Short range planning Model
+        model_name = 'short'
         self.model = so.Model(name=model_name + '_model')
 
         order = [0, 1, 2, 3]
@@ -2986,7 +2986,7 @@ class Team_Optimization:
                 var = self.model.get_variable(words[1])
                 var.set_value(float(words[2]))
 
-        pretty_print(
+        return pretty_print(
             self.data,
             self.start,
             self.period,
