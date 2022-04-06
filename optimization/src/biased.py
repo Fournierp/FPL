@@ -8,19 +8,19 @@ import matplotlib.path as mpath
 from highlight_text import fig_text
 from matplotlib.colors import ListedColormap
 
-from team_planner import Team_Planner
+from team_optimization import Team_Optimization
 
 
 @st.cache
 def get_data():
 
-    tp = Team_Planner(
+    to = Team_Optimization(
         team_id=35868,
         horizon=5,
         noise=False,
         premium=True)
 
-    return tp.data.Name, tp.start
+    return to.data.Name, to.start
 
 def write():
     st.title('FPL - Biased Model')
@@ -65,42 +65,44 @@ def write():
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        team_in_1 = st.multiselect(f"Forced in Team GW {start+1}", player_names.values)
+        team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
     with col2:
-        team_in_2 = st.multiselect(f"In GW {start+2}", player_names.values)
+        team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
     with col3:
-        team_in_3 = st.multiselect(f"In GW {start+3}", player_names.values)
+        team_in_3 = st.multiselect(f"In GW {start+2}", player_names.values)
 
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        team_out_1 = st.multiselect(f"Forced out Team GW {start+1}", player_names.values)
+        team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
     with col2:
-        team_out_2 = st.multiselect(f"Out GW {start+2}", player_names.values)
+        team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
     with col3:
-        team_out_3 = st.multiselect(f"Out GW {start+3}", player_names.values)
+        team_out_3 = st.multiselect(f"Out GW {start+2}", player_names.values)
 
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        hit_1 = st.slider(f"Maximim hits in GW {start+1}", min_value=0, max_value=5, value=5)
+        hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
     with col2:
-        hit_2 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
+        hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
     with col3:
-        hit_3 = st.slider(f"GW {start+3}", min_value=0, max_value=5, value=5)
+        hit_3 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
+
+    rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+3))
 
 
     if st.button('Run Optimization'):
 
         with st.spinner("Running Optimization ..."):
 
-            tp = Team_Planner(
+            to = Team_Optimization(
                 team_id=35868,
                 horizon=horizon,
                 noise=False,
                 premium=True if premium=='Premium' else False)
 
-            tp.build_model(
+            to.build_model(
                 model_name="biased",
                 objective_type='decay' if decay != 0 else 'linear',
                 decay_gameweek=decay,
@@ -110,7 +112,7 @@ def write():
                 itb_val=itb_val,
                 hit_val=hit_val)
 
-            tp.biased_model(
+            to.biased_model(
                 love={
                     'buy': {},
                     'start': {},
@@ -135,10 +137,10 @@ def write():
                     'eq': {},
                     'min': {}
                 },
-                two_ft_gw=[])
+                two_ft_gw=rolling)
 
 
-            df, chip_strat = tp.solve(
+            df, chip_strat = to.solve(
                 model_name="biased",
                 log=True,
                 time_lim=0)
@@ -152,7 +154,7 @@ def write():
 
             color_position = {'G': "#ebff00", 'D': "#00ff87", 'M': "#05f0ff", 'F': "#e90052"}
 
-            for j, row in tp.initial_team_df.iterrows():
+            for j, row in to.initial_team_df.iterrows():
                 rectangle = patches.Rectangle(
                     (0, 14-j),
                     12, .75,
@@ -230,7 +232,7 @@ def write():
                     ls=':', lw='2.5', c='grey')
 
                 if i == 0:
-                    transfers = tp.initial_team_df.append(df_gw, ignore_index=True)[['Name', 'Pos']]
+                    transfers = to.initial_team_df.append(df_gw, ignore_index=True)[['Name', 'Pos']]
                     transfers = transfers.drop_duplicates(keep=False).sort_index()
 
                     for pos in ['G', 'D', 'M', 'F']:
