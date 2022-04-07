@@ -75,6 +75,8 @@ python3 modeling/fixtures/dixon_coles.py.py
 
 [livefpl.net](https://www.livefpl.net/elite) - Best 1000 Managers of All Time
 
+[vaastav/Fantasy-Premier-League](https://github.com/vaastav/Fantasy-Premier-League) - Historical FPL data
+
 ## Contribute
 
 To build on this tool, please fork it and make pull requests. Or simply send me some suggestions !
