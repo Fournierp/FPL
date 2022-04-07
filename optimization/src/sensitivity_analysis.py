@@ -14,50 +14,51 @@ from team_optimization import Team_Optimization
 
 
 def write():
-    st.title('FPL - Vanilla Model')
+    st.title('FPL - Sensitivity Analysis Model')
     st.header(
         """
-        Vanilla FPL Optimization.
+        Sensitivity Analysis FPL Optimization.
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
 
-    col1, col2 = st.columns(2)
-    with col1:
-        horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
-    with col2:
-        premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
+    with st.expander('TMP'):
+        col1, col2 = st.columns(2)
+        with col1:
+            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+        with col2:
+            premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 
 
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        gk_weight = st.slider("GK Weight", min_value=0.01, max_value=1., value=0.03, step=0.02)
-    with col2:
-        first_bench_weight = st.slider("1st Weight", min_value=0.01, max_value=1., value=0.21, step=0.02)
-    with col3:
-        second_bench_weight = st.slider("2nd Weight", min_value=0.01, max_value=1., value=0.06, step=0.02)
-    with col4:
-        third_bench_weight = st.slider("3rd Weight", min_value=0.01, max_value=1., value=0.01, step=0.02)
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            gk_weight = st.slider("GK Weight", min_value=0.01, max_value=1., value=0.03, step=0.02)
+        with col2:
+            first_bench_weight = st.slider("1st Weight", min_value=0.01, max_value=1., value=0.21, step=0.02)
+        with col3:
+            second_bench_weight = st.slider("2nd Weight", min_value=0.01, max_value=1., value=0.06, step=0.02)
+        with col4:
+            third_bench_weight = st.slider("3rd Weight", min_value=0.01, max_value=1., value=0.01, step=0.02)
 
 
-    col1, col2, col3, col4, col5 = st.columns(5)
-    with col1:
-        decay = st.slider("Decay rate", min_value=0., max_value=1., value=0.9, step=0.02)
-    with col2:
-        vicecap_decay = st.slider("Vicecap rate", min_value=0., max_value=1., value=0.1, step=0.02)
-    with col3:
-        ft_val = st.slider("FT value", min_value=0., max_value=5., value=1.5, step=0.2)
-    with col4:
-        hit_val = st.slider("Hit value", min_value=2., max_value=8., value=6., step=0.5)
-    with col5:
-        itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
+        col1, col2, col3, col4, col5 = st.columns(5)
+        with col1:
+            decay = st.slider("Decay rate", min_value=0., max_value=1., value=0.9, step=0.02)
+        with col2:
+            vicecap_decay = st.slider("Vicecap rate", min_value=0., max_value=1., value=0.1, step=0.02)
+        with col3:
+            ft_val = st.slider("FT value", min_value=0., max_value=5., value=1.5, step=0.2)
+        with col4:
+            hit_val = st.slider("Hit value", min_value=2., max_value=8., value=6., step=0.5)
+        with col5:
+            itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
 
-    col1, col2 = st.columns(2)
-    with col1:
-        repeats = st.slider("Number of Experiments", min_value=1, max_value=10, value=5)
-    with col2:
-        iterations = st.slider("Iterations per exp.", min_value=1, max_value=10, value=7)
+        col1, col2 = st.columns(2)
+        with col1:
+            repeats = st.slider("Number of Experiments", min_value=1, max_value=10, value=5)
+        with col2:
+            iterations = st.slider("Iterations per exp.", min_value=1, max_value=10, value=7)
 
 
     if st.button('Run Optimization'):
@@ -123,7 +124,96 @@ def write():
                     axis=1))
 
             df[['Total', '1', '2', '3']] = df[['Total', '1', '2', '3']].astype('int32')
-            st.dataframe(df[['Transfer', 'Total', '1', '2', '3', 'Mean', 'Std']])
+            # df = df.sort_values(['Total', '1', '2', '3'], ascending=False)
+            # st.dataframe(df[['Transfer', 'Total', '1', '2', '3', 'Mean', 'Std']])
+
+            fig, ax = plt.subplots(figsize=(16, 12))
+            # Set up the axis limits with a bit of padding
+            ax.set_ylim(0, 5.5)
+            ax.set_xlim(0, 25+(4+1)*16+2.5)
+            ax.axis('off')
+            header_pos = 5.25
+
+            newaxes = []
+            for j, row in df.head(7)[::-1].reset_index().iterrows():
+                rectangle = patches.Rectangle(
+                    (0, j*.75),
+                    25, .5,
+                    facecolor='grey')
+                ax.add_patch(rectangle)
+                rx, ry = rectangle.get_xy()
+                cx = rx + rectangle.get_width()/2.0
+                cy = ry + rectangle.get_height()/2.0
+                ax.annotate(
+                    row['Transfer'],
+                    (cx, cy),
+                    color='black',
+                    weight='bold',
+                    fontsize=14,
+                    ha='center',
+                    va='center')
+
+                newax = fig.add_axes([.63, 0.11+j*.105, .25 , .07])
+                newax.boxplot(
+                    [-row[col] for col in max_cols if pd.notnull(row[col])],
+                    vert=False,
+                    patch_artist=True,
+                    capprops=dict(color='grey'),
+                    boxprops=dict(facecolor='grey', color='grey'),
+                    whiskerprops=dict(color='grey'),
+                    flierprops=dict(markerfacecolor='r'),
+                    medianprops=dict(color='w'),
+                    widths=.6)
+                # TODO: Change color scheme
+                newax.set_xlim(-np.max(np.max(df[max_cols], axis=0))-1, -np.min(np.min(df[max_cols], axis=0))+1)
+                newaxes.append(newax)
+
+            # Column headers
+            ax.text(
+                cx, header_pos,
+                'Transfer',
+                fontsize=14, weight='bold', ha='center')
+
+            # Header separator
+            ax.plot(
+                [0, 25],
+                [5, 5],
+                ls='-', lw='2.5', c='grey')
+
+            for i, col in enumerate(['Total', '1', '2', '3']):
+                for j, row in df.head(7)[::-1].reset_index().iterrows():
+                    rectangle = patches.Rectangle(
+                        (30+i*10, j*.75),
+                        5, .5,
+                        facecolor='grey')
+                    ax.add_patch(rectangle)
+                    rx, ry = rectangle.get_xy()
+                    cx = rx + rectangle.get_width()/2.0
+                    cy = ry + rectangle.get_height()/2.0
+                    ax.annotate(
+                        row[col],
+                        (cx, cy),
+                        color='black',
+                        weight='bold',
+                        fontsize=14,
+                        ha='center',
+                        va='center')
+
+                # Column headers
+                ax.text(
+                    cx, header_pos,
+                    col,
+                    fontsize=14, weight='bold', ha='center')
+
+                # Header separator
+                ax.plot(
+                    [30+i*10, 30+i*10+5],
+                    [5, 5],
+                    ls='-', lw='2.5', c='grey')
+
+
+            st.pyplot(fig, ax)
+            plt.close(fig)
 
 
 def write_transfer(x, player_names):
