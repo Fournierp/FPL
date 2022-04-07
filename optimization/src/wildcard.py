@@ -20,42 +20,44 @@ def write():
 
     plt.style.use(".streamlit/style.mplstyle")
 
-    col1, col2 = st.columns(2)
-    with col1:
-        horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
-    with col2:
-        premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
+    with st.expander('Parameters', expanded=True):
+
+        col1, col2 = st.columns(2)
+        with col1:
+            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+        with col2:
+            premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 
 
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        gk_weight = st.slider("GK Weight", min_value=0.01, max_value=1., value=0.03, step=0.02)
-    with col2:
-        first_bench_weight = st.slider("1st Weight", min_value=0.01, max_value=1., value=0.21, step=0.02)
-    with col3:
-        second_bench_weight = st.slider("2nd Weight", min_value=0.01, max_value=1., value=0.06, step=0.02)
-    with col4:
-        third_bench_weight = st.slider("3rd Weight", min_value=0.01, max_value=1., value=0.01, step=0.02)
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            gk_weight = st.slider("GK Weight", min_value=0.01, max_value=1., value=0.03, step=0.02)
+        with col2:
+            first_bench_weight = st.slider("1st Weight", min_value=0.01, max_value=1., value=0.21, step=0.02)
+        with col3:
+            second_bench_weight = st.slider("2nd Weight", min_value=0.01, max_value=1., value=0.06, step=0.02)
+        with col4:
+            third_bench_weight = st.slider("3rd Weight", min_value=0.01, max_value=1., value=0.01, step=0.02)
 
 
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        vicecap_decay = st.slider("Vicecap rate", min_value=0., max_value=1., value=0.1, step=0.02)
-    with col2:
-        ft_val = st.slider("FT value", min_value=0., max_value=5., value=1.5, step=0.2)
-    with col3:
-        hit_val = st.slider("Hit value", min_value=2., max_value=8., value=6., step=0.5)
-    with col4:
-        itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            vicecap_decay = st.slider("Vicecap rate", min_value=0., max_value=1., value=0.1, step=0.02)
+        with col2:
+            ft_val = st.slider("FT value", min_value=0., max_value=5., value=1.5, step=0.2)
+        with col3:
+            hit_val = st.slider("Hit value", min_value=2., max_value=8., value=6., step=0.5)
+        with col4:
+            itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        decay_long = st.slider("Longterm WC Decay rate", min_value=0., max_value=1., value=0.9, step=0.02)
-    with col2:
-        decay_med = st.slider("Medium-term WC Decay rate", min_value=0., max_value=1., value=0.8, step=0.02)
-    with col3:
-        decay_short = st.slider("Short-term WC Decay rate", min_value=0., max_value=1., value=0.7, step=0.02)
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            decay_long = st.slider("Longterm WC Decay rate", min_value=0., max_value=1., value=0.9, step=0.02)
+        with col2:
+            decay_med = st.slider("Medium-term WC Decay rate", min_value=0., max_value=1., value=0.8, step=0.02)
+        with col3:
+            decay_short = st.slider("Short-term WC Decay rate", min_value=0., max_value=1., value=0.7, step=0.02)
 
 
     if st.button('Run Optimization'):

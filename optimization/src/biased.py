@@ -32,64 +32,66 @@ def write():
     plt.style.use(".streamlit/style.mplstyle")
     player_names, start = get_data()
 
-    col1, col2 = st.columns(2)
-    with col1:
-        horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
-    with col2:
-        premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
+    with st.expander('Parameters', expanded=True):
+
+        col1, col2 = st.columns(2)
+        with col1:
+            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+        with col2:
+            premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 
 
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        gk_weight = st.slider("GK Weight", min_value=0.01, max_value=1., value=0.03, step=0.02)
-    with col2:
-        first_bench_weight = st.slider("1st Weight", min_value=0.01, max_value=1., value=0.21, step=0.02)
-    with col3:
-        second_bench_weight = st.slider("2nd Weight", min_value=0.01, max_value=1., value=0.06, step=0.02)
-    with col4:
-        third_bench_weight = st.slider("3rd Weight", min_value=0.01, max_value=1., value=0.01, step=0.02)
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            gk_weight = st.slider("GK Weight", min_value=0.01, max_value=1., value=0.03, step=0.02)
+        with col2:
+            first_bench_weight = st.slider("1st Weight", min_value=0.01, max_value=1., value=0.21, step=0.02)
+        with col3:
+            second_bench_weight = st.slider("2nd Weight", min_value=0.01, max_value=1., value=0.06, step=0.02)
+        with col4:
+            third_bench_weight = st.slider("3rd Weight", min_value=0.01, max_value=1., value=0.01, step=0.02)
 
 
-    col1, col2, col3, col4, col5 = st.columns(5)
-    with col1:
-        decay = st.slider("Decay rate", min_value=0., max_value=1., value=0.9, step=0.02)
-    with col2:
-        vicecap_decay = st.slider("Vicecap rate", min_value=0., max_value=1., value=0.1, step=0.02)
-    with col3:
-        ft_val = st.slider("FT value", min_value=0., max_value=5., value=1.5, step=0.2)
-    with col4:
-        hit_val = st.slider("Hit value", min_value=2., max_value=8., value=6., step=0.5)
-    with col5:
-        itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
+        col1, col2, col3, col4, col5 = st.columns(5)
+        with col1:
+            decay = st.slider("Decay rate", min_value=0., max_value=1., value=0.9, step=0.02)
+        with col2:
+            vicecap_decay = st.slider("Vicecap rate", min_value=0., max_value=1., value=0.1, step=0.02)
+        with col3:
+            ft_val = st.slider("FT value", min_value=0., max_value=5., value=1.5, step=0.2)
+        with col4:
+            hit_val = st.slider("Hit value", min_value=2., max_value=8., value=6., step=0.5)
+        with col5:
+            itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
-    with col2:
-        team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
-    with col3:
-        team_in_3 = st.multiselect(f"In GW {start+2}", player_names.values)
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
+        with col2:
+            team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
+        with col3:
+            team_in_3 = st.multiselect(f"In GW {start+2}", player_names.values)
 
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
-    with col2:
-        team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
-    with col3:
-        team_out_3 = st.multiselect(f"Out GW {start+2}", player_names.values)
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
+        with col2:
+            team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
+        with col3:
+            team_out_3 = st.multiselect(f"Out GW {start+2}", player_names.values)
 
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
-    with col2:
-        hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
-    with col3:
-        hit_3 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
+        with col2:
+            hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
+        with col3:
+            hit_3 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
 
-    rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+3))
+        rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+3))
 
 
     if st.button('Run Optimization'):
