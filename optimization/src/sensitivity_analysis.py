@@ -22,7 +22,7 @@ def write():
 
     plt.style.use(".streamlit/style.mplstyle")
 
-    with st.expander('TMP'):
+    with st.expander('Parameters', expanded=True):
         col1, col2 = st.columns(2)
         with col1:
             horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
@@ -70,19 +70,19 @@ def write():
                 noise=False,
                 premium=True if premium=='Premium' else False)
 
-            # to.build_model(
-            #     model_name="vanilla",
-            #     objective_type='decay' if decay != 0 else 'linear',
-            #     decay_gameweek=decay,
-            #     vicecap_decay=vicecap_decay,
-            #     decay_bench=[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
-            #     ft_val=ft_val,
-            #     itb_val=itb_val,
-            #     hit_val=hit_val)
+            to.build_model(
+                model_name="vanilla",
+                objective_type='decay' if decay != 0 else 'linear',
+                decay_gameweek=decay,
+                vicecap_decay=vicecap_decay,
+                decay_bench=[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
+                ft_val=ft_val,
+                itb_val=itb_val,
+                hit_val=hit_val)
 
-            # tp.sensitivity_analysis(
-            #     repeats=repeats,
-            #     iterations=iterations)
+            tp.sensitivity_analysis(
+                repeats=repeats,
+                iterations=iterations)
 
             player_names = (
                 pd
@@ -139,7 +139,7 @@ def write():
                 rectangle = patches.Rectangle(
                     (0, j*.75),
                     25, .5,
-                    facecolor='grey')
+                    facecolor='#656B73')
                 ax.add_patch(rectangle)
                 rx, ry = rectangle.get_xy()
                 cx = rx + rectangle.get_width()/2.0
@@ -147,7 +147,7 @@ def write():
                 ax.annotate(
                     row['Transfer'],
                     (cx, cy),
-                    color='black',
+                    color='w',
                     weight='bold',
                     fontsize=14,
                     ha='center',
@@ -158,26 +158,28 @@ def write():
                     [-row[col] for col in max_cols if pd.notnull(row[col])],
                     vert=False,
                     patch_artist=True,
-                    capprops=dict(color='grey'),
-                    boxprops=dict(facecolor='grey', color='grey'),
-                    whiskerprops=dict(color='grey'),
+                    capprops=dict(color='#656B73'),
+                    boxprops=dict(facecolor='#656B73', color='#656B73'),
+                    whiskerprops=dict(color='#656B73'),
                     flierprops=dict(markerfacecolor='r'),
                     medianprops=dict(color='w'),
                     widths=.6)
-                # TODO: Change color scheme
-                newax.set_xlim(-np.max(np.max(df[max_cols], axis=0))-1, -np.min(np.min(df[max_cols], axis=0))+1)
+
+                newax.set_xlim(
+                    -np.max(np.max(df[max_cols], axis=0))-1,
+                    -np.min(np.min(df[max_cols], axis=0))+1)
                 newaxes.append(newax)
 
             # Column headers
             ax.text(
                 cx, header_pos,
                 'Transfer',
-                fontsize=14, weight='bold', ha='center')
+                fontsize=16, weight='bold', ha='center')
 
             # Header separator
             ax.plot(
                 [0, 25],
-                [5, 5],
+                [5.125, 5.125],
                 ls='-', lw='2.5', c='grey')
 
             for i, col in enumerate(['Total', '1', '2', '3']):
@@ -185,7 +187,7 @@ def write():
                     rectangle = patches.Rectangle(
                         (30+i*10, j*.75),
                         5, .5,
-                        facecolor='grey')
+                        facecolor='#656B73')
                     ax.add_patch(rectangle)
                     rx, ry = rectangle.get_xy()
                     cx = rx + rectangle.get_width()/2.0
@@ -193,7 +195,7 @@ def write():
                     ax.annotate(
                         row[col],
                         (cx, cy),
-                        color='black',
+                        color='w',
                         weight='bold',
                         fontsize=14,
                         ha='center',
@@ -203,12 +205,12 @@ def write():
                 ax.text(
                     cx, header_pos,
                     col,
-                    fontsize=14, weight='bold', ha='center')
+                    fontsize=16, weight='bold', ha='center')
 
                 # Header separator
                 ax.plot(
                     [30+i*10, 30+i*10+5],
-                    [5, 5],
+                    [5.125, 5.125],
                     ls='-', lw='2.5', c='grey')
 
 
@@ -218,7 +220,7 @@ def write():
 
 def write_transfer(x, player_names):
     if len(x['Transfer in']) == len(x['Transfer out']) == 0:
-        return 'Roll'
+        return 'Roll Transfer'
 
     else:
         in_list, out_list = [], []
