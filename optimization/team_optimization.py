@@ -3154,7 +3154,7 @@ class Team_Optimization:
                     # choosing to roll transfer
                     self.model.add_constraint(
                         so.expr_sum(
-                            self.number_of_transfers[w]
+                            so.expr_sum(self.sell[p, w] for p in self.players)
                             for w in gw_range) >= 1,
                         name=f'cutoff_{i}')
 
@@ -3217,7 +3217,7 @@ class Team_Optimization:
 
                     podium.loc[transfer, i+1] = 1
 
-                num_cols = podium.loc[transfer, 1] + podium.loc[transfer, 2] + podium.loc[transfer, 3]
+                num_cols = sum([podium.loc[transfer, r] for r in np.arange(1, iterations+1)])
                 podium.loc[
                     transfer,
                     f"EV_{int(num_cols)}"] = v[2]
