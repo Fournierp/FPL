@@ -149,7 +149,7 @@ def write():
 
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Expected Value", total_ev)
+                st.metric("Expected Value", np.round(total_ev, 2))
             with col2:
                 st.metric("Objective Function Value", np.round(total_obj, 2))
 

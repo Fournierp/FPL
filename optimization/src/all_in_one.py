@@ -175,13 +175,13 @@ def write():
                 two_ft_gw=rolling)
 
             df, chip_strat, total_ev, total_obj = to.solve(
-                model_name="vanilla",
+                model_name="all_in_one",
                 log=True,
                 time_lim=0)
 
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Expected Value", total_ev)
+                st.metric("Expected Value", np.round(total_ev, 2))
             with col2:
                 st.metric("Objective Function Value", np.round(total_obj, 2))
 
