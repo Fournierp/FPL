@@ -22,7 +22,7 @@ pip install -r requirements.txt
 ## Usage Example
 
 ```{bash}
-python3 /home/FPL/modeling/dixon_coles.py
+python3 modeling/fixtures/dixon_coles.py.py
 ```
 
 ## Features
@@ -31,7 +31,7 @@ python3 /home/FPL/modeling/dixon_coles.py
   - Daily betting odds
   - FiveThirtyEight SPIs before the games
   - FPL ownership data per gameweek
-  - FPL Review Predictive data
+  - FPL Review Predictive data (Deprecated)
 
 - Optimization of FPL Team
 - Predictions of match scores
@@ -46,6 +46,12 @@ python3 /home/FPL/modeling/dixon_coles.py
   * Github Actions scraper
   * Basic gameweek FPL Team optimization
   * Benchmark match scores predictive models
+  * Football analysis metrics
+
+* 2.0
+  * FPL Optimization Dashboard
+
+  ![Demo](/optimization/streamlit-app.gif)
 
 ## Acknowledgements
 
@@ -68,6 +74,8 @@ python3 /home/FPL/modeling/dixon_coles.py
 [sertalpbilal/FPL-Optimization-Tools](https://github.com/sertalpbilal/FPL-Optimization-Tools) - Tutorials and recipes to use optimization for winning Fantasy Premier League
 
 [livefpl.net](https://www.livefpl.net/elite) - Best 1000 Managers of All Time
+
+[vaastav/Fantasy-Premier-League](https://github.com/vaastav/Fantasy-Premier-League) - Historical FPL data
 
 ## Contribute
 
