@@ -65,6 +65,7 @@ def write():
 
 
     with st.expander('Differential'):
+
         col1, col2, col3 = st.columns(3)
         with col1:
             nb_diff = st.slider("# Differentials", min_value=0, max_value=11, value=3, step=1)
@@ -73,7 +74,9 @@ def write():
         with col3:
             rank = st.selectbox("Rank", ['Top_100', 'Top_1K', 'Top_10K', 'Top_50K', 'Top_100K', 'Top_250K', 'Top_500K'], 4)
 
+
     with st.expander('Chip selection'):
+
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             wc_gw = st.selectbox("Wildcard", [None] + [gw for gw in np.arange(horizon)], 0)
@@ -83,6 +86,7 @@ def write():
             tc_gw = st.selectbox("Triple Captain", [None] + [gw for gw in np.arange(horizon)], 0)
         with col4:
             bb_gw = st.selectbox("Bench Boost", [None] + [gw for gw in np.arange(horizon)], 0)
+
 
     with st.expander('Bias'):
 
@@ -170,10 +174,16 @@ def write():
                 },
                 two_ft_gw=rolling)
 
-            df, chip_strat = to.solve(
+            df, chip_strat, total_ev, total_obj = to.solve(
                 model_name="vanilla",
                 log=True,
                 time_lim=0)
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Expected Value", total_ev)
+            with col2:
+                st.metric("Objective Function Value", np.round(total_obj, 2))
 
             fig, ax = plt.subplots(figsize=(16, 12))
             # Set up the axis limits with a bit of padding

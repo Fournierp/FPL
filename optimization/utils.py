@@ -408,4 +408,4 @@ def pretty_print(
     # print(df)
     print(f"EV: {total_ev:.2f}  |  Objective Val: {-objective_value:.2f}")
 
-    return df, chip_strat
+    return df, chip_strat, total_ev, -objective_value

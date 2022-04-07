@@ -142,10 +142,16 @@ def write():
                 two_ft_gw=rolling)
 
 
-            df, chip_strat = to.solve(
+            df, chip_strat, total_ev, total_obj = to.solve(
                 model_name="biased",
                 log=True,
                 time_lim=0)
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Expected Value", total_ev)
+            with col2:
+                st.metric("Objective Function Value", np.round(total_obj, 2))
 
             fig, ax = plt.subplots(figsize=(16, 12))
             # Set up the axis limits with a bit of padding

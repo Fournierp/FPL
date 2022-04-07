@@ -69,7 +69,7 @@ def write():
                 noise=False,
                 premium=True if premium=='Premium' else False)
 
-            df, chip_strat = to.advanced_wildcard(
+            df, chip_strat, total_ev, total_obj = to.advanced_wildcard(
                 objective_type='decay',
                 decay_gameweek=[decay_short, decay_med, decay_long],
                 vicecap_decay=vicecap_decay,
@@ -77,6 +77,12 @@ def write():
                 ft_val=ft_val,
                 itb_val=itb_val,
                 hit_val=hit_val)
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Expected Value", total_ev)
+            with col2:
+                st.metric("Objective Function Value", np.round(total_obj, 2))
 
             fig, ax = plt.subplots(figsize=(16, 12))
             # Set up the axis limits with a bit of padding
