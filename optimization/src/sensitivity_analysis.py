@@ -6,12 +6,19 @@ import json
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-import matplotlib.path as mpath
-from highlight_text import fig_text
-from matplotlib.colors import ListedColormap
 
 from team_optimization import Team_Optimization
 
+@st.cache
+def get_data():
+
+    to = Team_Optimization(
+        team_id=35868,
+        horizon=5,
+        noise=False,
+        premium=True)
+
+    return to.data.Name, to.start
 
 def write():
     st.title('FPL - Sensitivity Analysis Model')
@@ -21,8 +28,10 @@ def write():
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
+    player_names, start = get_data()
 
-    with st.expander('Parameters', expanded=True):
+    with st.expander('Basics'):
+
         col1, col2 = st.columns(2)
         with col1:
             horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
@@ -54,11 +63,25 @@ def write():
             itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
 
+    with st.expander('Chip selection'):
+
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            wc_gw = st.selectbox("Wildcard", [None] + [gw for gw in np.arange(horizon)], 0)
+        with col2:
+            fh_gw = st.selectbox("Freehit", [None] + [gw for gw in np.arange(horizon)], 0)
+        with col3:
+            tc_gw = st.selectbox("Triple Captain", [None] + [gw for gw in np.arange(horizon)], 0)
+        with col4:
+            bb_gw = st.selectbox("Bench Boost", [None] + [gw for gw in np.arange(horizon)], 0)
+
+
+    with st.expander('Parameters', expanded=True):
         col1, col2 = st.columns(2)
         with col1:
-            repeats = st.slider("Number of Experiments", min_value=1, max_value=10, value=5)
+            repeats = st.slider("Number of Experiments", min_value=1, max_value=25, value=5)
         with col2:
-            iterations = st.slider("Iterations per exp.", min_value=1, max_value=10, value=7)
+            iterations = st.slider("Iterations per exp.", min_value=1, max_value=25, value=7)
 
 
     if st.button('Run Optimization'):
@@ -70,19 +93,23 @@ def write():
                 noise=False,
                 premium=True if premium=='Premium' else False)
 
-            to.build_model(
-                model_name="vanilla",
-                objective_type='decay' if decay != 0 else 'linear',
-                decay_gameweek=decay,
-                vicecap_decay=vicecap_decay,
-                decay_bench=[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
-                ft_val=ft_val,
-                itb_val=itb_val,
-                hit_val=hit_val)
-
-            tp.sensitivity_analysis(
+            to.sensitivity_analysis(
                 repeats=repeats,
-                iterations=iterations)
+                iterations=iterations,
+                parameters={
+                    'model_name':'sensitivity_analysis',
+                    'freehit_gw':fh_gw if fh_gw is not None else -1,
+                    'wildcard_gw':wc_gw if wc_gw is not None else -1,
+                    'bboost_gw':bb_gw if bb_gw is not None else -1,
+                    'threexc_gw':tc_gw if tc_gw is not None else -1,
+                    'objective_type':'decay' if decay != 0 else 'linear',
+                    'decay_gameweek':decay,
+                    'vicecap_decay':vicecap_decay,
+                    'decay_bench':[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
+                    'ft_val':ft_val,
+                    'itb_val':itb_val,
+                    'hit_val':hit_val
+                })
 
             player_names = (
                 pd
