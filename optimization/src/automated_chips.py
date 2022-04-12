@@ -5,8 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.path as mpath
-from highlight_text import fig_text
-from matplotlib.colors import ListedColormap
 
 from team_optimization import Team_Optimization
 
