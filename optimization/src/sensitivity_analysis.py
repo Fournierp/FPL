@@ -13,7 +13,11 @@ from team_optimization import Team_Optimization
 
 @st.cache
 def get_data():
+    """ Get player names, xpts for first GW and next GW number
 
+    Returns:
+        tuple: Series, int, series
+    """
     to = Team_Optimization(
         team_id=35868,
         horizon=5,
@@ -31,6 +35,7 @@ def write():
 
     plt.style.use(".streamlit/style.mplstyle")
     player_names, start, xpts = get_data()
+
 
     with st.expander('Basics'):
 
@@ -85,42 +90,44 @@ def write():
         with col2:
             iterations = st.slider("Iterations per exp.", min_value=1, max_value=25, value=7)
 
+
     if st.button('Run Optimization'):
 
         with st.spinner("Running Optimization ..."):
             if fh_gw == 0 and (horizon > 1 or iterations > 1):
-                st.warning('This is a warning')
+                st.warning('Should not have more than 1 iteration or longer than 1 gw horizon')
 
             else:
-                # to = Team_Optimization(
-                #     team_id=35868,
-                #     horizon=horizon,
-                #     noise=False,
-                #     premium=True if premium=='Premium' else False)
+                to = Team_Optimization(
+                    team_id=35868,
+                    horizon=horizon,
+                    noise=False,
+                    premium=True if premium=='Premium' else False)
 
-                # to.sensitivity_analysis(
-                #     repeats=repeats,
-                #     iterations=iterations,
-                #     parameters={
-                #         'model_name':'sensitivity_analysis',
-                #         'freehit_gw':fh_gw if fh_gw is not None else -1,
-                #         'wildcard_gw':wc_gw if wc_gw is not None else -1,
-                #         'bboost_gw':bb_gw if bb_gw is not None else -1,
-                #         'threexc_gw':tc_gw if tc_gw is not None else -1,
-                #         'objective_type':'decay' if decay != 0 else 'linear',
-                #         'decay_gameweek':decay,
-                #         'vicecap_decay':vicecap_decay,
-                #         'decay_bench':[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
-                #         'ft_val':ft_val,
-                #         'itb_val':itb_val,
-                #         'hit_val':hit_val
-                #     })
+                to.sensitivity_analysis(
+                    repeats=repeats,
+                    iterations=iterations,
+                    parameters={
+                        'model_name':'sensitivity_analysis',
+                        'freehit_gw':fh_gw if fh_gw is not None else -1,
+                        'wildcard_gw':wc_gw if wc_gw is not None else -1,
+                        'bboost_gw':bb_gw if bb_gw is not None else -1,
+                        'threexc_gw':tc_gw if tc_gw is not None else -1,
+                        'objective_type':'decay' if decay != 0 else 'linear',
+                        'decay_gameweek':decay,
+                        'vicecap_decay':vicecap_decay,
+                        'decay_bench':[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
+                        'ft_val':ft_val,
+                        'itb_val':itb_val,
+                        'hit_val':hit_val
+                    })
 
                 player_names = (
                     pd
                     .read_csv('data/fpl_official/vaastav/data/2021-22/player_idlist.csv')
                     .set_index('id'))
 
+                # Get first GW optimal teams
                 with open('optimization/tmp/hashes.json', 'r') as f:
                     hashes = json.load(f)
 
@@ -157,10 +164,14 @@ def write():
                 # st.dataframe(df[['Transfer', 'Total', '1', '2', '3', 'Mean', 'Std']])
 
                 if fh_gw == 0:
+                    # Freehit graph
+
+                    # Freehit lineups
                     freehit_teams = pd.DataFrame(
                         zip(*df['Transfer in'].apply(lambda x: write_freehit(x, player_names)))
                         ).T
 
+                    # Gather data on the players in the team
                     percent = pd.DataFrame(columns=['Player', 'Pos', 'Appearences'])
                     percent['Player'] = np.unique(freehit_teams)
                     player_pos = (
@@ -228,6 +239,7 @@ def write():
                             .reset_index(drop=True)
                             )
 
+                    # Get team names
                     photos = (
                         pd.read_csv('data/fpl_official/vaastav/data/2021-22/players_raw.csv')
                         [['first_name', 'second_name', 'photo', 'team']])
@@ -246,6 +258,7 @@ def write():
                         right_on='id',
                     ).drop(['Team', 'id'], axis=1)
 
+                    # Add upcoming fixtures
                     fixtures = pd.read_csv('data/fpl_official/vaastav/data/2021-22/fixtures.csv')
                     fixtures = fixtures.loc[fixtures.event == start][['team_h', 'team_a']]
                     fixtures = pd.merge(
@@ -278,7 +291,8 @@ def write():
                                 ).values if game is not None]
                             )
                         )
-                    
+
+                    # Add xpts data
                     xpts = pd.merge(
                         xpts,
                         player_names,
@@ -560,6 +574,15 @@ def write():
 
 
 def write_transfer(x, player_names):
+    """Write into a string the transfers made for a gw
+
+    Args:
+        x (array): _description_
+        player_names (pd.DataFrame): player names
+
+    Returns:
+        str: transfered players
+    """
     if len(x['Transfer in']) == len(x['Transfer out']) == 0:
         return 'Roll Transfer'
 
@@ -576,6 +599,15 @@ def write_transfer(x, player_names):
 
 
 def write_freehit(x, player_names):
+    """Write into a list the freehit team
+
+    Args:
+        x (array): _description_
+        player_names (pd.DataFrame): player names
+
+    Returns:
+        list: transfered players
+    """
     fh_list = []
 
     for fh_player in x:
