@@ -30,7 +30,7 @@ def write():
     plt.style.use(".streamlit/style.mplstyle")
     player_names, start = get_data()
 
-    with st.expander('Parameters', expanded=True):
+    with st.expander('Basic Parameters', expanded=True):
 
         col1, col2 = st.columns(2)
         with col1:
@@ -62,6 +62,8 @@ def write():
         with col5:
             itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
+
+    with st.expander('Bias', expanded=True):
 
         col1, col2, col3 = st.columns(3)
         with col1:

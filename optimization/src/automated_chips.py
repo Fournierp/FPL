@@ -51,6 +51,8 @@ def write():
             itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
 
+    with st.expander('Chips', expanded=True):
+
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             wc_val = st.slider("Wildcard Added Value", min_value=0, max_value=25, value=18)
