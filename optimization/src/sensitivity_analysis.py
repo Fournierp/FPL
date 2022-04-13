@@ -6,6 +6,8 @@ import json
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+from highlight_text import fig_text
 
 from team_optimization import Team_Optimization
 
@@ -227,10 +229,13 @@ def write():
                             .reset_index(drop=True)
                             )
 
-                    fig, ax = plt.subplots(figsize=(16, 12))
-                    ax.set_ylim(0, 4.5)
-                    ax.set_xlim(0, 100)
-                    ax.axis('off')
+                    photos = (
+                        pd
+                        .read_csv('data/fpl_official/vaastav/data/2021-22/players_raw.csv')
+                        [['first_name', 'second_name', 'photo']])
+                    url = "https://resources.premierleague.com/premierleague/photos/players/110x140/p{index}.png"
+
+                    fig, ax = plt.subplots(figsize=(12, 14))
 
                     # Goalkeeper
                     df = (
@@ -245,21 +250,31 @@ def write():
 
                     for j, row in df.iterrows():
                         rectangle = patches.Rectangle(
-                            (25+j*35, 3.5),
-                            17, .5,
+                            (25+j*35, 3),
+                            17, .25,
                             facecolor='#656B73')
                         ax.add_patch(rectangle)
                         rx, ry = rectangle.get_xy()
                         cx = rx + rectangle.get_width()/2.0
                         cy = ry + rectangle.get_height()/2.0
+                        name = row['Player'] if '-' not in row['Player'] else row['Player'].split(' ')[-1]
                         ax.annotate(
-                            row['Player'] + '\n\n' + str(row['Appearences']),
+                            name + '\n\n' + str(row['Appearences']),
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=14,
+                            fontsize=12,
                             ha='center',
                             va='center')
+                        # Plot the portrait
+                        imscatter(
+                            x=cx, y=3.25+.31,
+                            image=url.format(index=(
+                                photos.loc[
+                                    photos.first_name + ' ' +
+                                    photos.second_name == row['Player']
+                                ]['photo'].values[0][:-4])),
+                            ax=ax, zoom=.4)
 
                     # Defender
                     df = (
@@ -274,21 +289,31 @@ def write():
 
                     for j, row in df.iterrows():
                         rectangle = patches.Rectangle(
-                            (2.5+j*20, 2.5),
-                            17, .5,
+                            (2.5+j*20, 2),
+                            17, .25,
                             facecolor='#656B73')
                         ax.add_patch(rectangle)
                         rx, ry = rectangle.get_xy()
                         cx = rx + rectangle.get_width()/2.0
                         cy = ry + rectangle.get_height()/2.0
+                        name = row['Player'] if '-' not in row['Player'] else row['Player'].split(' ')[-1]
                         ax.annotate(
-                            row['Player'] + '\n\n' + str(row['Appearences']),
+                            name + '\n\n' + str(row['Appearences']),
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=14,
+                            fontsize=12,
                             ha='center',
                             va='center')
+                        # Plot the portrait
+                        imscatter(
+                            x=cx, y=2.25+.31,
+                            image=url.format(index=(
+                                photos.loc[
+                                    photos.first_name + ' ' +
+                                    photos.second_name == row['Player']
+                                ]['photo'].values[0][:-4])),
+                            ax=ax, zoom=.4)
 
                     # Midfielder
                     df = (
@@ -302,22 +327,32 @@ def write():
 
                     for j, row in df.iterrows():
                         rectangle = patches.Rectangle(
-                            (2.5+j*20, 1.5),
-                            17, .5,
+                            (2.5+j*20, 1),
+                            17, .25,
                             facecolor='#656B73')
                         ax.add_patch(rectangle)
                         rx, ry = rectangle.get_xy()
                         cx = rx + rectangle.get_width()/2.0
                         cy = ry + rectangle.get_height()/2.0
                         name = row['Player'] if row['Player'] != "Bruno Miguel Borges Fernandes" else "Bruno Fernandes"
+                        name = name if '-' not in name else name.split(' ')[-1]
                         ax.annotate(
                             name + '\n\n' + str(row['Appearences']),
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=14,
+                            fontsize=12,
                             ha='center',
                             va='center')
+                        # Plot the portrait
+                        imscatter(
+                            x=cx, y=1.25+.31,
+                            image=url.format(index=(
+                                photos.loc[
+                                    photos.first_name + ' ' +
+                                    photos.second_name == row['Player']
+                                ]['photo'].values[0][:-4])),
+                            ax=ax, zoom=.4)
 
                     # Forward
                     df = (
@@ -331,22 +366,42 @@ def write():
 
                     for j, row in df.iterrows():
                         rectangle = patches.Rectangle(
-                            (17.5+j*25, .5),
-                            17, .5,
+                            (17.5+j*25, 0),
+                            17, .25,
                             facecolor='#656B73')
                         ax.add_patch(rectangle)
                         rx, ry = rectangle.get_xy()
                         cx = rx + rectangle.get_width()/2.0
                         cy = ry + rectangle.get_height()/2.0
                         name = row['Player'] if row['Player'] != "Cristiano Ronaldo dos Santos Aveiro" else "Cristiano Ronaldo"
+                        name = name if '-' not in name else name.split(' ')[-1]
                         ax.annotate(
                             name + '\n\n' + str(row['Appearences']),
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=14,
+                            fontsize=12,
                             ha='center',
                             va='center')
+                        # Plot the portrait
+                        imscatter(
+                            x=cx, y=.25+.31,
+                            image=url.format(index=(
+                                photos.loc[
+                                    photos.first_name + ' ' +
+                                    photos.second_name == row['Player']
+                                ]['photo'].values[0][:-4])),
+                            ax=ax, zoom=.4)
+
+                    ax.set_ylim(0, 4.25)
+                    ax.set_xlim(0, 100)
+                    ax.axis('off')
+
+                    fig_text(
+                        x=0.14, y=.855,
+                        s="<Players appearing most on randomized FH Team>",
+                        highlight_textprops=[{"fontweight": "bold"}],
+                        fontsize=24, fontfamily="DejaVu Sans", color='w')
 
                     st.pyplot(fig, ax)
                     plt.close(fig)
@@ -472,3 +527,25 @@ def write_freehit(x, player_names):
             player_names.loc[fh_player]['second_name'])
 
     return fh_list
+
+
+def imscatter(x, y, image, ax=None, zoom=1):
+    """stackoverflow.com/questions/35651932/plotting-img-with-matplotlib/35651933"""
+    if ax is None:
+        ax = plt.gca()
+
+    try:
+        image = plt.imread(image)
+    except TypeError:
+        pass
+
+    im = OffsetImage(image, zoom=zoom)
+    x, y = np.atleast_1d(x, y)
+    artists = []
+    for x0, y0 in zip(x, y):
+        ab = AnnotationBbox(im, (x0, y0), xycoords='data', frameon=False)
+        artists.append(ax.add_artist(ab))
+        
+    ax.update_datalim(np.column_stack([x, y]))
+    ax.autoscale()
+    return artists
