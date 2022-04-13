@@ -20,7 +20,7 @@ def get_data():
         noise=False,
         premium=True)
 
-    return to.data.Name, to.start
+    return to.data.Name, to.start, to.data[[f'{to.start}_Pts']]
 
 def write():
     st.title('FPL - Sensitivity Analysis Model')
@@ -30,7 +30,7 @@ def write():
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
-    player_names, start = get_data()
+    player_names, start, xpts = get_data()
 
     with st.expander('Basics'):
 
@@ -84,7 +84,6 @@ def write():
             repeats = st.slider("Number of Experiments", min_value=1, max_value=25, value=5)
         with col2:
             iterations = st.slider("Iterations per exp.", min_value=1, max_value=25, value=7)
-
 
     if st.button('Run Optimization'):
 
@@ -230,10 +229,70 @@ def write():
                             )
 
                     photos = (
-                        pd
-                        .read_csv('data/fpl_official/vaastav/data/2021-22/players_raw.csv')
-                        [['first_name', 'second_name', 'photo']])
+                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/players_raw.csv')
+                        [['first_name', 'second_name', 'photo', 'team']])
                     url = "https://resources.premierleague.com/premierleague/photos/players/110x140/p{index}.png"
+
+                    percent['Team'] = percent.apply(
+                        lambda x: photos.loc[
+                            photos.first_name + ' ' + photos.second_name == x.Player
+                            ]['team'].values[0],
+                        axis=1)
+
+                    percent = pd.merge(
+                        percent,
+                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/teams.csv')[['id', 'short_name']],
+                        left_on='Team',
+                        right_on='id',
+                    ).drop(['Team', 'id'], axis=1)
+
+                    fixtures = pd.read_csv('data/fpl_official/vaastav/data/2021-22/fixtures.csv')
+                    fixtures = fixtures.loc[fixtures.event == start][['team_h', 'team_a']]
+                    fixtures = pd.merge(
+                        fixtures,
+                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/teams.csv')[['id', 'short_name']],
+                        left_on='team_h',
+                        right_on='id',
+                    ).drop(['team_h', 'id'], axis=1).rename(columns={'short_name': 'team_h'})
+
+                    fixtures = pd.merge(
+                        fixtures,
+                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/teams.csv')[['id', 'short_name']],
+                        left_on='team_a',
+                        right_on='id',
+                    ).drop(['team_a', 'id'], axis=1).rename(columns={'short_name': 'team_a'})
+
+                    def get_fixtures(x, y):
+                        if y.team_h == x:
+                            return y.team_a
+
+                        if y.team_a == x:
+                            return y.team_h.lower()
+
+                    percent['GW'] = percent['short_name'].apply(
+                        lambda x: ' + '.join(
+                            [
+                                game for game in fixtures.apply(
+                                    lambda y: get_fixtures(x, y),
+                                    axis=1
+                                ).values if game is not None]
+                            )
+                        )
+                    
+                    xpts = pd.merge(
+                        xpts,
+                        player_names,
+                        left_index=True,
+                        right_index=True,
+                    )
+                    xpts['Player'] = xpts.apply(lambda x: x.first_name + ' ' + x.second_name, axis=1)
+
+                    percent = pd.merge(
+                        percent,
+                        xpts,
+                        left_on='Player',
+                        right_on='Player'
+                    )
 
                     fig, ax = plt.subplots(figsize=(12, 14))
 
@@ -244,7 +303,6 @@ def write():
                         .sort_values(
                             by=['Appearences', 'Mean'],
                             ascending=[False, False])
-                        [['Player', 'Appearences', 'Mean', 'Std']]
                         .reset_index(drop=True)
                         .head(2))
 
@@ -259,11 +317,11 @@ def write():
                         cy = ry + rectangle.get_height()/2.0
                         name = row['Player'] if '-' not in row['Player'] else row['Player'].split(' ')[-1]
                         ax.annotate(
-                            name + '\n\n' + str(row['Appearences']),
+                            f"{name}\n{row['GW']}\n{np.round(row['Appearences']/repeats*100)} | xPts: {row[f'{start}_Pts']}",
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=12,
+                            fontsize=11,
                             ha='center',
                             va='center')
                         # Plot the portrait
@@ -283,7 +341,6 @@ def write():
                         .sort_values(
                             by=['Appearences', 'Mean'],
                             ascending=[False, False])
-                        [['Player', 'Appearences', 'Mean', 'Std']]
                         .reset_index(drop=True)
                         .head(5))
 
@@ -298,11 +355,12 @@ def write():
                         cy = ry + rectangle.get_height()/2.0
                         name = row['Player'] if '-' not in row['Player'] else row['Player'].split(' ')[-1]
                         ax.annotate(
-                            name + '\n\n' + str(row['Appearences']),
+                            # name + '\n' + row['GW'] + '\n' + str(row['Appearences']),
+                            f"{name}\n{row['GW']}\n{np.round(row['Appearences']/repeats*100)} | xPts: {row[f'{start}_Pts']}",
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=12,
+                            fontsize=11,
                             ha='center',
                             va='center')
                         # Plot the portrait
@@ -321,7 +379,6 @@ def write():
                         .sort_values(
                             by=['Appearences', 'Mean'],
                             ascending=[False, False])
-                        [['Player', 'Appearences', 'Mean', 'Std']]
                         .reset_index(drop=True)
                         .head(5))
 
@@ -337,11 +394,12 @@ def write():
                         name = row['Player'] if row['Player'] != "Bruno Miguel Borges Fernandes" else "Bruno Fernandes"
                         name = name if '-' not in name else name.split(' ')[-1]
                         ax.annotate(
-                            name + '\n\n' + str(row['Appearences']),
+                            # name + '\n' + row['GW'] + '\n' + str(row['Appearences']),
+                            f"{name}\n{row['GW']}\n{np.round(row['Appearences']/repeats*100)} | xPts: {row[f'{start}_Pts']}",
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=12,
+                            fontsize=11,
                             ha='center',
                             va='center')
                         # Plot the portrait
@@ -360,7 +418,6 @@ def write():
                         .sort_values(
                             by=['Appearences', 'Mean'],
                             ascending=[False, False])
-                        [['Player', 'Appearences', 'Mean', 'Std']]
                         .reset_index(drop=True)
                         .head(3))
 
@@ -376,11 +433,12 @@ def write():
                         name = row['Player'] if row['Player'] != "Cristiano Ronaldo dos Santos Aveiro" else "Cristiano Ronaldo"
                         name = name if '-' not in name else name.split(' ')[-1]
                         ax.annotate(
-                            name + '\n\n' + str(row['Appearences']),
+                            # name + '\n' + row['GW'] + '\n' + str(row['Appearences']),
+                            f"{name}\n{row['GW']}\n{np.round(row['Appearences']/repeats*100)} | xPts: {row[f'{start}_Pts']}",
                             (cx, cy),
                             color='w',
                             weight='bold',
-                            fontsize=12,
+                            fontsize=11,
                             ha='center',
                             va='center')
                         # Plot the portrait
