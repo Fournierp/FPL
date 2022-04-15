@@ -7,10 +7,15 @@ from datetime import datetime
 class xMins:
 
     def __init__(self, games):
-        self.games = games
+        self.games = games.sort_values(by=['Date']).reset_index(drop=True)
 
     def uniform(self):
         self.games["xmins"] = np.random.uniform(0, 90)
+
+        return self.games
+
+    def constant(self):
+        self.games["xmins"] = 45
 
         return self.games
 
@@ -22,6 +27,7 @@ class xMins:
         return np.sqrt(np.mean(games.error))
 
 def player_match_history(name, club):
+    # TODO: Handle newly transfered players with match history of games he was not here for
     # Player minutes
     lineup_df = pd.read_csv('data/fbref/games_lineup.csv')
     lineup_df = lineup_df.loc[lineup_df.Player == name].loc[(lineup_df.squad_h == club) | (lineup_df.squad_a == club)]
@@ -52,7 +58,7 @@ def player_match_history(name, club):
 
     all_fixtures['A'] = np.where(all_fixtures.Min == 90, 1, 0)
     all_fixtures['B'] = np.where(all_fixtures['Subbed off'] == 1, 1, 0)
-    all_fixtures['C'] = np.where((all_fixtures.Lineup == 0) | (all_fixtures['Subbed on'] == 0), 1, 0)
+    all_fixtures['C'] = np.where(all_fixtures.Min == 0, 1, 0)
     all_fixtures['D'] = np.where(all_fixtures['Subbed on'] == 1, 1, 0)
 
     # Keep fixtures that were played
@@ -65,4 +71,7 @@ if __name__ == "__main__":
     xMins = xMins(games)
 
     predictions = xMins.evaluate(xMins.uniform())
+    print(f"{predictions:.2f}")
+
+    predictions = xMins.evaluate(xMins.constant())
     print(f"{predictions:.2f}")
