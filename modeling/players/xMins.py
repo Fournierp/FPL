@@ -2,29 +2,36 @@ import pandas as pd
 import numpy as np
 
 from datetime import datetime
+from sklearn.linear_model import LinearRegression
 
 
-class xMins:
+class xMinutes:
 
     def __init__(self, games):
         self.games = games.sort_values(by=['Date']).reset_index(drop=True)
 
     def uniform(self):
-        self.games["xmins"] = np.random.uniform(0, 90)
+        _, _, _, y_test = train_test_split(self.games)
+        y_pred = y_test.copy()
+        y_pred = np.random.uniform(0, 90)
 
-        return self.games
+        return y_test, y_pred
 
     def constant(self):
-        self.games["xmins"] = 45
+        _, _, _, y_test = train_test_split(self.games)
+        y_pred = y_test.copy()
+        y_pred = 45
 
-        return self.games
+        return y_test, y_pred
+    def evaluate(self, y_test, y_pred):
+        return np.sqrt(np.mean(np.power(y_test - y_pred, 2)))
 
-    def evaluate(self, games):
-        games["error"] = games.apply(
-            lambda row: np.power(row.xmins - row.Min, 2),
-            axis=1)
-
-        return np.sqrt(np.mean(games.error))
+def train_test_split(df):
+    X_train = df.iloc[:-15].drop('Min', axis=1).reset_index(drop=True)
+    y_train = df.iloc[:-15]['Min'].reset_index(drop=True)
+    X_test = df.iloc[-15:].drop('Min', axis=1).reset_index(drop=True)
+    y_test = df.iloc[-15:]['Min'].reset_index(drop=True)
+    return X_train, X_test, y_train, y_test
 
 def player_match_history(name, club):
     # TODO: Handle newly transfered players with match history of games he was not here for
@@ -66,12 +73,12 @@ def player_match_history(name, club):
 
 
 if __name__ == "__main__":
-    games = player_match_history('Mohamed Salah', 'Liverpool')
+    games = player_match_history('Kevin De Bruyne', 'Manchester City')
 
-    xMins = xMins(games)
+    xMins = xMinutes(games)
 
-    predictions = xMins.evaluate(xMins.uniform())
-    print(f"{predictions:.2f}")
+    predictions = xMins.evaluate(*xMins.uniform())
+    print(f">>> Uniform benchmark: {predictions:.2f}")
 
-    predictions = xMins.evaluate(xMins.constant())
-    print(f"{predictions:.2f}")
+    predictions = xMins.evaluate(*xMins.constant())
+    print(f">>> Constant benchmark: {predictions:.2f}")
