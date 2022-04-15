@@ -23,8 +23,99 @@ class xMinutes:
         y_pred = 45
 
         return y_test, y_pred
+
     def evaluate(self, y_test, y_pred):
         return np.sqrt(np.mean(np.power(y_test - y_pred, 2)))
+
+    def last_game_minutes_lagged_linear_reg(self):
+        self.games[f"Min_minus_1"] = self.games['Min'].shift(1)
+
+        self.games = self.games.iloc[1:]
+
+        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1"]])
+
+        reg = LinearRegression().fit(X_train, y_train)
+
+        return y_test, reg.predict(X_test)
+
+    def minutes_lagged_linear_reg(self):
+        lag_values = list(range(1, 6 + 1))
+
+        features_lags = []
+        lagged_column = 'Min'
+
+        for lag_value in lag_values:
+            self.games[f"{lagged_column}_minus_{lag_value}"] = self.games[lagged_column].shift(lag_value)
+            features_lags.append(f"{lagged_column}_minus_{lag_value}")
+
+        self.games = self.games.iloc[6:]
+
+        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min'] + features_lags])
+
+        reg = LinearRegression().fit(X_train, y_train)
+
+        return y_test, reg.predict(X_test)
+
+    def rolling_minutes_linear_reg(self):
+        self.games[f"Min_minus_1_to_6"] = self.games['Min'].shift(1).rolling(6).mean()
+
+        self.games = self.games.iloc[6:]
+
+        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1_to_6"]])
+
+        reg = LinearRegression().fit(X_train, y_train)
+
+        return y_test, reg.predict(X_test)
+
+    def weighted_rolling_minutes_linear_reg(self):
+        weights = np.array([.03, .085, .14, .195, .2475, .3025])
+        self.games[f"Min_minus_1_to_6"] = self.games['Min'].shift(1).rolling(6).apply(lambda x: np.sum(weights*x))
+
+        self.games = self.games.iloc[6:]
+
+        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1_to_6"]])
+
+        reg = LinearRegression().fit(X_train, y_train)
+
+        return y_test, reg.predict(X_test)
+
+    def weighted_rolling_cases_linear_reg(self):
+        weights = np.array([.03, .085, .14, .195, .2475, .3025])
+
+        starts_lags = []
+
+        for lagged_column in ['A', 'B', 'C', 'D']:
+            self.games[f"{lagged_column}_minus_1_to_6"] = self.games[lagged_column].shift(1).rolling(6).apply(lambda x: np.sum(weights*x))
+            starts_lags.append(f"{lagged_column}_minus_1_to_6")
+
+        self.games = self.games.iloc[6:]
+
+        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min'] + starts_lags])
+
+        reg = LinearRegression().fit(X_train, y_train)
+
+        return y_test, reg.predict(X_test)
+
+    def linear_reg(self):
+        weights = np.array([.03, .085, .14, .195, .2475, .3025])
+
+        features_lags, starts_lags = [], []
+        lagged_column = 'Min'
+
+        self.games[f"Min_minus_1_to_6"] = self.games['Min'].shift(1).rolling(6).apply(lambda x: np.sum(weights*x))
+
+        for lagged_column in ['A', 'B', 'C', 'D']:
+            self.games[f"{lagged_column}_minus_1_to_6"] = self.games[lagged_column].shift(1).rolling(6).apply(lambda x: np.sum(weights*x))
+            starts_lags.append(f"{lagged_column}_minus_1_to_6")
+
+        self.games = self.games.iloc[6:]
+
+        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1_to_6"] + starts_lags + features_lags])
+
+        reg = LinearRegression().fit(X_train, y_train)
+
+        return y_test, reg.predict(X_test)
+
 
 def train_test_split(df):
     X_train = df.iloc[:-15].drop('Min', axis=1).reset_index(drop=True)
@@ -78,7 +169,25 @@ if __name__ == "__main__":
     xMins = xMinutes(games)
 
     predictions = xMins.evaluate(*xMins.uniform())
-    print(f">>> Uniform benchmark: {predictions:.2f}")
+    print(f">>> Uniform baseline: {predictions:.2f}")
 
     predictions = xMins.evaluate(*xMins.constant())
-    print(f">>> Constant benchmark: {predictions:.2f}")
+    print(f">>> Constant baseline: {predictions:.2f}")
+
+    predictions = xMins.evaluate(*xMins.last_game_minutes_lagged_linear_reg())
+    print(f">>> Last game minutes LR: {predictions:.2f}")
+
+    predictions = xMins.evaluate(*xMins.minutes_lagged_linear_reg())
+    print(f">>> Last 6 game minutes LR: {predictions:.2f}")
+
+    predictions = xMins.evaluate(*xMins.rolling_minutes_linear_reg())
+    print(f">>> Last 6 game rolling minutes LR: {predictions:.2f}")
+
+    predictions = xMins.evaluate(*xMins.weighted_rolling_minutes_linear_reg())
+    print(f">>> Last 6 game weighted rolling minutes LR: {predictions:.2f}")
+
+    predictions = xMins.evaluate(*xMins.weighted_rolling_cases_linear_reg())
+    print(f">>> Last 6 game weighted rolling cases LR: {predictions:.2f}")
+
+    predictions = xMins.evaluate(*xMins.linear_reg())
+    print(f">>> LR: {predictions:.2f}")
