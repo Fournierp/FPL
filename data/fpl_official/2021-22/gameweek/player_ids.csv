@@ -43,6 +43,7 @@ id,first_name,second_name,team
 711,Zak,Swanson,1
 719,Mazeed,Ogungbo,1
 720,Marcelo,Flores,1
+721,Miguel,Azeez,1
 10,Calum,Chambers,2
 28,Jed,Steer,2
 29,Conor,Hourihane,2
@@ -120,6 +121,7 @@ id,first_name,second_name,team
 662,Myles,Peart-Harris,3
 673,Jonas,Lössl,3
 699,Christian,Eriksen,3
+722,Julian,Jeanvier,3
 53,Adam,Lallana,4
 54,Jason,Steele,4
 55,Pascal,Groß,4
