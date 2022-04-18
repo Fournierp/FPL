@@ -11,14 +11,14 @@ class xMinutes:
         self.games = games.sort_values(by=['Date']).reset_index(drop=True)
 
     def uniform(self):
-        _, _, _, y_test = train_test_split(self.games)
+        _, _, _, y_test = train_test_split(self.games, 'Date', 'Min')
         y_pred = y_test.copy()
         y_pred = np.random.uniform(0, 90)
 
         return y_test, y_pred
 
     def constant(self):
-        _, _, _, y_test = train_test_split(self.games)
+        _, _, _, y_test = train_test_split(self.games, 'Date', 'Min')
         y_pred = y_test.copy()
         y_pred = 45
 
@@ -32,8 +32,7 @@ class xMinutes:
 
         self.games = self.games.iloc[1:]
 
-        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1"]])
-
+        X_train, X_test, y_train, y_test = train_test_split(self.games, ['Min_minus_1'], 'Min')
         reg = LinearRegression().fit(X_train, y_train)
 
         return y_test, reg.predict(X_test)
@@ -50,7 +49,7 @@ class xMinutes:
 
         self.games = self.games.iloc[6:]
 
-        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min'] + features_lags])
+        X_train, X_test, y_train, y_test = train_test_split(self.games, features_lags, 'Min')
 
         reg = LinearRegression().fit(X_train, y_train)
 
@@ -61,7 +60,7 @@ class xMinutes:
 
         self.games = self.games.iloc[6:]
 
-        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1_to_6"]])
+        X_train, X_test, y_train, y_test = train_test_split(self.games, ['Min_minus_1_to_6'], 'Min')
 
         reg = LinearRegression().fit(X_train, y_train)
 
@@ -73,7 +72,7 @@ class xMinutes:
 
         self.games = self.games.iloc[6:]
 
-        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1_to_6"]])
+        X_train, X_test, y_train, y_test = train_test_split(self.games, ['Min_minus_1_to_6'], 'Min')
 
         reg = LinearRegression().fit(X_train, y_train)
 
@@ -82,15 +81,15 @@ class xMinutes:
     def weighted_rolling_cases_linear_reg(self):
         weights = np.array([.03, .085, .14, .195, .2475, .3025])
 
-        starts_lags = []
+        cases_lags = []
 
         for lagged_column in ['A', 'B', 'C', 'D']:
             self.games[f"{lagged_column}_minus_1_to_6"] = self.games[lagged_column].shift(1).rolling(6).apply(lambda x: np.sum(weights*x))
-            starts_lags.append(f"{lagged_column}_minus_1_to_6")
+            cases_lags.append(f"{lagged_column}_minus_1_to_6")
 
         self.games = self.games.iloc[6:]
 
-        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min'] + starts_lags])
+        X_train, X_test, y_train, y_test = train_test_split(self.games, cases_lags, 'Min')
 
         reg = LinearRegression().fit(X_train, y_train)
 
@@ -99,29 +98,32 @@ class xMinutes:
     def linear_reg(self):
         weights = np.array([.03, .085, .14, .195, .2475, .3025])
 
-        features_lags, starts_lags = [], []
+        features_lags, cases_lags = [], []
         lagged_column = 'Min'
+
+        for lag_value in range(1, 7):
+            self.games[f"{lagged_column}_minus_{lag_value}"] = self.games[lagged_column].shift(lag_value)
+            features_lags.append(f"{lagged_column}_minus_{lag_value}")
 
         self.games[f"Min_minus_1_to_6"] = self.games['Min'].shift(1).rolling(6).apply(lambda x: np.sum(weights*x))
 
         for lagged_column in ['A', 'B', 'C', 'D']:
             self.games[f"{lagged_column}_minus_1_to_6"] = self.games[lagged_column].shift(1).rolling(6).apply(lambda x: np.sum(weights*x))
-            starts_lags.append(f"{lagged_column}_minus_1_to_6")
+            cases_lags.append(f"{lagged_column}_minus_1_to_6")
 
         self.games = self.games.iloc[6:]
 
-        X_train, X_test, y_train, y_test = train_test_split(self.games[['Min', "Min_minus_1_to_6"] + starts_lags + features_lags])
+        X_train, X_test, y_train, y_test = train_test_split(self.games, ['Min_minus_1_to_6'] + cases_lags + features_lags, 'Min')
 
         reg = LinearRegression().fit(X_train, y_train)
 
         return y_test, reg.predict(X_test)
 
-
-def train_test_split(df):
-    X_train = df.iloc[:-15].drop('Min', axis=1).reset_index(drop=True)
-    y_train = df.iloc[:-15]['Min'].reset_index(drop=True)
-    X_test = df.iloc[-15:].drop('Min', axis=1).reset_index(drop=True)
-    y_test = df.iloc[-15:]['Min'].reset_index(drop=True)
+def train_test_split(df, covariates, target):
+    X_train = df.iloc[:-15][covariates].reset_index(drop=True)
+    y_train = df.iloc[:-15][target].reset_index(drop=True)
+    X_test = df.iloc[-15:][covariates].reset_index(drop=True)
+    y_test = df.iloc[-15:][target].reset_index(drop=True)
     return X_train, X_test, y_train, y_test
 
 def player_match_history(name, club):
