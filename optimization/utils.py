@@ -20,6 +20,13 @@ def get_team(team_id, gw):
     res = requests.get(
         'https://fantasy.premierleague.com/api/entry/' +
         f'{team_id}/event/{gw}/picks/').json()
+
+    # Scrape GW before FH to get the team from GW prior
+    if res['active_chip'] == 'freehit':
+        res = requests.get(
+            'https://fantasy.premierleague.com/api/entry/' +
+            f'{team_id}/event/{gw-1}/picks/').json()
+
     # Adjust the player id with fplreview indices
     return [i['element'] for i in res['picks']], res['entry_history']['bank']
 
