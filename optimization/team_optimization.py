@@ -85,7 +85,7 @@ class Team_Optimization:
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
         # Drop players that are not predicted to play much to reduce the search space
-        # self.data.drop(self.data[self.data.total_ev <= 1].index, inplace=True)
+        self.data.drop(self.data[self.data.total_ev <= 1].index, inplace=True)
         self.players = self.data.index.tolist()
 
         self.initial_team_df = pd.DataFrame(
@@ -549,14 +549,14 @@ class Team_Optimization:
             (
                 so.expr_sum(
                     self.bench[p, w, 0] for p in self.players
-                    if self.data.loc[p, 'G'] == 1) <=
-                1 for w in self.gameweeks),
+                    if self.data.loc[p, 'G'] == 1) ==
+                1 - self.bboost[w] for w in self.gameweeks),
             name='one_bench_gk')
         # There must be a single substitute per bench spot
         self.model.add_constraints(
             (
                 so.expr_sum(self.bench[p, w, o] for p in self.players) <= 1
-                for w in self.gameweeks for o in [1, 2, 3]),
+                for w in self.gameweeks for o in [0, 1, 2, 3]),
             name='one_per_bench_spot')
 
         # The players not started in the team are benched
@@ -3243,15 +3243,15 @@ if __name__ == "__main__":
         noise=False,
         premium=True)
 
-    # to.build_model(
-    #     model_name="vanilla",
-    #     objective_type='decay',
-    #     decay_gameweek=0.9,
-    #     vicecap_decay=0.1,
-    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
-    #     ft_val=1.5,
-    #     itb_val=0.008,
-    #     hit_val=6)
+    to.build_model(
+        model_name="vanilla",
+        objective_type='decay',
+        decay_gameweek=0.9,
+        vicecap_decay=0.1,
+        decay_bench=[0.03, 0.21, 0.06, 0.002],
+        ft_val=1.5,
+        itb_val=0.008,
+        hit_val=6)
 
     # to.differential_model(
     #     nb_differentials=3,
@@ -3267,17 +3267,17 @@ if __name__ == "__main__":
     #     itb_val=0.008,
     #     hit_val=6)
 
-    to.advanced_wildcard(
-        freehit_gw=-1,
-        bboost_gw=-1,
-        threexc_gw=-1,
-        objective_type='decay',
-        decay_gameweek=0.9,
-        vicecap_decay=0.1,
-        decay_bench=[0.03, 0.21, 0.06, 0.002],
-        ft_val=1.5,
-        itb_val=0.008,
-        hit_val=6)
+    # to.advanced_wildcard(
+    #     freehit_gw=-1,
+    #     bboost_gw=2,
+    #     threexc_gw=-1,
+    #     objective_type='decay',
+    #     decay_gameweek=0.9,
+    #     vicecap_decay=0.1,
+    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
+    #     ft_val=1.5,
+    #     itb_val=0.008,
+    #     hit_val=6)
 
     # to.biased_model(
     #     love={
@@ -3298,10 +3298,10 @@ if __name__ == "__main__":
     #     },
     #     two_ft_gw=[])
 
-    # to.solve(
-    #     model_name="vanilla",
-    #     log=True,
-    #     time_lim=0)
+    to.solve(
+        model_name="vanilla",
+        log=True,
+        time_lim=0)
 
     # tp.suboptimals(
     #     model_name="vanilla",
