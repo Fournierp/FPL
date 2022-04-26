@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def write():
-    st.title('Sorare - Home')
+    st.title('FPL - Home')
     with st.spinner("Loading About ..."):
         st.header(
             """

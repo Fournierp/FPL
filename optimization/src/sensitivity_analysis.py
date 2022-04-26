@@ -144,6 +144,7 @@ def write():
                             lambda x: (hashes[str(x)][0], hashes[str(x)][1])))
 
                 max_cols = [col for col in df.columns if 'EV_' in col]
+                evs = np.unique(df[max_cols].values)
 
                 df['Mean'] = (
                     df.apply(
@@ -163,7 +164,7 @@ def write():
                 # df = df.sort_values(['Total', '1', '2', '3'], ascending=False)
                 # st.dataframe(df[['Transfer', 'Total', '1', '2', '3', 'Mean', 'Std']])
 
-                if fh_gw == 0:
+                if fh_gw == 0 or wc_gw == 0:
                     # Freehit graph
 
                     # Freehit lineups
@@ -511,7 +512,7 @@ def write():
 
                         newax = fig.add_axes([.63, 0.11+j*.105, .25 , .07])
                         newax.boxplot(
-                            [-row[col] for col in max_cols if pd.notnull(row[col])],
+                            [-row[col] for col in max_cols if pd.notnull(row[col]) and row[col] != 0],
                             vert=False,
                             patch_artist=True,
                             capprops=dict(color='#656B73'),
@@ -522,8 +523,8 @@ def write():
                             widths=.6)
 
                         newax.set_xlim(
-                            -np.max(np.max(df[max_cols], axis=0))-1,
-                            -np.min(np.min(df[max_cols], axis=0))+1)
+                            -np.max(evs[evs != 0])-1,
+                            -np.min(evs[evs != 0])+1)
                         newaxes.append(newax)
 
                     # Column headers
