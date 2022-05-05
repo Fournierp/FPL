@@ -1346,6 +1346,7 @@ class Team_Optimization:
         assert not (self.freehit_used and freehit_gw >= 0), "Freehit chip was already used."
         assert not (self.bboost_used and bboost_gw >= 0), "Bench boost chip was already used."
         assert not (self.threexc_used and threexc_gw >= 0), "Tripple captain chip was already used."
+        assert not self.wildcard_used, "Wildcard chip was already used."
 
         # Longterm Model
         model_name = 'longterm'
@@ -3234,7 +3235,7 @@ if __name__ == "__main__":
     logger: logging.Logger = logging.getLogger(__name__)
 
     to = Team_Optimization(
-        team_id=35868,
+        team_id=30610,
         horizon=3,
         noise=False,
         premium=True)
