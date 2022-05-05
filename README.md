@@ -21,8 +21,18 @@ pip install -r requirements.txt
 
 ## Usage Example
 
+### Fixture Predictions
+
 ```{bash}
-python3 modeling/fixtures/dixon_coles.py.py
+python3 modeling/fixtures/dixon_coles.py
+```
+
+### FPL Team Optimization
+
+**Note:** Prior to running this, one should have downloaded the gameweek prediction data and saved it in folder: *data/fpl_review/SEASON/gameweek/GAMEWEEK*.
+
+```{bash}
+python3 optimization/team_optimization.py
 ```
 
 ## Features
