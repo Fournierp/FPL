@@ -3234,6 +3234,8 @@ class Team_Optimization:
 
 
 if __name__ == "__main__":
+    os.makedirs('optimization/tmp/', exist_ok=True)
+
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
 

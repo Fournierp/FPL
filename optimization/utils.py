@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import numpy as np
 import sasoptpy as so
+import os
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -69,10 +70,11 @@ def get_predictions(noise=False, premium=False):
     Returns:
         (pd.DataFrame): EV Data
     """
-    if premium: 
+    if premium:
         start = get_next_gw()
-        df = pd.read_csv(
-            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv")
+        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv"
+        assert os.path.exists(path), "The Premium Planner data is not saved in the GW folder."
+        df = pd.read_csv(path)
 
         # One hot encoded values for the constraints
         if df.Pos.dtype == np.int:
@@ -94,8 +96,9 @@ def get_predictions(noise=False, premium=False):
 
     else:
         start = get_next_gw()
-        df = pd.read_csv(
-            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
+        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv"
+        assert os.path.exists(path), "The Free Planner data is not saved in the GW folder."
+        df = pd.read_csv(path)
         if df.Pos.dtype == np.int:
             df["Pos"] = df["Pos"].map(
                 {
