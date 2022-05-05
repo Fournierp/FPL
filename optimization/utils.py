@@ -170,6 +170,7 @@ def get_chips(team_id, last_gw):
         (tuple): Availability for freehit, wildcard, bboost, threexc
     """
     freehit, wildcard, bboost, threexc = 0, 0, 0, 0
+    fh_count = 0
     # Reversing GW history until a chip is played or 2+ transfers were made
     for gw in range(last_gw, 0, -1):
         res = requests.get(
@@ -186,6 +187,11 @@ def get_chips(team_id, last_gw):
             wildcard = gw
         if chip == 'freehit':
             freehit = gw
+            fh_count += 1
+
+    # Handle the 2nd FH available for season 2021-22 (remove if the rules change)
+    if fh_count <= 1:
+        freehit = 0
 
     # Handle the WC reset at GW 20
     if wildcard <= 20 and last_gw >= 20:
