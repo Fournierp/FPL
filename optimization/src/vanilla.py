@@ -7,6 +7,7 @@ import matplotlib.patches as patches
 import matplotlib.path as mpath
 
 from team_optimization import Team_Optimization
+from utils import get_next_gw
 
 
 def write():
@@ -17,12 +18,13 @@ def write():
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
+    start = get_next_gw()
 
     with st.expander('Parameters', expanded=True):
 
         col1, col2 = st.columns(2)
         with col1:
-            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+            horizon = st.slider("Horizon", min_value=1, max_value=min(39-start, 8), value=min(39-start, 5), step=1)
         with col2:
             premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 

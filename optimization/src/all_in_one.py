@@ -33,7 +33,7 @@ def write():
 
         col1, col2 = st.columns(2)
         with col1:
-            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+            horizon = st.slider("Horizon", min_value=1, max_value=min(39-start, 8), value=min(39-start, 5), step=1)
         with col2:
             premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 
