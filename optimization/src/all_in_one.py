@@ -77,44 +77,85 @@ def write():
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            wc_gw = st.selectbox("Wildcard", [None] + [gw for gw in np.arange(horizon)], 0)
+            wc_gw = st.selectbox("Wildcard", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col2:
-            fh_gw = st.selectbox("Freehit", [None] + [gw for gw in np.arange(horizon)], 0)
+            fh_gw = st.selectbox("Freehit", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col3:
-            tc_gw = st.selectbox("Triple Captain", [None] + [gw for gw in np.arange(horizon)], 0)
+            tc_gw = st.selectbox("Triple Captain", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col4:
-            bb_gw = st.selectbox("Bench Boost", [None] + [gw for gw in np.arange(horizon)], 0)
+            bb_gw = st.selectbox("Bench Boost", [None] + [start + gw for gw in np.arange(horizon)], 0)
 
+    max_gws = min(min(3, 39 - start), horizon)
 
     with st.expander('Bias'):
 
-        col1, col2, col3 = st.columns(3)
-        with col1:
+        if max_gws == 3:
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
+            with col2:
+                team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
+            with col3:
+                team_in_3 = st.multiselect(f"In GW {start+2}", player_names.values)
+
+
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
+            with col2:
+                team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
+            with col3:
+                team_out_3 = st.multiselect(f"Out GW {start+2}", player_names.values)
+
+
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
+            with col2:
+                hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
+            with col3:
+                hit_3 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
+
+            rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+3))
+
+
+        if max_gws == 2:
+            col1, col2 = st.columns(2)
+            with col1:
+                team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
+            with col2:
+                team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
+            team_in_3 = []
+
+
+            col1, col2 = st.columns(2)
+            with col1:
+                team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
+            with col2:
+                team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
+            team_out_3 = []
+
+
+            col1, col2 = st.columns(2)
+            with col1:
+                hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
+            with col2:
+                hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
+            hit_3 = []
+
+            rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+2))
+
+
+        if max_gws == 1:
             team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
-        with col2:
-            team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
-        with col3:
-            team_in_3 = st.multiselect(f"In GW {start+2}", player_names.values)
+            team_in_2, team_in_3 = [], []
 
-
-        col1, col2, col3 = st.columns(3)
-        with col1:
             team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
-        with col2:
-            team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
-        with col3:
-            team_out_3 = st.multiselect(f"Out GW {start+2}", player_names.values)
+            team_out_2, team_out_3 = [], []
 
-
-        col1, col2, col3 = st.columns(3)
-        with col1:
             hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
-        with col2:
-            hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
-        with col3:
-            hit_3 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
-        
-        rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+3))
+            hit_2, hit_3 = [], []
+            rolling = []
 
 
     if st.button('Run Optimization'):
@@ -128,10 +169,10 @@ def write():
 
             to.build_model(
                 model_name='all_in_one',
-                freehit_gw=fh_gw if fh_gw is not None else -1,
-                wildcard_gw=wc_gw if wc_gw is not None else -1,
-                bboost_gw=bb_gw if bb_gw is not None else -1,
-                threexc_gw=tc_gw if tc_gw is not None else -1,
+                freehit_gw=fh_gw-start if fh_gw is not None else -1,
+                wildcard_gw=wc_gw-start if wc_gw is not None else -1,
+                bboost_gw=bb_gw-start if bb_gw is not None else -1,
+                threexc_gw=tc_gw-start if tc_gw is not None else -1,
                 objective_type='decay' if decay != 0 else 'linear',
                 decay_gameweek=decay,
                 vicecap_decay=vicecap_decay,
@@ -144,6 +185,13 @@ def write():
                 nb_differentials=nb_diff,
                 threshold=threshold,
                 target=rank)
+
+            if max_gws == 3:
+                hit_limit = [(start, hit_1), (start+1, hit_2), (start+2, hit_3)]
+            if max_gws == 2:
+                hit_limit = [(start, hit_1), (start+1, hit_2)]
+            if max_gws == 1:
+                hit_limit = [(start, hit_1)]
 
             to.biased_model(
                 love={
@@ -166,7 +214,7 @@ def write():
                     'bench': {}
                 },
                 hit_limit={
-                    'max': [(start, hit_1), (start+1, hit_2), (start+2, hit_3)],
+                    'max': hit_limit,
                     'eq': {},
                     'min': {}
                 },

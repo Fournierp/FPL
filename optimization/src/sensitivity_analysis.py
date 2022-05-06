@@ -74,13 +74,13 @@ def write():
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            wc_gw = st.selectbox("Wildcard", [None] + [gw for gw in np.arange(horizon)], 0)
+            wc_gw = st.selectbox("Wildcard", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col2:
-            fh_gw = st.selectbox("Freehit", [None] + [gw for gw in np.arange(horizon)], 0)
+            fh_gw = st.selectbox("Freehit", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col3:
-            tc_gw = st.selectbox("Triple Captain", [None] + [gw for gw in np.arange(horizon)], 0)
+            tc_gw = st.selectbox("Triple Captain", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col4:
-            bb_gw = st.selectbox("Bench Boost", [None] + [gw for gw in np.arange(horizon)], 0)
+            bb_gw = st.selectbox("Bench Boost", [None] + [start + gw for gw in np.arange(horizon)], 0)
 
 
     with st.expander('Parameters', expanded=True):
@@ -109,10 +109,10 @@ def write():
                     iterations=iterations,
                     parameters={
                         'model_name':'sensitivity_analysis',
-                        'freehit_gw':fh_gw if fh_gw is not None else -1,
-                        'wildcard_gw':wc_gw if wc_gw is not None else -1,
-                        'bboost_gw':bb_gw if bb_gw is not None else -1,
-                        'threexc_gw':tc_gw if tc_gw is not None else -1,
+                        'freehit_gw':fh_gw-start if fh_gw is not None else -1,
+                        'wildcard_gw':wc_gw-start if wc_gw is not None else -1,
+                        'bboost_gw':bb_gw-start if bb_gw is not None else -1,
+                        'threexc_gw':tc_gw-start if tc_gw is not None else -1,
                         'objective_type':'decay' if decay != 0 else 'linear',
                         'decay_gameweek':decay,
                         'vicecap_decay':vicecap_decay,
