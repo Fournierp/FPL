@@ -1346,6 +1346,7 @@ class Team_Optimization:
         assert not (self.freehit_used and freehit_gw >= 0), "Freehit chip was already used."
         assert not (self.bboost_used and bboost_gw >= 0), "Bench boost chip was already used."
         assert not (self.threexc_used and threexc_gw >= 0), "Tripple captain chip was already used."
+        assert not self.wildcard_used, "Wildcard chip was already used."
 
         # Longterm Model
         model_name = 'longterm'
@@ -3240,13 +3241,17 @@ if __name__ == "__main__":
     logger: logging.Logger = logging.getLogger(__name__)
 
     to = Team_Optimization(
-        team_id=35868,
+        team_id=30610,
         horizon=3,
         noise=False,
         premium=True)
 
     to.build_model(
         model_name="vanilla",
+        freehit_gw=0,
+        wildcard_gw=-1,
+        bboost_gw=1,
+        threexc_gw=-1,
         objective_type='decay',
         decay_gameweek=0.9,
         vicecap_decay=0.1,
@@ -3271,7 +3276,7 @@ if __name__ == "__main__":
 
     # to.advanced_wildcard(
     #     freehit_gw=-1,
-    #     bboost_gw=2,
+    #     bboost_gw=-1,
     #     threexc_gw=-1,
     #     objective_type='decay',
     #     decay_gameweek=0.9,
