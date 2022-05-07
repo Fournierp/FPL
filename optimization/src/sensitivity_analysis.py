@@ -104,23 +104,29 @@ def write():
                     noise=False,
                     premium=True if premium=='Premium' else False)
 
-                to.sensitivity_analysis(
-                    repeats=repeats,
-                    iterations=iterations,
-                    parameters={
-                        'model_name':'sensitivity_analysis',
-                        'freehit_gw':fh_gw-start if fh_gw is not None else -1,
-                        'wildcard_gw':wc_gw-start if wc_gw is not None else -1,
-                        'bboost_gw':bb_gw-start if bb_gw is not None else -1,
-                        'threexc_gw':tc_gw-start if tc_gw is not None else -1,
-                        'objective_type':'decay' if decay != 0 else 'linear',
-                        'decay_gameweek':decay,
-                        'vicecap_decay':vicecap_decay,
-                        'decay_bench':[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
-                        'ft_val':ft_val,
-                        'itb_val':itb_val,
-                        'hit_val':hit_val
-                    })
+                my_bar = st.progress(0)
+                progress = 0
+
+                for tmp in to.sensitivity_analysis(
+                        repeats=repeats,
+                        iterations=iterations,
+                        parameters={
+                            'model_name':'sensitivity_analysis',
+                            'freehit_gw':fh_gw-start if fh_gw is not None else -1,
+                            'wildcard_gw':wc_gw-start if wc_gw is not None else -1,
+                            'bboost_gw':bb_gw-start if bb_gw is not None else -1,
+                            'threexc_gw':tc_gw-start if tc_gw is not None else -1,
+                            'objective_type':'decay' if decay != 0 else 'linear',
+                            'decay_gameweek':decay,
+                            'vicecap_decay':vicecap_decay,
+                            'decay_bench':[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
+                            'ft_val':ft_val,
+                            'itb_val':itb_val,
+                            'hit_val':hit_val
+                        }):
+
+                    progress += 1
+                    my_bar.progress(progress / repeats)
 
                 player_names = (
                     pd

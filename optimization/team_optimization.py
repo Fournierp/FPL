@@ -3210,6 +3210,8 @@ class Team_Optimization:
                 f"sensitivity_analysis_{r}",
                 iterations=iterations)
 
+            yield 1
+
             # Store data
             for i, (k, v) in enumerate(sa.items()):
                 transfer = hash(tuple((tuple(v[0]), tuple(v[1]))))
