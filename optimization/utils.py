@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import numpy as np
 import sasoptpy as so
+import os
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -62,10 +63,11 @@ def get_predictions(noise=False, premium=False):
     Returns:
         (pd.DataFrame): EV Data
     """
-    if premium: 
+    if premium:
         start = get_next_gw()
-        df = pd.read_csv(
-            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv")
+        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv"
+        assert os.path.exists(path), "The Premium Planner data is not saved in the GW folder."
+        df = pd.read_csv(path)
 
         # One hot encoded values for the constraints
         if df.Pos.dtype == np.int:
@@ -87,8 +89,9 @@ def get_predictions(noise=False, premium=False):
 
     else:
         start = get_next_gw()
-        df = pd.read_csv(
-            f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv")
+        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv"
+        assert os.path.exists(path), "The Free Planner data is not saved in the GW folder."
+        df = pd.read_csv(path)
         if df.Pos.dtype == np.int:
             df["Pos"] = df["Pos"].map(
                 {
@@ -167,6 +170,7 @@ def get_chips(team_id, last_gw):
         (tuple): Availability for freehit, wildcard, bboost, threexc
     """
     freehit, wildcard, bboost, threexc = 0, 0, 0, 0
+    fh_count = 0
     # Reversing GW history until a chip is played or 2+ transfers were made
     for gw in range(last_gw, 0, -1):
         res = requests.get(
@@ -183,6 +187,11 @@ def get_chips(team_id, last_gw):
             wildcard = gw
         if chip == 'freehit':
             freehit = gw
+            fh_count += 1
+
+    # Handle the 2nd FH available for season 2021-22 (remove if the rules change)
+    if fh_count <= 1:
+        freehit = 0
 
     # Handle the WC reset at GW 20
     if wildcard <= 20 and last_gw >= 20:

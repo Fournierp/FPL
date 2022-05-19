@@ -1346,6 +1346,7 @@ class Team_Optimization:
         assert not (self.freehit_used and freehit_gw >= 0), "Freehit chip was already used."
         assert not (self.bboost_used and bboost_gw >= 0), "Bench boost chip was already used."
         assert not (self.threexc_used and threexc_gw >= 0), "Tripple captain chip was already used."
+        assert not self.wildcard_used, "Wildcard chip was already used."
 
         # Longterm Model
         model_name = 'longterm'
@@ -3234,24 +3235,30 @@ class Team_Optimization:
 
 
 if __name__ == "__main__":
+    os.makedirs('optimization/tmp/', exist_ok=True)
+
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
 
     to = Team_Optimization(
-        team_id=35868,
+        team_id=30610,
         horizon=3,
         noise=False,
         premium=True)
 
-    # to.build_model(
-    #     model_name="vanilla",
-    #     objective_type='decay',
-    #     decay_gameweek=0.9,
-    #     vicecap_decay=0.1,
-    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
-    #     ft_val=1.5,
-    #     itb_val=0.008,
-    #     hit_val=6)
+    to.build_model(
+        model_name="vanilla",
+        freehit_gw=0,
+        wildcard_gw=-1,
+        bboost_gw=1,
+        threexc_gw=-1,
+        objective_type='decay',
+        decay_gameweek=0.9,
+        vicecap_decay=0.1,
+        decay_bench=[0.03, 0.21, 0.06, 0.002],
+        ft_val=1.5,
+        itb_val=0.008,
+        hit_val=6)
 
     # to.differential_model(
     #     nb_differentials=3,
@@ -3267,17 +3274,17 @@ if __name__ == "__main__":
     #     itb_val=0.008,
     #     hit_val=6)
 
-    to.advanced_wildcard(
-        freehit_gw=-1,
-        bboost_gw=-1,
-        threexc_gw=-1,
-        objective_type='decay',
-        decay_gameweek=0.9,
-        vicecap_decay=0.1,
-        decay_bench=[0.03, 0.21, 0.06, 0.002],
-        ft_val=1.5,
-        itb_val=0.008,
-        hit_val=6)
+    # to.advanced_wildcard(
+    #     freehit_gw=-1,
+    #     bboost_gw=-1,
+    #     threexc_gw=-1,
+    #     objective_type='decay',
+    #     decay_gameweek=0.9,
+    #     vicecap_decay=0.1,
+    #     decay_bench=[0.03, 0.21, 0.06, 0.002],
+    #     ft_val=1.5,
+    #     itb_val=0.008,
+    #     hit_val=6)
 
     # to.biased_model(
     #     love={
@@ -3298,10 +3305,10 @@ if __name__ == "__main__":
     #     },
     #     two_ft_gw=[])
 
-    # to.solve(
-    #     model_name="vanilla",
-    #     log=True,
-    #     time_lim=0)
+    to.solve(
+        model_name="vanilla",
+        log=True,
+        time_lim=0)
 
     # tp.suboptimals(
     #     model_name="vanilla",
