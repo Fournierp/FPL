@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+import sys
 
 from utils import get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
@@ -381,68 +382,88 @@ class Elo:
 
 
 if __name__ == "__main__":
-    df = (
-        pd.read_csv(
-            f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
-            usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'],
-            encoding='unicode_escape')
-        for season in [
-            '9394', '9495', '9596', '9697', '9798',
-            '9899', '9900', '0001', '0102', '0203',
-            '0304', '0405', '0506', '0607', '0708',
-            '0809', '0910', '1011', '1112', '1213',
-            '1314', '1415', '1516', '1617', '1718',
-            '1819', '1920', '2021'])
+    if sys.argv[1] == 'predict':
+        df = (
+            pd.read_csv(
+                f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
+                usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'],
+                encoding='unicode_escape')
+            for season in [
+                '9394', '9495', '9596', '9697', '9798',
+                '9899', '9900', '0001', '0102', '0203',
+                '0304', '0405', '0506', '0607', '0708',
+                '0809', '0910', '1011', '1112', '1213',
+                '1314', '1415', '1516', '1617', '1718',
+                '1819', '1920', '2021'])
 
-    df = (
-        pd.concat(df)
-        .rename(columns={
-            "HomeTeam": "team1",
-            "AwayTeam": "team2",
-            "FTHG": "score1",
-            "FTAG": "score2",
-            "Date": "date",
-            })
-        .dropna())
+        df = (
+            pd.concat(df)
+            .rename(columns={
+                "HomeTeam": "team1",
+                "AwayTeam": "team2",
+                "FTHG": "score1",
+                "FTAG": "score2",
+                "Date": "date",
+                })
+            .dropna())
 
-    # Train model on all games up to the previous GW
-    model = Elo(df)
-    model.fit()
+        # Train model on all games up to the previous GW
+        model = Elo(df)
+        model.fit()
 
-    season = '2122'
-    next_gw = get_next_gw()-1
+        season = '2122'
+        # Get last finished GW
+        previous_gw = get_next_gw() - 2
 
-    # Get GW dates
-    fixtures = (
-        pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
-        .loc[:, ['event', 'kickoff_time']])
-    fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
+        # Get GW dates
+        fixtures = (
+            pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            .loc[:, ['event', 'kickoff_time']])
+        fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
 
-    # Merge on date
-    season_games = (
-        pd.read_csv(
-            f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
-            usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'])
-        .rename(columns={
-            "HomeTeam": "team1",
-            "AwayTeam": "team2",
-            "FTHG": "score1",
-            "FTAG": "score2",
-            "Date": "date",
-            })
-        .dropna())
-    season_games["date"] = (
-        pd.to_datetime(season_games["date"], dayfirst=True).dt.date)
-    season_games = (
-        pd.merge(
-            season_games,
-            fixtures,
-            left_on='date',
-            right_on='kickoff_time')
-        .drop_duplicates()
-        )
+        # Merge on date
+        season_games = (
+            pd.read_csv(
+                f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
+                usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'])
+            .rename(columns={
+                "HomeTeam": "team1",
+                "AwayTeam": "team2",
+                "FTHG": "score1",
+                "FTAG": "score2",
+                "Date": "date",
+                })
+            .dropna())
+        season_games["date"] = (
+            pd.to_datetime(season_games["date"], dayfirst=True).dt.date)
+        season_games = (
+            pd.merge(
+                season_games,
+                fixtures,
+                left_on='date',
+                right_on='kickoff_time')
+            .drop_duplicates()
+            )
 
-    # Run inference on the specific GW
-    predictions = model.evaluate(
-        season_games[season_games['event'] == next_gw])
-    print(predictions.rps.mean())
+        # Run inference on the specific GW
+        predictions = model.evaluate(
+            season_games[season_games['event'] == previous_gw])
+        print("Elo model's Ranked Probability Score on the {} games from GW{} is : {:.4f}.".format(len(predictions), previous_gw,  predictions.rps.mean()))
+
+        predictions = model.predict(
+            season_games[season_games['event'] == previous_gw + 1])
+
+        print(
+            "Elo model's predictions for the {} games from GW{} : \n{}"\
+                .format(len(predictions), previous_gw,  predictions.sort_values(by=['date'])[[
+                    'date', 'event', 'team1', 'team2', 'home_win_p', 'draw_p', 'away_win_p']]))
+
+    if sys.argv[1] == 'backtest':
+        df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
+        df = (
+            df
+            .loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
+            )
+
+        model = Elo(df)
+        model.backtest(df, season)

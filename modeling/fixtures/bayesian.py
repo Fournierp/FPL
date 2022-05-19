@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 from tqdm import tqdm
+import sys
 
 from utils import odds, clean_sheet, time_decay, score_mtx, get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
@@ -399,56 +400,76 @@ if __name__ == "__main__":
     with open('info.json') as f:
         season = json.load(f)['season']
 
-    next_gw = get_next_gw()
+    if sys.argv[1] == 'predict':
+        # Get last finished GW
+        previous_gw = get_next_gw() - 2
 
-    df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
-    df = df.loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
+        df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
+        df = df.loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
 
-    # Get GW dates
-    fixtures = (
-        pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
-        .loc[:, ['event', 'kickoff_time']])
-    fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
+        # Get GW dates
+        fixtures = (
+            pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            .loc[:, ['event', 'kickoff_time']])
+        fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
 
-    # Get only EPL games from the current season
-    season_games = (
-        df
-        .loc[df['league_id'] == 2411]
-        .loc[df['season'] == season]
+        # Get only EPL games from the current season
+        season_games = (
+            df
+            .loc[df['league_id'] == 2411]
+            .loc[df['season'] == season]
+            )
+        season_games["kickoff_time"] = pd.to_datetime(season_games["date"]).dt.date
+
+        # Merge on date
+        season_games = (
+            pd.merge(
+                season_games,
+                fixtures,
+                left_on='kickoff_time',
+                right_on='kickoff_time')
+            .drop_duplicates()
+            )
+
+        # Train model on all games up to the previous GW
+        model = Bayesian(
+            pd.concat([
+                df.loc[df['season'] != season],
+                season_games[season_games['event'] < previous_gw]
+                ]))
+        model.fit()
+
+        # Add the home team and away team index for running inference
+        season_games = (
+            pd.merge(season_games, model.teams, left_on="team1", right_on="team")
+            .rename(columns={"team_index": "hg"})
+            .drop(["team"], axis=1)
+            .drop_duplicates()
+            .merge(model.teams, left_on="team2", right_on="team")
+            .rename(columns={"team_index": "ag"})
+            .drop(["team"], axis=1)
+            .sort_values("date")
         )
-    season_games["kickoff_time"] = pd.to_datetime(season_games["date"]).dt.date
 
-    # Merge on date
-    season_games = (
-        pd.merge(
-            season_games,
-            fixtures,
-            left_on='kickoff_time',
-            right_on='kickoff_time')
-        .drop_duplicates()
-        )
+        # Run inference on the specific GW
+        predictions = model.evaluate(
+            season_games[season_games['event'] == previous_gw])
+        print("Bayseian model's Ranked Probability Score on the {} games from GW{} is : {:.4f}.".format(len(predictions), previous_gw,  predictions.rps.mean()))
 
-    # Train model on all games up to the previous GW
-    model = Bayesian(
-        pd.concat([
-            df.loc[df['season'] != season],
-            season_games[season_games['event'] < next_gw]
-            ]))
-    model.fit()
+        predictions = model.predict(
+            season_games[season_games['event'] == previous_gw + 1])
 
-    # Add the home team and away team index for running inference
-    season_games = (
-        pd.merge(season_games, model.teams, left_on="team1", right_on="team")
-        .rename(columns={"team_index": "hg"})
-        .drop(["team"], axis=1)
-        .drop_duplicates()
-        .merge(model.teams, left_on="team2", right_on="team")
-        .rename(columns={"team_index": "ag"})
-        .drop(["team"], axis=1)
-        .sort_values("date")
-    )
+        print(
+            "Bayseian model's predictions for the {} games from GW{} : \n{}"\
+                .format(len(predictions), previous_gw,  predictions.sort_values(by=['date'])[[
+                    'date', 'event', 'team1', 'team2', 'home_win_p', 'draw_p', 'away_win_p']]))
 
-    # Run inference on the specific GW
-    predictions = model.evaluate(
-        season_games[season_games['event'] == next_gw])
-    print(predictions.rps.mean())
+    if sys.argv[1] == 'backtest':
+        df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
+        df = (
+            df
+            .loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
+            )
+
+        model = Bayesian(df)
+        model.backtest(df, season)
