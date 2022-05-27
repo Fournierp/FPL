@@ -75,8 +75,8 @@ class FPL_Season:
 
     def sample_ranks(self):
         """Sample every rank to get season data"""
-        last = 130000
-        end = 255000
+        last = 150000
+        end = 205000
         increment = 5000
         for ranks in np.arange(last + increment, end, increment):
             self.logger.info(f"Starting to scrape top {ranks}.")
