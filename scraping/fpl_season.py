@@ -75,7 +75,7 @@ class FPL_Season:
 
     def sample_ranks(self):
         """Sample every rank to get season data"""
-        last = 150000
+        last = 180000
         end = 205000
         increment = 5000
         for ranks in np.arange(last + increment, end, increment):
