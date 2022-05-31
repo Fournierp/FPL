@@ -8,6 +8,7 @@ import json
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
+from tqdm import tqdm
 
 
 # Player Goalkeeping
@@ -172,6 +173,7 @@ class FBRef:
                     self.logger.info(f"Season: {season}")
 
                     df = pd.read_html(url)[0]
+                    time_start = time.time()
                     # Remove empty row
                     df = df[~(df.Date.isna())]
                     # Add Competition label
@@ -198,6 +200,15 @@ class FBRef:
                         df.to_csv(
                             os.path.join(self.root, 'fixtures.csv'),
                             index=False)
+
+                    # Wait to comply with scraping rules
+                    time.sleep(3 - (time.time() - time_start))
+
+        # Drop dupplicates in case I run the latest season scraper to update it.
+        (
+            pd.read_csv(os.path.join(self.root, 'fixtures.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'fixtures.csv'), index=False))
 
     def get_team_data(self, url):
         """ Scrape each table of team data
@@ -259,6 +270,8 @@ class FBRef:
                 self.logger.warning(
                     f'URL Request failed, retrying in 30 seconds! URL: {url}')
                 time.sleep(30)
+
+        time.sleep(3)
 
     def get_player_table(self, url, columns):
         """ Parse the table of outfield or keeper player data
@@ -387,6 +400,8 @@ class FBRef:
                 self.logger.info(f"Season: {season}")
 
                 df, df_opp = self.get_team_data(url)
+                time_start = time.time()
+
                 df.loc[:, "season"] = year
                 df_opp.loc[:, "season"] = year
                 if os.path.isfile(os.path.join(self.root, 'team.csv')):
@@ -406,7 +421,11 @@ class FBRef:
                         os.path.join(self.root, 'team_opp.csv'),
                         index=False)
 
+                # Wait to comply with scraping rules
+                time.sleep(3 - (time.time() - time_start))
+
                 df = self.get_keeper_data(url)
+                time_start = time.time()
                 df.loc[:, "season"] = year
                 if os.path.isfile(os.path.join(self.root, 'keeper.csv')):
                     df.to_csv(
@@ -416,8 +435,12 @@ class FBRef:
                     df.to_csv(
                         os.path.join(self.root, 'keeper.csv'),
                         index=False)
+                
+                # Wait to comply with scraping rules
+                time.sleep(3 - (time.time() - time_start))
 
                 df = self.get_player_data(url)
+                time_start = time.time()
                 df.loc[:, "season"] = year
                 if os.path.isfile(os.path.join(self.root, 'outfield.csv')):
                     df.to_csv(
@@ -427,6 +450,27 @@ class FBRef:
                     df.to_csv(
                         os.path.join(self.root, 'outfield.csv'),
                         index=False)
+
+                # Wait to comply with scraping rules
+                time.sleep(3 - (time.time() - time_start))
+
+        # Drop dupplicates in case I run the latest season scraper to update it.
+        (
+            pd.read_csv(os.path.join(self.root, 'outfield.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'outfield.csv'), index=False))
+        (
+            pd.read_csv(os.path.join(self.root, 'keeper.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'keeper.csv'), index=False))
+        (
+            pd.read_csv(os.path.join(self.root, 'team.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'team.csv'), index=False))
+        (
+            pd.read_csv(os.path.join(self.root, 'team_opp.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'team_opp.csv'), index=False))
 
     def get_games_players(self, tables):
         df_h = []
@@ -504,6 +548,8 @@ class FBRef:
                         'Wk', 'Day', 'Date', 'Time', 'Home', 'Away',
                         'Attendance', 'Venue', 'Referee', 'Notes']]
                         )
+                time.sleep(3)
+
                 # Remove empty row
                 df = df[~df.Wk.isna()]
                 # Remove upcoming games
@@ -521,7 +567,7 @@ class FBRef:
                 # Get urls to games
                 table_rows = self.get_url(url)[0].find_all('tr')
 
-                for row in table_rows:
+                for row in tqdm(table_rows):
                     # Skip blank rows, and postponed games
                     if (
                             row.find('th', {"scope": "row"}) is not None
@@ -539,6 +585,7 @@ class FBRef:
                         tables = pd.read_html(
                             "https://fbref.com" +
                             row.find('td', {"data-stat": "match_report"}).find('a')['href'])
+                        time_start = time.time()
 
                         df = self.get_games_players(tables)
                         df.loc[:, 'date'] = date
@@ -582,6 +629,9 @@ class FBRef:
                                 os.path.join(self.root, f'games_shots.csv'),
                                 index=False)
 
+                        # Wait to comply with scraping rules
+                        time.sleep(3 - (time.time() - time_start))
+
         # Drop dupplicates in case I run the latest season scraper to update it.
         (
             pd.read_csv(os.path.join(self.root, 'games.csv'))
@@ -612,8 +662,8 @@ if __name__ == "__main__":
         season_data = json.load(stat)
 
     fbref = FBRef(logger, season_data)
-    # fbref.get_fixtures()
+    fbref.get_fixtures()
 
-    # fbref.get_pl_season(True)
+    fbref.get_pl_season(True)
 
     fbref.get_pl_games()
