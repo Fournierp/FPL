@@ -5,10 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.path as mpath
-from highlight_text import fig_text
-from matplotlib.colors import ListedColormap
 
 from team_optimization import Team_Optimization
+from utils import get_next_gw
 
 
 def write():
@@ -19,12 +18,13 @@ def write():
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
+    start = get_next_gw()
 
     with st.expander('Parameters', expanded=True):
 
         col1, col2 = st.columns(2)
         with col1:
-            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+            horizon = st.slider("Horizon", min_value=1, max_value=min(39-start, 8), value=min(39-start, 5), step=1)
         with col2:
             premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 
@@ -53,15 +53,17 @@ def write():
             itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
 
+    with st.expander('Chips', expanded=True):
+
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             wc_val = st.slider("Wildcard Added Value", min_value=0, max_value=25, value=18)
         with col2:
-            fh_val = st.slider("Freehit Added Value", min_value=0, max_value=25, value=18)
+            fh_val = st.slider("Freehit AV", min_value=0, max_value=25, value=18)
         with col3:
-            tc_val = st.slider("Triple Captain Added Value", min_value=0, max_value=25, value=12)
+            tc_val = st.slider("Triple Captain AV", min_value=0, max_value=25, value=12)
         with col4:
-            bb_val = st.slider("Bench Boost Added Value", min_value=0, max_value=25, value=14)
+            bb_val = st.slider("Bench Boost AV", min_value=0, max_value=25, value=14)
 
 
     if st.button('Run Optimization'):
@@ -86,10 +88,16 @@ def write():
                 freehit_val=fh_val,
                 wildcard_val=wc_val)
 
-            df, chip_strat = to.solve(
+            df, chip_strat, total_ev, total_obj = to.solve(
                 model_name="automated_chips",
                 log=True,
                 time_lim=0)
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Expected Value", np.round(total_ev, 2))
+            with col2:
+                st.metric("Objective Function Value", np.round(total_obj, 2))
 
             fig, ax = plt.subplots(figsize=(16, 12))
             # Set up the axis limits with a bit of padding

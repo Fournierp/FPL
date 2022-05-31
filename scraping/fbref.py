@@ -429,6 +429,14 @@ class FBRef:
                         index=False)
 
     def get_games_players(self, tables):
+        """ Get data about the outfielders who played
+
+        Args:
+            tables (list): DataFrames extracted from the url of fixture
+
+        Returns:
+            pd.DataFrames: Data of the fixture
+        """
         df_h = []
         df_a = []
 
@@ -454,6 +462,14 @@ class FBRef:
         return df.loc[:, ~df.columns.duplicated()]
 
     def get_games_keepers(self, tables):
+        """ Get data about the keepers who played
+
+        Args:
+            tables (list): DataFrames extracted from the url of fixture
+
+        Returns:
+            pd.DataFrames: Data of the fixture
+        """
         # Home keeper
         table_h = tables[9].copy()
         table_h.columns = [' '.join(col).strip() if i > 5 else col[1] for i, col in enumerate(table_h.columns.values)]
@@ -469,7 +485,75 @@ class FBRef:
         df = pd.concat([table_h, table_a])
         return df.loc[:, ~df.columns.duplicated()]
 
+    def get_games_lineups(self, tables):
+        """ Get data about the players who played and got subsituted
+
+        Args:
+            tables (list): DataFrames extracted from the url of fixture
+
+        Returns:
+            pd.DataFrames: Data of the fixture
+        """
+        df_h = []
+        df_a = []
+
+        # Home roster
+        starting_lineup_h = tables[0][[tables[0].columns[1]]]
+        starting_lineup_h['Lineup'] = 1
+
+        starting_lineup_h.loc[:11, 'Starter'] = 1
+        starting_lineup_h.loc[11:, 'Benched'] = 1
+
+        starting_lineup_h = starting_lineup_h.drop(11)
+        starting_lineup_h = starting_lineup_h.rename(columns={tables[0].columns[1]: 'Player'})
+        starting_lineup_h.loc[:, 'home'] = 1
+
+        # Away roster
+        starting_lineup_a = tables[1][[tables[1].columns[1]]]
+        starting_lineup_a['Lineup'] = 1
+
+        starting_lineup_a.loc[:11, 'Starter'] = 1
+        starting_lineup_a.loc[11:, 'Benched'] = 1
+
+        starting_lineup_a = starting_lineup_a.drop(11)
+        starting_lineup_a = starting_lineup_a.rename(columns={tables[1].columns[1]: 'Player'})
+        starting_lineup_a.loc[:, 'home'] = 0
+
+        # Home minutes played & substitutions
+        minutes_h = tables[3][[('Unnamed: 0_level_0', 'Player'), ('Unnamed: 5_level_0', 'Min')]]
+        minutes_h.columns = minutes_h.columns.map(lambda x: x[1])
+        minutes_h = minutes_h.iloc[:-1]
+
+        # Away minutes played & substitutions
+        minutes_a = tables[10][[('Unnamed: 0_level_0', 'Player'), ('Unnamed: 5_level_0', 'Min')]]
+        minutes_a.columns = minutes_a.columns.map(lambda x: x[1])
+        minutes_a = minutes_a.iloc[:-1]
+
+        df_h = pd.merge(
+            starting_lineup_h,
+            minutes_h,
+            how='outer',
+            left_on='Player',
+            right_on='Player'
+        )
+
+        df_a = pd.merge(
+            starting_lineup_a,
+            minutes_a,
+            how='outer',
+            left_on='Player',
+            right_on='Player'
+        )
+        df = pd.concat([df_h, df_a])
+
+        return df.fillna(0)
+
     def get_pl_games(self, history=False):
+        """ Get every PL fixture data
+
+        Args:
+            history (boolean): Collect historical data
+        """
         seasons = self.get_competition_urls(
             'https://fbref.com/en/comps/9/history/Premier-League-Seasons')
 
@@ -582,6 +666,20 @@ class FBRef:
                                 os.path.join(self.root, f'games_shots.csv'),
                                 index=False)
 
+                        df = self.get_games_lineups(tables)
+                        df.loc[:, 'date'] = date
+                        df.loc[:, 'squad_h'] = squad_h
+                        df.loc[:, 'squad_a'] = squad_a
+
+                        if os.path.isfile(os.path.join(self.root, f'games_lineup.csv')):
+                            df.to_csv(
+                                os.path.join(self.root, 'games_lineup.csv'),
+                                index=False, mode='a', header=False)
+                        else:
+                            df.to_csv(
+                                os.path.join(self.root, f'games_lineup.csv'),
+                                index=False)
+
         # Drop dupplicates in case I run the latest season scraper to update it.
         (
             pd.read_csv(os.path.join(self.root, 'games.csv'))
@@ -602,6 +700,11 @@ class FBRef:
             pd.read_csv(os.path.join(self.root, 'games_shots.csv'))
             .drop_duplicates()
             .to_csv(os.path.join(self.root, 'games_shots.csv'), index=False))
+
+        (
+            pd.read_csv(os.path.join(self.root, 'games_lineup.csv'))
+            .drop_duplicates()
+            .to_csv(os.path.join(self.root, 'games_lineup.csv'), index=False))
 
 
 if __name__ == "__main__":

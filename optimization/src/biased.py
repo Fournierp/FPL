@@ -5,8 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.path as mpath
-from highlight_text import fig_text
-from matplotlib.colors import ListedColormap
 
 from team_optimization import Team_Optimization
 
@@ -32,11 +30,11 @@ def write():
     plt.style.use(".streamlit/style.mplstyle")
     player_names, start = get_data()
 
-    with st.expander('Parameters', expanded=True):
+    with st.expander('Basic Parameters', expanded=True):
 
         col1, col2 = st.columns(2)
         with col1:
-            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+            horizon = st.slider("Horizon", min_value=1, max_value=min(39-start, 8), value=min(39-start, 5), step=1)
         with col2:
             premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 
@@ -64,35 +62,77 @@ def write():
         with col5:
             itb_val = st.slider("ITB value", min_value=0., max_value=1., value=0.008, step=0.02)
 
+    max_gws = min(min(3, 39 - start), horizon)
 
-        col1, col2, col3 = st.columns(3)
-        with col1:
+    with st.expander('Bias', expanded=True):
+
+        if max_gws == 3:
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
+            with col2:
+                team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
+            with col3:
+                team_in_3 = st.multiselect(f"In GW {start+2}", player_names.values)
+
+
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
+            with col2:
+                team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
+            with col3:
+                team_out_3 = st.multiselect(f"Out GW {start+2}", player_names.values)
+
+
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
+            with col2:
+                hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
+            with col3:
+                hit_3 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
+
+            rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+3))
+
+
+        if max_gws == 2:
+            col1, col2 = st.columns(2)
+            with col1:
+                team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
+            with col2:
+                team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
+            team_in_3 = []
+
+
+            col1, col2 = st.columns(2)
+            with col1:
+                team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
+            with col2:
+                team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
+            team_out_3 = []
+
+
+            col1, col2 = st.columns(2)
+            with col1:
+                hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
+            with col2:
+                hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
+            hit_3 = []
+
+            rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+2))
+
+
+        if max_gws == 1:
             team_in_1 = st.multiselect(f"Forced in Team GW {start}", player_names.values)
-        with col2:
-            team_in_2 = st.multiselect(f"In GW {start+1}", player_names.values)
-        with col3:
-            team_in_3 = st.multiselect(f"In GW {start+2}", player_names.values)
+            team_in_2, team_in_3 = [], []
 
-
-        col1, col2, col3 = st.columns(3)
-        with col1:
             team_out_1 = st.multiselect(f"Forced out Team GW {start}", player_names.values)
-        with col2:
-            team_out_2 = st.multiselect(f"Out GW {start+1}", player_names.values)
-        with col3:
-            team_out_3 = st.multiselect(f"Out GW {start+2}", player_names.values)
+            team_out_2, team_out_3 = [], []
 
-
-        col1, col2, col3 = st.columns(3)
-        with col1:
             hit_1 = st.slider(f"Maximim hits in GW {start}", min_value=0, max_value=5, value=5)
-        with col2:
-            hit_2 = st.slider(f"GW {start+1}", min_value=0, max_value=5, value=5)
-        with col3:
-            hit_3 = st.slider(f"GW {start+2}", min_value=0, max_value=5, value=5)
-
-        rolling = st.multiselect(f"Rolling transfers", np.arange(start+1, start+3))
-
+            hit_2, hit_3 = [], []
+            rolling = []
 
     if st.button('Run Optimization'):
 
@@ -113,6 +153,13 @@ def write():
                 ft_val=ft_val,
                 itb_val=itb_val,
                 hit_val=hit_val)
+
+            if max_gws == 3:
+                hit_limit = [(start, hit_1), (start+1, hit_2), (start+2, hit_3)]
+            if max_gws == 2:
+                hit_limit = [(start, hit_1), (start+1, hit_2)]
+            if max_gws == 1:
+                hit_limit = [(start, hit_1)]
 
             to.biased_model(
                 love={
@@ -135,17 +182,23 @@ def write():
                     'bench': {}
                 },
                 hit_limit={
-                    'max': [(start, hit_1), (start+1, hit_2), (start+2, hit_3)],
+                    'max': hit_limit,
                     'eq': {},
                     'min': {}
                 },
                 two_ft_gw=rolling)
 
 
-            df, chip_strat = to.solve(
+            df, chip_strat, total_ev, total_obj = to.solve(
                 model_name="biased",
                 log=True,
                 time_lim=0)
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Expected Value", np.round(total_ev, 2))
+            with col2:
+                st.metric("Objective Function Value", np.round(total_obj, 2))
 
             fig, ax = plt.subplots(figsize=(16, 12))
             # Set up the axis limits with a bit of padding

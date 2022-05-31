@@ -85,7 +85,7 @@ class Team_Optimization:
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
         # Drop players that are not predicted to play much to reduce the search space
-        self.data.drop(self.data[self.data.total_ev <= 2].index, inplace=True)
+        self.data.drop(self.data[self.data.total_ev <= 1].index, inplace=True)
         self.players = self.data.index.tolist()
 
         self.initial_team_df = pd.DataFrame(
@@ -549,14 +549,14 @@ class Team_Optimization:
             (
                 so.expr_sum(
                     self.bench[p, w, 0] for p in self.players
-                    if self.data.loc[p, 'G'] == 1) <=
-                1 for w in self.gameweeks),
+                    if self.data.loc[p, 'G'] == 1) ==
+                1 - self.bboost[w] for w in self.gameweeks),
             name='one_bench_gk')
         # There must be a single substitute per bench spot
         self.model.add_constraints(
             (
                 so.expr_sum(self.bench[p, w, o] for p in self.players) <= 1
-                for w in self.gameweeks for o in [1, 2, 3]),
+                for w in self.gameweeks for o in [0, 1, 2, 3]),
             name='one_per_bench_spot')
 
         # The players not started in the team are benched
@@ -3159,39 +3159,45 @@ class Team_Optimization:
                             for w in gw_range) >= 1,
                         name=f'cutoff_{i}')
 
-            sa[i] = [
-                [
-                    p for p in self.players
-                    if self.buy[p, self.start].get_value() > 0.5],
-                [
-                    p for p in self.players
-                    if self.sell[p, self.start].get_value() > 0.5],
-                self.model.get_objective_value()
-            ]
+            if self.freehit[self.start].get_value() :
+                sa[i] = [
+                    [
+                        p for p in self.players
+                        if self.team_fh[p, self.start].get_value() > 0.5],
+                    [],
+                    self.model.get_objective_value()
+                ]
+            else:
+                sa[i] = [
+                    [
+                        p for p in self.players
+                        if self.buy[p, self.start].get_value() > 0.5],
+                    [
+                        p for p in self.players
+                        if self.sell[p, self.start].get_value() > 0.5],
+                    self.model.get_objective_value()
+                ]
 
         return sa
 
-    def sensitivity_analysis(self, repeats=3, iterations=3):
+    def sensitivity_analysis(
+            self,
+            repeats=3,
+            iterations=3,
+            parameters={'model_name': 'sa'}):
         """ Solving model with randomized EV
 
         Args:
             repeats (int): Repeating the randomization/solving
             iterations (int): Iterations of suboptimals
         """
-        podium = pd.DataFrame(columns=list(np.arange(3)[1:]))
+        podium = pd.DataFrame(columns=list(np.arange(1, 4)))
         hashes = {}
         raw_data = self.data.copy()
 
         # Reproduce the optimization from scratch
         for r in range(repeats):
-            self.build_model(
-                model_name="sensitivity_analysis",
-                objective_type='decay',
-                decay_gameweek=0.9,
-                vicecap_decay=0.1,
-                decay_bench=[0.03, 0.21, 0.06, 0.002],
-                ft_val=1.5,
-                itb_val=0.008)
+            self.build_model(**parameters)
 
             print(f"\n----- Trial {r+1} -----")
 
@@ -3203,6 +3209,8 @@ class Team_Optimization:
             sa = self.suboptimals(
                 f"sensitivity_analysis_{r}",
                 iterations=iterations)
+
+            yield 1
 
             # Store data
             for i, (k, v) in enumerate(sa.items()):
@@ -3223,7 +3231,7 @@ class Team_Optimization:
                     transfer,
                     f"EV_{int(num_cols)}"] = v[2]
 
-        podium.to_csv("optimization/tmp/podium.csv")
+        podium.fillna(0).to_csv("optimization/tmp/podium.csv")
         with open("optimization/tmp/hashes.json", "w") as outfile:
             json.dump(hashes, outfile)
 
