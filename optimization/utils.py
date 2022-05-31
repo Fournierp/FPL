@@ -21,6 +21,13 @@ def get_team(team_id, gw):
     res = requests.get(
         'https://fantasy.premierleague.com/api/entry/' +
         f'{team_id}/event/{gw}/picks/').json()
+
+    # Scrape GW before FH to get the team from GW prior
+    if res['active_chip'] == 'freehit':
+        res = requests.get(
+            'https://fantasy.premierleague.com/api/entry/' +
+            f'{team_id}/event/{gw-1}/picks/').json()
+
     # Adjust the player id with fplreview indices
     return [i['element'] for i in res['picks']], res['entry_history']['bank']
 
@@ -417,4 +424,4 @@ def pretty_print(
     # print(df)
     print(f"EV: {total_ev:.2f}  |  Objective Val: {-objective_value:.2f}")
 
-    return df, chip_strat
+    return df, chip_strat, total_ev, -objective_value
