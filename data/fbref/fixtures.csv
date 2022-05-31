@@ -2012,7 +2012,6 @@ First round,Sat,2020-09-05,15:00,Luton Town,3–1,Norwich City,,Kenilworth Road 
 First round,Sat,2020-09-05,15:00,P'borough Utd,0–1,Cheltenham,,ABAX Stadium,Alan Young,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Sunderland,(4) 0–0 (5),Hull City,,Stadium of Light,Thomas Bramall,Hull City won on penalty kicks following normal time,EFL-Cup
 First round,Sat,2020-09-05,15:00,Oxford United,(4) 1–1 (3),AFC Wimbledon,,The Kassam Stadium,Lee Swabey,Oxford United won on penalty kicks following normal time,EFL-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
 First round,Sat,2020-09-05,15:00,FG Rovers,1–2,Leyton Orient,,The New Lawn,Craig Hicks,,EFL-Cup
 First round,Sat,2020-09-05,15:00,Tranmere Rovers,(7) 1–1 (8),Harrogate,,Prenton Park,Tom Nield,Harrogate won on penalty kicks following normal time,EFL-Cup
 First round,Sat,2020-09-05,15:00,Ipswich Town,3–0,Bristol Rovers,,Portman Road Stadium,Will Finnie,,EFL-Cup
@@ -2104,7 +2103,6 @@ First round,Tue,2019-08-13,19:45,Walsall,2–3,Crawley Town,2451,The Banks's Sta
 First round,Tue,2019-08-13,19:45,Rochdale,5–2,Bolton,3362,Crown Oil Arena,Andy Haines,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Huddersfield,0–1,Lincoln City,6908,The John Smith's Stadium,Peter Wright,,EFL-Cup
 First round,Tue,2019-08-13,19:45,AFC Wimbledon,(2) 2–2 (4),MK Dons,2191,Cherry Red Records Fans' Stadium,Craig Hicks,MK Dons won on penalty kicks following extra time,EFL-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
 First round,Tue,2019-08-13,19:45,Nott'ham Forest,1–0,Fleetwood Town,7432,The City Ground,Alan Young,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Barnsley,0–3,Carlisle United,5208,Oakwell Stadium,Ben Toner,,EFL-Cup
 First round,Tue,2019-08-13,19:45,Blackburn,3–2,Oldham Athletic,5215,Ewood Park,Tom Nield,,EFL-Cup
@@ -2198,7 +2196,6 @@ First round,Tue,2018-08-14,19:45,Norwich City,3–1,Stevenage,11687,Carrow Road,
 First round,Tue,2018-08-14,19:45,Millwall,(3) 0–0 (1),Gillingham,4401,The Den,Charles Breakspear,Millwall won on penalty kicks following extra time,EFL-Cup
 First round,Tue,2018-08-14,19:45,Oxford United,2–0,Coventry City,3551,The Kassam Stadium,James Linington,,EFL-Cup
 First round,Tue,2018-08-14,19:45,QPR,2–0,P'borough Utd,4021,Loftus Road Stadium,Gavin Ward,,EFL-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
 First round,Tue,2018-08-14,19:45,Bristol City,0–1,Plymouth Argyle,9865,Ashton Gate Stadium,Kevin Johnson,,EFL-Cup
 First round,Tue,2018-08-14,19:45,Preston,3–1,Morecambe,6077,Deepdale Stadium,Tom Nield,,EFL-Cup
 First round,Tue,2018-08-14,19:45,Middlesbrough,(4) 3–3 (3),Notts County,9942,Riverside Stadium,Anthony Backhouse,Middlesbrough won on penalty kicks following extra time,EFL-Cup
@@ -2292,7 +2289,6 @@ First round,Tue,2017-08-08,19:45,Coventry City,1–3,Blackburn,5372,City of Cove
 First round,Tue,2017-08-08,19:45,Cardiff City,2–1,Portsmouth,6592,Cardiff City Stadium,Steve Martin,Required Extra Time,EFL-Cup
 First round,Tue,2017-08-08,19:45,Wycombe,0–2,Fulham,3639,Adams Park,Gavin Ward,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Exeter City,1–2,Charlton Ath,2699,St. James' Park,Tim Robinson,,EFL-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,EFL-Cup
 First round,Tue,2017-08-08,19:45,Birmingham City,5–1,Crawley Town,7814,St Andrew's Trillion Trophy Stadium,Michael Salisbury,,EFL-Cup
 First round,Tue,2017-08-08,19:45,Fleetwood Town,1–2,Carlisle United,1711,Highbury Stadium,Graham Salisbury,Required Extra Time,EFL-Cup
 First round,Tue,2017-08-08,19:45,Norwich City,3–2,Swindon Town,13166,Carrow Road,Geoff Eltringham,,EFL-Cup
@@ -2412,7 +2408,6 @@ First round proper,Tue,2021-11-16,19:45,Altrincham,2–3,Gateshead,1390,The J. D
 First round proper,Tue,2021-11-16,19:45,Cheltenham,1–0,Gillingham,2651,Jonny-Rocks Stadium,Lee Swabey,,FA-Cup
 First round proper,Tue,2021-11-16,19:45,Stevenage,2–1,MK Dons,1876,The Lamex Stadium,Alan Young,Required Extra Time,FA-Cup
 First round proper,Tue,2021-11-16,19:45,Notts County,1–2,Rochdale,4416,Meadow Lane Stadium,James Bell,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round proper,Tue,2021-11-16,19:45,Oldham Athletic,1–2,Ipswich Town,,Boundary Park,Carl Boyeson,,FA-Cup
 First round proper,Wed,2021-11-17,19:45,Stockport,5–3,Bolton,,Edgeley Park,Samuel Barrott,Required Extra Time,FA-Cup
 First round proper,Tue,2021-11-30,19:45,Exeter City,2–1,Bradford City,3228,St. James' Park,Charles Breakspear,,FA-Cup
@@ -2459,7 +2454,6 @@ First round proper,Sat,2020-11-07,15:00,Port Vale,0–1,King's Lynn,,Vale Park,D
 First round proper,Sat,2020-11-07,15:00,Brackley Town,(3) 3–3 (2),Bishop's,,St. James' Park,Adrian Quelch,Brackley Town won on penalty kicks following extra time,FA-Cup
 First round proper,Sat,2020-11-07,15:00,Walsall,1–2,Bristol Rovers,,The Banks's Stadium,Ross Joyce,,FA-Cup
 First round proper,Sat,2020-11-07,15:00,Bromley,0–1,Yeovil Town,,The Courage Stadium,Anthony Coggins,Required Extra Time,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round proper,Sat,2020-11-07,15:00,Sunderland,0–1,Mansfield Town,,Stadium of Light,Anthony Backhouse,,FA-Cup
 First round proper,Sat,2020-11-07,15:00,Gillingham,3–2,Woking,,MEMS Priestfield Stadium,Chris Sarginson,,FA-Cup
 First round proper,Sat,2020-11-07,15:00,Stevenage,(5) 2–2 (4),Concord Rang.,,The Lamex Stadium,John Busby,Stevenage won on penalty kicks following extra time,FA-Cup
@@ -2485,7 +2479,6 @@ Second round proper,Sat,2020-11-28,15:00,Portsmouth,6–1,King's Lynn,,Fratton P
 Second round proper,Sat,2020-11-28,15:00,Cheltenham,2–1,Crewe Alexandra,,Jonny-Rocks Stadium,James Adcock,Required Extra Time,FA-Cup
 Second round proper,Sat,2020-11-28,15:00,Plymouth Argyle,2–0,Lincoln City,,Home Park,David Rock,,FA-Cup
 Second round proper,Sat,2020-11-28,15:00,Harrogate,0–4,Blackpool,,CNG Stadium,James Oldham,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Second round proper,Sat,2020-11-28,17:30,P'borough Utd,1–2,Chorley,,ABAX Stadium,Darren Drysdale,,FA-Cup
 Second round proper,Sun,2020-11-29,13:30,Stevenage,(6) 1–1 (5),Hull City,,Edgeley Park,Samuel Allison,Stevenage won on penalty kicks following extra time,FA-Cup
 Second round proper,Sun,2020-11-29,13:30,Bristol Rovers,6–0,Darlington,,Memorial Stadium,Brett Huxtable,,FA-Cup
@@ -2511,7 +2504,6 @@ Third round proper,Sat,2021-01-09,15:00,Blackburn,0–1,Doncaster,,Ewood Park,Sa
 Third round proper,Sat,2021-01-09,15:00,Wycombe,4–1,Preston,,Adams Park,Matt Donohue,,FA-Cup
 Third round proper,Sat,2021-01-09,15:00,QPR,0–2,Fulham,,Loftus Road Stadium,Simon Hooper,Required Extra Time,FA-Cup
 Third round proper,Sat,2021-01-09,15:00,Bristol Rovers,2–3,Sheffield Utd,,Memorial Stadium,Keith Stroud,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Third round proper,Sat,2021-01-09,15:00,Bournemouth,4–1,Oldham Athletic,,Boundary Park,Andy Woolmer,,FA-Cup
 Third round proper,Sat,2021-01-09,15:00,Exeter City,0–2,Sheffield Weds,,St. James' Park,Dean Whitestone,,FA-Cup
 Third round proper,Sat,2021-01-09,15:00,Burnley,(4) 1–1 (3),MK Dons,,Turf Moor,Jonathan Moss,Burnley won on penalty kicks following extra time,FA-Cup
@@ -2537,7 +2529,6 @@ Fourth round proper,Sat,2021-01-23,15:00,Swansea City,5–1,Nott'ham Forest,,Lib
 Fourth round proper,Sat,2021-01-23,15:00,Barnsley,1–0,Norwich City,,Oakwell Stadium,John Brooks,,FA-Cup
 Fourth round proper,Sat,2021-01-23,15:00,West Ham,4–0,Doncaster,,London Stadium,Robert Jones,,FA-Cup
 Fourth round proper,Sat,2021-01-23,15:00,Brighton,2–1,Blackpool,,The American Express Community Stadium,Darren England,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Fourth round proper,Sat,2021-01-23,15:00,Sheffield Utd,2–1,Plymouth Argyle,,Bramall Lane,Lee Mason,,FA-Cup
 Fourth round proper,Sat,2021-01-23,17:30,Cheltenham,1–3,Manchester City,,Jonny-Rocks Stadium,Stuart Attwell,,FA-Cup
 Fourth round proper,Sun,2021-01-24,12:00,Chelsea,3–1,Luton Town,,Stamford Bridge,David Coote,,FA-Cup
@@ -2586,7 +2577,6 @@ First round,Sat,2019-11-09,15:00,Tranmere Rovers,2–2,Wycombe,3849,Prenton Park
 First round,Sat,2019-11-09,15:00,Stourbridge,2–2,Eastleigh,1846,War Memorial Athletic Ground,Samuel Barrott,,FA-Cup
 First round,Sat,2019-11-09,15:00,FG Rovers,4–0,Billericay,1419,The New Lawn,Graham Salisbury,,FA-Cup
 First round,Sat,2019-11-09,15:00,Ebbsfleet Utd,2–3,Notts County,1206,Stonebridge Road,Carl Brook,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round,Sat,2019-11-09,15:00,Cambridge Utd,1–1,Exeter City,2302,The Cambs Glass Stadium,Peter Wright,,FA-Cup
 First round,Sat,2019-11-09,15:00,Blackpool,4–1,Morecambe,5371,Bloomfield Road,Ross Joyce,,FA-Cup
 First round,Sat,2019-11-09,15:00,Crawley Town,4–1,Scunthorpe Utd,1706,Checkatrade.com Stadium,Lee Swabey,,FA-Cup
@@ -2612,7 +2602,6 @@ First round,Tue,2019-11-19,19:45,Doncaster,2–0,AFC Wimbledon,3413,Keepmoat Sta
 First round,Tue,2019-11-19,19:45,Rochdale,1–0,Wrexham,1628,Crown Oil Arena,Seb Stockbridge,,FA-Cup
 First round,Tue,2019-11-19,19:45,Gillingham,1–0,Sunderland,3561,MEMS Priestfield Stadium,Alan Young,Required Extra Time,FA-Cup
 First round,Tue,2019-11-19,19:45,Swindon Town,0–1,Cheltenham,3000,The Energy Check County Ground,Darren Drysdale,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round,Wed,2019-11-20,19:45,Lincoln City,0–1,Ipswich Town,6781,Sincil Bank Stadium,Andy Haines,,FA-Cup
 First round,Wed,2019-11-20,19:45,Darlington,0–1,Walsall,3106,Blackwell Meadows,Scott Oldham,,FA-Cup
 First round,Wed,2019-11-20,19:45,Wycombe,1–2,Tranmere Rovers,2928,Adams Park,Graham Salisbury,Required Extra Time,FA-Cup
@@ -2638,7 +2627,6 @@ Second round,Sun,2019-12-01,14:00,Blackpool,3–1,Maidstone Utd,3977,Bloomfield 
 Second round,Sun,2019-12-01,15:00,Tranmere Rovers,5–1,Chichester,4370,Prenton Park,Darren Drysdale,,FA-Cup
 Second round,Mon,2019-12-02,19:45,Solihull Moors,3–4,Rotherham Utd,2317,Damson Park,Carl Boyeson,,FA-Cup
 Second round,Tue,2019-12-10,19:45,Crewe Alexandra,3–1,Eastleigh,2184,Alexandra Stadium,Sam Purkiss,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Second round,Tue,2019-12-10,19:45,Hartlepool Utd,1–0,Exeter City,2398,The Northern Gas and Power Stadium,Scott Oldham,Required Extra Time,FA-Cup
 Second round,Tue,2019-12-10,19:45,Carlisle United,1–0,FG Rovers,1736,Brunton Park,Andy Haines,,FA-Cup
 Second round,Tue,2019-12-10,19:45,Ipswich Town,1–2,Coventry City,6515,Portman Road Stadium,Chris Sarginson,,FA-Cup
@@ -2664,7 +2652,6 @@ Third round,Sat,2020-01-04,17:31,Leicester City,2–0,Wigan Athletic,30330,King 
 Third round,Sat,2020-01-04,17:31,Bournemouth,4–0,Luton Town,10064,Vitality Stadium,Darren England,,FA-Cup
 Third round,Sat,2020-01-04,17:31,Manchester City,4–1,Port Vale,52433,Etihad Stadium,Lee Mason,,FA-Cup
 Third round,Sat,2020-01-04,17:31,Fleetwood Town,1–2,Portsmouth,2145,Highbury Stadium,Marc Edwards,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Third round,Sun,2020-01-05,14:01,Crystal Palace,0–1,Derby County,15507,Selhurst Park,Michael Oliver,,FA-Cup
 Third round,Sun,2020-01-05,14:01,Bristol Rovers,2–2,Coventry City,7000,Memorial Stadium,Gavin Ward,,FA-Cup
 Third round,Sun,2020-01-05,14:01,Chelsea,2–0,Nott'ham Forest,40492,Stamford Bridge,Peter Bankes,,FA-Cup
@@ -2690,7 +2677,6 @@ Fourth round,Fri,2020-01-24,20:00,Northampton,0–0,Derby County,7798,Sixfields 
 Fourth round,Sat,2020-01-25,12:45,Brentford,0–1,Leicester City,12221,Griffin Park,Chris Kavanagh,,FA-Cup
 Fourth round,Sat,2020-01-25,15:00,Coventry City,0–0,Birmingham City,21193,St Andrew's Trillion Trophy Stadium,Tim Robinson,,FA-Cup
 Fourth round,Sat,2020-01-25,15:00,Burnley,1–2,Norwich City,8071,Turf Moor,Michael Oliver,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Fourth round,Sat,2020-01-25,15:00,West Ham,0–1,West Brom,58911,London Stadium,Stuart Attwell,,FA-Cup
 Fourth round,Sat,2020-01-25,15:00,Newcastle Utd,0–0,Oxford United,52221,St. James' Park,Robert Jones,,FA-Cup
 Fourth round,Sat,2020-01-25,15:00,Millwall,0–2,Sheffield Utd,12653,The Den,Anthony Taylor,,FA-Cup
@@ -2716,7 +2702,6 @@ Fifth round,Wed,2020-03-04,19:45,Leicester City,1–0,Birmingham City,27181,King
 Fifth round,Wed,2020-03-04,19:45,Tottenham,(2) 1–1 (3),Norwich City,58007,Tottenham Hotspur Stadium,Paul Tierney,Norwich City won on penalty kicks following extra time,FA-Cup
 Fifth round,Wed,2020-03-04,19:45,Sheffield Weds,0–1,Manchester City,20995,Hillsborough Stadium,Michael Oliver,,FA-Cup
 Fifth round,Thu,2020-03-05,19:45,Derby County,0–3,Manchester Utd,31379,iPro Stadium,Craig Pawson,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Quarter-finals,Sat,2020-06-27,17:30,Norwich City,1–2,Manchester Utd,,Carrow Road,Jonathan Moss,Required Extra Time,FA-Cup
 Quarter-finals,Sun,2020-06-28,13:00,Sheffield Utd,1–2,Arsenal,,Bramall Lane,Paul Tierney,,FA-Cup
 Quarter-finals,Sun,2020-06-28,16:00,Leicester City,0–1,Chelsea,,King Power Stadium,Mike Dean,,FA-Cup
@@ -2748,7 +2733,6 @@ First round,Sat,2018-11-10,15:00,Yeovil Town,1–3,Stockport,2550,Huish Park Sta
 First round,Sat,2018-11-10,15:00,Bromley,1–3,P'borough Utd,3107,The H2T Group Stadium,Kevin Johnson,,FA-Cup
 First round,Sat,2018-11-10,15:00,Crewe Alexandra,0–1,Carlisle United,2467,Alexandra Stadium,Lee Swabey,,FA-Cup
 First round,Sat,2018-11-10,15:00,Chesterfield,1–1,Billericay,2952,Proact Stadium,Martin Woods,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round,Sat,2018-11-10,15:00,Oxford United,0–0,FG Rovers,3933,The Kassam Stadium,Nick Kinseley,,FA-Cup
 First round,Sat,2018-11-10,15:00,Maidstone Utd,2–1,Macclesfield,2169,Gallagher Stadium,Neil Hair,,FA-Cup
 First round,Sat,2018-11-10,15:00,Torquay,0–1,Woking,2419,Plainmoor Ground,Declan Bourne,,FA-Cup
@@ -2774,7 +2758,6 @@ First round,Tue,2018-11-20,19:45,Cheltenham,2–0,Ebbsfleet Utd,1435,Jonny-Rocks
 First round,Tue,2018-11-20,19:45,Charlton Ath,5–0,Mansfield Town,1910,The Valley,Kevin Johnson,,FA-Cup
 First round,Tue,2018-11-20,19:45,Billericay,1–3,Chesterfield,2493,AGP Arena,Jacob Miles,,FA-Cup
 First round,Tue,2018-11-20,19:45,Doncaster,7–0,Chorley,3048,Keepmoat Stadium,Darren Drysdale,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round,Tue,2018-11-20,19:45,Slough,(8) 1–1 (7),Sutton United,1360,Arbour Park,Brett Huxtable,Slough won replayed match on penalty kicks following extra time,FA-Cup
 First round,Wed,2018-11-21,19:45,Bristol Rovers,1–2,Barnet,2740,Memorial Stadium,Lee Swabey,,FA-Cup
 First round,Wed,2018-11-21,19:45,Salford City,1–3,Shrewsbury,2432,The Peninsula Stadium,Seb Stockbridge,,FA-Cup
@@ -2800,7 +2783,6 @@ Second round,Sun,2018-12-02,14:00,Shrewsbury,1–0,Scunthorpe Utd,3427,Montgomer
 Second round,Sun,2018-12-02,14:00,Tranmere Rovers,1–1,Southport,4701,Prenton Park,Anthony Backhouse,,FA-Cup
 Second round,Mon,2018-12-03,20:00,Guiseley,1–2,Fleetwood Town,2324,Nethermoor Park,John Busby,,FA-Cup
 Second round,Tue,2018-12-11,19:45,Bradford City,(2) 4–4 (3),P'borough Utd,3486,Northern Commercials Stadium,Ross Joyce,P'borough Utd won replayed match on penalty kicks following extra time,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Second round,Tue,2018-12-11,19:45,Sunderland,0–1,Walsall,8212,Stadium of Light,Michael Salisbury,,FA-Cup
 Second round,Tue,2018-12-11,19:45,Newport County,4–0,Wrexham,4143,Rodney Parade,Kevin Johnson,,FA-Cup
 Second round,Mon,2018-12-17,19:45,Southport,0–2,Tranmere Rovers,5414,Haig Avenue,Thomas Bramall,,FA-Cup
@@ -2826,7 +2808,6 @@ Third round,Sat,2019-01-05,15:00,Brentford,1–0,Oxford United,6106,Griffin Park
 Third round,Sat,2019-01-05,17:30,Norwich City,0–1,Portsmouth,23201,Carrow Road,Darren Bond,,FA-Cup
 Third round,Sat,2019-01-05,17:30,Blackpool,0–3,Arsenal,8955,Bloomfield Road,Mike Dean,,FA-Cup
 Third round,Sat,2019-01-05,17:30,Crystal Palace,1–0,Grimsby Town,19967,Selhurst Park,Martin Atkinson,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Third round,Sat,2019-01-05,17:30,Newcastle Utd,1–1,Blackburn,36440,St. James' Park,Kevin Friend,,FA-Cup
 Third round,Sat,2019-01-05,17:30,Bristol City,1–0,Huddersfield,12179,Ashton Gate Stadium,Peter Bankes,,FA-Cup
 Third round,Sun,2019-01-06,14:00,Preston,1–3,Doncaster,8101,Deepdale Stadium,Andrew Davies,,FA-Cup
@@ -2852,7 +2833,6 @@ Fourth round,Sat,2019-01-26,15:00,Shrewsbury,2–2,Wolves,9503,Montgomery Waters
 Fourth round,Sat,2019-01-26,15:00,Manchester City,5–0,Burnley,50121,Etihad Stadium,Graham Scott,,FA-Cup
 Fourth round,Sat,2019-01-26,15:00,Swansea City,4–1,Gillingham,15080,Liberty Stadium,Darren England,,FA-Cup
 Fourth round,Sat,2019-01-26,15:00,Middlesbrough,1–1,Newport County,15794,Riverside Stadium,John Brooks,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Fourth round,Sat,2019-01-26,15:00,Doncaster,2–1,Oldham Athletic,11260,Keepmoat Stadium,Peter Bankes,,FA-Cup
 Fourth round,Sat,2019-01-26,17:30,Millwall,3–2,Everton,16354,The Den,Michael Oliver,,FA-Cup
 Fourth round,Sat,2019-01-26,19:45,AFC Wimbledon,4–2,West Ham,4777,Cherry Red Records Fans' Stadium,Anthony Taylor,,FA-Cup
@@ -2878,7 +2858,6 @@ Quarter-finals,Sat,2019-03-16,19:55,Wolves,2–1,Manchester Utd,31004,Molineux S
 Quarter-finals,Sun,2019-03-17,14:00,Millwall,(4) 2–2 (5),Brighton,17137,The Den,Chris Kavanagh,,FA-Cup
 Semi-finals,Sat,2019-04-06,17:30,Manchester City,1–0,Brighton,71521,Wembley Stadium,Anthony Taylor,,FA-Cup
 Semi-finals,Sun,2019-04-07,16:00,Watford,3–2,Wolves,80092,Wembley Stadium,Michael Oliver,Required Extra Time,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Final,Sat,2019-05-18,17:00,Manchester City,6–0,Watford,85854,Wembley Stadium,Kevin Friend,,FA-Cup
 First round,Fri,2017-11-03,19:45,Port Vale,2–0,Oxford United,3443,Vale Park,Mark Heywood,,FA-Cup
 First round,Fri,2017-11-03,19:45,Notts County,4–2,Bristol Rovers,4228,Meadow Lane Stadium,Graham Salisbury,,FA-Cup
@@ -2904,7 +2883,6 @@ First round,Sat,2017-11-04,15:00,Gateshead,2–0,Chelmsford,732,Gateshead Intern
 First round,Sat,2017-11-04,15:00,Morecambe,3–0,Hartlepool Utd,2004,Globe Arena,Tom Nield,,FA-Cup
 First round,Sat,2017-11-04,15:00,Luton Town,1–0,Portsmouth,5333,Kenilworth Road Stadium,Seb Stockbridge,,FA-Cup
 First round,Sat,2017-11-04,15:00,Rochdale,4–0,Bromley,2241,Crown Oil Arena,Andrew Miller,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 First round,Sat,2017-11-04,15:00,Shrewsbury,5–0,Aldershot Town,3859,Montgomery Waters Meadow,Ross Joyce,,FA-Cup
 First round,Sat,2017-11-04,15:00,Carlisle United,3–2,Oldham Athletic,3965,Brunton Park,Andy Haines,,FA-Cup
 First round,Sat,2017-11-04,15:00,Crewe Alexandra,2–1,Rotherham Utd,2597,Alexandra Stadium,Scott Oldham,,FA-Cup
@@ -2930,7 +2908,6 @@ Second round,Fri,2017-12-01,19:55,Fylde,1–1,Wigan Athletic,3351,Mill Farm,Darr
 Second round,Sat,2017-12-02,12:30,Notts County,3–2,Oxford City,5092,Meadow Lane Stadium,John Brooks,,FA-Cup
 Second round,Sat,2017-12-02,15:00,Gillingham,1–1,Carlisle United,3178,MEMS Priestfield Stadium,Andy Woolmer,,FA-Cup
 Second round,Sat,2017-12-02,15:00,MK Dons,4–1,Maidstone Utd,4804,Stadium mk,Martin Coy,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Second round,Sat,2017-12-02,15:00,Stevenage,5–2,Swindon Town,1883,The Lamex Stadium,Nick Kinseley,,FA-Cup
 Second round,Sat,2017-12-02,15:00,Shrewsbury,2–0,Morecambe,3184,Montgomery Waters Meadow,Craig Hicks,,FA-Cup
 Second round,Sat,2017-12-02,15:00,FG Rovers,3–3,Exeter City,2250,The New Lawn,Gavin Ward,,FA-Cup
@@ -2956,7 +2933,6 @@ Second round,Thu,2017-12-14,19:45,Hereford,0–2,Fleetwood Town,4235,Edgar Stree
 Second round,Tue,2017-12-19,19:45,Carlisle United,3–1,Gillingham,2357,Brunton Park,Mark Heywood,,FA-Cup
 Third round,Fri,2018-01-05,19:55,Liverpool,2–1,Everton,52513,Anfield,Robert Madley,,FA-Cup
 Third round,Fri,2018-01-05,20:00,Manchester Utd,2–0,Derby County,73899,Old Trafford,Kevin Friend,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Third round,Sat,2018-01-06,12:45,Fleetwood Town,0–0,Leicester City,5001,Highbury Stadium,Simon Hooper,,FA-Cup
 Third round,Sat,2018-01-06,13:00,Middlesbrough,2–0,Sunderland,26399,Riverside Stadium,Chris Kavanagh,,FA-Cup
 Third round,Sat,2018-01-06,15:00,Wycombe,1–5,Preston,4928,Adams Park,Peter Bankes,,FA-Cup
@@ -2982,7 +2958,6 @@ Third round,Sat,2018-01-06,15:00,Stevenage,0–0,Reading,3877,The Lamex Stadium,
 Third round,Sat,2018-01-06,15:00,Manchester City,4–1,Burnley,53356,Etihad Stadium,Graham Scott,,FA-Cup
 Third round,Sat,2018-01-06,15:00,Ipswich Town,0–1,Sheffield Utd,12057,Portman Road Stadium,Mike Jones,,FA-Cup
 Third round,Sat,2018-01-06,17:30,Norwich City,0–0,Chelsea,23598,Carrow Road,Stuart Attwell,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Third round,Sun,2018-01-07,12:00,Newport County,2–1,Leeds United,6887,Rodney Parade,Mike Dean,,FA-Cup
 Third round,Sun,2018-01-07,14:00,Shrewsbury,0–0,West Ham,9535,Montgomery Waters Meadow,Paul Tierney,,FA-Cup
 Third round,Sun,2018-01-07,15:00,Tottenham,3–0,AFC Wimbledon,47527,Wembley Stadium,David Coote,,FA-Cup
@@ -3008,7 +2983,6 @@ Fourth round,Sat,2018-01-27,15:00,Southampton,1–0,Watford,25195,St. Mary's Sta
 Fourth round,Sat,2018-01-27,15:00,Middlesbrough,0–1,Brighton,20475,Riverside Stadium,Anthony Taylor,,FA-Cup
 Fourth round,Sat,2018-01-27,15:00,Hull City,2–1,Nott'ham Forest,13450,Kingston Communications Stadium,Stuart Attwell,,FA-Cup
 Fourth round,Sat,2018-01-27,15:00,MK Dons,0–1,Coventry City,14925,Stadium mk,Peter Bankes,,FA-Cup
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,FA-Cup
 Fourth round,Sat,2018-01-27,17:30,Newport County,1–1,Tottenham,9836,Rodney Parade,Roger East,,FA-Cup
 Fourth round,Sat,2018-01-27,19:45,Liverpool,2–3,West Brom,53342,Anfield,Craig Pawson,,FA-Cup
 Fourth round,Sun,2018-01-28,13:30,Chelsea,3–0,Newcastle Utd,41049,Stamford Bridge,Kevin Friend,,FA-Cup
@@ -3496,7 +3470,6 @@ Quarter-finals,Tue,2019-04-16,21:00,Barcelona es,3–0,eng Manchester Utd,96708,
 Quarter-finals,Wed,2019-04-17,20:00,Porto pt,1–4,eng Liverpool,49117,Estádio Do Dragão,Danny Makkelie,Leg 2 of 2; Liverpool won,Champions-League
 Quarter-finals,Wed,2019-04-17,20:00,Manchester City eng,4–3,eng Tottenham,53348,Etihad Stadium,Cüneyt Çakιr,Leg 2 of 2; Tottenham won,Champions-League
 Semi-finals,Tue,2019-04-30,20:00,Tottenham eng,0–1,nl Ajax,60243,Tottenham Hotspur Stadium,Antonio Matéu Lahoz,Leg 1 of 2,Champions-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Champions-League
 Semi-finals,Wed,2019-05-01,21:00,Barcelona es,3–0,eng Liverpool,98299,Camp Nou,Björn Kuipers,Leg 1 of 2,Champions-League
 Semi-finals,Tue,2019-05-07,20:00,Liverpool eng,4–0,es Barcelona,55212,Anfield,Cüneyt Çakιr,Leg 2 of 2; Liverpool won,Champions-League
 Semi-finals,Wed,2019-05-08,21:00,Ajax nl,2–3,eng Tottenham,52641,Johan Cruyff ArenA,Felix Brych,Leg 2 of 2; Tottenham won,Champions-League
@@ -3622,7 +3595,6 @@ Quarter-finals,Tue,2018-04-10,20:45,Roma it,3–0,es Barcelona,56580,Stadio Olim
 Quarter-finals,Wed,2018-04-11,20:45,Bayern Munich de,0–0,es Sevilla,70000,Allianz Arena,William Collum,Leg 2 of 2; Bayern Munich won,Champions-League
 Quarter-finals,Wed,2018-04-11,20:45,Real Madrid es,1–3,it Juventus,75796,Estadio Santiago Bernabéu,Michael Oliver,Leg 2 of 2; Real Madrid won,Champions-League
 Semi-finals,Tue,2018-04-24,19:45,Liverpool eng,5–2,it Roma,51236,Anfield,Felix Brych,Leg 1 of 2,Champions-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Champions-League
 Semi-finals,Wed,2018-04-25,20:45,Bayern Munich de,1–2,es Real Madrid,70000,Allianz Arena,Björn Kuipers,Leg 1 of 2,Champions-League
 Semi-finals,Tue,2018-05-01,20:45,Real Madrid es,2–2,de Bayern Munich,77459,Estadio Santiago Bernabéu,Cüneyt Çakιr,Leg 2 of 2; Real Madrid won,Champions-League
 Semi-finals,Wed,2018-05-02,20:45,Roma it,4–2,eng Liverpool,61889,Stadio Olimpico,Damir Skomina,Leg 2 of 2; Liverpool won,Champions-League
@@ -3918,7 +3890,6 @@ Round of 16,Thu,2021-03-18,21:00,Milan it,0–1,eng Manchester Utd,,Stadio Giuse
 Round of 16,Thu,2021-03-18,21:00,Villarreal es,2–0,ua Dynamo Kyiv,,Estadio de la Cerámica,Andreas Ekberg,Leg 2 of 2; Villarreal won,Europa-League
 Quarter-finals,Thu,2021-04-08,20:00,Arsenal eng,1–1,cz Slavia Prague,,Emirates Stadium,Andreas Ekberg,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2021-04-08,21:00,Ajax nl,1–2,it Roma,,Johan Cruyff ArenA,Sergey Karasev,Leg 1 of 2,Europa-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Europa-League
 Quarter-finals,Thu,2021-04-08,21:00,Granada es,0–2,eng Manchester Utd,,Estadio de Los Cármenes,Artur Soares Dias,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2021-04-08,21:00,Dinamo Zagreb hr,0–1,es Villarreal,,Stadion Maksimir,Daniel Siebert,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2021-04-15,20:00,Manchester Utd eng,2–0,es Granada,,Old Trafford,István Kovács,Leg 2 of 2; Manchester Utd won,Europa-League
@@ -4099,7 +4070,6 @@ Round of 32,Thu,2020-02-27,18:55,Malmö se,0–3,de Wolfsburg,20500,Swedbank Sta
 Round of 32,Thu,2020-02-27,18:55,Espanyol es,3–2,eng Wolves,14525,RCDE Stadium,Marco Guida,Leg 2 of 2; Wolves won,Europa-League
 Round of 32,Thu,2020-02-27,20:55,Başakşehir tr,4–1,pt Sporting CP,5892,Başakşehir Fatih Terim Stadium,Antonio Matéu Lahoz,Leg 2 of 2; Başakşehir won; Required Extra Time,Europa-League
 Round of 32,Thu,2020-02-27,20:00,Celtic sct,1–3,dk FC Copenhagen,56172,Celtic Park,Artur Soares Dias,Leg 2 of 2; FC Copenhagen won,Europa-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Europa-League
 Round of 32,Thu,2020-02-27,20:00,Arsenal eng,1–2,gr Olympiacos,60424,Emirates Stadium,Davide Massa,Leg 2 of 2; Olympiacos won; Required Extra Time,Europa-League
 Round of 32,Thu,2020-02-27,20:00,Manchester Utd eng,5–0,be Club Brugge,70397,Old Trafford,Serdar Gözübüyük,Leg 2 of 2; Manchester Utd won,Europa-League
 Round of 32,Thu,2020-02-27,20:00,Benfica pt,3–3,ua Shakhtar,48302,Estádio do Sport Lisboa e Benfica,Björn Kuipers,Leg 2 of 2; Shakhtar won,Europa-League
@@ -4125,7 +4095,6 @@ Round of 16,Thu,2020-08-06,20:00,Wolves eng,1–0,gr Olympiacos,,Molineux Stadiu
 Round of 16,Thu,2020-08-06,21:00,Basel ch,1–0,de Eint Frankfurt,,St. Jakob-Park,Antonio Matéu Lahoz,Leg 2 of 2; Basel won,Europa-League
 Quarter-finals,Mon,2020-08-10,21:00,Inter it,2–1,de Leverkusen,,Merkur Spielarena,Carlos del Cerro,,Europa-League
 Quarter-finals,Mon,2020-08-10,21:00,Manchester Utd eng,1–0,dk FC Copenhagen,,RheinEnergieSTADION,Clément Turpin,Required Extra Time,Europa-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Europa-League
 Quarter-finals,Tue,2020-08-11,21:00,Wolves eng,0–1,es Sevilla,,Schauinsland-Reisen-Arena,Daniele Orsato,,Europa-League
 Quarter-finals,Tue,2020-08-11,21:00,Shakhtar ua,4–1,ch Basel,,Veltins-Arena,Michael Oliver,,Europa-League
 Semi-finals,Sun,2020-08-16,21:00,Sevilla es,2–1,eng Manchester Utd,,RheinEnergieSTADION,Felix Brych,,Europa-League
@@ -4300,7 +4269,6 @@ Round of 32,Thu,2019-02-21,18:55,RB Salzburg at,4–0,be Club Brugge,24717,Red B
 Round of 32,Thu,2019-02-21,18:55,Dinamo Zagreb hr,3–0,cz Viktoria Plzeň,25860,Stadion Maksimir,István Kovács,Leg 2 of 2; Dinamo Zagreb won,Europa-League
 Round of 32,Thu,2019-02-21,18:55,Villarreal es,1–1,pt Sporting CP,14098,Estadio de la Cerámica,Pavel Královec,Leg 2 of 2; Villarreal won,Europa-League
 Round of 32,Thu,2019-02-21,20:55,Zenit ru,3–1,tr Fenerbahçe,50448,Gazprom Arena,Michael Oliver,Leg 2 of 2; Zenit won,Europa-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Europa-League
 Round of 32,Thu,2019-02-21,20:00,Benfica pt,0–0,tr Galatasaray,49545,Estádio do Sport Lisboa e Benfica,Ovidiu Hațegan,Leg 2 of 2; Benfica won,Europa-League
 Round of 32,Thu,2019-02-21,20:00,Chelsea eng,3–0,se Malmö,39813,Stamford Bridge,Orel Grinfeeld,Leg 2 of 2; Chelsea won,Europa-League
 Round of 32,Thu,2019-02-21,21:00,Genk be,1–4,cz Slavia Prague,13688,Luminus Arena,Bobby Madden,Leg 2 of 2; Slavia Prague won,Europa-League
@@ -4326,7 +4294,6 @@ Round of 16,Thu,2019-03-14,21:00,Inter it,0–1,de Eint Frankfurt,49866,Stadio G
 Round of 16,Thu,2019-03-14,21:00,Villarreal es,2–1,ru Zenit,14027,Estadio de la Cerámica,Artur Dias,Leg 2 of 2; Villarreal won,Europa-League
 Quarter-finals,Thu,2019-04-11,20:00,Arsenal eng,2–0,it Napoli,59738,Emirates Stadium,Alberto Undiano,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2019-04-11,20:00,Benfica pt,4–2,de Eint Frankfurt,54175,Estádio do Sport Lisboa e Benfica,Anthony Taylor,Leg 1 of 2,Europa-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Europa-League
 Quarter-finals,Thu,2019-04-11,21:00,Slavia Prague cz,0–1,eng Chelsea,17484,Sinobo Stadium,Felix Zwayer,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2019-04-11,21:00,Villarreal es,1–3,es Valencia,17605,Estadio de la Cerámica,Michael Oliver,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2019-04-18,20:00,Chelsea eng,4–3,cz Slavia Prague,38326,Stamford Bridge,Damir Skomina,Leg 2 of 2; Chelsea won,Europa-League
@@ -4507,7 +4474,6 @@ Round of 32,Thu,2018-02-22,19:00,Atlético Madrid es,1–0,dk FC Copenhagen,4403
 Round of 32,Thu,2018-02-22,19:00,Lazio it,5–1,ro FCSB,27597,Stadio Olimpico (Neutral Site),Slavko Vinčić,Leg 2 of 2; Lazio won,Europa-League
 Round of 32,Thu,2018-02-22,19:00,RB Leipzig de,0–2,it Napoli,36163,Red Bull Arena (Neutral Site),Anthony Taylor,Leg 2 of 2; RB Leipzig won,Europa-League
 Round of 32,Thu,2018-02-22,20:00,Dynamo Kyiv ua,0–0,gr AEK Athens,27024,NSK Olimpijs'kyj (Neutral Site),Matej Jug,Leg 2 of 2; Dynamo Kyiv won,Europa-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Europa-League
 Round of 32,Thu,2018-02-22,21:00,Zenit ru,3–0,sct Celtic,50492,Stadion Petrovskij (Neutral Site),Antonio Matéu Lahoz,Leg 2 of 2; Zenit won,Europa-League
 Round of 32,Thu,2018-02-22,20:05,Braga pt,1–0,fr Marseille,9016,Estádio Municipal de Bragança (Neutral Site),Svein Oddvar Moen,Leg 2 of 2; Marseille won,Europa-League
 Round of 32,Thu,2018-02-22,20:05,Arsenal eng,1–2,se Östersund,58405,Arsenal Stadium (Neutral Site),Ivan Kružliak,Leg 2 of 2; Arsenal won,Europa-League
@@ -4533,7 +4499,6 @@ Round of 16,Thu,2018-03-15,21:05,Lyon fr,2–3,ru CSKA Moscow,38622,Groupama Sta
 Round of 16,Thu,2018-03-15,21:05,RB Salzburg at,0–0,de Dortmund,29520,Red Bull Arena,Benoît Bastien,Leg 2 of 2; RB Salzburg won,Europa-League
 Quarter-finals,Thu,2018-04-05,20:05,Arsenal eng,4–1,ru CSKA Moscow,58285,Emirates Stadium,Pavel Královec,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2018-04-05,21:05,RB Leipzig de,1–0,fr Marseille,34043,Red Bull Arena,Alberto Undiano,Leg 1 of 2,Europa-League
-Round,Day,Date,Time,Home,Score,Away,Attendance,Venue,Referee,Notes,Europa-League
 Quarter-finals,Thu,2018-04-05,21:05,Atlético Madrid es,2–0,pt Sporting CP,53301,Estadio Wanda Metropolitano,Sergey Karasev,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2018-04-05,21:05,Lazio it,4–2,at RB Salzburg,42538,Stadio Olimpico,Ovidiu Hațegan,Leg 1 of 2,Europa-League
 Quarter-finals,Thu,2018-04-12,20:05,Sporting CP pt,1–0,es Atlético Madrid,28437,Estádio José Alvalade,Milorad Mažić,Leg 2 of 2; Atlético Madrid won,Europa-League
@@ -4545,3 +4510,617 @@ Semi-finals,Thu,2018-04-26,21:05,Marseille fr,2–0,at RB Salzburg,62312,Orange 
 Semi-finals,Thu,2018-05-03,21:05,Atlético Madrid es,1–0,eng Arsenal,64196,Estadio Wanda Metropolitano,Gianluca Rocchi,Leg 2 of 2; Atlético Madrid won,Europa-League
 Semi-finals,Thu,2018-05-03,21:05,RB Salzburg at,2–1,fr Marseille,29520,Red Bull Arena,Sergey Karasev,Leg 2 of 2; Marseille won; Required Extra Time,Europa-League
 Final,Wed,2018-05-16,20:45,Marseille fr,0–3,es Atlético Madrid,55768,Groupama Stadium (Neutral Site),Björn Kuipers,,Europa-League
+14.0,Wed,2021-12-01,19:30,Southampton,2–2,Leicester City,26951.0,St. Mary's Stadium,Robert Jones,,Premier-League
+14.0,Wed,2021-12-01,19:30,West Ham,1–1,Brighton,59626.0,London Stadium,Chris Kavanagh,,Premier-League
+14.0,Wed,2021-12-01,19:30,Wolves,0–0,Burnley,30328.0,Molineux Stadium,John Brooks,,Premier-League
+14.0,Wed,2021-12-01,19:30,Watford,1–2,Chelsea,20388.0,Vicarage Road Stadium,David Coote,,Premier-League
+14.0,Wed,2021-12-01,20:15,Aston Villa,1–2,Manchester City,41400.0,Villa Park,Mike Dean,,Premier-League
+14.0,Wed,2021-12-01,20:15,Everton,1–4,Liverpool,39641.0,Goodison Park,Paul Tierney,,Premier-League
+14.0,Thu,2021-12-02,19:30,Tottenham,2–0,Brentford,54202.0,Tottenham Hotspur Stadium,Jonathan Moss,,Premier-League
+14.0,Thu,2021-12-02,20:15,Manchester Utd,3–2,Arsenal,73123.0,Old Trafford,Martin Atkinson,,Premier-League
+15.0,Sat,2021-12-04,12:30,West Ham,3–2,Chelsea,59942.0,London Stadium,Andre Marriner,,Premier-League
+15.0,Sat,2021-12-04,15:00,Newcastle Utd,1–0,Burnley,51948.0,St. James' Park,Paul Tierney,,Premier-League
+15.0,Sat,2021-12-04,15:00,Southampton,1–1,Brighton,28706.0,St. Mary's Stadium,Anthony Taylor,,Premier-League
+15.0,Sat,2021-12-04,15:00,Wolves,0–1,Liverpool,30729.0,Molineux Stadium,Chris Kavanagh,,Premier-League
+15.0,Sat,2021-12-04,17:30,Watford,1–3,Manchester City,20673.0,Vicarage Road Stadium,Simon Hooper,,Premier-League
+15.0,Sun,2021-12-05,14:00,Leeds United,2–2,Brentford,35639.0,Elland Road,David Coote,,Premier-League
+15.0,Sun,2021-12-05,14:00,Tottenham,3–0,Norwich City,57088.0,Tottenham Hotspur Stadium,Jarred Gillett,,Premier-League
+15.0,Sun,2021-12-05,14:00,Manchester Utd,1–0,Crystal Palace,73172.0,Old Trafford,Craig Pawson,,Premier-League
+15.0,Sun,2021-12-05,16:30,Aston Villa,2–1,Leicester City,41572.0,Villa Park,Michael Oliver,,Premier-League
+15.0,Mon,2021-12-06,20:00,Everton,2–1,Arsenal,38906.0,Goodison Park,Mike Dean,,Premier-League
+16.0,Fri,2021-12-10,20:00,Brentford,2–1,Watford,16861.0,Brentford Community Stadium,Michael Oliver,,Premier-League
+16.0,Sat,2021-12-11,12:30,Manchester City,1–0,Wolves,52613.0,Etihad Stadium,Jonathan Moss,,Premier-League
+16.0,Sat,2021-12-11,15:00,Liverpool,1–0,Aston Villa,53093.0,Anfield,Stuart Attwell,,Premier-League
+16.0,Sat,2021-12-11,15:00,Arsenal,3–0,Southampton,59653.0,Emirates Stadium,Jarred Gillett,,Premier-League
+16.0,Sat,2021-12-11,15:00,Chelsea,3–2,Leeds United,39959.0,Stamford Bridge,Chris Kavanagh,,Premier-League
+16.0,Sat,2021-12-11,17:30,Norwich City,0–1,Manchester Utd,27606.0,Carrow Road,Darren England,,Premier-League
+16.0,Sun,2021-12-12,14:00,Burnley,0–0,West Ham,18065.0,Turf Moor,Graham Scott,,Premier-League
+16.0,Sun,2021-12-12,14:00,Leicester City,4–0,Newcastle Utd,31959.0,King Power Stadium,Peter Bankes,,Premier-League
+16.0,Sun,2021-12-12,16:30,Crystal Palace,3–1,Everton,24066.0,Selhurst Park,Andy Madley,,Premier-League
+17.0,Tue,2021-12-14,19:45,Norwich City,0–2,Aston Villa,26836.0,Carrow Road,David Coote,,Premier-League
+17.0,Tue,2021-12-14,20:00,Manchester City,7–0,Leeds United,52401.0,Etihad Stadium,Paul Tierney,,Premier-League
+17.0,Wed,2021-12-15,19:30,Brighton,0–1,Wolves,30362.0,The American Express Community Stadium,Tony Harrington,,Premier-League
+17.0,Wed,2021-12-15,19:30,Crystal Palace,2–2,Southampton,22861.0,Selhurst Park,Simon Hooper,,Premier-League
+17.0,Wed,2021-12-15,20:00,Arsenal,2–0,West Ham,59777.0,Emirates Stadium,Anthony Taylor,,Premier-League
+17.0,Thu,2021-12-16,19:45,Chelsea,1–1,Everton,13933.0,Stamford Bridge,Michael Oliver,,Premier-League
+17.0,Thu,2021-12-16,20:00,Liverpool,3–1,Newcastle Utd,52951.0,Anfield,Mike Dean,,Premier-League
+18.0,Sat,2021-12-18,17:30,Leeds United,1–4,Arsenal,36166.0,Elland Road,Andre Marriner,,Premier-League
+18.0,Sun,2021-12-19,14:00,Wolves,0–0,Chelsea,30631.0,Molineux Stadium,David Coote,,Premier-League
+18.0,Sun,2021-12-19,14:15,Newcastle Utd,0–4,Manchester City,52127.0,St. James' Park,Martin Atkinson,,Premier-League
+18.0,Sun,2021-12-19,16:30,Tottenham,2–2,Liverpool,45421.0,Tottenham Hotspur Stadium,Paul Tierney,,Premier-League
+19.0,Sun,2021-12-26,15:00,West Ham,2–3,Southampton,41027.0,London Stadium,Kevin Friend,,Premier-League
+19.0,Sun,2021-12-26,15:00,Manchester City,6–3,Leicester City,53226.0,Etihad Stadium,Chris Kavanagh,,Premier-League
+19.0,Sun,2021-12-26,15:00,Norwich City,0–5,Arsenal,26940.0,Carrow Road,Graham Scott,,Premier-League
+19.0,Sun,2021-12-26,15:00,Tottenham,3–0,Crystal Palace,40539.0,Tottenham Hotspur Stadium,Jonathan Moss,,Premier-League
+19.0,Sun,2021-12-26,17:30,Aston Villa,1–3,Chelsea,41907.0,Villa Park,Martin Atkinson,,Premier-League
+19.0,Sun,2021-12-26,20:00,Brighton,2–0,Brentford,30141.0,The American Express Community Stadium,Darren England,,Premier-League
+19.0,Mon,2021-12-27,20:00,Newcastle Utd,1–1,Manchester Utd,52178.0,St. James' Park,Craig Pawson,,Premier-League
+20.0,Tue,2021-12-28,15:00,Southampton,1–1,Tottenham,31304.0,St. Mary's Stadium,Anthony Taylor,,Premier-League
+20.0,Tue,2021-12-28,15:00,Crystal Palace,3–0,Norwich City,24433.0,Selhurst Park,Paul Tierney,,Premier-League
+20.0,Tue,2021-12-28,15:00,Watford,1–4,West Ham,20073.0,Vicarage Road Stadium,Darren England,,Premier-League
+20.0,Tue,2021-12-28,20:00,Leicester City,1–0,Liverpool,32230.0,King Power Stadium,Michael Oliver,,Premier-League
+20.0,Wed,2021-12-29,19:30,Chelsea,1–1,Brighton,40080.0,Stamford Bridge,Mike Dean,,Premier-League
+20.0,Wed,2021-12-29,20:15,Brentford,0–1,Manchester City,17009.0,Brentford Community Stadium,David Coote,,Premier-League
+20.0,Thu,2021-12-30,20:15,Manchester Utd,3–1,Burnley,73121.0,Old Trafford,Jonathan Moss,,Premier-League
+21.0,Sat,2022-01-01,12:30,Arsenal,1–2,Manchester City,59757.0,Emirates Stadium,Stuart Attwell,,Premier-League
+21.0,Sat,2022-01-01,15:00,Watford,0–1,Tottenham,20391.0,Vicarage Road Stadium,Robert Jones,,Premier-League
+21.0,Sat,2022-01-01,17:30,Crystal Palace,2–3,West Ham,24351.0,Selhurst Park,Darren England,,Premier-League
+21.0,Sun,2022-01-02,14:00,Leeds United,3–1,Burnley,36083.0,Elland Road,Paul Tierney,,Premier-League
+21.0,Sun,2022-01-02,14:00,Brentford,2–1,Aston Villa,16876.0,Brentford Community Stadium,Craig Pawson,,Premier-League
+21.0,Sun,2022-01-02,14:00,Everton,2–3,Brighton,38203.0,Goodison Park,John Brooks,,Premier-League
+21.0,Sun,2022-01-02,16:30,Chelsea,2–2,Liverpool,40072.0,Stamford Bridge,Anthony Taylor,,Premier-League
+21.0,Mon,2022-01-03,17:30,Manchester Utd,0–1,Wolves,73045.0,Old Trafford,Mike Dean,,Premier-League
+18.0,Tue,2022-01-11,19:45,Southampton,4–1,Brentford,27383.0,St. Mary's Stadium,Stuart Attwell,,Premier-League
+18.0,Wed,2022-01-12,19:45,West Ham,2–0,Norwich City,59775.0,London Stadium,Simon Hooper,,Premier-League
+22.0,Fri,2022-01-14,20:00,Brighton,1–1,Crystal Palace,30675.0,The American Express Community Stadium,Robert Jones,,Premier-League
+22.0,Sat,2022-01-15,12:30,Manchester City,1–0,Chelsea,53319.0,Etihad Stadium,Craig Pawson,,Premier-League
+22.0,Sat,2022-01-15,15:00,Norwich City,2–1,Everton,26629.0,Carrow Road,Andy Madley,,Premier-League
+22.0,Sat,2022-01-15,15:00,Newcastle Utd,1–1,Watford,52223.0,St. James' Park,Paul Tierney,,Premier-League
+22.0,Sat,2022-01-15,15:00,Wolves,3–1,Southampton,30057.0,Molineux Stadium,Michael Salisbury,,Premier-League
+22.0,Sat,2022-01-15,17:30,Aston Villa,2–2,Manchester Utd,41968.0,Villa Park,David Coote,,Premier-League
+22.0,Sun,2022-01-16,14:00,West Ham,2–3,Leeds United,59951.0,London Stadium,Mike Dean,,Premier-League
+22.0,Sun,2022-01-16,14:00,Liverpool,3–0,Brentford,52824.0,Anfield,Jonathan Moss,,Premier-League
+24.0,Tue,2022-01-18,20:00,Brighton,1–1,Chelsea,30880.0,The American Express Community Stadium,Kevin Friend,,Premier-League
+17.0,Wed,2022-01-19,19:30,Leicester City,2–3,Tottenham,31986.0,King Power Stadium,Jonathan Moss,,Premier-League
+17.0,Wed,2022-01-19,20:00,Brentford,1–3,Manchester Utd,17094.0,Brentford Community Stadium,Andre Marriner,,Premier-League
+23.0,Fri,2022-01-21,20:00,Watford,0–3,Norwich City,20782.0,Vicarage Road Stadium,Mike Dean,,Premier-League
+23.0,Sat,2022-01-22,12:30,Everton,0–1,Aston Villa,38203.0,Goodison Park,Craig Pawson,,Premier-League
+23.0,Sat,2022-01-22,15:00,Leeds United,0–1,Newcastle Utd,36405.0,Elland Road,Chris Kavanagh,,Premier-League
+23.0,Sat,2022-01-22,15:00,Manchester Utd,1–0,West Ham,73130.0,Old Trafford,Jonathan Moss,,Premier-League
+23.0,Sat,2022-01-22,15:00,Brentford,1–2,Wolves,16982.0,Brentford Community Stadium,Peter Bankes,,Premier-League
+23.0,Sat,2022-01-22,17:30,Southampton,1–1,Manchester City,31178.0,St. Mary's Stadium,Simon Hooper,,Premier-League
+23.0,Sun,2022-01-23,14:00,Crystal Palace,1–3,Liverpool,25002.0,Selhurst Park,Kevin Friend,,Premier-League
+23.0,Sun,2022-01-23,14:00,Arsenal,0–0,Burnley,59255.0,Emirates Stadium,David Coote,,Premier-League
+23.0,Sun,2022-01-23,14:00,Leicester City,1–1,Brighton,31231.0,King Power Stadium,Martin Atkinson,,Premier-League
+23.0,Sun,2022-01-23,16:30,Chelsea,2–0,Tottenham,40020.0,Stamford Bridge,Paul Tierney,,Premier-League
+17.0,Sat,2022-02-05,18:00,Burnley,0–0,Watford,19527.0,Turf Moor,Craig Pawson,,Premier-League
+24.0,Tue,2022-02-08,19:45,West Ham,1–0,Watford,59581.0,London Stadium,Martin Atkinson,,Premier-League
+24.0,Tue,2022-02-08,19:45,Newcastle Utd,3–1,Everton,52186.0,St. James' Park,Anthony Taylor,,Premier-League
+24.0,Tue,2022-02-08,20:00,Burnley,1–1,Manchester Utd,21233.0,Turf Moor,Mike Dean,,Premier-League
+24.0,Wed,2022-02-09,19:45,Tottenham,2–3,Southampton,54012.0,Tottenham Hotspur Stadium,David Coote,,Premier-League
+24.0,Wed,2022-02-09,19:45,Norwich City,1–1,Crystal Palace,26652.0,Carrow Road,Paul Tierney,,Premier-League
+24.0,Wed,2022-02-09,19:45,Manchester City,2–0,Brentford,51658.0,Etihad Stadium,Darren England,,Premier-League
+24.0,Wed,2022-02-09,20:00,Aston Villa,3–3,Leeds United,41927.0,Villa Park,Jarred Gillett,,Premier-League
+24.0,Thu,2022-02-10,19:45,Liverpool,2–0,Leicester City,53050.0,Anfield,Chris Kavanagh,,Premier-League
+24.0,Thu,2022-02-10,19:45,Wolves,0–1,Arsenal,31523.0,Molineux Stadium,Michael Oliver,,Premier-League
+25.0,Sat,2022-02-12,12:30,Manchester Utd,1–1,Southampton,73084.0,Old Trafford,Stuart Attwell,,Premier-League
+25.0,Sat,2022-02-12,15:00,Everton,3–0,Leeds United,39150.0,Goodison Park,Graham Scott,,Premier-League
+25.0,Sat,2022-02-12,15:00,Brentford,0–0,Crystal Palace,16958.0,Brentford Community Stadium,Simon Hooper,,Premier-League
+25.0,Sat,2022-02-12,15:00,Watford,0–2,Brighton,20795.0,Vicarage Road Stadium,Jonathan Moss,,Premier-League
+25.0,Sat,2022-02-12,17:30,Norwich City,0–4,Manchester City,27010.0,Carrow Road,Andre Marriner,,Premier-League
+25.0,Sun,2022-02-13,14:00,Newcastle Utd,1–0,Aston Villa,52207.0,St. James' Park,Craig Pawson,,Premier-League
+25.0,Sun,2022-02-13,14:00,Burnley,0–1,Liverpool,19563.0,Turf Moor,Martin Atkinson,,Premier-League
+25.0,Sun,2022-02-13,14:00,Tottenham,0–2,Wolves,56452.0,Tottenham Hotspur Stadium,Kevin Friend,,Premier-League
+25.0,Sun,2022-02-13,16:30,Leicester City,2–2,West Ham,32061.0,King Power Stadium,Michael Oliver,,Premier-League
+18.0,Tue,2022-02-15,20:15,Manchester Utd,2–0,Brighton,73012.0,Old Trafford,Peter Bankes,,Premier-League
+26.0,Sat,2022-02-19,12:30,West Ham,1–1,Newcastle Utd,59949.0,London Stadium,Chris Kavanagh,,Premier-League
+26.0,Sat,2022-02-19,15:00,Aston Villa,0–1,Watford,41936.0,Villa Park,Robert Jones,,Premier-League
+26.0,Sat,2022-02-19,15:00,Arsenal,2–1,Brentford,59249.0,Emirates Stadium,Jonathan Moss,,Premier-League
+26.0,Sat,2022-02-19,15:00,Southampton,2–0,Everton,31312.0,St. Mary's Stadium,Andy Madley,,Premier-League
+26.0,Sat,2022-02-19,15:00,Liverpool,3–1,Norwich City,53135.0,Anfield,Mike Dean,,Premier-League
+26.0,Sat,2022-02-19,15:00,Brighton,0–3,Burnley,30361.0,The American Express Community Stadium,Kevin Friend,,Premier-League
+26.0,Sat,2022-02-19,15:00,Crystal Palace,0–1,Chelsea,25109.0,Selhurst Park,David Coote,,Premier-League
+26.0,Sat,2022-02-19,17:30,Manchester City,2–3,Tottenham,53201.0,Etihad Stadium,Anthony Taylor,,Premier-League
+26.0,Sun,2022-02-20,14:00,Leeds United,2–4,Manchester Utd,36715.0,Elland Road,Paul Tierney,,Premier-League
+26.0,Sun,2022-02-20,16:30,Wolves,2–1,Leicester City,31587.0,Molineux Stadium,Craig Pawson,,Premier-League
+13.0,Wed,2022-02-23,19:30,Burnley,1–0,Tottenham,19488.0,Turf Moor,Graham Scott,,Premier-League
+18.0,Wed,2022-02-23,19:30,Watford,1–4,Crystal Palace,20012.0,Vicarage Road Stadium,Andre Marriner,,Premier-League
+19.0,Wed,2022-02-23,19:45,Liverpool,6–0,Leeds United,53018.0,Anfield,Michael Oliver,,Premier-League
+20.0,Thu,2022-02-24,19:45,Arsenal,2–1,Wolves,59888.0,Emirates Stadium,Martin Atkinson,,Premier-League
+27.0,Fri,2022-02-25,20:00,Southampton,2–0,Norwich City,31182.0,St. Mary's Stadium,Simon Hooper,,Premier-League
+27.0,Sat,2022-02-26,12:30,Leeds United,0–4,Tottenham,36599.0,Elland Road,Craig Pawson,,Premier-League
+27.0,Sat,2022-02-26,15:00,Crystal Palace,1–1,Burnley,24203.0,Selhurst Park,Jonathan Moss,,Premier-League
+27.0,Sat,2022-02-26,15:00,Manchester Utd,0–0,Watford,73152.0,Old Trafford,Kevin Friend,,Premier-League
+27.0,Sat,2022-02-26,15:00,Brighton,0–2,Aston Villa,31475.0,The American Express Community Stadium,John Brooks,,Premier-League
+27.0,Sat,2022-02-26,15:00,Brentford,0–2,Newcastle Utd,17039.0,Brentford Community Stadium,Mike Dean,,Premier-League
+27.0,Sat,2022-02-26,17:30,Everton,0–1,Manchester City,39105.0,Goodison Park,Paul Tierney,,Premier-League
+27.0,Sun,2022-02-27,14:00,West Ham,1–0,Wolves,59946.0,London Stadium,Anthony Taylor,,Premier-League
+22.0,Tue,2022-03-01,19:45,Burnley,0–2,Leicester City,17825.0,Turf Moor,Chris Kavanagh,,Premier-League
+28.0,Sat,2022-03-05,12:30,Leicester City,1–0,Leeds United,32236.0,King Power Stadium,David Coote,,Premier-League
+28.0,Sat,2022-03-05,15:00,Newcastle Utd,2–1,Brighton,52214.0,St. James' Park,Martin Atkinson,,Premier-League
+28.0,Sat,2022-03-05,15:00,Aston Villa,4–0,Southampton,41855.0,Villa Park,Peter Bankes,,Premier-League
+28.0,Sat,2022-03-05,15:00,Burnley,0–4,Chelsea,19439.0,Turf Moor,Andre Marriner,,Premier-League
+28.0,Sat,2022-03-05,15:00,Wolves,0–2,Crystal Palace,31395.0,Molineux Stadium,Andy Madley,,Premier-League
+28.0,Sat,2022-03-05,15:00,Norwich City,1–3,Brentford,26887.0,Carrow Road,Anthony Taylor,,Premier-League
+28.0,Sat,2022-03-05,17:30,Liverpool,1–0,West Ham,59925.0,Anfield,Jonathan Moss,,Premier-League
+28.0,Sun,2022-03-06,14:00,Watford,2–3,Arsenal,21142.0,Vicarage Road Stadium,Craig Pawson,,Premier-League
+28.0,Sun,2022-03-06,16:30,Manchester City,4–1,Manchester Utd,53165.0,Etihad Stadium,Michael Oliver,,Premier-League
+28.0,Mon,2022-03-07,20:00,Tottenham,5–0,Everton,59647.0,Tottenham Hotspur Stadium,Stuart Attwell,,Premier-League
+19.0,Thu,2022-03-10,19:30,Wolves,4–0,Watford,29658.0,Molineux Stadium,Darren England,,Premier-League
+21.0,Thu,2022-03-10,19:30,Southampton,1–2,Newcastle Utd,30056.0,St. Mary's Stadium,Kevin Friend,,Premier-League
+30.0,Thu,2022-03-10,19:30,Norwich City,1–3,Chelsea,26684.0,Carrow Road,Martin Atkinson,,Premier-League
+20.0,Thu,2022-03-10,19:45,Leeds United,0–3,Aston Villa,36400.0,Elland Road,Simon Hooper,,Premier-League
+29.0,Sat,2022-03-12,12:30,Brighton,0–2,Liverpool,31474.0,The American Express Community Stadium,Mike Dean,,Premier-League
+29.0,Sat,2022-03-12,15:00,Brentford,2–0,Burnley,17088.0,Brentford Community Stadium,Paul Tierney,,Premier-League
+29.0,Sat,2022-03-12,17:30,Manchester Utd,3–2,Tottenham,73458.0,Old Trafford,Jonathan Moss,,Premier-League
+29.0,Sun,2022-03-13,14:00,Chelsea,1–0,Newcastle Utd,40026.0,Stamford Bridge,David Coote,,Premier-League
+29.0,Sun,2022-03-13,14:00,Southampton,1–2,Watford,28863.0,St. Mary's Stadium,Graham Scott,,Premier-League
+29.0,Sun,2022-03-13,14:00,West Ham,2–1,Aston Villa,59957.0,London Stadium,Jarred Gillett,,Premier-League
+29.0,Sun,2022-03-13,14:00,Everton,0–1,Wolves,39112.0,Goodison Park,Michael Oliver,,Premier-League
+29.0,Sun,2022-03-13,14:00,Leeds United,2–1,Norwich City,36321.0,Elland Road,Stuart Attwell,,Premier-League
+29.0,Sun,2022-03-13,16:30,Arsenal,2–0,Leicester City,60111.0,Emirates Stadium,Anthony Taylor,,Premier-League
+29.0,Mon,2022-03-14,20:00,Crystal Palace,0–0,Manchester City,25309.0,Selhurst Park,Martin Atkinson,,Premier-League
+16.0,Wed,2022-03-16,19:30,Brighton,0–2,Tottenham,31144.0,The American Express Community Stadium,Robert Jones,,Premier-League
+27.0,Wed,2022-03-16,20:15,Arsenal,0–2,Liverpool,59968.0,Emirates Stadium,Andre Marriner,,Premier-League
+20.0,Thu,2022-03-17,19:45,Everton,1–0,Newcastle Utd,39068.0,Goodison Park,Craig Pawson,,Premier-League
+30.0,Fri,2022-03-18,20:00,Wolves,2–3,Leeds United,31842.0,Molineux Stadium,Kevin Friend,,Premier-League
+30.0,Sat,2022-03-19,12:30,Aston Villa,0–1,Arsenal,41956.0,Villa Park,Andy Madley,,Premier-League
+30.0,Sun,2022-03-20,14:00,Leicester City,2–1,Brentford,31830.0,King Power Stadium,Darren England,,Premier-League
+30.0,Sun,2022-03-20,16:30,Tottenham,3–1,West Ham,58685.0,Tottenham Hotspur Stadium,Anthony Taylor,,Premier-League
+31.0,Sat,2022-04-02,12:30,Liverpool,2–0,Watford,53104.0,Anfield,Stuart Attwell,,Premier-League
+31.0,Sat,2022-04-02,15:00,Wolves,2–1,Aston Villa,31012.0,Molineux Stadium,Darren England,,Premier-League
+31.0,Sat,2022-04-02,15:00,Leeds United,1–1,Southampton,36580.0,Elland Road,Anthony Taylor,,Premier-League
+31.0,Sat,2022-04-02,15:00,Chelsea,1–4,Brentford,39061.0,Stamford Bridge,Andy Madley,,Premier-League
+31.0,Sat,2022-04-02,15:00,Burnley,0–2,Manchester City,21249.0,Turf Moor,Craig Pawson,,Premier-League
+31.0,Sat,2022-04-02,15:00,Brighton,0–0,Norwich City,31245.0,The American Express Community Stadium,Simon Hooper,,Premier-League
+31.0,Sat,2022-04-02,17:30,Manchester Utd,1–1,Leicester City,73444.0,Old Trafford,Andre Marriner,,Premier-League
+31.0,Sun,2022-04-03,14:00,West Ham,2–1,Everton,59953.0,London Stadium,Michael Oliver,,Premier-League
+31.0,Sun,2022-04-03,16:30,Tottenham,5–1,Newcastle Utd,57553.0,Tottenham Hotspur Stadium,Martin Atkinson,,Premier-League
+31.0,Mon,2022-04-04,20:00,Crystal Palace,3–0,Arsenal,25149.0,Selhurst Park,Paul Tierney,,Premier-League
+19.0,Wed,2022-04-06,19:30,Burnley,3–2,Everton,19830.0,Turf Moor,Mike Dean,,Premier-League
+32.0,Fri,2022-04-08,20:00,Newcastle Utd,1–0,Wolves,52164.0,St. James' Park,Peter Bankes,,Premier-League
+32.0,Sat,2022-04-09,12:30,Everton,1–0,Manchester Utd,39080.0,Goodison Park,Jonathan Moss,,Premier-League
+32.0,Sat,2022-04-09,15:00,Arsenal,1–2,Brighton,60112.0,Emirates Stadium,David Coote,,Premier-League
+32.0,Sat,2022-04-09,15:00,Southampton,0–6,Chelsea,31359.0,St. Mary's Stadium,Kevin Friend,,Premier-League
+32.0,Sat,2022-04-09,15:00,Watford,0–3,Leeds United,20957.0,Vicarage Road Stadium,Andre Marriner,,Premier-League
+32.0,Sat,2022-04-09,17:30,Aston Villa,0–4,Tottenham,41949.0,Villa Park,Graham Scott,,Premier-League
+32.0,Sun,2022-04-10,14:00,Brentford,2–0,West Ham,17032.0,Brentford Community Stadium,Martin Atkinson,,Premier-League
+32.0,Sun,2022-04-10,14:00,Leicester City,2–1,Crystal Palace,31896.0,King Power Stadium,Robert Jones,,Premier-League
+32.0,Sun,2022-04-10,14:00,Norwich City,2–0,Burnley,26361.0,Carrow Road,Michael Oliver,,Premier-League
+32.0,Sun,2022-04-10,16:30,Manchester City,2–2,Liverpool,53197.0,Etihad Stadium,Anthony Taylor,,Premier-League
+33.0,Sat,2022-04-16,12:30,Tottenham,0–1,Brighton,58685.0,Tottenham Hotspur Stadium,Craig Pawson,,Premier-League
+33.0,Sat,2022-04-16,15:00,Manchester Utd,3–2,Norwich City,73381.0,Old Trafford,Andy Madley,,Premier-League
+33.0,Sat,2022-04-16,15:00,Watford,1–2,Brentford,21045.0,Vicarage Road Stadium,Simon Hooper,,Premier-League
+33.0,Sat,2022-04-16,15:00,Southampton,1–0,Arsenal,31465.0,St. Mary's Stadium,Peter Bankes,,Premier-League
+33.0,Sun,2022-04-17,14:15,Newcastle Utd,2–1,Leicester City,52104.0,St. James' Park,Jarred Gillett,,Premier-League
+33.0,Sun,2022-04-17,14:15,West Ham,1–1,Burnley,59958.0,London Stadium,Paul Tierney,,Premier-League
+30.0,Tue,2022-04-19,20:00,Liverpool,4–0,Manchester Utd,52686.0,Anfield,Martin Atkinson,,Premier-League
+18.0,Wed,2022-04-20,19:45,Everton,1–1,Leicester City,39153.0,Goodison Park,David Coote,,Premier-League
+25.0,Wed,2022-04-20,19:45,Chelsea,2–4,Arsenal,32249.0,Stamford Bridge,Jonathan Moss,,Premier-League
+30.0,Wed,2022-04-20,19:45,Newcastle Utd,1–0,Crystal Palace,51938.0,St. James' Park,Tony Harrington,,Premier-League
+30.0,Wed,2022-04-20,20:00,Manchester City,3–0,Brighton,52226.0,Etihad Stadium,Mike Dean,,Premier-League
+30.0,Thu,2022-04-21,19:45,Burnley,2–0,Southampton,17384.0,Turf Moor,Stuart Attwell,,Premier-League
+34.0,Sat,2022-04-23,12:30,Arsenal,3–1,Manchester Utd,60223.0,Emirates Stadium,Craig Pawson,,Premier-League
+34.0,Sat,2022-04-23,15:00,Leicester City,0–0,Aston Villa,32185.0,King Power Stadium,Andy Madley,,Premier-League
+34.0,Sat,2022-04-23,15:00,Manchester City,5–1,Watford,53013.0,Etihad Stadium,Kevin Friend,,Premier-League
+34.0,Sat,2022-04-23,15:00,Norwich City,0–3,Newcastle Utd,26910.0,Carrow Road,Chris Kavanagh,,Premier-League
+34.0,Sat,2022-04-23,17:30,Brentford,0–0,Tottenham,17072.0,Brentford Community Stadium,Martin Atkinson,,Premier-League
+34.0,Sun,2022-04-24,14:00,Brighton,2–2,Southampton,31335.0,The American Express Community Stadium,Robert Jones,,Premier-League
+34.0,Sun,2022-04-24,14:00,Burnley,1–0,Wolves,19246.0,Turf Moor,Anthony Taylor,,Premier-League
+34.0,Sun,2022-04-24,14:00,Chelsea,1–0,West Ham,32231.0,Stamford Bridge,Michael Oliver,,Premier-League
+34.0,Sun,2022-04-24,16:30,Liverpool,2–0,Everton,53213.0,Anfield,Stuart Attwell,,Premier-League
+34.0,Mon,2022-04-25,20:00,Crystal Palace,0–0,Leeds United,25357.0,Selhurst Park,Darren England,,Premier-League
+37.0,Thu,2022-04-28,19:45,Manchester Utd,1–1,Chelsea,73564.0,Old Trafford,Mike Dean,,Premier-League
+35.0,Sat,2022-04-30,12:30,Newcastle Utd,0–1,Liverpool,52281.0,St. James' Park,Andre Marriner,,Premier-League
+35.0,Sat,2022-04-30,15:00,Watford,1–2,Burnley,20738.0,Vicarage Road Stadium,Craig Pawson,,Premier-League
+35.0,Sat,2022-04-30,15:00,Wolves,0–3,Brighton,31243.0,Molineux Stadium,Simon Hooper,,Premier-League
+35.0,Sat,2022-04-30,15:00,Aston Villa,2–0,Norwich City,40290.0,Villa Park,John Brooks,,Premier-League
+35.0,Sat,2022-04-30,15:00,Southampton,1–2,Crystal Palace,31359.0,St. Mary's Stadium,Jarred Gillett,,Premier-League
+35.0,Sat,2022-04-30,17:30,Leeds United,0–4,Manchester City,35771.0,Elland Road,Paul Tierney,,Premier-League
+35.0,Sun,2022-05-01,14:00,Tottenham,3–1,Leicester City,59482.0,Tottenham Hotspur Stadium,Jonathan Moss,,Premier-League
+35.0,Sun,2022-05-01,14:00,Everton,1–0,Chelsea,39256.0,Goodison Park,Kevin Friend,,Premier-League
+35.0,Sun,2022-05-01,16:30,West Ham,1–2,Arsenal,59959.0,London Stadium,Mike Dean,,Premier-League
+35.0,Mon,2022-05-02,20:00,Manchester Utd,3–0,Brentford,73482.0,Old Trafford,Chris Kavanagh,,Premier-League
+36.0,Sat,2022-05-07,15:00,Crystal Palace,1–0,Watford,24622.0,Selhurst Park,Graham Scott,,Premier-League
+36.0,Sat,2022-05-07,15:00,Brentford,3–0,Southampton,17051.0,Brentford Community Stadium,Michael Salisbury,,Premier-League
+36.0,Sat,2022-05-07,15:00,Chelsea,2–2,Wolves,32190.0,Stamford Bridge,Peter Bankes,,Premier-League
+36.0,Sat,2022-05-07,15:00,Burnley,1–3,Aston Villa,20891.0,Turf Moor,David Coote,,Premier-League
+36.0,Sat,2022-05-07,17:30,Brighton,4–0,Manchester Utd,31637.0,The American Express Community Stadium,Andy Madley,,Premier-League
+36.0,Sat,2022-05-07,19:45,Liverpool,1–1,Tottenham,53177.0,Anfield,Michael Oliver,,Premier-League
+36.0,Sun,2022-05-08,14:00,Leicester City,1–2,Everton,32001.0,King Power Stadium,Craig Pawson,,Premier-League
+36.0,Sun,2022-05-08,14:00,Norwich City,0–4,West Ham,26428.0,Carrow Road,Robert Jones,,Premier-League
+36.0,Sun,2022-05-08,14:00,Arsenal,2–1,Leeds United,60108.0,Emirates Stadium,Chris Kavanagh,,Premier-League
+36.0,Sun,2022-05-08,16:30,Manchester City,5–0,Newcastle Utd,53336.0,Etihad Stadium,Stuart Attwell,,Premier-League
+33.0,Tue,2022-05-10,20:00,Aston Villa,1–2,Liverpool,41919.0,Villa Park,Jonathan Moss,,Premier-League
+33.0,Wed,2022-05-11,19:30,Leeds United,0–3,Chelsea,36549.0,Elland Road,Anthony Taylor,,Premier-League
+21.0,Wed,2022-05-11,19:45,Leicester City,3–0,Norwich City,38092.0,King Power Stadium,Simon Hooper,,Premier-League
+30.0,Wed,2022-05-11,19:45,Watford,0–0,Everton,20653.0,Vicarage Road Stadium,Mike Dean,,Premier-League
+33.0,Wed,2022-05-11,20:15,Wolves,1–5,Manchester City,,Molineux Stadium,Martin Atkinson,,Premier-League
+22.0,Thu,2022-05-12,19:45,Tottenham,3–0,Arsenal,62027.0,Tottenham Hotspur Stadium,Paul Tierney,,Premier-League
+37.0,Sun,2022-05-15,12:00,Tottenham,1–0,Burnley,61729.0,Tottenham Hotspur Stadium,Kevin Friend,,Premier-League
+37.0,Sun,2022-05-15,14:00,Leeds United,1–1,Brighton,36638.0,Elland Road,Mike Dean,,Premier-League
+37.0,Sun,2022-05-15,14:00,Watford,1–5,Leicester City,20257.0,Vicarage Road Stadium,Jarred Gillett,,Premier-League
+37.0,Sun,2022-05-15,14:00,Wolves,1–1,Norwich City,31219.0,Molineux Stadium,Tony Harrington,,Premier-League
+37.0,Sun,2022-05-15,14:00,Aston Villa,1–1,Crystal Palace,41136.0,Villa Park,Chris Kavanagh,,Premier-League
+37.0,Sun,2022-05-15,14:00,West Ham,2–2,Manchester City,59972.0,London Stadium,Anthony Taylor,,Premier-League
+37.0,Sun,2022-05-15,16:30,Everton,2–3,Brentford,38819.0,Goodison Park,Michael Oliver,,Premier-League
+37.0,Mon,2022-05-16,20:00,Newcastle Utd,2–0,Arsenal,52274.0,St. James' Park,Darren England,,Premier-League
+37.0,Tue,2022-05-17,19:45,Southampton,1–2,Liverpool,31588.0,St. Mary's Stadium,Martin Atkinson,,Premier-League
+33.0,Thu,2022-05-19,19:45,Everton,3–2,Crystal Palace,38448.0,Goodison Park,Anthony Taylor,,Premier-League
+18.0,Thu,2022-05-19,20:00,Aston Villa,1–1,Burnley,40468.0,Villa Park,Paul Tierney,,Premier-League
+27.0,Thu,2022-05-19,20:00,Chelsea,1–1,Leicester City,31478.0,Stamford Bridge,Stuart Attwell,,Premier-League
+38.0,Sun,2022-05-22,16:00,Brentford,1–2,Leeds United,16957.0,Brentford Community Stadium,Paul Tierney,,Premier-League
+38.0,Sun,2022-05-22,16:00,Leicester City,4–1,Southampton,32003.0,King Power Stadium,Jonathan Moss,,Premier-League
+38.0,Sun,2022-05-22,16:00,Crystal Palace,1–0,Manchester Utd,25434.0,Selhurst Park,Martin Atkinson,,Premier-League
+38.0,Sun,2022-05-22,16:00,Arsenal,5–1,Everton,60201.0,Emirates Stadium,Andre Marriner,,Premier-League
+38.0,Sun,2022-05-22,16:00,Brighton,3–1,West Ham,31604.0,The American Express Community Stadium,Kevin Friend,,Premier-League
+38.0,Sun,2022-05-22,16:00,Norwich City,0–5,Tottenham,27022.0,Carrow Road,Chris Kavanagh,,Premier-League
+38.0,Sun,2022-05-22,16:00,Manchester City,3–2,Aston Villa,53395.0,Etihad Stadium,Michael Oliver,,Premier-League
+38.0,Sun,2022-05-22,16:00,Liverpool,3–1,Wolves,53097.0,Anfield,Anthony Taylor,,Premier-League
+38.0,Sun,2022-05-22,16:00,Burnley,1–2,Newcastle Utd,21361.0,Turf Moor,Craig Pawson,,Premier-League
+38.0,Sun,2022-05-22,16:00,Chelsea,2–1,Watford,32089.0,Stamford Bridge,Mike Dean,,Premier-League
+Fourth round,Tue,2021-10-26,19:45,Chelsea,(4) 1–1 (3),Southampton,39766,Stamford Bridge,Kevin Friend,Chelsea won on penalty kicks following normal time,EFL-Cup
+Quarter-finals,Tue,2021-12-21,19:45,Arsenal,5–1,Sunderland,59027,Emirates Stadium,Robert Jones,,EFL-Cup
+Quarter-finals,Wed,2021-12-22,19:45,Brentford,0–2,Chelsea,16577,Brentford Community Stadium,Andre Marriner,,EFL-Cup
+Quarter-finals,Wed,2021-12-22,19:45,Tottenham,2–1,West Ham,40031,Tottenham Hotspur Stadium,Chris Kavanagh,,EFL-Cup
+Quarter-finals,Wed,2021-12-22,19:45,Liverpool,(5) 3–3 (4),Leicester City,52020,Anfield,Andy Madley,Liverpool won on penalty kicks following normal time,EFL-Cup
+Semi-finals,Wed,2022-01-05,19:45,Chelsea,2–0,Tottenham,37868,Stamford Bridge,Craig Pawson,,EFL-Cup
+Semi-finals,Wed,2022-01-12,19:45,Tottenham,0–1,Chelsea,45603,Tottenham Hotspur Stadium,Andre Marriner,,EFL-Cup
+Semi-finals,Thu,2022-01-13,19:45,Liverpool,0–0,Arsenal,52377,Anfield,Michael Oliver,,EFL-Cup
+Semi-finals,Thu,2022-01-20,19:45,Arsenal,0–2,Liverpool,59360,Emirates Stadium,Martin Atkinson,,EFL-Cup
+Final,Sun,2022-02-27,16:30,Chelsea,(10) 0–0 (11),Liverpool,88512,Wembley Stadium,Stuart Attwell,Liverpool won on penalty kicks following extra time,EFL-Cup
+First round proper,Sat,2021-11-06,14:00,Gillingham,1–1,Cheltenham,2555,MEMS Priestfield Stadium,Oliver Yates,,FA-Cup
+First round proper,Sat,2021-11-06,15:00,King's Lynn,0–1,Walsall,1934,The Walks,Rob Lewis,,FA-Cup
+First round proper,Sat,2021-11-06,15:00,Sunderland,0–1,Mansfield Town,8620,Holstein-Stadion,James Oldham,,FA-Cup
+First round proper,Sat,2021-11-06,17:15,Banbury,0–4,Barrow,2400,The Spencer Stadium,Rebecca Welch,,FA-Cup
+First round proper,Sun,2021-11-07,15:00,Stratford,1–5,Shrewsbury,2800,The DCS Stadium,Ben Toner,,FA-Cup
+First round proper,Sun,2021-11-07,17:15,St Albans City,3–2,FG Rovers,4100,Clarence Park,Robert Madley,,FA-Cup
+First round proper,Tue,2021-11-16,19:45,Oldham Athletic,1–2,Ipswich Town,2801,Boundary Park,Carl Boyeson,,FA-Cup
+First round proper,Wed,2021-11-17,19:45,Stockport,5–3,Bolton,10084,Edgeley Park,Samuel Barrott,Required Extra Time,FA-Cup
+Second round proper,Fri,2021-12-03,19:45,Gateshead,0–2,Charlton Ath,3746,Gateshead International Stadium,Tom Reeves,,FA-Cup
+Second round proper,Fri,2021-12-03,19:45,Rotherham Utd,1–0,Stockport,6466,New York Stadium,Oliver Yates,,FA-Cup
+Second round proper,Sat,2021-12-04,12:45,Buxton,0–1,Morecambe,3642,The Silverlands,Lee Swabey,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Bristol Rovers,2–1,Sutton United,4456,Memorial Stadium,Darren Drysdale,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Carlisle United,1–2,Shrewsbury,2794,Brunton Park,Samuel Barrott,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Burton Albion,1–2,Port Vale,3539,Pirelli Stadium,Martin Coy,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Doncaster,2–3,Mansfield Town,7040,Keepmoat Stadium,Seb Stockbridge,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Cambridge Utd,2–1,Exeter City,2834,The Cambs Glass Stadium,David Rock,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Ipswich Town,0–0,Barrow,6425,Portman Road Stadium,Sam Purkiss,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Walsall,1–2,Swindon Town,4331,The Banks's Stadium,Peter Wright,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,AFC Wimbledon,4–3,Cheltenham,4322,Cherry Red Records Fans' Stadium,Alan Young,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Leyton Orient,4–0,Tranmere Rovers,3248,Matchroom Stadium,James Oldham,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Lincoln City,0–1,Hartlepool Utd,5506,Sincil Bank Stadium,Robert Madley,,FA-Cup
+Second round proper,Sat,2021-12-04,15:00,Portsmouth,1–2,Harrogate,7857,Fratton Park,Simon Mather,,FA-Cup
+Second round proper,Sat,2021-12-04,17:30,Yeovil Town,1–0,Stevenage,2754,Huish Park Stadium,Craig Hicks,,FA-Cup
+Second round proper,Sun,2021-12-05,12:15,Rochdale,1–2,Plymouth Argyle,2687,Crown Oil Arena,Andrew Kitchen,,FA-Cup
+Second round proper,Sun,2021-12-05,12:30,Colchester Utd,1–2,Wigan Athletic,2056,JobServe Community Stadium,Carl Brook,,FA-Cup
+Second round proper,Sun,2021-12-05,16:00,Kidderminster,2–0,FC Halifax Town,4290,Aggborough Stadium,Brett Huxtable,,FA-Cup
+Second round proper,Sun,2021-12-05,17:15,Salford City,0–2,Chesterfield,1997,The Peninsula Stadium,Ross Joyce,,FA-Cup
+Second round proper,Mon,2021-12-06,19:45,Boreham Wood,4–0,St Albans City,4101,Meadow Park,Ben Speedie,,FA-Cup
+Second round proper,Wed,2021-12-15,19:45,Barrow,2–0,Ipswich Town,2756,Holker Street,James Bell,,FA-Cup
+Third round proper,Fri,2022-01-07,20:00,Swindon Town,1–4,Manchester City,14753,The Energy Check County Ground,Darren England,,FA-Cup
+Third round proper,Sat,2022-01-08,12:15,Mansfield Town,2–3,Middlesbrough,7297,One Call Stadium,Keith Stroud,,FA-Cup
+Third round proper,Sat,2022-01-08,12:30,Burnley,1–2,Huddersfield,7654,Turf Moor,Andre Marriner,,FA-Cup
+Third round proper,Sat,2022-01-08,12:30,Hartlepool Utd,2–1,Blackpool,4932,The Northern Gas and Power Stadium,Matt Donohue,,FA-Cup
+Third round proper,Sat,2022-01-08,12:30,Bristol City,0–1,Fulham,7304,Ashton Gate Stadium,Jonathan Moss,Required Extra Time,FA-Cup
+Third round proper,Sat,2022-01-08,12:30,Coventry City,1–0,Derby County,8896,City of Coventry Stadium,Andy Madley,,FA-Cup
+Third round proper,Sat,2022-01-08,12:45,Millwall,1–2,Crystal Palace,16646,The Den,Anthony Taylor,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,West Brom,1–2,Brighton,8208,The Hawthorns,Robert Jones,Required Extra Time,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,QPR,(8) 1–1 (7),Rotherham Utd,7157,Loftus Road Stadium,Michael Salisbury,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,Port Vale,1–4,Brentford,8069,Vale Park,Thomas Bramall,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,P'borough Utd,2–1,Bristol Rovers,4937,ABAX Stadium,Andrew Davies,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,Newcastle Utd,0–1,Cambridge Utd,51395,St. James' Park,Tony Harrington,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,Boreham Wood,2–0,AFC Wimbledon,3501,Meadow Park,James Bell,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,Kidderminster,2–1,Reading,5178,Aggborough Stadium,Gavin Ward,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,Barnsley,5–4,Barrow,4755,Oakwell Stadium,Ross Joyce,Required Extra Time,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,Wigan Athletic,3–2,Blackburn,9892,The DW Stadium,Tim Robinson,,FA-Cup
+Third round proper,Sat,2022-01-08,15:00,Leicester City,4–1,Watford,25710,King Power Stadium,Mike Dean,,FA-Cup
+Third round proper,Sat,2022-01-08,17:30,Hull City,2–3,Everton,16282,Kingston Communications Stadium,Andy Madley,Required Extra Time,FA-Cup
+Third round proper,Sat,2022-01-08,17:30,Swansea City,2–3,Southampton,,Liberty Stadium,Simon Hooper,Required Extra Time,FA-Cup
+Third round proper,Sat,2022-01-08,17:30,Chelsea,5–1,Chesterfield,39795,Stamford Bridge,Jarred Gillett,,FA-Cup
+Third round proper,Sat,2022-01-08,17:30,Birmingham City,0–1,Plymouth Argyle,9823,St Andrew's Trillion Trophy Stadium,Rebecca Welch,Required Extra Time,FA-Cup
+Third round proper,Sat,2022-01-08,17:45,Yeovil Town,1–3,Bournemouth,7818,Huish Park Stadium,Jeremy Simpson,,FA-Cup
+Third round proper,Sun,2022-01-09,12:30,Luton Town,4–0,Harrogate,4834,Kenilworth Road Stadium,James Linington,,FA-Cup
+Third round proper,Sun,2022-01-09,14:00,Tottenham,3–1,Morecambe,40310,Tottenham Hotspur Stadium,John Brooks,,FA-Cup
+Third round proper,Sun,2022-01-09,14:00,Liverpool,4–1,Shrewsbury,52226,Anfield,David Coote,,FA-Cup
+Third round proper,Sun,2022-01-09,14:00,Wolves,3–0,Sheffield Utd,27004,Molineux Stadium,Paul Tierney,,FA-Cup
+Third round proper,Sun,2022-01-09,14:00,Cardiff City,2–1,Preston,,Cardiff City Stadium,Simon Hooper,Required Extra Time,FA-Cup
+Third round proper,Sun,2022-01-09,14:00,West Ham,2–0,Leeds United,54303,London Stadium,Stuart Attwell,,FA-Cup
+Third round proper,Sun,2022-01-09,14:00,Charlton Ath,0–1,Norwich City,13835,The Valley,Joshua Smith,,FA-Cup
+Third round proper,Sun,2022-01-09,14:00,Stoke City,2–0,Leyton Orient,5269,Bet365 Stadium,Samuel Barrott,,FA-Cup
+Third round proper,Sun,2022-01-09,17:10,Nott'ham Forest,1–0,Arsenal,24938,The City Ground,Craig Pawson,,FA-Cup
+Third round proper,Mon,2022-01-10,19:55,Manchester Utd,1–0,Aston Villa,72911,Old Trafford,Michael Oliver,,FA-Cup
+Fourth round proper,Fri,2022-02-04,20:00,Manchester Utd,(7) 1–1 (8),Middlesbrough,71871,Old Trafford,Anthony Taylor,,FA-Cup
+Fourth round proper,Sat,2022-02-05,12:30,Chelsea,2–1,Plymouth Argyle,35959,Stamford Bridge,Simon Hooper,Required Extra Time,FA-Cup
+Fourth round proper,Sat,2022-02-05,12:30,Kidderminster,1–2,West Ham,5327,Aggborough Stadium,Jonathan Moss,Required Extra Time,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,Everton,4–1,Brentford,37310,Stadion Chemnitz,Michael Oliver,,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,Huddersfield,1–0,Barnsley,16607,The John Smith's Stadium,Jeremy Simpson,,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,P'borough Utd,2–0,QPR,10119,ABAX Stadium,David Webb,,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,Manchester City,4–1,Fulham,53400,Etihad Stadium,Jarred Gillett,,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,Crystal Palace,2–0,Hartlepool Utd,22114,Selhurst Park,Peter Bankes,,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,Wolves,0–1,Norwich City,30736,Molineux Stadium,David Coote,,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,Southampton,2–1,Coventry City,30512,St Mary's Stadium,Tony Harrington,Required Extra Time,FA-Cup
+Fourth round proper,Sat,2022-02-05,15:00,Stoke City,2–0,Wigan Athletic,12641,Bet365 Stadium,Geoff Eltringham,,FA-Cup
+Fourth round proper,Sat,2022-02-05,17:30,Cambridge Utd,0–3,Luton Town,7937,The Cambs Glass Stadium,Thomas Bramall,,FA-Cup
+Fourth round proper,Sat,2022-02-05,20:00,Tottenham,3–1,Brighton,54697,Tottenham Hotspur Stadium,Stuart Attwell,,FA-Cup
+Fourth round proper,Sun,2022-02-06,12:00,Liverpool,3–1,Cardiff City,51268,Anfield,Andy Madley,,FA-Cup
+Fourth round proper,Sun,2022-02-06,16:00,Nott'ham Forest,4–1,Leicester City,28762,The City Ground,Paul Tierney,,FA-Cup
+Fourth round proper,Sun,2022-02-06,18:30,Bournemouth,0–1,Boreham Wood,9548,Vitality Stadium,Graham Scott,,FA-Cup
+Fifth round proper,Tue,2022-03-01,19:15,P'borough Utd,0–2,Manchester City,13405,ABAX Stadium,Andy Madley,,FA-Cup
+Fifth round proper,Tue,2022-03-01,19:30,Crystal Palace,2–1,Stoke City,23159,Selhurst Park,Robert Jones,,FA-Cup
+Fifth round proper,Tue,2022-03-01,19:55,Middlesbrough,1–0,Tottenham,31135,Riverside Stadium,Darren England,Required Extra Time,FA-Cup
+Fifth round proper,Wed,2022-03-02,19:15,Luton Town,2–3,Chelsea,10140,Kenilworth Road Stadium,Peter Bankes,,FA-Cup
+Fifth round proper,Wed,2022-03-02,19:30,Southampton,3–1,West Ham,28383,St. Mary's Stadium,Andre Marriner,,FA-Cup
+Fifth round proper,Wed,2022-03-02,20:15,Liverpool,2–1,Norwich City,52231,Anfield,Martin Atkinson,,FA-Cup
+Fifth round proper,Thu,2022-03-03,20:15,Everton,2–0,Boreham Wood,38836,Goodison Park,Tony Harrington,,FA-Cup
+Fifth round proper,Mon,2022-03-07,19:30,Nott'ham Forest,2–1,Huddersfield,27417,The City Ground,Graham Scott,,FA-Cup
+Quarter-finals,Sat,2022-03-19,17:15,Middlesbrough,0–2,Chelsea,31422,Riverside Stadium,Paul Tierney,,FA-Cup
+Quarter-finals,Sun,2022-03-20,12:30,Crystal Palace,4–0,Everton,23781,Selhurst Park,Stuart Attwell,,FA-Cup
+Quarter-finals,Sun,2022-03-20,15:00,Southampton,1–4,Manchester City,29702,St. Mary's Stadium,Mike Dean,,FA-Cup
+Quarter-finals,Sun,2022-03-20,18:00,Nott'ham Forest,0–1,Liverpool,28584,The City Ground,Craig Pawson,,FA-Cup
+Semi-finals,Sat,2022-04-16,15:30,Manchester City,2–3,Liverpool,73793,Wembley Stadium,Michael Oliver,,FA-Cup
+Semi-finals,Sun,2022-04-17,16:30,Chelsea,2–0,Crystal Palace,76238,Wembley Stadium,Anthony Taylor,,FA-Cup
+Final,Sat,2022-05-14,16:45,Chelsea,(5) 0–0 (6),Liverpool,84897,Wembley Stadium,Craig Pawson,Liverpool won on penalty kicks following extra time,FA-Cup
+Group stage,Tue,2021-09-14,18:45,Sevilla es,1–1,at RB Salzburg,18373,Estadio Ramón Sánchez Pizjuán,Aliaksei Kulbakou,,Champions-League
+Group stage,Tue,2021-09-14,18:45,Young Boys ch,2–1,eng Manchester Utd,31120,Wankdorfstadion,François Letexier,,Champions-League
+Group stage,Tue,2021-09-14,20:00,Chelsea eng,1–0,ru Zenit,39252,Stamford Bridge,Bartosz Frankowski,,Champions-League
+Group stage,Tue,2021-09-14,21:00,Villarreal es,2–2,it Atalanta,12916,Estadio de la Cerámica,Clément Turpin,,Champions-League
+Group stage,Tue,2021-09-14,21:00,Barcelona es,0–3,de Bayern Munich,39737,Camp Nou,Michael Oliver,,Champions-League
+Group stage,Tue,2021-09-14,21:00,Lille fr,0–0,de Wolfsburg,34314,Stade Pierre-Mauroy,Danny Makkelie,,Champions-League
+Group stage,Tue,2021-09-14,21:00,Malmö se,0–3,it Juventus,5832,Swedbank Stadion,Artur Dias,,Champions-League
+Group stage,Tue,2021-09-14,22:00,Dynamo Kyiv ua,0–0,pt Benfica,21657,NSK Olimpijs'kyj,Anthony Taylor,,Champions-League
+Group stage,Wed,2021-09-15,19:45,Sheriff Tiraspol md,2–0,ua Shakhtar,5205,Bolshaya Sportivnaya Arena,Deniz Aytekin,,Champions-League
+Group stage,Wed,2021-09-15,19:45,Beşiktaş tr,1–2,de Dortmund,22445,Vodafone Arena,Antonio Matéu Lahoz,,Champions-League
+Group stage,Wed,2021-09-15,20:00,Sporting CP pt,1–5,nl Ajax,20382,Estádio José Alvalade,José Sánchez,,Champions-League
+Group stage,Wed,2021-09-15,20:00,Manchester City eng,6–3,de RB Leipzig,38062,Etihad Stadium,Serdar Gözübüyük,,Champions-League
+Group stage,Wed,2021-09-15,20:00,Liverpool eng,3–2,it Milan,51445,Anfield,Szymon Marciniak,,Champions-League
+Group stage,Wed,2021-09-15,21:00,Inter it,0–1,es Real Madrid,37082,Stadio Giuseppe Meazza,Daniel Siebert,,Champions-League
+Group stage,Wed,2021-09-15,21:00,Club Brugge be,1–1,fr Paris S-G,27546,Jan Breydelstadion,Sandro Schärer,,Champions-League
+Group stage,Wed,2021-09-15,21:00,Atlético Madrid es,0–0,pt Porto,40098,Estadio Wanda Metropolitano,Ovidiu Hațegan,,Champions-League
+Group stage,Tue,2021-09-28,18:45,Ajax nl,2–0,tr Beşiktaş,52628,Johan Cruyff ArenA,Benoît Bastien,,Champions-League
+Group stage,Tue,2021-09-28,19:45,Shakhtar ua,0–0,it Inter,26170,NSK Olimpijs'kyj,István Kovács,,Champions-League
+Group stage,Tue,2021-09-28,20:00,Porto pt,1–5,eng Liverpool,23520,Estádio Do Dragão,Sergey Karasev,,Champions-League
+Group stage,Tue,2021-09-28,21:00,Real Madrid es,1–2,md Sheriff Tiraspol,24522,Estadio Santiago Bernabéu,Lawrence Visser,,Champions-League
+Group stage,Tue,2021-09-28,21:00,RB Leipzig de,1–2,be Club Brugge,23500,Red Bull Arena,Slavko Vinčič,,Champions-League
+Group stage,Tue,2021-09-28,21:00,Dortmund de,1–0,pt Sporting CP,25000,Signal Iduna Park,Srdjan Stojanovic,,Champions-League
+Group stage,Tue,2021-09-28,21:00,Paris S-G fr,2–0,eng Manchester City,37350,Parc des Princes,Carlos del Cerro,,Champions-League
+Group stage,Tue,2021-09-28,21:00,Milan it,1–2,es Atlético Madrid,35374,Stadio Giuseppe Meazza,Cüneyt Çakιr,,Champions-League
+Group stage,Wed,2021-09-29,18:45,Atalanta it,1–0,ch Young Boys,8536,Stadio Atleti Azzurri d'Italia,Felix Brych,,Champions-League
+Group stage,Wed,2021-09-29,19:45,Zenit ru,4–0,se Malmö,15339,Gazprom Arena,Anastasios Sidiropoulos,,Champions-League
+Group stage,Wed,2021-09-29,20:00,Manchester Utd eng,2–1,es Villarreal,73130,Old Trafford,Felix Zwayer,,Champions-League
+Group stage,Wed,2021-09-29,20:00,Benfica pt,3–0,es Barcelona,29454,Estádio do Sport Lisboa e Benfica,Daniele Orsato,,Champions-League
+Group stage,Wed,2021-09-29,21:00,RB Salzburg at,2–1,fr Lille,24207,Red Bull Arena,Halil Umut Meler,,Champions-League
+Group stage,Wed,2021-09-29,21:00,Juventus it,1–0,eng Chelsea,19934,Allianz Stadium,Jesús Gil,,Champions-League
+Group stage,Wed,2021-09-29,21:00,Bayern Munich de,5–0,ua Dynamo Kyiv,25000,Allianz Arena,Marco Guida,,Champions-League
+Group stage,Wed,2021-09-29,21:00,Wolfsburg de,1–1,es Sevilla,11733,Volkswagen Arena,Georgi Kabakov,,Champions-League
+Group stage,Tue,2021-10-19,18:45,Club Brugge be,1–5,eng Manchester City,24915,Jan Breydelstadion,István Kovács,,Champions-League
+Group stage,Tue,2021-10-19,19:45,Beşiktaş tr,1–4,pt Sporting CP,22936,Vodafone Arena,Slavko Vinčič,,Champions-League
+Group stage,Tue,2021-10-19,20:00,Porto pt,1–0,it Milan,32130,Estádio Do Dragão,Felix Brych,,Champions-League
+Group stage,Tue,2021-10-19,21:00,Atlético Madrid es,2–3,eng Liverpool,60725,Estadio Wanda Metropolitano,Daniel Siebert,,Champions-League
+Group stage,Tue,2021-10-19,21:00,Inter it,3–1,md Sheriff Tiraspol,43305,Stadio Giuseppe Meazza,Danny Makkelie,,Champions-League
+Group stage,Tue,2021-10-19,21:00,Paris S-G fr,3–2,de RB Leipzig,47359,Parc des Princes,Marco Guida,,Champions-League
+Group stage,Tue,2021-10-19,21:00,Ajax nl,4–0,de Dortmund,54029,Johan Cruyff ArenA,Jesús Gil,,Champions-League
+Group stage,Tue,2021-10-19,22:00,Shakhtar ua,0–5,es Real Madrid,34037,Oblasny SportKomplex Metalist,Srđan Jovanović,,Champions-League
+Group stage,Wed,2021-10-20,18:45,RB Salzburg at,3–1,de Wolfsburg,29520,Red Bull Arena,Daniele Orsato,,Champions-League
+Group stage,Wed,2021-10-20,18:45,Barcelona es,1–0,ua Dynamo Kyiv,45968,Camp Nou,Clément Turpin,,Champions-League
+Group stage,Wed,2021-10-20,20:00,Manchester Utd eng,3–2,it Atalanta,72279,Old Trafford,Szymon Marciniak,,Champions-League
+Group stage,Wed,2021-10-20,20:00,Benfica pt,0–4,de Bayern Munich,55201,Estádio do Sport Lisboa e Benfica,Ovidiu Hațegan,,Champions-League
+Group stage,Wed,2021-10-20,20:00,Chelsea eng,4–0,se Malmö,39095,Stamford Bridge,François Letexier,,Champions-League
+Group stage,Wed,2021-10-20,21:00,Lille fr,0–0,es Sevilla,34362,Stade Pierre-Mauroy,Michael Oliver,,Champions-League
+Group stage,Wed,2021-10-20,21:00,Young Boys ch,1–4,es Villarreal,27398,Wankdorfstadion,Sergey Karasev,,Champions-League
+Group stage,Wed,2021-10-20,22:00,Zenit ru,0–1,it Juventus,18717,Gazprom Arena,Sandro Schärer,,Champions-League
+Group stage,Tue,2021-11-02,18:45,Wolfsburg de,2–1,at RB Salzburg,16112,Volkswagen Arena,Artur Dias,,Champions-League
+Group stage,Tue,2021-11-02,18:45,Malmö se,0–1,eng Chelsea,19551,Swedbank Stadion,Felix Brych,,Champions-League
+Group stage,Tue,2021-11-02,21:00,Bayern Munich de,5–2,pt Benfica,50000,Allianz Arena,Szymon Marciniak,,Champions-League
+Group stage,Tue,2021-11-02,21:00,Atalanta it,2–2,eng Manchester Utd,14443,Stadio Atleti Azzurri d'Italia,Slavko Vinčič,,Champions-League
+Group stage,Tue,2021-11-02,21:00,Villarreal es,2–0,ch Young Boys,14890,Estadio de la Cerámica,Serdar Gözübüyük,,Champions-League
+Group stage,Tue,2021-11-02,21:00,Juventus it,4–2,ru Zenit,20053,Allianz Stadium,Alejandro Hernández,,Champions-League
+Group stage,Tue,2021-11-02,21:00,Sevilla es,1–2,fr Lille,29369,Estadio Ramón Sánchez Pizjuán,István Kovács,,Champions-League
+Group stage,Tue,2021-11-02,22:00,Dynamo Kyiv ua,0–1,es Barcelona,31378,NSK Olimpijs'kyj,Ovidiu Hațegan,,Champions-League
+Group stage,Wed,2021-11-03,18:45,Milan it,1–1,pt Porto,39675,Stadio Giuseppe Meazza,Clément Turpin,,Champions-League
+Group stage,Wed,2021-11-03,18:45,Real Madrid es,2–1,ua Shakhtar,38105,Estadio Santiago Bernabéu,Benoît Bastien,,Champions-League
+Group stage,Wed,2021-11-03,20:00,Manchester City eng,4–1,be Club Brugge,50228,Etihad Stadium,Antonio Matéu Lahoz,,Champions-League
+Group stage,Wed,2021-11-03,20:00,Sporting CP pt,4–0,tr Beşiktaş,40835,Estádio José Alvalade,Sergey Karasev,,Champions-League
+Group stage,Wed,2021-11-03,20:00,Liverpool eng,2–0,es Atlético Madrid,51347,Anfield,Danny Makkelie,,Champions-League
+Group stage,Wed,2021-11-03,21:00,RB Leipzig de,2–2,fr Paris S-G,39794,Red Bull Arena,Andreas Ekberg,,Champions-League
+Group stage,Wed,2021-11-03,21:00,Dortmund de,1–3,nl Ajax,54820,Signal Iduna Park,Michael Oliver,,Champions-League
+Group stage,Wed,2021-11-03,22:00,Sheriff Tiraspol md,1–3,it Inter,5930,Bolshaya Sportivnaya Arena,Felix Zwayer,,Champions-League
+Group stage,Tue,2021-11-23,18:45,Villarreal es,0–2,eng Manchester Utd,20875,Estadio de la Cerámica,Felix Brych,,Champions-League
+Group stage,Tue,2021-11-23,19:45,Dynamo Kyiv ua,1–2,de Bayern Munich,28732,NSK Olimpijs'kyj,Halil Umut Meler,,Champions-League
+Group stage,Tue,2021-11-23,20:00,Chelsea eng,4–0,it Juventus,39513,Stamford Bridge,Srđan Jovanović,,Champions-League
+Group stage,Tue,2021-11-23,21:00,Barcelona es,0–0,pt Benfica,49572,Camp Nou,Sergey Karasev,,Champions-League
+Group stage,Tue,2021-11-23,21:00,Lille fr,1–0,at RB Salzburg,33573,Stade Pierre-Mauroy,Anthony Taylor,,Champions-League
+Group stage,Tue,2021-11-23,21:00,Young Boys ch,3–3,it Atalanta,31120,Stade de Suisse Wankdorf Bern,Daniel Siebert,,Champions-League
+Group stage,Tue,2021-11-23,21:00,Sevilla es,2–0,de Wolfsburg,28663,Estadio Ramón Sánchez Pizjuán,Cüneyt Çakιr,,Champions-League
+Group stage,Tue,2021-11-23,21:00,Malmö se,1–1,ru Zenit,15520,Swedbank Stadion,Andris Treimanis,,Champions-League
+Group stage,Wed,2021-11-24,18:45,Inter it,2–0,ua Shakhtar,46225,Stadio Giuseppe Meazza,Ovidiu Hațegan,,Champions-League
+Group stage,Wed,2021-11-24,20:45,Beşiktaş tr,1–2,nl Ajax,11712,Vodafone Arena,Irfan Peljto,,Champions-League
+Group stage,Wed,2021-11-24,20:00,Manchester City eng,2–1,fr Paris S-G,52030,Etihad Stadium,Daniele Orsato,,Champions-League
+Group stage,Wed,2021-11-24,20:00,Sporting CP pt,3–1,de Dortmund,41341,Estádio José Alvalade,Carlos del Cerro,,Champions-League
+Group stage,Wed,2021-11-24,20:00,Liverpool eng,2–0,pt Porto,52209,Anfield,Felix Zwayer,,Champions-League
+Group stage,Wed,2021-11-24,21:00,Atlético Madrid es,0–1,it Milan,61019,Estadio Wanda Metropolitano,Slavko Vinčič,,Champions-League
+Group stage,Wed,2021-11-24,21:00,Club Brugge be,0–5,de RB Leipzig,24072,Jan Breydelstadion,Davide Massa,,Champions-League
+Group stage,Wed,2021-11-24,22:00,Sheriff Tiraspol md,0–3,es Real Madrid,5932,Bolshaya Sportivnaya Arena,Szymon Marciniak,,Champions-League
+Group stage,Tue,2021-12-07,18:45,Paris S-G fr,4–1,be Club Brugge,47492,Parc des Princes,Jesús Gil,,Champions-League
+Group stage,Tue,2021-12-07,18:45,RB Leipzig de,2–1,eng Manchester City,,Red Bull Arena,Sandro Schärer,,Champions-League
+Group stage,Tue,2021-12-07,20:00,Porto pt,1–3,es Atlético Madrid,38830,Estádio Do Dragão,Clément Turpin,,Champions-League
+Group stage,Tue,2021-12-07,21:00,Real Madrid es,2–0,it Inter,44887,Estadio Santiago Bernabéu,Felix Brych,,Champions-League
+Group stage,Tue,2021-12-07,21:00,Dortmund de,5–0,tr Beşiktaş,15000,Signal Iduna Park,François Letexier,,Champions-League
+Group stage,Tue,2021-12-07,21:00,Ajax nl,4–2,pt Sporting CP,,Johan Cruyff ArenA,Davide Massa,,Champions-League
+Group stage,Tue,2021-12-07,21:00,Milan it,1–2,eng Liverpool,56237,Stadio Giuseppe Meazza,Danny Makkelie,,Champions-League
+Group stage,Tue,2021-12-07,22:00,Shakhtar ua,1–1,md Sheriff Tiraspol,6841,Oblasny SportKomplex Metalist,Donatas Rumšas,,Champions-League
+Group stage,Wed,2021-12-08,18:45,Juventus it,1–0,se Malmö,17501,Allianz Stadium,Irfan Peljto,,Champions-League
+Group stage,Wed,2021-12-08,20:45,Zenit ru,3–3,eng Chelsea,29349,Gazprom Arena,Serdar Gözübüyük,,Champions-League
+Group stage,Wed,2021-12-08,20:00,Benfica pt,2–0,ua Dynamo Kyiv,36591,Estádio do Sport Lisboa e Benfica,Deniz Aytekin,,Champions-League
+Group stage,Wed,2021-12-08,20:00,Manchester Utd eng,1–1,ch Young Boys,73156,Old Trafford,Benoît Bastien,,Champions-League
+Group stage,Wed,2021-12-08,21:00,Bayern Munich de,3–0,es Barcelona,,Allianz Arena,Ovidiu Hațegan,,Champions-League
+Group stage,Wed,2021-12-08,21:00,Wolfsburg de,1–3,fr Lille,6544,Volkswagen Arena,Daniele Orsato,,Champions-League
+Group stage,Wed,2021-12-08,21:00,RB Salzburg at,1–0,es Sevilla,,Red Bull Arena,Slavko Vinčič,,Champions-League
+Group stage,Thu,2021-12-09,19:00,Atalanta it,2–3,es Villarreal,11690,Stadio Atleti Azzurri d'Italia,Anthony Taylor,,Champions-League
+Round of 16,Tue,2022-02-15,20:00,Sporting CP pt,0–5,eng Manchester City,48129,Estádio José Alvalade,Srdjan Stojanovic,Leg 1 of 2,Champions-League
+Round of 16,Tue,2022-02-15,21:00,Paris S-G fr,1–0,es Real Madrid,47443,Parc des Princes,Daniele Orsato,Leg 1 of 2,Champions-League
+Round of 16,Wed,2022-02-16,21:00,RB Salzburg at,1–1,de Bayern Munich,29520,Red Bull Arena,Michael Oliver,Leg 1 of 2,Champions-League
+Round of 16,Wed,2022-02-16,21:00,Inter it,0–2,eng Liverpool,37918,Stadio Giuseppe Meazza,Szymon Marciniak,Leg 1 of 2,Champions-League
+Round of 16,Tue,2022-02-22,20:00,Chelsea eng,2–0,fr Lille,38832,Stamford Bridge,Jesús Gil,Leg 1 of 2,Champions-League
+Round of 16,Tue,2022-02-22,21:00,Villarreal es,1–1,it Juventus,17686,Estadio de la Cerámica,Daniel Siebert,Leg 1 of 2,Champions-League
+Round of 16,Wed,2022-02-23,20:00,Benfica pt,2–2,nl Ajax,54760,Estádio do Sport Lisboa e Benfica,Slavko Vinčič,Leg 1 of 2,Champions-League
+Round of 16,Wed,2022-02-23,21:00,Atlético Madrid es,1–1,eng Manchester Utd,63273,Estadio Wanda Metropolitano,Ovidiu Hațegan,Leg 1 of 2,Champions-League
+Round of 16,Tue,2022-03-08,20:00,Liverpool eng,0–1,it Inter,51747,Anfield,Antonio Matéu Lahoz,Leg 2 of 2; Liverpool won,Champions-League
+Round of 16,Tue,2022-03-08,21:00,Bayern Munich de,7–1,at RB Salzburg,25000,Allianz Arena,Clément Turpin,Leg 2 of 2; Bayern Munich won,Champions-League
+Round of 16,Wed,2022-03-09,20:00,Manchester City eng,0–0,pt Sporting CP,51213,Etihad Stadium,Halil Umut Meler,Leg 2 of 2; Manchester City won,Champions-League
+Round of 16,Wed,2022-03-09,21:00,Real Madrid es,3–1,fr Paris S-G,59895,Estadio Santiago Bernabéu,Danny Makkelie,Leg 2 of 2; Real Madrid won,Champions-League
+Round of 16,Tue,2022-03-15,20:00,Manchester Utd eng,0–1,es Atlético Madrid,73008,Old Trafford,Slavko Vinčič,Leg 2 of 2; Atlético Madrid won,Champions-League
+Round of 16,Tue,2022-03-15,21:00,Ajax nl,0–1,pt Benfica,54066,Johan Cruyff ArenA,Carlos del Cerro,Leg 2 of 2; Benfica won,Champions-League
+Round of 16,Wed,2022-03-16,21:00,Lille fr,1–2,eng Chelsea,49048,Stade Pierre-Mauroy,Davide Massa,Leg 2 of 2; Chelsea won,Champions-League
+Round of 16,Wed,2022-03-16,21:00,Juventus it,0–3,es Villarreal,30385,Allianz Stadium,Szymon Marciniak,Leg 2 of 2; Villarreal won,Champions-League
+Quarter-finals,Tue,2022-04-05,20:00,Benfica pt,1–3,eng Liverpool,59633,Estádio do Sport Lisboa e Benfica,Jesús Gil,Leg 1 of 2,Champions-League
+Quarter-finals,Tue,2022-04-05,20:00,Manchester City eng,1–0,es Atlético Madrid,52018,Etihad Stadium,István Kovács,Leg 1 of 2,Champions-League
+Quarter-finals,Wed,2022-04-06,20:00,Chelsea eng,1–3,es Real Madrid,38689,Stamford Bridge,Clément Turpin,Leg 1 of 2,Champions-League
+Quarter-finals,Wed,2022-04-06,21:00,Villarreal es,1–0,de Bayern Munich,21626,Estadio de la Cerámica,Anthony Taylor,Leg 1 of 2,Champions-League
+Quarter-finals,Tue,2022-04-12,21:00,Bayern Munich de,1–1,es Villarreal,70000,Allianz Arena,Slavko Vinčič,Leg 2 of 2; Villarreal won,Champions-League
+Quarter-finals,Tue,2022-04-12,21:00,Real Madrid es,2–3,eng Chelsea,59839,Estadio Santiago Bernabéu,Szymon Marciniak,Leg 2 of 2; Real Madrid won; Required Extra Time,Champions-League
+Quarter-finals,Wed,2022-04-13,20:00,Liverpool eng,3–3,pt Benfica,51373,Anfield,Serdar Gözübüyük,Leg 2 of 2; Liverpool won,Champions-League
+Quarter-finals,Wed,2022-04-13,21:00,Atlético Madrid es,0–0,eng Manchester City,65675,Estadio Wanda Metropolitano,Daniel Siebert,Leg 2 of 2; Manchester City won,Champions-League
+Semi-finals,Tue,2022-04-26,20:00,Manchester City eng,4–3,es Real Madrid,52217,Etihad Stadium,István Kovács,Leg 1 of 2,Champions-League
+Semi-finals,Wed,2022-04-27,20:00,Liverpool eng,2–0,es Villarreal,51586,Anfield,Szymon Marciniak,Leg 1 of 2,Champions-League
+Semi-finals,Tue,2022-05-03,21:00,Villarreal es,2–3,eng Liverpool,23665,Estadio de la Cerámica,Danny Makkelie,Leg 2 of 2; Liverpool won,Champions-League
+Semi-finals,Wed,2022-05-04,21:00,Real Madrid es,3–1,eng Manchester City,61416,Estadio Santiago Bernabéu,Daniele Orsato,Leg 2 of 2; Real Madrid won; Required Extra Time,Champions-League
+Final,Sat,2022-05-28,21:30,Liverpool eng,0–1,es Real Madrid,,Stade de France,Clément Turpin,,Champions-League
+Group stage,Wed,2021-09-15,17:30,Spartak Moscow ru,0–1,pl Legia Warsaw,6832,"Stadium Spartak, Field № 4",Nikola Dabanović,,Europa-League
+Group stage,Thu,2021-09-16,18:45,Betis es,4–3,sct Celtic,30893,Estadio Benito Villamarín,Fran Jović,,Europa-League
+Group stage,Thu,2021-09-16,18:45,Rapid Wien at,0–1,be Genk,18400,Gerhard-Hanappi-Stadion,Kristo Tohver,,Europa-League
+Group stage,Thu,2021-09-16,18:45,Red Star rs,2–1,pt Braga,24671,Stadion Rajko Mitić,John Beaton,,Europa-League
+Group stage,Thu,2021-09-16,18:45,Leverkusen de,2–1,hu Ferencváros,11013,BayArena,Andris Treimanis,,Europa-League
+Group stage,Thu,2021-09-16,18:45,Midtjylland dk,1–1,bg Ludogorets,6568,MCH Arena,Aghayev Aliyev,,Europa-League
+Group stage,Thu,2021-09-16,18:45,Dinamo Zagreb hr,0–2,eng West Ham,12344,Stadion Maksimir,Ruddy Buquet,,Europa-League
+Group stage,Thu,2021-09-16,19:45,Loko Moscow ru,1–1,fr Marseille,8100,RZD Arena,Irfan Peljto,,Europa-League
+Group stage,Thu,2021-09-16,19:45,Galatasaray tr,1–0,it Lazio,15353,Ali Sami Yen Stadyumu,Matej Jug,,Europa-League
+Group stage,Thu,2021-09-16,20:00,Rangers sct,0–2,fr Lyon,44906,Ibrox Stadium,Andreas Ekberg,,Europa-League
+Group stage,Thu,2021-09-16,20:00,Leicester City eng,2–2,it Napoli,29579,King Power Stadium,Tiago Martins,,Europa-League
+Group stage,Thu,2021-09-16,21:00,PSV Eindhoven nl,2–2,es Real Sociedad,23135,Philips Stadion,William Collum,,Europa-League
+Group stage,Thu,2021-09-16,21:00,Brøndby dk,0–0,cz Sparta Prague,18867,Brøndby Stadion,Aleksandar Stavrev,,Europa-League
+Group stage,Thu,2021-09-16,21:00,Eint Frankfurt de,1–1,tr Fenerbahçe,25000,Commerzbank-Arena,Maurizio Mariani,,Europa-League
+Group stage,Thu,2021-09-16,21:00,Monaco fr,1–0,at Sturm Graz,2941,Stade Louis II.,Donatas Rumšas,,Europa-League
+Group stage,Thu,2021-09-16,22:00,Olympiacos gr,2–1,be Antwerp,15615,Stadio Georgios Karaiskáki,Tamás Bognár,,Europa-League
+Group stage,Thu,2021-09-30,18:45,Lyon fr,3–0,dk Brøndby,25466,Groupama Stadium,Harald Lechner,,Europa-League
+Group stage,Thu,2021-09-30,18:45,Napoli it,2–3,ru Spartak Moscow,13373,Stadio San Paolo,Ivan Kružliak,,Europa-League
+Group stage,Thu,2021-09-30,18:45,Sturm Graz at,1–4,nl PSV Eindhoven,15026,Merkur Arena,Anatolii Aranovskii,,Europa-League
+Group stage,Thu,2021-09-30,18:45,Legia Warsaw pl,1–0,eng Leicester City,27087,Stadion Miejski Legii Warszawa im. Marsz...,Ivan Bebek,,Europa-League
+Group stage,Thu,2021-09-30,18:45,Real Sociedad es,1–1,fr Monaco,23765,Estadio Municipal de Anoeta,Sergey Ivanov,,Europa-League
+Group stage,Thu,2021-09-30,18:45,Sparta Prague cz,1–0,sct Rangers,10879,Generali Arena,Ali Palabıyık,,Europa-League
+Group stage,Thu,2021-09-30,18:45,Antwerp be,0–1,de Eint Frankfurt,13183,Bosuilstadion,Jakob Kehlet,,Europa-League
+Group stage,Thu,2021-09-30,19:45,Fenerbahçe tr,0–3,gr Olympiacos,22160,Ülker Stadyumu Fenerbahçe Şükrü Saracoğl...,Alejandro Hernández,,Europa-League
+Group stage,Thu,2021-09-30,20:00,Celtic sct,0–4,de Leverkusen,55436,Celtic Park,Marco Di Bello,,Europa-League
+Group stage,Thu,2021-09-30,20:00,West Ham eng,2–0,at Rapid Wien,50004,London Stadium,Tobias Stieler,,Europa-League
+Group stage,Thu,2021-09-30,20:00,Braga pt,3–1,dk Midtjylland,5449,Estádio Municipal de Braga,Stéphanie Frappart,,Europa-League
+Group stage,Thu,2021-09-30,21:00,Marseille fr,0–0,tr Galatasaray,49870,Orange Vélodrome,Paweł Raczkowski,,Europa-League
+Group stage,Thu,2021-09-30,21:00,Genk be,0–3,hr Dinamo Zagreb,11262,Luminus Arena,Mattias Gestranius,,Europa-League
+Group stage,Thu,2021-09-30,21:00,Ferencváros hu,1–3,es Betis,16759,Groupama Arena,Roi Reinshreiber,,Europa-League
+Group stage,Thu,2021-09-30,21:00,Lazio it,2–0,ru Loko Moscow,6767,Stadio Olimpico,Craig Pawson,,Europa-League
+Group stage,Thu,2021-09-30,22:00,Ludogorets bg,0–1,rs Red Star,3078,Ludogorets Arena,Jérôme Brisard,,Europa-League
+Group stage,Tue,2021-10-19,15:30,Celtic sct,2–0,hu Ferencváros,50427,Celtic Park,Jakob Kehlet,,Europa-League
+Group stage,Wed,2021-10-20,17:30,Spartak Moscow ru,3–4,eng Leicester City,11366,Otkrytie Arena,Anastasios Sidiropoulos,,Europa-League
+Group stage,Thu,2021-10-21,18:45,Betis es,1–1,de Leverkusen,39230,Estadio Benito Villamarín,Bartosz Frankowski,,Europa-League
+Group stage,Thu,2021-10-21,18:45,Midtjylland dk,1–1,rs Red Star,8438,MCH Arena,Roi Reinshreiber,,Europa-League
+Group stage,Thu,2021-10-21,18:45,Lazio it,0–0,fr Marseille,8329,Stadio Olimpico,Deniz Aytekin,,Europa-League
+Group stage,Thu,2021-10-21,18:45,Rapid Wien at,2–1,hr Dinamo Zagreb,22300,Allianz Stadion,Kateryna Monzul,,Europa-League
+Group stage,Thu,2021-10-21,19:45,Fenerbahçe tr,2–2,be Antwerp,16629,Ülker Stadyumu Fenerbahçe Şükrü Saracoğl...,Sergey Ivanov,,Europa-League
+Group stage,Thu,2021-10-21,19:45,Ludogorets bg,0–1,pt Braga,2280,Ludogorets Arena,Kristo Tohver,,Europa-League
+Group stage,Thu,2021-10-21,20:00,West Ham eng,3–0,be Genk,45980,London Stadium,Donatas Rumšas,,Europa-League
+Group stage,Thu,2021-10-21,20:00,Rangers sct,2–0,dk Brøndby,46842,Ibrox Stadium,Fran Jović,,Europa-League
+Group stage,Thu,2021-10-21,21:00,Eint Frankfurt de,3–1,gr Olympiacos,35000,Commerzbank-Arena,Tiago Martins,,Europa-League
+Group stage,Thu,2021-10-21,21:00,Sparta Prague cz,3–4,fr Lyon,12427,Generali Arena,Matej Jug,,Europa-League
+Group stage,Thu,2021-10-21,21:00,Sturm Graz at,0–1,es Real Sociedad,14809,Merkur Arena,Tobias Stieler,,Europa-League
+Group stage,Thu,2021-10-21,21:00,PSV Eindhoven nl,1–2,fr Monaco,33000,Philips Stadion,Davide Massa,,Europa-League
+Group stage,Thu,2021-10-21,21:00,Napoli it,3–0,pl Legia Warsaw,10346,Stadio San Paolo,Carlos Grande Rabadán,,Europa-League
+Group stage,Thu,2021-10-21,22:00,Loko Moscow ru,0–1,tr Galatasaray,8100,RZD Arena,Harald Lechner,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Real Sociedad es,1–1,at Sturm Graz,25010,Estadio Municipal de Anoeta,Andris Treimanis,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Brøndby dk,1–1,sct Rangers,20462,Brøndby Stadion,Nikola Dabanović,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Monaco fr,0–0,nl PSV Eindhoven,5840,Stade Louis II.,Cüneyt Çakιr,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Legia Warsaw pl,1–4,it Napoli,25706,Stadion Miejski Legii Warszawa im. Marsz...,Lawrence Visser,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Lyon fr,3–0,cz Sparta Prague,33934,Groupama Stadium,Maurizio Mariani,,Europa-League
+Group stage,Thu,2021-11-04,18:45,Genk be,2–2,eng West Ham,12239,Luminus Arena,Aleksandar Stavrev,,Europa-League
+Group stage,Thu,2021-11-04,19:45,Olympiacos gr,1–2,de Eint Frankfurt,23050,Stadio Georgios Karaiskáki,Aliaksei Kulbakou,,Europa-League
+Group stage,Thu,2021-11-04,20:45,Galatasaray tr,1–1,ru Loko Moscow,27776,Türk Telekom Arena,Sandro Schärer,,Europa-League
+Group stage,Thu,2021-11-04,20:00,Braga pt,4–2,bg Ludogorets,6221,Estádio Municipal de Braga,Glenn Nyberg,,Europa-League
+Group stage,Thu,2021-11-04,20:00,Leicester City eng,1–1,ru Spartak Moscow,30222,King Power Stadium,Halil Umut Meler,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Ferencváros hu,2–3,sct Celtic,16501,Groupama Arena,Fábio Veríssimo,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Red Star rs,0–1,dk Midtjylland,23070,Stadion Rajko Mitić,Tamás Bognár,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Leverkusen de,4–0,es Betis,15208,BayArena,Anthony Taylor,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Marseille fr,2–2,it Lazio,59163,Orange Vélodrome,José Sánchez,,Europa-League
+Group stage,Thu,2021-11-04,21:00,Dinamo Zagreb hr,3–1,at Rapid Wien,7835,Stadion Maksimir,John Beaton,,Europa-League
+Group stage,Wed,2021-11-24,18:30,Spartak Moscow ru,2–1,it Napoli,25706,Otkrytie Arena,Clément Turpin,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Betis es,2–0,hu Ferencváros,30137,Estadio Benito Villamarín,Ruddy Buquet,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Red Star rs,1–0,bg Ludogorets,11252,Stadion Rajko Mitić,José Sánchez,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Leverkusen de,3–2,sct Celtic,19830,BayArena,Anastasios Sidiropoulos,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Midtjylland dk,3–2,pt Braga,7189,MCH Arena,Matej Jug,,Europa-League
+Group stage,Thu,2021-11-25,18:45,Dinamo Zagreb hr,1–1,be Genk,6892,Stadion Maksimir,Glenn Nyberg,,Europa-League
+Group stage,Thu,2021-11-25,20:45,Galatasaray tr,4–2,fr Marseille,39758,Ali Sami Yen Stadyumu,Tobias Stieler,,Europa-League
+Group stage,Thu,2021-11-25,20:45,Loko Moscow ru,0–3,it Lazio,8100,RZD Arena,Artur Dias,,Europa-League
+Group stage,Thu,2021-11-25,20:00,Leicester City eng,3–1,pl Legia Warsaw,30658,King Power Stadium,Deniz Aytekin,,Europa-League
+Group stage,Thu,2021-11-25,20:00,Rangers sct,2–0,cz Sparta Prague,48370,Ibrox Stadium,Danny Makkelie,,Europa-League
+Group stage,Thu,2021-11-25,21:00,Eint Frankfurt de,2–2,be Antwerp,30000,Commerzbank-Arena,Paul Tierney,,Europa-League
+Group stage,Thu,2021-11-25,21:00,Monaco fr,2–1,es Real Sociedad,3834,Stade Louis II.,Ivan Kružliak,,Europa-League
+Group stage,Thu,2021-11-25,21:00,Brøndby dk,1–3,fr Lyon,16645,Brøndby Stadion,Georgi Kabakov,,Europa-League
+Group stage,Thu,2021-11-25,22:00,Olympiacos gr,1–0,tr Fenerbahçe,22405,Stadio Georgios Karaiskáki,Antonio Matéu Lahoz,,Europa-League
+Group stage,Thu,2021-12-09,18:45,Legia Warsaw pl,0–1,ru Spartak Moscow,21629,Stadion Miejski Legii Warszawa im. Marsz...,Matej Jug,,Europa-League
+Group stage,Thu,2021-12-09,18:45,Antwerp be,1–0,gr Olympiacos,7992,Bosuilstadion,Marco Di Bello,,Europa-League
+Group stage,Thu,2021-12-09,18:45,Sparta Prague cz,2–0,dk Brøndby,976,Generali Arena,Craig Pawson,,Europa-League
+Group stage,Thu,2021-12-09,18:45,Sturm Graz at,1–1,fr Monaco,,Merkur Arena,Mohammed Al Hakim,,Europa-League
+Group stage,Thu,2021-12-09,18:45,Lyon fr,1–1,sct Rangers,26842,Groupama Stadium,Radu Petrescu,,Europa-League
+Group stage,Thu,2021-12-09,18:45,Napoli it,3–2,eng Leicester City,14646,Stadio San Paolo,Antonio Matéu Lahoz,,Europa-League
+Group stage,Thu,2021-12-09,18:45,Real Sociedad es,3–0,nl PSV Eindhoven,24940,Estadio Municipal de Anoeta,Felix Zwayer,,Europa-League
+Group stage,Thu,2021-12-09,20:45,Fenerbahçe tr,1–1,de Eint Frankfurt,8932,Ülker Stadyumu Fenerbahçe Şükrü Saracoğl...,Srđan Jovanović,,Europa-League
+Group stage,Thu,2021-12-09,20:00,West Ham eng,0–1,hr Dinamo Zagreb,49407,London Stadium,Maurizio Mariani,,Europa-League
+Group stage,Thu,2021-12-09,20:00,Braga pt,1–1,rs Red Star,5344,Estádio Municipal de Braga,Marco Guida,,Europa-League
+Group stage,Thu,2021-12-09,20:00,Celtic sct,3–2,es Betis,54548,Celtic Park,Daniel Stefański,,Europa-League
+Group stage,Thu,2021-12-09,21:00,Lazio it,0–0,tr Galatasaray,13178,Stadio Olimpico,Carlos del Cerro,,Europa-League
+Group stage,Thu,2021-12-09,21:00,Marseille fr,1–0,ru Loko Moscow,42614,Orange Vélodrome,William Collum,,Europa-League
+Group stage,Thu,2021-12-09,21:00,Ferencváros hu,1–0,de Leverkusen,12127,Groupama Arena,Kirill Levnikov,,Europa-League
+Group stage,Thu,2021-12-09,21:00,Genk be,0–1,at Rapid Wien,10018,Luminus Arena,Tiago Martins,,Europa-League
+Group stage,Thu,2021-12-09,22:00,Ludogorets bg,0–0,dk Midtjylland,556,Ludogorets Arena,Tobias Stieler,,Europa-League
+Knockout round play-offs,Thu,2022-02-17,18:45,Dortmund de,2–4,sct Rangers,10000,Signal Iduna Park,Clément Turpin,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-17,18:45,Barcelona es,1–1,it Napoli,73525,Camp Nou,István Kovács,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-17,19:45,Sheriff Tiraspol md,2–0,pt Braga,3062,Bolshaya Sportivnaya Arena,Danny Makkelie,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-17,20:45,Zenit ru,2–3,es Betis,28936,Gazprom Arena,Benoît Bastien,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-17,20:00,Porto pt,2–1,it Lazio,32929,Estádio Do Dragão,Serdar Gözübüyük,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-17,21:00,Sevilla es,3–1,hr Dinamo Zagreb,28372,Estadio Ramón Sánchez Pizjuán,Marco Guida,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-17,21:00,RB Leipzig de,2–2,es Real Sociedad,21113,Red Bull Arena,Cüneyt Çakιr,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-17,21:00,Atalanta it,2–1,gr Olympiacos,9448,Stadio Atleti Azzurri d'Italia,Sandro Schärer,Leg 1 of 2,Europa-League
+Knockout round play-offs,Thu,2022-02-24,18:45,Real Sociedad es,1–3,de RB Leipzig,30113,Estadio Municipal de Anoeta,Anthony Taylor,Leg 2 of 2; RB Leipzig won,Europa-League
+Knockout round play-offs,Thu,2022-02-24,18:45,Dinamo Zagreb hr,1–0,es Sevilla,9788,Stadion Maksimir,François Letexier,Leg 2 of 2; Sevilla won,Europa-League
+Knockout round play-offs,Thu,2022-02-24,18:45,Lazio it,2–2,pt Porto,24948,Stadio Olimpico,Deniz Aytekin,Leg 2 of 2; Porto won,Europa-League
+Knockout round play-offs,Thu,2022-02-24,19:45,Olympiacos gr,0–3,it Atalanta,15835,Stadio Georgios Karaiskáki,Carlos del Cerro,Leg 2 of 2; Atalanta won,Europa-League
+Knockout round play-offs,Thu,2022-02-24,20:00,Braga pt,(3) 2–0 (2),md Sheriff Tiraspol,9423,Estádio Municipal de Braga,José Sánchez,Leg 2 of 2; Braga won; Braga won on penalty kicks following extra time,Europa-League
+Knockout round play-offs,Thu,2022-02-24,20:00,Rangers sct,2–2,de Dortmund,47709,Ibrox Stadium,Antonio Matéu Lahoz,Leg 2 of 2; Rangers won,Europa-League
+Knockout round play-offs,Thu,2022-02-24,21:00,Napoli it,2–4,es Barcelona,37858,Stadio San Paolo,Sergey Karasev,Leg 2 of 2; Barcelona won,Europa-League
+Knockout round play-offs,Thu,2022-02-24,21:00,Betis es,0–0,ru Zenit,44236,Estadio Benito Villamarín,Halil Umut Meler,Leg 2 of 2; Betis won,Europa-League
+Round of 16,Wed,2022-03-09,17:45,Porto pt,0–1,fr Lyon,26309,Estádio Do Dragão,José Sánchez,Leg 1 of 2,Europa-League
+Round of 16,Wed,2022-03-09,18:45,Betis es,1–2,de Eint Frankfurt,36574,Estadio Benito Villamarín,Marco Guida,Leg 1 of 2,Europa-League
+Round of 16,Thu,2022-03-10,18:45,RB Leipzig de,,ru Spartak Moscow,,Red Bull Arena,,Leg 1 of 2; Match Cancelled,Europa-League
+Round of 16,Thu,2022-03-10,18:45,Sevilla es,1–0,eng West Ham,34728,Estadio Ramón Sánchez Pizjuán,Sandro Schärer,Leg 1 of 2,Europa-League
+Round of 16,Thu,2022-03-10,20:00,Braga pt,2–0,fr Monaco,10228,Estádio Municipal de Braga,Felix Zwayer,Leg 1 of 2,Europa-League
+Round of 16,Thu,2022-03-10,20:00,Rangers sct,3–0,rs Red Star,48589,Ibrox Stadium,Serdar Gözübüyük,Leg 1 of 2,Europa-League
+Round of 16,Thu,2022-03-10,21:00,Barcelona es,0–0,tr Galatasaray,61740,Camp Nou,Benoît Bastien,Leg 1 of 2,Europa-League
+Round of 16,Thu,2022-03-10,21:00,Atalanta it,3–2,de Leverkusen,13134,Stadio Atleti Azzurri d'Italia,Srđan Jovanović,Leg 1 of 2,Europa-League
+Round of 16,Thu,2022-03-17,,Spartak Moscow ru,,de RB Leipzig,,,,Leg 2 of 2; RB Leipzig won; Match Cancelled,Europa-League
+Round of 16,Thu,2022-03-17,18:45,Leverkusen de,0–1,it Atalanta,19871,BayArena,François Letexier,Leg 2 of 2; Atalanta won,Europa-League
+Round of 16,Thu,2022-03-17,18:45,Red Star rs,2–1,sct Rangers,47024,Stadion Rajko Mitić,István Kovács,Leg 2 of 2; Rangers won,Europa-League
+Round of 16,Thu,2022-03-17,18:45,Monaco fr,1–1,pt Braga,3892,Stade Louis II.,Andreas Ekberg,Leg 2 of 2; Braga won,Europa-League
+Round of 16,Thu,2022-03-17,20:45,Galatasaray tr,1–2,es Barcelona,50110,Ali Sami Yen Stadyumu,Daniele Orsato,Leg 2 of 2; Barcelona won,Europa-League
+Round of 16,Thu,2022-03-17,20:00,West Ham eng,2–0,es Sevilla,59981,London Stadium,Clément Turpin,Leg 2 of 2; West Ham won; Required Extra Time,Europa-League
+Round of 16,Thu,2022-03-17,21:00,Lyon fr,1–1,pt Porto,54551,Groupama Stadium,Ovidiu Hațegan,Leg 2 of 2; Lyon won,Europa-League
+Round of 16,Thu,2022-03-17,21:00,Eint Frankfurt de,1–1,es Betis,25000,Commerzbank-Arena,Michael Oliver,Leg 2 of 2; Eint Frankfurt won; Required Extra Time,Europa-League
+Quarter-finals,Thu,2022-04-07,18:45,RB Leipzig de,1–1,it Atalanta,36029,Red Bull Arena,Michael Oliver,Leg 1 of 2,Europa-League
+Quarter-finals,Thu,2022-04-07,20:00,Braga pt,1–0,sct Rangers,20331,Estádio Municipal de Braga,Davide Massa,Leg 1 of 2,Europa-League
+Quarter-finals,Thu,2022-04-07,20:00,West Ham eng,1–1,fr Lyon,59978,London Stadium,Felix Zwayer,Leg 1 of 2,Europa-League
+Quarter-finals,Thu,2022-04-07,21:00,Eint Frankfurt de,1–1,es Barcelona,48000,Commerzbank-Arena,Srđan Jovanović,Leg 1 of 2,Europa-League
+Quarter-finals,Thu,2022-04-14,18:45,Atalanta it,0–2,de RB Leipzig,17905,Stadio Atleti Azzurri d'Italia,Antonio Matéu Lahoz,Leg 2 of 2; RB Leipzig won,Europa-League
+Quarter-finals,Thu,2022-04-14,20:00,Rangers sct,3–1,pt Braga,48894,Ibrox Stadium,François Letexier,Leg 2 of 2; Rangers won; Required Extra Time,Europa-League
+Quarter-finals,Thu,2022-04-14,21:00,Lyon fr,0–3,eng West Ham,50065,Groupama Stadium,Sandro Schärer,Leg 2 of 2; West Ham won,Europa-League
+Quarter-finals,Thu,2022-04-14,21:00,Barcelona es,2–3,de Eint Frankfurt,79468,Camp Nou,Artur Dias,Leg 2 of 2; Eint Frankfurt won,Europa-League
+Semi-finals,Thu,2022-04-28,20:00,West Ham eng,1–2,de Eint Frankfurt,60000,London Stadium,Serdar Gözübüyük,Leg 1 of 2,Europa-League
+Semi-finals,Thu,2022-04-28,21:00,RB Leipzig de,1–0,sct Rangers,40303,Red Bull Arena,Benoît Bastien,Leg 1 of 2,Europa-League
+Semi-finals,Thu,2022-05-05,20:00,Rangers sct,3–1,de RB Leipzig,49397,Ibrox Stadium,Artur Dias,Leg 2 of 2; Rangers won,Europa-League
+Semi-finals,Thu,2022-05-05,21:00,Eint Frankfurt de,1–0,eng West Ham,48000,Commerzbank-Arena,Jesús Gil,Leg 2 of 2; Eint Frankfurt won,Europa-League
+Final,Wed,2022-05-18,21:00,Eint Frankfurt de,(5) 1–1 (4),sct Rangers,,Estadio Ramón Sánchez Pizjuán,Slavko Vinčič,Eint Frankfurt won on penalty kicks following extra time,Europa-League

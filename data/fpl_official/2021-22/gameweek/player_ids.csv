@@ -192,6 +192,8 @@ id,first_name,second_name,team
 700,Wout,Weghorst,5
 708,Sam,Waller,5
 726,Dara,Costelloe,5
+735,Joseph,McGlynn,5
+736,Anthony,Mancini,5
 119,César,Azpilicueta,6
 120,Olivier,Giroud,6
 121,Thiago,Emiliano da Silva,6
@@ -573,6 +575,7 @@ id,first_name,second_name,team
 665,Dynel,Simeu,16
 667,Thierry,Small,16
 680,Kgaogelo,Chauke,16
+731,Tyler,Dibling,16
 352,Joe,Hart,17
 353,Hugo,Lloris,17
 355,Toby,Alderweireld,17
@@ -658,6 +661,9 @@ id,first_name,second_name,team
 679,Edo,Kayembe,18
 698,Samuel,Kalu,18
 725,Shaqai,Forde,18
+732,Tiago,Çukur,18
+733,Adrian,Blake,18
+734,Jack,Grieves,18
 128,Kurt,Zouma,19
 406,Mark,Noble,19
 407,Darren,Randolph,19

@@ -3,6 +3,7 @@ import sys, getopt
 import requests
 import logging
 import time
+from tqdm import tqdm
 
 import json
 import pandas as pd
@@ -74,8 +75,8 @@ class FPL_Season:
 
     def sample_ranks(self):
         """Sample every rank to get season data"""
-        last = 0
-        end = 255000
+        last = 180000
+        end = 205000
         increment = 5000
         for ranks in np.arange(last + increment, end, increment):
             self.logger.info(f"Starting to scrape top {ranks}.")
@@ -317,8 +318,7 @@ class FPL_Season:
         df = pd.read_csv('data/hof/top_managers.csv')
 
         managers = {}
-        for team_id in df['team_id']:
-            self.logger.info(f"Starting to scrape manager {team_id}.")
+        for team_id in tqdm(df['team_id']):
 
             # API Requests
             res = requests.get(
@@ -330,25 +330,23 @@ class FPL_Season:
 
             (_, team_id, chips, overall_rank,
                 bench_pts, team, transfers) = team_data
-            managers[str(rank)] = {}
-            managers[str(rank)]['id'] = team_id
-            managers[str(rank)]['chips'] = chips
-            managers[str(rank)]['team'] = team['team']
-            managers[str(rank)]['cap'] = team['cap']
-            managers[str(rank)]['vice'] = team['vice']
-            managers[str(rank)]['subs'] = team['subs']
-            managers[str(rank)]['transfers'] = transfers
-            managers[str(rank)]['overall_rank'] = overall_rank
-            managers[str(rank)]['bench_pts'] = bench_pts
+            managers[str(rank)] = {
+                'id': team_id,
+                'chips': chips,
+                'team': team['team'],
+                'cap': team['cap'],
+                'vice': team['vice'],
+                'subs': team['subs'],
+                'transfers': transfers,
+                'overall_rank': overall_rank,
+                'bench_pts': bench_pts
+                }
 
             with open(
                     os.path.join(self.root, f'managers_hof.json'),
                     'w') as outfile:
                 json.dump(managers, outfile)
 
-            if self.git_cli:
-                self.logger.info("Saving csv.")
-                Git()
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -358,6 +356,6 @@ if __name__ == "__main__":
         season_data = json.load(f)
 
     fpls = FPL_Season(logger, season_data, sys.argv[1:])
-    # fpls.sample_ranks()
-    fpls.sample_one_manager(team_id=35868)
+    fpls.sample_ranks()
+    # fpls.sample_one_manager(team_id=35868)
     # fpls.sample_hof()
