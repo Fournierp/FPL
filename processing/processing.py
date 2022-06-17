@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-import glob
 import os
+import json
 
 
 def get_raw_data(rank, path='data/fpl_official/2020-21/season/raw/'):
@@ -63,15 +63,19 @@ def get_raw_data(rank, path='data/fpl_official/2020-21/season/raw/'):
 
 
 def get_season_points():
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
     for rank in np.arange(5000, 105000, 5000):
         print(rank)
-        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank, f'data/fpl_official/{season}-{season % 2000 + 1}/season/raw/')
 
         points = pd.DataFrame().reindex_like(bench_pts)
 
         free_transfer = np.zeros(105000)
 
-        all_gw_data = pd.read_csv(os.path.join('data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'element', 'total_points', 'minutes']]
+        all_gw_data = pd.read_csv(os.path.join(f'data/fpl_official/vaastav/data/{season}-{season % 2000 + 1}/gws/merged_gw.csv'))[['GW', 'element', 'total_points', 'minutes']]
 
         for gw in np.arange(1, 39):
             gw_data = all_gw_data[all_gw_data['GW'] == gw]
@@ -129,19 +133,23 @@ def get_season_points():
 
         points = points.fillna(0)
         points = points.astype(int)
-        points.to_csv(f'data/fpl_official/2020-21/season/processed/points_{rank}.csv')
+        points.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/points_{rank}.csv')
 
 
 def get_season_value():
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
     for rank in np.arange(5000, 105000, 5000):
         print(rank)
-        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank, f'data/fpl_official/{season}-{season % 2000 + 1}/season/raw/')
 
         team_value = pd.DataFrame().reindex_like(bench_pts)
         in_the_bank = pd.DataFrame().reindex_like(bench_pts)
         bench_value = pd.DataFrame().reindex_like(bench_pts)
 
-        all_gw_data = pd.read_csv(os.path.join('data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'element', 'value']]
+        all_gw_data = pd.read_csv(os.path.join(f'data/fpl_official/vaastav/data/{season}-{season % 2000 + 1}/gws/merged_gw.csv'))[['GW', 'element', 'value']]
 
         for gw in np.arange(1, 39):
             gw_data = all_gw_data[all_gw_data['GW'] == gw]
@@ -201,20 +209,24 @@ def get_season_value():
         bench_value = bench_value.fillna(0)
         bench_value = bench_value.astype(int)
 
-        team_value.to_csv(f'data/fpl_official/2020-21/season/processed/team_value_{rank}.csv')
-        in_the_bank.to_csv(f'data/fpl_official/2020-21/season/processed/in_the_bank_{rank}.csv')
-        bench_value.to_csv(f'data/fpl_official/2020-21/season/processed/bench_value_{rank}.csv')
+        team_value.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/team_value_{rank}.csv')
+        in_the_bank.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/in_the_bank_{rank}.csv')
+        bench_value.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/bench_value_{rank}.csv')
 
 
 def get_season_formation():
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
     for rank in np.arange(5000, 105000, 5000):
         print(rank)
-        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank, f'data/fpl_official/{season}-{season % 2000 + 1}/season/raw/')
 
         team_formation = pd.DataFrame().reindex_like(bench_pts)
         bench_order = pd.DataFrame().reindex_like(bench_pts)
 
-        all_gw_data = pd.read_csv(os.path.join('data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))
+        all_gw_data = pd.read_csv(os.path.join(f'data/fpl_official/vaastav/data/{season}-{season % 2000 + 1}/gws/merged_gw.csv'))
         all_gw_data = all_gw_data[['position', 'element']].drop_duplicates(subset='element', keep="first")
 
         for gw in np.arange(1, 39):
@@ -245,48 +257,56 @@ def get_season_formation():
         bench_order = bench_order.fillna(0)
         bench_order = bench_order.astype(int)
 
-        team_formation.to_csv(f'data/fpl_official/2020-21/season/processed/team_formation_{rank}.csv')
-        bench_order.to_csv(f'data/fpl_official/2020-21/season/processed/bench_order_{rank}.csv')
+        team_formation.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/team_formation_{rank}.csv')
+        bench_order.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/bench_order_{rank}.csv')
 
 
 def get_season_pos_values():
-    for rank in np.arange(35000, 105000, 5000):
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
+    for rank in np.arange(5000, 105000, 5000):
         print(rank)
-        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank, f'data/fpl_official/{season}-{season % 2000 + 1}/season/raw/')
 
         gk_value = pd.DataFrame().reindex_like(bench_pts)
         def_value = pd.DataFrame().reindex_like(bench_pts)
         mid_value = pd.DataFrame().reindex_like(bench_pts)
         fwd_value = pd.DataFrame().reindex_like(bench_pts)
 
-        all_gw_data = pd.read_csv(os.path.join('data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'position', 'element', 'minutes', 'value']]
+        all_gw_data = pd.read_csv(os.path.join(f'data/fpl_official/vaastav/data/{season}-{season % 2000 + 1}/gws/merged_gw.csv'))[['GW', 'position', 'element', 'minutes', 'value']]
 
         for gw in np.arange(1, 39):
+            prev_gw_data = all_gw_data[all_gw_data['GW'] == gw-1]
             gw_data = all_gw_data[all_gw_data['GW'] == gw]
             next_gw_data = all_gw_data[all_gw_data['GW'] == gw+1]
 
             for player in gk_value.index:
                 # FPL Team
+                prev_fpl_team = prev_gw_data[prev_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
                 fpl_team = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)])].drop_duplicates(subset='element', keep="first")
-                fpl_bench = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)][-3:])].drop_duplicates(subset='element', keep="first")
                 next_fpl_team = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
-                next_fpl_bench = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)][-3:] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
 
                 # Team value
                 # Handle missing players from DF due to BGW
                 gk_value.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'GK']['value']) +
                     sum(fpl_team[fpl_team['position'] == 'GK']['value']) +
                     sum(next_fpl_team[next_fpl_team['position'] == 'GK']['value'])
                 )
                 def_value.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'DEF']['value']) +
                     sum(fpl_team[fpl_team['position'] == 'DEF']['value']) +
                     sum(next_fpl_team[next_fpl_team['position'] == 'DEF']['value'])
                 )
                 mid_value.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'MID']['value']) +
                     sum(fpl_team[fpl_team['position'] == 'MID']['value']) +
                     sum(next_fpl_team[next_fpl_team['position'] == 'MID']['value'])
                 )
                 fwd_value.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'FWD']['value']) +
                     sum(fpl_team[fpl_team['position'] == 'FWD']['value']) +
                     sum(next_fpl_team[next_fpl_team['position'] == 'FWD']['value'])
                 )
@@ -300,16 +320,125 @@ def get_season_pos_values():
         fwd_value = fwd_value.fillna(0)
         fwd_value = fwd_value.astype(int)
 
-        gk_value.to_csv(f'data/fpl_official/2020-21/season/processed/gk_value_{rank}.csv')
-        def_value.to_csv(f'data/fpl_official/2020-21/season/processed/def_value_{rank}.csv')
-        mid_value.to_csv(f'data/fpl_official/2020-21/season/processed/mid_value_{rank}.csv')
-        fwd_value.to_csv(f'data/fpl_official/2020-21/season/processed/fwd_value_{rank}.csv')
+        gk_value.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/gk_value_{rank}.csv')
+        def_value.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/def_value_{rank}.csv')
+        mid_value.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/mid_value_{rank}.csv')
+        fwd_value.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/fwd_value_{rank}.csv')
+
+
+def get_season_assets():
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
+    for rank in np.arange(5000, 105000, 5000):
+        print(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank, f'data/fpl_official/{season}-{season % 2000 + 1}/season/raw/')
+
+        gk_premiums = pd.DataFrame().reindex_like(bench_pts)
+        def_premiums = pd.DataFrame().reindex_like(bench_pts)
+        mid_premiums = pd.DataFrame().reindex_like(bench_pts)
+        fwd_premiums = pd.DataFrame().reindex_like(bench_pts)
+
+        gk_cheap = pd.DataFrame().reindex_like(bench_pts)
+        def_cheap = pd.DataFrame().reindex_like(bench_pts)
+        mid_cheap = pd.DataFrame().reindex_like(bench_pts)
+        fwd_cheap = pd.DataFrame().reindex_like(bench_pts)
+
+        all_gw_data = pd.read_csv(os.path.join(f'data/fpl_official/vaastav/data/{season}-{season % 2000 + 1}/gws/merged_gw.csv'))[['GW', 'position', 'element', 'minutes', 'value']]
+
+        for gw in np.arange(1, 39):
+            prev_gw_data = all_gw_data[all_gw_data['GW'] == gw-1]
+            gw_data = all_gw_data[all_gw_data['GW'] == gw]
+            next_gw_data = all_gw_data[all_gw_data['GW'] == gw+1]
+
+            for player in gk_premiums.index:
+                # FPL Team
+                prev_fpl_team = prev_gw_data[prev_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
+                fpl_team = gw_data[gw_data['element'].isin(teams.loc[player, str(gw)])].drop_duplicates(subset='element', keep="first")
+                next_fpl_team = next_gw_data[next_gw_data['element'].isin([player_id for player_id in teams.loc[player, str(gw)] if player_id not in gw_data['element'].values])].drop_duplicates(subset='element', keep="first")
+
+                # Team value
+                # Handle missing players from DF due to BGW
+                gk_premiums.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'GK']['value'] > 55) +
+                    sum(fpl_team[fpl_team['position'] == 'GK']['value'] > 55) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'GK']['value'] > 55)
+                )
+                def_premiums.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'DEF']['value'] >= 65) +
+                    sum(fpl_team[fpl_team['position'] == 'DEF']['value'] >= 65) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'DEF']['value'] >= 65)
+                )
+                mid_premiums.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'MID']['value'] > 90) +
+                    sum(fpl_team[fpl_team['position'] == 'MID']['value'] > 90) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'MID']['value'] > 90)
+                )
+                fwd_premiums.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'FWD']['value'] > 100) +
+                    sum(fpl_team[fpl_team['position'] == 'FWD']['value'] > 100) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'FWD']['value'] > 100)
+                )
+
+                gk_cheap.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'GK']['value'] < 45) +
+                    sum(fpl_team[fpl_team['position'] == 'GK']['value'] < 45) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'GK']['value'] < 45)
+                )
+                def_cheap.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'DEF']['value'] < 50) +
+                    sum(fpl_team[fpl_team['position'] == 'DEF']['value'] < 50) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'DEF']['value'] < 50)
+                )
+                mid_cheap.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'MID']['value'] < 60) +
+                    sum(fpl_team[fpl_team['position'] == 'MID']['value'] < 60) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'MID']['value'] < 60)
+                )
+                fwd_cheap.loc[player, str(gw)] = (
+                    sum(prev_fpl_team[prev_fpl_team['position'] == 'FWD']['value'] <= 60) +
+                    sum(fpl_team[fpl_team['position'] == 'FWD']['value'] <= 60) +
+                    sum(next_fpl_team[next_fpl_team['position'] == 'FWD']['value'] <= 60)
+                )
+
+        gk_premiums = gk_premiums.fillna(0)
+        gk_premiums = gk_premiums.astype(int)
+        def_premiums = def_premiums.fillna(0)
+        def_premiums = def_premiums.astype(int)
+        mid_premiums = mid_premiums.fillna(0)
+        mid_premiums = mid_premiums.astype(int)
+        fwd_premiums = fwd_premiums.fillna(0)
+        fwd_premiums = fwd_premiums.astype(int)
+
+        gk_cheap = gk_cheap.fillna(0)
+        gk_cheap = gk_cheap.astype(int)
+        def_cheap = def_cheap.fillna(0)
+        def_cheap = def_cheap.astype(int)
+        mid_cheap = mid_cheap.fillna(0)
+        mid_cheap = mid_cheap.astype(int)
+        fwd_cheap = fwd_cheap.fillna(0)
+        fwd_cheap = fwd_cheap.astype(int)
+
+        gk_premiums.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/gk_premiums_{rank}.csv')
+        def_premiums.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/def_premiums_{rank}.csv')
+        mid_premiums.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/mid_premiums_{rank}.csv')
+        fwd_premiums.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/fwd_premiums_{rank}.csv')
+
+        gk_cheap.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/gk_cheap_{rank}.csv')
+        def_cheap.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/def_cheap_{rank}.csv')
+        mid_cheap.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/mid_cheap_{rank}.csv')
+        fwd_cheap.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/fwd_cheap_{rank}.csv')
 
 
 def get_season_transfers():
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
     for rank in np.arange(5000, 105000, 5000):
         print(rank)
-        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank)
+        chips, teams, caps, vice, bench_pts, transfers = get_raw_data(rank, f'data/fpl_official/{season}-{season % 2000 + 1}/season/raw/')
 
         hit_points = pd.DataFrame().reindex_like(bench_pts)
         free_transfers = pd.DataFrame().reindex_like(bench_pts)
@@ -357,13 +486,17 @@ def get_season_transfers():
         rolled = rolled.fillna(0)
         rolled = rolled.astype(int)
 
-        hit_points.to_csv(f'data/fpl_official/2020-21/season/processed/hit_points_{rank}.csv')
-        free_transfers.to_csv(f'data/fpl_official/2020-21/season/processed/free_transfers_{rank}.csv')
-        rolled.to_csv(f'data/fpl_official/2020-21/season/processed/rolled_{rank}.csv')
+        hit_points.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/hit_points_{rank}.csv')
+        free_transfers.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/free_transfers_{rank}.csv')
+        rolled.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/rolled_{rank}.csv')
 
 
 def get_season_misc():
-    all_gw_data = pd.read_csv(os.path.join('../data/fpl_official/vaastav/data/2020-21/gws/merged_gw.csv'))[['GW', 'position', 'element', 'minutes']]
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
+    all_gw_data = pd.read_csv(os.path.join(f'data/fpl_official/vaastav/data/{season}-{season % 2000 + 1}/gws/merged_gw.csv'))[['GW', 'position', 'element', 'minutes']]
     mapping = {
         'DEF': 1,
         'MID': 2,
@@ -422,12 +555,16 @@ def get_season_misc():
         transfer_position = transfer_position.fillna(0)
         transfer_position = transfer_position.astype(int)
 
-        captain_position.to_csv(f'../data/fpl_official/20-21/season/processed/captain_position_{rank}.csv')
-        transfer_position.to_csv(f'../data/fpl_official/20-21/season/processed/transfer_position_{rank}.csv')
+        captain_position.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/captain_position_{rank}.csv')
+        transfer_position.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/processed/transfer_position_{rank}.csv')
 
 
 def get_hof_transfers():
-    chips, teams, caps, vice, bench_pts, transfers = get_raw_data('hof', 'data/fpl_official/2021-22/season/')
+    with open('info.json') as f:
+        season_data = json.load(f)
+    season = season_data['season']
+
+    chips, teams, caps, vice, bench_pts, transfers = get_raw_data('hof', f'data/fpl_official/{season}-{season % 2000 + 1}/season/')
 
     hit_points = pd.DataFrame().reindex_like(bench_pts)
     free_transfers = pd.DataFrame().reindex_like(bench_pts)
@@ -477,15 +614,16 @@ def get_hof_transfers():
     rolled = rolled.fillna(0)
     rolled = rolled.astype(int)
 
-    hit_points.to_csv(f'data/fpl_official/2021-22/season/hit_points_hof.csv')
-    free_transfers.to_csv(f'data/fpl_official/2021-22/season/free_transfers_hof.csv')
-    rolled.to_csv(f'data/fpl_official/2021-22/season/rolled_hof.csv')
+    hit_points.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/hit_points_hof.csv')
+    free_transfers.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/free_transfers_hof.csv')
+    rolled.to_csv(f'data/fpl_official/{season}-{season % 2000 + 1}/season/rolled_hof.csv')
 
 
 # get_season_points()
 # get_season_value()
 # get_season_formation()
 # get_season_pos_values()
+get_season_assets()
 # get_season_transfers()
 # get_season_misc()
-get_hof_transfers()
+# get_hof_transfers()

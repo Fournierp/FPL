@@ -41,7 +41,7 @@ def write():
 
         col1, col2 = st.columns(2)
         with col1:
-            horizon = st.slider("Horizon", min_value=1, max_value=8, value=5, step=1)
+            horizon = st.slider("Horizon", min_value=1, max_value=min(39-start, 8), value=min(39-start, 5), step=1)
         with col2:
             premium = st.selectbox("Data type", ['Premium', 'Free'], 0)
 
@@ -74,13 +74,13 @@ def write():
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            wc_gw = st.selectbox("Wildcard", [None] + [gw for gw in np.arange(horizon)], 0)
+            wc_gw = st.selectbox("Wildcard", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col2:
-            fh_gw = st.selectbox("Freehit", [None] + [gw for gw in np.arange(horizon)], 0)
+            fh_gw = st.selectbox("Freehit", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col3:
-            tc_gw = st.selectbox("Triple Captain", [None] + [gw for gw in np.arange(horizon)], 0)
+            tc_gw = st.selectbox("Triple Captain", [None] + [start + gw for gw in np.arange(horizon)], 0)
         with col4:
-            bb_gw = st.selectbox("Bench Boost", [None] + [gw for gw in np.arange(horizon)], 0)
+            bb_gw = st.selectbox("Bench Boost", [None] + [start + gw for gw in np.arange(horizon)], 0)
 
 
     with st.expander('Parameters', expanded=True):
@@ -104,23 +104,29 @@ def write():
                     noise=False,
                     premium=True if premium=='Premium' else False)
 
-                to.sensitivity_analysis(
-                    repeats=repeats,
-                    iterations=iterations,
-                    parameters={
-                        'model_name':'sensitivity_analysis',
-                        'freehit_gw':fh_gw if fh_gw is not None else -1,
-                        'wildcard_gw':wc_gw if wc_gw is not None else -1,
-                        'bboost_gw':bb_gw if bb_gw is not None else -1,
-                        'threexc_gw':tc_gw if tc_gw is not None else -1,
-                        'objective_type':'decay' if decay != 0 else 'linear',
-                        'decay_gameweek':decay,
-                        'vicecap_decay':vicecap_decay,
-                        'decay_bench':[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
-                        'ft_val':ft_val,
-                        'itb_val':itb_val,
-                        'hit_val':hit_val
-                    })
+                my_bar = st.progress(0)
+                progress = 0
+
+                for tmp in to.sensitivity_analysis(
+                        repeats=repeats,
+                        iterations=iterations,
+                        parameters={
+                            'model_name':'sensitivity_analysis',
+                            'freehit_gw':fh_gw-start if fh_gw is not None else -1,
+                            'wildcard_gw':wc_gw-start if wc_gw is not None else -1,
+                            'bboost_gw':bb_gw-start if bb_gw is not None else -1,
+                            'threexc_gw':tc_gw-start if tc_gw is not None else -1,
+                            'objective_type':'decay' if decay != 0 else 'linear',
+                            'decay_gameweek':decay,
+                            'vicecap_decay':vicecap_decay,
+                            'decay_bench':[gk_weight, first_bench_weight, second_bench_weight, third_bench_weight],
+                            'ft_val':ft_val,
+                            'itb_val':itb_val,
+                            'hit_val':hit_val
+                        }):
+
+                    progress += 1
+                    my_bar.progress(progress / repeats)
 
                 player_names = (
                     pd
@@ -144,6 +150,7 @@ def write():
                             lambda x: (hashes[str(x)][0], hashes[str(x)][1])))
 
                 max_cols = [col for col in df.columns if 'EV_' in col]
+                evs = np.unique(df[max_cols].values)
 
                 df['Mean'] = (
                     df.apply(
@@ -163,7 +170,7 @@ def write():
                 # df = df.sort_values(['Total', '1', '2', '3'], ascending=False)
                 # st.dataframe(df[['Transfer', 'Total', '1', '2', '3', 'Mean', 'Std']])
 
-                if fh_gw == 0:
+                if fh_gw == 0 or wc_gw == 0:
                     # Freehit graph
 
                     # Freehit lineups
@@ -511,7 +518,7 @@ def write():
 
                         newax = fig.add_axes([.63, 0.11+j*.105, .25 , .07])
                         newax.boxplot(
-                            [-row[col] for col in max_cols if pd.notnull(row[col])],
+                            [-row[col] for col in max_cols if pd.notnull(row[col]) and row[col] != 0],
                             vert=False,
                             patch_artist=True,
                             capprops=dict(color='#656B73'),
@@ -522,8 +529,8 @@ def write():
                             widths=.6)
 
                         newax.set_xlim(
-                            -np.max(np.max(df[max_cols], axis=0))-1,
-                            -np.min(np.min(df[max_cols], axis=0))+1)
+                            -np.max(evs[evs != 0])-1,
+                            -np.min(evs[evs != 0])+1)
                         newaxes.append(newax)
 
                     # Column headers

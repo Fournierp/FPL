@@ -85,7 +85,7 @@ class Team_Optimization:
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
         # Drop players that are not predicted to play much to reduce the search space
-        # self.data.drop(self.data[self.data.total_ev <= 1].index, inplace=True)
+        self.data.drop(self.data[self.data.total_ev <= 1].index, inplace=True)
         self.players = self.data.index.tolist()
 
         self.initial_team_df = pd.DataFrame(
@@ -549,14 +549,14 @@ class Team_Optimization:
             (
                 so.expr_sum(
                     self.bench[p, w, 0] for p in self.players
-                    if self.data.loc[p, 'G'] == 1) <=
-                1 for w in self.gameweeks),
+                    if self.data.loc[p, 'G'] == 1) ==
+                1 - self.bboost[w] for w in self.gameweeks),
             name='one_bench_gk')
         # There must be a single substitute per bench spot
         self.model.add_constraints(
             (
                 so.expr_sum(self.bench[p, w, o] for p in self.players) <= 1
-                for w in self.gameweeks for o in [1, 2, 3]),
+                for w in self.gameweeks for o in [0, 1, 2, 3]),
             name='one_per_bench_spot')
 
         # The players not started in the team are benched
@@ -3209,6 +3209,8 @@ class Team_Optimization:
             sa = self.suboptimals(
                 f"sensitivity_analysis_{r}",
                 iterations=iterations)
+
+            yield 1
 
             # Store data
             for i, (k, v) in enumerate(sa.items()):
