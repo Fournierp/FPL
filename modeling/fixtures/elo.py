@@ -279,7 +279,7 @@ class Elo:
                 self.teams.team == away_team, 'rating'] = self.rating_update(
                     away_rating, res_a, exp_a)
 
-    def backtest(self, test_season, path='', save=False):
+    def backtest(self, test_season, path='', save=True):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -407,15 +407,11 @@ if __name__ == "__main__":
                 })
             .dropna())
 
-        # Train model on all games up to the previous GW
-        model = Elo(df)
-        model.fit()
-
         season = '2122'
         # Get last finished GW
         previous_gw = get_next_gw() - 2
 
-        # Get GW dates
+        # Get GW dates of Last season
         fixtures = (
             pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
             .loc[:, ['event', 'kickoff_time']])
@@ -445,11 +441,16 @@ if __name__ == "__main__":
             .drop_duplicates()
             )
 
-        # Run inference on the specific GW
-        predictions = model.evaluate(
-            season_games[season_games['event'] == previous_gw])
-        print("Elo model's Ranked Probability Score on the {} games from GW{} is : {:.4f}.".format(len(predictions), previous_gw,  predictions.rps.mean()))
+        # Train model on all games up to the previous GW
+        model = Elo(
+            pd.concat([
+                df,
+                season_games.loc[season_games['event'] <= previous_gw]
+            ])
+        )
+        model.fit()
 
+        # Run inference on the specific GW
         predictions = model.predict(
             season_games[season_games['event'] == previous_gw + 1])
 
@@ -466,4 +467,5 @@ if __name__ == "__main__":
             )
 
         model = Elo(df)
-        model.backtest(df, season)
+        season = '2122'
+        model.backtest(season)

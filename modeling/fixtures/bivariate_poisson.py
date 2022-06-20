@@ -384,7 +384,7 @@ if __name__ == "__main__":
         model = Bivariate_Poisson(
             pd.concat([
                 df.loc[df['season'] != season],
-                season_games[season_games['event'] < previous_gw]
+                season_games[season_games['event'] <= previous_gw]
                 ]))
         model.maximum_likelihood_estimation()
 
@@ -404,10 +404,7 @@ if __name__ == "__main__":
             .sort_values("date")
         )
 
-        predictions = model.evaluate(
-            season_games[season_games['event'] == previous_gw])
-        print("Bivariate Poisson model's Ranked Probability Score on the {} games from GW{} is : {:.4f}.".format(len(predictions), previous_gw,  predictions.rps.mean()))
-
+        # Run inference on the specific GW
         predictions = model.predict(
             season_games[season_games['event'] == previous_gw + 1])
 

@@ -435,7 +435,7 @@ if __name__ == "__main__":
         model = Bayesian(
             pd.concat([
                 df.loc[df['season'] != season],
-                season_games[season_games['event'] < previous_gw]
+                season_games[season_games['event'] <= previous_gw]
                 ]))
         model.fit()
 
@@ -452,10 +452,6 @@ if __name__ == "__main__":
         )
 
         # Run inference on the specific GW
-        predictions = model.evaluate(
-            season_games[season_games['event'] == previous_gw])
-        print("Bayseian model's Ranked Probability Score on the {} games from GW{} is : {:.4f}.".format(len(predictions), previous_gw,  predictions.rps.mean()))
-
         predictions = model.predict(
             season_games[season_games['event'] == previous_gw + 1])
 
