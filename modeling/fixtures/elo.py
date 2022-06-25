@@ -164,8 +164,8 @@ class Elo:
                 float: Odds of a draw
             """
             return (
-                np.exp(- (rating_a - rating_b) / 10) /
-                np.power(1 + np.exp(- (rating_a - rating_b) / 10), 2))
+                np.exp(- (rating_a - rating_b) / 100) /
+                np.power(1 + np.exp(- (rating_a - rating_b) / 100), 2))
 
         def synthesize_odds(row):
             """ Lambda function that parses row by row to compute score matrix
