@@ -59,7 +59,7 @@ class Elo:
         """
         return 1 / (1 + pow(10, (rating_b - rating_a) / w))
 
-    def rating_update(self, rating, actual_score, expected_score, k=20):
+    def rating_update(self, rating, actual_score, expected_score, perf=0, k=20):
         """ Amount by which the rating of a team will be changed based on the outcome
         and expectation of a game
 
@@ -67,12 +67,13 @@ class Elo:
             rating (int): Rating of the team
             actual_score (float): Result
             expected_score (float): Expected result
+            perf (int, optional): Performance boost
             k (int, optional): factor by which a victory changes rating
 
         Returns:
             (float): elo points delta
         """
-        return rating + k * (actual_score - expected_score)
+        return rating + k * (actual_score - expected_score) + perf
 
     def fit(self, hfa=50):
         """ Compute the current team ratings based on past results
@@ -138,12 +139,19 @@ class Elo:
                 else 0.5 if match['winner'] == 1
                 else 0)
 
+            gd = match['score1'] - match['score2']
             self.teams.loc[
                 self.teams.team == home_team, 'rating'] = \
-                self.rating_update(home_rating, res_h, exp_h)
+                self.rating_update(
+                    home_rating, res_h, exp_h,
+                    5 if gd > 2 else -5 if gd < 2 else 0
+                )
             self.teams.loc[
                 self.teams.team == away_team, 'rating'] = \
-                self.rating_update(away_rating, res_a, exp_a)
+                self.rating_update(
+                    away_rating, res_a, exp_a,
+                    -5 if gd > 2 else 5 if gd < 2 else 0
+                    )
 
     def predict(self, games, hfa=50):
         """ Predict the result of games
