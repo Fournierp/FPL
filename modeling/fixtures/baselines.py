@@ -309,7 +309,8 @@ if __name__ == "__main__":
     with open('info.json') as f:
         season = json.load(f)['season']
 
-    next_gw = get_next_gw()
+    # Get last finished GW
+    previous_gw = get_next_gw() - 2
 
     df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
     df = (
@@ -345,7 +346,7 @@ if __name__ == "__main__":
     baselines = Baselines(
         pd.concat([
             df.loc[df['season'] != season],
-            season_games[season_games['event'] < next_gw]
+            season_games[season_games['event'] < previous_gw]
             ]))
 
     # Add the home team and away team index for running inference
@@ -365,5 +366,5 @@ if __name__ == "__main__":
     )
 
     predictions = baselines.evaluate(
-        season_games[season_games['event'] == next_gw], 'favorite')
-    print(f"{(np.mean(predictions.rps)*100):.2f}")
+        season_games[season_games['event'] == previous_gw], 'favorite')
+    print("Baseline model's Ranked Probability Score on the {} games from GW{} is : {:.4f}.".format(len(predictions), previous_gw,  predictions.rps.mean()))
