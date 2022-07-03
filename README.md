@@ -62,6 +62,7 @@ python3 optimization/team_optimization.py
 
 * 2.0
   * FPL Optimization Dashboard
+  * Master Thesis code
 
   ![Demo](/optimization/streamlit-app.gif)
 
