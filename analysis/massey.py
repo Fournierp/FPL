@@ -4,7 +4,7 @@ import numpy as np
 class Massey:
     """ Massey sport ranking """
 
-    def __init__(self, fixtures, league_table, decay=False, draw_weight=.5):
+    def __init__(self, fixtures, league_table, decay=False):
         """
         Args:
             fixtures (pd.DataFrame): Games from season to used
@@ -16,7 +16,6 @@ class Massey:
             fixtures[fixtures['finished'] == True]
             [['team_a', 'team_a_score', 'team_h', 'team_h_score', "kickoff_time"]])
         self.league_table = league_table
-        self.draw_weight = draw_weight
 
         self.results["date"] = pd.to_datetime(self.results["kickoff_time"])
         self.results["days_since"] = (self.results["date"].max() - self.results["date"]).dt.days
@@ -59,8 +58,13 @@ class Massey:
             team (int): Team index
         """
         return (
-            self.home_results[self.home_results['team_h'] == team]['gd'].sum() +
-            self.away_results[self.away_results['team_a'] == team]['gd'].sum())
+            sum(
+                self.home_results[self.home_results['team_h'] == team]['gd'] *
+                self.home_results[self.home_results['team_h'] == team]['weight']) +
+            sum(
+                self.away_results[self.away_results['team_a'] == team]['gd'] *
+                self.away_results[self.away_results['team_a'] == team]['weight'])
+            )
 
     def _time_decay(self, xi, t):
         """ Compute importance weight based on time elapsed
