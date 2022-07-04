@@ -25,12 +25,20 @@ class Massey:
         self.home_results = self.results.copy()
         self.home_results['gd'] = self.home_results.apply(
             lambda row: self._score_delta_at_home(row), axis=1)
-        self.home_results = (self.home_results.loc[:, ['team_a', 'team_h', 'gd', "weight"]])
+        self.home_results = (
+            self.home_results.loc[:, [
+                'team_a', 'team_h',
+                'team_h_score', 'team_a_score',
+                'gd', "weight"]])
         
         self.away_results = self.results.copy()
         self.away_results['gd'] = self.away_results.apply(
             lambda row: self._score_delta_at_away(row), axis=1)
-        self.away_results = (self.away_results.loc[:, ['team_a', 'team_h', 'gd', "weight"]])
+        self.away_results = (
+            self.away_results.loc[:, [
+                'team_a', 'team_h',
+                'team_h_score', 'team_a_score',
+                'gd', "weight"]])
 
     def _score_delta_at_home(self, row):
         """
@@ -52,7 +60,7 @@ class Massey:
 
     def _aggregate_gd(self, team):
         """
-        Computes the overall points accumulated teams
+        Computes the overall goal difference accumulated
 
         Args:
             team (int): Team index
@@ -64,6 +72,20 @@ class Massey:
             sum(
                 self.away_results[self.away_results['team_a'] == team]['gd'] *
                 self.away_results[self.away_results['team_a'] == team]['weight'])
+            )
+    
+    def _aggregate_gf(self, team):
+        """
+        Computes the overall goals scored accumulated
+
+        Args:
+            team (int): Team index
+        """
+        return (
+            sum(
+                self.home_results[self.home_results['team_h'] == team]['team_h_score']) +
+            sum(
+                self.away_results[self.away_results['team_a'] == team]['team_a_score'])
             )
 
     def _time_decay(self, xi, t):
@@ -87,29 +109,59 @@ class Massey:
         lt = (self.league_table.id.map(self._aggregate_gd))
         self.league_table['gd'] = lt
 
-        x = pd.DataFrame(
+        m = pd.DataFrame(
             index=self.league_table["id"],
             columns=self.league_table["id"]).fillna(0)
 
         for i in range(1, 21):
-            x.loc[i, i] = 0
+            m.loc[i, i] = 0
 
         for _, row in self.results.iterrows():
-            res = 1
-
-            x.loc[int(row['team_h']), int(row['team_h'])] += res
-            x.loc[int(row['team_h']), int(row['team_a'])] = -res
+            m.loc[int(row['team_h']), int(row['team_h'])] += row['weight']
+            m.loc[int(row['team_h']), int(row['team_a'])] -= row['weight']
             
-            x.loc[int(row['team_a']), int(row['team_a'])] += res
-            x.loc[int(row['team_a']), int(row['team_h'])] = -res
+            m.loc[int(row['team_a']), int(row['team_a'])] += row['weight']
+            m.loc[int(row['team_a']), int(row['team_h'])] -= row['weight']
 
-        X = x.values
+        m.loc[21, :] = 1
+        M = m.values
+        p = np.append(self.league_table['gd'].values, 0)
 
-        y = self.league_table['gd'].values
+        # Solve p = Mr
+        self.league_table['massey'] = np.linalg.lstsq(M, p, rcond=None)[0]# np.linalg.inv(M) @ p
+        return self.league_table
 
-        X[19, :] = 1
-        y[19] = 0
+    def offensive_defensive(self):
+        """ Computes offensive defensive ratings
 
-        # Solve y = Xr
-        self.league_table['massey'] = np.linalg.inv(X) @ y
+        Returns:
+            (pd.DataFrame): League table of ratings
+        """
+
+        lt = (self.league_table.id.map(self._aggregate_gd))
+        self.league_table['gd'] = lt
+
+        m = pd.DataFrame(
+            index=self.league_table["id"],
+            columns=self.league_table["id"]).fillna(0)
+
+        for i in range(1, 21):
+            m.loc[i, i] = 0
+
+        for _, row in self.results.iterrows():
+            m.loc[int(row['team_h']), int(row['team_h'])] += 1
+            m.loc[int(row['team_h']), int(row['team_a'])] += 1
+
+            m.loc[int(row['team_a']), int(row['team_a'])] += 1
+            m.loc[int(row['team_a']), int(row['team_h'])] += 1
+
+        M = m.values
+
+        T = np.diag(M)
+        r = self.rating().massey
+        f = self.league_table.id.map(self._aggregate_gf)
+        Tr_f =  (T * r) - f 
+
+        self.league_table['d'] = np.linalg.lstsq(M, Tr_f, rcond=None)[0] #np.linalg.inv(M) @ Tr_f
+        self.league_table['o'] = r - self.league_table['d']
         return self.league_table
