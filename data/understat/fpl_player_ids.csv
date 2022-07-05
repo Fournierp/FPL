@@ -8,7 +8,6 @@ id,first_name,second_name,team,name
 7,Granit,Xhaka,1,Granit Xhaka
 8,Pablo,Marí,1,Pablo Marí
 9,Héctor,Bellerín,1,Héctor Bellerín
-10,Calum,Chambers,1,Calum Chambers
 11,Sead,Kolasinac,1,Sead Kolasinac
 12,Mohamed Naser,El Sayed Elneny,1,Mohamed Naser El Sayed Elneny
 13,Ainsley,Maitland-Niles,1,Ainsley Maitland-Niles
@@ -35,6 +34,18 @@ id,first_name,second_name,team,name
 559,Aaron,Ramsdale,1,Aaron Ramsdale
 572,Arthur,Okonkwo,1,Arthur Okonkwo
 590,Takehiro,Tomiyasu,1,Takehiro Tomiyasu
+664,Charlie,Patino,1,Charlie Patino
+692,Omari,Hutchinson,1,Omari Hutchinson
+693,Salah-Eddine,Oulad M'hand,1,Salah-Eddine Oulad M'hand
+694,Mika,Biereth,1,Mika Biereth
+695,Ryan,Alebiosu,1,Ryan Alebiosu
+705,Zach,Awe,1,Zach Awe
+711,Zak,Swanson,1,Zak Swanson
+719,Mazeed,Ogungbo,1,Mazeed Ogungbo
+720,Marcelo,Flores,1,Marcelo Flores
+721,Miguel,Azeez,1,Miguel Azeez
+730,Alex,Kirk,1,Alex Kirk
+10,Calum,Chambers,2,Calum Chambers
 28,Jed,Steer,2,Jed Steer
 29,Conor,Hourihane,2,Conor Hourihane
 30,Emiliano,Martínez,2,Emiliano Martínez
@@ -45,10 +56,8 @@ id,first_name,second_name,team,name
 36,Kortney,Hause,2,Kortney Hause
 37,Mahmoud Ahmed,Ibrahim Hassan,2,Mahmoud Ahmed Ibrahim Hassan
 38,Tyrone,Mings,2,Tyrone Mings
-39,Matt,Targett,2,Matt Targett
 40,Ollie,Watkins,2,Ollie Watkins
 41,Marvelous,Nakamba,2,Marvelous Nakamba
-42,Anwar,El Ghazi,2,Anwar El Ghazi
 43,Emiliano,Buendía Stati,2,Emiliano Buendía Stati
 44,Matthew,Cash,2,Matthew Cash
 45,Ezri,Konsa Ngoyo,2,Ezri Konsa Ngoyo
@@ -59,7 +68,7 @@ id,first_name,second_name,team,name
 50,Douglas Luiz,Soares de Paulo,2,Douglas Luiz Soares de Paulo
 51,Jacob,Ramsey,2,Jacob Ramsey
 52,Ashley,Young,2,Ashley Young
-283,Axel,Tuanzebe,2,Axel Tuanzebe
+168,Lucas,Digne,2,Lucas Digne
 337,Danny,Ings,2,Danny Ings
 492,Leon,Bailey,2,Leon Bailey
 496,Aaron,Ramsey,2,Aaron Ramsey
@@ -68,6 +77,14 @@ id,first_name,second_name,team,name
 568,Cameron,Archer,2,Cameron Archer
 596,Viljami,Sinisalo,2,Viljami Sinisalo
 610,Lamare,Bogarde,2,Lamare Bogarde
+638,Tim,Iroegbunam,2,Tim Iroegbunam
+650,Filip,Marschall,2,Filip Marschall
+670,Josh,Feeney,2,Josh Feeney
+681,Philippe,Coutinho Correia,2,Philippe Coutinho Correia
+684,Kaine,Hayden,2,Kaine Hayden
+691,Robin,Olsen,2,Robin Olsen
+703,Benjamin,Chrisene,2,Benjamin Chrisene
+713,Tommi,O'Reilly,2,Tommi O'Reilly
 76,Pontus,Jansson,3,Pontus Jansson
 77,Christian,Nørgaard,3,Christian Nørgaard
 78,Ivan,Toney,3,Ivan Toney
@@ -101,12 +118,16 @@ id,first_name,second_name,team,name
 614,Paris,Maghoma,3,Paris Maghoma
 619,Matthew,Cox,3,Matthew Cox
 628,Maxwell,Haygarth,3,Maxwell Haygarth
+640,Nathan,Young-Coombes,3,Nathan Young-Coombes
+662,Myles,Peart-Harris,3,Myles Peart-Harris
+673,Jonas,Lössl,3,Jonas Lössl
+699,Christian,Eriksen,3,Christian Eriksen
+722,Julian,Jeanvier,3,Julian Jeanvier
 53,Adam,Lallana,4,Adam Lallana
 54,Jason,Steele,4,Jason Steele
 55,Pascal,Groß,4,Pascal Groß
 56,Shane,Duffy,4,Shane Duffy
 57,Davy,Pröpper,4,Davy Pröpper
-58,Dan,Burn,4,Dan Burn
 59,Lewis,Dunk,4,Lewis Dunk
 60,Solomon,March,4,Solomon March
 61,Adam,Webster,4,Adam Webster
@@ -135,6 +156,11 @@ id,first_name,second_name,team,name
 584,Marc,Cucurella,4,Marc Cucurella
 595,Jürgen,Locadia,4,Jürgen Locadia
 612,Jeremy,Sarmiento,4,Jeremy Sarmiento
+653,Ed,Turns,4,Ed Turns
+654,Marc,Leonard,4,Marc Leonard
+655,Evan,Ferguson,4,Evan Ferguson
+688,Thomas,McGill,4,Thomas McGill
+712,Odeluga,Offiah,4,Odeluga Offiah
 98,James,Tarkowski,5,James Tarkowski
 99,Phil,Bardsley,5,Phil Bardsley
 100,Erik,Pieters,5,Erik Pieters
@@ -146,7 +172,6 @@ id,first_name,second_name,team,name
 106,Ben,Mee,5,Ben Mee
 107,Ashley,Westwood,5,Ashley Westwood
 108,Johann Berg,Gudmundsson,5,Johann Berg Gudmundsson
-109,Chris,Wood,5,Chris Wood
 110,Matthew,Lowton,5,Matthew Lowton
 111,Matej,Vydra,5,Matej Vydra
 112,Nick,Pope,5,Nick Pope
@@ -164,6 +189,11 @@ id,first_name,second_name,team,name
 575,Aaron,Lennon,5,Aaron Lennon
 578,Maxwel,Cornet,5,Maxwel Cornet
 585,Connor,Roberts,5,Connor Roberts
+700,Wout,Weghorst,5,Wout Weghorst
+708,Sam,Waller,5,Sam Waller
+726,Dara,Costelloe,5,Dara Costelloe
+735,Joseph,McGlynn,5,Joseph McGlynn
+736,Anthony,Mancini,5,Anthony Mancini
 119,César,Azpilicueta,6,César Azpilicueta
 120,Olivier,Giroud,6,Olivier Giroud
 121,Thiago,Emiliano da Silva,6,Thiago Emiliano da Silva
@@ -194,6 +224,9 @@ id,first_name,second_name,team,name
 539,Emerson,Palmieri dos Santos,6,Emerson Palmieri dos Santos
 592,Saúl,Ñíguez,6,Saúl Ñíguez
 606,Marcus,Bettinelli,6,Marcus Bettinelli
+671,Lewis,Hall,6,Lewis Hall
+672,Harvey,Vale,6,Harvey Vale
+690,Robert Kenedy,Nunes do Nascimento,6,Robert Kenedy Nunes do Nascimento
 144,Conor,Gallagher,7,Conor Gallagher
 146,Vicente,Guaita,7,Vicente Guaita
 147,James,Tomkins,7,James Tomkins
@@ -224,12 +257,13 @@ id,first_name,second_name,team,name
 543,Scott,Banks,7,Scott Banks
 561,Remi,Matthews,7,Remi Matthews
 586,Odsonne,Edouard,7,Odsonne Edouard
+709,Tayo,Adaramola,7,Tayo Adaramola
+42,Anwar,El Ghazi,8,Anwar El Ghazi
 163,Fabian,Delph,8,Fabian Delph
 164,Gylfi,Sigurdsson,8,Gylfi Sigurdsson
 165,Seamus,Coleman,8,Seamus Coleman
 166,James,Rodríguez,8,James Rodríguez
 167,Bernard,Anício Caldeira Duarte,8,Bernard Anício Caldeira Duarte
-168,Lucas,Digne,8,Lucas Digne
 169,Michael,Keane,8,Michael Keane
 170,Jordan,Pickford,8,Jordan Pickford
 171,Allan,Marques Loureiro,8,Allan Marques Loureiro
@@ -243,6 +277,8 @@ id,first_name,second_name,team,name
 179,Ben,Godfrey,8,Ben Godfrey
 180,Richarlison,de Andrade,8,Richarlison de Andrade
 181,João,Virgínia,8,João Virgínia
+282,Donny,van de Beek,8,Donny van de Beek
+363,Bamidele,Alli,8,Bamidele Alli
 481,Asmir,Begović,8,Asmir Begović
 482,Andros,Townsend,8,Andros Townsend
 484,Demarai,Gray,8,Demarai Gray
@@ -262,6 +298,9 @@ id,first_name,second_name,team,name
 622,Cenk,Tosun,8,Cenk Tosun
 623,Reece,Welch,8,Reece Welch
 630,Tyler,Onyango,8,Tyler Onyango
+674,Nathan,Patterson,8,Nathan Patterson
+675,Vitalii,Mykolenko,8,Vitalii Mykolenko
+718,Isaac,Price,8,Isaac Price
 200,Kasper,Schmeichel,9,Kasper Schmeichel
 201,Jonny,Evans,9,Jonny Evans
 202,Marc,Albrighton,9,Marc Albrighton
@@ -290,6 +329,10 @@ id,first_name,second_name,team,name
 505,Kiernan,Dewsbury-Hall,9,Kiernan Dewsbury-Hall
 573,Eldin,Jakupovic,9,Eldin Jakupovic
 587,Ademola,Lookman,9,Ademola Lookman
+639,Vontae,Daley-Campbell,9,Vontae Daley-Campbell
+645,Ben,Nelson,9,Ben Nelson
+646,Lewis,Brunt,9,Lewis Brunt
+647,Kasey,McAteer,9,Kasey McAteer
 182,Pablo,Hernández Domínguez,10,Pablo Hernández Domínguez
 183,Francisco,Casilla Cortés,10,Francisco Casilla Cortés
 184,Liam,Cooper,10,Liam Cooper
@@ -324,6 +367,8 @@ id,first_name,second_name,team,name
 608,Leo Fuhr,Hjelde,10,Leo Fuhr Hjelde
 624,Lewis,Bate,10,Lewis Bate
 631,Jack,Jenkins,10,Jack Jenkins
+657,Kris,Moore,10,Kris Moore
+658,Archie,Gray,10,Archie Gray
 221,James,Milner,11,James Milner
 222,Jordan,Henderson,11,Jordan Henderson
 223,Adrián,San Miguel del Castillo,11,Adrián San Miguel del Castillo
@@ -358,6 +403,9 @@ id,first_name,second_name,team,name
 625,Kaide,Gordon,11,Kaide Gordon
 626,Conor,Bradley,11,Conor Bradley
 627,Owen,Beck,11,Owen Beck
+656,Marcelo,de Araújo Pitaluga Filho,11,Marcelo de Araújo Pitaluga Filho
+660,Jarell,Quansah,11,Jarell Quansah
+696,Luis,Díaz,11,Luis Díaz
 33,Jack,Grealish,12,Jack Grealish
 249,Kyle,Walker,12,Kyle Walker
 250,Ilkay,Gündogan,12,Ilkay Gündogan
@@ -388,6 +436,9 @@ id,first_name,second_name,team,name
 605,Romeo,Lavia,12,Romeo Lavia
 615,Cieran,Slicker,12,Cieran Slicker
 629,James,McAtee,12,James McAtee
+651,Conrad,Egan-Riley,12,Conrad Egan-Riley
+663,Kayky da Silva,Chagas,12,Kayky da Silva Chagas
+704,Liam,Delap,12,Liam Delap
 269,Edinson,Cavani,13,Edinson Cavani
 270,David,de Gea,13,David de Gea
 271,Nemanja,Matic,13,Nemanja Matic
@@ -401,7 +452,7 @@ id,first_name,second_name,team,name
 279,Alex Nicolao,Telles,13,Alex Nicolao Telles
 280,Dean,Henderson,13,Dean Henderson
 281,Marcus,Rashford,13,Marcus Rashford
-282,Donny,van de Beek,13,Donny van de Beek
+283,Axel,Tuanzebe,13,Axel Tuanzebe
 284,Victor,Lindelöf,13,Victor Lindelöf
 285,Scott,McTominay,13,Scott McTominay
 286,Eric,Bailly,13,Eric Bailly
@@ -416,7 +467,16 @@ id,first_name,second_name,team,name
 555,Raphaël,Varane,13,Raphaël Varane
 579,Cristiano Ronaldo,dos Santos Aveiro,13,Cristiano Ronaldo dos Santos Aveiro
 632,Phil,Jones,13,Phil Jones
+636,Amad,Diallo,13,Amad Diallo
+706,Hannibal,Mejbri,13,Hannibal Mejbri
+723,Alejandro,Garnacho Ferreyra,13,Alejandro Garnacho Ferreyra
+727,Shola,Shoretire,13,Shola Shoretire
+728,Álvaro,Fernández,13,Álvaro Fernández
+737,Charlie,Savage,13,Charlie Savage
 19,Joseph,Willock,14,Joseph Willock
+39,Matt,Targett,14,Matt Targett
+58,Dan,Burn,14,Dan Burn
+109,Chris,Wood,14,Chris Wood
 291,Jonjo,Shelvey,14,Jonjo Shelvey
 292,Matt,Ritchie,14,Matt Ritchie
 293,Ciaran,Clark,14,Ciaran Clark
@@ -444,6 +504,9 @@ id,first_name,second_name,team,name
 514,Mark,Gillespie,14,Mark Gillespie
 599,Joe,White,14,Joe White
 609,Elliot,Anderson,14,Elliot Anderson
+678,Kieran,Trippier,14,Kieran Trippier
+697,Bruno,Guimarães Rodriguez Moura,14,Bruno Guimarães Rodriguez Moura
+707,Lucas,De Bolle,14,Lucas De Bolle
 145,Billy,Gilmour,15,Billy Gilmour
 290,Brandon,Williams,15,Brandon Williams
 313,Michael,McGovern,15,Michael McGovern
@@ -475,6 +538,13 @@ id,first_name,second_name,team,name
 528,Christos,Tzolis,15,Christos Tzolis
 580,Ozan,Kabak,15,Ozan Kabak
 581,Mathias,Normann,15,Mathias Normann
+643,Jonathan,Tomkinson,15,Jonathan Tomkinson
+648,Jonathan,Rowe,15,Jonathan Rowe
+649,Thomas,Dickson-Peters,15,Thomas Dickson-Peters
+666,Jon,McCracken,15,Jon McCracken
+683,Liam,Gibbs,15,Liam Gibbs
+715,Abu,Kamara,15,Abu Kamara
+716,Tony,Springett,15,Tony Springett
 332,Theo,Walcott,16,Theo Walcott
 333,Fraser,Forster,16,Fraser Forster
 334,Alex,McCarthy,16,Alex McCarthy
@@ -501,6 +571,12 @@ id,first_name,second_name,team,name
 525,Adam,Armstrong,16,Adam Armstrong
 546,Yan,Valery,16,Yan Valery
 567,Lyanco Evangelista,Silveira Neves Vojnovic,16,Lyanco Evangelista Silveira Neves Vojnovic
+637,Harry,Lewis,16,Harry Lewis
+641,Willy,Caballero,16,Willy Caballero
+665,Dynel,Simeu,16,Dynel Simeu
+667,Thierry,Small,16,Thierry Small
+680,Kgaogelo,Chauke,16,Kgaogelo Chauke
+731,Tyler,Dibling,16,Tyler Dibling
 352,Joe,Hart,17,Joe Hart
 353,Hugo,Lloris,17,Hugo Lloris
 355,Toby,Alderweireld,17,Toby Alderweireld
@@ -511,7 +587,6 @@ id,first_name,second_name,team,name
 360,Matt,Doherty,17,Matt Doherty
 361,Eric,Dier,17,Eric Dier
 362,Lucas,Rodrigues Moura da Silva,17,Lucas Rodrigues Moura da Silva
-363,Bamidele,Alli,17,Bamidele Alli
 364,Ben,Davies,17,Ben Davies
 365,Pierre-Emile,Højbjerg,17,Pierre-Emile Højbjerg
 366,Harry,Winks,17,Harry Winks
@@ -531,6 +606,14 @@ id,first_name,second_name,team,name
 588,Emerson Aparecido,Leite de Souza Junior,17,Emerson Aparecido Leite de Souza Junior
 597,Dilan,Markanday,17,Dilan Markanday
 598,Tobi,Omole,17,Tobi Omole
+659,Brandon,Austin,17,Brandon Austin
+668,Harvey,White,17,Harvey White
+701,Dejan,Kulusevski,17,Dejan Kulusevski
+702,Rodrigo,Bentancur,17,Rodrigo Bentancur
+714,Alfie,Devine,17,Alfie Devine
+717,Jamie,Bowden,17,Jamie Bowden
+724,Marcel,Lavinier,17,Marcel Lavinier
+729,Matthew,Craig,17,Matthew Craig
 354,Moussa,Sissoko,18,Moussa Sissoko
 376,Ben,Foster,18,Ben Foster
 377,Danny,Rose,18,Danny Rose
@@ -572,6 +655,16 @@ id,first_name,second_name,team,name
 574,Robert,Elliot,18,Robert Elliot
 618,Nicolas,Nkoulou,18,Nicolas Nkoulou
 633,James,Morris,18,James Morris
+642,Vincent,Angelini,18,Vincent Angelini
+669,Kamil,Conteh,18,Kamil Conteh
+676,Hassane,Kamara,18,Hassane Kamara
+677,Samir,Caetano de Souza Santos,18,Samir Caetano de Souza Santos
+679,Edo,Kayembe,18,Edo Kayembe
+698,Samuel,Kalu,18,Samuel Kalu
+725,Shaqai,Forde,18,Shaqai Forde
+732,Tiago,Çukur,18,Tiago Çukur
+733,Adrian,Blake,18,Adrian Blake
+734,Jack,Grieves,18,Jack Grieves
 128,Kurt,Zouma,19,Kurt Zouma
 406,Mark,Noble,19,Mark Noble
 407,Darren,Randolph,19,Darren Randolph
@@ -600,6 +693,11 @@ id,first_name,second_name,team,name
 582,Nikola,Vlasic,19,Nikola Vlasic
 589,Alex,Kral,19,Alex Kral
 617,Harrison,Ashby,19,Harrison Ashby
+634,Sonny,Perkins,19,Sonny Perkins
+644,Ajibola,Alese,19,Ajibola Alese
+652,Armstrong,Oko-Flex,19,Armstrong Oko-Flex
+682,Pierre,Ekwah,19,Pierre Ekwah
+710,Daniel,Chesters,19,Daniel Chesters
 426,João Filipe Iria,Santos Moutinho,20,João Filipe Iria Santos Moutinho
 427,Rui Pedro,dos Santos Patrício,20,Rui Pedro dos Santos Patrício
 428,Willy,Boly,20,Willy Boly
@@ -632,3 +730,9 @@ id,first_name,second_name,team,name
 583,Hee-Chan,Hwang,20,Hee-Chan Hwang
 611,Louie,Moulden,20,Louie Moulden
 621,James,Storer,20,James Storer
+635,Hugo,Bueno,20,Hugo Bueno
+661,Bruno André,Cavaco Jordão,20,Bruno André Cavaco Jordão
+685,Toti António,Gomes,20,Toti António Gomes
+686,Dion,Sanderson,20,Dion Sanderson
+687,Ryan,Giles,20,Ryan Giles
+689,Francisco Jorge,Tomás Oliveira,20,Francisco Jorge Tomás Oliveira
