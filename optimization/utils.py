@@ -60,19 +60,20 @@ def randomize(seed, df, start):
     return df
 
 
-def get_predictions(noise=False, premium=False):
+def get_predictions(season, noise=False, premium=False):
     """ Load CSV file of EV Data
 
     Args:
         noise (bool, optional): Apply noise. Defaults to False.
         premium (bool, optional): Load premium data. Defaults to False.
+        season (int): Season
 
     Returns:
         (pd.DataFrame): EV Data
     """
     if premium:
         start = get_next_gw()
-        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv"
+        path = f"data/fpl_review/{season}-{season % 2000 + 1}/gameweek/{start}/fplreview_mp.csv"
         assert os.path.exists(path), "The Premium Planner data is not saved in the GW folder."
         df = pd.read_csv(path)
 
@@ -96,7 +97,7 @@ def get_predictions(noise=False, premium=False):
 
     else:
         start = get_next_gw()
-        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv"
+        path = f"data/fpl_review/{season}-{season % 2000 + 1}/gameweek/{start}/fplreview_mp.csv"
         assert os.path.exists(path), "The Free Planner data is not saved in the GW folder."
         df = pd.read_csv(path)
         if df.Pos.dtype == np.int:
