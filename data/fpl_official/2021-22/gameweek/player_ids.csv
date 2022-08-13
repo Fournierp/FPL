@@ -82,6 +82,7 @@ id,first_name,second_name,team
 535,Marcus,Tavernier,3
 539,James,Hill,3
 574,Norberto,Murara Neto,3
+576,Marcos,Senesi,3
 78,Pontus,Jansson,4
 79,Christian,Nørgaard,4
 80,Ivan,Toney,4
@@ -111,6 +112,7 @@ id,first_name,second_name,team
 526,Ben,Mee,4
 540,Fin,Stevens,4
 541,Halil,Dervişoğlu,4
+580,Mikkel,Damsgaard,4
 101,Adam,Lallana,5
 102,Jason,Steele,5
 103,Danny,Welbeck,5
@@ -226,6 +228,7 @@ id,first_name,second_name,team
 534,Dwight,McNeil,8
 560,Stanley,Mills,8
 561,Lewis,Warrington,8
+577,Amadou,Onana,8
 2,Bernd,Leno,9
 105,Shane,Duffy,9
 200,Tom,Cairney,9
@@ -250,6 +253,7 @@ id,first_name,second_name,team
 219,Jay,Stansfield,9
 220,João,Palhinha Gonçalves,9
 346,Andreas,Hoelgebaum Pereira,9
+470,Issa,Diop,9
 521,Tyrese,Francois,9
 532,Kevin,Mbabu,9
 546,Luke,Harris,9
@@ -313,6 +317,7 @@ id,first_name,second_name,team
 508,Luis,Sinisterra Lucumí,11
 547,Cody,Drameh,11
 565,Archie,Gray,11
+578,Joel,Robles,11
 274,James,Milner,12
 275,Jordan,Henderson,12
 276,Joel,Matip,12
@@ -536,7 +541,6 @@ id,first_name,second_name,team
 467,Declan,Rice,19
 468,Tomas,Soucek,19
 469,Pablo,Fornals Malla,19
-470,Issa,Diop,19
 471,Ben,Johnson,19
 472,Nayef,Aguerd,19
 473,Alphonse,Areola,19
@@ -574,3 +578,4 @@ id,first_name,second_name,team
 566,Joseph,Hodge,20
 567,Connor,Ronan,20
 568,Chem,Campbell,20
+579,Gonçalo Manuel,Ganchinho Guedes,20
