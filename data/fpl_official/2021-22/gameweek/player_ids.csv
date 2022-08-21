@@ -141,6 +141,7 @@ id,first_name,second_name,team
 543,Matt,Clarke,5
 544,Jan Paul,van Hecke,5
 559,Levi,Colwill,5
+586,Pervis,Estupiñán,5
 48,Carney,Chukwuemeka,6
 112,Marc,Cucurella Saseta,6
 127,César,Azpilicueta,6
@@ -199,6 +200,7 @@ id,first_name,second_name,team
 496,Luke,Plange,7
 514,Cheick,Doucouré,7
 530,Chris,Richards,7
+590,Joseph,Whitworth,7
 176,Asmir,Begović,8
 177,Salomón,Rondón,8
 178,Seamus,Coleman,8
@@ -258,6 +260,7 @@ id,first_name,second_name,team
 532,Kevin,Mbabu,9
 546,Luke,Harris,9
 562,Manor,Solomon,9
+591,Terry,Ablade,9
 248,Kasper,Schmeichel,10
 249,Jonny,Evans,10
 250,Ryan,Bertrand,10
@@ -286,6 +289,7 @@ id,first_name,second_name,team
 273,Lewis,Brunt,10
 548,Daniel,Iversen,10
 549,Dennis,Praet,10
+581,Alex,Smithies,10
 221,Liam,Cooper,11
 222,Luke,Ayling,11
 223,Mateusz,Klich,11
@@ -349,6 +353,7 @@ id,first_name,second_name,team
 501,Nathaniel,Phillips,12
 563,Luke,Chambers,12
 564,Stefan,Bajcetic,12
+584,Bobby,Clark,12
 299,Kyle,Walker,13
 300,Ilkay,Gündogan,13
 301,Kevin,De Bruyne,13
@@ -375,6 +380,7 @@ id,first_name,second_name,team
 325,Kalvin,Phillips,13
 502,Scott,Carson,13
 573,Rico,Lewis,13
+587,Sergio,Gómez,13
 326,Cristiano Ronaldo,dos Santos Aveiro,14
 327,David,De Gea Quintana,14
 328,Phil,Jones,14
@@ -457,6 +463,7 @@ id,first_name,second_name,team
 397,Taiwo,Awoniyi,16
 398,Dean,Henderson,16
 399,Giulian,Biancone,16
+493,Morgan,Gibbs-White,16
 507,Moussa,Niakhaté,16
 511,Omar,Richards,16
 518,Wayne,Hennessey,16
@@ -465,6 +472,9 @@ id,first_name,second_name,team
 527,Jesse,Lingard,16
 536,Orel,Mangala,16
 553,Oliver,Hammond,16
+582,Remo,Freuler,16
+583,Cheikhou,Kouyaté,16
+585,Emmanuel,Dennis,16
 321,Roméo,Lavia,17
 400,Theo,Walcott,17
 401,Alex,McCarthy,17
@@ -551,6 +561,7 @@ id,first_name,second_name,team
 571,Darren,Randolph,19
 572,Armstrong,Oko-Flex,19
 575,Maxwel,Cornet,19
+588,Thilo,Kehrer,19
 474,Willy,Boly,20
 476,Raúl,Jiménez,20
 477,Jonathan,Castro Otto,20
@@ -569,7 +580,6 @@ id,first_name,second_name,team
 490,Francisco Jorge,Tomás Oliveira,20
 491,Adama,Traoré Diarra,20
 492,Matija,Šarkić,20
-493,Morgan,Gibbs-White,20
 494,Yerson,Mosquera Valdelamar,20
 503,João Filipe Iria,Santos Moutinho,20
 516,Nathan,Collins,20
@@ -579,3 +589,4 @@ id,first_name,second_name,team
 567,Connor,Ronan,20
 568,Chem,Campbell,20
 579,Gonçalo Manuel,Ganchinho Guedes,20
+589,Matheus Luiz,Nunes,20
