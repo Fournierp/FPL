@@ -1,12 +1,13 @@
 Overall Rank,Stadium,Town / City,Capacity,Club,League (Tier),Rank within League,Notes
 1,Wembley Stadium,London,90000,England national football team,National Stadium,,Tottenham used Wembley for home matches during the 2017–18 and 2018-19 seasons while their new stadium was being built.
 1,Wembley Stadium,London,90000,Tottenham Hotspur,Premier League,,Tottenham used Wembley for home matches during the 2017–18 and 2018-19 seasons while their new stadium was being built.
+3,Old Trafford,Manchester,75653,Manchester United,Premier League,2,
 3,Tottenham Hotspur Stadium,London,62062,Tottenham Hotspur,Premier League,2,From 3 April 2019 onwards.
 4,Emirates Stadium,London,60260,Arsenal,Premier League,3,Also known as Ashburton Grove.
 5,London Stadium,London,60000,West Ham United,Premier League,4,Previously known as the Olympic Stadium.
-6,Etihad,Manchester,55097,Manchester City,Premier League,5,Commercially known as the Etihad Stadium.
+6,Etihad Stadium,Manchester,55097,Manchester City,Premier League,5,Commercially known as the Etihad Stadium.
 7,Anfield,Liverpool,54074,Liverpool,Premier League,6,
-8,St James' Park,Newcastle upon Tyne,52338,Newcastle United,Premier League,7,
+8,St. James' Park,Newcastle upon Tyne,52338,Newcastle United,Premier League,7,
 9,Stadium of Light,Sunderland,48707,Sunderland,League One,1,
 10,Villa Park,Birmingham,42660,Aston Villa,Premier League,9,
 11,Stamford Bridge,London,41798,Chelsea,Premier League,8,
@@ -17,12 +18,13 @@ Overall Rank,Stadium,Town / City,Capacity,Club,League (Tier),Rank within League,
 16,Pride Park Stadium,Derby,33597,Derby County,Championship,19,
 N/A[nb 1],Cardiff City Stadium,Cardiff,33280,Cardiff City,Championship,13,Also home of Wales men's team.
 17,Bramall Lane,Sheffield,32702,Sheffield United,Premier League,10,
-18,St Mary's Stadium,Southampton,32505,Southampton,Premier League,13,
+18,St. Mary's Stadium,Southampton,32505,Southampton,Premier League,13,
 19,Ricoh Arena,Coventry,32500,Coventry City,Championship,2,Shared with Wasps of Rugby Union's Aviva Premiership.
 20,King Power Stadium,Leicester,32312,Leicester City,Premier League,3,Formerly known as the Walkers Stadium.
-21,Molineux,Wolverhampton,31700,Wolverhampton Wanderers,Premier League,17,
+21,Molineux Stadium,Wolverhampton,31700,Wolverhampton Wanderers,Premier League,17,
 22,Ewood Park,Blackburn,31154,Blackburn Rovers,Championship,17,
 23,Falmer Stadium,Brighton,30750,Brighton & Hove Albion,Premier League,16,Commercially known as The American Express Community Stadium (The AMEX).
+23,The American Express Community Stadium,Brighton,30750,Brighton & Hove Albion,Premier League,16,Commercially known as The American Express Community Stadium (The AMEX).
 24,City Ground,Nottingham,30576,Nottingham Forest,Championship,10,
 25,Stadium mk,Milton Keynes,30500,Milton Keynes Dons,League One,1,
 26,Portman Road,Ipswich,30311,Ipswich Town,League One,3,
@@ -39,10 +41,11 @@ N/A[nb 1],Cardiff City Stadium,Cardiff,33280,Cardiff City,Championship,13,Also h
 37,Valley Parade,Bradford,25136,Bradford City,League Two,5,Commercially known as the Northern Commercials Stadium.
 38,DW Stadium,Wigan,25023,Wigan Athletic,League One,17,Previously known as the JJB Stadium. Shared with Wigan Warriors of Rugby League's Super League.
 39,Kirklees Stadium,Huddersfield,24500,Huddersfield Town,Championship,23,"Shared with Huddersfield Giants of Rugby league's Super League. Commercially known as the John Smith's Stadium, and formerly as the Alfred McAlpine Stadium and the Galpharm Stadium."
+39,The John Smith's Stadium,Huddersfield,24500,Huddersfield Town,Championship,23,"Shared with Huddersfield Giants of Rugby league's Super League. Commercially known as the John Smith's Stadium, and formerly as the Alfred McAlpine Stadium and the Galpharm Stadium."
 40,Madejski Stadium,Reading,24161,Reading,Championship,18,Shared with London Irish of Rugby Union's Aviva Premiership.
 41,Deepdale,Preston,23408,Preston North End,Championship,19,
 42,Oakwell,Barnsley,23009,Barnsley,Championship,6,
-43,Vicarage Road,Watford,21438,Watford,Championship,18,
+43,Vicarage Road Stadium,Watford,21438,Watford,Championship,18,
 44,Turf Moor,Burnley,21401,Burnley,Premier League,19,
 N/A[nb 1],Liberty Stadium,Swansea,20909,Swansea City,Championship,20,Shared with Ospreys of Rugby Union's Pro14.
 45,Fratton Park,Portsmouth,20700,Portsmouth,League One,7,
@@ -63,6 +66,7 @@ N/A[nb 1],Liberty Stadium,Swansea,20909,Swansea City,Championship,20,Shared with
 57,Halton Stadium,Widnes,13350,Widnes,Northern Premier League Div 1 North West (8),1,"Shared with Widnes Vikings of Rugby league's Super League. Also known as Halton Stadium (2001–2007) and Stobart Stadium, Halton (2008–2013). Formerly known as Naughton Park (1932–1999)."
 58,Boundary Park,Oldham,13309,Oldham Athletic,League Two,7,
 59,Griffin Park,London,12763,Brentford,Championship,23,
+59,Brentford Community Stadium,London,17250,Brentford,Championship,23,
 60,Kassam Stadium,Oxford,12500,Oxford United,League One,12,
 61,Roots Hall,Southend,12392,Southend United,League Two,13,
 62,Memorial Stadium,Bristol,12300,Bristol Rovers,League One,14,
@@ -71,6 +75,7 @@ N/A[nb 1],Liberty Stadium,Swansea,20909,Swansea City,Championship,20,Shared with
 65,Gigg Lane,Bury,11640,Bury,,8,
 66,Priestfield Stadium,Gillingham,11582,Gillingham,League One,15,
 67,Dean Court,Bournemouth,11464,Bournemouth,Championship,20,Commercially known as the Vitality Stadium.
+67,Vitality Stadium,Bournemouth,11464,Bournemouth,Championship,20,
 68,Bescot Stadium,Walsall,11300,Walsall,League Two,16,Commercially known as the Banks's Stadium.
 69,Edgeley Park,Stockport,10832,Stockport County,National League,1,
 70,The Shay,Halifax,10561,Halifax Town,National League,2,Shared with Halifax of Rugby League's Kingstone Press Championship.

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+import sys
 
 from utils import get_next_gw
 from ranked_probability_score import ranked_probability_score, match_outcome
@@ -58,7 +59,7 @@ class Elo:
         """
         return 1 / (1 + pow(10, (rating_b - rating_a) / w))
 
-    def rating_update(self, rating, actual_score, expected_score, k=20):
+    def rating_update(self, rating, actual_score, expected_score, perf=0, k=20):
         """ Amount by which the rating of a team will be changed based on the outcome
         and expectation of a game
 
@@ -66,12 +67,13 @@ class Elo:
             rating (int): Rating of the team
             actual_score (float): Result
             expected_score (float): Expected result
+            perf (int, optional): Performance boost
             k (int, optional): factor by which a victory changes rating
 
         Returns:
             (float): elo points delta
         """
-        return rating + k * (actual_score - expected_score)
+        return rating + k * (actual_score - expected_score) + perf
 
     def fit(self, hfa=50):
         """ Compute the current team ratings based on past results
@@ -137,12 +139,19 @@ class Elo:
                 else 0.5 if match['winner'] == 1
                 else 0)
 
+            gd = match['score1'] - match['score2']
             self.teams.loc[
                 self.teams.team == home_team, 'rating'] = \
-                self.rating_update(home_rating, res_h, exp_h)
+                self.rating_update(
+                    home_rating, res_h, exp_h,
+                    5 if gd > 2 else -5 if gd < 2 else 0
+                )
             self.teams.loc[
                 self.teams.team == away_team, 'rating'] = \
-                self.rating_update(away_rating, res_a, exp_a)
+                self.rating_update(
+                    away_rating, res_a, exp_a,
+                    -5 if gd > 2 else 5 if gd < 2 else 0
+                    )
 
     def predict(self, games, hfa=50):
         """ Predict the result of games
@@ -163,8 +172,8 @@ class Elo:
                 float: Odds of a draw
             """
             return (
-                np.exp(- (rating_a - rating_b) / 10) /
-                np.power(1 + np.exp(- (rating_a - rating_b) / 10), 2))
+                np.exp(- (rating_a - rating_b) / 100) /
+                np.power(1 + np.exp(- (rating_a - rating_b) / 100), 2))
 
         def synthesize_odds(row):
             """ Lambda function that parses row by row to compute score matrix
@@ -278,7 +287,7 @@ class Elo:
                 self.teams.team == away_team, 'rating'] = self.rating_update(
                     away_rating, res_a, exp_a)
 
-    def backtest(self, test_season, path='', save=False):
+    def backtest(self, test_season, path='', save=True):
         """ Test the model's accuracy on past/finished games by iteratively
         training and testing on parts of the data.
 
@@ -381,68 +390,90 @@ class Elo:
 
 
 if __name__ == "__main__":
-    df = (
-        pd.read_csv(
-            f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
-            usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'],
-            encoding='unicode_escape')
-        for season in [
-            '9394', '9495', '9596', '9697', '9798',
-            '9899', '9900', '0001', '0102', '0203',
-            '0304', '0405', '0506', '0607', '0708',
-            '0809', '0910', '1011', '1112', '1213',
-            '1314', '1415', '1516', '1617', '1718',
-            '1819', '1920', '2021'])
+    if sys.argv[1] == 'predict':
+        df = (
+            pd.read_csv(
+                f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
+                usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'],
+                encoding='unicode_escape')
+            for season in [
+                '9394', '9495', '9596', '9697', '9798',
+                '9899', '9900', '0001', '0102', '0203',
+                '0304', '0405', '0506', '0607', '0708',
+                '0809', '0910', '1011', '1112', '1213',
+                '1314', '1415', '1516', '1617', '1718',
+                '1819', '1920', '2021'])
 
-    df = (
-        pd.concat(df)
-        .rename(columns={
-            "HomeTeam": "team1",
-            "AwayTeam": "team2",
-            "FTHG": "score1",
-            "FTAG": "score2",
-            "Date": "date",
-            })
-        .dropna())
+        df = (
+            pd.concat(df)
+            .rename(columns={
+                "HomeTeam": "team1",
+                "AwayTeam": "team2",
+                "FTHG": "score1",
+                "FTAG": "score2",
+                "Date": "date",
+                })
+            .dropna())
 
-    # Train model on all games up to the previous GW
-    model = Elo(df)
-    model.fit()
+        season = '2122'
+        # Get last finished GW
+        previous_gw = get_next_gw() - 2
 
-    season = '2122'
-    next_gw = get_next_gw()-1
+        # Get GW dates of Last season
+        fixtures = (
+            pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
+            .loc[:, ['event', 'kickoff_time']])
+        fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
 
-    # Get GW dates
-    fixtures = (
-        pd.read_csv("data/fpl_official/vaastav/data/2021-22/fixtures.csv")
-        .loc[:, ['event', 'kickoff_time']])
-    fixtures["kickoff_time"] = pd.to_datetime(fixtures["kickoff_time"]).dt.date
+        # Merge on date
+        season_games = (
+            pd.read_csv(
+                f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
+                usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'])
+            .rename(columns={
+                "HomeTeam": "team1",
+                "AwayTeam": "team2",
+                "FTHG": "score1",
+                "FTAG": "score2",
+                "Date": "date",
+                })
+            .dropna())
+        season_games["date"] = (
+            pd.to_datetime(season_games["date"], dayfirst=True).dt.date)
+        season_games = (
+            pd.merge(
+                season_games,
+                fixtures,
+                left_on='date',
+                right_on='kickoff_time')
+            .drop_duplicates()
+            )
 
-    # Merge on date
-    season_games = (
-        pd.read_csv(
-            f'https://www.football-data.co.uk/mmz4281/{season}/E0.csv',
-            usecols=['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'])
-        .rename(columns={
-            "HomeTeam": "team1",
-            "AwayTeam": "team2",
-            "FTHG": "score1",
-            "FTAG": "score2",
-            "Date": "date",
-            })
-        .dropna())
-    season_games["date"] = (
-        pd.to_datetime(season_games["date"], dayfirst=True).dt.date)
-    season_games = (
-        pd.merge(
-            season_games,
-            fixtures,
-            left_on='date',
-            right_on='kickoff_time')
-        .drop_duplicates()
+        # Train model on all games up to the previous GW
+        model = Elo(
+            pd.concat([
+                df,
+                season_games.loc[season_games['event'] <= previous_gw]
+            ])
         )
+        model.fit()
 
-    # Run inference on the specific GW
-    predictions = model.evaluate(
-        season_games[season_games['event'] == next_gw])
-    print(predictions.rps.mean())
+        # Run inference on the specific GW
+        predictions = model.predict(
+            season_games[season_games['event'] == previous_gw + 1])
+
+        print(
+            "Elo model's predictions for the {} games from GW{} : \n{}"\
+                .format(len(predictions), previous_gw,  predictions.sort_values(by=['date'])[[
+                    'date', 'event', 'team1', 'team2', 'home_win_p', 'draw_p', 'away_win_p']]))
+
+    if sys.argv[1] == 'backtest':
+        df = pd.read_csv("data/fivethirtyeight/spi_matches.csv")
+        df = (
+            df
+            .loc[(df['league_id'] == 2411) | (df['league_id'] == 2412)]
+            )
+
+        model = Elo(df)
+        season = '2122'
+        model.backtest(season)

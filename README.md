@@ -23,6 +23,8 @@ pip install -r requirements.txt
 
 ### Fixture Predictions
 
+**Note:** Prior to running this, add the command line argument with *predict* if you want to see the prediction for next gameweek and *backtest* if you want to save evaluate the model on a whole season.
+
 ```{bash}
 python3 modeling/fixtures/dixon_coles.py
 ```
@@ -60,6 +62,7 @@ python3 optimization/team_optimization.py
 
 * 2.0
   * FPL Optimization Dashboard
+  * Master Thesis code
 
   ![Demo](/optimization/streamlit-app.gif)
 
