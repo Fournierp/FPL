@@ -83,6 +83,8 @@ id,first_name,second_name,team
 539,James,Hill,3
 574,Norberto,Murara Neto,3
 576,Marcos,Senesi,3
+597,Christian,Saydee,3
+598,Owen,Bevan,3
 78,Pontus,Jansson,4
 79,Christian,Nørgaard,4
 80,Ivan,Toney,4
@@ -113,6 +115,7 @@ id,first_name,second_name,team
 540,Fin,Stevens,4
 541,Halil,Dervişoğlu,4
 580,Mikkel,Damsgaard,4
+595,Mathias,Jorgensen,4
 101,Adam,Lallana,5
 102,Jason,Steele,5
 103,Danny,Welbeck,5
@@ -121,7 +124,6 @@ id,first_name,second_name,team
 107,Solly,March,5
 108,Adam,Webster,5
 109,Joël,Veltman,5
-110,Neal,Maupay,5
 111,Leandro,Trossard,5
 113,Robert,Sánchez,5
 114,Tariq,Lamptey,5
@@ -142,6 +144,7 @@ id,first_name,second_name,team
 544,Jan Paul,van Hecke,5
 559,Levi,Colwill,5
 586,Pervis,Estupiñán,5
+596,Evan,Ferguson,5
 48,Carney,Chukwuemeka,6
 112,Marc,Cucurella Saseta,6
 127,César,Azpilicueta,6
@@ -171,7 +174,6 @@ id,first_name,second_name,team
 151,Ethan,Ampadu,6
 304,Raheem,Sterling,6
 520,Kalidou,Koulibaly,6
-545,Emerson,Palmieri dos Santos,6
 152,Vicente,Guaita,7
 153,James,Tomkins,7
 154,James,McArthur,7
@@ -201,6 +203,8 @@ id,first_name,second_name,team
 514,Cheick,Doucouré,7
 530,Chris,Richards,7
 590,Joseph,Whitworth,7
+601,Kaden,Rodney,7
+110,Neal,Maupay,8
 176,Asmir,Begović,8
 177,Salomón,Rondón,8
 178,Seamus,Coleman,8
@@ -354,6 +358,7 @@ id,first_name,second_name,team
 563,Luke,Chambers,12
 564,Stefan,Bajcetic,12
 584,Bobby,Clark,12
+592,Harvey,Davies,12
 299,Kyle,Walker,13
 300,Ilkay,Gündogan,13
 301,Kevin,De Bruyne,13
@@ -381,6 +386,8 @@ id,first_name,second_name,team
 502,Scott,Carson,13
 573,Rico,Lewis,13
 587,Sergio,Gómez,13
+599,Claudio,Gomes,13
+600,Ben,Knight,13
 326,Cristiano Ronaldo,dos Santos Aveiro,14
 327,David,De Gea Quintana,14
 328,Phil,Jones,14
@@ -410,6 +417,7 @@ id,first_name,second_name,team
 551,Zidane,Iqbal,14
 569,Alejandro,Garnacho,14
 570,James,Garner,14
+593,Carlos Henrique,Casimiro,14
 349,Jonjo,Shelvey,15
 350,Matt,Ritchie,15
 351,Federico,Fernández,15
@@ -440,6 +448,7 @@ id,first_name,second_name,team
 376,Nick,Pope,15
 377,Sven,Botman,15
 552,Elliot,Anderson,15
+594,Alexander,Isak,15
 295,Neco,Williams,16
 378,Harry,Arter,16
 379,Steve,Cook,16
@@ -556,6 +565,7 @@ id,first_name,second_name,team
 473,Alphonse,Areola,19
 509,Flynn,Downes,19
 529,Gianluca,Scamacca,19
+545,Emerson,Palmieri dos Santos,19
 555,Harrison,Ashby,19
 556,Conor,Coventry,19
 571,Darren,Randolph,19
