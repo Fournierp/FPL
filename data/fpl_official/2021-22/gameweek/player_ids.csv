@@ -246,6 +246,7 @@ id,first_name,second_name,team
 577,Amadou,Onana,8
 605,Reece,Welch,8
 611,Idrissa,Gueye,8
+627,Eldin,Jakupovic,8
 2,Bernd,Leno,9
 105,Shane,Duffy,9
 200,Tom,Cairney,9
@@ -467,6 +468,7 @@ id,first_name,second_name,team
 377,Sven,Botman,15
 552,Elliot,Anderson,15
 594,Alexander,Isak,15
+626,Loris,Karius,15
 295,Neco,Williams,16
 378,Harry,Arter,16
 379,Steve,Cook,16
@@ -505,6 +507,7 @@ id,first_name,second_name,team
 585,Emmanuel,Dennis,16
 602,Renan Augusto,Lodi dos Santos,16
 621,Loïc,Badé,16
+628,Serge,Aurier,16
 21,Ainsley,Maitland-Niles,17
 321,Roméo,Lavia,17
 400,Theo,Walcott,17
@@ -623,3 +626,5 @@ id,first_name,second_name,team
 579,Gonçalo Manuel,Ganchinho Guedes,20
 589,Matheus Luiz,Nunes,20
 608,Sasa,Kalajdzic,20
+625,Diego,Da Silva Costa,20
+629,Boubacar,Traoré,20
