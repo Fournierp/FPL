@@ -118,7 +118,7 @@ class Team_Optimization:
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
         # Drop players that are not predicted to play much to reduce the search space
-        self.data.drop(self.data[self.data.total_ev <= 1].index, inplace=True)
+        # self.data.drop(self.data[self.data.total_ev <= 0.1].index, inplace=True)
         self.players = self.data.index.tolist()
 
         self.initial_team_df = pd.DataFrame(
@@ -3275,8 +3275,12 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
 
+    with open('info.json') as f:
+        info = json.load(f)
+        team_id = info['team-id']
+
     to = Team_Optimization(
-        team_id=33092,
+        team_id=team_id,
         horizon=8,
         noise=False,
         premium=True)
@@ -3285,7 +3289,7 @@ if __name__ == "__main__":
         model_name="vanilla",
         freehit_gw=-1,
         wildcard_gw=-1,
-        bboost_gw=1,
+        bboost_gw=-1,
         threexc_gw=-1,
         objective_type='decay',
         decay_gameweek=0.9,
@@ -3345,7 +3349,7 @@ if __name__ == "__main__":
         log=True,
         time_lim=0)
 
-    # tp.suboptimals(
+    # to.suboptimals(
     #     model_name="vanilla",
     #     iterations=3,
     #     cutoff_search='first_transfer')
