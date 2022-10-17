@@ -1,6 +1,7 @@
 import streamlit as st
 
 import numpy as np
+import json
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -10,14 +11,17 @@ from team_optimization import Team_Optimization
 
 @st.cache
 def get_data():
+    with open('info.json') as f:
+        info = json.load(f)
+        team_id = info['team-id']
 
     to = Team_Optimization(
-        team_id=35868,
+        team_id=team_id,
         horizon=5,
         noise=False,
         premium=True)
 
-    return to.data.Name, to.start
+    return to.data.Name, to.start, team_id
 
 def write():
     st.title('FPL - All In One Model')
@@ -27,7 +31,7 @@ def write():
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
-    player_names, start = get_data()
+    player_names, start, team_id = get_data()
 
     with st.expander('Basics', expanded=True):
 
@@ -162,7 +166,7 @@ def write():
 
         with st.spinner("Running Optimization ..."):
             to = Team_Optimization(
-                team_id=35868,
+                team_id=team_id,
                 horizon=horizon,
                 noise=False,
                 premium=True if premium=='Premium' else False)

@@ -1,7 +1,7 @@
 import streamlit as st
 
 import numpy as np
-
+import json
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.path as mpath
@@ -78,8 +78,13 @@ def write():
                 st.warning('Two chips cannot be used in the same GW')
 
             else:
+
+                with open('info.json') as f:
+                    info = json.load(f)
+                    team_id = info['team-id']
+
                 to = Team_Optimization(
-                    team_id=35868,
+                    team_id=team_id,
                     horizon=horizon,
                     noise=False,
                     premium=True if premium=='Premium' else False)

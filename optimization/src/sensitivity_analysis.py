@@ -18,13 +18,17 @@ def get_data():
     Returns:
         tuple: Series, int, series
     """
+    with open('info.json') as f:
+        info = json.load(f)
+        team_id = info['team-id']
+
     to = Team_Optimization(
-        team_id=35868,
+        team_id=team_id,
         horizon=5,
         noise=False,
         premium=True)
 
-    return to.data.Name, to.start, to.data[[f'{to.start}_Pts']]
+    return to.data.Name, to.start, team_id, to.data[[f'{to.start}_Pts']]
 
 def write():
     st.title('FPL - Sensitivity Analysis Model')
@@ -34,7 +38,7 @@ def write():
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
-    player_names, start, xpts = get_data()
+    player_names, start, team_id, xpts = get_data()
 
 
     with st.expander('Basics'):
@@ -99,7 +103,7 @@ def write():
 
             else:
                 to = Team_Optimization(
-                    team_id=35868,
+                    team_id=team_id,
                     horizon=horizon,
                     noise=False,
                     premium=True if premium=='Premium' else False)
