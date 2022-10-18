@@ -27,6 +27,8 @@ id,first_name,second_name,team
 28,Gabriel,Fernando de Jesus,1
 313,Oleksandr,Zinchenko,1
 607,Matthew,Smith,1
+630,Ethan,Nwaneri,1
+631,Lino,Sousa,1
 29,Philippe,Coutinho Correia,2
 30,Danny,Ings,2
 31,Emiliano,Martínez Romero,2
@@ -59,6 +61,7 @@ id,first_name,second_name,team
 525,Ludwig,Augustinsson,2
 537,Kaine,Kesler Hayden,2
 538,Ashley,Young,2
+638,Lamare,Bogarde,2
 57,Adam,Smith,3
 58,Junior,Stanislas,3
 59,Ryan,Fredericks,3
@@ -119,6 +122,8 @@ id,first_name,second_name,team
 541,Halil,Dervişoğlu,4
 580,Mikkel,Damsgaard,4
 595,Mathias,Jorgensen,4
+632,Ryan,Trevitt,4
+633,Matthew,Cox,4
 101,Adam,Lallana,5
 102,Jason,Steele,5
 103,Danny,Welbeck,5
@@ -149,6 +154,7 @@ id,first_name,second_name,team
 559,Levi,Colwill,5
 586,Pervis,Estupiñán,5
 596,Evan,Ferguson,5
+640,Ed,Turns,5
 48,Carney,Chukwuemeka,6
 112,Marc,Cucurella Saseta,6
 127,César,Azpilicueta,6
@@ -181,6 +187,7 @@ id,first_name,second_name,team
 606,Harvey,Vale,6
 616,Denis,Zakaria,6
 617,Pierre-Emerick,Aubameyang,6
+635,Marcus,Bettinelli,6
 152,Vicente,Guaita,7
 153,James,Tomkins,7
 154,James,McArthur,7
@@ -212,6 +219,8 @@ id,first_name,second_name,team
 590,Joseph,Whitworth,7
 601,Kaden,Rodney,7
 604,Killian,Phillips,7
+634,John-Kymani,Gordon,7
+642,Kofi,Balmer,7
 110,Neal,Maupay,8
 176,Asmir,Begović,8
 177,Salomón,Rondón,8
@@ -247,6 +256,7 @@ id,first_name,second_name,team
 605,Reece,Welch,8
 611,Idrissa,Gueye,8
 627,Eldin,Jakupovic,8
+637,Kyle,John,8
 2,Bernd,Leno,9
 105,Shane,Duffy,9
 200,Tom,Cairney,9
@@ -281,6 +291,8 @@ id,first_name,second_name,team
 613,Layvin,Kurzawa,9
 614,Willian,Borges da Silva,9
 618,Carlos Vinícius,Alves Morais,9
+636,Stefan,Parkes,9
+641,Martial,Godo,9
 248,Kasper,Schmeichel,10
 249,Jonny,Evans,10
 250,Ryan,Bertrand,10
@@ -310,6 +322,7 @@ id,first_name,second_name,team
 549,Dennis,Praet,10
 581,Alex,Smithies,10
 612,Wout,Faes,10
+639,Sammy,Braybrooke,10
 221,Liam,Cooper,11
 222,Luke,Ayling,11
 223,Mateusz,Klich,11
