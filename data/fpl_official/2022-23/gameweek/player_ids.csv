@@ -29,6 +29,7 @@ id,first_name,second_name,team
 607,Matthew,Smith,1
 630,Ethan,Nwaneri,1
 631,Lino,Sousa,1
+655,Karl,Hein,1
 29,Philippe,Coutinho Correia,2
 30,Danny,Ings,2
 31,Emiliano,Martínez Romero,2
@@ -364,6 +365,7 @@ id,first_name,second_name,team
 565,Archie,Gray,11
 578,Joel,Robles,11
 619,Wilfried,Gnonto,11
+659,Mateo Joseph,Fernández,11
 274,James,Milner,12
 275,Jordan,Henderson,12
 276,Joel,Matip,12
@@ -461,6 +463,7 @@ id,first_name,second_name,team
 609,Antony Matheus,dos Santos,14
 615,Matej,Kovár,14
 643,Kobbie,Mainoo,14
+656,Nathan,Bishop,14
 349,Jonjo,Shelvey,15
 350,Matt,Ritchie,15
 351,Federico,Fernández,15
@@ -653,3 +656,5 @@ id,first_name,second_name,team
 608,Sasa,Kalajdzic,20
 625,Diego,Da Silva Costa,20
 629,Boubacar,Traoré,20
+657,Nathan,Fraser,20
+658,Harvey,Griffiths,20
