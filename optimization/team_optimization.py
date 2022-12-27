@@ -9,6 +9,7 @@ import json
 from concurrent.futures import ProcessPoolExecutor
 
 from utils import (
+    get_season,
     get_team,
     get_predictions,
     get_rolling,
@@ -34,10 +35,9 @@ class Team_Optimization:
         self.horizon = horizon
         self.premium = premium
 
-        with open('info.json') as f:
-            season_data = json.load(f)
+        season_data = get_season()
 
-        self.get_data(team_id, season_data['season'])
+        self.get_data(team_id, season_data)
 
         if noise:
             self.random_noise(None)
@@ -118,7 +118,8 @@ class Team_Optimization:
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
         # Drop players that are not predicted to play much to reduce the search space
-        # self.data.drop(self.data[self.data.total_ev <= 0.1].index, inplace=True)
+        print(f'Droped {self.data[self.data.total_ev <= .1].shape[0]} players because they have no projected points.')
+        self.data.drop(self.data[self.data.total_ev <= .1].index, inplace=True)
         self.players = self.data.index.tolist()
 
         self.initial_team_df = pd.DataFrame(
@@ -3354,6 +3355,7 @@ if __name__ == "__main__":
     #     iterations=3,
     #     cutoff_search='first_transfer')
 
-    # tp.sensitivity_analysis(
-    #     repeats=2,
-    #     iterations=3)
+    # for _ in to.sensitivity_analysis(
+    #     repeats=10,
+    #     iterations=5):
+    #     pass

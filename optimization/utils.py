@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import numpy as np
+import json
 import sasoptpy as so
 import os
 
@@ -217,6 +218,18 @@ def get_next_gw():
         # if not gw['finished']:
         if gw['is_next']:
             return idx + 1
+
+
+def get_season():
+    """ Load info.json and extract seaon
+
+    Returns:
+        (int): Season
+    """
+    with open('info.json') as f:
+        season_data = json.load(f)
+
+    return season_data['season']
 
 
 def get_ownership_data():
