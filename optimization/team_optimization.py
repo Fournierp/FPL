@@ -9,6 +9,7 @@ import json
 from concurrent.futures import ProcessPoolExecutor
 
 from utils import (
+    get_season,
     get_team,
     get_predictions,
     get_rolling,
@@ -22,7 +23,7 @@ from utils import (
 class Team_Optimization:
     """ Mathematical optimization of FPL """
 
-    def __init__(self, team_id=35868, horizon=5, noise=False, premium=False):
+    def __init__(self, team_id=33092, horizon=5, noise=False, premium=False):
         """
 
         Args:
@@ -33,48 +34,80 @@ class Team_Optimization:
         """
         self.horizon = horizon
         self.premium = premium
-        self.get_data(team_id)
+
+        season_data = get_season()
+
+        self.get_data(team_id, season_data)
 
         if noise:
             self.random_noise(None)
 
-    def get_data(self, team_id):
+    def get_data(self, team_id, season):
         """ Get EV& Ownership data along with team data
 
         Args:
             team_id (int): Team to optimize
+            season (int): Season
         """
         # Data collection
         # Predicted points from https://fplreview.com/
-        df = get_predictions(premium=self.premium)
+        df = get_predictions(premium=self.premium, season=season)
         self.team_names = df.columns[-20:].values
         self.data = df.copy()
 
-        # Ownership data
-        ownership = get_ownership_data()
-        self.data = pd.concat([self.data, ownership], axis=1, join="inner")
-
         # FPL data
         self.start = get_next_gw()
-        self.initial_team, self.bank = get_team(team_id, self.start-1)
-        (
-            self.freehit_used,
-            self.wildcard_used,
-            self.bboost_used,
-            self.threexc_used
-            ) = get_chips(team_id, self.start - 1)
 
-        # GW
-        self.period = min(
-            self.horizon,
-            len([col for col in df.columns if '_Pts' in col]))
-        (
-            self.rolling_transfer,
-            self.transfer
-            ) = get_rolling(team_id, self.start - 1)
-        self.budget = np.sum(
-            [self.data.loc[p, 'SV'] for p in self.initial_team]
-            ) + self.bank
+        if self.start != 1:
+
+            # Ownership data
+            ownership = get_ownership_data()
+            self.data = pd.concat([self.data, ownership], axis=1, join="inner")
+
+            self.initial_team, self.bank = get_team(team_id, self.start-1)
+            (
+                self.freehit_used,
+                self.wildcard_used,
+                self.bboost_used,
+                self.threexc_used
+                ) = get_chips(team_id, self.start - 1)
+
+            # GW
+            self.period = min(
+                self.horizon,
+                len([col for col in df.columns if '_Pts' in col]))
+            (
+                self.rolling_transfer,
+                self.transfer
+                ) = get_rolling(team_id, self.start - 1)
+            
+            self.budget = np.sum(
+                [self.data.loc[p, 'SV'] for p in self.initial_team]
+                ) + self.bank
+                
+        else:
+
+            self.initial_team, self.bank = [0 for i in range(15)], 100
+            (
+                self.freehit_used,
+                self.wildcard_used,
+                self.bboost_used,
+                self.threexc_used
+                ) = 0, 0, 0, 0
+
+            # GW
+            self.period = min(
+                self.horizon,
+                len([col for col in df.columns if '_Pts' in col]))
+            (
+                self.rolling_transfer,
+                self.transfer
+                ) = 0, 0
+
+            self.budget = np.sum(
+                [self.data.loc[p, 'SV'] for p in self.initial_team]
+                ) + self.bank
+
         self.all_gameweeks = np.arange(self.start-1, self.start+self.period)
         self.gameweeks = np.arange(self.start, self.start+self.period)
 
@@ -85,7 +118,8 @@ class Team_Optimization:
         self.data.sort_values(by=['total_ev'], ascending=[False], inplace=True)
 
         # Drop players that are not predicted to play much to reduce the search space
-        self.data.drop(self.data[self.data.total_ev <= 1].index, inplace=True)
+        print(f'Droped {self.data[self.data.total_ev <= .1].shape[0]} players because they have no projected points.')
+        self.data.drop(self.data[self.data.total_ev <= .1].index, inplace=True)
         self.players = self.data.index.tolist()
 
         self.initial_team_df = pd.DataFrame(
@@ -3242,17 +3276,21 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
     logger: logging.Logger = logging.getLogger(__name__)
 
+    with open('info.json') as f:
+        info = json.load(f)
+        team_id = info['team-id']
+
     to = Team_Optimization(
-        team_id=30610,
-        horizon=3,
+        team_id=team_id,
+        horizon=8,
         noise=False,
         premium=True)
 
     to.build_model(
         model_name="vanilla",
-        freehit_gw=0,
+        freehit_gw=-1,
         wildcard_gw=-1,
-        bboost_gw=1,
+        bboost_gw=-1,
         threexc_gw=-1,
         objective_type='decay',
         decay_gameweek=0.9,
@@ -3312,11 +3350,12 @@ if __name__ == "__main__":
         log=True,
         time_lim=0)
 
-    # tp.suboptimals(
+    # to.suboptimals(
     #     model_name="vanilla",
     #     iterations=3,
     #     cutoff_search='first_transfer')
 
-    # tp.sensitivity_analysis(
-    #     repeats=2,
-    #     iterations=3)
+    # for _ in to.sensitivity_analysis(
+    #     repeats=10,
+    #     iterations=5):
+    #     pass
