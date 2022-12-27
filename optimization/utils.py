@@ -197,10 +197,6 @@ def get_chips(team_id, last_gw):
             freehit = gw
             fh_count += 1
 
-    # Handle the 2nd FH available for season 2021-22 (remove if the rules change)
-    if fh_count <= 1:
-        freehit = 0
-
     # Handle the WC reset at GW 20
     if wildcard <= 20 and last_gw >= 20:
         wildcard = 0
