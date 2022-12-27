@@ -1,6 +1,7 @@
 import streamlit as st
 
 import numpy as np
+import json
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -65,10 +66,13 @@ def write():
 
 
     if st.button('Run Optimization'):
+        with open('info.json') as f:
+            info = json.load(f)
+            team_id = info['team-id']
 
         with st.spinner("Running Optimization ..."):
             to = Team_Optimization(
-                team_id=35868,
+                team_id=team_id,
                 horizon=horizon,
                 noise=False,
                 premium=True if premium=='Premium' else False)

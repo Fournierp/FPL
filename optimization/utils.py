@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import numpy as np
+import json
 import sasoptpy as so
 import os
 
@@ -60,19 +61,20 @@ def randomize(seed, df, start):
     return df
 
 
-def get_predictions(noise=False, premium=False):
+def get_predictions(season, noise=False, premium=False):
     """ Load CSV file of EV Data
 
     Args:
         noise (bool, optional): Apply noise. Defaults to False.
         premium (bool, optional): Load premium data. Defaults to False.
+        season (int): Season
 
     Returns:
         (pd.DataFrame): EV Data
     """
     if premium:
         start = get_next_gw()
-        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_mp.csv"
+        path = f"data/fpl_review/{season}-{season % 2000 + 1}/gameweek/{start}/fplreview_mp.csv"
         assert os.path.exists(path), "The Premium Planner data is not saved in the GW folder."
         df = pd.read_csv(path)
 
@@ -96,7 +98,7 @@ def get_predictions(noise=False, premium=False):
 
     else:
         start = get_next_gw()
-        path = f"data/fpl_review/2021-22/gameweek/{start}/fplreview_fp.csv"
+        path = f"data/fpl_review/{season}-{season % 2000 + 1}/gameweek/{start}/fplreview_mp.csv"
         assert os.path.exists(path), "The Free Planner data is not saved in the GW folder."
         df = pd.read_csv(path)
         if df.Pos.dtype == np.int:
@@ -196,10 +198,6 @@ def get_chips(team_id, last_gw):
             freehit = gw
             fh_count += 1
 
-    # Handle the 2nd FH available for season 2021-22 (remove if the rules change)
-    if fh_count <= 1:
-        freehit = 0
-
     # Handle the WC reset at GW 20
     if wildcard <= 20 and last_gw >= 20:
         wildcard = 0
@@ -222,6 +220,18 @@ def get_next_gw():
             return idx + 1
 
 
+def get_season():
+    """ Load info.json and extract seaon
+
+    Returns:
+        (int): Season
+    """
+    with open('info.json') as f:
+        season_data = json.load(f)
+
+    return season_data['season']
+
+
 def get_ownership_data():
     """ Load CSV Ownership Data
 
@@ -229,8 +239,9 @@ def get_ownership_data():
         (pd.DataFrame): Ownership Data
     """
     gw = get_next_gw() - 1
+    season = get_season()
     df = pd.read_csv(
-        f"data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv"
+        f"data/fpl_official/{season}-{season%2000+1}/gameweek/{gw}/player_ownership.csv"
         )[[
             'id', 'Top_100', 'Top_1K', 'Top_10K',
             'Top_50K', 'Top_100K', 'Top_250K']]
