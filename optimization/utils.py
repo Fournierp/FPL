@@ -239,8 +239,9 @@ def get_ownership_data():
         (pd.DataFrame): Ownership Data
     """
     gw = get_next_gw() - 1
+    season = get_season()
     df = pd.read_csv(
-        f"data/fpl_official/2021-22/gameweek/{gw}/player_ownership.csv"
+        f"data/fpl_official/{season}-{season%2000+1}/gameweek/{gw}/player_ownership.csv"
         )[[
             'id', 'Top_100', 'Top_1K', 'Top_10K',
             'Top_50K', 'Top_100K', 'Top_250K']]

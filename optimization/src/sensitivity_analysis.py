@@ -21,6 +21,7 @@ def get_data():
     with open('info.json') as f:
         info = json.load(f)
         team_id = info['team-id']
+        season = info['season']
 
     to = Team_Optimization(
         team_id=team_id,
@@ -28,7 +29,7 @@ def get_data():
         noise=False,
         premium=True)
 
-    return to.data.Name, to.start, team_id, to.data[[f'{to.start}_Pts']]
+    return to.data.Name, to.start, team_id, to.data[[f'{to.start}_Pts']], season
 
 def write():
     st.title('FPL - Sensitivity Analysis Model')
@@ -38,7 +39,7 @@ def write():
         """)
 
     plt.style.use(".streamlit/style.mplstyle")
-    player_names, start, team_id, xpts = get_data()
+    player_names, start, team_id, xpts, season = get_data()
 
 
     with st.expander('Basics'):
@@ -134,7 +135,7 @@ def write():
 
                 player_names = (
                     pd
-                    .read_csv('data/fpl_official/vaastav/data/2021-22/player_idlist.csv')
+                    .read_csv(f'data/fpl_official/vaastav/data/{season}-{season%2000+1}/player_idlist.csv')
                     .set_index('id'))
 
                 # Get first GW optimal teams
@@ -187,7 +188,7 @@ def write():
                     percent['Player'] = np.unique(freehit_teams)
                     player_pos = (
                         pd
-                        .read_csv('data/fpl_official/vaastav/data/2021-22/cleaned_players.csv')
+                        .read_csv(f'data/fpl_official/vaastav/data/{season}-{season%2000+1}/cleaned_players.csv')
                         [['first_name', 'second_name', 'element_type']])
                     percent['Pos'] = (
                         percent['Player']
@@ -252,7 +253,7 @@ def write():
 
                     # Get team names
                     photos = (
-                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/players_raw.csv')
+                        pd.read_csv(f'data/fpl_official/vaastav/data/{season}-{season%2000+1}/players_raw.csv')
                         [['first_name', 'second_name', 'photo', 'team']])
                     url = "https://resources.premierleague.com/premierleague/photos/players/110x140/p{index}.png"
 
@@ -264,24 +265,24 @@ def write():
 
                     percent = pd.merge(
                         percent,
-                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/teams.csv')[['id', 'short_name']],
+                        pd.read_csv(f'data/fpl_official/vaastav/data/{season}-{season%2000+1}/teams.csv')[['id', 'short_name']],
                         left_on='Team',
                         right_on='id',
                     ).drop(['Team', 'id'], axis=1)
 
                     # Add upcoming fixtures
-                    fixtures = pd.read_csv('data/fpl_official/vaastav/data/2021-22/fixtures.csv')
+                    fixtures = pd.read_csv(f'data/fpl_official/vaastav/data/{season}-{season%2000+1}/fixtures.csv')
                     fixtures = fixtures.loc[fixtures.event == start][['team_h', 'team_a']]
                     fixtures = pd.merge(
                         fixtures,
-                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/teams.csv')[['id', 'short_name']],
+                        pd.read_csv(f'data/fpl_official/vaastav/data/{season}-{season%2000+1}/teams.csv')[['id', 'short_name']],
                         left_on='team_h',
                         right_on='id',
                     ).drop(['team_h', 'id'], axis=1).rename(columns={'short_name': 'team_h'})
 
                     fixtures = pd.merge(
                         fixtures,
-                        pd.read_csv('data/fpl_official/vaastav/data/2021-22/teams.csv')[['id', 'short_name']],
+                        pd.read_csv(f'data/fpl_official/vaastav/data/{season}-{season%2000+1}/teams.csv')[['id', 'short_name']],
                         left_on='team_a',
                         right_on='id',
                     ).drop(['team_a', 'id'], axis=1).rename(columns={'short_name': 'team_a'})
