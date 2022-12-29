@@ -175,7 +175,7 @@ def write():
                 # df = df.sort_values(['Total', '1', '2', '3'], ascending=False)
                 # st.dataframe(df[['Transfer', 'Total', '1', '2', '3', 'Mean', 'Std']])
 
-                if fh_gw == 0 or wc_gw == 0:
+                if fh_gw is not None or wc_gw is not None:
                     # Freehit graph
 
                     # Freehit lineups
