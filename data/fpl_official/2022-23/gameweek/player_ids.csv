@@ -30,6 +30,7 @@ id,first_name,second_name,team
 630,Ethan,Nwaneri,1
 631,Lino,Sousa,1
 655,Karl,Hein,1
+668,Amario,Cozier-Duberry,1
 29,Philippe,Coutinho Correia,2
 30,Danny,Ings,2
 31,Emiliano,Martínez Romero,2
@@ -63,6 +64,8 @@ id,first_name,second_name,team
 537,Kaine,Kesler Hayden,2
 538,Ashley,Young,2
 638,Lamare,Bogarde,2
+670,Filip,Marschall,2
+672,Kadan,Young,2
 57,Adam,Smith,3
 58,Junior,Stanislas,3
 59,Ryan,Fredericks,3
@@ -161,6 +164,8 @@ id,first_name,second_name,team
 640,Ed,Turns,5
 651,Andrew,Moran,5
 652,James,Furlong,5
+677,Jack,Hinshelwood,5
+679,Facundo,Buonanotte,5
 48,Carney,Chukwuemeka,6
 112,Marc,Cucurella Saseta,6
 127,César,Azpilicueta,6
@@ -196,6 +201,7 @@ id,first_name,second_name,team
 635,Marcus,Bettinelli,6
 653,Omari,Hutchinson,6
 661,Lewis,Hall,6
+673,Bashir,Humphreys,6
 152,Vicente,Guaita,7
 153,James,Tomkins,7
 154,James,McArthur,7
@@ -231,6 +237,7 @@ id,first_name,second_name,team
 642,Kofi,Balmer,7
 644,Owen,Goodman,7
 654,Jack,Wells-Morrison,7
+676,David,Ozoh,7
 110,Neal,Maupay,8
 176,Asmir,Begović,8
 177,Salomón,Rondón,8
@@ -268,6 +275,7 @@ id,first_name,second_name,team
 627,Eldin,Jakupovic,8
 637,Kyle,John,8
 662,Thomas,Cannon,8
+678,Isaac,Price,8
 2,Bernd,Leno,9
 105,Shane,Duffy,9
 200,Tom,Cairney,9
@@ -405,6 +413,7 @@ id,first_name,second_name,team
 592,Harvey,Davies,12
 620,Arthur Henrique,Ramos de Oliveira Melo,12
 665,Ben,Doak,12
+680,Cody,Gakpo,12
 299,Kyle,Walker,13
 300,Ilkay,Gündogan,13
 301,Kevin,De Bruyne,13
@@ -470,6 +479,7 @@ id,first_name,second_name,team
 643,Kobbie,Mainoo,14
 656,Nathan,Bishop,14
 660,Shola,Shoretire,14
+674,Rhys,Bennett,14
 349,Jonjo,Shelvey,15
 350,Matt,Ritchie,15
 351,Federico,Fernández,15
@@ -501,6 +511,7 @@ id,first_name,second_name,team
 552,Elliot,Anderson,15
 594,Alexander,Isak,15
 626,Loris,Karius,15
+683,Garang,Kuol,15
 295,Neco,Williams,16
 378,Harry,Arter,16
 379,Steve,Cook,16
@@ -541,6 +552,8 @@ id,first_name,second_name,team
 621,Loïc,Badé,16
 628,Serge,Aurier,16
 666,Dale,Taylor,16
+675,Jordan,Smith,16
+681,Gustavo Henrique,Furtado Scarpa,16
 21,Ainsley,Maitland-Niles,17
 321,Roméo,Lavia,17
 400,Theo,Walcott,17
@@ -573,6 +586,7 @@ id,first_name,second_name,team
 624,Samuel,Edozie,17
 647,Lewis,Payne,17
 648,Ryan,Finnigan,17
+671,Jimmy,Morgan,17
 425,Hugo,Lloris,18
 426,Fraser,Forster,18
 427,Harry,Kane,18
@@ -634,6 +648,7 @@ id,first_name,second_name,team
 575,Maxwel,Cornet,19
 588,Thilo,Kehrer,19
 603,Lucas,Tolentino Coelho de Lima,19
+669,Divin,Mubama,19
 476,Raúl,Jiménez,20
 477,Jonathan,Castro Otto,20
 478,José,Malheiro de Sá,20
@@ -666,3 +681,4 @@ id,first_name,second_name,team
 657,Nathan,Fraser,20
 658,Harvey,Griffiths,20
 664,Dexter,Lembikisa,20
+682,Matheus,Santos Carneiro Da Cunha,20
