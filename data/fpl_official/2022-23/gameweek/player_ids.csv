@@ -31,6 +31,7 @@ id,first_name,second_name,team
 631,Lino,Sousa,1
 655,Karl,Hein,1
 668,Amario,Cozier-Duberry,1
+685,Nathan,Butler-Oyedeji,1
 29,Philippe,Coutinho Correia,2
 30,Danny,Ings,2
 31,Emiliano,Martínez Romero,2
@@ -66,6 +67,7 @@ id,first_name,second_name,team
 638,Lamare,Bogarde,2
 670,Filip,Marschall,2
 672,Kadan,Young,2
+694,Alexandre,Moreno Lopera,2
 57,Adam,Smith,3
 58,Junior,Stanislas,3
 59,Ryan,Fredericks,3
@@ -131,6 +133,7 @@ id,first_name,second_name,team
 633,Matthew,Cox,4
 646,Tristan,Crama,4
 650,Yegor,Yarmolyuk,4
+688,Kevin,Schade,4
 101,Adam,Lallana,5
 102,Jason,Steele,5
 103,Danny,Welbeck,5
@@ -202,6 +205,9 @@ id,first_name,second_name,team
 653,Omari,Hutchinson,6
 661,Lewis,Hall,6
 673,Bashir,Humphreys,6
+684,David Datro,Fofana,6
+689,Benoît,Badiashile,6
+690,João,Félix Sequeira,6
 152,Vicente,Guaita,7
 153,James,Tomkins,7
 154,James,McArthur,7
@@ -212,7 +218,6 @@ id,first_name,second_name,team
 159,Jordan,Ayew,7
 160,Wilfried,Zaha,7
 161,Jeffrey,Schlupp,7
-162,Jack,Butland,7
 163,Will,Hughes,7
 164,Jairo,Riedewald,7
 165,Joachim,Andersen,7
@@ -276,6 +281,7 @@ id,first_name,second_name,team
 637,Kyle,John,8
 662,Thomas,Cannon,8
 678,Isaac,Price,8
+686,Ellis,Simms,8
 2,Bernd,Leno,9
 105,Shane,Duffy,9
 200,Tom,Cairney,9
@@ -344,6 +350,7 @@ id,first_name,second_name,team
 612,Wout,Faes,10
 639,Sammy,Braybrooke,10
 645,Joe,Wormleighton,10
+687,Kasey,McAteer,10
 221,Liam,Cooper,11
 222,Luke,Ayling,11
 223,Mateusz,Klich,11
@@ -378,6 +385,7 @@ id,first_name,second_name,team
 619,Wilfried,Gnonto,11
 659,Mateo Joseph,Fernández,11
 663,Sonny,Perkins,11
+691,Maximilian,Wöber,11
 274,James,Milner,12
 275,Jordan,Henderson,12
 276,Joel,Matip,12
@@ -444,6 +452,7 @@ id,first_name,second_name,team
 599,Claudio,Gomes,13
 600,Ben,Knight,13
 610,Manuel,Akanji,13
+162,Jack,Butland,14
 326,Cristiano Ronaldo,dos Santos Aveiro,14
 327,David,De Gea Quintana,14
 328,Phil,Jones,14
@@ -466,7 +475,6 @@ id,first_name,second_name,team
 345,Anthony,Martial,14
 347,Facundo,Pellistri Rebollo,14
 348,Tom,Heaton,14
-355,Martin,Dubravka,14
 504,Tyrell,Malacia,14
 519,Christian,Eriksen,14
 533,Lisandro,Martínez,14
@@ -486,6 +494,7 @@ id,first_name,second_name,team
 352,Ciaran,Clark,15
 353,Karl,Darlow,15
 354,Chris,Wood,15
+355,Martin,Dubravka,15
 356,Callum,Wilson,15
 357,Kieran,Trippier,15
 358,Dan,Burn,15
@@ -587,6 +596,8 @@ id,first_name,second_name,team
 647,Lewis,Payne,17
 648,Ryan,Finnigan,17
 671,Jimmy,Morgan,17
+692,Mislav,Orsic,17
+693,Carlos,Alcaraz,17
 425,Hugo,Lloris,18
 426,Fraser,Forster,18
 427,Harry,Kane,18
