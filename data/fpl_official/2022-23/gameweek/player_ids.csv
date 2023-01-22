@@ -25,6 +25,7 @@ id,first_name,second_name,team
 26,William,Saliba,1
 27,Marcus,Oliveira Alencar,1
 28,Gabriel,Fernando de Jesus,1
+111,Leandro,Trossard,1
 313,Oleksandr,Zinchenko,1
 607,Matthew,Smith,1
 630,Ethan,Nwaneri,1
@@ -33,7 +34,6 @@ id,first_name,second_name,team
 668,Amario,Cozier-Duberry,1
 685,Nathan,Butler-Oyedeji,1
 29,Philippe,Coutinho Correia,2
-30,Danny,Ings,2
 31,Emiliano,Martínez Romero,2
 32,Calum,Chambers,2
 33,Lucas,Digne,2
@@ -98,6 +98,10 @@ id,first_name,second_name,team
 597,Christian,Saydee,3
 598,Owen,Bevan,3
 649,Cameron,Plain,3
+695,Daniel,Adu-Adjei,3
+696,Michael,Dacosta Gonzalez,3
+697,Dominic,Sadi,3
+705,Dango,Ouattara,3
 78,Pontus,Jansson,4
 79,Christian,Nørgaard,4
 80,Ivan,Toney,4
@@ -142,7 +146,6 @@ id,first_name,second_name,team
 107,Solly,March,5
 108,Adam,Webster,5
 109,Joël,Veltman,5
-111,Leandro,Trossard,5
 113,Robert,Sánchez,5
 114,Tariq,Lamptey,5
 115,Steven,Alzate,5
@@ -208,6 +211,8 @@ id,first_name,second_name,team
 684,David Datro,Fofana,6
 689,Benoît,Badiashile,6
 690,João,Félix Sequeira,6
+699,Mykhailo,Mudryk,6
+702,Andrey,Nascimento dos Santos,6
 152,Vicente,Guaita,7
 153,James,Tomkins,7
 154,James,McArthur,7
@@ -386,6 +391,7 @@ id,first_name,second_name,team
 659,Mateo Joseph,Fernández,11
 663,Sonny,Perkins,11
 691,Maximilian,Wöber,11
+700,Georginio,Rutter,11
 274,James,Milner,12
 275,Jordan,Henderson,12
 276,Joel,Matip,12
@@ -488,12 +494,12 @@ id,first_name,second_name,team
 656,Nathan,Bishop,14
 660,Shola,Shoretire,14
 674,Rhys,Bennett,14
+701,Wout,Weghorst,14
 349,Jonjo,Shelvey,15
 350,Matt,Ritchie,15
 351,Federico,Fernández,15
 352,Ciaran,Clark,15
 353,Karl,Darlow,15
-354,Chris,Wood,15
 355,Martin,Dubravka,15
 356,Callum,Wilson,15
 357,Kieran,Trippier,15
@@ -522,6 +528,7 @@ id,first_name,second_name,team
 626,Loris,Karius,15
 683,Garang,Kuol,15
 295,Neco,Williams,16
+354,Chris,Wood,16
 378,Harry,Arter,16
 379,Steve,Cook,16
 380,Lyle,Taylor,16
@@ -563,6 +570,7 @@ id,first_name,second_name,team
 666,Dale,Taylor,16
 675,Jordan,Smith,16
 681,Gustavo Henrique,Furtado Scarpa,16
+703,Danilo,dos Santos de Oliveira,16
 21,Ainsley,Maitland-Niles,17
 321,Roméo,Lavia,17
 400,Theo,Walcott,17
@@ -631,6 +639,7 @@ id,first_name,second_name,team
 513,Clément,Lenglet,18
 522,Djed,Spence,18
 554,Bryan,Gil Salvatierra,18
+30,Danny,Ings,19
 455,Lukasz,Fabianski,19
 456,Angelo,Ogbonna,19
 457,Aaron,Cresswell,19
@@ -693,3 +702,5 @@ id,first_name,second_name,team
 658,Harvey,Griffiths,20
 664,Dexter,Lembikisa,20
 682,Matheus,Santos Carneiro Da Cunha,20
+698,Mario,Lemina,20
+704,Pablo,Sarabia,20
