@@ -1,5 +1,4 @@
 id,first_name,second_name,team
-1,Cédric,Alves Soares,1
 3,Granit,Xhaka,1
 4,Mohamed,Elneny,1
 5,Rob,Holding,1
@@ -15,7 +14,6 @@ id,first_name,second_name,team
 15,Aaron,Ramsdale,1
 16,Gabriel,dos Santos Magalhães,1
 17,Nuno,Varela Tavares,1
-18,Albert,Sambi Lokonga,1
 19,Gabriel,Martinelli Silva,1
 20,Pablo,Marí Villar,1
 22,Lucas,Torreira di Pascua,1
@@ -26,6 +24,7 @@ id,first_name,second_name,team
 27,Marcus,Oliveira Alencar,1
 28,Gabriel,Fernando de Jesus,1
 111,Leandro,Trossard,1
+130,Jorge Luiz,Frello Filho,1
 313,Oleksandr,Zinchenko,1
 607,Matthew,Smith,1
 630,Ethan,Nwaneri,1
@@ -33,6 +32,7 @@ id,first_name,second_name,team
 655,Karl,Hein,1
 668,Amario,Cozier-Duberry,1
 685,Nathan,Butler-Oyedeji,1
+710,Jakub,Kiwior,1
 29,Philippe,Coutinho Correia,2
 31,Emiliano,Martínez Romero,2
 32,Calum,Chambers,2
@@ -59,7 +59,6 @@ id,first_name,second_name,team
 54,Cameron,Archer,2
 55,Jaden,Philogene-Bidace,2
 56,Frédéric,Guilbert,2
-410,Jan,Bednarek,2
 479,Leander,Dendoncker,2
 525,Ludwig,Augustinsson,2
 537,Kaine,Kesler Hayden,2
@@ -68,6 +67,8 @@ id,first_name,second_name,team
 670,Filip,Marschall,2
 672,Kadan,Young,2
 694,Alexandre,Moreno Lopera,2
+707,Viljami,Sinisalo,2
+711,Jhon,Durán,2
 57,Adam,Smith,3
 58,Junior,Stanislas,3
 59,Ryan,Fredericks,3
@@ -93,6 +94,7 @@ id,first_name,second_name,team
 505,Joe,Rothwell,3
 535,Marcus,Tavernier,3
 539,James,Hill,3
+571,Darren,Randolph,3
 574,Norberto,Murara Neto,3
 576,Marcos,Senesi,3
 597,Christian,Saydee,3
@@ -102,6 +104,11 @@ id,first_name,second_name,team
 696,Michael,Dacosta Gonzalez,3
 697,Dominic,Sadi,3
 705,Dango,Ouattara,3
+706,Euan,Pollock,3
+714,Antoine,Semenyo,3
+718,Matías,Viña,3
+722,Illia,Zabarnyi,3
+723,Hamed,Traorè,3
 78,Pontus,Jansson,4
 79,Christian,Nørgaard,4
 80,Ivan,Toney,4
@@ -172,12 +179,12 @@ id,first_name,second_name,team
 652,James,Furlong,5
 677,Jack,Hinshelwood,5
 679,Facundo,Buonanotte,5
+719,Yasin,Ayari,5
 48,Carney,Chukwuemeka,6
 112,Marc,Cucurella Saseta,6
 127,César,Azpilicueta,6
 128,Thiago,Emiliano da Silva,6
 129,Marcos,Alonso,6
-130,Jorge Luiz,Frello Filho,6
 131,Ross,Barkley,6
 132,Mateo,Kovacic,6
 133,Kepa,Arrizabalaga,6
@@ -213,6 +220,9 @@ id,first_name,second_name,team
 690,João,Félix Sequeira,6
 699,Mykhailo,Mudryk,6
 702,Andrey,Nascimento dos Santos,6
+708,Noni,Madueke,6
+724,Enzo,Fernández,6
+18,Albert,Sambi Lokonga,7
 152,Vicente,Guaita,7
 153,James,Tomkins,7
 154,James,McArthur,7
@@ -248,6 +258,7 @@ id,first_name,second_name,team
 644,Owen,Goodman,7
 654,Jack,Wells-Morrison,7
 676,David,Ozoh,7
+725,Naouirou,Ahamada,7
 110,Neal,Maupay,8
 176,Asmir,Begović,8
 177,Salomón,Rondón,8
@@ -268,7 +279,6 @@ id,first_name,second_name,team
 192,Mason,Holgate,8
 193,Ben,Godfrey,8
 194,Vitalii,Mykolenko,8
-195,Anthony,Gordon,8
 196,Jarrad,Branthwaite,8
 197,Nathan,Patterson,8
 198,Niels,Nkounkou,8
@@ -287,6 +297,7 @@ id,first_name,second_name,team
 662,Thomas,Cannon,8
 678,Isaac,Price,8
 686,Ellis,Simms,8
+1,Cédric,Alves Soares,9
 2,Bernd,Leno,9
 105,Shane,Duffy,9
 200,Tom,Cairney,9
@@ -324,6 +335,7 @@ id,first_name,second_name,team
 636,Stefan,Parkes,9
 641,Martial,Godo,9
 667,Kristian,Sekularac,9
+726,Sasa,Lukic,9
 248,Kasper,Schmeichel,10
 249,Jonny,Evans,10
 250,Ryan,Bertrand,10
@@ -356,6 +368,9 @@ id,first_name,second_name,team
 639,Sammy,Braybrooke,10
 645,Joe,Wormleighton,10
 687,Kasey,McAteer,10
+709,Victor,Kristiansen,10
+715,Mateus,Cardoso Lemos Martins,10
+727,Harry,Souttar,10
 221,Liam,Cooper,11
 222,Luke,Ayling,11
 223,Mateusz,Klich,11
@@ -392,6 +407,7 @@ id,first_name,second_name,team
 663,Sonny,Perkins,11
 691,Maximilian,Wöber,11
 700,Georginio,Rutter,11
+720,Weston,McKennie,11
 274,James,Milner,12
 275,Jordan,Henderson,12
 276,Joel,Matip,12
@@ -458,6 +474,7 @@ id,first_name,second_name,team
 599,Claudio,Gomes,13
 600,Ben,Knight,13
 610,Manuel,Akanji,13
+712,Máximo,Perrone,13
 162,Jack,Butland,14
 326,Cristiano Ronaldo,dos Santos Aveiro,14
 327,David,De Gea Quintana,14
@@ -495,7 +512,8 @@ id,first_name,second_name,team
 660,Shola,Shoretire,14
 674,Rhys,Bennett,14
 701,Wout,Weghorst,14
-349,Jonjo,Shelvey,15
+728,Marcel,Sabitzer,14
+195,Anthony,Gordon,15
 350,Matt,Ritchie,15
 351,Federico,Fernández,15
 352,Ciaran,Clark,15
@@ -524,10 +542,12 @@ id,first_name,second_name,team
 376,Nick,Pope,15
 377,Sven,Botman,15
 552,Elliot,Anderson,15
+555,Harrison,Ashby,15
 594,Alexander,Isak,15
 626,Loris,Karius,15
 683,Garang,Kuol,15
 295,Neco,Williams,16
+349,Jonjo,Shelvey,16
 354,Chris,Wood,16
 378,Harry,Arter,16
 379,Steve,Cook,16
@@ -571,6 +591,9 @@ id,first_name,second_name,team
 675,Jordan,Smith,16
 681,Gustavo Henrique,Furtado Scarpa,16
 703,Danilo,dos Santos de Oliveira,16
+729,Keylor,Navas,16
+730,Felipe Augusto,de Almeida Monteiro,16
+734,André,Ayew,16
 21,Ainsley,Maitland-Niles,17
 321,Roméo,Lavia,17
 400,Theo,Walcott,17
@@ -582,6 +605,7 @@ id,first_name,second_name,team
 407,James,Ward-Prowse,17
 408,Adam,Armstrong,17
 409,Kyle,Walker-Peters,17
+410,Jan,Bednarek,17
 411,Che,Adams,17
 412,Nathan,Tella,17
 413,Lyanco,Silveira Neves Vojnovic,17
@@ -606,6 +630,9 @@ id,first_name,second_name,team
 671,Jimmy,Morgan,17
 692,Mislav,Orsic,17
 693,Carlos,Alcaraz,17
+716,James,Bree,17
+731,Kamaldeen,Sulemana,17
+732,Paul,Onuachu,17
 425,Hugo,Lloris,18
 426,Fraser,Forster,18
 427,Harry,Kane,18
@@ -639,12 +666,13 @@ id,first_name,second_name,team
 513,Clément,Lenglet,18
 522,Djed,Spence,18
 554,Bryan,Gil Salvatierra,18
+713,Arnaut,Danjuma,18
+733,Pedro,Porro,18
 30,Danny,Ings,19
 455,Lukasz,Fabianski,19
 456,Angelo,Ogbonna,19
 457,Aaron,Cresswell,19
 458,Michail,Antonio,19
-459,Craig,Dawson,19
 460,Manuel,Lanzini,19
 461,Kurt,Zouma,19
 462,Arthur,Masuaku,19
@@ -661,14 +689,13 @@ id,first_name,second_name,team
 509,Flynn,Downes,19
 529,Gianluca,Scamacca,19
 545,Emerson,Palmieri dos Santos,19
-555,Harrison,Ashby,19
 556,Conor,Coventry,19
-571,Darren,Randolph,19
 572,Armstrong,Oko-Flex,19
 575,Maxwel,Cornet,19
 588,Thilo,Kehrer,19
 603,Lucas,Tolentino Coelho de Lima,19
 669,Divin,Mubama,19
+459,Craig,Dawson,20
 476,Raúl,Jiménez,20
 477,Jonathan,Castro Otto,20
 478,José,Malheiro de Sá,20
@@ -704,3 +731,5 @@ id,first_name,second_name,team
 682,Matheus,Santos Carneiro Da Cunha,20
 698,Mario,Lemina,20
 704,Pablo,Sarabia,20
+717,Daniel,Bentley,20
+721,João Victor,Gomes da Silva,20
