@@ -109,6 +109,8 @@ id,first_name,second_name,team
 718,Matías,Viña,3
 722,Illia,Zabarnyi,3
 723,Hamed,Traorè,3
+737,Ben,Greenwood,3
+738,Max,Kinsey-Wellings,3
 78,Pontus,Jansson,4
 79,Christian,Nørgaard,4
 80,Ivan,Toney,4
@@ -180,6 +182,7 @@ id,first_name,second_name,team
 677,Jack,Hinshelwood,5
 679,Facundo,Buonanotte,5
 719,Yasin,Ayari,5
+736,Odeluga,Offiah,5
 48,Carney,Chukwuemeka,6
 112,Marc,Cucurella Saseta,6
 127,César,Azpilicueta,6
@@ -371,6 +374,7 @@ id,first_name,second_name,team
 709,Victor,Kristiansen,10
 715,Mateus,Cardoso Lemos Martins,10
 727,Harry,Souttar,10
+735,Wanya,Marçal-Madivadua,10
 221,Liam,Cooper,11
 222,Luke,Ayling,11
 223,Mateusz,Klich,11
@@ -695,6 +699,8 @@ id,first_name,second_name,team
 588,Thilo,Kehrer,19
 603,Lucas,Tolentino Coelho de Lima,19
 669,Divin,Mubama,19
+739,Joseph,Anang,19
+740,Krisztián,Hegyi,19
 459,Craig,Dawson,20
 476,Raúl,Jiménez,20
 477,Jonathan,Castro Otto,20
