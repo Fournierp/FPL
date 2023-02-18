@@ -69,6 +69,8 @@ id,first_name,second_name,team
 694,Alexandre,Moreno Lopera,2
 707,Viljami,Sinisalo,2
 711,Jhon,Durán,2
+744,Sil,Swinkels,2
+745,Oliwier,Zych,2
 57,Adam,Smith,3
 58,Junior,Stanislas,3
 59,Ryan,Fredericks,3
@@ -412,6 +414,8 @@ id,first_name,second_name,team
 691,Maximilian,Wöber,11
 700,Georginio,Rutter,11
 720,Weston,McKennie,11
+742,Jeremiah,Chilokoa-Mullen,11
+743,Diogo,Pinheiro Monteiro,11
 274,James,Milner,12
 275,Jordan,Henderson,12
 276,Joel,Matip,12
@@ -550,6 +554,7 @@ id,first_name,second_name,team
 594,Alexander,Isak,15
 626,Loris,Karius,15
 683,Garang,Kuol,15
+741,Lewis,Miley,15
 295,Neco,Williams,16
 349,Jonjo,Shelvey,16
 354,Chris,Wood,16
