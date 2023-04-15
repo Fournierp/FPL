@@ -33,6 +33,7 @@ id,first_name,second_name,team
 668,Amario,Cozier-Duberry,1
 685,Nathan,Butler-Oyedeji,1
 710,Jakub,Kiwior,1
+751,Reuell,Walters,1
 29,Philippe,Coutinho Correia,2
 31,Emiliano,Martínez Romero,2
 32,Calum,Chambers,2
@@ -71,6 +72,8 @@ id,first_name,second_name,team
 711,Jhon,Durán,2
 744,Sil,Swinkels,2
 745,Oliwier,Zych,2
+753,James,Wright,2
+754,Sebastian,Revan,2
 57,Adam,Smith,3
 58,Junior,Stanislas,3
 59,Ryan,Fredericks,3
@@ -149,6 +152,7 @@ id,first_name,second_name,team
 646,Tristan,Crama,4
 650,Yegor,Yarmolyuk,4
 688,Kevin,Schade,4
+752,Michael,Olakigbe,4
 101,Adam,Lallana,5
 102,Jason,Steele,5
 103,Danny,Welbeck,5
