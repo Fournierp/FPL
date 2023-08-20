@@ -28,6 +28,7 @@ id,first_name,second_name,team
 29,Benjamin,White,1
 30,Granit,Xhaka,1
 31,Oleksandr,Zinchenko,1
+113,David,Raya Martin,1
 540,Declan,Rice,1
 578,Reiss,Nelson,1
 585,Jurriën,Timber,1
@@ -120,7 +121,6 @@ id,first_name,second_name,team
 110,Christian,Nørgaard,4
 111,Frank,Onyeka,4
 112,Ethan,Pinnock,4
-113,David,Raya Martin,4
 114,Mads,Roerslev Rasmussen,4
 115,Kevin,Schade,4
 116,Thomas,Strakosha,4
@@ -134,7 +134,6 @@ id,first_name,second_name,team
 123,Steven,Alzate,5
 124,Yasin,Ayari,5
 125,Facundo,Buonanotte,5
-126,Moisés,Caicedo Corozo,5
 127,Aaron,Connolly,5
 128,Mahmoud,Dahoud,5
 129,Lewis,Dunk,5
@@ -201,6 +200,8 @@ id,first_name,second_name,team
 605,Luca,Koleosho,6
 608,Jacob,Bruun Larsen,6
 622,Owen,Dodgson,6
+660,Wilson,Odobert,6
+126,Moisés,Caicedo Corozo,7
 145,Robert,Sánchez,7
 185,Ethan,Ampadu,7
 186,Andrey,Nascimento dos Santos,7
@@ -240,6 +241,8 @@ id,first_name,second_name,team
 611,Axel,Disasi,7
 613,Lesley,Ugochukwu,7
 623,Mason,Burstow,7
+659,Lucas,Bergström,7
+667,Roméo,Lavia,7
 219,Naouirou,Ahamada,8
 220,Joachim,Andersen,8
 221,Jordan,Ayew,8
@@ -298,6 +301,7 @@ id,first_name,second_name,team
 645,Youssef,Ramalho Chermiti,9
 649,Thomas,Cannon,9
 650,Tyler,Onyango,9
+661,Jack,Harrison,9
 267,Andreas,Hoelgebaum Pereira,10
 268,Tom,Cairney,10
 269,Ivan,Neves Abreu Cavaleiro,10
@@ -326,6 +330,7 @@ id,first_name,second_name,team
 625,Luc,De Fougerolles,10
 651,Jay,Stansfield,10
 652,Matthew,Dibley-Dias,10
+662,Adama,Traoré,10
 289,Adrián,San Miguel del Castillo,11
 290,Trent,Alexander-Arnold,11
 291,Alisson,Ramses Becker,11
@@ -355,6 +360,7 @@ id,first_name,second_name,team
 627,Bobby,Clark,11
 628,Ben,Doak,11
 629,James,McConnell,11
+668,Wataru,Endo,11
 52,Marvelous,Nakamba,12
 314,Elijah,Adebayo,12
 315,Mads Juel,Andersen,12
@@ -392,6 +398,7 @@ id,first_name,second_name,team
 630,Ross,Barkley,12
 631,Jacob,Brown,12
 648,Aidan,Francis-Clarke,12
+665,Tim,Krul,12
 341,Manuel,Akanji,13
 342,Nathan,Aké,13
 343,Julián,Álvarez,13
@@ -457,6 +464,7 @@ id,first_name,second_name,team
 597,André,Onana,14
 617,Rasmus,Højlund,14
 632,Omari,Forson,14
+669,Radek,Vítek,14
 402,Miguel,Almirón Rejala,15
 403,Elliot,Anderson,15
 404,Harrison,Ashby,15
@@ -566,6 +574,8 @@ id,first_name,second_name,team
 654,Louie,Marsh,17
 655,Andre,Brooks,17
 656,Antwoine,Hackford,17
+663,Gustavo,Hamer,17
+666,Tom,Davies,17
 491,Brandon,Austin,18
 492,Rodrigo,Bentancur,18
 493,Yves,Bissouma,18
@@ -626,6 +636,7 @@ id,first_name,second_name,team
 577,Angelo,Ogbonna,19
 642,Edson,Álvarez Velázquez,19
 647,Joseph,Anang,19
+664,James,Ward-Prowse,19
 545,Rayan,Aït-Nouri,20
 546,Daniel,Bentley,20
 547,Bendegúz,Bolla,20
