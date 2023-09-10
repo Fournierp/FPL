@@ -5,7 +5,6 @@ id,first_name,second_name,team
 4,Fábio,Ferreira Vieira,1
 5,Gabriel,dos Santos Magalhães,1
 6,Kai,Havertz,1
-7,Rob,Holding,1
 8,Gabriel,Fernando de Jesus,1
 9,Jorge Luiz,Frello Filho,1
 10,Jakub,Kiwior,1
@@ -19,7 +18,6 @@ id,first_name,second_name,team
 18,Rúnar Alex,Rúnarsson,1
 19,Bukayo,Saka,1
 20,William,Saliba,1
-21,Albert,Sambi Lokonga,1
 22,Emile,Smith Rowe,1
 24,Kieran,Tierney,1
 25,Takehiro,Tomiyasu,1
@@ -101,6 +99,7 @@ id,first_name,second_name,team
 643,Max,Aarons,3
 644,Alex,Scott,3
 673,Tyler,Adams,3
+705,Luis,Sinisterra,3
 90,Kristoffer,Ajer,4
 91,Ellery,Balcombe,4
 92,Shandon,Baptiste,4
@@ -132,7 +131,8 @@ id,first_name,second_name,team
 119,Yoane,Wissa,4
 120,Yegor,Yarmolyuk,4
 121,Mathias,Jorgensen,4
-620,Michale,Olakigbe,4
+258,Neal,Maupay,4
+620,Michael,Olakigbe,4
 684,Ethan,Brierley,4
 701,Saman,Ghoddos,4
 122,Simon,Adingra,5
@@ -211,6 +211,7 @@ id,first_name,second_name,team
 674,Hannes,Delcroix,6
 675,Aaron,Ramsey,6
 694,Han-Noah,Massengo,6
+706,Mike,Trésor,6
 126,Moisés,Caicedo Corozo,7
 145,Robert,Sánchez,7
 185,Ethan,Ampadu,7
@@ -231,7 +232,6 @@ id,first_name,second_name,team
 201,Wesley,Fofana,7
 202,Conor,Gallagher,7
 203,Malo,Gusto,7
-205,Callum,Hudson-Odoi,7
 206,Reece,James,7
 207,Romelu,Lukaku Bolingoli,7
 208,Noni,Madueke,7
@@ -257,6 +257,7 @@ id,first_name,second_name,team
 680,Eddie,Beach,7
 681,Diego Manuel Jadon,da Silva Moreira,7
 687,Djordje,Petrovic,7
+7,Rob,Holding,8
 219,Naouirou,Ahamada,8
 220,Joachim,Andersen,8
 221,Jordan,Ayew,8
@@ -298,9 +299,7 @@ id,first_name,second_name,team
 253,Demarai,Gray,9
 254,Idrissa,Gueye,9
 255,Mason,Holgate,9
-256,Alex,Iwobi,9
 257,Michael,Keane,9
-258,Neal,Maupay,9
 259,Dwight,McNeil,9
 260,Vitalii,Mykolenko,9
 261,Amadou,Onana,9
@@ -318,6 +317,7 @@ id,first_name,second_name,team
 650,Tyler,Onyango,9
 661,Jack,Harrison,9
 691,Norberto Bercique,Gomes Betuncal,9
+256,Alex,Iwobi,10
 267,Andreas,Hoelgebaum Pereira,10
 268,Tom,Cairney,10
 269,Ivan,Neves Abreu Cavaleiro,10
@@ -350,6 +350,7 @@ id,first_name,second_name,team
 683,Luke,Harris,10
 688,Timothy,Castagne,10
 692,Steven,Benda,10
+707,Fodé,Ballo-Touré,10
 289,Adrián,San Miguel del Castillo,11
 290,Trent,Alexander-Arnold,11
 291,Alisson,Ramses Becker,11
@@ -380,6 +381,8 @@ id,first_name,second_name,team
 628,Ben,Doak,11
 629,James,McConnell,11
 668,Wataru,Endo,11
+708,Ryan,Gravenberch,11
+21,Albert,Sambi Lokonga,12
 52,Marvelous,Nakamba,12
 314,Elijah,Adebayo,12
 315,Mads Juel,Andersen,12
@@ -438,7 +441,6 @@ id,first_name,second_name,team
 357,Aymeric,Laporte,13
 358,Rico,Lewis,13
 359,Riyad,Mahrez,13
-360,James,McAtee,13
 361,Stefan,Ortega Moreno,13
 363,Máximo,Perrone,13
 364,Kalvin,Phillips,13
@@ -487,6 +489,8 @@ id,first_name,second_name,team
 669,Radek,Vítek,14
 685,Daniel,Gore,14
 695,Altay,Bayindir,14
+703,Jonny,Evans,14
+709,Sofyan,Amrabat,14
 204,Lewis,Hall,15
 402,Miguel,Almirón Rejala,15
 403,Elliot,Anderson,15
@@ -529,6 +533,7 @@ id,first_name,second_name,team
 23,Nuno,Varela Tavares,16
 28,Matt,Turner,16
 186,Andrey,Nascimento dos Santos,16
+205,Callum,Hudson-Odoi,16
 378,Anthony,Elanga,16
 434,Brandon,Aguilera Zamora,16
 435,Harry,Arter,16
@@ -546,7 +551,6 @@ id,first_name,second_name,team
 447,Morgan,Gibbs-White,16
 448,Wayne,Hennessey,16
 449,Ethan,Horvath,16
-450,Brennan,Johnson,16
 451,Cheikhou,Kouyaté,16
 452,Richie,Laryea,16
 453,Orel,Mangala,16
@@ -572,8 +576,14 @@ id,first_name,second_name,team
 637,Josh,Powell,16
 679,Gonzalo,Montiel,16
 696,Murillo,Santiago Costa dos Santos,16
+710,Odysseas,Vlachodimos,16
+711,Andrew,Omobamidele,16
+712,Nicolás,Domínguez,16
+713,Ibrahim,Sangaré,16
+714,Divock,Origi,16
 27,Auston,Trusty,17
 33,Cameron,Archer,17
+360,James,McAtee,17
 471,Anel,Ahmedhodžić,17
 472,Jordan,Amissah,17
 473,George,Baldock,17
@@ -605,6 +615,7 @@ id,first_name,second_name,team
 663,Gustavo,Hamer,17
 666,Tom,Davies,17
 693,Luke,Thomas,17
+450,Brennan,Johnson,18
 491,Brandon,Austin,18
 492,Rodrigo,Bentancur,18
 493,Yves,Bissouma,18
@@ -700,3 +711,5 @@ id,first_name,second_name,team
 598,Matt,Doherty,20
 697,Santiago,Bueno,20
 698,Enso,González,20
+704,Nathan,Fraser,20
+715,Jean-Ricner,Bellegarde,20
