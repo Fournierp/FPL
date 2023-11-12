@@ -30,6 +30,9 @@ id,first_name,second_name,team
 578,Reiss,Nelson,1
 585,Jurriën,Timber,1
 646,Karl,Hein,1
+735,Charles,Sagoe,1
+736,Reuell,Walters,1
+737,Bradley,Ibrahim,1
 32,Alexandre,Moreno Lopera,2
 34,Leon,Bailey,2
 35,Emiliano,Buendía Stati,2
@@ -438,6 +441,7 @@ id,first_name,second_name,team
 682,Joseph,Johnson,12
 727,Andros,Townsend,12
 729,Jayden,Luker,12
+734,Zack,Nelson,12
 341,Manuel,Akanji,13
 342,Nathan,Aké,13
 343,Julián,Álvarez,13
@@ -545,6 +549,8 @@ id,first_name,second_name,team
 633,Tino,Livramento,15
 634,Alex,Murphy,15
 635,Lewis,Miley,15
+738,Amadou,Diallo,15
+739,Ben,Parkinson,15
 23,Nuno,Varela Tavares,16
 28,Matt,Turner,16
 186,Andrey,Nascimento dos Santos,16
@@ -669,6 +675,7 @@ id,first_name,second_name,team
 641,Alejo,Véliz,18
 702,Ashley,Phillips,18
 722,Jamie,Donley,18
+740,Alfie,Dorrington,18
 522,Nayef,Aguerd,19
 523,Michail,Antonio,19
 524,Alphonse,Areola,19
