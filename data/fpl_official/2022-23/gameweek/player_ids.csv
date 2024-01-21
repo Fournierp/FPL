@@ -72,6 +72,7 @@ id,first_name,second_name,team
 699,Clément,Lenglet,2
 765,Sam,Proctor,2
 767,Tommi,O'Reilly,2
+778,James,Wright,2
 62,Jaidon,Anthony,3
 63,Philip,Billing,3
 64,David,Brooks,3
@@ -139,6 +140,7 @@ id,first_name,second_name,team
 120,Yegor,Yarmoliuk,4
 121,Mathias,Jorgensen,4
 258,Neal,Maupay,4
+508,Sergio,Reguilón,4
 620,Michael,Olakigbe,4
 684,Ethan,Brierley,4
 701,Saman,Ghoddos,4
@@ -217,6 +219,7 @@ id,first_name,second_name,team
 182,Victor,da Silva,6
 183,Wout,Weghorst,6
 184,Anass,Zaroury,6
+200,David Datro,Fofana,6
 475,Sander,Berge,6
 594,Zeki,Amdouni,6
 596,James,Trafford,6
@@ -246,7 +249,6 @@ id,first_name,second_name,team
 197,Levi,Colwill,7
 198,Marc,Cucurella Saseta,7
 199,Enzo,Fernández,7
-200,David Datro,Fofana,7
 201,Wesley,Fofana,7
 202,Conor,Gallagher,7
 203,Malo,Gusto,7
@@ -626,6 +628,9 @@ id,first_name,second_name,team
 712,Nicolás,Domínguez,16
 713,Ibrahim,Sangaré,16
 714,Divock,Origi,16
+779,Jamie,McDonnell,16
+780,Detlef Esapa,Osong,16
+781,Joe,Gardner,16
 27,Auston,Trusty,17
 33,Cameron,Archer,17
 360,James,McAtee,17
@@ -682,7 +687,6 @@ id,first_name,second_name,team
 505,Tanguy,Ndombélé Alvaro,18
 506,Pedro,Porro,18
 507,Ivan,Perišić,18
-508,Sergio,Reguilón,18
 509,Richarlison,de Andrade,18
 510,Joe,Rodon,18
 511,Cristian,Romero,18
