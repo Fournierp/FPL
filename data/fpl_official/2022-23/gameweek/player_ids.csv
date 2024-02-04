@@ -73,6 +73,8 @@ id,first_name,second_name,team
 765,Sam,Proctor,2
 767,Tommi,O'Reilly,2
 778,James,Wright,2
+793,Kaine,Kesler-Hayden,2
+803,Morgan,Rogers,2
 62,Jaidon,Anthony,3
 63,Philip,Billing,3
 64,David,Brooks,3
@@ -108,6 +110,9 @@ id,first_name,second_name,team
 644,Alex,Scott,3
 673,Tyler,Adams,3
 705,Luis,Sinisterra,3
+799,Romain,Faivre,3
+802,Max,Kinsey-Wellings,3
+804,Enes,Ünal,3
 90,Kristoffer,Ajer,4
 91,Ellery,Balcombe,4
 92,Shandon,Baptiste,4
@@ -148,6 +153,8 @@ id,first_name,second_name,team
 733,Valintino,Adedokun,4
 744,Myles,Peart-Harris,4
 752,Vincent,Angelini,4
+789,Hákon,Valdimarsson,4
+797,Benjamin,Fredrick,4
 122,Simon,Adingra,5
 123,Steven,Alzate,5
 124,Yasin,Ayari,5
@@ -190,6 +197,7 @@ id,first_name,second_name,team
 747,Joshua,Duffus,5
 753,Leigh,Kavanagh,5
 755,Luca,Barrington,5
+786,Cameron,Peupion,5
 156,Enock,Agyei,6
 157,Ameen,Al-Dakhil,6
 158,Samuel,Bastien,6
@@ -232,6 +240,8 @@ id,first_name,second_name,team
 675,Aaron,Ramsey,6
 694,Han-Noah,Massengo,6
 706,Mike,Trésor,6
+805,Lorenz,Assignon,6
+806,Maxime,Esteve,6
 126,Moisés,Caicedo Corozo,7
 145,Robert,Sánchez,7
 185,Ethan,Ampadu,7
@@ -242,7 +252,6 @@ id,first_name,second_name,team
 190,Abdul Rahman,Baba,7
 191,Benoît,Badiashile,7
 192,Marcus,Bettinelli,7
-193,Armando,Broja,7
 194,Trevoh,Chalobah,7
 195,Ben,Chilwell,7
 196,Carney,Chukwuemeka,7
@@ -282,6 +291,7 @@ id,first_name,second_name,team
 718,Alex,Matos,7
 723,Josh,Brooking,7
 758,Leo,Castledine,7
+791,Cesare,Casadei,7
 7,Rob,Holding,8
 219,Naouirou,Ahamada,8
 220,Joachim,Andersen,8
@@ -316,6 +326,8 @@ id,first_name,second_name,team
 721,David,Ozoh,8
 724,Jadan,Raymond,8
 763,Tayo,Adaramola,8
+792,Daniel,Muñoz,8
+807,Adam,Wharton,8
 244,André,Tavares Gomes,9
 245,Jarrad,Branthwaite,9
 246,Dominic,Calvert-Lewin,9
@@ -327,7 +339,6 @@ id,first_name,second_name,team
 252,Ben,Godfrey,9
 253,Demarai,Gray,9
 254,Idrissa,Gueye,9
-255,Mason,Holgate,9
 257,Michael,Keane,9
 259,Dwight,McNeil,9
 260,Vitalii,Mykolenko,9
@@ -349,6 +360,7 @@ id,first_name,second_name,team
 719,Mackenzie,Hunt,9
 760,Jenson,Metcalfe,9
 761,Elijah,Campbell,9
+193,Armando,Broja,10
 256,Alex,Iwobi,10
 267,Andreas,Hoelgebaum Pereira,10
 268,Tom,Cairney,10
@@ -384,6 +396,8 @@ id,first_name,second_name,team
 692,Steven,Benda,10
 707,Fodé,Ballo-Touré,10
 732,Devan,Tanton,10
+796,Kristian,Sekularac,10
+810,Joshua,King,10
 289,Adrián,San Miguel del Castillo,11
 290,Trent,Alexander-Arnold,11
 291,Alisson,Ramses Becker,11
@@ -420,6 +434,8 @@ id,first_name,second_name,team
 743,Treymaurice,Nyoni,11
 756,Marcelo,de Araújo Pitaluga Filho,11
 757,Conor,Bradley,11
+782,Owen,Beck,11
+783,Kaide,Gordon,11
 21,Albert,Sambi Lokonga,12
 52,Marvelous,Nakamba,12
 314,Elijah,Adebayo,12
@@ -464,6 +480,7 @@ id,first_name,second_name,team
 727,Andros,Townsend,12
 729,Jayden,Luker,12
 734,Zack,Nelson,12
+798,Daiki,Hashioka,12
 341,Manuel,Akanji,13
 342,Nathan,Aké,13
 343,Julián,Álvarez,13
@@ -484,7 +501,6 @@ id,first_name,second_name,team
 359,Riyad,Mahrez,13
 361,Stefan,Ortega Moreno,13
 363,Máximo,Perrone,13
-364,Kalvin,Phillips,13
 365,Rodrigo,Hernandez,13
 366,Sergio,Gómez,13
 367,Zack,Steffen,13
@@ -578,6 +594,8 @@ id,first_name,second_name,team
 738,Amadou,Diallo,15
 739,Ben,Parkinson,15
 745,Michael,Ndiweni,15
+794,Joe,White,15
+795,Travis,Hernes,15
 23,Nuno,Varela Tavares,16
 28,Matt,Turner,16
 205,Callum,Hudson-Odoi,16
@@ -631,8 +649,12 @@ id,first_name,second_name,team
 779,Jamie,McDonnell,16
 780,Detlef Esapa,Osong,16
 781,Joe,Gardner,16
+801,Giovanni,Reyna,16
+808,Matz,Sels,16
+809,Rodrigo,Duarte Ribeiro,16
 27,Auston,Trusty,17
 33,Cameron,Archer,17
+255,Mason,Holgate,17
 360,James,McAtee,17
 471,Anel,Ahmedhodžić,17
 472,Jordan,Amissah,17
@@ -669,6 +691,7 @@ id,first_name,second_name,team
 731,Jili,Buyabu,17
 759,Sydie,Peck,17
 775,Ben,Brereton,17
+790,Ivo,Grbic,17
 450,Brennan,Johnson,18
 491,Brandon,Austin,18
 492,Rodrigo,Bentancur,18
@@ -710,6 +733,7 @@ id,first_name,second_name,team
 754,Yago,de Santiago Alonso,18
 776,Timo,Werner,18
 777,Radu,Dragusin,18
+364,Kalvin,Phillips,19
 522,Nayef,Aguerd,19
 523,Michail,Antonio,19
 524,Alphonse,Areola,19
@@ -740,6 +764,8 @@ id,first_name,second_name,team
 689,Mohammed,Kudus,19
 773,Lewis,Orford,19
 774,Kaelan,Casey,19
+784,Oliver,Scarles,19
+785,Callum,Marshall,19
 351,Tommy,Doyle,20
 545,Rayan,Aït-Nouri,20
 546,Daniel,Bentley,20
@@ -779,3 +805,6 @@ id,first_name,second_name,team
 751,Justin,Hubner,20
 769,Owen,Hesketh,20
 770,Ty,Barnett,20
+787,Harvey,Griffiths,20
+788,Yerson,Mosquera,20
+800,Noha,Lemina,20
