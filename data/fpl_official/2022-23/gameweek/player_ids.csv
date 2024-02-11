@@ -113,6 +113,7 @@ id,first_name,second_name,team
 799,Romain,Faivre,3
 802,Max,Kinsey-Wellings,3
 804,Enes,Ünal,3
+811,Dominic,Sadi,3
 90,Kristoffer,Ajer,4
 91,Ellery,Balcombe,4
 92,Shandon,Baptiste,4
@@ -436,6 +437,8 @@ id,first_name,second_name,team
 757,Conor,Bradley,11
 782,Owen,Beck,11
 783,Kaide,Gordon,11
+812,Lewis,Koumas,11
+813,Fabian,Mrozek,11
 21,Albert,Sambi Lokonga,12
 52,Marvelous,Nakamba,12
 314,Elijah,Adebayo,12
@@ -511,6 +514,7 @@ id,first_name,second_name,team
 678,Jérémy,Doku,13
 762,Mahamadou,Susoho,13
 771,Micah,Hamilton,13
+814,Jacob,Wright,13
 209,Mason,Mount,14
 370,Alex,Telles,14
 371,Amad,Diallo,14
