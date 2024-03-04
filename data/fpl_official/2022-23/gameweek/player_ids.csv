@@ -299,6 +299,7 @@ id,first_name,second_name,team
 791,Cesare,Casadei,7
 819,Ishé,Samuels-Smith,7
 820,Ollie,Harrison,7
+830,Jimi,Tauriainen,7
 7,Rob,Holding,8
 219,Naouirou,Ahamada,8
 220,Joachim,Andersen,8
@@ -493,6 +494,7 @@ id,first_name,second_name,team
 729,Jayden,Luker,12
 734,Zack,Nelson,12
 798,Daiki,Hashioka,12
+831,Axel,Piesold,12
 341,Manuel,Akanji,13
 342,Nathan,Aké,13
 343,Julián,Álvarez,13
@@ -566,6 +568,7 @@ id,first_name,second_name,team
 766,Willy,Kambwala,14
 768,Rhys,Bennett,14
 826,Toby,Collyer,14
+833,Habeeb,Ogunneye,14
 204,Lewis,Hall,15
 402,Miguel,Almirón Rejala,15
 403,Elliot,Anderson,15
@@ -784,6 +787,7 @@ id,first_name,second_name,team
 774,Kaelan,Casey,19
 784,Oliver,Scarles,19
 785,Callum,Marshall,19
+829,George,Earthy,19
 351,Tommy,Doyle,20
 545,Rayan,Aït-Nouri,20
 546,Daniel,Bentley,20
@@ -826,3 +830,4 @@ id,first_name,second_name,team
 787,Harvey,Griffiths,20
 788,Yerson,Mosquera,20
 800,Noha,Lemina,20
+832,Wesley,Okoduwa,20
