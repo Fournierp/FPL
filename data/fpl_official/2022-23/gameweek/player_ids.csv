@@ -204,6 +204,7 @@ id,first_name,second_name,team
 755,Luca,Barrington,5
 786,Cameron,Peupion,5
 816,Valentín,Barco,5
+843,Samy,Chouchane,5
 156,Enock,Agyei,6
 157,Ameen,Al-Dakhil,6
 158,Samuel,Bastien,6
@@ -340,6 +341,7 @@ id,first_name,second_name,team
 807,Adam,Wharton,8
 821,Franco,Umeh-Chibueze,8
 825,Kaden,Rodney,8
+842,Roshaun,Mathurin,8
 244,André,Tavares Gomes,9
 245,Jarrad,Branthwaite,9
 246,Dominic,Calvert-Lewin,9
@@ -372,6 +374,7 @@ id,first_name,second_name,team
 719,Mackenzie,Hunt,9
 760,Jenson,Metcalfe,9
 761,Elijah,Campbell,9
+841,Lewis,Warrington,9
 193,Armando,Broja,10
 256,Alex,Iwobi,10
 267,Andreas,Hoelgebaum Pereira,10
@@ -837,3 +840,4 @@ id,first_name,second_name,team
 800,Noha,Lemina,20
 832,Wesley,Okoduwa,20
 836,Leon,Chiwome,20
+840,Fletcher,Holman,20
