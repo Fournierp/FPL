@@ -75,8 +75,8 @@ class FPL_Season:
 
     def sample_ranks(self):
         """Sample every rank to get season data"""
-        last = 180000
-        end = 205000
+        last = 0
+        end = 105000
         increment = 5000
         for ranks in np.arange(last + increment, end, increment):
             self.logger.info(f"Starting to scrape top {ranks}.")
@@ -356,6 +356,6 @@ if __name__ == "__main__":
         season_data = json.load(f)
 
     fpls = FPL_Season(logger, season_data, sys.argv[1:])
-    # fpls.sample_ranks()
-    fpls.sample_one_manager(team_id=23895)
+    fpls.sample_ranks()
+    # fpls.sample_one_manager(team_id=23895)
     # fpls.sample_hof()
