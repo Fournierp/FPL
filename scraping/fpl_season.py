@@ -356,6 +356,6 @@ if __name__ == "__main__":
         season_data = json.load(f)
 
     fpls = FPL_Season(logger, season_data, sys.argv[1:])
-    fpls.sample_ranks()
-    # fpls.sample_one_manager(team_id=35868)
+    # fpls.sample_ranks()
+    fpls.sample_one_manager(team_id=23895)
     # fpls.sample_hof()
